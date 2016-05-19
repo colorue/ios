@@ -4,8 +4,17 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Morphu.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<true/>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>MorphuApp.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<false/>
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>

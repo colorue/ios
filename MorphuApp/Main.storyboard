@@ -55,13 +55,13 @@
         <!--Inbox-->
         <scene sceneID="tB1-K1-Nv6">
             <objects>
-                <tableViewController id="nlr-Iq-6VO" customClass="InboxViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="nlr-Iq-6VO" customClass="InboxViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="1" sectionHeaderHeight="28" sectionFooterHeight="28" id="k2Z-7J-spB">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="M49-i7-Byk" customClass="InboxDescriptionCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="M49-i7-Byk" customClass="InboxDescriptionCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M49-i7-Byk" id="QLM-sN-lhV">
@@ -378,7 +378,7 @@
                                     <outlet property="timeCreated" destination="cvk-1r-WzI" id="gnW-KK-Jqk"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="ONg-eV-nfj" customClass="InboxDrawingCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="ONg-eV-nfj" customClass="InboxDrawingCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="166" width="600" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ONg-eV-nfj" id="dE2-e5-EqD">
@@ -707,7 +707,7 @@
         <!--Draw Prompt-->
         <scene sceneID="dMl-U3-GTV">
             <objects>
-                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xmt-d0-0cX"/>
                         <viewControllerLayoutGuide type="bottom" id="Uwp-QL-EV4"/>
@@ -881,7 +881,7 @@
                         <outlet property="creator" destination="pY5-t3-wya" id="VWR-th-4Lj"/>
                         <outlet property="descriptionText" destination="sav-5c-AfN" id="fgY-nQ-325"/>
                         <outlet property="timeCreated" destination="aSW-sk-pVt" id="75u-mb-TH4"/>
-                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="MorphuApp" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
+                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="U9g-HJ-mcN"/>
                     </connections>
                 </viewController>
@@ -893,7 +893,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
             <objects>
-                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="InboxIcon" id="FWV-Hs-Vva">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -915,7 +915,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
             <objects>
-                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3AG-5Q-AcY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -934,7 +934,7 @@
         <!--Navigation Controller-->
         <scene sceneID="FgC-3D-bSI">
             <objects>
-                <navigationController id="dog-ia-Nxz" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="dog-ia-Nxz" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="o9u-EG-gs8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -955,7 +955,7 @@
         <!--Describe Drawing-->
         <scene sceneID="ZGw-ke-Xca">
             <objects>
-                <viewController id="Gb6-vC-tcz" customClass="DescribingViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Gb6-vC-tcz" customClass="DescribingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ysi-M6-Y9d"/>
                         <viewControllerLayoutGuide type="bottom" id="Ge2-5d-LW5"/>
@@ -1160,7 +1160,7 @@
                         <outlet property="creator" destination="pNA-ag-bVt" id="8RL-EI-LLI"/>
                         <outlet property="drawingImage" destination="h3d-wB-zEz" id="X0C-a2-4l7"/>
                         <outlet property="timeCreated" destination="Kpe-vM-aYY" id="kBn-ZE-1vP"/>
-                        <segue destination="bmd-jm-4Yp" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="MorphuApp" customModuleProvider="target" unwindAction="backToPickNext:" id="j21-y9-XiY"/>
+                        <segue destination="bmd-jm-4Yp" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToPickNext:" id="j21-y9-XiY"/>
                         <segue destination="bmd-jm-4Yp" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="FXy-YY-qKH"/>
                     </connections>
                 </viewController>
@@ -1172,7 +1172,7 @@
         <!--Item-->
         <scene sceneID="MB7-pV-Ktn">
             <objects>
-                <navigationController id="zHB-ES-NWT" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="zHB-ES-NWT" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="s3H-K0-rh4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="0kx-YW-4FH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -1192,13 +1192,13 @@
         <!--Chain-->
         <scene sceneID="Yli-cD-MKE">
             <objects>
-                <tableViewController id="vk1-Dr-duj" customClass="ThreadTableViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="vk1-Dr-duj" customClass="ThreadTableViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="1" sectionHeaderHeight="28" sectionFooterHeight="28" id="K2w-Vy-h91">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="JaU-Ac-bxa" customClass="InboxDescriptionCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="JaU-Ac-bxa" customClass="InboxDescriptionCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JaU-Ac-bxa" id="u08-w0-Hym">
@@ -1514,7 +1514,7 @@
                                     <outlet property="timeCreated" destination="yai-aF-wj2" id="NLf-Oe-1wp"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="G8H-bC-Dtg" customClass="InboxDrawingCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="G8H-bC-Dtg" customClass="InboxDrawingCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="166" width="600" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="G8H-bC-Dtg" id="KHM-Ui-XE0">
@@ -1805,7 +1805,7 @@
                                     <outlet property="timeCreated" destination="gMS-4M-K3P" id="8ms-Wi-371"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UpNextCell" rowHeight="38" id="S4E-Ly-far" customClass="UpNextCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="UpNextCell" rowHeight="38" id="S4E-Ly-far" customClass="UpNextCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="630" width="600" height="38"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="S4E-Ly-far" id="eO3-ZH-heS">
@@ -1969,7 +1969,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="lay-Sc-mtL" kind="unwind" identifier="toHomeTable" customClass="UIStoryboardUnwindSegueFromRight" customModule="MorphuApp" customModuleProvider="target" unwindAction="backToHome:" id="0tE-S5-kxv"/>
+                        <segue destination="lay-Sc-mtL" kind="unwind" identifier="toHomeTable" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToHome:" id="0tE-S5-kxv"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P7j-Yv-xuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1980,7 +1980,7 @@
         <!--Navigation Controller-->
         <scene sceneID="7tj-fP-y9l">
             <objects>
-                <navigationController id="Jc4-Vw-zCe" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="Jc4-Vw-zCe" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="fOe-Xt-trJ">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1999,7 +1999,7 @@
         <!--Start Chain-->
         <scene sceneID="hXv-RM-ARR">
             <objects>
-                <viewController id="HiG-nS-qLh" customClass="NewThreadViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="HiG-nS-qLh" customClass="NewThreadViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Vva-ju-8u7"/>
                         <viewControllerLayoutGuide type="bottom" id="Jcz-3K-e1p"/>
@@ -2019,7 +2019,7 @@
                     </navigationItem>
                     <connections>
                         <segue destination="jON-m4-D2d" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="PPq-Pz-VO4"/>
-                        <segue destination="jON-m4-D2d" kind="unwind" identifier="backToChooseMember" customClass="UIStoryboardUnwindSegueFromRight" customModule="MorphuApp" customModuleProvider="target" unwindAction="backToChooseMember:" id="iZ4-UR-mpj"/>
+                        <segue destination="jON-m4-D2d" kind="unwind" identifier="backToChooseMember" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToChooseMember:" id="iZ4-UR-mpj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oRL-L9-wyr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2030,13 +2030,13 @@
         <!--Morphu-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
-                <tableViewController id="4Ba-st-mMB" customClass="ArchiveViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Ba-st-mMB" customClass="ArchiveViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HtL-VG-g21">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="kGZ-2h-S87" customClass="InboxDescriptionCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="138" id="kGZ-2h-S87" customClass="InboxDescriptionCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="138"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kGZ-2h-S87" id="D6R-hF-Wwg">
@@ -2353,7 +2353,7 @@
                                     <outlet property="timeCreated" destination="e94-ny-744" id="Gpw-26-LZB"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="tAl-EB-dAq" customClass="InboxDrawingCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="464" id="tAl-EB-dAq" customClass="InboxDrawingCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="166" width="600" height="464"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAl-EB-dAq" id="MBj-Xc-vDK">
@@ -2679,7 +2679,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="zHB-ES-NWT" kind="custom" identifier="toThreadTableView" customClass="UIStoryboardSegueFromRight" customModule="MorphuApp" customModuleProvider="target" id="LiK-cO-tAg"/>
+                        <segue destination="zHB-ES-NWT" kind="custom" identifier="toThreadTableView" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="LiK-cO-tAg"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCQ-E2-ktF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2689,7 +2689,7 @@
         <!--Morphu-->
         <scene sceneID="DzX-pb-Yw0">
             <objects>
-                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oso-1h-tk1"/>
                         <viewControllerLayoutGuide type="bottom" id="e3O-Zi-OLe"/>
@@ -2715,10 +2715,10 @@
                                 </variation>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ODP-hf-HID">
-                                <rect key="frame" x="72" y="696" width="240" height="32"/>
+                                <rect key="frame" x="72" y="696" width="236" height="32"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
-                                        <rect key="frame" x="0.0" y="0.0" width="240" height="32"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
+                                        <rect key="frame" x="0.0" y="0.0" width="236" height="32"/>
                                         <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="CD9-ZP-JXH"/>
@@ -2751,8 +2751,7 @@
                                         <exclude reference="F0N-rS-SYH"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="472" width="400" height="60"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="F0N-rS-SYH"/>
                                     </mask>
@@ -2864,7 +2863,7 @@
         <!--Loading View Controller-->
         <scene sceneID="1qg-38-0L5">
             <objects>
-                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zmi-QF-ZBk"/>
                         <viewControllerLayoutGuide type="bottom" id="tnr-A0-xkn"/>
@@ -2933,7 +2932,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yyo-ll-IHM">
             <objects>
-                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="L2H-32-AxG">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -2955,7 +2954,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wlr-Yz-00Y">
             <objects>
-                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="uWa-C7-36M">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -2977,13 +2976,13 @@
         <!--Friends-->
         <scene sceneID="slm-FW-9Fy">
             <objects>
-                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qZS-12-nUw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="fZh-EJ-nJd" customClass="UserTableViewCell" customModule="MorphuApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="fZh-EJ-nJd" customClass="UserTableViewCell" customModule="Morphu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZh-EJ-nJd" id="Qxq-Kf-eoz">
@@ -3084,7 +3083,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="MorphuApp" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
+                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
                         <segue destination="cAF-Q1-MSm" kind="presentation" identifier="toLogin" id="C20-D9-RLT"/>
                     </connections>
                 </tableViewController>
@@ -3115,7 +3114,7 @@
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <prototypes>
-                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="125" id="g4w-qs-wbg" customClass="InboxDescriptionCell" customModule="MorphuApp" customModuleProvider="target">
+                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDescriptionCell" rowHeight="125" id="g4w-qs-wbg" customClass="InboxDescriptionCell" customModule="Morphu" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="28" width="600" height="125"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g4w-qs-wbg" id="csa-42-gbh">
@@ -3324,7 +3323,7 @@
                                 <outlet property="group" destination="jSb-zp-2K9" id="fh5-78-0CU"/>
                             </connections>
                         </tableViewCell>
-                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="450" id="Ll9-6g-dJV" customClass="InboxDrawingCell" customModule="MorphuApp" customModuleProvider="target">
+                        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="450" id="Ll9-6g-dJV" customClass="InboxDrawingCell" customModule="Morphu" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="153" width="600" height="450"/>
                             <autoresizingMask key="autoresizingMask"/>
                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ll9-6g-dJV" id="1ab-ZD-dXP">
@@ -3528,7 +3527,7 @@
         <!--Navigation Controller-->
         <scene sceneID="GOz-OW-Wry">
             <objects>
-                <navigationController id="tp0-fc-lg9" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="tp0-fc-lg9" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="Bwu-wL-hgU">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -3550,7 +3549,7 @@
         <!--Pass To:-->
         <scene sceneID="5Ar-3N-Cj2">
             <objects>
-                <tableViewController id="ac4-3L-aZb" customClass="ChooseFirstViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ac4-3L-aZb" customClass="ChooseFirstViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="dBZ-gC-vLM">
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3590,7 +3589,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="57N-Zc-fif" kind="custom" identifier="toStartRound" customClass="UIStoryboardSegueFromRight" customModule="MorphuApp" customModuleProvider="target" id="tY0-NX-vZG"/>
+                        <segue destination="57N-Zc-fif" kind="custom" identifier="toStartRound" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="tY0-NX-vZG"/>
                         <segue destination="vq5-3c-IJD" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="iN6-wY-CE5"/>
                     </connections>
                 </tableViewController>
@@ -3602,7 +3601,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wot-AX-pX5">
             <objects>
-                <navigationController id="X9b-zC-j8J" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="X9b-zC-j8J" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cWA-Qv-9DA">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -3621,7 +3620,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JwZ-9y-0gs">
             <objects>
-                <navigationController id="cAF-Q1-MSm" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="cAF-Q1-MSm" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="nLM-T6-rBF">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -3643,7 +3642,7 @@
         <!--Morphu-->
         <scene sceneID="178-nn-QQJ">
             <objects>
-                <viewController id="C8I-qW-0Q2" customClass="LoginViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C8I-qW-0Q2" customClass="LoginViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jjl-UJ-mTf"/>
                         <viewControllerLayoutGuide type="bottom" id="QOz-I0-gX3"/>
@@ -3688,24 +3687,24 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Me5-QY-lRA">
-                                <rect key="frame" x="-20" y="328" width="302" height="33"/>
+                                <rect key="frame" x="-20" y="328" width="299" height="33"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8ow-IJ-CS8">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="8ow-IJ-CS8">
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KWY-Xg-zAh">
-                                        <rect key="frame" x="104" y="0.0" width="94" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="KWY-Xg-zAh">
+                                        <rect key="frame" x="103" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-vd-LTK">
-                                        <rect key="frame" x="208" y="0.0" width="94" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-vd-LTK">
+                                        <rect key="frame" x="206" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="W9v-r8-aNe"/>
@@ -3839,7 +3838,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hEM-Yx-wU2">
             <objects>
-                <navigationController id="hw6-IR-nJb" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="hw6-IR-nJb" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="lfA-45-4Zg">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -3861,7 +3860,7 @@
         <!--Morphu-->
         <scene sceneID="JUc-O2-hPf">
             <objects>
-                <viewController id="Zn6-GV-rhn" customClass="RegisterViewController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zn6-GV-rhn" customClass="RegisterViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aF2-fk-dyd"/>
                         <viewControllerLayoutGuide type="bottom" id="Yjz-0r-fNt"/>
@@ -3910,31 +3909,31 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xu3-g7-kNX">
-                                <rect key="frame" x="-8" y="328" width="406" height="33"/>
+                                <rect key="frame" x="-8" y="328" width="402" height="33"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
-                                        <rect key="frame" x="0.0" y="0.0" width="94" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
-                                        <rect key="frame" x="104" y="0.0" width="94" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
+                                        <rect key="frame" x="103" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
-                                        <rect key="frame" x="208" y="0.0" width="94" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
+                                        <rect key="frame" x="206" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
-                                        <rect key="frame" x="312" y="0.0" width="94" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
+                                        <rect key="frame" x="309" y="0.0" width="93" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="p2l-ut-BE0"/>
@@ -4082,7 +4081,7 @@
         <!--Pass To:-->
         <scene sceneID="wly-T9-D0N">
             <objects>
-                <tableViewController id="BQO-WY-mQH" customClass="PickNextController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="BQO-WY-mQH" customClass="PickNextController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="xub-B7-Ap7">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4157,8 +4156,8 @@
                     </refreshControl>
                     <connections>
                         <segue destination="Py3-QR-5tQ" kind="unwind" identifier="backToInbox" unwindAction="backToInbox:" id="3Cv-rr-5JS"/>
-                        <segue destination="dog-ia-Nxz" kind="custom" identifier="toDrawingView" customClass="UIStoryboardSegueFromRight" customModule="MorphuApp" customModuleProvider="target" id="Neo-kh-hfi"/>
-                        <segue destination="Jc4-Vw-zCe" kind="custom" identifier="toDescribingView" customClass="UIStoryboardSegueFromRight" customModule="MorphuApp" customModuleProvider="target" id="ai1-uh-ZJU"/>
+                        <segue destination="dog-ia-Nxz" kind="custom" identifier="toDrawingView" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="Neo-kh-hfi"/>
+                        <segue destination="Jc4-Vw-zCe" kind="custom" identifier="toDescribingView" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="ai1-uh-ZJU"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdt-fj-qNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4169,7 +4168,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Yaf-jV-eW2">
             <objects>
-                <navigationController id="XLI-js-gJj" customClass="NavigationController" customModule="MorphuApp" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="XLI-js-gJj" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="InboxIcon" id="QW1-vr-r72">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
