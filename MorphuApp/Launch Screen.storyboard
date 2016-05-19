@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" initialViewController="fZW-0J-spp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--Loading View Controller-->
+        <scene sceneID="Mpx-O3-9RF">
+            <objects>
+                <viewController id="fZW-0J-spp" userLabel="Loading View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oTY-lF-Asg"/>
+                        <viewControllerLayoutGuide type="bottom" id="LG5-H3-SWA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bnq-9R-nEg">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Morphu Brand" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-HP-fpL">
+                                <rect key="frame" x="0.0" y="-200" width="600" height="1000"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ColorKeyboard" translatesAutoresizingMaskIntoConstraints="NO" id="m7A-qb-clW">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LG5-H3-SWA" firstAttribute="top" secondItem="m7A-qb-clW" secondAttribute="bottom" id="3PS-dv-phy"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="hX4-HP-fpL" secondAttribute="trailing" constant="-20" id="Zy3-3f-5H6"/>
+                            <constraint firstItem="m7A-qb-clW" firstAttribute="trailing" secondItem="hX4-HP-fpL" secondAttribute="trailing" id="j48-eA-YKq"/>
+                            <constraint firstItem="m7A-qb-clW" firstAttribute="leading" secondItem="hX4-HP-fpL" secondAttribute="leading" id="qz4-Li-C1X"/>
+                            <constraint firstItem="hX4-HP-fpL" firstAttribute="centerY" secondItem="Bnq-9R-nEg" secondAttribute="centerY" id="rsc-Eu-jPw"/>
+                            <constraint firstItem="hX4-HP-fpL" firstAttribute="leading" secondItem="Bnq-9R-nEg" secondAttribute="leadingMargin" constant="-20" id="w2L-aa-a6F"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="m7A-qb-clW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="j48-eA-YKq"/>
+                                <exclude reference="qz4-Li-C1X"/>
+                                <exclude reference="3PS-dv-phy"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="m7A-qb-clW"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="j48-eA-YKq"/>
+                                <include reference="qz4-Li-C1X"/>
+                                <include reference="3PS-dv-phy"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLY-S2-ahw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-795" y="366"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="ColorKeyboard" width="512" height="85"/>
+        <image name="Morphu Brand" width="512" height="1000"/>
+    </resources>
+</document>
