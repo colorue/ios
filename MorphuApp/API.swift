@@ -18,15 +18,15 @@ class API {
     static let sharedInstance = API()
 
     private let myRootRef = FIRDatabase.database().reference()
-    let dateFormatter = NSDateFormatter()
     private let facebookLogin = FBSDKLoginManager()
+    let dateFormatter = NSDateFormatter()
 
     private var production = false
     private var inbox = [Chain]()
     private var archive = [Chain]()
     private var users = [User]()
     private var activeUser = User()
-    private var urbanAirshipKey = ""
+//    private var urbanAirshipKey = ""
     
     var inboxBadge: UITabBarItem?
     
@@ -35,8 +35,6 @@ class API {
         dateFormatter.timeStyle = .MediumStyle
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")  // CHECK IF THIS WORKED!!!
     }
-    
-
     
     // MARK: Internal methods
     private func addContent(content: Content, chainId: String) -> FIRDatabaseReference {
