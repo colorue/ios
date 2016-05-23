@@ -17,10 +17,10 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var drawingImage: UIImageView!
     @IBOutlet weak var timeCreated: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likesCount: UILabel!
     
     @IBAction func like(sender: UIButton) {
-        if let drawing = self.drawing {
-            delagate?.like(drawing)
-        }
+        sender.selected = true
+        delagate?.like(self)
     }
 }

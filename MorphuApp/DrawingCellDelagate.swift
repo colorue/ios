@@ -8,5 +8,5 @@
 
 import Foundation
 protocol DrawingCellDelagate {
-    func like(drawing: Drawing) -> ()
-}
+    func like(drawingCell: DrawingCell) -> ()
+}   

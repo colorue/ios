@@ -68,10 +68,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! InboxDrawingCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! DrawingCell
         
         if cell.delagate == nil {
             cell.delagate = self
+            print("delagateSet")
         }
         return cell
     }
@@ -79,11 +80,13 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
         let content = model.getWall()[indexPath.row]
-        let drawingCell = cell as! InboxDrawingCell
+        let drawingCell = cell as! DrawingCell
+        drawingCell.drawing = content
         drawingCell.profileImage.image = content.getArtist().profileImage
         drawingCell.creator.text = content.getArtist().username
         drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
         drawingCell.timeCreated.text = content.getTimeSinceSent()
+        drawingCell.likeButton.titleLabel?.text = String(content.likes.count) + " likes"
     }
 
     /*
@@ -102,8 +105,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
     }
     */
     
-    func like(drawing: Drawing) {
-        model.like(drawing)
+    func like(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            model.like(drawing)
+            //drawingCell.likeButton.titleLabel?.text = String(drawing.likes.count + 1) + " likes"
+        }
     }
     
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
