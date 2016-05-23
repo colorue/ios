@@ -35,22 +35,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
-        let canvasFrame = CGRect(x: 0.0, y: 108, width: self.view.frame.width, height: self.view.frame.width)
+        
+        let keyboardHeight = CGFloat(120)
+
+        let canvasFrame = CGRect(x: 0.0, y: 0, width: self.view.frame.width, height: self.view.frame.height - keyboardHeight - 60)
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: UIImage.getImageWithColor(whiteColor, size: canvasFrame.size))
         self.view.addSubview(canvas)
         self.canvas = canvas
-        
-        //creator.text = descriptionInstance!.getAuthor().username
-        //descriptionCell.actionIcon.image = self.stackIcon
-        //descriptionText.text = descriptionInstance!.text
-        //timeCreated.text = descriptionInstance!.getTimeSinceSent()
  
-        let keyboardHeight = CGFloat(120)
         let colorKeyboard = ColorKeyboardView(frame: CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight), delagate: self)
         self.view.addSubview(colorKeyboard)
         self.colorKeyboard = colorKeyboard
         
-        self.underFingerView.frame = CGRect(x: self.view.frame.width - 106, y: 1, width: 106, height: 106)
+        self.underFingerView.frame = CGRect(x: 0, y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
         underFingerView.backgroundColor = UIColor.whiteColor()
         self.underFingerView.hidden = true
         self.view.addSubview(underFingerView)

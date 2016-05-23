@@ -14,13 +14,7 @@ class OnboardingViewController: UIViewController {
     @IBOutlet weak var animation: UIImageView!
 
     override func viewDidLoad() {
-        
-        var animationImages = [UIImage]()
-        for i in  0...50 {
-            animationImages.append(UIImage(named: String(i))!)
-        }
-        animation.image = UIImage.animatedImageWithImages(animationImages, duration: 30.0)!
-        animation.startAnimating()
+        super.viewDidLoad()
     }
     
     @IBAction func facebookButton(sender: AnyObject) {
