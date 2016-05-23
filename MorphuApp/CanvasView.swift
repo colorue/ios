@@ -15,9 +15,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var currentStroke: UIImage
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
-    
-    let resizeScale: CGFloat = 2.0
+    let prefs = NSUserDefaults.standardUserDefaults()
 
+    let resizeScale: CGFloat = 2.0
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage) {
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: frame.size)
@@ -86,6 +86,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             undoStack.removeAtIndex(0)
             undoStack.append(self.imageView.image!)
         }
+        prefs.setValue(self.imageView.image!.toBase64(), forKey: "savedDrawing")
     }
     
     func drawImage() {

@@ -10,7 +10,6 @@ import UIKit
 
 class WallViewController: UITableViewController {
     let model = API.sharedInstance
-    let stackIcon = UIImage(named: "ChevronForwards")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,39 +64,21 @@ class WallViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.getArchive().count
+        return model.getWall().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if let content = model.getArchive()[indexPath.row].getLastContent() {
-            if (content.isDrawing) {
-                return self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! InboxDrawingCell
-            } else {
-                return tableView.dequeueReusableCellWithIdentifier("InboxDescriptionCell", forIndexPath: indexPath) as! InboxDescriptionCell
-            }
-        } else {
-            return tableView.dequeueReusableCellWithIdentifier("InboxDescriptionCell", forIndexPath: indexPath)
-        }
+        return self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! InboxDrawingCell
     }
         
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath){
-        if let content = model.getArchive()[indexPath.row].getLastContent() {
-            if (content.isDrawing) {
-                let drawingCell = cell as! InboxDrawingCell
-                drawingCell.profileImage.image = content.getAuthor().profileImage
-                drawingCell.creator.text = content.getAuthor().username
-                drawingCell.actionIcon.image = self.stackIcon
-                drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
-                drawingCell.timeCreated.text = content.getTimeSinceSent()
-            } else {
-                let descriptionCell = cell as! InboxDescriptionCell
-                descriptionCell.profileImage.image = content.getAuthor().profileImage
-                descriptionCell.creator.text = content.getAuthor().username
-                descriptionCell.actionIcon.image = self.stackIcon
-                descriptionCell.descriptionText.text = content.text
-                descriptionCell.timeCreated.text = content.getTimeSinceSent()
-            }
-        }
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
+        let content = model.getWall()[indexPath.row]
+        let drawingCell = cell as! InboxDrawingCell
+        drawingCell.profileImage.image = content.getArtist().profileImage
+        drawingCell.creator.text = content.getArtist().username
+        drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
+        drawingCell.timeCreated.text = content.getTimeSinceSent()
     }
 
     /*

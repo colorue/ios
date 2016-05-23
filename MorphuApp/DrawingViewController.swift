@@ -9,14 +9,10 @@
 import UIKit
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate {
-    let model = API.sharedInstance
+    let api = API.sharedInstance
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
-    var descriptionInstance: Content?
     var underFingerView = UIImageView()
-    var chainInstance = Chain()
-    var nextUser = User()
-    var finishChain = false
     
     @IBOutlet weak var creator: UILabel!
     @IBOutlet weak var actionIcon: UIImageView!
@@ -35,11 +31,25 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
-        
         let keyboardHeight = CGFloat(120)
 
-        let canvasFrame = CGRect(x: 0.0, y: 0, width: self.view.frame.width, height: self.view.frame.height - keyboardHeight - 60)
-        let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: UIImage.getImageWithColor(whiteColor, size: canvasFrame.size))
+        let canvasHeight = self.view.frame.height - keyboardHeight - 60
+        let canvasFrame = CGRect(x: 0.0, y: 0, width: self.view.frame.width, height: canvasHeight)
+        
+        let prefs = NSUserDefaults.standardUserDefaults()
+        var baseImage: UIImage
+        
+        if let savedDrawing = prefs.stringForKey("savedDrawing") {
+            if savedDrawing != "noDrawing" {
+                baseImage = UIImage.fromBase64(savedDrawing)
+            } else {
+                baseImage = UIImage.getImageWithColor(whiteColor, size: canvasFrame.size)
+            }
+        } else {
+            baseImage = UIImage.getImageWithColor(whiteColor, size: canvasFrame.size)
+        }
+
+        let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
         self.view.addSubview(canvas)
         self.canvas = canvas
  
@@ -66,22 +76,18 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     @IBAction func done(sender: UIBarButtonItem) {
         
-        let newDrawing = Content(author: User(), isDrawing: true, text: canvas!.getDrawing().toBase64(), chainId: "", contentId: "")
-        
-        if self.finishChain {
-            model.finishChain(chainInstance, content: newDrawing)
-        } else {
-            model.addToChain(chainInstance, content: newDrawing, nextUser: nextUser)
-        }
-        self
+        let newDrawing = Drawing(artist: User(), text: canvas!.getDrawing().toBase64(), drawingId: "")
+        api.postDrawing(newDrawing)
         
         let prefs = NSUserDefaults.standardUserDefaults()
+        prefs.setValue("noDrawing", forKey: "savedDrawing")
+        
         if (!prefs.boolForKey("getStartedHowToSet")) {
             prefs.setValue(true, forKey: "viewRoundsHowTo")
             prefs.setValue(true, forKey: "getStartedHowToSet")
         }
         
-        self.performSegueWithIdentifier("unwindToInbox", sender: self)
+        self.performSegueWithIdentifier("backToHome", sender: self)
     }
     
     func getCurrentColor() -> UIColor {

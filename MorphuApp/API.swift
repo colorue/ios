@@ -21,12 +21,9 @@ class API {
     private let facebookLogin = FBSDKLoginManager()
     let dateFormatter = NSDateFormatter()
 
-    private var production = false
-    private var inbox = [Chain]()
-    private var archive = [Chain]()
+    private var wall = [Drawing]()
     private var users = [User]()
     private var activeUser = User()
-//    private var urbanAirshipKey = ""
     
     var inboxBadge: UITabBarItem?
     
@@ -37,23 +34,13 @@ class API {
     }
     
     // MARK: Internal methods
-    private func addContent(content: Content, chainId: String) -> FIRDatabaseReference {
-        let newContent = myRootRef.child("content").childByAutoId()
-        content.setContentId(newContent.key)
-        content.setChainId(chainId)
-
-        content.setAuthor(activeUser)
-        // TODO fix timestamps print(FirebaseServerValue.timestamp())
-        newContent.setValue(content.toAnyObject())
-        return newContent
-    }
     
-    private func getContent(contentId: String, callback: (Content) -> ()) {
-        self.myRootRef.child("content/\(contentId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+    private func getDrawing(drawingId: String, callback: (Drawing) -> ()) {
+        self.myRootRef.child("drawings/\(drawingId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
             if (!snapshot.exists()) { return }
             
-            self.getUser(snapshot.value!["author"] as! String, callback: { (author: User) -> () in
-                callback(Content(author: author, timeSent: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, isDrawing: snapshot.value!["isDrawing"] as! Bool, text: snapshot.value!["text"] as! String, chainId: snapshot.value!["chainId"] as! String, contentId: contentId))
+            self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
+                callback(Drawing(artist: artist, timeSent: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, text: snapshot.value!["text"] as! String, drawingId: drawingId))
             })
         })
     }
@@ -120,48 +107,21 @@ class API {
         })
     }
     
-
- 
     func logout() {
         let prefs = NSUserDefaults.standardUserDefaults()
         prefs.setValue(false, forKey: "loggedIn")
-        self.inbox.removeAll()
-        self.archive.removeAll()
         self.users.removeAll()
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
         FBSDKLoginManager().logOut()
     }
-    
-    func createChain(content: Content, nextUser: User) {
-            let newChain = myRootRef.child("chains").childByAutoId()
-            self.addToChain(Chain(chainId: newChain.key), content: content, nextUser: nextUser)
-    }
-    
-    func addToChain(chain: Chain, content: Content, nextUser: User) {
-        let newContent = self.addContent(content, chainId: chain.chainId)                            // Create content
-        myRootRef.child("chains/\(chain.chainId)/content/\(newContent.key)")
-            .setValue(chain.getAllContent().count * -1)                                              // Add content to chain
-        myRootRef.child("users/\(self.activeUser.userId)/inbox/\(chain.chainId)").removeValue()      // Remove chain from activeUser's inbox
-        myRootRef.child("users/\(self.activeUser.userId)/archive/\(chain.chainId)").setValue(true)   // Add chain to activeUser's achive
-        myRootRef.child("users/\(nextUser.userId)/inbox/\(chain.chainId)").setValue(true)            // Add chain to nextUser's inbox
-        myRootRef.child("chains/\(chain.chainId)/nextUser").setValue(nextUser.userId)                //set nextUser
 
-            /*
-            if content.isDrawing {
-                self.sendPushNotification("\(self.activeUser.username) sent you a drawing to describe", recipient: nextUser.userId, badge: "+1")
-            } else {
-                self.sendPushNotification("\(self.activeUser.username) sent you a prompt to draw", recipient: nextUser.userId, badge: "+1")
-            }
-            */
-    }
     
-    func finishChain(chain: Chain, content: Content) {
-        let newContent = self.addContent(content, chainId: chain.chainId)                                           // Create content
-        myRootRef.child("chains/\(chain.chainId)/content/\(newContent.key)")
-                .setValue(chain.getAllContent().count * -1)                                                             // Add content to chain
-        myRootRef.child("users/\(self.activeUser.userId)/inbox/\(chain.chainId)").removeValue()                // Remove chain from activeUser's inbox
-        myRootRef.child("users/\(self.activeUser.userId)/archive/\(chain.chainId)").setValue(true)             // Add chain to activeUser's achive
+    func postDrawing(drawing: Drawing) {
+        let newDrawing = myRootRef.child("drawings").childByAutoId()
+        drawing.setDrawingId(newDrawing.key)
+        drawing.setArtist(activeUser)
+        newDrawing.setValue(drawing.toAnyObject())
     }
     
     // MARK: Get Methods
@@ -169,12 +129,8 @@ class API {
         return self.activeUser
     }
     
-    func getInbox() -> [Chain] {
-        return self.inbox.reverse()
-    }
-    
-    func getArchive() -> [Chain] {
-        return self.archive.reverse()
+    func getWall() -> [Drawing] {
+        return self.wall.reverse()
     }
     
     func getUsers() -> [User] {
@@ -187,71 +143,25 @@ class API {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
         })
-        self.loadArchive(user)
-        self.loadInbox(user)
+        self.loadWall(user)
         self.loadUsers(user)
     }
     
-    private func loadArchive(currentUser: FIRUser) {
-        myRootRef.child("users/\(currentUser.uid)/archive").queryOrderedByKey()
+    private func loadWall(currentUser: FIRUser) {
+        myRootRef.child("drawings").queryOrderedByKey()
             .observeEventType(.ChildAdded, withBlock: { snapshot in
-                let chainId = snapshot.key
-                
-                print("chainId " + chainId)
-                
-                let newChain = Chain(chainId: chainId)
-                self.myRootRef.child("chains/\(chainId)/content").queryOrderedByValue()
-                    .observeEventType(.ChildAdded, withBlock: { snapshot in
-                        let contentId = snapshot.key
-                        self.getContent(contentId, callback: { (content: Content) -> () in
-                            newChain.prependContent(content)
-                        })
-                    })
-                
-                self.myRootRef.child("chains/\(chainId)/nextUser").observeSingleEventOfType(.Value, withBlock: {snapshot in
-                    if (!snapshot.exists()) { return }
-                    self.getUser(snapshot.value as! String, callback: { (nextUser: User) -> () in
-                        newChain.setNextUser(nextUser)
-                    })
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
+                    self.wall.append(drawing)
                 })
-                self.archive.append(newChain)
-            })
-
-        myRootRef.child("users/\(currentUser.uid)/archive").queryOrderedByKey()
-            .observeEventType(.ChildRemoved, withBlock: { snapshot in
-                let chainId = snapshot.key
-                var i = 0
-                for chain in self.archive {
-                    if chain.chainId == chainId {
-                        self.archive.removeAtIndex(i)
-                    }
-                    i += 1
-                }
-            })
-    }
-    
-    private func loadInbox(currentUser: FIRUser) {
-        myRootRef.child("users/\(currentUser.uid)/inbox").queryOrderedByKey()
-            .observeEventType(.ChildAdded, withBlock: { snapshot in
-                let chainId = snapshot.key
-                let newChain = Chain(chainId: chainId)
-                self.myRootRef.child("chains/\(chainId)/content").queryOrderedByKey()
-                    .observeEventType(.ChildAdded, withBlock: { snapshot in
-                        let contentId = snapshot.key
-                        self.getContent(contentId, callback: { (content: Content) -> () in
-                            newChain.appendContent(content)
-                        })
-                    })
-                self.inbox.append(newChain)
             })
         
-        myRootRef.child("users/\(currentUser.uid)/inbox").queryOrderedByKey()
+        myRootRef.child("drawings").queryOrderedByKey()
             .observeEventType(.ChildRemoved, withBlock: { snapshot in
-                let chainId = snapshot.key
+                let drawingId = snapshot.key
                 var i = 0
-                for chain in self.inbox {
-                    if chain.chainId == chainId {
-                        self.inbox.removeAtIndex(i)
+                for drawing in self.wall {
+                    if drawing.getDrawingId() == drawingId {
+                        self.users.removeAtIndex(i)
                     }
                     i += 1
                 }
@@ -295,7 +205,7 @@ class API {
         Alamofire.request(.POST, "https://go.urbanairship.com/api/push",
             headers:   ["Authorization" : self.urbanAirshipKey,
                 "Accept" : "application/vnd.urbanairship+json; version=3",
-                "Content-Type" : "application/json"],
+                "Drawing-Type" : "application/json"],
             parameters: ["audience":iPhone6, "notification":notificationData, "device_types":["ios"]],
             encoding: .JSON)
             .response { request, response, data, error in
