@@ -1,0 +1,12 @@
+//
+//  DrawingCellDelagate.swift
+//  Morphu
+//
+//  Created by Dylan Wight on 5/23/16.
+//  Copyright © 2016 Dylan Wight. All rights reserved.
+//
+
+import Foundation
+protocol DrawingCellDelagate {
+    func like(drawing: Drawing) -> ()
+}

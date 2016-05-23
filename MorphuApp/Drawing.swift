@@ -15,6 +15,7 @@ class Drawing {
     let timeSent: NSDate
     private var drawingId: String
     private var artist: User
+    var likes = [User]()
     
     init(artist: User, timeSent: NSDate = NSDate(), text: String, drawingId: String) {
         self.artist = artist
@@ -41,6 +42,14 @@ class Drawing {
     
     func getArtist() -> User {
         return self.artist
+    }
+    
+    func like(user: User) {
+        self.likes.append(user)
+    }
+    
+    func unlike(user: User) {
+        //self.likes.append(user)
     }
     
     func getTimeSinceSent() -> String {

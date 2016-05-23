@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WallViewController: UITableViewController {
+class WallViewController: UITableViewController, DrawingCellDelagate {
     let model = API.sharedInstance
 
     override func viewDidLoad() {
@@ -68,7 +68,12 @@ class WallViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! InboxDrawingCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! InboxDrawingCell
+        
+        if cell.delagate == nil {
+            cell.delagate = self
+        }
+        return cell
     }
         
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
@@ -96,6 +101,10 @@ class WallViewController: UITableViewController {
         }
     }
     */
+    
+    func like(drawing: Drawing) {
+        model.like(drawing)
+    }
     
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }

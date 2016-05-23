@@ -8,11 +8,19 @@
 
 import UIKit
 
-class InboxDrawingCell: UITableViewCell {
+class DrawingCell: UITableViewCell {
+    
+    var delagate: DrawingCellDelagate?
+    var drawing: Drawing?
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var creator: UILabel!
-    @IBOutlet weak var group: UILabel!
-    @IBOutlet weak var actionIcon: UIImageView!
     @IBOutlet weak var drawingImage: UIImageView!
     @IBOutlet weak var timeCreated: UILabel!
+    @IBOutlet weak var likeButton: UIButton!
+    
+    @IBAction func like(sender: UIButton) {
+        if let drawing = self.drawing {
+            delagate?.like(drawing)
+        }
+    }
 }
