@@ -8,6 +8,7 @@
 
 import UIKit
 
+/*
 class DescriptionInputView: UIView, UITextViewDelegate, UIGestureRecognizerDelegate {
     var descriptionInput = UITextView()
     var placeholderLabel = UILabel()
@@ -107,3 +108,4 @@ class DescriptionInputView: UIView, UITextViewDelegate, UIGestureRecognizerDeleg
         descriptionInput.removeObserver(self, forKeyPath: "contentSize")
     }
 }
+ */

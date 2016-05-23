@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ArchiveViewController: UITableViewController {
+class WallViewController: UITableViewController {
     let model = API.sharedInstance
     let stackIcon = UIImage(named: "ChevronForwards")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
 
@@ -100,6 +100,7 @@ class ArchiveViewController: UITableViewController {
         }
     }
 
+    /*
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         _ = tableView.indexPathForSelectedRow!
         self.performSegueWithIdentifier("toThreadTableView", sender: self)
@@ -113,6 +114,7 @@ class ArchiveViewController: UITableViewController {
             targetController.chainInstance = model.getArchive()[(path?.item)!]
         }
     }
-
+    */
+    
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }

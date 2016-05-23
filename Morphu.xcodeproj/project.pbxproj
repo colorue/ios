@@ -12,16 +12,9 @@
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
 		8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */; };
-		8763D2D01CEE226700E3D528 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* ArchiveViewController.swift */; };
-		8763D2D11CEE226700E3D528 /* ChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C11CEE226700E3D528 /* ChainViewController.swift */; };
-		8763D2D21CEE226700E3D528 /* ChooseFirstViewControllerr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C21CEE226700E3D528 /* ChooseFirstViewControllerr.swift */; };
-		8763D2D31CEE226700E3D528 /* StartChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C31CEE226700E3D528 /* StartChainViewController.swift */; };
-		8763D2D41CEE226700E3D528 /* InboxTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C41CEE226700E3D528 /* InboxTableViewController.swift */; };
-		8763D2D51CEE226700E3D528 /* PickNextController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C51CEE226700E3D528 /* PickNextController.swift */; };
+		8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* WallViewController.swift */; };
 		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
-		8763D2D71CEE226700E3D528 /* DescribingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C71CEE226700E3D528 /* DescribingViewController.swift */; };
 		8763D2D81CEE226700E3D528 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */; };
-		8763D2D91CEE226700E3D528 /* NewGroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C91CEE226700E3D528 /* NewGroupTableViewController.swift */; };
 		8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */; };
 		8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CB1CEE226700E3D528 /* LoginViewController.swift */; };
 		8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */; };
@@ -67,16 +60,9 @@
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		8763D2C01CEE226700E3D528 /* ArchiveViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
-		8763D2C11CEE226700E3D528 /* ChainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChainViewController.swift; sourceTree = "<group>"; };
-		8763D2C21CEE226700E3D528 /* ChooseFirstViewControllerr.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFirstViewControllerr.swift; sourceTree = "<group>"; };
-		8763D2C31CEE226700E3D528 /* StartChainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StartChainViewController.swift; sourceTree = "<group>"; };
-		8763D2C41CEE226700E3D528 /* InboxTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InboxTableViewController.swift; sourceTree = "<group>"; };
-		8763D2C51CEE226700E3D528 /* PickNextController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickNextController.swift; sourceTree = "<group>"; };
+		8763D2C01CEE226700E3D528 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 		8763D2C61CEE226700E3D528 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		8763D2C71CEE226700E3D528 /* DescribingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescribingViewController.swift; sourceTree = "<group>"; };
 		8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
-		8763D2C91CEE226700E3D528 /* NewGroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewGroupTableViewController.swift; sourceTree = "<group>"; };
 		8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8763D2CB1CEE226700E3D528 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -187,7 +173,7 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8763D3201CEE251800E3D528 /* Archive */,
+				8763D3201CEE251800E3D528 /* Wall */,
 				8763D3211CEE252300E3D528 /* Inbox */,
 				8763D3221CEE253100E3D528 /* Friends */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
@@ -278,24 +264,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8763D3201CEE251800E3D528 /* Archive */ = {
+		8763D3201CEE251800E3D528 /* Wall */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2C01CEE226700E3D528 /* ArchiveViewController.swift */,
-				8763D2C11CEE226700E3D528 /* ChainViewController.swift */,
-				8763D2C21CEE226700E3D528 /* ChooseFirstViewControllerr.swift */,
-				8763D2C31CEE226700E3D528 /* StartChainViewController.swift */,
+				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 			);
-			name = Archive;
+			name = Wall;
 			sourceTree = "<group>";
 		};
 		8763D3211CEE252300E3D528 /* Inbox */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2C41CEE226700E3D528 /* InboxTableViewController.swift */,
-				8763D2C51CEE226700E3D528 /* PickNextController.swift */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
-				8763D2C71CEE226700E3D528 /* DescribingViewController.swift */,
 				87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */,
 			);
 			name = Inbox;
@@ -305,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */,
-				8763D2C91CEE226700E3D528 /* NewGroupTableViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -480,7 +459,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8763D2D71CEE226700E3D528 /* DescribingViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
 				8763D30A1CEE229C00E3D528 /* SegueFromLeft.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* InboxDrawingCell.swift in Sources */,
@@ -493,16 +471,13 @@
 				8763D3041CEE229C00E3D528 /* ButtonTableCell.swift in Sources */,
 				8763D2FC1CEE229C00E3D528 /* DescriptionInputView.swift in Sources */,
 				8763D2FE1CEE229C00E3D528 /* CanvasDelagate.swift in Sources */,
-				8763D2D51CEE226700E3D528 /* PickNextController.swift in Sources */,
 				8763D3021CEE229C00E3D528 /* InboxDescriptionCell.swift in Sources */,
-				8763D2D91CEE226700E3D528 /* NewGroupTableViewController.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				8763D3061CEE229C00E3D528 /* Chain.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D3071CEE229C00E3D528 /* Content.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */,
-				8763D2D11CEE226700E3D528 /* ChainViewController.swift in Sources */,
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
@@ -512,12 +487,9 @@
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 				8763D3051CEE229C00E3D528 /* UpNextCell.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */,
-				8763D2D31CEE226700E3D528 /* StartChainViewController.swift in Sources */,
 				8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */,
-				8763D2D21CEE226700E3D528 /* ChooseFirstViewControllerr.swift in Sources */,
-				8763D2D41CEE226700E3D528 /* InboxTableViewController.swift in Sources */,
 				8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */,
-				8763D2D01CEE226700E3D528 /* ArchiveViewController.swift in Sources */,
+				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
