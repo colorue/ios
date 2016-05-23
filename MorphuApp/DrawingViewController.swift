@@ -27,7 +27,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let chevron = UIImage(named: "ChevronDown")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let backButton = UIButton(type: UIButtonType.Custom)
         backButton.tintColor = UIColor.whiteColor()
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
@@ -40,10 +40,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.view.addSubview(canvas)
         self.canvas = canvas
         
-        creator.text = descriptionInstance!.getAuthor().username
+        //creator.text = descriptionInstance!.getAuthor().username
         //descriptionCell.actionIcon.image = self.stackIcon
-        descriptionText.text = descriptionInstance!.text
-        timeCreated.text = descriptionInstance!.getTimeSinceSent()
+        //descriptionText.text = descriptionInstance!.text
+        //timeCreated.text = descriptionInstance!.getTimeSinceSent()
  
         let keyboardHeight = CGFloat(120)
         let colorKeyboard = ColorKeyboardView(frame: CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight), delagate: self)
@@ -115,6 +115,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func unwind(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("backToPickNext", sender: self)
+        self.performSegueWithIdentifier("backToHome", sender: self)
     }
 }

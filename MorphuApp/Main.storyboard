@@ -706,7 +706,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Kp-vu-1OS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="739.5" y="1083"/>
+            <point key="canvasLocation" x="4171.5" y="1140"/>
         </scene>
         <!--Draw Prompt-->
         <scene sceneID="dMl-U3-GTV">
@@ -737,7 +737,8 @@
                                         <exclude reference="b50-wA-sAS"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="12" y="28" width="100" height="12"/>
                                     <mask key="constraints">
                                         <include reference="29j-jJ-Xcu"/>
                                         <include reference="b50-wA-sAS"/>
@@ -877,7 +878,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Draw Prompt" id="7DO-Fc-Ouh">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="mVr-dO-lxG">
+                        <barButtonItem key="rightBarButtonItem" title="Post" id="mVr-dO-lxG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="done:" destination="OHZ-gn-DsE" id="PxV-kB-HVG"/>
@@ -890,12 +891,50 @@
                         <outlet property="timeCreated" destination="aSW-sk-pVt" id="75u-mb-TH4"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="U9g-HJ-mcN"/>
+                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="FAr-m3-UeF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAe-qX-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ebr-du-21l" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4096.5" y="727.5"/>
+            <point key="canvasLocation" x="2203.5" y="1083"/>
+        </scene>
+        <!--Present Drawing View Controller-->
+        <scene sceneID="N1g-j3-gtY">
+            <objects>
+                <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CkJ-ds-Baa"/>
+                        <viewControllerLayoutGuide type="bottom" id="S5v-Lr-IHb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h5B-wh-c2T">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="LTg-xC-fgv"/>
+                    <connections>
+                        <segue destination="ATK-nE-Squ" kind="presentation" identifier="newDrawing" id="LGn-sL-SO6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VoK-Mm-g2d" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681" y="1083"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="RVQ-o7-j7n">
+            <objects>
+                <navigationController id="ATK-nE-Squ" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="TV7-0i-FOu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="OHZ-gn-DsE" kind="relationship" relationship="rootViewController" id="3zt-Xt-HP5"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vbR-P3-EWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1458" y="1083"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
@@ -912,7 +951,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="nlr-Iq-6VO" kind="relationship" relationship="rootViewController" id="eGh-I9-Qgr"/>
+                        <segue destination="gFW-lw-iDZ" kind="relationship" relationship="rootViewController" id="Rp8-ES-UXK"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXz-WY-GOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -950,14 +989,13 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="OHZ-gn-DsE" kind="relationship" relationship="rootViewController" id="YNq-KM-IP6"/>
                         <segue destination="bVq-re-T7w" kind="unwind" identifier="toHomeTable" unwindAction="backToHome:" id="rQX-Ci-AEI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tGe-bi-4ev" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="bVq-re-T7w" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3217.5" y="727.5"/>
+            <point key="canvasLocation" x="6559.5" y="784.5"/>
         </scene>
         <!--Describe Drawing-->
         <scene sceneID="ZGw-ke-Xca">
@@ -988,7 +1026,8 @@
                                         <exclude reference="cB8-Ug-JrH"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="12" y="148" width="100" height="12"/>
                                     <mask key="constraints">
                                         <include reference="Ooz-dn-3ns"/>
                                         <include reference="cB8-Ug-JrH"/>
@@ -1176,7 +1215,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZnA-DI-81B" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="bmd-jm-4Yp" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4096.5" y="1450.5"/>
+            <point key="canvasLocation" x="7342.5" y="1507.5"/>
         </scene>
         <!--Item-->
         <scene sceneID="MB7-pV-Ktn">
@@ -2003,7 +2042,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5jx-0N-wPj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3217.5" y="1450.5"/>
+            <point key="canvasLocation" x="6559.5" y="1507.5"/>
         </scene>
         <!--Start Chain-->
         <scene sceneID="hXv-RM-ARR">
@@ -4178,7 +4217,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cdt-fj-qNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Py3-QR-5tQ" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2311.5" y="1083"/>
+            <point key="canvasLocation" x="5653.5" y="1140"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Yaf-jV-eW2">
@@ -4200,7 +4239,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qE4-8w-RNL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1543.5" y="1083"/>
+            <point key="canvasLocation" x="4885.5" y="1140"/>
         </scene>
     </scenes>
     <resources>
@@ -4216,7 +4255,7 @@
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="C20-D9-RLT"/>
         <segue reference="5uB-bY-P8D"/>
+        <segue reference="C20-D9-RLT"/>
     </inferredMetricsTieBreakers>
 </document>

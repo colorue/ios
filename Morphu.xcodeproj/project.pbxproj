@@ -55,6 +55,7 @@
 		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
 		8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */; };
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
+		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -109,6 +110,7 @@
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -294,6 +296,7 @@
 				8763D2C51CEE226700E3D528 /* PickNextController.swift */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
 				8763D2C71CEE226700E3D528 /* DescribingViewController.swift */,
+				87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */,
 			);
 			name = Inbox;
 			sourceTree = "<group>";
@@ -498,6 +501,7 @@
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D3071CEE229C00E3D528 /* Content.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
+				87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */,
 				8763D2D11CEE226700E3D528 /* ChainViewController.swift in Sources */,
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,

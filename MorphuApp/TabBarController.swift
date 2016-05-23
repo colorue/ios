@@ -11,6 +11,6 @@ import UIKit
 class TabBarController: UITabBarController {
     override func viewDidLoad() {
         self.tabBar.tintColor = morhpuColorBright
-    }
+    }    
 }
 
