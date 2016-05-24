@@ -10,6 +10,8 @@ import UIKit
 
 class WallViewController: UITableViewController, DrawingCellDelagate {
     let model = API.sharedInstance
+    
+    var selectedDrawing = Drawing()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,7 +74,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         
         if cell.delagate == nil {
             cell.delagate = self
-            print("delagateSet")
         }
         return cell
     }
@@ -86,44 +87,37 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         drawingCell.creator.text = content.getArtist().username
         drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
         drawingCell.timeCreated.text = content.getTimeSinceSent()
-        drawingCell.likeButton.selected = content.liked()
-        
-        let likes = content.likes.count
-        if likes == 0 {
-            drawingCell.likesCount.text = ""
-        } else if likes == 1 {
-            drawingCell.likesCount.text = "1 like"
-        } else {
-            drawingCell.likesCount.text = String(likes) + " likes"
-        }
-    }
-
-    /*
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        _ = tableView.indexPathForSelectedRow!
-        self.performSegueWithIdentifier("toThreadTableView", sender: self)
+        drawingCell.likeButton.selected = content.liked(model.getActiveUser())
+        self.setLikes(drawingCell)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toThreadTableView" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! ThreadTableViewController
-            let path = tableView.indexPathForSelectedRow
-            targetController.chainInstance = model.getArchive()[(path?.item)!]
+    private func setLikes(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            let likes = drawing.getLikes().count
+            if likes == 0 {
+                drawingCell.likes.text = ""
+                drawingCell.likeCount.enabled = false
+            } else if likes == 1 {
+                drawingCell.likeCount.enabled = true
+                drawingCell.likes.text = "1 like"
+            } else {
+                drawingCell.likeCount.enabled = true
+                drawingCell.likes.text = String(likes) + " likes"
+            }
         }
     }
-    */
     
     func like(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
             model.like(drawing)
-            //drawingCell.likeButton.titleLabel?.text = String(drawing.likes.count + 1) + " likes"
+            self.setLikes(drawingCell)
         }
     }
     
     func unlike(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
             model.unlike(drawing)
+            self.setLikes(drawingCell)
         }
     }
     
@@ -143,8 +137,24 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         }
     }
     
+    func viewLikes(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            print("drawing set")
+            self.selectedDrawing = drawing
+        }
+        self.performSegueWithIdentifier("toViewLikes", sender: self)
+    }
+    
     private func saveDrawing(drawing: Drawing) {
         UIImageWriteToSavedPhotosAlbum(UIImage.fromBase64(drawing.text), nil, nil, nil)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "toViewLikes" {
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! LikeViewController
+            targetController.drawingInstance = self.selectedDrawing
+        }
     }
     
     @IBAction func backToHome(segue: UIStoryboardSegue) {}

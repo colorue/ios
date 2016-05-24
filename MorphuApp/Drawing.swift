@@ -15,7 +15,7 @@ class Drawing {
     let timeSent: NSDate
     private var drawingId: String
     private var artist: User
-    var likes = [User]()
+    private var likes = [User]()
     
     init(artist: User, timeSent: NSDate = NSDate(), text: String, drawingId: String) {
         self.artist = artist
@@ -45,7 +45,9 @@ class Drawing {
     }
     
     func like(user: User) {
-        self.likes.append(user)
+        if !liked(user) {
+            self.likes.append(user)
+        }
     }
     
     func unlike(user: User) {
@@ -59,6 +61,15 @@ class Drawing {
         }
     }
     
+    func liked(user: User) -> Bool {
+        for liker in self.likes {
+            if liker.userId == user.userId {
+                return true
+            }
+        }
+        return false
+    }
+    
     func liked() -> Bool {
         for liker in self.likes {
             if liker.userId == model.getActiveUser().userId {
@@ -66,6 +77,10 @@ class Drawing {
             }
         }
         return false
+    }
+    
+    func getLikes() -> [User] {
+        return self.likes
     }
     
     func getTimeSinceSent() -> String {

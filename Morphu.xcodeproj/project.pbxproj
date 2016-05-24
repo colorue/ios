@@ -44,6 +44,7 @@
 		8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */; };
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
 		879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */; };
+		879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */; };
 		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 /* End PBXBuildFile section */
@@ -89,6 +90,7 @@
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCellDelagate.swift; sourceTree = "<group>"; };
+		879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
+				879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */,
 			);
 			name = Wall;
 			sourceTree = "<group>";
@@ -467,6 +470,7 @@
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
+				879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */,
 				87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */,
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,

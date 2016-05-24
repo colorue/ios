@@ -17,8 +17,8 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var drawingImage: UIImageView!
     @IBOutlet weak var timeCreated: UILabel!
     @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likesCount: UILabel!
-    
+    @IBOutlet weak var likeCount: UIButton!
+    @IBOutlet weak var likes: UILabel!
     
     @IBAction func upload(sender: UIButton) {
         delagate?.upload(self)
@@ -32,5 +32,9 @@ class DrawingCell: UITableViewCell {
             sender.selected = false
             delagate?.unlike(self)
         }
+    }
+    
+    @IBAction func viewLikes(sender: UIButton) {
+        delagate?.viewLikes(self)
     }
 }

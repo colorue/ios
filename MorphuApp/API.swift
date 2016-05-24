@@ -140,10 +140,12 @@ class API {
     }
     
     func like(drawing: Drawing) {
+        drawing.like(self.activeUser)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").setValue(true)
     }
     
     func unlike(drawing: Drawing) {
+        drawing.unlike(self.activeUser)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").removeValue()
     }
     
