@@ -127,5 +127,25 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         }
     }
     
+    func upload(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            let actionSelector = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Save to photos", style: UIAlertActionStyle.Default,
+                handler: {(alert: UIAlertAction!) in self.saveDrawing(drawing)}))
+            
+            /*
+            if let popoverController = actionSelector.popoverPresentationController {
+                popoverController.barButtonItem = sender
+            }
+            */
+            self.presentViewController(actionSelector, animated: true, completion: nil)
+        }
+    }
+    
+    private func saveDrawing(drawing: Drawing) {
+        UIImageWriteToSavedPhotosAlbum(UIImage.fromBase64(drawing.text), nil, nil, nil)
+    }
+    
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }

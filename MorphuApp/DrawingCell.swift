@@ -19,6 +19,11 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesCount: UILabel!
     
+    
+    @IBAction func upload(sender: UIButton) {
+        delagate?.upload(self)
+    }
+    
     @IBAction func like(sender: UIButton) {
         if !(drawing?.liked())! {
             sender.selected = true

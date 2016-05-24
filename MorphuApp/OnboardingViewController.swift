@@ -29,5 +29,10 @@ class OnboardingViewController: UIViewController {
         }
     }
     
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return UIStatusBarStyle.LightContent;
+    }
+    
     @IBAction func backToOnBoarding(segue: UIStoryboardSegue) {}
 }

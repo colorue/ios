@@ -10,4 +10,5 @@ import Foundation
 protocol DrawingCellDelagate {
     func like(drawingCell: DrawingCell) -> ()
     func unlike(drawingCell: DrawingCell) -> ()
+    func upload(drawingCell: DrawingCell) -> ()
 }
