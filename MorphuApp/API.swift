@@ -44,8 +44,14 @@ class API {
                 let drawing = Drawing(artist: artist, timeSent: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, text: snapshot.value!["text"] as! String, drawingId: drawingId)
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    self.getUser(snapshot.key, callback: { (like: User) -> () in
-                        drawing.like(like)
+                    self.getUser(snapshot.key, callback: { (liker: User) -> () in
+                        drawing.like(liker)
+                    })
+                })
+                
+                self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                    self.getUser(snapshot.key, callback: { (unliker: User) -> () in
+                        drawing.unlike(unliker)
                     })
                 })
                 
@@ -135,6 +141,10 @@ class API {
     
     func like(drawing: Drawing) {
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").setValue(true)
+    }
+    
+    func unlike(drawing: Drawing) {
+        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").removeValue()
     }
     
     // MARK: Get Methods

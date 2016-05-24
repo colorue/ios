@@ -49,7 +49,23 @@ class Drawing {
     }
     
     func unlike(user: User) {
-        //self.likes.append(user)
+        var i = 0
+        for liker in likes {
+            if liker.userId == user.userId {
+                self.likes.removeAtIndex(i)
+                break
+            }
+            i += 1
+        }
+    }
+    
+    func liked() -> Bool {
+        for liker in self.likes {
+            if liker.userId == model.getActiveUser().userId {
+                return true
+            }
+        }
+        return false
     }
     
     func getTimeSinceSent() -> String {

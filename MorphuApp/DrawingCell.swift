@@ -20,7 +20,12 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var likesCount: UILabel!
     
     @IBAction func like(sender: UIButton) {
-        sender.selected = true
-        delagate?.like(self)
+        if !(drawing?.liked())! {
+            sender.selected = true
+            delagate?.like(self)
+        } else {
+            sender.selected = false
+            delagate?.unlike(self)
+        }
     }
 }

@@ -86,7 +86,16 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         drawingCell.creator.text = content.getArtist().username
         drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
         drawingCell.timeCreated.text = content.getTimeSinceSent()
-        drawingCell.likeButton.titleLabel?.text = String(content.likes.count) + " likes"
+        drawingCell.likeButton.selected = content.liked()
+        
+        let likes = content.likes.count
+        if likes == 0 {
+            drawingCell.likesCount.text = ""
+        } else if likes == 1 {
+            drawingCell.likesCount.text = "1 like"
+        } else {
+            drawingCell.likesCount.text = String(likes) + " likes"
+        }
     }
 
     /*
@@ -109,6 +118,12 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         if let drawing = drawingCell.drawing {
             model.like(drawing)
             //drawingCell.likeButton.titleLabel?.text = String(drawing.likes.count + 1) + " likes"
+        }
+    }
+    
+    func unlike(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            model.unlike(drawing)
         }
     }
     
