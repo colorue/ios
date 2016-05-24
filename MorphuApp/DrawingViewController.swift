@@ -9,19 +9,19 @@
 import UIKit
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate {
+    
     let api = API.sharedInstance
+    let prefs = NSUserDefaults.standardUserDefaults()
+
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
     var underFingerView = UIImageView()
     
-    @IBOutlet weak var creator: UILabel!
-    @IBOutlet weak var actionIcon: UIImageView!
-    @IBOutlet weak var descriptionText: UILabel!
-    @IBOutlet weak var timeCreated: UILabel!
-    
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         
         let chevron = UIImage(named: "ChevronDown")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         let backButton = UIButton(type: UIButtonType.Custom)
@@ -74,21 +74,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    @IBAction func done(sender: UIBarButtonItem) {
-        
-        let newDrawing = Drawing(artist: User(), text: canvas!.getDrawing().toBase64(), drawingId: "")
-        api.postDrawing(newDrawing)
-        
-        let prefs = NSUserDefaults.standardUserDefaults()
-        prefs.setValue("noDrawing", forKey: "savedDrawing")
-        
-        if (!prefs.boolForKey("getStartedHowToSet")) {
-            prefs.setValue(true, forKey: "viewRoundsHowTo")
-            prefs.setValue(true, forKey: "getStartedHowToSet")
-        }
-        
-        self.performSegueWithIdentifier("backToHome", sender: self)
-    }
+
     
     func getCurrentColor() -> UIColor {
         return colorKeyboard!.getCurrentColor()
@@ -117,7 +103,41 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         underFingerView.hidden = true
     }
     
-    func unwind(sender: UIBarButtonItem) {
+    @IBAction func done(sender: UIBarButtonItem) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        let newDrawing = Drawing(artist: User(), text: canvas!.getDrawing().toBase64(), drawingId: "")
+        api.postDrawing(newDrawing)
+        
+        prefs.setValue("noDrawing", forKey: "savedDrawing")
+        
+        if (!prefs.boolForKey("getStartedHowToSet")) {
+            prefs.setValue(true, forKey: "viewRoundsHowTo")
+            prefs.setValue(true, forKey: "getStartedHowToSet")
+        }
+        
         self.performSegueWithIdentifier("backToHome", sender: self)
+    }
+    
+    func unwind(sender: UIBarButtonItem) {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
+        self.performSegueWithIdentifier("backToHome", sender: self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    func appMovedToBackground() {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+        print("App moved to background!")
+        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
+    }
+    
+    deinit {
+        print("denit")
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

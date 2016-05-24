@@ -60,6 +60,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("%@", userInfo)
     }
     
+    func applicationWillResignActive(application: UIApplication) {
+        let notificationCenter = NSNotificationCenter.defaultCenter()
+        notificationCenter.postNotificationName(UIApplicationWillResignActiveNotification, object: nil)
+    }
+    
     func tokenRefreshNotificaiton(notification: NSNotification) {
         let refreshedToken = FIRInstanceID.instanceID().token()!
         print("InstanceID token: \(refreshedToken)")

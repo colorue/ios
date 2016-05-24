@@ -60,7 +60,7 @@
             </objects>
             <point key="canvasLocation" x="2203.5" y="1083"/>
         </scene>
-        <!--Present Drawing View Controller-->
+        <!--Morphu-->
         <scene sceneID="N1g-j3-gtY">
             <objects>
                 <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
@@ -72,7 +72,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="LTg-xC-fgv"/>
+                    <navigationItem key="navigationItem" title="Morphu" id="LTg-xC-fgv"/>
                     <connections>
                         <segue destination="ATK-nE-Squ" kind="presentation" identifier="newDrawing" id="LGn-sL-SO6"/>
                     </connections>
@@ -112,7 +112,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="gFW-lw-iDZ" kind="relationship" relationship="rootViewController" id="Rp8-ES-UXK"/>
+                        <segue destination="gFW-lw-iDZ" kind="relationship" relationship="rootViewController" id="Jd9-3J-jCj"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXz-WY-GOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -289,7 +289,7 @@
                                                         <action selector="upload:" destination="tAl-EB-dAq" eventType="touchUpInside" id="AaF-6a-gU8"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
                                                     <rect key="frame" x="85" y="20" width="76" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">

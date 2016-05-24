@@ -49,10 +49,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     func handleTap(sender: UITapGestureRecognizer) {
         lastPoint = sender.locationInView(imageView)
         currentPoint = sender.locationInView(imageView)
-        drawImage()
+        self.drawImage()
+        self.mergeImages()
         self.shiftUndoStack()
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
-        mergeImages()
     }
     
     func handleDrag(sender: UIPanGestureRecognizer) {
@@ -60,7 +60,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if (sender.numberOfTouches() > 1) { return }
         
         let underFingerSize = CGSize(width: 200, height: 200)
-        mergeImages()
+        self.mergeImages()
 
         if sender.state == .Began {
             lastPoint = sender.locationOfTouch(0, inView: imageView)
@@ -86,7 +86,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             undoStack.removeAtIndex(0)
             undoStack.append(self.imageView.image!)
         }
-        prefs.setValue(self.imageView.image!.toBase64(), forKey: "savedDrawing")
     }
     
     func drawImage() {
