@@ -26,6 +26,8 @@ class Drawing {
         
         
         comments.append(Comment(commentId: "1", user: api.getActiveUser(), text: "Hello There"))
+
+
     }
     
     convenience init() {

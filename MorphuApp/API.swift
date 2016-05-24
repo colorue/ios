@@ -149,6 +149,10 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").removeValue()
     }
     
+    func addComment(drawing: Drawing, text: String) {
+        drawing.addComment(Comment(user: self.activeUser, text: text))
+    }
+    
     // MARK: Get Methods
     func getActiveUser() -> User {
         return self.activeUser

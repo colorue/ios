@@ -8,9 +8,10 @@
 
 import UIKit
 
-class CommentViewController: UITableViewController {
+class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     
     var drawingInstance = Drawing()
+    var writeCommentCell: WriteCommentCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,10 +33,6 @@ class CommentViewController: UITableViewController {
         self.tableView.reloadData()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
-    }
-    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -53,7 +50,30 @@ class CommentViewController: UITableViewController {
         cell.profileImage.image = comment.user.profileImage
         cell.timeStamp.text = comment.getTimeSinceSent()
         cell.commentText.text = comment.text
+        
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! WriteCommentCell
+        cell.delagate = self
+        
+        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
+        separatorU.backgroundColor = dividerColor
+        cell.addSubview(separatorU)
+        
+        self.writeCommentCell = cell
+        return cell
+    }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func addComment(text: String) {
+        API.sharedInstance.addComment(drawingInstance, text: text)
+        self.writeCommentCell?.commentText.text = ""
+        self.tableView.reloadData()
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
@@ -62,6 +82,7 @@ class CommentViewController: UITableViewController {
     }
     
     func unwind(sender: UIBarButtonItem) {
+        self.writeCommentCell?.commentText.resignFirstResponder()
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
 }

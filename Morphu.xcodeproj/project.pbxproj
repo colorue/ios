@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1D8CA3965B4E0FC811AC6443 /* Pods_MorphuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */; };
+		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
 		8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* Main.storyboard */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
@@ -29,7 +30,6 @@
 		8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E51CEE229C00E3D528 /* ColorKeyboardDelagate.swift */; };
 		8763D3001CEE229C00E3D528 /* UserTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E61CEE229C00E3D528 /* UserTableViewCell.swift */; };
 		8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E71CEE229C00E3D528 /* DrawingCell.swift */; };
-		8763D3041CEE229C00E3D528 /* ButtonTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EA1CEE229C00E3D528 /* ButtonTableCell.swift */; };
 		8763D3081CEE229C00E3D528 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EE1CEE229C00E3D528 /* User.swift */; };
 		8763D3091CEE229C00E3D528 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EF1CEE229C00E3D528 /* API.swift */; };
 		8763D30A1CEE229C00E3D528 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */; };
@@ -48,6 +48,7 @@
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
 		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
+		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
 		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 /* End PBXBuildFile section */
@@ -57,6 +58,7 @@
 		7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.release.xcconfig"; sourceTree = "<group>"; };
 		873AFA0D1CED7697006FD34A /* Morphu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphu.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		8763D2B81CEE21BC00E3D528 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -78,7 +80,6 @@
 		8763D2E51CEE229C00E3D528 /* ColorKeyboardDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorKeyboardDelagate.swift; sourceTree = "<group>"; };
 		8763D2E61CEE229C00E3D528 /* UserTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTableViewCell.swift; sourceTree = "<group>"; };
 		8763D2E71CEE229C00E3D528 /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
-		8763D2EA1CEE229C00E3D528 /* ButtonTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ButtonTableCell.swift; sourceTree = "<group>"; };
 		8763D2EE1CEE229C00E3D528 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8763D2EF1CEE229C00E3D528 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
@@ -97,6 +98,7 @@
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCell.swift; sourceTree = "<group>"; };
 		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -227,8 +229,8 @@
 			children = (
 				8763D2E61CEE229C00E3D528 /* UserTableViewCell.swift */,
 				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
-				8763D2EA1CEE229C00E3D528 /* ButtonTableCell.swift */,
 				879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */,
+				879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -240,6 +242,7 @@
 				8763D2E41CEE229C00E3D528 /* CanvasDelagate.swift */,
 				8763D2E51CEE229C00E3D528 /* ColorKeyboardDelagate.swift */,
 				879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */,
+				8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */,
 			);
 			name = Delagates;
 			sourceTree = "<group>";
@@ -468,15 +471,16 @@
 				879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */,
 				8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
+				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserTableViewCell.swift in Sources */,
 				8763D2D81CEE226700E3D528 /* GroupTableViewController.swift in Sources */,
 				8763D2FD1CEE229C00E3D528 /* DescriptionInputDelagate.swift in Sources */,
-				8763D3041CEE229C00E3D528 /* ButtonTableCell.swift in Sources */,
 				8763D2FC1CEE229C00E3D528 /* DescriptionInputView.swift in Sources */,
 				8763D2FE1CEE229C00E3D528 /* CanvasDelagate.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
+				879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */,
