@@ -10,22 +10,26 @@ import Foundation
 
 class Drawing {
     
-    let model = API.sharedInstance
+    let api = API.sharedInstance
     let text: String
-    let timeSent: NSDate
+    let timeStamp: NSDate
     private var drawingId: String
     private var artist: User
     private var likes = [User]()
+    private var comments = [Comment]()
     
-    init(artist: User, timeSent: NSDate = NSDate(), text: String, drawingId: String) {
+    init(artist: User, timeStamp: NSDate = NSDate(), text: String, drawingId: String) {
         self.artist = artist
-        self.timeSent = timeSent
+        self.timeStamp = timeStamp
         self.text = text
         self.drawingId = drawingId
+        
+        
+        comments.append(Comment(commentId: "1", user: api.getActiveUser(), text: "Hello There"))
     }
     
     convenience init() {
-        self.init(artist: User(), timeSent: NSDate(), text: "", drawingId: "")
+        self.init(artist: User(), timeStamp: NSDate(), text: "", drawingId: "")
     }
     
     func setDrawingId(drawingId: String) {
@@ -72,7 +76,7 @@ class Drawing {
     
     func liked() -> Bool {
         for liker in self.likes {
-            if liker.userId == model.getActiveUser().userId {
+            if liker.userId == api.getActiveUser().userId {
                 return true
             }
         }
@@ -83,8 +87,27 @@ class Drawing {
         return self.likes
     }
     
+    func addComment(comment: Comment) {
+        self.comments.append(comment)
+    }
+    
+    func removeComment(comment: Comment) {
+        var i = 0
+        for comment_ in self.comments {
+            if comment_.commentId == comment.commentId {
+                self.comments.removeAtIndex(i)
+                break
+            }
+            i += 1
+        }
+    }
+    
+    func getComments() -> [Comment] {
+        return self.comments
+    }
+    
     func getTimeSinceSent() -> String {
-        let secondsSince = NSDate().timeIntervalSinceDate(self.timeSent)
+        let secondsSince = NSDate().timeIntervalSinceDate(self.timeStamp)
         switch(secondsSince) {
         case 0..<60:
             return "now"
@@ -100,6 +123,6 @@ class Drawing {
     func toAnyObject()-> NSDictionary {
         return ["artist": self.artist.userId,
                 "text": self.text,
-                "timeSent": model.dateFormatter.stringFromDate(self.timeSent)]
+                "timeSent": api.dateFormatter.stringFromDate(self.timeStamp)]
     }
 }

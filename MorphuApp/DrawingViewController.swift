@@ -111,11 +111,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         prefs.setValue("noDrawing", forKey: "savedDrawing")
         
-        if (!prefs.boolForKey("getStartedHowToSet")) {
-            prefs.setValue(true, forKey: "viewRoundsHowTo")
-            prefs.setValue(true, forKey: "getStartedHowToSet")
-        }
-        
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
     
@@ -132,12 +127,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func appMovedToBackground() {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        print("App moved to background!")
         prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
-    }
-    
-    deinit {
-        print("denit")
-        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
 }

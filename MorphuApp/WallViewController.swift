@@ -88,6 +88,14 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
         drawingCell.timeCreated.text = content.getTimeSinceSent()
         drawingCell.likeButton.selected = content.liked(model.getActiveUser())
+        
+        let comments = content.getComments().count
+        if comments == 1 {
+            drawingCell.commentCount.text = "1 comment"
+        } else {
+            drawingCell.commentCount.text = String(content.getComments().count) + " comments"
+        }
+        
         self.setLikes(drawingCell)
     }
     
@@ -128,21 +136,22 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
             actionSelector.addAction(UIAlertAction(title: "Save to photos", style: UIAlertActionStyle.Default,
                 handler: {(alert: UIAlertAction!) in self.saveDrawing(drawing)}))
             
-            /*
-            if let popoverController = actionSelector.popoverPresentationController {
-                popoverController.barButtonItem = sender
-            }
-            */
             self.presentViewController(actionSelector, animated: true, completion: nil)
         }
     }
     
     func viewLikes(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
-            print("drawing set")
             self.selectedDrawing = drawing
         }
         self.performSegueWithIdentifier("toViewLikes", sender: self)
+    }
+    
+    func viewComments(drawingCell: DrawingCell) {
+        if let drawing = drawingCell.drawing {
+            self.selectedDrawing = drawing
+        }
+        self.performSegueWithIdentifier("toViewComments", sender: self)
     }
     
     private func saveDrawing(drawing: Drawing) {
@@ -153,6 +162,10 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         if segue.identifier == "toViewLikes" {
             let destinationNavigationController = segue.destinationViewController as! UINavigationController
             let targetController = destinationNavigationController.topViewController as! LikeViewController
+            targetController.drawingInstance = self.selectedDrawing
+        } else if segue.identifier == "toViewComments" {
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! CommentViewController
             targetController.drawingInstance = self.selectedDrawing
         }
     }

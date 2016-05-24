@@ -41,7 +41,7 @@ class API {
             
             self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
                 
-                let drawing = Drawing(artist: artist, timeSent: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, text: snapshot.value!["text"] as! String, drawingId: drawingId)
+                let drawing = Drawing(artist: artist, timeStamp: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, text: snapshot.value!["text"] as! String, drawingId: drawingId)
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
                     self.getUser(snapshot.key, callback: { (liker: User) -> () in

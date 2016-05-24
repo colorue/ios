@@ -45,6 +45,9 @@
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
 		879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */; };
 		879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */; };
+		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
+		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
+		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
 		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 /* End PBXBuildFile section */
@@ -91,6 +94,9 @@
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCellDelagate.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
+		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
@@ -195,6 +201,7 @@
 			children = (
 				8763D2EE1CEE229C00E3D528 /* User.swift */,
 				87E7ADE71CF38BEB00DC226A /* Drawing.swift */,
+				879BCC971CF4137F00CD95E7 /* Comment.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -221,6 +228,7 @@
 				8763D2E61CEE229C00E3D528 /* UserTableViewCell.swift */,
 				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
 				8763D2EA1CEE229C00E3D528 /* ButtonTableCell.swift */,
+				879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -262,6 +270,7 @@
 			children = (
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 				879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */,
+				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
 			);
 			name = Wall;
 			sourceTree = "<group>";
@@ -475,13 +484,16 @@
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
+				879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
+				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */,
 				8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */,
 				8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
+				879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
