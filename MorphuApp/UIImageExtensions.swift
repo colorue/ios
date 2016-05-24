@@ -57,10 +57,18 @@ extension UIImage {
         return image
     }
     
-    func toBase64() -> String {
-        let imageData = UIImagePNGRepresentation(self)!
-        let base64String: String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
-        return base64String
+    func getPixelColor(pos: CGPoint) -> UIColor {
+        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider(self.CGImage))
+        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+        
+        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+            
+        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
+        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
+        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
+        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
+            
+        return UIColor(red: r, green: g, blue: b, alpha: a)
     }
     
     static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
@@ -71,6 +79,12 @@ extension UIImage {
         let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image
+    }
+    
+    func toBase64() -> String {
+        let imageData = UIImagePNGRepresentation(self)!
+        let base64String: String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
+        return base64String
     }
     
     static func fromBase64(base64String: String) -> UIImage {

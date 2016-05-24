@@ -25,6 +25,8 @@ class API {
     private var users = [User]()
     private var activeUser = User()
     
+    private var userDict = [String: User]()
+    
     var inboxBadge: UITabBarItem?
     
     init() {
@@ -55,41 +57,74 @@ class API {
                     })
                 })
                 
+                self.myRootRef.child("drawings/\(drawingId)/comments").observeEventType(.ChildAdded, withBlock: {snapshot in
+                    self.getComment(snapshot.key, callback: { (comment: Comment) -> () in
+                        drawing.addComment(comment)
+                    })
+                })
+                
                 callback(drawing)
             })
         })
     }
     
-    private func getUser(userId: String, callback: (User) -> ()) {
-        self.myRootRef.child("users/\(userId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+    private func getComment(commentId: String, callback: (Comment) -> ()) {
+        self.myRootRef.child("comments/\(commentId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
             if (!snapshot.exists()) { return }
             
-            let username = snapshot.value!["username"] as! String
-            let email = snapshot.value!["email"] as! String
+            let text = snapshot.value!["text"] as! String
+            let timeStamp = self.dateFormatter.dateFromString(snapshot.value!["timeStamp"] as! String)!
             
-            let newUser = User(userId: userId, username: username, email: email)
-            
-            if let url = snapshot.value!["profileImageURL"] as? String {
-                dispatch_async(dispatch_get_main_queue()) {
-                    let url = NSURL(string: url)
-                    let data = NSData(contentsOfURL: url!)
-                    newUser.profileImage = UIImage(data: data!)!
-                }
-            }
-            callback(newUser)
+            self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
+                callback(Comment(commentId: commentId, user: user, timeStamp: timeStamp, text: text))
+            })
         })
+
+    }
+    
+    private func getUser(userId: String, callback: (User) -> ()) {
+        if let user = self.userDict[userId] {
+            callback(user)
+        } else {
+            self.myRootRef.child("users/\(userId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+                if (!snapshot.exists()) { return }
+            
+                let username = snapshot.value!["username"] as! String
+                let email = snapshot.value!["email"] as! String
+            
+                let newUser = User(userId: userId, username: username, email: email)
+            
+                if let url = snapshot.value!["photoURL"] as? String {
+                    dispatch_async(dispatch_get_main_queue()) {
+                        let url = NSURL(string: url)
+                        let data = NSData(contentsOfURL: url!)
+                        newUser.profileImage = UIImage(data: data!)!
+                    }
+                }
+                self.userDict[userId] = newUser
+                callback(newUser)
+            })
+        }
     }
     
     // MARK: External Methods
     
     func checkLoggedIn(callback: (Bool)-> ()) {
         if let user = FIRAuth.auth()?.currentUser {
+            
+            myRootRef.child("users/\(user.uid)/email").setValue("testEmail")
+            myRootRef.child("users/\(user.uid)/username").setValue(user.displayName!)
+            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
+
             self.loadData(user)
             callback(true)
         } else {
             callback(false)
         }
     }
+    
+
+
     
     func connectWithFacebook(viewController: UIViewController, callback: (Bool)  -> ()) {
         
@@ -126,6 +161,7 @@ class API {
         let prefs = NSUserDefaults.standardUserDefaults()
         prefs.setValue(false, forKey: "loggedIn")
         self.users.removeAll()
+        self.wall.removeAll()
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
         FBSDKLoginManager().logOut()
@@ -150,7 +186,12 @@ class API {
     }
     
     func addComment(drawing: Drawing, text: String) {
-        drawing.addComment(Comment(user: self.activeUser, text: text))
+        let comment = Comment(user: self.activeUser, text: text)
+        let newComment = myRootRef.child("comments").childByAutoId()
+        comment.setCommentId(newComment.key)
+        drawing.addComment(comment)
+        newComment.setValue(comment.toAnyObject())
+        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
     }
     
     // MARK: Get Methods

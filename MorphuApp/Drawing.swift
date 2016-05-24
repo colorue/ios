@@ -23,11 +23,6 @@ class Drawing {
         self.timeStamp = timeStamp
         self.text = text
         self.drawingId = drawingId
-        
-        
-        comments.append(Comment(commentId: "1", user: api.getActiveUser(), text: "Hello There"))
-
-
     }
     
     convenience init() {
@@ -90,13 +85,18 @@ class Drawing {
     }
     
     func addComment(comment: Comment) {
+        for comment_ in self.comments {
+            if comment_.getCommetId() == comment.getCommetId() {
+                return
+            }
+        }
         self.comments.append(comment)
     }
     
     func removeComment(comment: Comment) {
         var i = 0
         for comment_ in self.comments {
-            if comment_.commentId == comment.commentId {
+            if comment_.getCommetId() == comment.getCommetId() {
                 self.comments.removeAtIndex(i)
                 break
             }

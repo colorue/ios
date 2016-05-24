@@ -9,10 +9,10 @@
 import Foundation
 
 class Comment {
-    let commentId: String
     let user: User
     let timeStamp: NSDate
     let text: String
+    private var commentId: String
     
     let api = API.sharedInstance
     
@@ -21,6 +21,14 @@ class Comment {
         self.user = user
         self.timeStamp = timeStamp
         self.text = text
+    }
+    
+    func setCommentId(commentId: String) {
+        self.commentId = commentId
+    }
+    
+    func getCommetId() -> String {
+        return self.commentId
     }
     
     func getTimeSinceSent() -> String {

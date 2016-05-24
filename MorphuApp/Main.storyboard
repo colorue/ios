@@ -1824,7 +1824,6 @@
                                     <variation key="default">
                                         <mask key="subviews">
                                             <exclude reference="kaq-Kb-Ih3"/>
-                                            <exclude reference="7Qs-I9-leV"/>
                                         </mask>
                                         <mask key="constraints">
                                             <exclude reference="8Dh-z8-WHD"/>
@@ -1839,7 +1838,6 @@
                                     <variation key="heightClass=regular-widthClass=compact">
                                         <mask key="subviews">
                                             <include reference="kaq-Kb-Ih3"/>
-                                            <include reference="7Qs-I9-leV"/>
                                         </mask>
                                         <mask key="constraints">
                                             <include reference="8Dh-z8-WHD"/>
