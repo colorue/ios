@@ -17,6 +17,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var canvas: CanvasView?
     var underFingerView = UIImageView()
     
+    private var dropperActive = false
+
+    
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,8 +77,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-
-    
     func getCurrentColor() -> UIColor {
         return colorKeyboard!.getCurrentColor()
     }
@@ -92,6 +93,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.canvas!.trash()
     }
     
+    func dropper() {
+        self.canvas!.dropper()
+    }
+    
     func setUnderfingerView(underFingerImage: UIImage) {
         if underFingerView.hidden {
             underFingerView.hidden = false
@@ -101,6 +106,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func hideUnderFingerView() {
         underFingerView.hidden = true
+    }
+    
+    func setColor(color: UIColor) {
+        self.colorKeyboard!.setColor(color)
+    }
+    
+    func getDropperActive() -> Bool {
+        return self.dropperActive
+    }
+    
+    func setDropperActive(active: Bool) {
+        self.dropperActive = active
+        self.colorKeyboard!.setDropper()
     }
     
     @IBAction func done(sender: UIBarButtonItem) {

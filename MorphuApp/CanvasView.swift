@@ -16,7 +16,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
     let prefs = NSUserDefaults.standardUserDefaults()
-
+    
     let resizeScale: CGFloat = 2.0
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage) {
@@ -47,6 +47,16 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func handleTap(sender: UITapGestureRecognizer) {
+        if self.delagate.getDropperActive() {
+            self.delagate.setDropperActive(false)
+            
+            let dropperPoint = sender.locationInView(imageView)
+            let dropperColor = imageView.image?.getPixelColor(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2))
+            
+            self.delagate.setColor(dropperColor!)
+            return
+        }
+        
         lastPoint = sender.locationInView(imageView)
         currentPoint = sender.locationInView(imageView)
         self.drawImage()
@@ -61,6 +71,21 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         let underFingerSize = CGSize(width: 200, height: 200)
         self.mergeImages()
+        
+        if self.delagate.getDropperActive() {
+            let dropperPoint = sender.locationInView(imageView)
+            let dropperColor = imageView.image?.getPixelColor(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2))
+            
+            self.delagate.setColor(dropperColor!)
+            
+            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2), cropSize: underFingerSize))
+            
+            if sender.state == .Ended {
+                self.delagate.setDropperActive(false)
+                self.delagate.hideUnderFingerView()
+            }
+            return
+        }
 
         if sender.state == .Began {
             lastPoint = sender.locationOfTouch(0, inView: imageView)
@@ -76,6 +101,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             self.shiftUndoStack()
             self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
             self.delagate.hideUnderFingerView()
+
         }
     }
     
@@ -126,6 +152,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.imageView.image = nil
         undoStack.append(UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale)))
         mergeImages()
+    }
+    
+    func dropper() {
+        self.delagate.setDropperActive(true)
     }
     
     func getDrawing() -> UIImage {

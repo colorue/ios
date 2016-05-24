@@ -14,6 +14,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let brushSizeSlider = UISlider()
     let undoButton = UIButton()
     let trashButton = UIButton()
+    let dropperButton = UIButton()
     let delagate: ColorKeyboardDelagate
     
     init (frame: CGRect, delagate: ColorKeyboardDelagate) {
@@ -51,6 +52,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.frame = CGRect(x: frame.maxX - 8 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
         self.addSubview(undoButton)
         
+        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+
+        dropperButton.tintColor = .whiteColor()
+        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
+        dropperButton.frame = CGRect(x: frame.maxX - 75 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
+        self.addSubview(dropperButton)
+        
         trashButton.setImage(UIImage(named: "TrashIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         trashButton.tintColor = .whiteColor()
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
@@ -87,6 +96,16 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         delagate.trash()
     }
     
+    func dropper(sender: UIButton) {
+        self.delagate.setDropperActive(!self.delagate.getDropperActive())
+        self.setDropper()
+    }
+    
+    
+    func setDropper() {
+        self.dropperButton.selected = self.delagate.getDropperActive()
+    }
+    
     func buttonHeld(sender: UITapGestureRecognizer) {
         currentColorView.backgroundColor = colors[sender.view!.tag]
         updateButtonColor()
@@ -112,6 +131,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         return brushSizeSlider.value * brushSizeSlider.value
     }
     
+    func setColor(color: UIColor) {
+        self.currentColorView.backgroundColor = color
+        
+        updateButtonColor()
+    }
+    
     func updateButtonColor() {
         let coreColor = currentColorView.backgroundColor?.coreImageColor!
         let colorDarkness = coreColor!.red + coreColor!.green + coreColor!.blue
@@ -129,9 +154,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         if (colorDarkness < 1.4) {
             undoButton.tintColor = .whiteColor()
             trashButton.tintColor = .whiteColor()
+            dropperButton.tintColor = .whiteColor()
         } else {
             undoButton.tintColor = .blackColor()
             trashButton.tintColor = .blackColor()
+            dropperButton.tintColor = .blackColor()
         }
     }
 }

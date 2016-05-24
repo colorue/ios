@@ -11,4 +11,7 @@ import Foundation
 protocol ColorKeyboardDelagate {
     func undo()
     func trash()
+    func dropper()
+    func getDropperActive() -> Bool
+    func setDropperActive(active: Bool)
 }

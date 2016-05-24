@@ -58,17 +58,25 @@ extension UIImage {
     }
     
     func getPixelColor(pos: CGPoint) -> UIColor {
-        let pixelData = CGDataProviderCopyData(CGImageGetDataProvider(self.CGImage))
-        let data: UnsafePointer<UInt8> = CFDataGetBytePtr(pixelData)
+        if pos.x < 0 || pos.x > size.width || pos.y < 0 || pos.y > size.height {
+            return whiteColor
+        }
         
-        let pixelInfo: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
-            
-        let r = CGFloat(data[pixelInfo]) / CGFloat(255.0)
-        let g = CGFloat(data[pixelInfo+1]) / CGFloat(255.0)
-        let b = CGFloat(data[pixelInfo+2]) / CGFloat(255.0)
-        let a = CGFloat(data[pixelInfo+3]) / CGFloat(255.0)
-            
-        return UIColor(red: r, green: g, blue: b, alpha: a)
+        print("X: \(pos.x), Y: \(pos.y), width: \(size.width), height: \(size.height)")
+        
+        let provider = CGImageGetDataProvider(self.CGImage)
+        let providerData = CGDataProviderCopyData(provider)
+        let data = CFDataGetBytePtr(providerData)
+        
+        let pixelData: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
+        
+        let r = CGFloat(data[pixelData]) / 255.0
+        let g = CGFloat(data[pixelData + 1]) / 255.0
+        let b = CGFloat(data[pixelData + 2]) / 255.0
+        let a = CGFloat(data[pixelData + 3]) / 255.0
+        
+        // Flipped red and blue for some reason
+        return UIColor(red: b, green: g, blue: r, alpha: a)
     }
     
     static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
