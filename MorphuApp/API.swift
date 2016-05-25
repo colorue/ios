@@ -18,6 +18,7 @@ class API {
     static let sharedInstance = API()
 
     private let myRootRef = FIRDatabase.database().reference()
+    
     private let facebookLogin = FBSDKLoginManager()
     let dateFormatter = NSDateFormatter()
 
@@ -173,6 +174,8 @@ class API {
         drawing.setDrawingId(newDrawing.key)
         drawing.setArtist(activeUser)
         newDrawing.setValue(drawing.toAnyObject())
+        
+        self.uploadImage(UIImage.fromBase64(drawing.text))
     }
     
     func like(drawing: Drawing) {
@@ -261,6 +264,62 @@ class API {
                 }
             })
     }
+    
+    
+    func uploadImage(image: UIImage) {
+    
+        let storage = FIRStorage.storage()
+        let storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
+    
+    // Upload file and metadata to the object 'images/mountains.jpg'
+    let uploadTask = storageRef.child("images/mountains.jpg").putData(UIImagePNGRepresentation(image)!)
+    
+    // Listen for state changes, errors, and completion of the upload.
+    uploadTask.observeStatus(.Pause) { snapshot in
+    // Upload paused
+    }
+    
+    uploadTask.observeStatus(.Resume) { snapshot in
+    // Upload resumed, also fires when the upload starts
+    }
+    
+    uploadTask.observeStatus(.Progress) { snapshot in
+    // Upload reported progress
+    if let progress = snapshot.progress {
+        let percentComplete = 100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
+    }
+    }
+    
+    uploadTask.observeStatus(.Success) { snapshot in
+    // Upload completed successfully
+    }
+    
+    // Errors only occur in the "Failure" case
+    uploadTask.observeStatus(.Failure) { snapshot in
+    guard let storageError = snapshot.error else { return }
+    guard let errorCode = FIRStorageErrorCode(rawValue: storageError.code) else { return }
+        /*
+    switch errorCode {
+        case .ObjectNotFound: break
+        // File doesn't exist
+    
+        case .Unauthorized: break
+        // User doesn't have permission to access file
+    
+        case .Cancelled: break
+        // User canceled the upload
+    
+    
+        case .Unknown: break
+        // Unknown error occurred, inspect the server response
+        
+    }
+    */
+    }
+    }
+    
+    
+    
     /*
     
     // MARK: Push Notifications

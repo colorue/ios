@@ -51,6 +51,7 @@
 		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
 		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
+		C072683204FB2AF0B2E1F9FF /* Pods_Morphu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -102,6 +103,9 @@
 		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
+		C45E9835818095253005D81B /* Pods-Morphu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Morphu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Morphu/Pods-Morphu.release.xcconfig"; sourceTree = "<group>"; };
+		CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Morphu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB8FDCD7C2DF9A66DCC349FB /* Pods-Morphu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Morphu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Morphu/Pods-Morphu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +114,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D8CA3965B4E0FC811AC6443 /* Pods_MorphuApp.framework in Frameworks */,
+				C072683204FB2AF0B2E1F9FF /* Pods_Morphu.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,6 +126,8 @@
 			children = (
 				BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */,
 				7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */,
+				FB8FDCD7C2DF9A66DCC349FB /* Pods-Morphu.debug.xcconfig */,
+				C45E9835818095253005D81B /* Pods-Morphu.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -326,6 +333,7 @@
 			isa = PBXGroup;
 			children = (
 				3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */,
+				CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -440,7 +448,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Morphu/Pods-Morphu-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */ = {
@@ -455,7 +463,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Morphu/Pods-Morphu-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -589,7 +597,7 @@
 		};
 		873AFA201CED7697006FD34A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */;
+			baseConfigurationReference = FB8FDCD7C2DF9A66DCC349FB /* Pods-Morphu.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -601,7 +609,7 @@
 		};
 		873AFA211CED7697006FD34A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */;
+			baseConfigurationReference = C45E9835818095253005D81B /* Pods-Morphu.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = MorphuApp/Info.plist;

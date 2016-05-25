@@ -46,10 +46,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             if savedDrawing != "noDrawing" {
                 baseImage = UIImage.fromBase64(savedDrawing)
             } else {
-                baseImage = UIImage.getImageWithColor(whiteColor, size: canvasFrame.size)
+                baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
             }
         } else {
-            baseImage = UIImage.getImageWithColor(whiteColor, size: canvasFrame.size)
+            baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
         }
 
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)

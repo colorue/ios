@@ -8,36 +8,26 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>1</integer>
 		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 		<key>FBSDKLoginKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
 		<key>FBSDKShareKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
 		</dict>
-		<key>Pods-MorphuApp.xcscheme</key>
+		<key>Pods-Morphu.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
@@ -57,12 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
+		<key>695DAF759C2DBD81AD26F5EE0EFB6683</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8AB68EF677AA27985F4C449D7F02CD68</key>
+		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
