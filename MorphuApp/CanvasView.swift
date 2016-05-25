@@ -69,8 +69,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     func handleDrag(sender: UIPanGestureRecognizer) {
         
-        print("handledrag")
-
         if (sender.numberOfTouches() > 1) { return }
         
         let underFingerSize = CGSize(width: 200, height: 200)

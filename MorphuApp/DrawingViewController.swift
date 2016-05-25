@@ -124,12 +124,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     @IBAction func done(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         
-        let newDrawing = Drawing(artist: User(), text: canvas!.getDrawing().toBase64(), drawingId: "")
-        api.postDrawing(newDrawing)
+        let newDrawing = Drawing(artist: User(), drawingId: "")
+        newDrawing.setImage((canvas?.getDrawing())!)
         
-        prefs.setValue("noDrawing", forKey: "savedDrawing")
-        
-        self.performSegueWithIdentifier("backToHome", sender: self)
+        api.postDrawing(newDrawing, callback: postCallback)
+    }
+    
+    func postCallback(uploaded: Bool) {
+        if uploaded {
+            prefs.setValue("noDrawing", forKey: "savedDrawing")
+            self.performSegueWithIdentifier("backToHome", sender: self)
+        } else {
+            print("upload failed")
+        }
     }
     
     func unwind(sender: UIBarButtonItem) {

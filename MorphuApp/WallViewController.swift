@@ -85,7 +85,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         drawingCell.drawing = content
         drawingCell.profileImage.image = content.getArtist().profileImage
         drawingCell.creator.text = content.getArtist().username
-        drawingCell.drawingImage.image = UIImage.fromBase64(content.text)
+        drawingCell.drawingImage.image = content.getImage()
         drawingCell.timeCreated.text = content.getTimeSinceSent()
         drawingCell.likeButton.selected = content.liked(model.getActiveUser())
         
@@ -155,7 +155,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
     }
     
     private func saveDrawing(drawing: Drawing) {
-        UIImageWriteToSavedPhotosAlbum(UIImage.fromBase64(drawing.text), nil, nil, nil)
+        UIImageWriteToSavedPhotosAlbum(drawing.getImage(), nil, nil, nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawingCell: UITableViewCell {
+class DrawingCell: UITableViewCell, DrawingDelagate {
     
     var delagate: DrawingCellDelagate?
     var drawing: Drawing?
@@ -41,5 +41,9 @@ class DrawingCell: UITableViewCell {
     
     @IBAction func viewComments(sender: UIButton) {
         delagate?.viewComments(self)
+    }
+    
+    func imageLoaded(image: UIImage) {
+        self.drawingImage.image = image
     }
 }

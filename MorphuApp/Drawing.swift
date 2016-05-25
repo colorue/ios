@@ -6,27 +6,27 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Drawing {
     
     let api = API.sharedInstance
-    let text: String
     let timeStamp: NSDate
     private var drawingId: String
     private var artist: User
     private var likes = [User]()
     private var comments = [Comment]()
+    private var image = UIImage()
+    var delagate: DrawingDelagate?
     
-    init(artist: User, timeStamp: NSDate = NSDate(), text: String, drawingId: String) {
+    init(artist: User, timeStamp: NSDate = NSDate(), drawingId: String) {
         self.artist = artist
         self.timeStamp = timeStamp
-        self.text = text
         self.drawingId = drawingId
     }
     
     convenience init() {
-        self.init(artist: User(), timeStamp: NSDate(), text: "", drawingId: "")
+        self.init(artist: User(), timeStamp: NSDate(), drawingId: "")
     }
     
     func setDrawingId(drawingId: String) {
@@ -35,6 +35,17 @@ class Drawing {
     
     func getDrawingId() -> String {
         return self.drawingId
+    }
+    
+    func setImage(image: UIImage) {
+        
+        print("Drawing: setImage()")
+        self.image = image
+        self.delagate?.imageLoaded(image)
+    }
+    
+    func getImage() -> UIImage {
+        return self.image
     }
     
     func setArtist(artist: User) {
@@ -53,7 +64,9 @@ class Drawing {
     
     func unlike(user: User) {
         var i = 0
-        for liker in likes {
+        if self.likes.isEmpty { return }
+        
+        for liker in self.likes {
             if liker.userId == user.userId {
                 self.likes.removeAtIndex(i)
                 break
@@ -124,7 +137,6 @@ class Drawing {
     
     func toAnyObject()-> NSDictionary {
         return ["artist": self.artist.userId,
-                "text": self.text,
                 "timeSent": api.dateFormatter.stringFromDate(self.timeStamp)]
     }
 }

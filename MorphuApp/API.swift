@@ -19,6 +19,9 @@ class API {
 
     private let myRootRef = FIRDatabase.database().reference()
     
+    let storage = FIRStorage.storage()
+    let storageRef: FIRStorageReference
+    
     private let facebookLogin = FBSDKLoginManager()
     let dateFormatter = NSDateFormatter()
 
@@ -34,6 +37,8 @@ class API {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .MediumStyle
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")  // CHECK IF THIS WORKED!!!
+        
+        self.storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
     }
     
     // MARK: Internal methods
@@ -44,7 +49,14 @@ class API {
             
             self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
                 
-                let drawing = Drawing(artist: artist, timeStamp: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, text: snapshot.value!["text"] as! String, drawingId: drawingId)
+                let drawing = Drawing(artist: artist, timeStamp: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, drawingId: drawingId)
+                
+                
+                print("getDrawing \(drawingId)")
+                
+                self.downloadImage(drawingId, callback: { (drawingImage: UIImage) -> () in
+                    drawing.setImage(drawingImage)
+                })
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
                     self.getUser(snapshot.key, callback: { (liker: User) -> () in
@@ -169,13 +181,17 @@ class API {
     }
 
     
-    func postDrawing(drawing: Drawing) {
+    func postDrawing(drawing: Drawing, callback: (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
-        drawing.setArtist(activeUser)
-        newDrawing.setValue(drawing.toAnyObject())
-        
-        self.uploadImage(UIImage.fromBase64(drawing.text))
+
+        self.uploadImage(drawing, callback:  { uploaded in
+            if uploaded {
+                drawing.setArtist(self.activeUser)
+                newDrawing.setValue(drawing.toAnyObject())
+            }
+            callback(uploaded)
+        })
     }
     
     func like(drawing: Drawing) {
@@ -265,57 +281,40 @@ class API {
             })
     }
     
-    
-    func uploadImage(image: UIImage) {
-    
-        let storage = FIRStorage.storage()
-        let storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
-    
-    // Upload file and metadata to the object 'images/mountains.jpg'
-    let uploadTask = storageRef.child("images/mountains.jpg").putData(UIImagePNGRepresentation(image)!)
-    
-    // Listen for state changes, errors, and completion of the upload.
-    uploadTask.observeStatus(.Pause) { snapshot in
-    // Upload paused
-    }
-    
-    uploadTask.observeStatus(.Resume) { snapshot in
-    // Upload resumed, also fires when the upload starts
-    }
-    
-    uploadTask.observeStatus(.Progress) { snapshot in
-    // Upload reported progress
-    if let progress = snapshot.progress {
-        let percentComplete = 100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount)
-    }
-    }
-    
-    uploadTask.observeStatus(.Success) { snapshot in
-    // Upload completed successfully
-    }
-    
-    // Errors only occur in the "Failure" case
-    uploadTask.observeStatus(.Failure) { snapshot in
-    guard let storageError = snapshot.error else { return }
-    guard let errorCode = FIRStorageErrorCode(rawValue: storageError.code) else { return }
-        /*
-    switch errorCode {
-        case .ObjectNotFound: break
-        // File doesn't exist
-    
-        case .Unauthorized: break
-        // User doesn't have permission to access file
-    
-        case .Cancelled: break
-        // User canceled the upload
-    
-    
-        case .Unknown: break
-        // Unknown error occurred, inspect the server response
+    func downloadImage(imageId: String, callback: (UIImage) -> ()) {
+        // Create a reference to the file you want to download
+        let drawingRef = storageRef.child("drawings/\(imageId).png")
         
+        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
+        drawingRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+            if (error != nil) {
+                // Uh-oh, an error occurred!
+                print(error)
+            } else {
+                if let imageData = data {
+                    callback(UIImage(data: imageData)!)
+                } else {
+                    print("data error")
+                }
+            }
+        }
     }
-    */
-    }
+    
+    
+    func uploadImage(drawing: Drawing, callback: (Bool) -> ()) {
+
+        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").putData(UIImagePNGRepresentation(drawing.getImage())!)
+    
+        uploadTask.observeStatus(.Success) { snapshot in
+            callback(true)
+        }
+    
+        // Errors only occur in the "Failure" case
+        uploadTask.observeStatus(.Failure) { snapshot in
+            callback(false)
+//            guard let storageError = snapshot.error else { return }
+//            guard let errorCode = FIRStorageErrorCode(rawValue: storageError.code) else { return }
+        }
     }
     
     
