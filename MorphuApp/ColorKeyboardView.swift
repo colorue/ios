@@ -52,13 +52,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.frame = CGRect(x: frame.maxX - 8 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
         self.addSubview(undoButton)
         
+        
         dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
 
         dropperButton.tintColor = .whiteColor()
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
         dropperButton.frame = CGRect(x: frame.maxX - 75 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
-        self.addSubview(dropperButton)
+//        self.addSubview(dropperButton)
         
         trashButton.setImage(UIImage(named: "TrashIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         trashButton.tintColor = .whiteColor()

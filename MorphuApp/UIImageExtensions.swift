@@ -57,28 +57,6 @@ extension UIImage {
         return image
     }
     
-    func getPixelColor(pos: CGPoint) -> UIColor {
-        if pos.x < 0 || pos.x > size.width || pos.y < 0 || pos.y > size.height {
-            return whiteColor
-        }
-        
-        print("X: \(pos.x), Y: \(pos.y), width: \(size.width), height: \(size.height)")
-        
-        let provider = CGImageGetDataProvider(self.CGImage)
-        let providerData = CGDataProviderCopyData(provider)
-        let data = CFDataGetBytePtr(providerData)
-        
-        let pixelData: Int = ((Int(self.size.width) * Int(pos.y)) + Int(pos.x)) * 4
-        
-        let r = CGFloat(data[pixelData]) / 255.0
-        let g = CGFloat(data[pixelData + 1]) / 255.0
-        let b = CGFloat(data[pixelData + 2]) / 255.0
-        let a = CGFloat(data[pixelData + 3]) / 255.0
-        
-        // Flipped red and blue for some reason
-        return UIColor(red: b, green: g, blue: r, alpha: a)
-    }
-    
     static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
         let rect = CGRectMake(0, 0, size.width, size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
@@ -104,6 +82,90 @@ extension UIImage {
             }
         }
         return decodedImage
+    }
+    
+    
+    private func createARGBBitmapContext(inImage: CGImageRef) -> CGContext {
+        
+        //Get image width, height
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        
+        // Declare the number of bytes per row. Each pixel in the bitmap in this
+        // example is represented by 4 bytes; 8 bits each of red, green, blue, and
+        // alpha.
+        let bitmapBytesPerRow = Int(pixelsWide) * 4
+        let bitmapByteCount = bitmapBytesPerRow * Int(pixelsHigh)
+        
+        // Use the generic RGB color space.
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        // Allocate memory for image data. This is the destination in memory
+        // where any drawing to the bitmap context will be rendered.
+        let bitmapData = UnsafeMutablePointer<UInt8>()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedFirst.rawValue)
+        
+        // Create the bitmap context. We want pre-multiplied ARGB, 8-bits
+        // per component. Regardless of what the source image format is
+        // (CMYK, Grayscale, and so on) it will be converted over to the format
+        // specified here by CGBitmapContextCreate.
+        let context = CGBitmapContextCreate(bitmapData, pixelsWide, pixelsHigh, 8, bitmapBytesPerRow, colorSpace, bitmapInfo.rawValue)
+        
+        return context!
+    }
+    
+    func sanitizePoint(point:CGPoint) {
+        let inImage:CGImageRef = self.CGImage!
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))
+        
+        precondition(CGRectContainsPoint(rect, point), "CGPoint passed is not inside the rect of image.It will give wrong pixel and may crash.")
+    }
+    
+    
+    /*
+     Get pixel color for a pixel in the image.
+     */
+    func getPixelColorAtLocation(point:CGPoint)->UIColor? {
+        
+        self.sanitizePoint(point)
+        // Create off screen bitmap context to draw the image into. Format ARGB is 4 bytes for each pixel: Alpa, Red, Green, Blue
+        let inImage:CGImageRef = self.CGImage!
+        let context = self.createARGBBitmapContext(inImage)
+        
+        let pixelsWide = CGImageGetWidth(inImage)
+        let pixelsHigh = CGImageGetHeight(inImage)
+        let rect = CGRect(x:0, y:0, width:Int(pixelsWide), height:Int(pixelsHigh))
+        
+        //Clear the context
+        CGContextClearRect(context, rect)
+        
+        // Draw the image to the bitmap context. Once we draw, the memory
+        // allocated for the context for rendering will then contain the
+        // raw image data in the specified color space.
+        CGContextDrawImage(context, rect, inImage)
+        
+        // Now we can get a pointer to the image data associated with the bitmap
+        // context.
+        let data = CGBitmapContextGetData(context)
+        let dataType = UnsafePointer<UInt8>(data)
+        
+        let offset = 4*((Int(pixelsWide) * Int(point.y)) + Int(point.x))
+        let alphaValue = dataType[offset]
+        let redColor = dataType[offset+1]
+        let greenColor = dataType[offset+2]
+        let blueColor = dataType[offset+3]
+        
+        let redFloat = CGFloat(redColor)/255.0
+        let greenFloat = CGFloat(greenColor)/255.0
+        let blueFloat = CGFloat(blueColor)/255.0
+        let alphaFloat = CGFloat(alphaValue)/255.0
+        
+        return UIColor(red: redFloat, green: greenFloat, blue: blueFloat, alpha: alphaFloat)
+        
+        // When finished, release the context
+        // Free image data memory for the context
     }
 }
 

@@ -270,7 +270,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
                                             <rect key="frame" x="231" y="534" width="181" height="61"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="IG8-Jh-kor"/>
@@ -294,7 +294,7 @@
                                                         <action selector="upload:" destination="tAl-EB-dAq" eventType="touchUpInside" id="AaF-6a-gU8"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
                                                     <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">
@@ -324,7 +324,7 @@
                                                         <action selector="like:" destination="tAl-EB-dAq" eventType="touchUpInside" id="tEG-fG-JQH"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
                                                     <rect key="frame" x="152" y="0.0" width="134" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
@@ -377,8 +377,7 @@
                                                     <exclude reference="mvq-pU-7Kc"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="272" y="555" width="120" height="12"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="mvq-pU-7Kc"/>
                                                 </mask>
@@ -649,7 +648,8 @@
                                                 <exclude reference="CD9-ZP-JXH"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
+                                        <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                            <rect key="frame" x="0.0" y="0.0" width="400" height="60"/>
                                             <mask key="constraints">
                                                 <exclude reference="CD9-ZP-JXH"/>
                                             </mask>
@@ -1717,18 +1717,18 @@
                                             <exclude reference="UCC-d9-TJM"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="86P-TO-xE1"/>
-                                            <exclude reference="MEM-AE-vhB"/>
-                                            <exclude reference="bXx-Ge-tZO"/>
-                                            <exclude reference="fCF-mo-m87"/>
-                                            <exclude reference="syI-cJ-sds"/>
+                                            <exclude reference="Hrs-G6-zEx"/>
+                                            <exclude reference="N42-Ab-K2n"/>
+                                            <exclude reference="geI-VO-Bxr"/>
                                             <exclude reference="AIM-eR-LfG"/>
                                             <exclude reference="H7Q-L8-BCT"/>
                                             <exclude reference="HAg-Kh-i8p"/>
                                             <exclude reference="LDS-TA-9Nx"/>
-                                            <exclude reference="Hrs-G6-zEx"/>
-                                            <exclude reference="N42-Ab-K2n"/>
-                                            <exclude reference="geI-VO-Bxr"/>
+                                            <exclude reference="bXx-Ge-tZO"/>
+                                            <exclude reference="fCF-mo-m87"/>
+                                            <exclude reference="syI-cJ-sds"/>
+                                            <exclude reference="86P-TO-xE1"/>
+                                            <exclude reference="MEM-AE-vhB"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -1739,18 +1739,18 @@
                                             <include reference="UCC-d9-TJM"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="86P-TO-xE1"/>
-                                            <include reference="MEM-AE-vhB"/>
-                                            <include reference="bXx-Ge-tZO"/>
-                                            <exclude reference="fCF-mo-m87"/>
-                                            <include reference="syI-cJ-sds"/>
+                                            <include reference="Hrs-G6-zEx"/>
+                                            <include reference="N42-Ab-K2n"/>
+                                            <include reference="geI-VO-Bxr"/>
                                             <include reference="AIM-eR-LfG"/>
                                             <include reference="H7Q-L8-BCT"/>
                                             <include reference="HAg-Kh-i8p"/>
                                             <include reference="LDS-TA-9Nx"/>
-                                            <include reference="Hrs-G6-zEx"/>
-                                            <include reference="N42-Ab-K2n"/>
-                                            <include reference="geI-VO-Bxr"/>
+                                            <include reference="bXx-Ge-tZO"/>
+                                            <exclude reference="fCF-mo-m87"/>
+                                            <include reference="syI-cJ-sds"/>
+                                            <include reference="86P-TO-xE1"/>
+                                            <include reference="MEM-AE-vhB"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1762,10 +1762,10 @@
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Morphu" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="110" width="600" height="82"/>
+                                <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EzM-5m-5ac" id="Ux9-46-s7a">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="81"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="39"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kaq-Kb-Ih3">
@@ -1800,7 +1800,7 @@
                                                 <action selector="addComment:" destination="EzM-5m-5ac" eventType="touchUpInside" id="F4F-Gk-l2k"/>
                                             </connections>
                                         </button>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write comment..." textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="7Qs-I9-leV">
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write comment..." textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="7Qs-I9-leV">
                                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>

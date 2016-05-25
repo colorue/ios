@@ -17,6 +17,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var imageView = UIImageView()
     let prefs = NSUserDefaults.standardUserDefaults()
     
+    var dataType: UnsafePointer<UInt8>?
+    
     let resizeScale: CGFloat = 2.0
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage) {
@@ -50,10 +52,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if self.delagate.getDropperActive() {
             self.delagate.setDropperActive(false)
             
-            let dropperPoint = sender.locationInView(imageView)
-            let dropperColor = imageView.image?.getPixelColor(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2))
+//            let dropperPoint = sender.locationInView(imageView)
             
-            self.delagate.setColor(dropperColor!)
+//            let dropperColor = self.getColorAtPoint(dropperPoint)
+//            self.delagate.setColor(dropperColor)
             return
         }
         
@@ -66,6 +68,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func handleDrag(sender: UIPanGestureRecognizer) {
+        
+        print("handledrag")
 
         if (sender.numberOfTouches() > 1) { return }
         
@@ -74,9 +78,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         if self.delagate.getDropperActive() {
             let dropperPoint = sender.locationInView(imageView)
-            let dropperColor = imageView.image?.getPixelColor(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2))
-            
-            self.delagate.setColor(dropperColor!)
+//            let dropperColor = self.getColorAtPoint(dropperPoint)
+//            self.delagate.setColor(dropperColor)
             
             self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: dropperPoint.x * 2, y: dropperPoint.y * 2), cropSize: underFingerSize))
             
@@ -137,6 +140,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         currentStroke.drawAtPoint(CGPoint.zero)
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        let data = CGBitmapContextGetData(UIGraphicsGetCurrentContext())
+        self.dataType = UnsafePointer<UInt8>(data)
+        
         UIGraphicsEndImageContext()
     }
     
