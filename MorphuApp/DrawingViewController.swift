@@ -124,6 +124,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     @IBAction func done(sender: UIBarButtonItem) {
         
         self.colorKeyboard!.uploading(0)
+        self.view.userInteractionEnabled = false
         
         let newDrawing = Drawing(artist: User(), drawingId: "")
         newDrawing.setImage((canvas?.getDrawing())!)
@@ -132,15 +133,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func postCallback(uploaded: Bool) {
-//        self.uploadingProgress.stopAnimating()
-
-
         if uploaded {
             NSNotificationCenter.defaultCenter().removeObserver(self)
             prefs.setValue("noDrawing", forKey: "savedDrawing")
             self.performSegueWithIdentifier("backToHome", sender: self)
         } else {
-            print("upload failed")
+            self.colorKeyboard!.uploadingFailed()
+            self.view.userInteractionEnabled = true
         }
     }
     

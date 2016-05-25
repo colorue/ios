@@ -188,5 +188,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         progressBar.hidden = false
         progressBar.progress = progress
     }
+    
+    func uploadingFailed() {
+        undoButton.hidden = false
+        trashButton.hidden = false
+        brushSizeSlider.hidden = false
+        
+        progressBar.hidden = true
+    }
 }
 
