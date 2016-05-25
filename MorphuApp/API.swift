@@ -181,16 +181,16 @@ class API {
     }
 
     
-    func postDrawing(drawing: Drawing, callback: (Bool) -> ()) {
+    func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
 
-        self.uploadImage(drawing, callback:  { uploaded in
+        self.uploadImage(drawing, progressCallback: progressCallback, finishedCallback:  { uploaded in
             if uploaded {
                 drawing.setArtist(self.activeUser)
                 newDrawing.setValue(drawing.toAnyObject())
             }
-            callback(uploaded)
+            finishedCallback(uploaded)
         })
     }
     
@@ -301,17 +301,26 @@ class API {
     }
     
     
-    func uploadImage(drawing: Drawing, callback: (Bool) -> ()) {
+    func uploadImage(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
 
         let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").putData(UIImagePNGRepresentation(drawing.getImage())!)
     
+        uploadTask.observeStatus(.Progress) { snapshot in
+            // Upload reported progress
+            if let progress = snapshot.progress {
+                let percentComplete = Float(100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
+                progressCallback(percentComplete)
+            }
+        }
+        
+        
         uploadTask.observeStatus(.Success) { snapshot in
-            callback(true)
+            finishedCallback(true)
         }
     
         // Errors only occur in the "Failure" case
         uploadTask.observeStatus(.Failure) { snapshot in
-            callback(false)
+            finishedCallback(false)
 //            guard let storageError = snapshot.error else { return }
 //            guard let errorCode = FIRStorageErrorCode(rawValue: storageError.code) else { return }
         }

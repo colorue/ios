@@ -16,7 +16,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
     var underFingerView = UIImageView()
-    
+
     private var dropperActive = false
 
     
@@ -122,16 +122,21 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        
+        self.colorKeyboard!.uploading(0)
         
         let newDrawing = Drawing(artist: User(), drawingId: "")
         newDrawing.setImage((canvas?.getDrawing())!)
         
-        api.postDrawing(newDrawing, callback: postCallback)
+        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
     }
     
     func postCallback(uploaded: Bool) {
+//        self.uploadingProgress.stopAnimating()
+
+
         if uploaded {
+            NSNotificationCenter.defaultCenter().removeObserver(self)
             prefs.setValue("noDrawing", forKey: "savedDrawing")
             self.performSegueWithIdentifier("backToHome", sender: self)
         } else {

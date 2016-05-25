@@ -15,6 +15,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let undoButton = UIButton()
     let trashButton = UIButton()
     let dropperButton = UIButton()
+    let progressBar = UIProgressView()
+    
     let delagate: ColorKeyboardDelagate
     
     init (frame: CGRect, delagate: ColorKeyboardDelagate) {
@@ -70,6 +72,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
         separatorU.backgroundColor = dividerColor
         self.addSubview(separatorU)
+        
+        self.progressBar.frame = CGRect(x: 0, y: 0, width: self.frame.width/2, height: 0)
+        self.progressBar.center = self.currentColorView.center
+        self.progressBar.progress = 0.5
+        self.progressBar.hidden = true
+        self.addSubview(progressBar)
         
         updateButtonColor()
     }
@@ -144,12 +152,21 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         if (colorDarkness < 1.2) {
             brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
+            
+            progressBar.tintColor = UIColor.lightGrayColor()
+            progressBar.trackTintColor = UIColor.whiteColor()
         } else if colorDarkness < 2.0 {
             brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
+            
+            progressBar.tintColor = UIColor.blackColor()
+            progressBar.trackTintColor = UIColor.whiteColor()
         } else {
             brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.lightGrayColor()
+            
+            progressBar.tintColor = UIColor.blackColor()
+            progressBar.trackTintColor = UIColor.lightGrayColor()
         }
         
         if (colorDarkness < 1.4) {
@@ -161,6 +178,15 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             trashButton.tintColor = .blackColor()
             dropperButton.tintColor = .blackColor()
         }
+    }
+    
+    func uploading(progress: Float) {
+        undoButton.hidden = true
+        trashButton.hidden = true
+        brushSizeSlider.hidden = true
+        
+        progressBar.hidden = false
+        progressBar.progress = progress
     }
 }
 
