@@ -10,4 +10,5 @@ import UIKit
 
 protocol DrawingDelagate {
     func imageLoaded(image: UIImage)
+    func setProgress(progress: Float)
 }

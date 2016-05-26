@@ -32,6 +32,10 @@ class Drawing {
         return self.drawingId
     }
     
+    func setProgress(progress: Float) {
+        self.delagate?.setProgress(progress)
+    }
+    
     func setImage(image: UIImage) {
         self.image = image
         self.delagate?.imageLoaded(image)
@@ -76,17 +80,6 @@ class Drawing {
         }
         return false
     }
-    
-    /*
-    func liked() -> Bool {
-        for liker in self.likes {
-            if liker.userId == api.getActiveUser().userId {
-                return true
-            }
-        }
-        return false
-    }
- */
     
     func getLikes() -> [User] {
         return self.likes

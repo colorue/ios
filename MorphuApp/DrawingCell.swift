@@ -22,7 +22,8 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     @IBOutlet weak var likes: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var progressBar: UIProgressView!
+    
     
     @IBAction func upload(sender: UIButton) {
         delagate?.upload(self)
@@ -46,11 +47,13 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
         delagate?.viewComments(self)
     }
     
+    func setProgress(progress: Float) {
+        progressBar.setProgress(progress, animated: true)
+    }
+    
     func imageLoaded(image: UIImage) {
-        
-        print("Stop spinning")
+        self.progressBar.hidden = true
         self.drawingImage.image = image
-        self.activityIndicator.stopAnimating()
         self.delagate?.refresh()
     }
 }

@@ -14,4 +14,5 @@ protocol DrawingCellDelagate {
     func viewLikes(drawingCell: DrawingCell) -> ()
     func viewComments(drawingCell: DrawingCell) -> ()
     func refresh()
+    
 }
