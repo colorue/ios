@@ -313,6 +313,7 @@ class API {
         
         
         uploadTask.observeStatus(.Success) { snapshot in
+            progressCallback(1.0)
             finishedCallback(true)
         }
     

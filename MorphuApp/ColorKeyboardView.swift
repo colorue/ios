@@ -74,7 +74,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         self.progressBar.frame = CGRect(x: 0, y: 0, width: self.frame.width/2, height: 0)
         self.progressBar.center = self.currentColorView.center
-        self.progressBar.progress = 0.5
+        self.progressBar.progress = 0.0
         self.progressBar.hidden = true
         self.addSubview(progressBar)
         
@@ -197,10 +197,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         brushSizeSlider.hidden = true
         
         progressBar.hidden = false
-        progressBar.progress = progress
+        progressBar.setProgress(progress, animated: true)
     }
     
     func uploadingFailed() {
+        self.progressBar.progress = 0.0
         undoButton.hidden = false
         trashButton.hidden = false
         brushSizeSlider.hidden = false
