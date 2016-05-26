@@ -1,0 +1,45 @@
+morphu:
+	users:
+		username: 	"dill9pickal"
+		email:		"dill99pickal@aol.com"
+
+		groups:
+			groupId: true
+
+		inbox: 
+			contentId: true
+			contentId: true
+			contentId: true
+
+		threads:
+			threadId: true
+			threadId: true
+
+	groups:
+		groupId:
+			name:	"DylGroup"
+			members:
+				userId: true
+				userId: true
+				userId: true
+
+	content:
+		contentId:
+			isDrawing:
+			author:
+			group:
+			timestamp:
+			text:
+
+	threads:
+		threadId:
+			currentUser: User
+			upcomingUsers: 
+				userId: true
+				userId: true
+				userId: true
+
+			content:
+				contentId: true
+				contentId: true
+				contentId: true

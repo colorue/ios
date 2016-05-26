@@ -1,0 +1,14 @@
+BEFORE BETA LAUNCH
+	Fix inbox badge/ handle in app push
+	iPhone 4 and 5 dimensions
+	Add to group
+
+AFTER
+	Add name on registration
+	Add number
+	Save drawing to prefs if back or app is backgrounded/closed
+	Indicatate order in Round view (Number or Arrow?)
+
+
+        //let developmentKey = "Basic aFJta2lYSHVRVjJZNGozMVYyRWotQTpwb1hORWFzRFFPS1NSZVBLdXdzMHFB"
+        //let productionKey = "Basic ZzBmLVFQM3BUZFNKVHZ5MldlUjRNUTpWS19ma1ZhZVRvLUtIcUVSVGwzR1pR"
