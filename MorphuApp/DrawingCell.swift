@@ -21,6 +21,8 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     @IBOutlet weak var likes: UILabel!
     @IBOutlet weak var commentCount: UILabel!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
     @IBAction func upload(sender: UIButton) {
         delagate?.upload(self)
     }
@@ -44,6 +46,10 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     }
     
     func imageLoaded(image: UIImage) {
+        self.activityIndicator.stopAnimating()
         self.drawingImage.image = image
+        print("DrawingCell: imageLoaded")
+
+        self.delagate?.refresh()
     }
 }

@@ -17,7 +17,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         super.viewDidLoad()
         
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300.0
+        tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
     }
@@ -82,6 +82,9 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
                             forRowAtIndexPath indexPath: NSIndexPath) {
         let content = model.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
+        
+        content.delagate = drawingCell
+
         drawingCell.drawing = content
         drawingCell.profileImage.image = content.getArtist().profileImage
         drawingCell.creator.text = content.getArtist().username
@@ -127,6 +130,13 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
             model.unlike(drawing)
             self.setLikes(drawingCell)
         }
+    }
+    
+    func refresh() {
+        dispatch_async(dispatch_get_main_queue(), {
+            print("WallViewController: refresh")
+            self.tableView.reloadData()
+        })
     }
     
     func upload(drawingCell: DrawingCell) {
