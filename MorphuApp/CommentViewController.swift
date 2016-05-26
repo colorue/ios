@@ -12,7 +12,8 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     
     var drawingInstance = Drawing()
     var writeCommentCell: WriteCommentCell?
-    
+    let backButton = UIButton(type: UIButtonType.Custom)
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -20,7 +21,6 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
         tableView.backgroundColor = backgroundColor
         
         let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let backButton = UIButton(type: UIButtonType.Custom)
         backButton.tintColor = UIColor.whiteColor()
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, forState: UIControlState.Normal)
@@ -82,6 +82,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     }
     
     func unwind(sender: UIBarButtonItem) {
+        self.backButton.enabled = false
         self.writeCommentCell?.commentText.resignFirstResponder()
         self.performSegueWithIdentifier("backToHome", sender: self)
     }

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "ColorKeyboard.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "colorKeyboard-1.png",
       "scale" : "2x"
     },
     {

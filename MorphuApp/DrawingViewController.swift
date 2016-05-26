@@ -16,6 +16,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
     var underFingerView = UIImageView()
+    
+    let backButton = UIButton(type: UIButtonType.Custom)
 
     @IBOutlet weak var postButton: UIBarButtonItem!
     private var dropperActive = false
@@ -28,7 +30,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         
         let chevron = UIImage(named: "ChevronDown")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let backButton = UIButton(type: UIButtonType.Custom)
         backButton.tintColor = UIColor.whiteColor()
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, forState: UIControlState.Normal)
@@ -151,6 +152,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func unwind(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
         self.save()
+        self.backButton.enabled = false
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
     

@@ -11,6 +11,7 @@ import UIKit
 class LikeViewController: UITableViewController {
     
     var drawingInstance = Drawing()
+    let backButton = UIButton(type: UIButtonType.Custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +20,6 @@ class LikeViewController: UITableViewController {
         tableView.backgroundColor = backgroundColor
         
         let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let backButton = UIButton(type: UIButtonType.Custom)
         backButton.tintColor = UIColor.whiteColor()
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, forState: UIControlState.Normal)
@@ -28,6 +28,7 @@ class LikeViewController: UITableViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        self.backButton.enabled = true
         super.viewDidAppear(animated)
         self.tableView.reloadData()
     }
@@ -58,6 +59,7 @@ class LikeViewController: UITableViewController {
     }
     
     func unwind(sender: UIBarButtonItem) {
+        self.backButton.enabled = false
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
 }
