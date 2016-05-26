@@ -106,7 +106,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
         if (indexPath.row + 1 >= api.getWall().count) {
             print("load more")
-            api.loadWallOlder()
+            api.loadWall()
         }
     }
     
