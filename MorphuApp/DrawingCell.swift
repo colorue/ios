@@ -46,8 +46,10 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     }
     
     func imageLoaded(image: UIImage) {
-        self.activityIndicator.stopAnimating()
+        
+        print("Stop spinning")
         self.drawingImage.image = image
         self.delagate?.refresh()
+        self.activityIndicator.stopAnimating()
     }
 }

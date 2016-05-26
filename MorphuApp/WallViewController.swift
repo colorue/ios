@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WallViewController: UITableViewController, DrawingCellDelagate {
+class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
     let model = API.sharedInstance
     
     var selectedDrawing = Drawing()
@@ -20,6 +20,8 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
+        
+        model.delagate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -134,7 +136,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate {
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
-            print("WallViewController: refresh")
             self.tableView.reloadData()
         })
     }

@@ -31,7 +31,7 @@ class API {
     
     private var userDict = [String: User]()
     
-    var inboxBadge: UITabBarItem?
+    var delagate: APIDelagate?
     
     init() {
         dateFormatter.dateStyle = .MediumStyle
@@ -50,9 +50,6 @@ class API {
             self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
                 
                 let drawing = Drawing(artist: artist, timeStamp: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, drawingId: drawingId)
-                
-                
-                print("getDrawing \(drawingId)")
                 
                 self.downloadImage(drawingId, callback: { (drawingImage: UIImage) -> () in
                     drawing.setImage(drawingImage)
@@ -219,7 +216,7 @@ class API {
     }
     
     func getWall() -> [Drawing] {
-        return self.wall.reverse()
+        return self.wall
     }
     
     func getUsers() -> [User] {
@@ -240,7 +237,8 @@ class API {
         myRootRef.child("drawings").queryOrderedByKey()
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
-                    self.wall.append(drawing)
+                    self.wall.insert(drawing, atIndex: 0)
+                    self.delagate?.refresh()
                 })
             })
         

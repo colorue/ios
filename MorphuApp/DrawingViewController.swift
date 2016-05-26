@@ -42,8 +42,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let prefs = NSUserDefaults.standardUserDefaults()
         var baseImage: UIImage
         
-        print("saved: \(prefs.boolForKey("saved"))")
-        
         if prefs.boolForKey("saved") {
             if let savedDrawing = prefs.stringForKey("savedDrawing") {
                 baseImage = UIImage.fromBase64(savedDrawing)
@@ -139,7 +137,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func postCallback(uploaded: Bool) {
         if uploaded {
             prefs.setValue(false, forKey: "saved")
-            print("saved: \(prefs.boolForKey("saved")) -uploaded")
 
             NSNotificationCenter.defaultCenter().removeObserver(self)
             self.performSegueWithIdentifier("backToHome", sender: self)
