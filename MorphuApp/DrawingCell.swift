@@ -10,6 +10,7 @@ import UIKit
 
 class DrawingCell: UITableViewCell, DrawingDelagate {
     
+    let api = API.sharedInstance
     var delagate: DrawingCellDelagate?
     var drawing: Drawing?
     @IBOutlet weak var profileImage: UIImageView!
@@ -28,7 +29,7 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     }
     
     @IBAction func like(sender: UIButton) {
-        if !(drawing?.liked())! {
+        if !(drawing?.liked(api.getActiveUser()))! {
             sender.selected = true
             delagate?.like(self)
         } else {

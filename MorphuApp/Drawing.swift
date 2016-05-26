@@ -10,8 +10,7 @@ import UIKit
 
 class Drawing {
     
-    let api = API.sharedInstance
-    let timeStamp: NSDate
+    let timeStamp: Double
     private var drawingId: String
     private var artist: User
     private var likes = [User]()
@@ -19,14 +18,10 @@ class Drawing {
     private var image = UIImage()
     var delagate: DrawingDelagate?
     
-    init(artist: User, timeStamp: NSDate = NSDate(), drawingId: String) {
+    init(artist: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, drawingId: String = "") {
         self.artist = artist
         self.timeStamp = timeStamp
         self.drawingId = drawingId
-    }
-    
-    convenience init() {
-        self.init(artist: User(), timeStamp: NSDate(), drawingId: "")
     }
     
     func setDrawingId(drawingId: String) {
@@ -82,6 +77,7 @@ class Drawing {
         return false
     }
     
+    /*
     func liked() -> Bool {
         for liker in self.likes {
             if liker.userId == api.getActiveUser().userId {
@@ -90,6 +86,7 @@ class Drawing {
         }
         return false
     }
+ */
     
     func getLikes() -> [User] {
         return self.likes
@@ -120,7 +117,7 @@ class Drawing {
     }
     
     func getTimeSinceSent() -> String {
-        let secondsSince = NSDate().timeIntervalSinceDate(self.timeStamp)
+        let secondsSince =  NSDate().timeIntervalSince1970 + self.timeStamp
         switch(secondsSince) {
         case 0..<60:
             return "now"
@@ -135,6 +132,6 @@ class Drawing {
     
     func toAnyObject()-> NSDictionary {
         return ["artist": self.artist.userId,
-                "timeSent": api.dateFormatter.stringFromDate(self.timeStamp)]
+                "timeStamp": self.timeStamp]
     }
 }

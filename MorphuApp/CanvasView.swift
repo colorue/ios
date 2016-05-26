@@ -123,13 +123,13 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastPoint!.x * resizeScale, lastPoint!.y * resizeScale)
+        
+        if let lastP = lastPoint {
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastP.x * resizeScale, lastP.y * resizeScale)
+        }
         CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint!.x * resizeScale, currentPoint!.y * resizeScale)
-        
-        
         CGContextSetLineJoin(UIGraphicsGetCurrentContext(), CGLineJoin.Round);
         CGContextSetMiterLimit(UIGraphicsGetCurrentContext(), 10.0);
-
 
         CGContextStrokePath(UIGraphicsGetCurrentContext())
         CGContextFlush(UIGraphicsGetCurrentContext())

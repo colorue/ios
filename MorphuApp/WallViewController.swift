@@ -9,7 +9,7 @@
 import UIKit
 
 class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
-    let model = API.sharedInstance
+    let api = API.sharedInstance
     
     var selectedDrawing = Drawing()
 
@@ -21,7 +21,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-        model.delagate = self
+        api.delagate = self
         self.refreshControl!.beginRefreshing()
     }
     
@@ -69,7 +69,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.getWall().count
+        return api.getWall().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -83,7 +83,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
-        let content = model.getWall()[indexPath.row]
+        let content = api.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
         content.delagate = drawingCell
@@ -93,7 +93,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         drawingCell.creator.text = content.getArtist().username
         drawingCell.drawingImage.image = content.getImage()
         drawingCell.timeCreated.text = content.getTimeSinceSent()
-        drawingCell.likeButton.selected = content.liked(model.getActiveUser())
+        drawingCell.likeButton.selected = content.liked(api.getActiveUser())
         
         let comments = content.getComments().count
         if comments == 1 {
@@ -103,6 +103,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         }
         
         self.setLikes(drawingCell)
+        
+        if (indexPath.row + 1 >= api.getWall().count) {
+            print("load more")
+            api.loadWallOlder()
+        }
     }
     
     private func setLikes(drawingCell: DrawingCell) {
@@ -123,14 +128,14 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     func like(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
-            model.like(drawing)
+            api.like(drawing)
             self.setLikes(drawingCell)
         }
     }
     
     func unlike(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
-            model.unlike(drawing)
+            api.unlike(drawing)
             self.setLikes(drawingCell)
         }
     }

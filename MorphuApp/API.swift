@@ -31,6 +31,8 @@ class API {
     
     private var userDict = [String: User]()
     
+    private var oldestTimeLoaded: Double = -99999999999999
+    
     var delagate: APIDelagate?
     
     init() {
@@ -49,7 +51,7 @@ class API {
             
             self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
                 
-                let drawing = Drawing(artist: artist, timeStamp: self.dateFormatter.dateFromString(snapshot.value!["timeSent"] as! String)!, drawingId: drawingId)
+                let drawing = Drawing(artist: artist, timeStamp: snapshot.value!["timeStamp"] as! Double, drawingId: drawingId)
                 
                 self.downloadImage(drawingId, callback: { (drawingImage: UIImage) -> () in
                     drawing.setImage(drawingImage)
@@ -204,6 +206,7 @@ class API {
     func addComment(drawing: Drawing, text: String) {
         let comment = Comment(user: self.activeUser, text: text)
         let newComment = myRootRef.child("comments").childByAutoId()
+
         comment.setCommentId(newComment.key)
         drawing.addComment(comment)
         newComment.setValue(comment.toAnyObject())
@@ -229,16 +232,21 @@ class API {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
         })
-        self.loadWall(user)
+        self.loadWallnewest()
         self.loadUsers(user)
     }
     
-    private func loadWall(currentUser: FIRUser) {
-        myRootRef.child("drawings").queryOrderedByKey()
+    func loadWallnewest() {
+        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
                     self.wall.insert(drawing, atIndex: 0)
                     self.delagate?.refresh()
+                    
+                    if drawing.timeStamp > self.oldestTimeLoaded {
+                        self.oldestTimeLoaded = drawing.timeStamp + 0.00001
+                        print (self.oldestTimeLoaded)
+                    }
                 })
             })
         
@@ -248,10 +256,25 @@ class API {
                 var i = 0
                 for drawing in self.wall {
                     if drawing.getDrawingId() == drawingId {
-                        self.users.removeAtIndex(i)
+                        self.wall.removeAtIndex(i)
                     }
                     i += 1
                 }
+            })
+    }
+    
+    func loadWallOlder() {
+        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
+            .observeEventType(.ChildAdded, withBlock: { snapshot in
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
+                    self.wall.append(drawing)
+                    self.delagate?.refresh()
+                    
+                    if drawing.timeStamp > self.oldestTimeLoaded {
+                        self.oldestTimeLoaded = drawing.timeStamp + 0.00001
+                        print (self.oldestTimeLoaded)
+                    }
+                })
             })
     }
     
