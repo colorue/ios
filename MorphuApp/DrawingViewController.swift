@@ -17,6 +17,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var canvas: CanvasView?
     var underFingerView = UIImageView()
 
+    @IBOutlet weak var postButton: UIBarButtonItem!
     private var dropperActive = false
 
     
@@ -124,7 +125,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
-        
+        self.postButton.enabled = false
         self.colorKeyboard!.uploading(0)
         self.view.userInteractionEnabled = false
         
@@ -143,6 +144,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         } else {
             self.colorKeyboard!.uploadingFailed()
             self.view.userInteractionEnabled = true
+            self.postButton.enabled = true
         }
     }
     

@@ -48,11 +48,10 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     }
     
     func setProgress(progress: Float) {
-        progressBar.setProgress(progress, animated: true)
+        progressBar.setProgress(1.0 - progress, animated: true)
     }
     
     func imageLoaded(image: UIImage) {
-        self.progressBar.hidden = true
         self.drawingImage.image = image
         self.delagate?.refresh()
     }

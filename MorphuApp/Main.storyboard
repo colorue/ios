@@ -55,6 +55,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="postButton" destination="mVr-dO-lxG" id="UEx-w3-foj"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="U9g-HJ-mcN"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="FAr-m3-UeF"/>
@@ -160,7 +161,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="586"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-2o-Cdl">
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-2o-Cdl">
                                             <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="aHA-jk-65B"/>
