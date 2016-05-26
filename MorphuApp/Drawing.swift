@@ -38,8 +38,6 @@ class Drawing {
     }
     
     func setImage(image: UIImage) {
-        
-        print("Drawing: setImage()")
         self.image = image
         self.delagate?.imageLoaded(image)
     }

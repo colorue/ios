@@ -42,8 +42,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let prefs = NSUserDefaults.standardUserDefaults()
         var baseImage: UIImage
         
-        if let savedDrawing = prefs.stringForKey("savedDrawing") {
-            if savedDrawing != "noDrawing" {
+        print("saved: \(prefs.boolForKey("saved"))")
+        
+        if prefs.boolForKey("saved") {
+            if let savedDrawing = prefs.stringForKey("savedDrawing") {
                 baseImage = UIImage.fromBase64(savedDrawing)
             } else {
                 baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
@@ -51,6 +53,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         } else {
             baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
         }
+        
 
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
         self.view.addSubview(canvas)
@@ -64,11 +67,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         underFingerView.backgroundColor = UIColor.whiteColor()
         self.underFingerView.hidden = true
         self.view.addSubview(underFingerView)
+        
+        prefs.setValue(true, forKey: "saved")
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        let prefs = NSUserDefaults.standardUserDefaults()
         if (!prefs.boolForKey("drawingHowTo")) {
             let drawingHowTo = UIAlertController(title: "Drawing", message: "Press color buttons to switch colors. Tap color buttons to MIX COLORS! The slider changes the brush size." , preferredStyle: UIAlertControllerStyle.Alert)
             drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
@@ -134,8 +138,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func postCallback(uploaded: Bool) {
         if uploaded {
+            prefs.setValue(false, forKey: "saved")
+            print("saved: \(prefs.boolForKey("saved")) -uploaded")
+
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            prefs.setValue("noDrawing", forKey: "savedDrawing")
             self.performSegueWithIdentifier("backToHome", sender: self)
         } else {
             self.colorKeyboard!.uploadingFailed()
@@ -145,17 +151,29 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func unwind(sender: UIBarButtonItem) {
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
+        self.save()
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
+        self.save()
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     func appMovedToBackground() {
+        self.save()
         NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    private func save() {
+        
+        let color = self.colorKeyboard?.getCurrentColor()
+        
+        prefs.setValue(color?.coreImageColor!.red, forKey: "colorRed")
+        prefs.setValue(color?.coreImageColor!.green, forKey: "colorGreen")
+        prefs.setValue(color?.coreImageColor!.blue, forKey: "colorBlue")
+        prefs.setValue(sqrt((self.colorKeyboard?.getCurrentBrushSize())!), forKey: "brushSize")
         prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
     }
 }

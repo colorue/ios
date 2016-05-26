@@ -48,8 +48,6 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     func imageLoaded(image: UIImage) {
         self.activityIndicator.stopAnimating()
         self.drawingImage.image = image
-        print("DrawingCell: imageLoaded")
-
         self.delagate?.refresh()
     }
 }

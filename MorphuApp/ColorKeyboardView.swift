@@ -16,6 +16,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let trashButton = UIButton()
     let dropperButton = UIButton()
     let progressBar = UIProgressView()
+    let prefs = NSUserDefaults.standardUserDefaults()
     
     let delagate: ColorKeyboardDelagate
     
@@ -36,7 +37,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             self.addSubview(colorButton(withColor: colors[tag], tag: tag))
         }
         
-        currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
         currentColorView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: selectorWidth)
         self.addSubview(currentColorView)
         
@@ -44,7 +44,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
         brushSizeSlider.maximumValue = 10.0
         brushSizeSlider.minimumValue = 1.5
-        brushSizeSlider.value = 5.5
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
         self.addSubview(brushSizeSlider)
         
@@ -78,6 +77,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         self.progressBar.progress = 0.5
         self.progressBar.hidden = true
         self.addSubview(progressBar)
+        
+        if prefs.boolForKey("saved") {
+            let red = CGFloat(prefs.floatForKey("colorRed"))
+            let green = CGFloat(prefs.floatForKey("colorGreen"))
+            let blue = CGFloat(prefs.floatForKey("colorBlue"))
+            
+            currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+            brushSizeSlider.value = prefs.floatForKey("brushSize")
+        } else {
+            brushSizeSlider.value = 5.5
+            currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
+        }
         
         updateButtonColor()
     }
