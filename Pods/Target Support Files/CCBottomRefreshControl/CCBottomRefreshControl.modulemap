@@ -1,0 +1,6 @@
+framework module CCBottomRefreshControl {
+  umbrella header "CCBottomRefreshControl-umbrella.h"
+
+  export *
+  module * { export * }
+}
