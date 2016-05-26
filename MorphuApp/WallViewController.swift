@@ -22,6 +22,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         tableView.backgroundColor = backgroundColor
         
         model.delagate = self
+        self.refreshControl!.beginRefreshing()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -136,6 +137,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
+            self.refreshControl!.endRefreshing()
             self.tableView.reloadData()
         })
     }
