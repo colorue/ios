@@ -42,6 +42,7 @@ class API {
         dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")  // CHECK IF THIS WORKED!!!
         
         self.storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
+        
     }
     
     // MARK: Internal methods
@@ -246,6 +247,7 @@ class API {
                         self.wall.append(drawing)
                         self.oldestTimeLoaded = drawing.timeStamp + 0.00001
                         self.newestTimeLoaded = drawing.timeStamp
+                        self.delagate?.refresh()
                     } else if drawing.timeStamp > self.oldestTimeLoaded {
                         self.oldestTimeLoaded = drawing.timeStamp + 0.00001
                         self.wall.append(drawing)
@@ -256,7 +258,6 @@ class API {
                         print("???")
                     }
                     
-                    self.delagate?.refresh()
                 })
             })
     }

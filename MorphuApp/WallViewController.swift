@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import CCBottomRefreshControl
 
 class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
     let api = API.sharedInstance
     
     var selectedDrawing = Drawing()
+    let bottomRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +25,13 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
         api.delagate = self
         self.refreshControl!.beginRefreshing()
+        
+        bottomRefreshControl.triggerVerticalOffset = 100.0
+        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+    }
+    
+    func refreshBottom(sender: UIRefreshControl) {
+        refresh()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +53,8 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
             self.presentViewController(softNotificationAsk, animated: true, completion: nil)
             prefs.setValue(false, forKey: "notificationsAsk")
         }
+        
+        self.tableView.bottomRefreshControl = bottomRefreshControl
     }
     
     func enableNotifications(_: UIAlertAction) {
@@ -105,7 +116,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         self.setLikes(drawingCell)
         
         if (indexPath.row + 1 >= api.getWall().count) {
-            print("load more")
             api.loadWall()
         }
     }
@@ -142,6 +152,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
+            self.bottomRefreshControl.endRefreshing()
             self.refreshControl!.endRefreshing()
             self.tableView.reloadData()
         })

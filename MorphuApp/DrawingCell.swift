@@ -50,7 +50,7 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
         
         print("Stop spinning")
         self.drawingImage.image = image
-        self.delagate?.refresh()
         self.activityIndicator.stopAnimating()
+        self.delagate?.refresh()
     }
 }
