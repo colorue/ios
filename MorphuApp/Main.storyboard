@@ -506,20 +506,14 @@
                                             <exclude reference="qnD-pN-Jiv"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="60n-3E-qww"/>
-                                            <exclude reference="yr6-ir-V8s"/>
-                                            <exclude reference="1pR-Lh-DxW"/>
-                                            <exclude reference="DDO-OG-gPP"/>
-                                            <exclude reference="bQ7-2w-RRS"/>
-                                            <exclude reference="jOA-lh-eWs"/>
-                                            <exclude reference="rrx-ET-DA2"/>
-                                            <exclude reference="95b-9U-EBK"/>
-                                            <exclude reference="CSN-Kz-eaa"/>
-                                            <exclude reference="JJQ-vX-QPk"/>
-                                            <exclude reference="MXD-Al-vpg"/>
-                                            <exclude reference="jGC-ki-KsS"/>
                                             <exclude reference="R3z-vV-hXU"/>
                                             <exclude reference="r8l-hc-RdN"/>
+                                            <exclude reference="DIb-2F-3O9"/>
+                                            <exclude reference="ZjV-s0-gEZ"/>
+                                            <exclude reference="c0m-tY-wP3"/>
+                                            <exclude reference="dsA-Lz-4Tk"/>
+                                            <exclude reference="BQb-6S-YyS"/>
+                                            <exclude reference="qy6-ON-7WR"/>
                                             <exclude reference="F7S-S9-TE2"/>
                                             <exclude reference="YJO-N1-Zlx"/>
                                             <exclude reference="atr-KK-dV0"/>
@@ -527,14 +521,15 @@
                                             <exclude reference="gsA-c6-SC1"/>
                                             <exclude reference="hwx-dl-kht"/>
                                             <exclude reference="oKR-MI-egZ"/>
-                                            <exclude reference="Z4j-Xb-64l"/>
-                                            <exclude reference="Zp1-1d-YGR"/>
-                                            <exclude reference="BQb-6S-YyS"/>
-                                            <exclude reference="qy6-ON-7WR"/>
-                                            <exclude reference="5hm-rY-cCo"/>
-                                            <exclude reference="eua-7b-j6F"/>
-                                            <exclude reference="mn5-Ww-9GQ"/>
-                                            <exclude reference="pQZ-fL-78I"/>
+                                            <exclude reference="1pR-Lh-DxW"/>
+                                            <exclude reference="DDO-OG-gPP"/>
+                                            <exclude reference="bQ7-2w-RRS"/>
+                                            <exclude reference="jOA-lh-eWs"/>
+                                            <exclude reference="rrx-ET-DA2"/>
+                                            <exclude reference="tYY-AD-GrN"/>
+                                            <exclude reference="xYe-dC-sKr"/>
+                                            <exclude reference="60n-3E-qww"/>
+                                            <exclude reference="yr6-ir-V8s"/>
                                             <exclude reference="3wc-se-ay4"/>
                                             <exclude reference="CQf-yn-LdG"/>
                                             <exclude reference="IFk-lb-3IX"/>
@@ -545,12 +540,17 @@
                                             <exclude reference="c5f-zf-DXl"/>
                                             <exclude reference="npz-Fc-6AM"/>
                                             <exclude reference="tPJ-xl-cZU"/>
-                                            <exclude reference="DIb-2F-3O9"/>
-                                            <exclude reference="ZjV-s0-gEZ"/>
-                                            <exclude reference="c0m-tY-wP3"/>
-                                            <exclude reference="dsA-Lz-4Tk"/>
-                                            <exclude reference="tYY-AD-GrN"/>
-                                            <exclude reference="xYe-dC-sKr"/>
+                                            <exclude reference="95b-9U-EBK"/>
+                                            <exclude reference="CSN-Kz-eaa"/>
+                                            <exclude reference="JJQ-vX-QPk"/>
+                                            <exclude reference="MXD-Al-vpg"/>
+                                            <exclude reference="jGC-ki-KsS"/>
+                                            <exclude reference="Z4j-Xb-64l"/>
+                                            <exclude reference="Zp1-1d-YGR"/>
+                                            <exclude reference="5hm-rY-cCo"/>
+                                            <exclude reference="eua-7b-j6F"/>
+                                            <exclude reference="mn5-Ww-9GQ"/>
+                                            <exclude reference="pQZ-fL-78I"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -566,20 +566,14 @@
                                             <include reference="qnD-pN-Jiv"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="60n-3E-qww"/>
-                                            <include reference="yr6-ir-V8s"/>
-                                            <include reference="1pR-Lh-DxW"/>
-                                            <include reference="DDO-OG-gPP"/>
-                                            <exclude reference="bQ7-2w-RRS"/>
-                                            <exclude reference="jOA-lh-eWs"/>
-                                            <exclude reference="rrx-ET-DA2"/>
-                                            <include reference="95b-9U-EBK"/>
-                                            <include reference="CSN-Kz-eaa"/>
-                                            <exclude reference="JJQ-vX-QPk"/>
-                                            <include reference="MXD-Al-vpg"/>
-                                            <exclude reference="jGC-ki-KsS"/>
                                             <include reference="R3z-vV-hXU"/>
                                             <include reference="r8l-hc-RdN"/>
+                                            <include reference="DIb-2F-3O9"/>
+                                            <include reference="ZjV-s0-gEZ"/>
+                                            <include reference="c0m-tY-wP3"/>
+                                            <include reference="dsA-Lz-4Tk"/>
+                                            <exclude reference="BQb-6S-YyS"/>
+                                            <exclude reference="qy6-ON-7WR"/>
                                             <exclude reference="F7S-S9-TE2"/>
                                             <include reference="YJO-N1-Zlx"/>
                                             <exclude reference="atr-KK-dV0"/>
@@ -587,14 +581,15 @@
                                             <exclude reference="gsA-c6-SC1"/>
                                             <exclude reference="hwx-dl-kht"/>
                                             <exclude reference="oKR-MI-egZ"/>
-                                            <exclude reference="Z4j-Xb-64l"/>
-                                            <include reference="Zp1-1d-YGR"/>
-                                            <exclude reference="BQb-6S-YyS"/>
-                                            <exclude reference="qy6-ON-7WR"/>
-                                            <include reference="5hm-rY-cCo"/>
-                                            <include reference="eua-7b-j6F"/>
-                                            <include reference="mn5-Ww-9GQ"/>
-                                            <include reference="pQZ-fL-78I"/>
+                                            <include reference="1pR-Lh-DxW"/>
+                                            <include reference="DDO-OG-gPP"/>
+                                            <exclude reference="bQ7-2w-RRS"/>
+                                            <exclude reference="jOA-lh-eWs"/>
+                                            <exclude reference="rrx-ET-DA2"/>
+                                            <include reference="tYY-AD-GrN"/>
+                                            <include reference="xYe-dC-sKr"/>
+                                            <include reference="60n-3E-qww"/>
+                                            <include reference="yr6-ir-V8s"/>
                                             <include reference="3wc-se-ay4"/>
                                             <include reference="CQf-yn-LdG"/>
                                             <exclude reference="IFk-lb-3IX"/>
@@ -605,12 +600,17 @@
                                             <include reference="c5f-zf-DXl"/>
                                             <exclude reference="npz-Fc-6AM"/>
                                             <exclude reference="tPJ-xl-cZU"/>
-                                            <include reference="DIb-2F-3O9"/>
-                                            <include reference="ZjV-s0-gEZ"/>
-                                            <include reference="c0m-tY-wP3"/>
-                                            <include reference="dsA-Lz-4Tk"/>
-                                            <include reference="tYY-AD-GrN"/>
-                                            <include reference="xYe-dC-sKr"/>
+                                            <include reference="95b-9U-EBK"/>
+                                            <include reference="CSN-Kz-eaa"/>
+                                            <exclude reference="JJQ-vX-QPk"/>
+                                            <include reference="MXD-Al-vpg"/>
+                                            <exclude reference="jGC-ki-KsS"/>
+                                            <exclude reference="Z4j-Xb-64l"/>
+                                            <include reference="Zp1-1d-YGR"/>
+                                            <include reference="5hm-rY-cCo"/>
+                                            <include reference="eua-7b-j6F"/>
+                                            <include reference="mn5-Ww-9GQ"/>
+                                            <include reference="pQZ-fL-78I"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1904,7 +1904,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ColorKeyboard" width="512" height="85"/>
+        <image name="ColorKeyboard" width="377" height="80"/>
         <image name="GroupsIcon" width="30" height="30"/>
         <image name="HomeIcon" width="30" height="30"/>
         <image name="InboxIcon" width="30" height="30"/>

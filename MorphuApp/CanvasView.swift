@@ -22,11 +22,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     let resizeScale: CGFloat = 2.0
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage) {
-        self.currentStroke = UIImage()
+        self.currentStroke = baseImage
         self.delagate = delagate
         super.init(frame : frame)
         displayCanvas()
-        self.undoStack.append(baseImage)
+        
         mergeImages()
     }
     
@@ -106,14 +106,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    func shiftUndoStack() {
-        if undoStack.count < 6 {
-            undoStack.append(self.imageView.image!)
-        } else {
-            undoStack.removeAtIndex(0)
-            undoStack.append(self.imageView.image!)
-        }
-    }
+
     
     func drawImage() {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
@@ -138,10 +131,19 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
     }
     
+    func shiftUndoStack() {
+        if undoStack.count < 6 {
+            undoStack.append(self.imageView.image!)
+        } else {
+            undoStack.removeAtIndex(0)
+            undoStack.append(self.imageView.image!)
+        }
+    }
+    
     func mergeImages() {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
 
-        undoStack.last!.drawAtPoint(CGPoint.zero)
+        undoStack.last?.drawAtPoint(CGPoint.zero)
         currentStroke.drawAtPoint(CGPoint.zero)
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()

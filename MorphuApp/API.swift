@@ -315,7 +315,6 @@ class API {
             if let progress = snapshot.progress {
 
                 let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
-                print("Download: \(percentComplete)%")
                 progressCallback(percentComplete)
             }
         }
