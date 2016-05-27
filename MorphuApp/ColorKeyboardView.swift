@@ -159,14 +159,17 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     func updateButtonColor() {
         let coreColor = currentColorView.backgroundColor?.coreImageColor!
-        let colorDarkness = coreColor!.red + coreColor!.green + coreColor!.blue
-        if (colorDarkness < 1.2) {
+        let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
+        
+        print("colorDarkness: \(colorDarkness)")
+
+        if (colorDarkness < 1.6) {
             brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
             
             progressBar.tintColor = UIColor.lightGrayColor()
             progressBar.trackTintColor = UIColor.whiteColor()
-        } else if colorDarkness < 2.0 {
+        } else if colorDarkness < 2.67 {
             brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
             
@@ -180,7 +183,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             progressBar.trackTintColor = UIColor.lightGrayColor()
         }
         
-        if (colorDarkness < 1.4) {
+        if (colorDarkness < 1.87) {
             undoButton.tintColor = .whiteColor()
             trashButton.tintColor = .whiteColor()
             dropperButton.tintColor = .whiteColor()
