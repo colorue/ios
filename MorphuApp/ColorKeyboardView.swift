@@ -161,8 +161,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         let coreColor = currentColorView.backgroundColor?.coreImageColor!
         let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
         
-        print("colorDarkness: \(colorDarkness)")
-
         if (colorDarkness < 1.6) {
             brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()

@@ -26,7 +26,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         api.delagate = self
         self.refreshControl!.beginRefreshing()
         
-        bottomRefreshControl.triggerVerticalOffset = 100.0
+        bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
     
