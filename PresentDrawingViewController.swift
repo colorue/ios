@@ -27,7 +27,7 @@ class PresentDrawingViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         self.tabBarController!.tabBar.selectionIndicatorImage = nil
-        self.tabBarController!.tabBar.tintColor = morhpuColor
+        self.tabBarController!.tabBar.tintColor = tabSelectionColor
     }
 
     override func didReceiveMemoryWarning() {

@@ -13,5 +13,4 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var commentText: UILabel!
-    @IBOutlet weak var cover: UIView!
 }

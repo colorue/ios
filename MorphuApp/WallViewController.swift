@@ -39,14 +39,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
         self.tableView.reloadData()
 
-        let prefs = NSUserDefaults.standardUserDefaults()
-        if (!prefs.boolForKey("getStartedHowTo")) {
-            let getStartedHowTo = UIAlertController(title: "Get Started", message: "Send a friend a prompt or drawing to start a new chain.", preferredStyle: UIAlertControllerStyle.Alert)
-            getStartedHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(getStartedHowTo, animated: true, completion: nil)
-            prefs.setValue(true, forKey: "getStartedHowTo")
-        }
+        self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
         
+        /*
+        let prefs = NSUserDefaults.standardUserDefaults()
+
         if (prefs.boolForKey("notificationsAsk")) {
             let softNotificationAsk = UIAlertController(title: "Enable push notifications?", message: "Find out when someone sends you a prompt or drawing" , preferredStyle: UIAlertControllerStyle.Alert)
             softNotificationAsk.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: enableNotifications))
@@ -54,10 +51,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
             self.presentViewController(softNotificationAsk, animated: true, completion: nil)
             prefs.setValue(false, forKey: "notificationsAsk")
         }
+         */
         
-        self.tableView.bottomRefreshControl = bottomRefreshControl
     }
     
+    /*
     func enableNotifications(_: UIAlertAction) {
         //UAirship.push()?.userPushNotificationsEnabled = true
     }
@@ -65,6 +63,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     func disableNotifactions(_: UIAlertAction) {
         //UAirship.push()?.userPushNotificationsEnabled = false
     }
+     */
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()

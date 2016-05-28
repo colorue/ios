@@ -11,8 +11,12 @@ import UIKit
 class NavigationController: UINavigationController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        let font = UIFont(name: "SF Cartoonist Hand", size: 24)!
+        let font = UIFont(name: "Open Sans", size: 16)!
+
         navigationBar.barTintColor = morhpuColor
-        navigationBar.titleTextAttributes = [NSFontAttributeName : UIFont(name: "SF Cartoonist Hand", size: 24)!, NSForegroundColorAttributeName: UIColor.whiteColor()]
+        navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationBar.translucent = false
         setStatusBarBackgroundColor(morhpuColor)
     }

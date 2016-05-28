@@ -34,11 +34,6 @@
 		8763D3091CEE229C00E3D528 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EF1CEE229C00E3D528 /* API.swift */; };
 		8763D30A1CEE229C00E3D528 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */; };
 		8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */; };
-		8763D30C1CEE229C00E3D528 /* SF_Cartoonist_Hand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F21CEE229C00E3D528 /* SF_Cartoonist_Hand.ttf */; };
-		8763D30D1CEE229C00E3D528 /* Oswald-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F31CEE229C00E3D528 /* Oswald-Medium.ttf */; };
-		8763D30E1CEE229C00E3D528 /* KOMTXT__.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F41CEE229C00E3D528 /* KOMTXT__.ttf */; };
-		8763D30F1CEE229C00E3D528 /* Comfortaa_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F51CEE229C00E3D528 /* Comfortaa_Regular.ttf */; };
-		8763D3101CEE229C00E3D528 /* BPreplay.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F61CEE229C00E3D528 /* BPreplay.otf */; };
 		8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F71CEE229C00E3D528 /* ColorConstants.swift */; };
 		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
 		8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */; };
@@ -87,11 +82,6 @@
 		8763D2EF1CEE229C00E3D528 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
 		8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		8763D2F21CEE229C00E3D528 /* SF_Cartoonist_Hand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Cartoonist_Hand.ttf; sourceTree = "<group>"; };
-		8763D2F31CEE229C00E3D528 /* Oswald-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Oswald-Medium.ttf"; sourceTree = "<group>"; };
-		8763D2F41CEE229C00E3D528 /* KOMTXT__.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KOMTXT__.ttf; sourceTree = "<group>"; };
-		8763D2F51CEE229C00E3D528 /* Comfortaa_Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Comfortaa_Regular.ttf; sourceTree = "<group>"; };
-		8763D2F61CEE229C00E3D528 /* BPreplay.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = BPreplay.otf; sourceTree = "<group>"; };
 		8763D2F71CEE229C00E3D528 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
@@ -176,11 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */,
-				8763D2F21CEE229C00E3D528 /* SF_Cartoonist_Hand.ttf */,
-				8763D2F31CEE229C00E3D528 /* Oswald-Medium.ttf */,
-				8763D2F41CEE229C00E3D528 /* KOMTXT__.ttf */,
-				8763D2F51CEE229C00E3D528 /* Comfortaa_Regular.ttf */,
-				8763D2F61CEE229C00E3D528 /* BPreplay.otf */,
 			);
 			name = Fonts;
 			sourceTree = "<group>";
@@ -413,13 +398,8 @@
 			files = (
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
-				8763D3101CEE229C00E3D528 /* BPreplay.otf in Resources */,
-				8763D30F1CEE229C00E3D528 /* Comfortaa_Regular.ttf in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */,
-				8763D30D1CEE229C00E3D528 /* Oswald-Medium.ttf in Resources */,
-				8763D30E1CEE229C00E3D528 /* KOMTXT__.ttf in Resources */,
-				8763D30C1CEE229C00E3D528 /* SF_Cartoonist_Hand.ttf in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

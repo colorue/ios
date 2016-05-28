@@ -44,12 +44,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>SF_Cartoonist_Hand.ttf</string>
-		<string>Oswald-Medium.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
-		<string>BPreplay.otf</string>
-		<string>KOMTXT__.ttf</string>
-		<string>Comfortaa_Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>

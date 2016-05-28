@@ -14,6 +14,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.barStyle = .Black
-        self.tabBar.tintColor = morhpuColor
+        self.tabBar.tintColor = tabSelectionColor
     }
 }

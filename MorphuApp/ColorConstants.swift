@@ -30,3 +30,5 @@ let morhpuColorBright = UIColor(red: 71.0/255.0, green: 17.0/255.0, blue: 153.0/
 let coverColor = UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 0.7)
 let infoTextColor = UIColor.blackColor()
 let descriptionTextColor = UIColor.blackColor()
+
+let tabSelectionColor = UIColor(red: 235.0/255.0, green: 235.0/255.0, blue: 235.0/255.0, alpha: 1.0)
