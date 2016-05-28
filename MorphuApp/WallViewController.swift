@@ -36,6 +36,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         self.tableView.reloadData()
 
         let prefs = NSUserDefaults.standardUserDefaults()

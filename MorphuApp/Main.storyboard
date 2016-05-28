@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fiD-lJ-IKR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fiD-lJ-IKR">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,7 +9,6 @@
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
-            <string>BPreplay</string>
             <string>BPreplay</string>
             <string>BPreplay</string>
         </mutableArray>
@@ -33,10 +32,10 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--Morphu-->
+        <!--Drawing View Controller-->
         <scene sceneID="dMl-U3-GTV">
             <objects>
-                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xmt-d0-0cX"/>
                         <viewControllerLayoutGuide type="bottom" id="Uwp-QL-EV4"/>
@@ -46,8 +45,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Morphu" id="7DO-Fc-Ouh">
-                        <barButtonItem key="rightBarButtonItem" title="Post" id="mVr-dO-lxG">
+                    <navigationItem key="navigationItem" id="7DO-Fc-Ouh">
+                        <barButtonItem key="rightBarButtonItem" title="Share" id="mVr-dO-lxG">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="done:" destination="OHZ-gn-DsE" id="PxV-kB-HVG"/>
@@ -56,7 +55,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="mVr-dO-lxG" id="UEx-w3-foj"/>
-                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
+                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="U9g-HJ-mcN"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="FAr-m3-UeF"/>
                     </connections>
@@ -66,10 +65,10 @@
             </objects>
             <point key="canvasLocation" x="2203.5" y="1083"/>
         </scene>
-        <!--Morphu-->
+        <!--Present Drawing View Controller-->
         <scene sceneID="N1g-j3-gtY">
             <objects>
-                <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CkJ-ds-Baa"/>
                         <viewControllerLayoutGuide type="bottom" id="S5v-Lr-IHb"/>
@@ -79,7 +78,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Morphu" id="LTg-xC-fgv"/>
+                    <navigationItem key="navigationItem" id="LTg-xC-fgv"/>
                     <connections>
                         <segue destination="ATK-nE-Squ" kind="presentation" identifier="newDrawing" id="LGn-sL-SO6"/>
                     </connections>
@@ -91,7 +90,7 @@
         <!--Navigation Controller-->
         <scene sceneID="RVQ-o7-j7n">
             <objects>
-                <navigationController id="ATK-nE-Squ" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="ATK-nE-Squ" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TV7-0i-FOu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -107,8 +106,8 @@
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
             <objects>
-                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="InboxIcon" id="FWV-Hs-Vva">
+                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="Logo Inactive" id="FWV-Hs-Vva">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="cds-eF-WYc">
@@ -129,7 +128,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
             <objects>
-                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3AG-5Q-AcY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -145,16 +144,16 @@
             </objects>
             <point key="canvasLocation" x="-776" y="1083"/>
         </scene>
-        <!--Morphu-->
+        <!--Gallery-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
-                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="HtL-VG-g21">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Morphu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Canvas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="586"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAl-EB-dAq" id="MBj-Xc-vDK">
@@ -288,7 +287,7 @@
                                             </variation>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
-                                            <rect key="frame" x="231" y="534" width="181" height="61"/>
+                                            <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
@@ -632,7 +631,7 @@
                             <outlet property="delegate" destination="4Ba-st-mMB" id="Uth-Sk-Yup"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Morphu" id="0FW-Cj-j2H"/>
+                    <navigationItem key="navigationItem" title="Gallery" id="0FW-Cj-j2H"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aL6-Ev-QhP">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -640,18 +639,18 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="lOG-z8-w9D" kind="custom" identifier="toViewLikes" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="AAM-C8-3Q5"/>
-                        <segue destination="ENQ-5g-Gzi" kind="custom" identifier="toViewComments" customClass="UIStoryboardSegueFromRight" customModule="Morphu" customModuleProvider="target" id="rUw-mP-Srk"/>
+                        <segue destination="lOG-z8-w9D" kind="custom" identifier="toViewLikes" customClass="UIStoryboardSegueFromRight" customModule="Canvas" customModuleProvider="target" id="AAM-C8-3Q5"/>
+                        <segue destination="ENQ-5g-Gzi" kind="custom" identifier="toViewComments" customClass="UIStoryboardSegueFromRight" customModule="Canvas" customModuleProvider="target" id="rUw-mP-Srk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCQ-E2-ktF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-777" y="2569.5"/>
         </scene>
-        <!--Morphu-->
+        <!--Canvas-->
         <scene sceneID="DzX-pb-Yw0">
             <objects>
-                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oso-1h-tk1"/>
                         <viewControllerLayoutGuide type="bottom" id="e3O-Zi-OLe"/>
@@ -735,7 +734,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Morphu" id="FjR-YB-ts2"/>
+                    <navigationItem key="navigationItem" title="Canvas" id="FjR-YB-ts2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STi-0B-COi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -744,7 +743,7 @@
         <!--Loading View Controller-->
         <scene sceneID="1qg-38-0L5">
             <objects>
-                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zmi-QF-ZBk"/>
                         <viewControllerLayoutGuide type="bottom" id="tnr-A0-xkn"/>
@@ -760,43 +759,28 @@
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ColorKeyboard" translatesAutoresizingMaskIntoConstraints="NO" id="St6-g9-XMQ">
-                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="tnr-A0-xkn" firstAttribute="top" secondItem="aQf-wg-UfE" secondAttribute="bottom" constant="30" id="1a3-kM-21D"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c5J-BY-gXo" secondAttribute="trailing" constant="-20" id="1cu-Q3-5qv"/>
                             <constraint firstItem="tnr-A0-xkn" firstAttribute="top" secondItem="aQf-wg-UfE" secondAttribute="bottom" constant="30" id="94J-ml-8oD"/>
                             <constraint firstItem="aQf-wg-UfE" firstAttribute="centerX" secondItem="3QG-Kk-ffx" secondAttribute="centerX" id="Eok-zT-bjw"/>
-                            <constraint firstItem="St6-g9-XMQ" firstAttribute="trailing" secondItem="c5J-BY-gXo" secondAttribute="trailing" id="MEZ-bJ-17g"/>
                             <constraint firstItem="aQf-wg-UfE" firstAttribute="top" secondItem="Zmi-QF-ZBk" secondAttribute="bottom" constant="30" id="OtL-pm-wbl"/>
-                            <constraint firstItem="St6-g9-XMQ" firstAttribute="leading" secondItem="c5J-BY-gXo" secondAttribute="leading" id="PuD-Ih-23G"/>
                             <constraint firstItem="c5J-BY-gXo" firstAttribute="leading" secondItem="3QG-Kk-ffx" secondAttribute="leadingMargin" constant="-20" id="St8-2r-BSX"/>
-                            <constraint firstItem="tnr-A0-xkn" firstAttribute="top" secondItem="St6-g9-XMQ" secondAttribute="bottom" id="WCD-n0-qzv"/>
                             <constraint firstItem="c5J-BY-gXo" firstAttribute="centerY" secondItem="3QG-Kk-ffx" secondAttribute="centerY" id="j63-zg-5pg"/>
                         </constraints>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="St6-g9-XMQ"/>
-                            </mask>
                             <mask key="constraints">
-                                <exclude reference="MEZ-bJ-17g"/>
-                                <exclude reference="PuD-Ih-23G"/>
-                                <exclude reference="WCD-n0-qzv"/>
                                 <exclude reference="OtL-pm-wbl"/>
+                                <exclude reference="1a3-kM-21D"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="St6-g9-XMQ"/>
-                            </mask>
                             <mask key="constraints">
-                                <include reference="MEZ-bJ-17g"/>
-                                <include reference="PuD-Ih-23G"/>
+                                <exclude reference="OtL-pm-wbl"/>
+                                <include reference="1a3-kM-21D"/>
                                 <exclude reference="94J-ml-8oD"/>
-                                <include reference="WCD-n0-qzv"/>
-                                <include reference="OtL-pm-wbl"/>
                             </mask>
                         </variation>
                     </view>
@@ -813,7 +797,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yyo-ll-IHM">
             <objects>
-                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="L2H-32-AxG">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -835,7 +819,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wlr-Yz-00Y">
             <objects>
-                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="uWa-C7-36M">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -857,13 +841,13 @@
         <!--Friends-->
         <scene sceneID="slm-FW-9Fy">
             <objects>
-                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qZS-12-nUw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="fZh-EJ-nJd" customClass="UserTableViewCell" customModule="Morphu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="fZh-EJ-nJd" customClass="UserTableViewCell" customModule="Canvas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fZh-EJ-nJd" id="Qxq-Kf-eoz">
@@ -964,7 +948,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
+                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
                         <segue destination="cAF-Q1-MSm" kind="presentation" identifier="toLogin" id="C20-D9-RLT"/>
                     </connections>
                 </tableViewController>
@@ -976,7 +960,7 @@
         <!--Navigation Controller-->
         <scene sceneID="GOz-OW-Wry">
             <objects>
-                <navigationController id="tp0-fc-lg9" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="tp0-fc-lg9" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="Bwu-wL-hgU">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -998,7 +982,7 @@
         <!--Navigation Controller-->
         <scene sceneID="JwZ-9y-0gs">
             <objects>
-                <navigationController id="cAF-Q1-MSm" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="cAF-Q1-MSm" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="nLM-T6-rBF">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1017,10 +1001,10 @@
             </objects>
             <point key="canvasLocation" x="-3975" y="352.5"/>
         </scene>
-        <!--Morphu-->
+        <!--Canvas-->
         <scene sceneID="178-nn-QQJ">
             <objects>
-                <viewController id="C8I-qW-0Q2" customClass="LoginViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="C8I-qW-0Q2" customClass="LoginViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Jjl-UJ-mTf"/>
                         <viewControllerLayoutGuide type="bottom" id="QOz-I0-gX3"/>
@@ -1198,7 +1182,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Morphu" id="MHR-lV-oEl"/>
+                    <navigationItem key="navigationItem" title="Canvas" id="MHR-lV-oEl"/>
                     <connections>
                         <outlet property="activityIndicator" destination="tHm-kJ-m5f" id="7wB-ID-Ca9"/>
                         <outlet property="feedback" destination="d3T-J6-Wov" id="Iih-Jr-vab"/>
@@ -1216,7 +1200,7 @@
         <!--Navigation Controller-->
         <scene sceneID="hEM-Yx-wU2">
             <objects>
-                <navigationController id="hw6-IR-nJb" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="hw6-IR-nJb" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="lfA-45-4Zg">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1235,10 +1219,10 @@
             </objects>
             <point key="canvasLocation" x="-2370" y="1083"/>
         </scene>
-        <!--Morphu-->
+        <!--Canvas-->
         <scene sceneID="JUc-O2-hPf">
             <objects>
-                <viewController id="Zn6-GV-rhn" customClass="RegisterViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Zn6-GV-rhn" customClass="RegisterViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aF2-fk-dyd"/>
                         <viewControllerLayoutGuide type="bottom" id="Yjz-0r-fNt"/>
@@ -1287,36 +1271,36 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xu3-g7-kNX">
-                                <rect key="frame" x="-8" y="328" width="402" height="33"/>
+                                <rect key="frame" x="-8" y="328" width="402" height="38"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
-                                        <rect key="frame" x="0.0" y="0.0" width="93" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
+                                        <rect key="frame" x="0.0" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
-                                        <rect key="frame" x="103" y="0.0" width="93" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
+                                        <rect key="frame" x="103" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
-                                        <rect key="frame" x="206" y="0.0" width="93" height="33"/>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
+                                        <rect key="frame" x="206" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
-                                        <rect key="frame" x="309" y="0.0" width="93" height="33"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
+                                        <rect key="frame" x="309" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="p2l-ut-BE0"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="ChalkboardSE-Regular" family="Chalkboard SE" pointSize="18"/>
                                         <state key="normal" title="Sign Up">
                                             <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1440,7 +1424,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Morphu" id="VK4-ir-vZl"/>
+                    <navigationItem key="navigationItem" title="Canvas" id="VK4-ir-vZl"/>
                     <connections>
                         <outlet property="activityIndicator" destination="q9t-Zu-M51" id="JzX-8h-ymb"/>
                         <outlet property="emailInput" destination="L6h-d5-su7" id="xe2-s1-DDx"/>
@@ -1459,13 +1443,13 @@
         <!--Likes-->
         <scene sceneID="DOn-HV-3qF">
             <objects>
-                <tableViewController id="RrQ-3M-rta" customClass="LikeViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RrQ-3M-rta" customClass="LikeViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="I58-J7-9eD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="Pl5-V5-wkk" customClass="UserTableViewCell" customModule="Morphu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="Pl5-V5-wkk" customClass="UserTableViewCell" customModule="Canvas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Pl5-V5-wkk" id="WNe-t8-vEu">
@@ -1559,7 +1543,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="gUt-cO-JrI" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" customModuleProvider="target" unwindAction="backToHome:" id="uG5-hg-hCW"/>
+                        <segue destination="gUt-cO-JrI" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToHome:" id="uG5-hg-hCW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkl-NO-iuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1570,7 +1554,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5Ed-hX-Tq7">
             <objects>
-                <navigationController id="lOG-z8-w9D" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="lOG-z8-w9D" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="kop-AO-twq">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1592,7 +1576,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rsZ-Yk-RET">
             <objects>
-                <navigationController id="ENQ-5g-Gzi" customClass="NavigationController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="ENQ-5g-Gzi" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="QSg-DH-16J">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1614,13 +1598,13 @@
         <!--Comments-->
         <scene sceneID="tYT-Ot-iQN">
             <objects>
-                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Morphu" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="PeY-4c-kJZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Morphu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Canvas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fHR-Kl-T59" id="PxQ-EL-KX8">
@@ -1787,7 +1771,7 @@
                                     <outlet property="username" destination="Z11-yh-Fhg" id="XIF-3l-agG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Morphu" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Canvas" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EzM-5m-5ac" id="Ux9-46-s7a">
@@ -1894,7 +1878,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="XdB-xt-AJz" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Morphu" unwindAction="backToHome:" id="u97-VB-HDt"/>
+                        <segue destination="XdB-xt-AJz" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" unwindAction="backToHome:" id="u97-VB-HDt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWw-jc-d5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1904,12 +1888,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ColorKeyboard" width="377" height="80"/>
         <image name="GroupsIcon" width="30" height="30"/>
         <image name="HomeIcon" width="30" height="30"/>
-        <image name="InboxIcon" width="30" height="30"/>
         <image name="Like" width="30" height="30"/>
         <image name="Liked" width="30" height="30"/>
+        <image name="Logo Inactive" width="30" height="30"/>
         <image name="Logout" width="24" height="24"/>
         <image name="Morphu Brand" width="512" height="1000"/>
         <image name="Upload" width="36" height="36"/>

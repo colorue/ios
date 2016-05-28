@@ -13,12 +13,21 @@ class PresentDrawingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.tabBarController!.tabBar.selectionIndicatorImage = UIImage(named: "Logo Clear")!
+        self.tabBarController!.tabBar.tintColor = UIColor.clearColor()
+
         performSegueWithIdentifier("newDrawing", sender: self)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        self.tabBarController!.tabBar.selectionIndicatorImage = nil
+        self.tabBarController!.tabBar.tintColor = morhpuColor
     }
 
     override func didReceiveMemoryWarning() {

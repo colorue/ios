@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-               BuildableName = "Morphu.app"
-               BlueprintName = "Morphu"
-               ReferencedContainer = "container:Morphu.xcodeproj">
+               BuildableName = "Canvas.app"
+               BlueprintName = "Canvas"
+               ReferencedContainer = "container:Canvas.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Morphu.app"
-            BlueprintName = "Morphu"
-            ReferencedContainer = "container:Morphu.xcodeproj">
+            BuildableName = "Canvas.app"
+            BlueprintName = "Canvas"
+            ReferencedContainer = "container:Canvas.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Morphu.app"
-            BlueprintName = "Morphu"
-            ReferencedContainer = "container:Morphu.xcodeproj">
+            BuildableName = "Canvas.app"
+            BlueprintName = "Canvas"
+            ReferencedContainer = "container:Canvas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Morphu.app"
-            BlueprintName = "Morphu"
-            ReferencedContainer = "container:Morphu.xcodeproj">
+            BuildableName = "Canvas.app"
+            BlueprintName = "Canvas"
+            ReferencedContainer = "container:Canvas.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

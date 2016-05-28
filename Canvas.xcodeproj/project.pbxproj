@@ -59,7 +59,7 @@
 /* Begin PBXFileReference section */
 		3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MorphuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.release.xcconfig"; sourceTree = "<group>"; };
-		873AFA0D1CED7697006FD34A /* Morphu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Morphu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		873AFA0D1CED7697006FD34A /* Canvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		8763D2B81CEE21BC00E3D528 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		873AFA0E1CED7697006FD34A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				873AFA0D1CED7697006FD34A /* Morphu.app */,
+				873AFA0D1CED7697006FD34A /* Canvas.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,9 +347,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		873AFA0C1CED7697006FD34A /* Morphu */ = {
+		873AFA0C1CED7697006FD34A /* Canvas */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Morphu" */;
+			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvas" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
 				873AFA091CED7697006FD34A /* Sources */,
@@ -362,9 +362,9 @@
 			);
 			dependencies = (
 			);
-			name = Morphu;
+			name = Canvas;
 			productName = MorphuApp;
-			productReference = 873AFA0D1CED7697006FD34A /* Morphu.app */;
+			productReference = 873AFA0D1CED7697006FD34A /* Canvas.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -388,7 +388,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Morphu" */;
+			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvas" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -401,7 +401,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				873AFA0C1CED7697006FD34A /* Morphu */,
+				873AFA0C1CED7697006FD34A /* Canvas */,
 			);
 		};
 /* End PBXProject section */
@@ -611,7 +611,7 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Morphu;
+				PRODUCT_NAME = Canvas;
 			};
 			name = Debug;
 		};
@@ -623,14 +623,14 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Morphu;
+				PRODUCT_NAME = Canvas;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Morphu" */ = {
+		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA1D1CED7697006FD34A /* Debug */,
@@ -639,7 +639,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Morphu" */ = {
+		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvas" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA201CED7697006FD34A /* Debug */,

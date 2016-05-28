@@ -26,6 +26,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let logo = UIImage(named: "Logo Clear")!
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         
@@ -159,6 +163,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         self.save()
+
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
