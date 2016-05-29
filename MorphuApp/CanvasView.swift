@@ -155,10 +155,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func undo() {
-        if undoStack.count > 1 {
-            undoStack.popLast()
-            mergeImages()
-        }
+        undoStack.popLast()
+        mergeImages()
     }
     
     func trash() {

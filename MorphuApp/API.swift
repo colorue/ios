@@ -129,9 +129,7 @@ class API {
         self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
             self.getUser(snapshot.key, callback: { (follow: User) -> () in
                 user.follow(follow)
-                print("follow \(follow.username)")
                 self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    print("Added to wall: \(snapshot.key)")
                     self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
                 })
             })
@@ -140,9 +138,7 @@ class API {
         self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
             self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
                 user.unfollow(unfollow)
-                print("unfollow \(unfollow.username)")
                 self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    print("Removed from wall: \(snapshot.key)")
                     self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").removeValue()
                 })
             })
@@ -289,11 +285,11 @@ class API {
                         self.oldestTimeLoaded = drawing.timeStamp + 0.00001
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
-                        // for new drawings
+                        // print("for new drawings")
                         self.newestTimeLoaded = drawing.timeStamp
                         self.wall.insert(drawing, atIndex: 0)
                     } else {
-                        // Add in middle, when following someone new
+                        // print("Add in middle, when following someone new")
                         var i = 0
                         for drawing_ in self.wall {
                             if drawing_.timeStamp > drawing.timeStamp {
@@ -303,7 +299,6 @@ class API {
                             i += 1
                         }
                     }
-                    
                 })
             })
         
