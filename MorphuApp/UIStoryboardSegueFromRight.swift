@@ -47,7 +47,9 @@ class UIStoryboardUnwindSegueFromRight: UIStoryboardSegue {
         
         UIView.animateWithDuration(0.4, animations: { () -> Void in
             firstVCView.transform = CGAffineTransformMakeTranslation(screenWidth, 0)
-            secondVCView.transform = CGAffineTransformMakeTranslation(0, 0)
+            
+            secondVCView.transform = CGAffineTransformIdentity
+
         }) { (Finished) -> Void in
             self.sourceViewController.dismissViewControllerAnimated(false, completion: nil)
         }
