@@ -285,13 +285,23 @@ class API {
                         self.newestTimeLoaded = drawing.timeStamp
                         self.delagate?.refresh()
                     } else if drawing.timeStamp > self.oldestTimeLoaded {
+                        // for older drawings
                         self.oldestTimeLoaded = drawing.timeStamp + 0.00001
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
+                        // for new drawings
                         self.newestTimeLoaded = drawing.timeStamp
                         self.wall.insert(drawing, atIndex: 0)
                     } else {
-                        print("???")
+                        // Add in middle, when following someone new
+                        var i = 0
+                        for drawing_ in self.wall {
+                            if drawing_.timeStamp > drawing.timeStamp {
+                                self.wall.insert(drawing, atIndex: i)
+                                return
+                            }
+                            i += 1
+                        }
                     }
                     
                 })
