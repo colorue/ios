@@ -125,6 +125,22 @@ class API {
         }
     }
     
+    private func getFullUser(user: User) {
+        self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.getUser(snapshot.key, callback: { (follow: User) -> () in
+                user.follow(follow)
+                print("follow \(follow.username)")
+            })
+        })
+        
+        self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
+                user.unfollow(unfollow)
+                print("unfollow \(unfollow.username)")
+            })
+        })
+    }
+    
     // MARK: External Methods
     
     func checkLoggedIn(callback: (Bool)-> ()) {
@@ -245,6 +261,7 @@ class API {
     private func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
+            self.getFullUser(self.activeUser)
         })
         self.loadWall()
         self.loadUsers(user)

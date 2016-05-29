@@ -45,7 +45,7 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
         cell.profileImage.image = user.profileImage
         cell.delagate = self
         cell.user = user
-        cell.followButton.selected = false
+        cell.followButton.selected = api.getActiveUser().isFollowing(user)
 
         return cell
     }
@@ -54,6 +54,7 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
         userCell.followButton.selected = true
         
         if let user = userCell.user {
+            api.getActiveUser().follow(user)
             api.follow(user)
         }
     }
@@ -72,6 +73,7 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
     private func unfollow(userCell: UserCell) {
         userCell.followButton.selected = false
         if let user = userCell.user {
+            api.getActiveUser().unfollow(user)
             api.unfollow(user)
         }
     }

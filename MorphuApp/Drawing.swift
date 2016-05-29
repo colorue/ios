@@ -66,7 +66,7 @@ class Drawing {
         for liker in self.likes {
             if liker.userId == user.userId {
                 self.likes.removeAtIndex(i)
-                break
+                return
             }
             i += 1
         }
