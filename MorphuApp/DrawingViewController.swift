@@ -27,7 +27,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = UIImage(named: "Logo Clear")!
+        let logo = UIImage(named: "Logo Inactive")! // UIImage(named: "Logo Clear")!
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
 

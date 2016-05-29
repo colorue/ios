@@ -8,7 +8,7 @@
 
 import UIKit
 
-class GroupTableViewController: UITableViewController {
+class GroupTableViewController: UITableViewController, UserCellDelagate {
     
     let api = API.sharedInstance
     
@@ -38,10 +38,35 @@ class GroupTableViewController: UITableViewController {
     }
         
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserTableViewCell
-        cell.username.text = api.getUsers()[indexPath.row].username
-        cell.profileImage.image = api.getUsers()[indexPath.row].profileImage
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
+        
+        let user = api.getUsers()[indexPath.row]
+        cell.username.text = user.username
+        cell.profileImage.image = user.profileImage
+        cell.delagate = self
+        cell.user = user
+        cell.followButton.selected = false
+
         return cell
+    }
+    
+    func followAction(userCell: UserCell) {
+        userCell.followButton.selected = true
+    }
+    
+    func unfollowAction(userCell: UserCell) {
+        if let user = userCell.user {
+            let actionSelector = UIAlertController(title: "Unfollow \(user.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.Destructive,
+                handler: {(alert: UIAlertAction!) in self.unfollow(userCell)}))
+        
+            self.presentViewController(actionSelector, animated: true, completion: nil)
+        }
+    }
+    
+    private func unfollow(userCell: UserCell) {
+        userCell.followButton.selected = false
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {

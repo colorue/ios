@@ -23,7 +23,7 @@ class UIStoryboardSegueFromRight: UIStoryboardSegue {
         let window = UIApplication.sharedApplication().keyWindow
         window?.insertSubview(secondVCView, aboveSubview: firstVCView)
         
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
             firstVCView.transform = CGAffineTransformMakeTranslation(-screenWidth, 0)
             secondVCView.transform = CGAffineTransformIdentity
         }) { (Finished) -> Void in
@@ -45,7 +45,7 @@ class UIStoryboardUnwindSegueFromRight: UIStoryboardSegue {
         let window = UIApplication.sharedApplication().keyWindow
         window?.insertSubview(secondVCView, aboveSubview: firstVCView)
         
-        UIView.animateWithDuration(0.4, animations: { () -> Void in
+        UIView.animateWithDuration(0.25, animations: { () -> Void in
             firstVCView.transform = CGAffineTransformMakeTranslation(screenWidth, 0)
             
             secondVCView.transform = CGAffineTransformIdentity

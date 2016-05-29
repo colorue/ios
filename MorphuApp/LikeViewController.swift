@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LikeViewController: UITableViewController {
+class LikeViewController: UITableViewController, UserCellDelagate {
     
     var drawingInstance = Drawing()
     let backButton = UIButton(type: UIButtonType.Custom)
@@ -47,10 +47,35 @@ class LikeViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserTableViewCell
-        cell.username.text = drawingInstance.getLikes()[indexPath.row].username
-        cell.profileImage.image = drawingInstance.getLikes()[indexPath.row].profileImage
+        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
+        
+        let user = drawingInstance.getLikes()[indexPath.row]
+        cell.username.text = user.username
+        cell.profileImage.image = user.profileImage
+        cell.delagate = self
+        cell.user = user
+        cell.followButton.selected = false
+        
         return cell
+    }
+    
+    func followAction(userCell: UserCell) {
+        userCell.followButton.selected = true
+    }
+    
+    func unfollowAction(userCell: UserCell) {
+        if let user = userCell.user {
+            let actionSelector = UIAlertController(title: "Unfollow \(user.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.Destructive,
+                handler: {(alert: UIAlertAction!) in self.unfollow(userCell)}))
+            
+            self.presentViewController(actionSelector, animated: true, completion: nil)
+        }
+    }
+    
+    private func unfollow(userCell: UserCell) {
+        userCell.followButton.selected = false
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
