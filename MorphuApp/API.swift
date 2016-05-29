@@ -130,6 +130,10 @@ class API {
             self.getUser(snapshot.key, callback: { (follow: User) -> () in
                 user.follow(follow)
                 print("follow \(follow.username)")
+                self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                    print("Added to wall: \(snapshot.key)")
+                    self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
+                })
             })
         })
         
@@ -137,6 +141,10 @@ class API {
             self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
                 user.unfollow(unfollow)
                 print("unfollow \(unfollow.username)")
+                self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                    print("Removed from wall: \(snapshot.key)")
+                    self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").removeValue()
+                })
             })
         })
     }
@@ -156,9 +164,6 @@ class API {
             callback(false)
         }
     }
-    
-
-
     
     func connectWithFacebook(viewController: UIViewController, callback: (Bool)  -> ()) {
         
@@ -210,6 +215,8 @@ class API {
             if uploaded {
                 drawing.setArtist(self.activeUser)
                 newDrawing.setValue(drawing.toAnyObject())
+                self.myRootRef.child("users/\(self.activeUser.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
             }
             finishedCallback(uploaded)
         })
@@ -262,13 +269,13 @@ class API {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
             self.getFullUser(self.activeUser)
+            self.loadWall()
+            self.loadUsers(user)
         })
-        self.loadWall()
-        self.loadUsers(user)
     }
 
     func loadWall() {
-        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
+        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
                     
@@ -288,6 +295,18 @@ class API {
                     }
                     
                 })
+            })
+        
+        myRootRef.child("users/\(getActiveUser().userId)/wall").observeEventType(.ChildRemoved, withBlock: { snapshot in
+                let drawingId = snapshot.key
+                var i = 0
+                for drawing in self.wall {
+                    if drawing.getDrawingId() == drawingId {
+                        self.wall.removeAtIndex(i)
+                        return
+                    }
+                    i += 1
+                }
             })
     }
     

@@ -52,7 +52,6 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
     
     func followAction(userCell: UserCell) {
         userCell.followButton.selected = true
-        
         if let user = userCell.user {
             api.getActiveUser().follow(user)
             api.follow(user)
