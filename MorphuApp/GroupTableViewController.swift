@@ -52,6 +52,10 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
     
     func followAction(userCell: UserCell) {
         userCell.followButton.selected = true
+        
+        if let user = userCell.user {
+            api.follow(user)
+        }
     }
     
     func unfollowAction(userCell: UserCell) {
@@ -67,6 +71,9 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
     
     private func unfollow(userCell: UserCell) {
         userCell.followButton.selected = false
+        if let user = userCell.user {
+            api.unfollow(user)
+        }
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {

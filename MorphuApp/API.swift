@@ -219,6 +219,14 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
     }
     
+    func follow(user: User) {
+        myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").setValue(true)
+    }
+    
+    func unfollow(user: User) {
+        myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").removeValue()
+    }
+    
     // MARK: Get Methods
     func getActiveUser() -> User {
         return self.activeUser
