@@ -16,7 +16,7 @@ class LoadingViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         API.sharedInstance.checkLoggedIn(loginCallback)
     }
- 
+    
     func loginCallback(loginValid: Bool) {
         if loginValid {
             self.performSegueWithIdentifier("toMainController", sender: self)

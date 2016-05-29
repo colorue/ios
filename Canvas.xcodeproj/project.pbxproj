@@ -32,7 +32,7 @@
 		8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E71CEE229C00E3D528 /* DrawingCell.swift */; };
 		8763D3081CEE229C00E3D528 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EE1CEE229C00E3D528 /* User.swift */; };
 		8763D3091CEE229C00E3D528 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EF1CEE229C00E3D528 /* API.swift */; };
-		8763D30A1CEE229C00E3D528 /* SegueFromLeft.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */; };
+		8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */; };
 		8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */; };
 		8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F71CEE229C00E3D528 /* ColorConstants.swift */; };
 		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
@@ -80,7 +80,7 @@
 		8763D2E71CEE229C00E3D528 /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		8763D2EE1CEE229C00E3D528 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8763D2EF1CEE229C00E3D528 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegueFromLeft.swift; sourceTree = "<group>"; };
+		8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueFromRight.swift; sourceTree = "<group>"; };
 		8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		8763D2F71CEE229C00E3D528 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -215,7 +215,7 @@
 		8763D31B1CEE245000E3D528 /* Segues */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2F01CEE229C00E3D528 /* SegueFromLeft.swift */,
+				8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */,
 			);
 			name = Segues;
 			sourceTree = "<group>";
@@ -461,7 +461,7 @@
 			files = (
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
 				87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */,
-				8763D30A1CEE229C00E3D528 /* SegueFromLeft.swift in Sources */,
+				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */,
 				8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */,

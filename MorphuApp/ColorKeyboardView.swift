@@ -40,17 +40,24 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         currentColorView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: selectorWidth)
         self.addSubview(currentColorView)
         
+        
+//        brushSizeSlider.maximumValueImage = UIImage(named: "Size Slider")!
+//        brushSizeSlider.minimumValueImage = UIImage(named: "Size Slider 2")!
+        
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
         brushSizeSlider.maximumValue = 10.0
         brushSizeSlider.minimumValue = 1.5
+        
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
         self.addSubview(brushSizeSlider)
+        
+        let buttonSize = selectorWidth
         
         undoButton.setImage(UIImage(named: "UndoIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         undoButton.tintColor = .whiteColor()
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
-        undoButton.frame = CGRect(x: frame.maxX - 8 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
+        undoButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         self.addSubview(undoButton)
         
         
@@ -59,14 +66,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
 
         dropperButton.tintColor = .whiteColor()
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
-        dropperButton.frame = CGRect(x: frame.maxX - 75 - selectorWidth/3 * 2, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
+        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
 //        self.addSubview(dropperButton)
         
         trashButton.setImage(UIImage(named: "TrashIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         trashButton.tintColor = .whiteColor()
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
-        trashButton.frame = CGRect(x: frame.minX + 8, y: (selectorWidth - (height: selectorWidth/3 * 2))/2, width: selectorWidth/3 * 2, height: selectorWidth/3 * 2)
+        trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         self.addSubview(trashButton)
+        
+        trashButton.showsTouchWhenHighlighted = true
+        undoButton.showsTouchWhenHighlighted = true
+
         
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
         separatorU.backgroundColor = dividerColor
@@ -167,12 +178,16 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             
             progressBar.tintColor = UIColor.lightGrayColor()
             progressBar.trackTintColor = UIColor.whiteColor()
+            
+
         } else if colorDarkness < 2.67 {
             brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
             
             progressBar.tintColor = UIColor.blackColor()
             progressBar.trackTintColor = UIColor.whiteColor()
+            
+
         } else {
             brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
             brushSizeSlider.maximumTrackTintColor = UIColor.lightGrayColor()

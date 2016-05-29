@@ -58,7 +58,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
         }
         
-
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
         self.view.addSubview(canvas)
         self.canvas = canvas

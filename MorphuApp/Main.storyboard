@@ -10,9 +10,9 @@
     <customFonts key="customFonts">
         <mutableArray key="BPreplay.otf">
             <string>BPreplay</string>
-            <string>BPreplay</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -144,7 +144,7 @@
             </objects>
             <point key="canvasLocation" x="-776" y="1083"/>
         </scene>
-        <!--Gallery-->
+        <!--Canvas-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
                 <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
@@ -631,7 +631,7 @@
                             <outlet property="delegate" destination="4Ba-st-mMB" id="Uth-Sk-Yup"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Gallery" id="0FW-Cj-j2H"/>
+                    <navigationItem key="navigationItem" title="Canvas" id="0FW-Cj-j2H"/>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="aL6-Ev-QhP">
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
@@ -772,15 +772,15 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="OtL-pm-wbl"/>
                                 <exclude reference="1a3-kM-21D"/>
+                                <exclude reference="OtL-pm-wbl"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <exclude reference="OtL-pm-wbl"/>
                                 <include reference="1a3-kM-21D"/>
                                 <exclude reference="94J-ml-8oD"/>
+                                <exclude reference="OtL-pm-wbl"/>
                             </mask>
                         </variation>
                     </view>
@@ -1071,7 +1071,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="W9v-r8-aNe"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="18"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="18"/>
                                         <state key="normal" title="Log In">
                                             <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
@@ -1092,6 +1092,12 @@
                                 </subviews>
                                 <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>
                             </stackView>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="Size Slider" maximumValueImage="Size Slider 2" translatesAutoresizingMaskIntoConstraints="NO" id="EpH-9g-EVR">
+                                <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
+                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
+                                    <rect key="frame" x="45" y="408" width="294" height="31"/>
+                                </variation>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1128,6 +1134,7 @@
                                 <exclude reference="jQM-N9-mlz"/>
                                 <exclude reference="yay-Qo-S55"/>
                                 <exclude reference="qIK-ma-ZHT"/>
+                                <exclude reference="EpH-9g-EVR"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="tJu-D8-Lwj"/>
@@ -1158,6 +1165,7 @@
                                 <include reference="jQM-N9-mlz"/>
                                 <include reference="yay-Qo-S55"/>
                                 <include reference="qIK-ma-ZHT"/>
+                                <include reference="EpH-9g-EVR"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="tJu-D8-Lwj"/>
@@ -1273,28 +1281,28 @@
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="xu3-g7-kNX">
                                 <rect key="frame" x="-8" y="328" width="402" height="38"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="eVP-hp-LzE">
                                         <rect key="frame" x="0.0" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="L6h-d5-su7">
                                         <rect key="frame" x="103" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="99y-Uk-ZSA">
                                         <rect key="frame" x="206" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j4Q-jO-LhN">
                                         <rect key="frame" x="309" y="0.0" width="93" height="38"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1895,11 +1903,13 @@
         <image name="Logo Inactive" width="30" height="30"/>
         <image name="Logout" width="24" height="24"/>
         <image name="Morphu Brand" width="512" height="1000"/>
+        <image name="Size Slider" width="5" height="12"/>
+        <image name="Size Slider 2" width="5" height="12"/>
         <image name="Upload" width="36" height="36"/>
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aBg-fO-FdL"/>
         <segue reference="GGX-L7-C94"/>
+        <segue reference="zEK-fj-XTP"/>
     </inferredMetricsTieBreakers>
 </document>
