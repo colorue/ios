@@ -22,7 +22,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     let resizeScale: CGFloat = 2.0
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage) {
-        self.currentStroke = baseImage
+        self.undoStack.append(baseImage)
+        self.currentStroke = UIImage()
         self.delagate = delagate
         super.init(frame : frame)
         displayCanvas()
@@ -155,14 +156,15 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func undo() {
-        undoStack.popLast()
-        mergeImages()
+        if undoStack.count > 1 {
+            undoStack.popLast()
+            mergeImages()
+        }
     }
     
     func trash() {
-        self.currentStroke = UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale))
+        self.undoStack.append(UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale)))
         mergeImages()
-        shiftUndoStack()
     }
     
     func dropper() {
