@@ -68,7 +68,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         self.underFingerView.frame = CGRect(x: 0, y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
         underFingerView.backgroundColor = UIColor.whiteColor()
-        self.underFingerView.hidden = true
+        self.underFingerView.alpha = 0.0
         self.view.addSubview(underFingerView)
         
         prefs.setValue(true, forKey: "saved")
@@ -112,7 +112,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func hideUnderFingerView() {
-        underFingerView.hidden = true
+        UIView.animateWithDuration(0.5, animations: {
+            self.underFingerView.alpha = 0.0
+        })
+    }
+    
+    func showUnderFingerView() {
+        UIView.animateWithDuration(0.5, animations: {
+            self.underFingerView.alpha = 1.0
+        })
     }
     
     func setColor(color: UIColor) {
@@ -166,7 +174,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             targetController.tableView.setContentOffset(CGPointZero, animated: true)
         }
     }
-    
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

@@ -40,14 +40,23 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         imageView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
         self.addSubview(imageView)
         
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(CanvasView.handleTap(_:)))
         tap.delegate = self
         self.addGestureRecognizer(tap)
         
+        /*
         let drag = UIPanGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
         drag.delegate = self
         self.addGestureRecognizer(drag)
+        */
+        
+        let dragL = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
+        dragL.minimumPressDuration = 0.06
+        dragL.delegate = self
+        self.addGestureRecognizer(dragL)
     }
+    
     
     func handleTap(sender: UITapGestureRecognizer) {
         if self.delagate.getDropperActive() {
@@ -68,7 +77,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
     }
     
-    func handleDrag(sender: UIPanGestureRecognizer) {
+    func handleDrag(sender: UILongPressGestureRecognizer) {
         
         if (sender.numberOfTouches() > 1) { return }
         
@@ -91,6 +100,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
         if sender.state == .Began {
             lastPoint = sender.locationOfTouch(0, inView: imageView)
+            currentPoint = sender.locationInView(imageView)
+            self.drawImage()
+            self.delagate.showUnderFingerView()
             self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: lastPoint!.x * resizeScale, y: lastPoint!.y * resizeScale), cropSize: underFingerSize))
         }
         else if sender.state == .Changed {
