@@ -55,9 +55,8 @@
                     </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="mVr-dO-lxG" id="UEx-w3-foj"/>
-                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToPickNext" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToPickNext:" id="eaP-Hd-7Cc"/>
-                        <segue destination="Ebr-du-21l" kind="unwind" identifier="unwindToInbox" unwindAction="backToInbox:" id="U9g-HJ-mcN"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="FAr-m3-UeF"/>
+                        <segue destination="Ebr-du-21l" kind="unwind" identifier="saveToHome" unwindAction="backToHome:" id="DJH-Tb-Def"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAe-qX-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -684,7 +683,7 @@
                                         </variation>
                                         <connections>
                                             <action selector="facebookButton:" destination="FpX-q6-whp" eventType="touchUpInside" id="Fwd-8q-HZz"/>
-                                            <segue destination="vLN-Co-cNl" kind="presentation" identifier="facebookLogin" modalTransitionStyle="crossDissolve" id="5uB-bY-P8D"/>
+                                            <segue destination="vLN-Co-cNl" kind="presentation" identifier="toMainController" modalTransitionStyle="crossDissolve" id="5uB-bY-P8D"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -793,6 +792,78 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qi2-gi-fEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3975" y="1044"/>
+        </scene>
+        <!--Table View Controller-->
+        <scene sceneID="3Bv-1U-FOC">
+            <objects>
+                <tableViewController id="TdD-8Q-3Ow" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="BWc-Eq-D9k">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="H5Q-OB-tF4">
+                                <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H5Q-OB-tF4" id="9DP-k3-NID">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="2Wu-M4-hJo" customClass="CommentCell" customModule="Canvas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="72" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2Wu-M4-hJo" id="Wjf-Y8-yPu">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="0hg-7g-ZOP">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        </imageView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="0hg-7g-ZOP" firstAttribute="top" secondItem="Wjf-Y8-yPu" secondAttribute="topMargin" id="Kpx-Zb-YBb"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="0hg-7g-ZOP" secondAttribute="trailing" id="ROt-dr-5Kc"/>
+                                        <constraint firstItem="0hg-7g-ZOP" firstAttribute="centerY" secondItem="Wjf-Y8-yPu" secondAttribute="centerY" id="oKf-V2-QZa"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="0hg-7g-ZOP" secondAttribute="bottom" id="p8I-pp-6dD"/>
+                                        <constraint firstItem="0hg-7g-ZOP" firstAttribute="leading" secondItem="Wjf-Y8-yPu" secondAttribute="leadingMargin" id="qfr-tc-pQp"/>
+                                    </constraints>
+                                    <variation key="default">
+                                        <mask key="subviews">
+                                            <exclude reference="0hg-7g-ZOP"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <exclude reference="Kpx-Zb-YBb"/>
+                                            <exclude reference="ROt-dr-5Kc"/>
+                                            <exclude reference="oKf-V2-QZa"/>
+                                            <exclude reference="p8I-pp-6dD"/>
+                                            <exclude reference="qfr-tc-pQp"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=compact">
+                                        <mask key="subviews">
+                                            <include reference="0hg-7g-ZOP"/>
+                                        </mask>
+                                        <mask key="constraints">
+                                            <include reference="Kpx-Zb-YBb"/>
+                                            <include reference="ROt-dr-5Kc"/>
+                                            <include reference="oKf-V2-QZa"/>
+                                            <include reference="p8I-pp-6dD"/>
+                                            <include reference="qfr-tc-pQp"/>
+                                        </mask>
+                                    </variation>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="TdD-8Q-3Ow" id="cey-ft-4AE"/>
+                            <outlet property="delegate" destination="TdD-8Q-3Ow" id="SoY-5L-NQc"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ibC-HF-cBT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2641.5" y="2137.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="yyo-ll-IHM">
@@ -1048,10 +1119,6 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tHm-kJ-m5f">
-                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
-                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                            </activityIndicatorView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d3T-J6-Wov">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
@@ -1127,12 +1194,10 @@
                                 </subviews>
                                 <variation key="heightClass=regular-widthClass=compact" axis="vertical"/>
                             </stackView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" minimumValueImage="Size Slider" maximumValueImage="Size Slider 2" translatesAutoresizingMaskIntoConstraints="NO" id="EpH-9g-EVR">
-                                <rect key="frame" x="0.0" y="-15" width="118" height="31"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="45" y="408" width="294" height="31"/>
-                                </variation>
-                            </slider>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="tHm-kJ-m5f">
+                                <rect key="frame" x="-10" y="-10" width="20" height="20"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -1164,12 +1229,11 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="tHm-kJ-m5f"/>
                                 <exclude reference="d3T-J6-Wov"/>
                                 <exclude reference="jQM-N9-mlz"/>
                                 <exclude reference="yay-Qo-S55"/>
                                 <exclude reference="qIK-ma-ZHT"/>
-                                <exclude reference="EpH-9g-EVR"/>
+                                <exclude reference="tHm-kJ-m5f"/>
                             </mask>
                             <mask key="constraints">
                                 <exclude reference="tJu-D8-Lwj"/>
@@ -1195,12 +1259,11 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="tHm-kJ-m5f"/>
                                 <include reference="d3T-J6-Wov"/>
                                 <include reference="jQM-N9-mlz"/>
                                 <include reference="yay-Qo-S55"/>
                                 <include reference="qIK-ma-ZHT"/>
-                                <include reference="EpH-9g-EVR"/>
+                                <include reference="tHm-kJ-m5f"/>
                             </mask>
                             <mask key="constraints">
                                 <include reference="tJu-D8-Lwj"/>
@@ -1231,6 +1294,7 @@
                         <outlet property="feedback" destination="d3T-J6-Wov" id="Iih-Jr-vab"/>
                         <outlet property="password" destination="KWY-Xg-zAh" id="8ah-nu-aFA"/>
                         <outlet property="username" destination="8ow-IJ-CS8" id="Z0b-Ct-AvD"/>
+                        <outlet property="x" destination="tHm-kJ-m5f" id="iS8-Lm-aRU"/>
                         <segue destination="vLN-Co-cNl" kind="presentation" identifier="toTabController" id="zEK-fj-XTP"/>
                         <segue destination="DKq-ba-Hjj" kind="unwind" identifier="unwindToOnboarding" unwindAction="backToOnBoarding:" id="BIO-mg-kEq"/>
                     </connections>
@@ -1975,13 +2039,11 @@
         <image name="Logo Inactive" width="30" height="30"/>
         <image name="Logout" width="24" height="24"/>
         <image name="Morphu Brand" width="512" height="1000"/>
-        <image name="Size Slider" width="5" height="12"/>
-        <image name="Size Slider 2" width="5" height="12"/>
         <image name="Upload" width="36" height="36"/>
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="zEK-fj-XTP"/>
-        <segue reference="C20-D9-RLT"/>
+        <segue reference="aBg-fO-FdL"/>
+        <segue reference="GGX-L7-C94"/>
     </inferredMetricsTieBreakers>
 </document>

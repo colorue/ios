@@ -18,10 +18,12 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         username.text = prefs.stringForKey("username")
         password.text = prefs.stringForKey("password")
+        
         
         
         let chevronBack = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)

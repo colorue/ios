@@ -144,7 +144,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             prefs.setValue(false, forKey: "saved")
 
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            self.performSegueWithIdentifier("backToHome", sender: self)
+            self.performSegueWithIdentifier("saveToHome", sender: self)
         } else {
             self.colorKeyboard!.uploadingFailed()
             self.view.userInteractionEnabled = true
@@ -158,6 +158,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.backButton.enabled = false
         self.performSegueWithIdentifier("backToHome", sender: self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "saveToHome" {
+            let targetController = segue.destinationViewController as! WallViewController
+            
+            targetController.tableView.setContentOffset(CGPointZero, animated: true)
+        }
+    }
+    
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)

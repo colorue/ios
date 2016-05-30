@@ -23,7 +23,6 @@ class API {
     let storageRef: FIRStorageReference
     
     private let facebookLogin = FBSDKLoginManager()
-    let dateFormatter = NSDateFormatter()
 
     private var wall = [Drawing]()
     private var users = [User]()
@@ -31,7 +30,6 @@ class API {
     
     private var userDict = [String: User]()
     private var drawingDict = [String: Drawing]()
-
     
     private var oldestTimeLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
@@ -39,10 +37,6 @@ class API {
     var delagate: APIDelagate?
     
     init() {
-        dateFormatter.dateStyle = .MediumStyle
-        dateFormatter.timeStyle = .MediumStyle
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "EST")  // CHECK IF THIS WORKED!!!
-        
         self.storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
     }
     
@@ -101,7 +95,7 @@ class API {
             if (!snapshot.exists()) { return }
             
             let text = snapshot.value!["text"] as! String
-            let timeStamp = self.dateFormatter.dateFromString(snapshot.value!["timeStamp"] as! String)!
+            let timeStamp = snapshot.value!["timeStamp"] as! Double
             
             self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
                 callback(Comment(commentId: commentId, user: user, timeStamp: timeStamp, text: text))
@@ -388,7 +382,6 @@ class API {
                 progressCallback(percentComplete)
             }
         }
-        
         
         uploadTask.observeStatus(.Success) { snapshot in
             progressCallback(1.0)

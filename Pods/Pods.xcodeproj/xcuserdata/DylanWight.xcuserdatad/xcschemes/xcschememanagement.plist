@@ -34,7 +34,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Morphu.xcscheme</key>
+		<key>Pods-Canvas.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -52,6 +52,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1F1EA47168F7A8A16E80C04316B25B97</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>30D7FCF8072F5D59AE1C98D94F9A6EC9</key>
 		<dict>
 			<key>primary</key>
@@ -63,11 +68,6 @@
 			<true/>
 		</dict>
 		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BA80016C3002F820F1E56FEC7461A9FC</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -10,13 +10,13 @@ import Foundation
 
 class Comment {
     let user: User
-    let timeStamp: NSDate
+    let timeStamp: Double
     let text: String
     private var commentId: String
     
     let api = API.sharedInstance
     
-    init(commentId: String = "", user: User = User(), timeStamp: NSDate = NSDate(), text: String = "") {
+    init(commentId: String = "", user: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, text: String = "") {
         self.commentId = commentId
         self.user = user
         self.timeStamp = timeStamp
@@ -32,7 +32,7 @@ class Comment {
     }
     
     func getTimeSinceSent() -> String {
-        let secondsSince = NSDate().timeIntervalSinceDate(self.timeStamp)
+        let secondsSince =  NSDate().timeIntervalSince1970 + self.timeStamp
         switch(secondsSince) {
         case 0..<60:
             return "now"
@@ -48,6 +48,6 @@ class Comment {
     func toAnyObject()-> NSDictionary {
         return ["user" : self.user.userId,
                 "text" : self.text,
-                "timeStamp" : api.dateFormatter.stringFromDate(self.timeStamp)]
+                "timeStamp" : self.timeStamp]
     }
 }

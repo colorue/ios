@@ -23,9 +23,13 @@ class OnboardingViewController: UIViewController {
     
     func facebookCallback(valid: Bool) {
         if valid {
-            let prefs = NSUserDefaults.standardUserDefaults()
-            prefs.setValue(true, forKey: "loggedIn")
-            performSegueWithIdentifier("facebookLogin", sender: self)
+            API.sharedInstance.checkLoggedIn(loginCallback)
+        }
+    }
+    
+    func loginCallback(loginValid: Bool) {
+        if loginValid {
+            self.performSegueWithIdentifier("toMainController", sender: self)
         }
     }
     
