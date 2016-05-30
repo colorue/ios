@@ -45,7 +45,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(tap)
         
         let drag = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
-        drag.minimumPressDuration = 0.04
+        drag.minimumPressDuration = 0.01
         drag.delegate = self
         self.addGestureRecognizer(drag)
     }
@@ -91,8 +91,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             underFingerSize = CGSize(width: underFinger, height: underFinger)
         }
         
-        print(self.delagate.getCurrentBrushSize())
-        
         self.mergeImages()
         
         if self.delagate.getDropperActive() {
@@ -126,7 +124,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             self.shiftUndoStack()
             self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
             self.delagate.hideUnderFingerView()
-
         }
     }
     

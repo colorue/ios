@@ -16,8 +16,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let trashButton = UIButton()
     let dropperButton = UIButton()
     let progressBar = UIProgressView()
-    let prefs = NSUserDefaults.standardUserDefaults()
-    
+    private let prefs = NSUserDefaults.standardUserDefaults()
+
     let delagate: ColorKeyboardDelagate
     
     init (frame: CGRect, delagate: ColorKeyboardDelagate) {

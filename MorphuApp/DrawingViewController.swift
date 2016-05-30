@@ -16,6 +16,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
     var underFingerView = UIImageView()
+    var keyboardCover = UIView()
+
     
     let backButton = UIButton(type: UIButtonType.Custom)
 
@@ -61,12 +63,21 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
         self.view.addSubview(canvas)
         self.canvas = canvas
- 
-        let colorKeyboard = ColorKeyboardView(frame: CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight), delagate: self)
+        
+        let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight)
+        let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame, delagate: self)
         self.view.addSubview(colorKeyboard)
         self.colorKeyboard = colorKeyboard
         
-        self.underFingerView.frame = CGRect(x: 0, y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
+        self.keyboardCover.frame = colorKeyboardFrame
+        keyboardCover.backgroundColor = UIColor.blackColor()
+        self.keyboardCover.alpha = 0.0
+        self.view.addSubview(keyboardCover)
+        
+        
+
+        
+        self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
         underFingerView.backgroundColor = UIColor.whiteColor()
         self.underFingerView.alpha = 0.0
         self.view.addSubview(underFingerView)
@@ -105,6 +116,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func setUnderfingerView(underFingerImage: UIImage) {
+        self.colorKeyboard?.userInteractionEnabled = false
         if underFingerView.hidden {
             underFingerView.hidden = false
         }
@@ -112,15 +124,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func hideUnderFingerView() {
-        UIView.animateWithDuration(0.5, animations: {
+        self.colorKeyboard?.userInteractionEnabled = true
+        UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
             self.underFingerView.alpha = 0.0
-        })
+            self.keyboardCover.alpha = 0.0
+            }, completion: nil)
     }
     
     func showUnderFingerView() {
-        UIView.animateWithDuration(0.5, animations: {
+        self.colorKeyboard?.userInteractionEnabled = false
+        UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
             self.underFingerView.alpha = 1.0
-        })
+            self.keyboardCover.alpha = 0.5
+        }, completion: nil)
     }
     
     func setColor(color: UIColor) {
