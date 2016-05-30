@@ -40,23 +40,15 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         imageView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
         self.addSubview(imageView)
         
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(CanvasView.handleTap(_:)))
         tap.delegate = self
         self.addGestureRecognizer(tap)
         
-        /*
-        let drag = UIPanGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
+        let drag = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
+        drag.minimumPressDuration = 0.04
         drag.delegate = self
         self.addGestureRecognizer(drag)
-        */
-        
-        let dragL = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
-        dragL.minimumPressDuration = 0.06
-        dragL.delegate = self
-        self.addGestureRecognizer(dragL)
     }
-    
     
     func handleTap(sender: UITapGestureRecognizer) {
         if self.delagate.getDropperActive() {
@@ -81,7 +73,26 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         if (sender.numberOfTouches() > 1) { return }
         
-        let underFingerSize = CGSize(width: 200, height: 200)
+        let brushSize = Double(self.delagate.getCurrentBrushSize())
+        let underFingerSize: CGSize
+        
+        let maxUnderFinger = 400.0
+        let minUnderFinger = 200.0
+        
+        let ceilingSize = 80.0
+        let baseSize = 10.0
+        
+        if (brushSize > ceilingSize) {
+             underFingerSize = CGSize(width: maxUnderFinger, height: maxUnderFinger)
+        } else if (brushSize < baseSize){
+             underFingerSize = CGSize(width: minUnderFinger, height: minUnderFinger)
+        } else {
+            let underFinger = ((brushSize - baseSize) / ceilingSize) * (maxUnderFinger - minUnderFinger) + minUnderFinger
+            underFingerSize = CGSize(width: underFinger, height: underFinger)
+        }
+        
+        print(self.delagate.getCurrentBrushSize())
+        
         self.mergeImages()
         
         if self.delagate.getDropperActive() {
