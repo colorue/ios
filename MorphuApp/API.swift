@@ -30,6 +30,8 @@ class API {
     private var activeUser = User()
     
     private var userDict = [String: User]()
+    private var drawingDict = [String: Drawing]()
+
     
     private var oldestTimeLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
@@ -46,7 +48,12 @@ class API {
     
     // MARK: Internal methods
     
-    private func getDrawing(drawingId: String, callback: (Drawing) -> ()) {
+    private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) {
+        if let drawing = self.drawingDict[drawingId] {
+            
+            callback(drawing, false)
+        } else {
+        
         self.myRootRef.child("drawings/\(drawingId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
             if (!snapshot.exists()) { return }
             
@@ -81,9 +88,12 @@ class API {
                     })
                 })
                 
-                callback(drawing)
+                self.drawingDict[drawingId] = drawing
+                
+                callback(drawing, true)
             })
         })
+        }
     }
     
     private func getComment(commentId: String, callback: (Comment) -> ()) {
@@ -97,7 +107,6 @@ class API {
                 callback(Comment(commentId: commentId, user: user, timeStamp: timeStamp, text: text))
             })
         })
-
     }
     
     private func getUser(userId: String, callback: (User) -> ()) {
@@ -273,30 +282,28 @@ class API {
     func loadWall() {
         myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
-                self.getDrawing(snapshot.key, callback: { (drawing: Drawing) -> () in
-                    
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
                         self.wall.append(drawing)
-                        self.oldestTimeLoaded = drawing.timeStamp + 0.00001
+                        self.oldestTimeLoaded = drawing.timeStamp
                         self.newestTimeLoaded = drawing.timeStamp
                         self.delagate?.refresh()
                     } else if drawing.timeStamp > self.oldestTimeLoaded {
-                        // for older drawings
-                        self.oldestTimeLoaded = drawing.timeStamp + 0.00001
+                        self.oldestTimeLoaded = drawing.timeStamp
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
-                        // print("for new drawings")
                         self.newestTimeLoaded = drawing.timeStamp
                         self.wall.insert(drawing, atIndex: 0)
                     } else {
-                        // print("Add in middle, when following someone new")
-                        var i = 0
-                        for drawing_ in self.wall {
-                            if drawing_.timeStamp > drawing.timeStamp {
-                                self.wall.insert(drawing, atIndex: i)
-                                return
+                        if new {
+                            var i = 0
+                            for drawing_ in self.wall {
+                                if drawing_.timeStamp > drawing.timeStamp {
+                                    self.wall.insert(drawing, atIndex: i)
+                                    return
+                                }
+                                i += 1
                             }
-                            i += 1
                         }
                     }
                 })
@@ -313,7 +320,7 @@ class API {
                     i += 1
                 }
             })
-    }
+        }
     
     private func loadUsers(currentUser: FIRUser) {
         myRootRef.child("users").queryOrderedByKey()
