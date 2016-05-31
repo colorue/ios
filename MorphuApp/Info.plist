@@ -32,7 +32,7 @@
 	<key>FacebookAppID</key>
 	<string>1213218985375111</string>
 	<key>FacebookDisplayName</key>
-	<string>Morphu</string>
+	<string>Canvas</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

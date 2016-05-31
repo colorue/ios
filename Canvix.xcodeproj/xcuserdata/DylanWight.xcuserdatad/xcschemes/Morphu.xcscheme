@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
                BuildableName = "Canvas.app"
-               BlueprintName = "Canvas"
-               ReferencedContainer = "container:Canvas.xcodeproj">
+               BlueprintName = "Canvix"
+               ReferencedContainer = "container:Canvix.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
             BuildableName = "Canvas.app"
-            BlueprintName = "Canvas"
-            ReferencedContainer = "container:Canvas.xcodeproj">
+            BlueprintName = "Canvix"
+            ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -57,8 +57,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
             BuildableName = "Canvas.app"
-            BlueprintName = "Canvas"
-            ReferencedContainer = "container:Canvas.xcodeproj">
+            BlueprintName = "Canvix"
+            ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -76,8 +76,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
             BuildableName = "Canvas.app"
-            BlueprintName = "Canvas"
-            ReferencedContainer = "container:Canvas.xcodeproj">
+            BlueprintName = "Canvix"
+            ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

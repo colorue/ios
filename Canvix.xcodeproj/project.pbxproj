@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1D8CA3965B4E0FC811AC6443 /* Pods_MorphuApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
 		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
 		8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* Main.storyboard */; };
@@ -51,16 +50,13 @@
 		87E7ADE61CF36D9D00DC226A /* PresentDrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 		B64B3A704C3BECD95BD95DEA /* Pods_Canvas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18CC2539518408BF6199885F /* Pods_Canvas.framework */; };
-		C072683204FB2AF0B2E1F9FF /* Pods_Morphu.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		18CC2539518408BF6199885F /* Pods_Canvas.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canvas.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		36A11BC968B4027FE1003DCA /* Pods-Canvas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvas.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvas/Pods-Canvas.release.xcconfig"; sourceTree = "<group>"; };
-		3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MorphuApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BA958F7C466DCEFEC6D2121 /* Pods-Canvas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvas.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvas/Pods-Canvas.debug.xcconfig"; sourceTree = "<group>"; };
-		7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.release.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.release.xcconfig"; sourceTree = "<group>"; };
-		873AFA0D1CED7697006FD34A /* Canvas.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvas.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		873AFA0D1CED7697006FD34A /* Canvix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellDelagate.swift; sourceTree = "<group>"; };
@@ -104,10 +100,6 @@
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE51CF36D9D00DC226A /* PresentDrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PresentDrawingViewController.swift; path = ../PresentDrawingViewController.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MorphuApp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MorphuApp/Pods-MorphuApp.debug.xcconfig"; sourceTree = "<group>"; };
-		C45E9835818095253005D81B /* Pods-Morphu.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Morphu.release.xcconfig"; path = "Pods/Target Support Files/Pods-Morphu/Pods-Morphu.release.xcconfig"; sourceTree = "<group>"; };
-		CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Morphu.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		FB8FDCD7C2DF9A66DCC349FB /* Pods-Morphu.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Morphu.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Morphu/Pods-Morphu.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,8 +107,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1D8CA3965B4E0FC811AC6443 /* Pods_MorphuApp.framework in Frameworks */,
-				C072683204FB2AF0B2E1F9FF /* Pods_Morphu.framework in Frameworks */,
 				B64B3A704C3BECD95BD95DEA /* Pods_Canvas.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -127,10 +117,6 @@
 		1434282B85DD599183CA51DD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BFDAF5621E0CB86DC890797A /* Pods-MorphuApp.debug.xcconfig */,
-				7027106533457C5FF32FCFBE /* Pods-MorphuApp.release.xcconfig */,
-				FB8FDCD7C2DF9A66DCC349FB /* Pods-Morphu.debug.xcconfig */,
-				C45E9835818095253005D81B /* Pods-Morphu.release.xcconfig */,
 				6BA958F7C466DCEFEC6D2121 /* Pods-Canvas.debug.xcconfig */,
 				36A11BC968B4027FE1003DCA /* Pods-Canvas.release.xcconfig */,
 			);
@@ -141,7 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
-				873AFA0F1CED7697006FD34A /* MorphuApp */,
+				873AFA0F1CED7697006FD34A /* Canvas */,
 				873AFA0E1CED7697006FD34A /* Products */,
 				1434282B85DD599183CA51DD /* Pods */,
 				BAEE6982A2EBD2C1D64BAA23 /* Frameworks */,
@@ -151,12 +137,12 @@
 		873AFA0E1CED7697006FD34A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				873AFA0D1CED7697006FD34A /* Canvas.app */,
+				873AFA0D1CED7697006FD34A /* Canvix.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		873AFA0F1CED7697006FD34A /* MorphuApp */ = {
+		873AFA0F1CED7697006FD34A /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
@@ -170,6 +156,7 @@
 				8763D31A1CEE244500E3D528 /* API */,
 				8763D31F1CEE247F00E3D528 /* Supporting Files */,
 			);
+			name = Canvas;
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};
@@ -336,8 +323,6 @@
 		BAEE6982A2EBD2C1D64BAA23 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3AC602CA27CECBBCF35FCD1E /* Pods_MorphuApp.framework */,
-				CA2BDE5BBB2459DAB3FF5B80 /* Pods_Morphu.framework */,
 				18CC2539518408BF6199885F /* Pods_Canvas.framework */,
 			);
 			name = Frameworks;
@@ -346,9 +331,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		873AFA0C1CED7697006FD34A /* Canvas */ = {
+		873AFA0C1CED7697006FD34A /* Canvix */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvas" */;
+			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvix" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
 				873AFA091CED7697006FD34A /* Sources */,
@@ -361,9 +346,9 @@
 			);
 			dependencies = (
 			);
-			name = Canvas;
+			name = Canvix;
 			productName = MorphuApp;
-			productReference = 873AFA0D1CED7697006FD34A /* Canvas.app */;
+			productReference = 873AFA0D1CED7697006FD34A /* Canvix.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -387,7 +372,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvas" */;
+			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvix" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -400,7 +385,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				873AFA0C1CED7697006FD34A /* Canvas */,
+				873AFA0C1CED7697006FD34A /* Canvix */,
 			);
 		};
 /* End PBXProject section */
@@ -607,7 +592,7 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Canvas;
+				PRODUCT_NAME = Canvix;
 			};
 			name = Debug;
 		};
@@ -619,14 +604,14 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Canvas;
+				PRODUCT_NAME = Canvix;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvas" */ = {
+		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA1D1CED7697006FD34A /* Debug */,
@@ -635,7 +620,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvas" */ = {
+		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvix" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA201CED7697006FD34A /* Debug */,
