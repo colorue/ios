@@ -10,9 +10,10 @@ import UIKit
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var delagate: CanvasDelagate
-    private var lastPoint: CGPoint?
-    private var currentPoint: CGPoint?
-    private var currentStroke: UIImage
+    
+    private var points = [CGPoint]()
+    
+    private var currentStroke: UIImage?
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
     let prefs = NSUserDefaults.standardUserDefaults()
@@ -61,9 +62,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return
         }
         
-        lastPoint = sender.locationInView(imageView)
-        currentPoint = sender.locationInView(imageView)
-        self.drawImage()
+//        lastPoint = sender.locationInView(imageView)
+//        currentPoint = sender.locationInView(imageView)
+        self.drawImage(sender.locationInView(imageView))
         self.mergeImages()
         self.shiftUndoStack()
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
@@ -108,52 +109,69 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
 
         if sender.state == .Began {
-            lastPoint = sender.locationOfTouch(0, inView: imageView)
-            currentPoint = sender.locationInView(imageView)
-            self.drawImage()
+            
+            UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
+
+//            lastPoint = sender.locationOfTouch(0, inView: imageView)
+//            currentPoint = sender.locationInView(imageView)
+            self.drawImage(sender.locationOfTouch(0, inView: imageView))
+    
+        
+            
             self.delagate.showUnderFingerView()
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: lastPoint!.x * resizeScale, y: lastPoint!.y * resizeScale), cropSize: underFingerSize))
+            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: sender.locationOfTouch(0, inView: imageView).x * resizeScale, y: sender.locationOfTouch(0, inView: imageView).y * resizeScale), cropSize: underFingerSize))
         }
         else if sender.state == .Changed {
-            currentPoint = sender.locationOfTouch(0, inView: imageView)
-            drawImage()
-            lastPoint = currentPoint
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: currentPoint!.x * resizeScale, y: currentPoint!.y * resizeScale), cropSize: underFingerSize))
+//            currentPoint = sender.locationOfTouch(0, inView: imageView)
+            drawImage(sender.locationOfTouch(0, inView: imageView))
+//            lastPoint = currentPoint
+            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: sender.locationOfTouch(0, inView: imageView).x * resizeScale, y: sender.locationOfTouch(0, inView: imageView).y * resizeScale), cropSize: underFingerSize))
         }
         else if sender.state == .Ended {
             self.shiftUndoStack()
-            self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
+            self.currentStroke = nil
             self.delagate.hideUnderFingerView()
+            UIGraphicsEndImageContext()
+            points.removeAll()
         }
     }
     
 
     
-    func drawImage() {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
-        currentStroke.drawAtPoint(CGPoint.zero)
+    func drawImage(currentPoint: CGPoint) {
+        
+        if points.count < 4 {
+            points.append(currentPoint)
+        } else {
+            points.removeAtIndex(0)
+            points.append(currentPoint)
+        }
         
         let color = delagate.getCurrentColor()
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
         
-        if let lastP = lastPoint {
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastP.x * resizeScale, lastP.y * resizeScale)
-        }
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint!.x * resizeScale, currentPoint!.y * resizeScale)
         CGContextSetLineJoin(UIGraphicsGetCurrentContext(), CGLineJoin.Round);
-        CGContextSetMiterLimit(UIGraphicsGetCurrentContext(), 10.0);
 
+        if points.count == 4 {
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), points[0].x * resizeScale, points[0].y * resizeScale)
+            CGContextAddCurveToPoint(UIGraphicsGetCurrentContext(), points[1].x * resizeScale, points[1].y * resizeScale, points[2].x * resizeScale, points[2].y * resizeScale, points[3].x * resizeScale, points[3].y * resizeScale)
+            
+            points.append(CGPoint(x: points[3].x * 2 - points[2].x, y: points[3].y * 2 - points[2].y))
+            points.removeAtIndex(0)
+            points.removeAtIndex(0)
+            points.removeAtIndex(0)
+        }
+
+        
         CGContextStrokePath(UIGraphicsGetCurrentContext())
         CGContextFlush(UIGraphicsGetCurrentContext())
-        currentStroke = UIGraphicsGetImageFromCurrentImageContext()    // sets tempImage to line or dot drawn
-        UIGraphicsEndImageContext()
-        
+        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     }
     
     func shiftUndoStack() {
-        if undoStack.count < 6 {
+        if undoStack.count < 11 {
             undoStack.append(self.imageView.image!)
         } else {
             undoStack.removeAtIndex(0)
@@ -165,7 +183,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
 
         undoStack.last?.drawAtPoint(CGPoint.zero)
-        currentStroke.drawAtPoint(CGPoint.zero)
+        currentStroke?.drawAtPoint(CGPoint.zero)
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
