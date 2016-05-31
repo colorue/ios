@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-               BuildableName = "Canvas.app"
+               BuildableName = "Canvix.app"
                BlueprintName = "Canvix"
                ReferencedContainer = "container:Canvix.xcodeproj">
             </BuildableReference>
@@ -33,7 +33,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Canvas.app"
+            BuildableName = "Canvix.app"
             BlueprintName = "Canvix"
             ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Canvas.app"
+            BuildableName = "Canvix.app"
             BlueprintName = "Canvix"
             ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>
@@ -75,7 +75,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Canvas.app"
+            BuildableName = "Canvix.app"
             BlueprintName = "Canvix"
             ReferencedContainer = "container:Canvix.xcodeproj">
          </BuildableReference>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fiD-lJ-IKR">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -26,7 +27,7 @@
         <!--Drawing View Controller-->
         <scene sceneID="dMl-U3-GTV">
             <objects>
-                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xmt-d0-0cX"/>
                         <viewControllerLayoutGuide type="bottom" id="Uwp-QL-EV4"/>
@@ -58,7 +59,7 @@
         <!--Present Drawing View Controller-->
         <scene sceneID="N1g-j3-gtY">
             <objects>
-                <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="gFW-lw-iDZ" customClass="PresentDrawingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="CkJ-ds-Baa"/>
                         <viewControllerLayoutGuide type="bottom" id="S5v-Lr-IHb"/>
@@ -80,7 +81,7 @@
         <!--Navigation Controller-->
         <scene sceneID="RVQ-o7-j7n">
             <objects>
-                <navigationController id="ATK-nE-Squ" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="ATK-nE-Squ" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="TV7-0i-FOu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -96,7 +97,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
             <objects>
-                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="luU-Ra-7SP" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Logo Inactive" id="FWV-Hs-Vva">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -118,7 +119,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
             <objects>
-                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3AG-5Q-AcY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -137,13 +138,13 @@
         <!--Canvix-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
-                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="HtL-VG-g21">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Canvas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="InboxDrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="586"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAl-EB-dAq" id="MBj-Xc-vDK">
@@ -279,8 +280,8 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
                                             <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="IG8-Jh-kor"/>
                                                         <constraint firstAttribute="width" constant="22" id="PAG-Kb-mcZ"/>
@@ -303,8 +304,8 @@
                                                         <action selector="upload:" destination="tAl-EB-dAq" eventType="touchUpInside" id="AaF-6a-gU8"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
-                                                    <rect key="frame" x="71" y="0.0" width="1" height="24"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
+                                                    <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -333,8 +334,8 @@
                                                         <action selector="like:" destination="tAl-EB-dAq" eventType="touchUpInside" id="tEG-fG-JQH"/>
                                                     </connections>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
-                                                    <rect key="frame" x="88" y="0.0" width="134" height="24"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
+                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
                                                     </constraints>
@@ -629,8 +630,8 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="lOG-z8-w9D" kind="custom" identifier="toViewLikes" customClass="UIStoryboardSegueFromRight" customModule="Canvas" customModuleProvider="target" id="AAM-C8-3Q5"/>
-                        <segue destination="ENQ-5g-Gzi" kind="custom" identifier="toViewComments" customClass="UIStoryboardSegueFromRight" customModule="Canvas" customModuleProvider="target" id="rUw-mP-Srk"/>
+                        <segue destination="lOG-z8-w9D" kind="custom" identifier="toViewLikes" customClass="UIStoryboardSegueFromRight" customModule="Canvix" customModuleProvider="target" id="AAM-C8-3Q5"/>
+                        <segue destination="ENQ-5g-Gzi" kind="custom" identifier="toViewComments" customClass="UIStoryboardSegueFromRight" customModule="Canvix" customModuleProvider="target" id="rUw-mP-Srk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCQ-E2-ktF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -640,7 +641,7 @@
         <!--Canvix-->
         <scene sceneID="DzX-pb-Yw0">
             <objects>
-                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oso-1h-tk1"/>
                         <viewControllerLayoutGuide type="bottom" id="e3O-Zi-OLe"/>
@@ -759,7 +760,7 @@
         <!--Loading View Controller-->
         <scene sceneID="1qg-38-0L5">
             <objects>
-                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zmi-QF-ZBk"/>
                         <viewControllerLayoutGuide type="bottom" id="tnr-A0-xkn"/>
@@ -816,7 +817,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yyo-ll-IHM">
             <objects>
-                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="L2H-32-AxG">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -838,7 +839,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wlr-Yz-00Y">
             <objects>
-                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="uWa-C7-36M">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -860,13 +861,13 @@
         <!--Friends-->
         <scene sceneID="slm-FW-9Fy">
             <objects>
-                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KbN-Ld-eZt" customClass="GroupTableViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qZS-12-nUw">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="YLm-N4-C1O" customClass="UserCell" customModule="Canvas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="YLm-N4-C1O" customClass="UserCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLm-N4-C1O" id="uLf-Nx-RUW">
@@ -1002,7 +1003,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
+                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
                         <segue destination="FpX-q6-whp" kind="presentation" identifier="toLogin" modalTransitionStyle="crossDissolve" id="bgi-Ne-Bdd"/>
                     </connections>
                 </tableViewController>
@@ -1014,13 +1015,13 @@
         <!--Likes-->
         <scene sceneID="DOn-HV-3qF">
             <objects>
-                <tableViewController id="RrQ-3M-rta" customClass="LikeViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RrQ-3M-rta" customClass="LikeViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="I58-J7-9eD">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="izg-mU-7c7" customClass="UserCell" customModule="Canvas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="izg-mU-7c7" customClass="UserCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="izg-mU-7c7" id="mcw-eX-OdQ">
@@ -1149,7 +1150,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="gUt-cO-JrI" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToHome:" id="uG5-hg-hCW"/>
+                        <segue destination="gUt-cO-JrI" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" customModuleProvider="target" unwindAction="backToHome:" id="uG5-hg-hCW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkl-NO-iuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1160,7 +1161,7 @@
         <!--Navigation Controller-->
         <scene sceneID="5Ed-hX-Tq7">
             <objects>
-                <navigationController id="lOG-z8-w9D" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="lOG-z8-w9D" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="kop-AO-twq">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1182,7 +1183,7 @@
         <!--Navigation Controller-->
         <scene sceneID="rsZ-Yk-RET">
             <objects>
-                <navigationController id="ENQ-5g-Gzi" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="ENQ-5g-Gzi" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="QSg-DH-16J">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1204,13 +1205,13 @@
         <!--Comments-->
         <scene sceneID="tYT-Ot-iQN">
             <objects>
-                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="PeY-4c-kJZ">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Canvas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fHR-Kl-T59" id="PxQ-EL-KX8">
@@ -1377,7 +1378,7 @@
                                     <outlet property="username" destination="Z11-yh-Fhg" id="XIF-3l-agG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Canvas" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EzM-5m-5ac" id="Ux9-46-s7a">
@@ -1484,7 +1485,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="XdB-xt-AJz" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" unwindAction="backToHome:" id="u97-VB-HDt"/>
+                        <segue destination="XdB-xt-AJz" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" unwindAction="backToHome:" id="u97-VB-HDt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWw-jc-d5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
