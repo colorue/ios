@@ -8,10 +8,8 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="BPreplay.otf">
-            <string>BPreplay</string>
-        </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -658,82 +656,109 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="ODP-hf-HID">
-                                <rect key="frame" x="72" y="696" width="236" height="32"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
-                                        <rect key="frame" x="0.0" y="0.0" width="236" height="32"/>
-                                        <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="CD9-ZP-JXH"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="BPreplay" family="BPreplay" pointSize="20"/>
-                                        <state key="normal" title="  Log in with Facebook" image="facebook-logo">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="CD9-ZP-JXH"/>
-                                            </mask>
-                                        </variation>
-                                        <variation key="heightClass=regular-widthClass=compact">
-                                            <mask key="constraints">
-                                                <exclude reference="CD9-ZP-JXH"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="facebookButton:" destination="FpX-q6-whp" eventType="touchUpInside" id="Fwd-8q-HZz"/>
-                                            <segue destination="vLN-Co-cNl" kind="presentation" identifier="toMainController" modalTransitionStyle="crossDissolve" id="5uB-bY-P8D"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Morphu Brand" translatesAutoresizingMaskIntoConstraints="NO" id="9mW-fC-d1L" userLabel="Canvas Logo">
+                                <rect key="frame" x="0.0" y="-200" width="600" height="1000"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="F0N-rS-SYH"/>
+                                    <constraint firstAttribute="width" secondItem="9mW-fC-d1L" secondAttribute="height" multiplier="2:5" id="Ejp-DG-bJm"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="F0N-rS-SYH"/>
+                                        <exclude reference="Ejp-DG-bJm"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="540" width="400" height="60"/>
+                                    <rect key="frame" x="-1" y="-100" width="400" height="1000"/>
                                     <mask key="constraints">
-                                        <include reference="F0N-rS-SYH"/>
+                                        <include reference="Ejp-DG-bJm"/>
                                     </mask>
                                 </variation>
-                            </stackView>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
+                                <rect key="frame" x="0.0" y="0.0" width="236" height="32"/>
+                                <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="CD9-ZP-JXH"/>
+                                    <constraint firstAttribute="height" constant="60" id="rJ0-3t-eju"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="20"/>
+                                <state key="normal" title="  Log in with Facebook" image="facebook-logo">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="CD9-ZP-JXH"/>
+                                        <exclude reference="rJ0-3t-eju"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <exclude reference="CD9-ZP-JXH"/>
+                                        <include reference="rJ0-3t-eju"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="facebookButton:" destination="FpX-q6-whp" eventType="touchUpInside" id="Fwd-8q-HZz"/>
+                                    <segue destination="vLN-Co-cNl" kind="presentation" identifier="toMainController" modalTransitionStyle="crossDissolve" id="5uB-bY-P8D"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fDS-yY-Bjt">
+                                <rect key="frame" x="282" y="533" width="37" height="37"/>
+                                <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ODP-hf-HID" firstAttribute="centerX" secondItem="Xfe-TP-TFH" secondAttribute="centerX" id="3kJ-Re-fVN"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="ODP-hf-HID" secondAttribute="trailing" constant="-8" id="7co-St-GA1">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
-                            </constraint>
-                            <constraint firstItem="e3O-Zi-OLe" firstAttribute="top" secondItem="ODP-hf-HID" secondAttribute="bottom" constant="8" id="S1l-GK-6FX">
-                                <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
-                            </constraint>
-                            <constraint firstItem="ODP-hf-HID" firstAttribute="leading" secondItem="Xfe-TP-TFH" secondAttribute="leadingMargin" constant="-8" id="ZFE-3w-lmS">
-                                <variation key="heightClass=regular-widthClass=compact" constant="-20"/>
-                            </constraint>
+                            <constraint firstAttribute="trailingMargin" secondItem="9mW-fC-d1L" secondAttribute="trailing" constant="-20" id="DEP-LT-nZe"/>
+                            <constraint firstItem="fDS-yY-Bjt" firstAttribute="centerX" secondItem="Xfe-TP-TFH" secondAttribute="centerX" id="H0h-3U-3Ub"/>
+                            <constraint firstItem="TXD-xw-z5l" firstAttribute="leading" secondItem="Xfe-TP-TFH" secondAttribute="leadingMargin" constant="-20" id="WtV-l6-9Ln"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TXD-xw-z5l" secondAttribute="trailing" constant="-20" id="gRL-7d-k8U"/>
+                            <constraint firstItem="e3O-Zi-OLe" firstAttribute="top" secondItem="TXD-xw-z5l" secondAttribute="bottom" id="mgA-fh-D1f"/>
+                            <constraint firstItem="9mW-fC-d1L" firstAttribute="leading" secondItem="Xfe-TP-TFH" secondAttribute="leadingMargin" constant="-20" id="oV2-MT-QPC"/>
+                            <constraint firstItem="9mW-fC-d1L" firstAttribute="centerY" secondItem="Xfe-TP-TFH" secondAttribute="centerY" id="wM4-tX-eeh"/>
+                            <constraint firstItem="fDS-yY-Bjt" firstAttribute="top" secondItem="oso-1h-tk1" secondAttribute="bottom" constant="30" id="zpQ-Z4-yAQ"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="9mW-fC-d1L"/>
+                                <exclude reference="TXD-xw-z5l"/>
+                                <exclude reference="fDS-yY-Bjt"/>
+                            </mask>
                             <mask key="constraints">
-                                <exclude reference="S1l-GK-6FX"/>
-                                <exclude reference="3kJ-Re-fVN"/>
-                                <exclude reference="7co-St-GA1"/>
-                                <exclude reference="ZFE-3w-lmS"/>
+                                <exclude reference="DEP-LT-nZe"/>
+                                <exclude reference="oV2-MT-QPC"/>
+                                <exclude reference="wM4-tX-eeh"/>
+                                <exclude reference="H0h-3U-3Ub"/>
+                                <exclude reference="zpQ-Z4-yAQ"/>
+                                <exclude reference="WtV-l6-9Ln"/>
+                                <exclude reference="gRL-7d-k8U"/>
+                                <exclude reference="mgA-fh-D1f"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="9mW-fC-d1L"/>
+                                <include reference="TXD-xw-z5l"/>
+                                <include reference="fDS-yY-Bjt"/>
+                            </mask>
                             <mask key="constraints">
-                                <include reference="S1l-GK-6FX"/>
-                                <exclude reference="3kJ-Re-fVN"/>
-                                <include reference="7co-St-GA1"/>
-                                <include reference="ZFE-3w-lmS"/>
+                                <include reference="DEP-LT-nZe"/>
+                                <include reference="oV2-MT-QPC"/>
+                                <include reference="wM4-tX-eeh"/>
+                                <include reference="H0h-3U-3Ub"/>
+                                <include reference="zpQ-Z4-yAQ"/>
+                                <include reference="WtV-l6-9Ln"/>
+                                <include reference="gRL-7d-k8U"/>
+                                <include reference="mgA-fh-D1f"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Canvas" id="FjR-YB-ts2"/>
+                    <connections>
+                        <outlet property="activityIndicator" destination="fDS-yY-Bjt" id="Rmf-le-jF6"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STi-0B-COi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -767,26 +792,29 @@
                             <constraint firstItem="aQf-wg-UfE" firstAttribute="centerX" secondItem="3QG-Kk-ffx" secondAttribute="centerX" id="Eok-zT-bjw"/>
                             <constraint firstItem="aQf-wg-UfE" firstAttribute="top" secondItem="Zmi-QF-ZBk" secondAttribute="bottom" constant="30" id="OtL-pm-wbl"/>
                             <constraint firstItem="c5J-BY-gXo" firstAttribute="leading" secondItem="3QG-Kk-ffx" secondAttribute="leadingMargin" constant="-20" id="St8-2r-BSX"/>
+                            <constraint firstItem="aQf-wg-UfE" firstAttribute="top" secondItem="Zmi-QF-ZBk" secondAttribute="bottom" constant="30" id="WP1-ga-Twz"/>
                             <constraint firstItem="c5J-BY-gXo" firstAttribute="centerY" secondItem="3QG-Kk-ffx" secondAttribute="centerY" id="j63-zg-5pg"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="1a3-kM-21D"/>
                                 <exclude reference="OtL-pm-wbl"/>
+                                <exclude reference="WP1-ga-Twz"/>
+                                <exclude reference="1a3-kM-21D"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="constraints">
-                                <include reference="1a3-kM-21D"/>
-                                <exclude reference="94J-ml-8oD"/>
                                 <exclude reference="OtL-pm-wbl"/>
+                                <include reference="WP1-ga-Twz"/>
+                                <exclude reference="1a3-kM-21D"/>
+                                <exclude reference="94J-ml-8oD"/>
                             </mask>
                         </variation>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
                         <segue destination="vLN-Co-cNl" kind="presentation" identifier="toMainController" modalTransitionStyle="crossDissolve" id="aBg-fO-FdL"/>
-                        <segue destination="cAF-Q1-MSm" kind="presentation" identifier="toLoginController" modalTransitionStyle="crossDissolve" id="GGX-L7-C94"/>
+                        <segue destination="FpX-q6-whp" kind="presentation" identifier="toLoginController" modalTransitionStyle="crossDissolve" id="Uh2-XG-9G7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qi2-gi-fEZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1055,13 +1083,13 @@
                     </refreshControl>
                     <connections>
                         <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvas" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
-                        <segue destination="cAF-Q1-MSm" kind="presentation" identifier="toLogin" id="C20-D9-RLT"/>
+                        <segue destination="FpX-q6-whp" kind="presentation" identifier="toLogin" modalTransitionStyle="crossDissolve" id="bgi-Ne-Bdd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXa-pc-yIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CKt-Sw-2U1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-786" y="-302.25"/>
+            <point key="canvasLocation" x="-777" y="-326.25"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="GOz-OW-Wry">
@@ -1084,28 +1112,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wbn-ag-v7A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2370" y="352.5"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="JwZ-9y-0gs">
-            <objects>
-                <navigationController id="cAF-Q1-MSm" customClass="NavigationController" customModule="Canvas" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="nLM-T6-rBF">
-                        <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
-                    </tabBarItem>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="7Z0-0N-KjE">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="FpX-q6-whp" kind="relationship" relationship="rootViewController" id="ocF-OX-Nyt"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FpL-Fm-SFo" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3975" y="352.5"/>
         </scene>
         <!--Canvas-->
         <scene sceneID="178-nn-QQJ">
@@ -2043,7 +2049,7 @@
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aBg-fO-FdL"/>
-        <segue reference="GGX-L7-C94"/>
+        <segue reference="5uB-bY-P8D"/>
+        <segue reference="Uh2-XG-9G7"/>
     </inferredMetricsTieBreakers>
 </document>
