@@ -62,8 +62,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return
         }
         
-//        lastPoint = sender.locationInView(imageView)
-//        currentPoint = sender.locationInView(imageView)
         self.drawImage(sender.locationInView(imageView))
         self.mergeImages()
         self.shiftUndoStack()
@@ -109,22 +107,13 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
 
         if sender.state == .Began {
-            
             UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
-
-//            lastPoint = sender.locationOfTouch(0, inView: imageView)
-//            currentPoint = sender.locationInView(imageView)
             self.drawImage(sender.locationOfTouch(0, inView: imageView))
-    
-        
-            
             self.delagate.showUnderFingerView()
             self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: sender.locationOfTouch(0, inView: imageView).x * resizeScale, y: sender.locationOfTouch(0, inView: imageView).y * resizeScale), cropSize: underFingerSize))
         }
         else if sender.state == .Changed {
-//            currentPoint = sender.locationOfTouch(0, inView: imageView)
             drawImage(sender.locationOfTouch(0, inView: imageView))
-//            lastPoint = currentPoint
             self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: sender.locationOfTouch(0, inView: imageView).x * resizeScale, y: sender.locationOfTouch(0, inView: imageView).y * resizeScale), cropSize: underFingerSize))
         }
         else if sender.state == .Ended {
@@ -135,9 +124,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             points.removeAll()
         }
     }
-    
 
-    
     func drawImage(currentPoint: CGPoint) {
         
         if points.count < 4 {
@@ -187,8 +174,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
-        let data = CGBitmapContextGetData(UIGraphicsGetCurrentContext())
-        self.dataType = UnsafePointer<UInt8>(data)
+//        let data = CGBitmapContextGetData(UIGraphicsGetCurrentContext())
+//        self.dataType = UnsafePointer<UInt8>(data)
         
         UIGraphicsEndImageContext()
     }
@@ -201,8 +188,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func trash() {
-        self.undoStack.append(UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale)))
-        mergeImages()
+        imageView.image = UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale))
+        shiftUndoStack()
     }
     
     func dropper() {
