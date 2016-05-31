@@ -62,7 +62,20 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return
         }
         
-        self.drawImage(sender.locationInView(imageView))
+        print("handleTap")
+        
+        let dotPoint = sender.locationInView(imageView)
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
+        let color = delagate.getCurrentColor()
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
+        CGContextStrokePath(UIGraphicsGetCurrentContext())
+        CGContextFlush(UIGraphicsGetCurrentContext())
+        UIGraphicsEndImageContext()
+
         self.mergeImages()
         self.shiftUndoStack()
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)

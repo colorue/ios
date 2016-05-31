@@ -183,8 +183,7 @@ class API {
                     print("Login failed. \(error)")
                     callback(false)
                 } else {
-                    if let user = user {
-                        self.loadData(user)
+                    if user != nil {
                         callback(true)
                     } else {
                         callback(false)
@@ -200,6 +199,10 @@ class API {
         prefs.setValue(false, forKey: "loggedIn")
         self.users.removeAll()
         self.wall.removeAll()
+        self.activeUser = User()
+        self.oldestTimeLoaded = -99999999999999
+        self.newestTimeLoaded = 0
+        
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
         FBSDKLoginManager().logOut()
