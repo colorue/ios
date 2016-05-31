@@ -64,16 +64,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         print("handleTap")
         
-        let dotPoint = sender.locationInView(imageView)
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
-        let color = delagate.getCurrentColor()
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        CGContextFlush(UIGraphicsGetCurrentContext())
+        
+        self.drawDot(sender.locationInView(imageView), color: delagate.getCurrentColor())
+
         UIGraphicsEndImageContext()
 
         self.mergeImages()
@@ -140,35 +134,82 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
     func drawImage(currentPoint: CGPoint) {
         
-        if points.count < 4 {
+        if points.count < 3 {
             points.append(currentPoint)
         } else {
             points.removeAtIndex(0)
             points.append(currentPoint)
         }
         
-        let color = delagate.getCurrentColor()
+
+        if points.count == 3 {
+            let color = delagate.getCurrentColor()
+            CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
+            
+            CGContextSetLineJoin(UIGraphicsGetCurrentContext(), CGLineJoin.Round)
+            
+            
+            
+            
+            
+            CGContextStrokePath(UIGraphicsGetCurrentContext())
+
+            
+            self.drawDot(a, color: greenColor)
+            self.drawDot(b, color: redColor)
+            self.drawDot(c, color: redColor)
+            self.drawDot(d, color: greenColor)
+
+            points.remove
+            points.append(a)
+            points.append(d)
+            
+            CGContextFlush(UIGraphicsGetCurrentContext())
+            currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+        }
+    }
+    
+    private func drawDot(dotPoint:CGPoint, color: UIColor) {
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
         CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
-        
-        CGContextSetLineJoin(UIGraphicsGetCurrentContext(), CGLineJoin.Round);
-
-        if points.count == 4 {
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), points[0].x * resizeScale, points[0].y * resizeScale)
-            CGContextAddCurveToPoint(UIGraphicsGetCurrentContext(), points[1].x * resizeScale, points[1].y * resizeScale, points[2].x * resizeScale, points[2].y * resizeScale, points[3].x * resizeScale, points[3].y * resizeScale)
-            
-            points.append(CGPoint(x: points[3].x * 2 - points[2].x, y: points[3].y * 2 - points[2].y))
-            points.removeAtIndex(0)
-            points.removeAtIndex(0)
-            points.removeAtIndex(0)
-        }
-
-        
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), dotPoint.x * resizeScale, dotPoint.y * resizeScale)
         CGContextStrokePath(UIGraphicsGetCurrentContext())
         CGContextFlush(UIGraphicsGetCurrentContext())
-        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     }
+    
+    /*
+    private func generateBiezerPoints(A: CGPoint, B: CGPoint, C: CGPoint) -> (CGPoint, CGPoint, CGPoint, CGPoint) {
+        
+        func getDelta(a: CGFloat, b: CGFloat, slope: CGFloat) -> CGFloat {
+            return (b - a) / (2 + slope)
+        }
+        
+        let P1: CGPoint
+        let P2: CGPoint
+        
+        if (B.y == A.y) {
+            print("(B.y == A.y)")
+            P1 = CGPoint(x: B.x + (C.x - B.x)/2, y: B.y)
+            P2 = CGPoint(x: B.x + (C.x - B.x)/2, y: C.y)
+        } else if (B.x == A.x) {
+            print("(B.x == A.x)")
+            P1 = CGPoint(x: B.x, y: B.y + (C.y - B.y)/2)
+            P2 = CGPoint(x: C.x, y: C.y + (C.x - B.x)/2)
+        } else {
+            print("else")
+
+            let slope = (B.y - A.y) / (B.x - A.x)
+            P1 = CGPoint(x: B.x + getDelta(B.x, b: C.x, slope: slope), y: B.y + getDelta(B.y, b: C.y, slope: (1/slope)))
+            P2 = CGPoint(x: C.x - getDelta(B.x, b: C.x, slope: slope), y: C.y - getDelta(B.y, b: C.y, slope: (1/slope)))
+        }
+        
+        return (B, P1, P2, C)
+    }
+ */
     
     func shiftUndoStack() {
         if undoStack.count < 11 {
