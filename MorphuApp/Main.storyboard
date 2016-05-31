@@ -1508,7 +1508,7 @@
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aBg-fO-FdL"/>
         <segue reference="Uh2-XG-9G7"/>
+        <segue reference="5uB-bY-P8D"/>
     </inferredMetricsTieBreakers>
 </document>

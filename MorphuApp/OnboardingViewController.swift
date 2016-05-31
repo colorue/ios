@@ -26,6 +26,8 @@ class OnboardingViewController: UIViewController {
 
         if valid {
             API.sharedInstance.checkLoggedIn(loginCallback)
+        } else {
+            activityIndicator.stopAnimating()
         }
     }
     

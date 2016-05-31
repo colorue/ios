@@ -12,7 +12,7 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let font = UIFont(name: "Open Sans", size: 16)!
+        let font = UIFont(name: "Chalkboard SE", size: 18)!
 
         navigationBar.barTintColor = morhpuColor
         navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor.whiteColor()]

@@ -55,6 +55,8 @@ class LikeViewController: UITableViewController, UserCellDelagate {
         cell.delagate = self
         cell.user = user
         cell.followButton.selected = false
+        cell.followButton.hidden = true
+
         
         return cell
     }
