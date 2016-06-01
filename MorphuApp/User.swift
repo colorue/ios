@@ -14,12 +14,18 @@ class User {
     let email: String
     var profileImage: UIImage  //make getter and setter
     private var following = [User]()
+    private var followers = [User]()
+    private var drawings = [Drawing]()
     
     init(userId: String = "", email: String = "", username: String = "", profileImage: UIImage = UIImage()) {
         self.userId = userId
         self.username = username
         self.email = email
         self.profileImage = profileImage
+    }
+    
+    func getFollowing() -> [User] {
+        return self.following
     }
     
     func follow(user: User) {
@@ -46,5 +52,32 @@ class User {
             }
         }
         return false
+    }
+    
+    func addFollower(user: User) {
+        followers.append(user)
+    }
+    
+    func removeFollower(user: User) {
+        var i = 0
+        for follower in self.followers {
+            if follower.userId == user.userId {
+                self.followers.removeAtIndex(i)
+                return
+            }
+            i += 1
+        }
+    }
+    
+    func getFollowers() -> [User] {
+        return self.followers
+    }
+    
+    func addDrawing(drawing: Drawing) {
+        self.drawings.append(drawing)
+    }
+    
+    func getDrawings() -> [Drawing] {
+        return self.drawings
     }
 }

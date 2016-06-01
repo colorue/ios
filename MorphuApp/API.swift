@@ -42,7 +42,9 @@ class API {
     
     // MARK: Internal methods
     
-    private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) {
+    
+
+    private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) { //callback
         if let drawing = self.drawingDict[drawingId] {
             
             callback(drawing, false)
@@ -146,6 +148,24 @@ class API {
                 })
             })
         })
+        
+        self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.getUser(snapshot.key, callback: { (follower: User) -> () in
+                user.addFollower(follower)
+            })
+        })
+        
+        self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
+                user.removeFollower(unfollower)
+            })
+        })
+        
+        self.myRootRef.child("users/\(user.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.getDrawing(snapshot.key, callback: { (drawing: Drawing, false) -> () in
+                user.addDrawing(drawing)
+            })
+        })
     }
     
     // MARK: External Methods
@@ -246,10 +266,12 @@ class API {
     
     func follow(user: User) {
         myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").setValue(true)
+        myRootRef.child("users/\(user.userId)/followers/\(activeUser.userId)").setValue(true)
     }
     
     func unfollow(user: User) {
         myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").removeValue()
+        myRootRef.child("users/\(user.userId)/followers/\(activeUser.userId)").removeValue()
     }
     
     // MARK: Get Methods

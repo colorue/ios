@@ -15,6 +15,9 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
     var selectedDrawing = Drawing()
     let bottomRefreshControl = UIRefreshControl()
     
+    var userInstance = User()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,12 +27,17 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         tableView.backgroundColor = backgroundColor
         
         api.delagate = self
-        self.refreshControl!.beginRefreshing()
+//        self.refreshControl!.beginRefreshing()
         
-        navigationController?.hidesBarsOnSwipe = true
+//        navigationController?.hidesBarsOnSwipe = true
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+        
+        
+        userInstance = api.getActiveUser()
+        
+        self.navigationItem.title = userInstance.username
     }
     
     func refreshBottom(sender: UIRefreshControl) {
@@ -63,14 +71,22 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if section == 0 {
             return 1
         } else {
-            return api.getWall().count
+            return userInstance.getDrawings().count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
+            cell.profileImage.image = userInstance.profileImage
+            cell.followingCount.text = String(userInstance.getFollowing().count)
+            cell.followersCount.text = String(userInstance.getFollowers().count)
+            cell.drawingsCount.text = String(userInstance.getDrawings().count)
             
+            if userInstance.userId == api.getActiveUser().userId {
+                cell.followButton.setImage(nil, forState: .Normal)
+                cell.followButton.enabled = false
+            }
             
             return cell
         } else {
@@ -89,7 +105,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if indexPath.section == 0 {
             
         } else {
-            let content = api.getWall()[indexPath.row]
+            let content = userInstance.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
         
             content.delagate = drawingCell
@@ -149,7 +165,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
-            self.refreshControl!.endRefreshing()
+//            self.refreshControl!.endRefreshing()
             self.tableView.reloadData()
         })
     }
