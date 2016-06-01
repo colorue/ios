@@ -162,12 +162,9 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     func upload(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
-            let actionSelector = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            actionSelector.addAction(UIAlertAction(title: "Save to photos", style: UIAlertActionStyle.Default,
-                handler: {(alert: UIAlertAction!) in self.saveDrawing(drawing)}))
-            
-            self.presentViewController(actionSelector, animated: true, completion: nil)
+            let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
+            avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
+            self.presentViewController(avc, animated: true, completion: nil)
         }
     }
     
@@ -185,9 +182,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         self.performSegueWithIdentifier("toViewComments", sender: self)
     }
     
-    private func saveDrawing(drawing: Drawing) {
-        UIImageWriteToSavedPhotosAlbum(drawing.getImage(), nil, nil, nil)
-    }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toViewLikes" {

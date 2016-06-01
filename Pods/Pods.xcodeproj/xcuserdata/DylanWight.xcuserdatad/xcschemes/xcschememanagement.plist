@@ -34,7 +34,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-Canvix.xcscheme</key>
+		<key>Pods-Canvi.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,11 +42,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06858E9502CBAD1D50E28F9B41AC21FA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>0EB19C1377A747F81110D44E2D5FCF78</key>
 		<dict>
 			<key>primary</key>
@@ -58,6 +53,11 @@
 			<true/>
 		</dict>
 		<key>30D7FCF8072F5D59AE1C98D94F9A6EC9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>43B09464977B68F93F4BD1241FB7EEE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>

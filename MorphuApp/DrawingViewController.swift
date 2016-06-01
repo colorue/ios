@@ -42,10 +42,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
-        let keyboardHeight = CGFloat(120)
-
+        let keyboardHeight = self.view.frame.height / 5.55833333333333
         let canvasHeight = self.view.frame.height - keyboardHeight - 60
-        let canvasFrame = CGRect(x: 0.0, y: 0, width: self.view.frame.width, height: canvasHeight)
+        
+        let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
         let prefs = NSUserDefaults.standardUserDefaults()
         var baseImage: UIImage
