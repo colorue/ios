@@ -28,7 +28,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         super.init(frame : frame)
         displayCanvas()
         
-        mergeImages()
+        mergeImages(false)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -64,7 +64,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         lastPoint = sender.locationInView(imageView)
         currentPoint = sender.locationInView(imageView)
         self.drawImage()
-        self.mergeImages()
+        self.mergeImages(true)
         self.shiftUndoStack()
         self.currentStroke = UIImage.getImageWithColor(UIColor.clearColor(), size: imageView.frame.size)
     }
@@ -91,7 +91,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             underFingerSize = CGSize(width: underFinger, height: underFinger)
         }
         
-        self.mergeImages()
+        self.mergeImages(true)
         
         if self.delagate.getDropperActive() {
             let dropperPoint = sender.locationInView(imageView)
@@ -129,7 +129,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     func trash() {
         self.currentStroke = UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale))
-        self.mergeImages()
+        self.mergeImages(false)
         self.shiftUndoStack()
     }
     
@@ -141,7 +141,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         let color = delagate.getCurrentColor()
         CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
         CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, UIScreen.mainScreen().scale)
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
         
         if let lastP = lastPoint {
             CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastP.x * resizeScale, lastP.y * resizeScale)
@@ -166,11 +166,16 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    func mergeImages() {
+    func mergeImages(alpha: Bool) {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
         
         undoStack.last?.drawAtPoint(CGPoint.zero)
-        currentStroke.drawAtPoint(CGPoint.zero)
+        
+        if alpha {
+            currentStroke.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate.getAlpha()!)
+        } else {
+            currentStroke.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
+        }
         
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         
@@ -180,11 +185,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     func undo() {
         if undoStack.count > 1 {
             undoStack.popLast()
-            mergeImages()
+            mergeImages(false)
         }
     }
-    
-
     
     func dropper() {
         self.delagate.setDropperActive(true)

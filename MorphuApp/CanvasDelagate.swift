@@ -11,6 +11,7 @@ import UIKit
 protocol CanvasDelagate {
     func getCurrentColor() -> UIColor
     func getCurrentBrushSize() -> Float
+    func getAlpha() -> CGFloat?
     func setUnderfingerView(underFingerImage: UIImage)
     func hideUnderFingerView()
     func showUnderFingerView()

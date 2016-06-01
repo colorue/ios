@@ -103,6 +103,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         return colorKeyboard!.getCurrentBrushSize()
     }
     
+    func getAlpha() -> CGFloat? {
+        return colorKeyboard?.getAlpha()
+    }
+    
     func undo() {
         self.canvas!.undo()
     }
