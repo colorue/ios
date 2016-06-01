@@ -77,6 +77,20 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
         }
     }
     
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        self.performSegueWithIdentifier("viewFriend", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "viewFriend" {
+            let destinationNavigationController = segue.destinationViewController as! UINavigationController
+            let targetController = destinationNavigationController.topViewController as! UserViewController
+            if let row = tableView.indexPathForSelectedRow?.row {
+                targetController.userInstance = api.getUsers()[row]
+            }
+        }
+    }
+    
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -86,4 +100,7 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
         api.logout()
         self.performSegueWithIdentifier("toLogin", sender: self)
     }
+    
+    @IBAction func backToFriends(segue: UIStoryboardSegue) {}
+
 }

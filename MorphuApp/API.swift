@@ -347,6 +347,7 @@ class API {
                 let userId = snapshot.key
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
                     if !(userId == currentUser.uid) {
+                        self.getFullUser(user)
                         self.users.append(user)
                     }
                 })

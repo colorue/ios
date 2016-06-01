@@ -1,5 +1,5 @@
 //
-//  ProfileViewController.swift
+//  UserViewController.swift
 //  Canvi
 //
 //  Created by Dylan Wight on 6/1/16.
@@ -9,12 +9,14 @@
 import UIKit
 import CCBottomRefreshControl
 
-class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
+class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
     let api = API.sharedInstance
     
     var selectedDrawing = Drawing()
     let bottomRefreshControl = UIRefreshControl()
     let backButton = UIButton(type: UIButtonType.Custom)
+    
+    var userInstance: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,12 +27,21 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         tableView.backgroundColor = backgroundColor
         
         api.delagate = self
-//        self.refreshControl!.beginRefreshing()
+        //        self.refreshControl!.beginRefreshing()
         
-//        navigationController?.hidesBarsOnSwipe = true
+        //        navigationController?.hidesBarsOnSwipe = true
+        
+        
+        let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        backButton.tintColor = UIColor.whiteColor()
+        backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
+        backButton.setImage(chevron, forState: UIControlState.Normal)
+        backButton.addTarget(self, action: #selector(UserViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+        bottomRefreshControl.addTarget(self, action: #selector(UserViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
     
     
@@ -41,7 +52,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationItem.title = api.getActiveUser().username
+        self.navigationItem.title = userInstance!.username
         
         self.tableView.reloadData()
         
@@ -67,19 +78,19 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if section == 0 {
             return 1
         } else {
-            return api.getActiveUser().getDrawings().count
+            return userInstance!.getDrawings().count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
-            cell.profileImage.image = api.getActiveUser().profileImage
-            cell.followingCount.text = String(api.getActiveUser().getFollowing().count)
-            cell.followersCount.text = String(api.getActiveUser().getFollowers().count)
-            cell.drawingsCount.text = String(api.getActiveUser().getDrawings().count)
+            cell.profileImage.image = userInstance!.profileImage
+            cell.followingCount.text = String(userInstance!.getFollowing().count)
+            cell.followersCount.text = String(userInstance!.getFollowers().count)
+            cell.drawingsCount.text = String(userInstance!.getDrawings().count)
             
-            if api.getActiveUser().userId == api.getActiveUser().userId {
+            if userInstance!.userId == api.getActiveUser().userId {
                 cell.followButton.setImage(nil, forState: .Normal)
                 cell.followButton.enabled = false
             }
@@ -87,7 +98,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
             return cell
         } else {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! DrawingCell
-        
+            
             if cell.delagate == nil {
                 cell.delagate = self
             }
@@ -101,27 +112,27 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if indexPath.section == 0 {
             
         } else {
-            let content = api.getActiveUser().getDrawings()[indexPath.row]
+            let content = userInstance!.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
-        
+            
             content.delagate = drawingCell
-        
+            
             drawingCell.drawing = content
             drawingCell.profileImage.image = content.getArtist().profileImage
             drawingCell.creator.text = content.getArtist().username
             drawingCell.drawingImage.image = content.getImage()
             drawingCell.timeCreated.text = content.getTimeSinceSent()
             drawingCell.likeButton.selected = content.liked(api.getActiveUser())
-        
+            
             let comments = content.getComments().count
             if comments == 1 {
                 drawingCell.commentCount.text = "1 comment"
             } else {
                 drawingCell.commentCount.text = String(content.getComments().count) + " comments"
             }
-        
+            
             self.setLikes(drawingCell)
-        
+            
             if (indexPath.row + 1 >= api.getWall().count) {
                 api.loadWall()
             }
@@ -161,7 +172,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
-//            self.refreshControl!.endRefreshing()
+            //            self.refreshControl!.endRefreshing()
             self.tableView.reloadData()
         })
     }
@@ -206,4 +217,11 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func unwind(sender: UIBarButtonItem) {
+        self.backButton.enabled = false
+        self.performSegueWithIdentifier("backToFriends", sender: self)
+    }
+    
+    @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }

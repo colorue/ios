@@ -17,7 +17,7 @@
 		8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */; };
 		8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* WallViewController.swift */; };
 		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
-		8763D2D81CEE226700E3D528 /* GroupTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */; };
+		8763D2D81CEE226700E3D528 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C81CEE226700E3D528 /* FriendsViewController.swift */; };
 		8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */; };
 		8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CB1CEE226700E3D528 /* LoginViewController.swift */; };
 		8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */; };
@@ -42,6 +42,7 @@
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
 		8774BA451CFF7E9B00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA441CFF7E9B00B26931 /* ProfileViewController.swift */; };
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
+		8774BA491CFFA08C00B26931 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* UserViewController.swift */; };
 		879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */; };
 		879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
@@ -69,7 +70,7 @@
 		8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8763D2C01CEE226700E3D528 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 		8763D2C61CEE226700E3D528 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GroupTableViewController.swift; sourceTree = "<group>"; };
+		8763D2C81CEE226700E3D528 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8763D2CB1CEE226700E3D528 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -94,6 +95,7 @@
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8774BA441CFF7E9B00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		8774BA481CFFA08C00B26931 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCellDelagate.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -297,7 +299,8 @@
 		8763D3221CEE253100E3D528 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2C81CEE226700E3D528 /* GroupTableViewController.swift */,
+				8763D2C81CEE226700E3D528 /* FriendsViewController.swift */,
+				8774BA481CFFA08C00B26931 /* UserViewController.swift */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -477,6 +480,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */,
+				8774BA491CFFA08C00B26931 /* UserViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
 				87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */,
 				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
@@ -487,7 +491,7 @@
 				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
-				8763D2D81CEE226700E3D528 /* GroupTableViewController.swift in Sources */,
+				8763D2D81CEE226700E3D528 /* FriendsViewController.swift in Sources */,
 				87C773D01CFBAC2700B70ED2 /* Wall.swift in Sources */,
 				8763D2FD1CEE229C00E3D528 /* DescriptionInputDelagate.swift in Sources */,
 				8763D2FC1CEE229C00E3D528 /* DescriptionInputView.swift in Sources */,
