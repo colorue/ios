@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawingCell: UITableViewCell, DrawingDelagate {
+class DrawingCell: UITableViewCell {
     
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var creator: UILabel!
@@ -26,7 +26,7 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     @IBOutlet weak var commentsButton: UIButton!
     
     
-    func setProgress(progress: Float) {
+    func stProgress(progress: Float) {
         progressBar.setProgress(1.0 - progress, animated: true)
     }
     

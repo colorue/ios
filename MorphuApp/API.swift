@@ -30,6 +30,7 @@ class API {
     
     private var userDict = [String: User]()
     private var drawingDict = [String: Drawing]()
+    private var imageDict = [String: UIImage]()
     
     private var oldestTimeLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
@@ -55,15 +56,6 @@ class API {
             self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
                 
                 let drawing = Drawing(artist: artist, timeStamp: snapshot.value!["timeStamp"] as! Double, drawingId: drawingId)
-                
-                self.downloadImage(
-                    drawingId,
-                    progressCallback: { (progress: Float) -> () in
-                        drawing.setProgress(progress)
-                    },
-                    finishedCallback: { (drawingImage: UIImage) -> () in
-                        drawing.setImage(drawingImage)
-                    })
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
                     self.getUser(snapshot.key, callback: { (liker: User) -> () in
@@ -364,32 +356,35 @@ class API {
             })
     }
     
+    func getImage(imageId: String) -> UIImage? {
+        return imageDict[imageId]
+    }
+    
     func downloadImage(imageId: String, progressCallback: (Float) -> (), finishedCallback: (UIImage) -> ()) {
-        // Create a reference to the file you want to download
-        let drawingRef = storageRef.child("drawings/\(imageId).png")
-        
-        // Download in memory with a maximum allowed size of 1MB (1 * 1024 * 1024 bytes)
-        
-        let downloadTask = drawingRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
-            if (error != nil) {
-                // Uh-oh, an error occurred!
-                print(error)
-            } else {
-                if let imageData = data {
-                    progressCallback(1.0)
-                    finishedCallback(UIImage(data: imageData)!)
-                } else {
-                    print("data error")
+        if imageDict[imageId] == nil {
+            let drawingRef = storageRef.child("drawings/\(imageId).png")
+            
+            let downloadTask = drawingRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+                if (error != nil) {
+                    // Uh-oh, an error occurred!
+                    print(error)
+                    } else {
+                    if let imageData = data {
+                        progressCallback(1.0)
+                        let image = UIImage(data: imageData)!
+                    self.imageDict[imageId] = image
+                        finishedCallback(image)
+                    } else {
+                        print("data error")
+                    }
                 }
             }
-        }
         
-        downloadTask.observeStatus(.Progress) { (snapshot) -> Void in
-            // Download reported progress
-            if let progress = snapshot.progress {
-
-                let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
-                progressCallback(percentComplete)
+            downloadTask.observeStatus(.Progress) { (snapshot) -> Void in
+                if let progress = snapshot.progress {
+                    let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
+                    progressCallback(percentComplete)
+                }
             }
         }
     }
@@ -412,11 +407,8 @@ class API {
             finishedCallback(true)
         }
     
-        // Errors only occur in the "Failure" case
         uploadTask.observeStatus(.Failure) { snapshot in
             finishedCallback(false)
-//            guard let storageError = snapshot.error else { return }
-//            guard let errorCode = FIRStorageErrorCode(rawValue: storageError.code) else { return }
         }
     }
     

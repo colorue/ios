@@ -56,7 +56,6 @@ class ProfileViewController: WallViewController {
             let content = userInstance!.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
             
-            content.delagate = drawingCell
             
             drawingCell.profileImage.image = content.getArtist().profileImage
             drawingCell.creator.text = content.getArtist().username

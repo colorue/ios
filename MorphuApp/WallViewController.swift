@@ -58,24 +58,31 @@ class WallViewController: UITableViewController, APIDelagate {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
+        
+
         return cell
     }
-        
+    
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
         let drawing = api.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
-        drawing.delagate = drawingCell
 
-//        drawingCell.drawing = drawing
+        api.downloadImage(drawing.getDrawingId(),
+                          progressCallback: { (progress: Float) -> () in
+                            drawingCell.progressBar.setProgress(progress, animated: true)
+            },
+                          finishedCallback: { (drawingImage: UIImage) -> () in
+                            drawingCell.drawingImage.image = drawingImage
+        })
+        
+        drawingCell.drawingImage.image = api.getImage(drawing.getDrawingId())
+        
         drawingCell.profileImage.image = drawing.getArtist().profileImage
         drawingCell.creator.text = drawing.getArtist().username
-        drawingCell.drawingImage.image = drawing.getImage()
         drawingCell.timeCreated.text = drawing.getTimeSinceSent()
         drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
-        
-//        drawingCell.delagate = self
         
         drawingCell.userButton.tag = indexPath.row
         drawingCell.uploadButton.tag = indexPath.row
