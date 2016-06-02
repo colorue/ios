@@ -18,6 +18,9 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // sets appDelagate as delagate for tabView controller
+        self.tabBarController?.delegate = UIApplication.sharedApplication().delegate as? UITabBarControllerDelegate
+        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()

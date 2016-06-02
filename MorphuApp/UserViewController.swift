@@ -16,7 +16,12 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     let bottomRefreshControl = UIRefreshControl()
     let backButton = UIButton(type: UIButtonType.Custom)
     
-    var userInstance: User?
+    var userInstance: User
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.userInstance = api.getActiveUser()
+        super.init(coder: aDecoder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,19 +32,8 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         tableView.backgroundColor = backgroundColor
         
         api.delagate = self
-        //        self.refreshControl!.beginRefreshing()
-        
-        //        navigationController?.hidesBarsOnSwipe = true
         
         
-        /*
-        let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        backButton.tintColor = UIColor.whiteColor()
-        backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
-        backButton.setImage(chevron, forState: UIControlState.Normal)
-        backButton.addTarget(self, action: #selector(UserViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        */
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(UserViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
@@ -53,7 +47,7 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationItem.title = userInstance!.username
+        self.navigationItem.title = userInstance.username
         
         self.tableView.reloadData()
         
@@ -79,19 +73,19 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         if section == 0 {
             return 1
         } else {
-            return userInstance!.getDrawings().count
+            return userInstance.getDrawings().count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
-            cell.profileImage.image = userInstance!.profileImage
-            cell.followingCount.text = String(userInstance!.getFollowing().count)
-            cell.followersCount.text = String(userInstance!.getFollowers().count)
-            cell.drawingsCount.text = String(userInstance!.getDrawings().count)
+            cell.profileImage.image = userInstance.profileImage
+            cell.followingCount.text = String(userInstance.getFollowing().count)
+            cell.followersCount.text = String(userInstance.getFollowers().count)
+            cell.drawingsCount.text = String(userInstance.getDrawings().count)
             
-            if userInstance!.userId == api.getActiveUser().userId {
+            if userInstance.userId == api.getActiveUser().userId {
                 cell.followButton.setImage(nil, forState: .Normal)
                 cell.followButton.enabled = false
             }
@@ -113,7 +107,7 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         if indexPath.section == 0 {
             
         } else {
-            let content = userInstance!.getDrawings()[indexPath.row]
+            let content = userInstance.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
             
             content.delagate = drawingCell

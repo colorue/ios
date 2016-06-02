@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import Firebase
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
     
     var window: UIWindow?
     
@@ -88,4 +88,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        
+        let destinationNavigationController = viewController as? UINavigationController
+        let targetController = destinationNavigationController?.topViewController
+        
+        if targetController is DrawingViewController {
+        
+            if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
+                tabBarController.presentViewController(newVC, animated: true, completion: nil)
+                return false
+            }
+        } else if let profileView = targetController as? UserViewController {
+            profileView.userInstance = API.sharedInstance.getActiveUser()
+        }
+        
+        return true
+    }
+
 }
