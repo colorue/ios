@@ -79,12 +79,12 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("viewFriend", sender: self)
+        self.performSegueWithIdentifier("showUser", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showUser" {
-            let targetController = segue.destinationViewController as! UserViewController
+            let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
                 targetController.navigationItem.title = users[row].username
                 targetController.userInstance = users[row]

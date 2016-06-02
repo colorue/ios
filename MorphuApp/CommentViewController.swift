@@ -8,11 +8,19 @@
 
 import UIKit
 
-class CommentViewController: UITableViewController, WriteCommentCellDelagate {
+class CommentViewController: UITableViewController, WriteCommentCellDelagate, CommentCellDelagate {
     
-    var drawingInstance = Drawing()
-    var writeCommentCell: WriteCommentCell?
-
+    var drawingInstance: Drawing?
+    private var writeCommentCell: WriteCommentCell?
+    private var selectedComment: Comment?
+    
+    
+    func setDrawingInstance(drawing: Drawing) {
+        self.drawingInstance = drawing
+        self.tableView.reloadData()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,18 +41,26 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return drawingInstance.getComments().count
+        if let drawing = drawingInstance {
+            return drawing.getComments().count
+        } else {
+            return 0
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell")! as! CommentCell
         
-        let comment = drawingInstance.getComments()[indexPath.row]
+        let comment = drawingInstance!.getComments()[indexPath.row]
         cell.username.text = comment.user.username
         cell.profileImage.image = comment.user.profileImage
         cell.timeStamp.text = comment.getTimeSinceSent()
         cell.commentText.text = comment.text
         
+        cell.comment = comment
+        cell.delagate = self
+
+
         return cell
     }
     
@@ -60,14 +76,17 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
         return cell
     }
     
-    
+    func selectComment(comment: Comment) {
+        print("selectComment")
+        self.selectedComment = comment
+    }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(tableView.indexPathForSelectedRow?.row)
         
-        if segue.identifier == "toProfile" {
-            let targetController = segue.destinationViewController as! UserViewController
-            targetController.userInstance = User()
+        if segue.identifier == "showUser" {
+            let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.userInstance = self.selectedComment!.user
         }
     }
     
@@ -76,7 +95,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     }
     
     func addComment(text: String) {
-        API.sharedInstance.addComment(drawingInstance, text: text)
+        API.sharedInstance.addComment(drawingInstance!, text: text)
         self.writeCommentCell?.commentText.text = ""
         self.tableView.reloadData()
     }

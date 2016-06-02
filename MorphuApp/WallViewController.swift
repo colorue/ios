@@ -12,7 +12,6 @@ import CCBottomRefreshControl
 class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
     let api = API.sharedInstance
     
-    var selectedDrawing = Drawing()
     let bottomRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -63,10 +62,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! DrawingCell
-        
-        if cell.delagate == nil {
-            cell.delagate = self
-        }
         return cell
     }
         
@@ -84,6 +79,14 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         drawingCell.timeCreated.text = content.getTimeSinceSent()
         drawingCell.likeButton.selected = content.liked(api.getActiveUser())
         
+        drawingCell.delagate = self
+        drawingCell.userButton.tag = indexPath.row
+        drawingCell.likesButton.tag = indexPath.row
+        drawingCell.commentsButton.tag = indexPath.row
+
+        
+        
+ 
         let comments = content.getComments().count
         if comments == 1 {
             drawingCell.commentCount.text = "1 comment"
@@ -103,12 +106,12 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
             let likes = drawing.getLikes().count
             if likes == 0 {
                 drawingCell.likes.text = ""
-                drawingCell.likeCount.enabled = false
+                drawingCell.likesButton.enabled = false
             } else if likes == 1 {
-                drawingCell.likeCount.enabled = true
+                drawingCell.likesButton.enabled = true
                 drawingCell.likes.text = "1 like"
             } else {
-                drawingCell.likeCount.enabled = true
+                drawingCell.likesButton.enabled = true
                 drawingCell.likes.text = String(likes) + " likes"
             }
         }
@@ -144,23 +147,17 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         }
     }
     
-    func viewLikes(drawingCell: DrawingCell) {
-        self.selectedDrawing = drawingCell.drawing!
-    }
-    
-    func viewComments(drawingCell: DrawingCell) {
-        self.selectedDrawing = drawingCell.drawing!
-    }
-    
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toViewLikes" {
+        if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
-            targetController.users = self.selectedDrawing.getLikes()
-        } else if segue.identifier == "toViewComments" {
+            targetController.users = api.getWall()[sender!.tag].getLikes()
+        } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
-            targetController.drawingInstance = self.selectedDrawing
+            targetController.drawingInstance = api.getWall()[sender!.tag]
+        } else if segue.identifier == "showUser" {
+            let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.userInstance = api.getWall()[sender!.tag].getArtist()
         }
     }
     

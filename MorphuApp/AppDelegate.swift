@@ -100,7 +100,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 tabBarController.presentViewController(newVC, animated: true, completion: nil)
                 return false
             }
-        } else if let profileView = targetController as? UserViewController {
+        } else if let profileView = targetController as? ProfileViewController {
             profileView.userInstance = API.sharedInstance.getActiveUser()
         } else if let friendsList = targetController as? UserListViewController {
             friendsList.users = API.sharedInstance.getUsers()

@@ -9,7 +9,7 @@
 import UIKit
 import CCBottomRefreshControl
 
-class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
+class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
     let api = API.sharedInstance
     
     var selectedDrawing = Drawing()
@@ -36,7 +36,7 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(UserViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+        bottomRefreshControl.addTarget(self, action: #selector(ProfileViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
     
     
@@ -178,17 +178,14 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         }
     }
     
-    func viewLikes(drawingCell: DrawingCell) {
-        self.selectedDrawing = drawingCell.drawing!
-    }
-    
-    func viewComments(drawingCell: DrawingCell) {
-        self.selectedDrawing = drawingCell.drawing!
+    func setSelectedDrawing(drawing: Drawing) {
+        self.selectedDrawing = drawing
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
+            targetController.navigationItem.title = "Likes"
             targetController.users = self.selectedDrawing.getLikes()
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController

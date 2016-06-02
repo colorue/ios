@@ -9,8 +9,15 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
+    var delagate: CommentCellDelagate?
+    var comment: Comment?
+    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var commentText: UILabel!
+    
+    @IBAction func viewUser(sender: UIButton) {
+        delagate?.selectComment(self.comment!)
+    }
 }
