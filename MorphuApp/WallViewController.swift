@@ -63,31 +63,32 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
-        let content = api.getWall()[indexPath.row]
+        let drawing = api.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
-        content.delagate = drawingCell
+        drawing.delagate = drawingCell
 
-        drawingCell.drawing = content
-        drawingCell.profileImage.image = content.getArtist().profileImage
-        drawingCell.creator.text = content.getArtist().username
-        drawingCell.drawingImage.image = content.getImage()
-        drawingCell.timeCreated.text = content.getTimeSinceSent()
-        drawingCell.likeButton.selected = content.liked(api.getActiveUser())
+        drawingCell.drawing = drawing
+        drawingCell.profileImage.image = drawing.getArtist().profileImage
+        drawingCell.creator.text = drawing.getArtist().username
+        drawingCell.drawingImage.image = drawing.getImage()
+        drawingCell.timeCreated.text = drawing.getTimeSinceSent()
+        drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
         
         drawingCell.delagate = self
+        
         drawingCell.userButton.tag = indexPath.row
+        drawingCell.uploadButton.tag = indexPath.row
+        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchUpInside)
+        drawingCell.likeButton.tag = indexPath.row
         drawingCell.likesButton.tag = indexPath.row
         drawingCell.commentsButton.tag = indexPath.row
 
-        
-        
  
-        let comments = content.getComments().count
-        if comments == 1 {
+        if drawing.getComments().count == 1 {
             drawingCell.commentCount.text = "1 comment"
         } else {
-            drawingCell.commentCount.text = String(content.getComments().count) + " comments"
+            drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
         }
         
         self.setLikes(drawingCell)
@@ -135,12 +136,11 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         })
     }
     
-    func upload(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
-            avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-            self.presentViewController(avc, animated: true, completion: nil)
-        }
+    func upload(sender: UIButton) {
+        let drawing = api.getWall()[sender.tag]
+        let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
+        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
+        self.presentViewController(avc, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

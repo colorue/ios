@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fiD-lJ-IKR">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -38,7 +39,7 @@
         <!--Drawing View Controller-->
         <scene sceneID="dMl-U3-GTV">
             <objects>
-                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="OHZ-gn-DsE" customClass="DrawingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xmt-d0-0cX"/>
                         <viewControllerLayoutGuide type="bottom" id="Uwp-QL-EV4"/>
@@ -70,7 +71,7 @@
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
             <objects>
-                <navigationController storyboardIdentifier="DrawingViewController" id="luU-Ra-7SP" customClass="NavigationController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DrawingViewController" id="luU-Ra-7SP" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Logo Inactive" id="FWV-Hs-Vva">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -92,7 +93,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
             <objects>
-                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController id="vLN-Co-cNl" customClass="TabBarController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" id="3AG-5Q-AcY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -112,13 +113,13 @@
         <!--Canvix-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
-                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="HtL-VG-g21">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Canvi" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DrawingCell" rowHeight="586" id="tAl-EB-dAq" customClass="DrawingCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="586"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAl-EB-dAq" id="MBj-Xc-vDK">
@@ -255,7 +256,7 @@
                                             <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="IG8-Jh-kor"/>
                                                         <constraint firstAttribute="width" constant="22" id="PAG-Kb-mcZ"/>
@@ -274,12 +275,9 @@
                                                             <include reference="PAG-Kb-mcZ"/>
                                                         </mask>
                                                     </variation>
-                                                    <connections>
-                                                        <action selector="upload:" destination="tAl-EB-dAq" eventType="touchUpInside" id="AaF-6a-gU8"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
-                                                    <rect key="frame" x="71" y="0.0" width="1" height="24"/>
+                                                    <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -309,7 +307,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
-                                                    <rect key="frame" x="88" y="0.0" width="134" height="24"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
                                                     </constraints>
@@ -617,6 +615,7 @@
                                     <outlet property="profileImage" destination="4EJ-Rj-sZ7" id="gs5-Eb-rxW"/>
                                     <outlet property="progressBar" destination="G8d-2o-Cdl" id="6Xb-CM-9EY"/>
                                     <outlet property="timeCreated" destination="TJM-QH-VOT" id="eCk-0Y-NGq"/>
+                                    <outlet property="uploadButton" destination="Yze-0X-GjG" id="FGY-nE-BY2"/>
                                     <outlet property="userButton" destination="t9O-CL-dxq" id="B9R-bY-WoZ"/>
                                 </connections>
                             </tableViewCell>
@@ -645,7 +644,7 @@
         <!--Canvix-->
         <scene sceneID="DzX-pb-Yw0">
             <objects>
-                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="oso-1h-tk1"/>
                         <viewControllerLayoutGuide type="bottom" id="e3O-Zi-OLe"/>
@@ -766,7 +765,7 @@
         <!--Loading View Controller-->
         <scene sceneID="1qg-38-0L5">
             <objects>
-                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="fiD-lJ-IKR" userLabel="Loading View Controller" customClass="LoadingViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Zmi-QF-ZBk"/>
                         <viewControllerLayoutGuide type="bottom" id="tnr-A0-xkn"/>
@@ -823,7 +822,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yyo-ll-IHM">
             <objects>
-                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="7tk-S9-5hV" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="HomeIcon" id="L2H-32-AxG">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -845,7 +844,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wlr-Yz-00Y">
             <objects>
-                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="CuC-tU-E7f" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="GroupsIcon" id="uWa-C7-36M">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -867,13 +866,13 @@
         <!--Friends-->
         <scene sceneID="slm-FW-9Fy">
             <objects>
-                <tableViewController id="KbN-Ld-eZt" customClass="UserListViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KbN-Ld-eZt" customClass="UserListViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="qZS-12-nUw">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="YLm-N4-C1O" customClass="UserCell" customModule="Canvi" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="UserCell" id="YLm-N4-C1O" customClass="UserCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="YLm-N4-C1O" id="uLf-Nx-RUW">
@@ -1004,7 +1003,7 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvi" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
+                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
                         <segue destination="FpX-q6-whp" kind="presentation" identifier="toLogin" modalTransitionStyle="crossDissolve" id="bgi-Ne-Bdd"/>
                         <segue destination="sJS-x6-3bU" kind="show" identifier="showUser" id="L5M-dB-8WQ"/>
                     </connections>
@@ -1017,13 +1016,13 @@
         <!--Comments-->
         <scene sceneID="tYT-Ot-iQN">
             <objects>
-                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="PeY-4c-kJZ">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Canvi" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="fHR-Kl-T59" customClass="CommentCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="82"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fHR-Kl-T59" id="PxQ-EL-KX8">
@@ -1214,7 +1213,7 @@
                                     <outlet property="username" destination="Z11-yh-Fhg" id="XIF-3l-agG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Canvi" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EzM-5m-5ac" id="Ux9-46-s7a">
@@ -1334,7 +1333,7 @@
         <!--Navigation Controller-->
         <scene sceneID="PcC-ob-b0o">
             <objects>
-                <navigationController id="I09-XK-7yA" customClass="NavigationController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="I09-XK-7yA" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="Follow" id="Ok4-nY-Hjm">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
@@ -1356,13 +1355,13 @@
         <!--Profile-->
         <scene sceneID="Mlt-Sg-06L">
             <objects>
-                <tableViewController id="sJS-x6-3bU" customClass="ProfileViewController" customModule="Canvi" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sJS-x6-3bU" customClass="ProfileViewController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="17H-nV-nGr">
-                        <rect key="frame" x="0.0" y="64" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="102" id="sts-Zk-KoF" customClass="ProfileCell" customModule="Canvi" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="ProfileCell" rowHeight="102" id="sts-Zk-KoF" customClass="ProfileCell" customModule="Canvix" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="600" height="102"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sts-Zk-KoF" id="mem-bg-lia">
@@ -1405,23 +1404,23 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
                                             <rect key="frame" x="96" y="-12" width="188" height="53"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
-                                                    <rect key="frame" x="0.0" y="0.0" width="188" height="34"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="194" height="41"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
-                                                            <rect key="frame" x="0.0" y="0.0" width="52" height="34"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="54" height="41"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="17"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
-                                                                    <rect key="frame" x="0.0" y="14" width="52" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="54" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1429,16 +1428,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
-                                                            <rect key="frame" x="68" y="0.0" width="52" height="34"/>
+                                                            <rect key="frame" x="70" y="0.0" width="54" height="41"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="17"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
-                                                                    <rect key="frame" x="0.0" y="14" width="52" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="54" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1446,16 +1445,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
-                                                            <rect key="frame" x="136" y="0.0" width="52" height="34"/>
+                                                            <rect key="frame" x="140" y="0.0" width="54" height="41"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="52" height="14"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="54" height="17"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
-                                                                    <rect key="frame" x="0.0" y="14" width="52" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="17" width="54" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1465,7 +1464,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
-                                                    <rect key="frame" x="0.0" y="34" width="188" height="36"/>
+                                                    <rect key="frame" x="0.0" y="41" width="194" height="36"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <state key="normal" image="Follow">
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1554,8 +1553,8 @@
                                     <outlet property="profileImage" destination="zyR-Ic-D4e" id="fpC-4p-r8g"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DrawingCell" rowHeight="586" id="mLR-CF-w6C" customClass="DrawingCell" customModule="Canvi" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="600" height="586"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="DrawingCell" rowHeight="586" id="mLR-CF-w6C" customClass="DrawingCell" customModule="Canvix" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="130" width="600" height="586"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mLR-CF-w6C" id="D7n-bF-rgv">
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="586"/>
@@ -1691,7 +1690,7 @@
                                             <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E83-B6-gpx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="22" id="RgB-r2-mG3"/>
                                                         <constraint firstAttribute="height" constant="22" id="kUB-9k-wuO"/>
@@ -1715,7 +1714,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mg4-AP-jJQ">
-                                                    <rect key="frame" x="71" y="0.0" width="1" height="24"/>
+                                                    <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="KgQ-Jb-zKe">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -1745,7 +1744,7 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CVV-wy-8SL">
-                                                    <rect key="frame" x="88" y="0.0" width="134" height="24"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="ZtH-bT-b0G"/>
                                                     </constraints>
@@ -1800,8 +1799,7 @@
                                                     <exclude reference="NeD-ai-3mG"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="272" y="554" width="120" height="14"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="NeD-ai-3mG"/>
                                                 </mask>
@@ -2062,9 +2060,12 @@
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="FEj-Ew-uYE">
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="pullRefresh:" destination="sJS-x6-3bU" eventType="valueChanged" id="2lQ-be-2ch"/>
+                        </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="Vip-gR-1Ss" kind="unwind" identifier="backToFriends" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvi" customModuleProvider="target" unwindAction="backToFriends:" id="ENJ-Wo-drW"/>
+                        <segue destination="Vip-gR-1Ss" kind="unwind" identifier="backToFriends" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" customModuleProvider="target" unwindAction="backToFriends:" id="ENJ-Wo-drW"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jds-EZ-IXD" userLabel="First Responder" sceneMemberID="firstResponder"/>

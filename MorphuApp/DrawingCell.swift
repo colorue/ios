@@ -18,20 +18,16 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     @IBOutlet weak var creator: UILabel!
     @IBOutlet weak var drawingImage: UIImageView!
     @IBOutlet weak var timeCreated: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
-    @IBOutlet weak var likeCount: UIButton!
     @IBOutlet weak var likes: UILabel!
     @IBOutlet weak var commentCount: UILabel!
+    
     @IBOutlet weak var progressBar: UIProgressView!
     
     @IBOutlet weak var userButton: UIButton!
+    @IBOutlet weak var uploadButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
-
-    
-    @IBAction func upload(sender: UIButton) {
-        delagate?.upload(self)
-    }
     
     @IBAction func like(sender: UIButton) {
         if !(drawing?.liked(api.getActiveUser()))! {
@@ -49,6 +45,5 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     
     func imageLoaded(image: UIImage) {
         self.drawingImage.image = image
-        self.delagate?.refresh()
     }
 }

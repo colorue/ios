@@ -131,7 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
-				873AFA0F1CED7697006FD34A /* Canvi */,
+				873AFA0F1CED7697006FD34A /* Canvix */,
 				873AFA0E1CED7697006FD34A /* Products */,
 				1434282B85DD599183CA51DD /* Pods */,
 				BAEE6982A2EBD2C1D64BAA23 /* Frameworks */,
@@ -146,7 +146,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		873AFA0F1CED7697006FD34A /* Canvi */ = {
+		873AFA0F1CED7697006FD34A /* Canvix */ = {
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
@@ -160,7 +160,7 @@
 				8763D31A1CEE244500E3D528 /* API */,
 				8763D31F1CEE247F00E3D528 /* Supporting Files */,
 			);
-			name = Canvi;
+			name = Canvix;
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};

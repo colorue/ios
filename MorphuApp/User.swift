@@ -15,7 +15,7 @@ class User {
     var profileImage: UIImage  //make getter and setter
     private var following = [User]()
     private var followers = [User]()
-    private var drawings = [Drawing]()
+    private var drawings = [String]()
     
     init(userId: String = "", email: String = "", username: String = "", profileImage: UIImage = UIImage()) {
         self.userId = userId
@@ -73,11 +73,11 @@ class User {
         return self.followers
     }
     
-    func addDrawing(drawing: Drawing) {
-        self.drawings.append(drawing)
+    func addDrawingId(drawingId: String) {
+        self.drawings.append(drawingId)
     }
     
     func getDrawings() -> [Drawing] {
-        return self.drawings
+        return []
     }
 }

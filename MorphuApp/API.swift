@@ -160,10 +160,8 @@ class API {
             })
         })
         
-        self.myRootRef.child("users/\(user.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-            self.getDrawing(snapshot.key, callback: { (drawing: Drawing, false) -> () in
-                user.addDrawing(drawing)
-            })
+        self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+            user.addDrawingId(snapshot.key)
         })
     }
     
