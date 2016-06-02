@@ -12,6 +12,9 @@ class TabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.delegate = UIApplication.sharedApplication().delegate as? UITabBarControllerDelegate
+
         self.tabBar.barStyle = .Default
         self.tabBar.tintColor = morhpuColor
     }

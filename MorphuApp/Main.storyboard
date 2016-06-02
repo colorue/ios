@@ -6,6 +6,7 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Segues with Peek and Pop" minToolsVersion="7.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Regular.ttf">
@@ -330,7 +331,10 @@
                                                     </variation>
                                                     <connections>
                                                         <action selector="viewLikes:" destination="tAl-EB-dAq" eventType="touchUpInside" id="Ukz-j1-Bha"/>
-                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="eHc-k5-le0"/>
+                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="eHc-k5-le0">
+                                                            <segue key="commit" inheritsFrom="parent" id="wAW-ip-4by"/>
+                                                            <segue key="preview" inheritsFrom="commit" id="JO2-Kb-Vcb"/>
+                                                        </segue>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -379,7 +383,10 @@
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="tAl-EB-dAq" eventType="touchUpInside" id="Nvo-BN-Rez"/>
-                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="ULh-ep-5Ui"/>
+                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="ULh-ep-5Ui">
+                                                    <segue key="commit" inheritsFrom="parent" id="OLF-wF-j2A"/>
+                                                    <segue key="preview" inheritsFrom="commit" id="2q2-Pi-mb1"/>
+                                                </segue>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -988,7 +995,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXa-pc-yIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CKt-Sw-2U1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="1504.5"/>
+            <point key="canvasLocation" x="1002" y="1558.5"/>
         </scene>
         <!--Likes-->
         <scene sceneID="DOn-HV-3qF">
@@ -1881,7 +1888,10 @@
                                                     </variation>
                                                     <connections>
                                                         <action selector="viewLikes:" destination="BlJ-fn-HZY" eventType="touchUpInside" id="Qqz-EZ-j6c"/>
-                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="LHy-zQ-0XX"/>
+                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="LHy-zQ-0XX">
+                                                            <segue key="commit" inheritsFrom="parent" id="IZA-Qh-SZT"/>
+                                                            <segue key="preview" inheritsFrom="commit" id="bvg-9z-pTW"/>
+                                                        </segue>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1930,7 +1940,10 @@
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="BlJ-fn-HZY" eventType="touchUpInside" id="HPI-oa-DeX"/>
-                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="Dg3-Co-lXy"/>
+                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="Dg3-Co-lXy">
+                                                    <segue key="commit" inheritsFrom="parent" id="VeQ-0w-D2K"/>
+                                                    <segue key="preview" inheritsFrom="commit" id="0ZO-rb-rJF"/>
+                                                </segue>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -2176,8 +2189,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="5uB-bY-P8D"/>
         <segue reference="bgi-Ne-Bdd"/>
-        <segue reference="xxt-zd-PQD"/>
-        <segue reference="LHy-zQ-0XX"/>
-        <segue reference="Dg3-Co-lXy"/>
+        <segue reference="L5M-dB-8WQ"/>
+        <segue reference="ULh-ep-5Ui"/>
+        <segue reference="eHc-k5-le0"/>
     </inferredMetricsTieBreakers>
 </document>
