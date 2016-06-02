@@ -78,7 +78,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAe-qX-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ebr-du-21l" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2335.5" y="720"/>
+            <point key="canvasLocation" x="1651.5" y="157.5"/>
         </scene>
         <!--Present Drawing View Controller-->
         <scene sceneID="Fnm-IN-MFO">
@@ -99,7 +99,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZBk-iI-iR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="837" y="720"/>
+            <point key="canvasLocation" x="6" y="157.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RVQ-o7-j7n">
@@ -115,7 +115,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vbR-P3-EWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1590" y="720"/>
+            <point key="canvasLocation" x="822" y="157.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
@@ -137,7 +137,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXz-WY-GOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103.5" y="720"/>
+            <point key="canvasLocation" x="-784.5" y="157.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
@@ -379,6 +379,7 @@
                                                     </variation>
                                                     <connections>
                                                         <action selector="viewLikes:" destination="tAl-EB-dAq" eventType="touchUpInside" id="Ukz-j1-Bha"/>
+                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="eHc-k5-le0"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -427,6 +428,7 @@
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="tAl-EB-dAq" eventType="touchUpInside" id="Nvo-BN-Rez"/>
+                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="ULh-ep-5Ui"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -656,14 +658,10 @@
                             <action selector="pullRefresh:" destination="4Ba-st-mMB" eventType="valueChanged" id="eXl-Jv-kRa"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="Phl-42-DX6"/>
-                        <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="o7b-v6-iRo"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCQ-E2-ktF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-777" y="2569.5"/>
+            <point key="canvasLocation" x="159" y="2275.5"/>
         </scene>
         <!--Canvi-->
         <scene sceneID="DzX-pb-Yw0">
@@ -782,7 +780,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="STi-0B-COi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1635" y="382.5"/>
+            <point key="canvasLocation" x="-1635" y="1786.5"/>
         </scene>
         <!--Loading View Controller-->
         <scene sceneID="1qg-38-0L5">
@@ -861,7 +859,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hY1-x9-IV6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-776" y="1865"/>
+            <point key="canvasLocation" x="-784.5" y="2275.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="wlr-Yz-00Y">
@@ -883,7 +881,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ITf-PE-S5x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-777" y="367.5"/>
+            <point key="canvasLocation" x="159" y="1504.5"/>
         </scene>
         <!--Friends-->
         <scene sceneID="slm-FW-9Fy">
@@ -1039,7 +1037,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXa-pc-yIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="CKt-Sw-2U1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-777" y="-326.25"/>
+            <point key="canvasLocation" x="1041" y="1504.5"/>
         </scene>
         <!--Likes-->
         <scene sceneID="DOn-HV-3qF">
@@ -1185,7 +1183,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mkl-NO-iuT" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="gUt-cO-JrI" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="6" y="2569.5"/>
+            <point key="canvasLocation" x="3459" y="1554"/>
         </scene>
         <!--Comments-->
         <scene sceneID="tYT-Ot-iQN">
@@ -1284,8 +1282,15 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUH-2h-S3O">
+                                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <connections>
+                                                <segue destination="sJS-x6-3bU" kind="show" identifier="toProfile" id="sFW-OK-Bh1"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="OUH-2h-S3O" firstAttribute="trailing" secondItem="Z11-yh-Fhg" secondAttribute="trailing" id="35G-lc-o5w"/>
                                         <constraint firstItem="34r-cq-MZy" firstAttribute="top" secondItem="PxQ-EL-KX8" secondAttribute="topMargin" id="86P-TO-xE1"/>
                                         <constraint firstItem="UCC-d9-TJM" firstAttribute="leading" secondItem="PxQ-EL-KX8" secondAttribute="leadingMargin" id="AIM-eR-LfG">
                                             <variation key="heightClass=regular-widthClass=compact" constant="4"/>
@@ -1297,6 +1302,7 @@
                                             <variation key="heightClass=regular-widthClass=compact" constant="4"/>
                                         </constraint>
                                         <constraint firstItem="GrA-Ie-dJh" firstAttribute="top" secondItem="34r-cq-MZy" secondAttribute="top" id="Hrs-G6-zEx"/>
+                                        <constraint firstItem="OUH-2h-S3O" firstAttribute="leading" secondItem="34r-cq-MZy" secondAttribute="leading" id="KS3-rG-cSS"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="UCC-d9-TJM" secondAttribute="bottom" constant="4" id="LDS-TA-9Nx">
                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                         </constraint>
@@ -1304,11 +1310,13 @@
                                         <constraint firstItem="GrA-Ie-dJh" firstAttribute="top" secondItem="PxQ-EL-KX8" secondAttribute="topMargin" constant="8" id="N42-Ab-K2n">
                                             <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                                         </constraint>
+                                        <constraint firstItem="OUH-2h-S3O" firstAttribute="bottom" secondItem="Z11-yh-Fhg" secondAttribute="bottom" id="au8-vY-h1N"/>
                                         <constraint firstItem="Z11-yh-Fhg" firstAttribute="leading" secondItem="34r-cq-MZy" secondAttribute="trailing" constant="8" id="bXx-Ge-tZO">
                                             <variation key="heightClass=regular-widthClass=compact" constant="4"/>
                                         </constraint>
                                         <constraint firstItem="Z11-yh-Fhg" firstAttribute="leading" secondItem="PxQ-EL-KX8" secondAttribute="leadingMargin" constant="4" id="fCF-mo-m87"/>
                                         <constraint firstAttribute="trailingMargin" secondItem="GrA-Ie-dJh" secondAttribute="trailing" id="geI-VO-Bxr"/>
+                                        <constraint firstItem="OUH-2h-S3O" firstAttribute="top" secondItem="Z11-yh-Fhg" secondAttribute="top" id="hbm-5T-fMA"/>
                                         <constraint firstItem="Z11-yh-Fhg" firstAttribute="top" secondItem="34r-cq-MZy" secondAttribute="top" id="syI-cJ-sds"/>
                                     </constraints>
                                     <variation key="default">
@@ -1317,20 +1325,25 @@
                                             <exclude reference="34r-cq-MZy"/>
                                             <exclude reference="Z11-yh-Fhg"/>
                                             <exclude reference="UCC-d9-TJM"/>
+                                            <exclude reference="OUH-2h-S3O"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <exclude reference="Hrs-G6-zEx"/>
-                                            <exclude reference="N42-Ab-K2n"/>
-                                            <exclude reference="geI-VO-Bxr"/>
+                                            <exclude reference="86P-TO-xE1"/>
+                                            <exclude reference="MEM-AE-vhB"/>
+                                            <exclude reference="bXx-Ge-tZO"/>
+                                            <exclude reference="fCF-mo-m87"/>
+                                            <exclude reference="syI-cJ-sds"/>
                                             <exclude reference="AIM-eR-LfG"/>
                                             <exclude reference="H7Q-L8-BCT"/>
                                             <exclude reference="HAg-Kh-i8p"/>
                                             <exclude reference="LDS-TA-9Nx"/>
-                                            <exclude reference="bXx-Ge-tZO"/>
-                                            <exclude reference="fCF-mo-m87"/>
-                                            <exclude reference="syI-cJ-sds"/>
-                                            <exclude reference="86P-TO-xE1"/>
-                                            <exclude reference="MEM-AE-vhB"/>
+                                            <exclude reference="35G-lc-o5w"/>
+                                            <exclude reference="KS3-rG-cSS"/>
+                                            <exclude reference="au8-vY-h1N"/>
+                                            <exclude reference="hbm-5T-fMA"/>
+                                            <exclude reference="Hrs-G6-zEx"/>
+                                            <exclude reference="N42-Ab-K2n"/>
+                                            <exclude reference="geI-VO-Bxr"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=compact">
@@ -1339,20 +1352,25 @@
                                             <include reference="34r-cq-MZy"/>
                                             <include reference="Z11-yh-Fhg"/>
                                             <include reference="UCC-d9-TJM"/>
+                                            <include reference="OUH-2h-S3O"/>
                                         </mask>
                                         <mask key="constraints">
-                                            <include reference="Hrs-G6-zEx"/>
-                                            <include reference="N42-Ab-K2n"/>
-                                            <include reference="geI-VO-Bxr"/>
+                                            <include reference="86P-TO-xE1"/>
+                                            <include reference="MEM-AE-vhB"/>
+                                            <include reference="bXx-Ge-tZO"/>
+                                            <exclude reference="fCF-mo-m87"/>
+                                            <include reference="syI-cJ-sds"/>
                                             <include reference="AIM-eR-LfG"/>
                                             <include reference="H7Q-L8-BCT"/>
                                             <include reference="HAg-Kh-i8p"/>
                                             <include reference="LDS-TA-9Nx"/>
-                                            <include reference="bXx-Ge-tZO"/>
-                                            <exclude reference="fCF-mo-m87"/>
-                                            <include reference="syI-cJ-sds"/>
-                                            <include reference="86P-TO-xE1"/>
-                                            <include reference="MEM-AE-vhB"/>
+                                            <include reference="35G-lc-o5w"/>
+                                            <include reference="KS3-rG-cSS"/>
+                                            <include reference="au8-vY-h1N"/>
+                                            <include reference="hbm-5T-fMA"/>
+                                            <include reference="Hrs-G6-zEx"/>
+                                            <include reference="N42-Ab-K2n"/>
+                                            <include reference="geI-VO-Bxr"/>
                                         </mask>
                                     </variation>
                                 </tableViewCellContentView>
@@ -1476,7 +1494,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWw-jc-d5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="XdB-xt-AJz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-777" y="3267"/>
+            <point key="canvasLocation" x="3459" y="774"/>
         </scene>
         <!--Profile-->
         <scene sceneID="r2q-hR-0i2">
@@ -1890,6 +1908,7 @@
                                                     </variation>
                                                     <connections>
                                                         <action selector="viewLikes:" destination="p40-8x-IBw" eventType="touchUpInside" id="BIm-Yb-Icg"/>
+                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="Av0-pc-jf8"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -1938,6 +1957,7 @@
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="p40-8x-IBw" eventType="touchUpInside" id="spd-8b-HPc"/>
+                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="Uqk-LT-KKw"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -2160,7 +2180,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLN-RN-Cvd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="813" y="1387.5"/>
+            <point key="canvasLocation" x="1041" y="838.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PcC-ob-b0o">
@@ -2182,7 +2202,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVc-A1-r3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="103.5" y="1387.5"/>
+            <point key="canvasLocation" x="159" y="838.5"/>
         </scene>
         <!--Profile-->
         <scene sceneID="Mlt-Sg-06L">
@@ -2596,6 +2616,7 @@
                                                     </variation>
                                                     <connections>
                                                         <action selector="viewLikes:" destination="BlJ-fn-HZY" eventType="touchUpInside" id="Qqz-EZ-j6c"/>
+                                                        <segue destination="RrQ-3M-rta" kind="show" identifier="toViewLikes" id="LHy-zQ-0XX"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -2644,6 +2665,7 @@
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                             <connections>
                                                 <action selector="viewComments:" destination="BlJ-fn-HZY" eventType="touchUpInside" id="HPI-oa-DeX"/>
+                                                <segue destination="eSl-sZ-L0p" kind="show" identifier="toViewComments" id="Dg3-Co-lXy"/>
                                             </connections>
                                         </button>
                                     </subviews>
@@ -2870,7 +2892,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jds-EZ-IXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Vip-gR-1Ss" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="30" y="-326.25"/>
+            <point key="canvasLocation" x="1908" y="1504.5"/>
         </scene>
     </scenes>
     <resources>
@@ -2889,5 +2911,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="5uB-bY-P8D"/>
         <segue reference="bgi-Ne-Bdd"/>
+        <segue reference="eHc-k5-le0"/>
+        <segue reference="sFW-OK-Bh1"/>
+        <segue reference="Dg3-Co-lXy"/>
     </inferredMetricsTieBreakers>
 </document>

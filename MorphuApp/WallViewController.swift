@@ -143,20 +143,13 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     }
     
     func viewLikes(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            self.selectedDrawing = drawing
-        }
-        self.performSegueWithIdentifier("toViewLikes", sender: self)
+        self.selectedDrawing = drawingCell.drawing!
     }
     
     func viewComments(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            self.selectedDrawing = drawing
-        }
-        self.performSegueWithIdentifier("toViewComments", sender: self)
+        self.selectedDrawing = drawingCell.drawing!
     }
     
-
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toViewLikes" {

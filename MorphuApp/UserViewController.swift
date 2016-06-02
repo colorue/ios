@@ -173,7 +173,6 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
-            //            self.refreshControl!.endRefreshing()
             self.tableView.reloadData()
         })
     }
@@ -187,29 +186,19 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     }
     
     func viewLikes(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            self.selectedDrawing = drawing
-        }
-        self.performSegueWithIdentifier("toViewLikes", sender: self)
+        self.selectedDrawing = drawingCell.drawing!
     }
     
     func viewComments(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            self.selectedDrawing = drawing
-        }
-        self.performSegueWithIdentifier("toViewComments", sender: self)
+        self.selectedDrawing = drawingCell.drawing!
     }
-    
-    
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toViewLikes" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! LikeViewController
+            let targetController = segue.destinationViewController as! LikeViewController
             targetController.drawingInstance = self.selectedDrawing
         } else if segue.identifier == "toViewComments" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! CommentViewController
+            let targetController = segue.destinationViewController as! CommentViewController
             targetController.drawingInstance = self.selectedDrawing
         }
     }

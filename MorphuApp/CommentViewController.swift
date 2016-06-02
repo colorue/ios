@@ -60,6 +60,17 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
         return cell
     }
     
+    
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        print(tableView.indexPathForSelectedRow?.row)
+        
+        if segue.identifier == "toProfile" {
+            let targetController = segue.destinationViewController as! UserViewController
+            targetController.userInstance = User()
+        }
+    }
+    
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
     }
