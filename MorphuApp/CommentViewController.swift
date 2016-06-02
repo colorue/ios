@@ -12,16 +12,17 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     
     var drawingInstance = Drawing()
     var writeCommentCell: WriteCommentCell?
-    let backButton = UIButton(type: UIButtonType.Custom)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
+        
     }
     
     override func viewDidAppear(animated: Bool) {
+
         super.viewDidAppear(animated)
         self.tableView.reloadData()
     }

@@ -26,8 +26,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         api.delagate = self
         self.refreshControl!.beginRefreshing()
         
-        navigationController?.hidesBarsOnSwipe = true
-        
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
@@ -40,32 +38,8 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         super.viewDidAppear(animated)
         
         self.tableView.reloadData()
-
         self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
-        
-        /*
-        let prefs = NSUserDefaults.standardUserDefaults()
-
-        if (prefs.boolForKey("notificationsAsk")) {
-            let softNotificationAsk = UIAlertController(title: "Enable push notifications?", message: "Find out when someone sends you a prompt or drawing" , preferredStyle: UIAlertControllerStyle.Alert)
-            softNotificationAsk.addAction(UIAlertAction(title: "Got it", style: UIAlertActionStyle.Default, handler: enableNotifications))
-            //softNotificationAsk.addAction(UIAlertAction(title: "Nope", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(softNotificationAsk, animated: true, completion: nil)
-            prefs.setValue(false, forKey: "notificationsAsk")
-        }
-         */
-        
     }
-    
-    /*
-    func enableNotifications(_: UIAlertAction) {
-        //UAirship.push()?.userPushNotificationsEnabled = true
-    }
-    
-    func disableNotifactions(_: UIAlertAction) {
-        //UAirship.push()?.userPushNotificationsEnabled = false
-    }
-     */
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()

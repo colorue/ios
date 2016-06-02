@@ -17,6 +17,8 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
         navigationBar.barTintColor = morhpuColor
         navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: UIColor.whiteColor()]
         navigationBar.translucent = false
+        
+        self.navigationBar.tintColor = UIColor.whiteColor()
         setStatusBarBackgroundColor(morhpuColor)
     }
 
