@@ -83,8 +83,7 @@ class GroupTableViewController: UITableViewController, UserCellDelagate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "viewFriend" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! UserViewController
+            let targetController = segue.destinationViewController as! UserViewController
             if let row = tableView.indexPathForSelectedRow?.row {
                 targetController.userInstance = api.getUsers()[row]
             }

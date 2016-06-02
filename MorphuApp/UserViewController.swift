@@ -32,13 +32,14 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         //        navigationController?.hidesBarsOnSwipe = true
         
         
+        /*
         let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
         backButton.tintColor = UIColor.whiteColor()
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, forState: UIControlState.Normal)
         backButton.addTarget(self, action: #selector(UserViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
+        */
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(UserViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)

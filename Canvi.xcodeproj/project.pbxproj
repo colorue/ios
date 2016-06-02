@@ -156,7 +156,6 @@
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
 				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
 				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
-				8774BA461CFF823B00B26931 /* ProfileCell.swift */,
 				873AFA1C1CED7697006FD34A /* Info.plist */,
 				8763D3141CEE22D300E3D528 /* Assets.xcassets */,
 				8763D3171CEE242100E3D528 /* Controller */,
@@ -233,6 +232,7 @@
 		8763D31C1CEE245F00E3D528 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				8774BA461CFF823B00B26931 /* ProfileCell.swift */,
 				8763D2E61CEE229C00E3D528 /* UserCell.swift */,
 				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
 				879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */,

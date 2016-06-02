@@ -19,13 +19,6 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
-        
-        let chevron = UIImage(named: "ChevronBack")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        backButton.tintColor = UIColor.whiteColor()
-        backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
-        backButton.setImage(chevron, forState: UIControlState.Normal)
-        backButton.addTarget(self, action: #selector(LikeViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,11 +72,5 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate {
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
-    }
-    
-    func unwind(sender: UIBarButtonItem) {
-        self.backButton.enabled = false
-        self.writeCommentCell?.commentText.resignFirstResponder()
-        self.performSegueWithIdentifier("backToHome", sender: self)
     }
 }

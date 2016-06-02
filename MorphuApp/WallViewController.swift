@@ -186,12 +186,10 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "toViewLikes" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! LikeViewController
+            let targetController = segue.destinationViewController as! LikeViewController
             targetController.drawingInstance = self.selectedDrawing
         } else if segue.identifier == "toViewComments" {
-            let destinationNavigationController = segue.destinationViewController as! UINavigationController
-            let targetController = destinationNavigationController.topViewController as! CommentViewController
+            let targetController = segue.destinationViewController as! CommentViewController
             targetController.drawingInstance = self.selectedDrawing
         }
     }
