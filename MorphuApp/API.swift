@@ -356,12 +356,10 @@ class API {
             })
     }
     
-    func getImage(imageId: String) -> UIImage? {
-        return imageDict[imageId]
-    }
-    
     func downloadImage(imageId: String, progressCallback: (Float) -> (), finishedCallback: (UIImage) -> ()) {
-        if imageDict[imageId] == nil {
+        if let image = imageDict[imageId] {
+            finishedCallback(image)
+        } else {
             let drawingRef = storageRef.child("drawings/\(imageId).png")
             
             let downloadTask = drawingRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
@@ -372,7 +370,7 @@ class API {
                     if let imageData = data {
                         progressCallback(1.0)
                         let image = UIImage(data: imageData)!
-                    self.imageDict[imageId] = image
+                        self.imageDict[imageId] = image
                         finishedCallback(image)
                     } else {
                         print("data error")

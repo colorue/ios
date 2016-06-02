@@ -12,6 +12,8 @@ import CCBottomRefreshControl
 class WallViewController: UITableViewController, APIDelagate {
     let api = API.sharedInstance
     
+//    let drawings = API.sharedInstance.getWall()
+    
     let bottomRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -68,6 +70,7 @@ class WallViewController: UITableViewController, APIDelagate {
         let drawing = api.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
+        drawingCell.drawingImage.image = nil
 
         api.downloadImage(drawing.getDrawingId(),
                           progressCallback: { (progress: Float) -> () in
@@ -76,8 +79,6 @@ class WallViewController: UITableViewController, APIDelagate {
                           finishedCallback: { (drawingImage: UIImage) -> () in
                             drawingCell.drawingImage.image = drawingImage
         })
-        
-        drawingCell.drawingImage.image = api.getImage(drawing.getDrawingId())
         
         drawingCell.profileImage.image = drawing.getArtist().profileImage
         drawingCell.creator.text = drawing.getArtist().username
