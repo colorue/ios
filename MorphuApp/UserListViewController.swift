@@ -62,10 +62,8 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     func followAction(userCell: UserCell) {
         userCell.followButton.selected = true
         
-        if let user = userCell.user {
-            api.getActiveUser().follow(user)
-            api.follow(user)
-        }
+        api.getActiveUser().follow(userCell.user!)
+        api.follow(userCell.user!)
     }
     
     func unfollowAction(userCell: UserCell) {
@@ -81,10 +79,8 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     
     private func unfollow(userCell: UserCell) {
         userCell.followButton.selected = false
-        if let user = userCell.user {
-            api.getActiveUser().unfollow(user)
-            api.unfollow(user)
-        }
+        api.getActiveUser().unfollow(userCell.user!)
+        api.unfollow(userCell.user!)
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {

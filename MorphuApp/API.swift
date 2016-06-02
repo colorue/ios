@@ -46,7 +46,6 @@ class API {
 
     private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) { //callback
         if let drawing = self.drawingDict[drawingId] {
-            
             callback(drawing, false)
         } else {
         
@@ -299,7 +298,7 @@ class API {
     }
 
     func loadWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
+        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(4).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
@@ -331,6 +330,7 @@ class API {
         myRootRef.child("users/\(getActiveUser().userId)/wall").observeEventType(.ChildRemoved, withBlock: { snapshot in
                 let drawingId = snapshot.key
                 var i = 0
+                self.drawingDict[drawingId] = nil
                 for drawing in self.wall {
                     if drawing.getDrawingId() == drawingId {
                         self.wall.removeAtIndex(i)
