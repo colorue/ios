@@ -9,59 +9,9 @@
 import UIKit
 import CCBottomRefreshControl
 
-class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
-    let api = API.sharedInstance
+class ProfileViewController: WallViewController {
     
-    var selectedDrawing = Drawing()
-    let bottomRefreshControl = UIRefreshControl()
-    let backButton = UIButton(type: UIButtonType.Custom)
-    
-    var userInstance: User
-    
-    required init?(coder aDecoder: NSCoder) {
-        self.userInstance = api.getActiveUser()
-        super.init(coder: aDecoder)
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 586.0
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = backgroundColor
-        
-        api.delagate = self
-        
-        
-        
-        bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(ProfileViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
-    }
-    
-    
-    func refreshBottom(sender: UIRefreshControl) {
-        refresh()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        
-        self.tableView.reloadData()
-        
-        self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
-        
-    }
-    
-    @IBAction func pullRefresh(sender: UIRefreshControl) {
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent;
-    }
+    var userInstance: User?
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -72,30 +22,27 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if section == 0 {
             return 1
         } else {
-            return userInstance.getDrawings().count
+            return userInstance!.getDrawings().count
         }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
-            cell.profileImage.image = userInstance.profileImage
-            cell.followingCount.text = String(userInstance.getFollowing().count)
-            cell.followersCount.text = String(userInstance.getFollowers().count)
-            cell.drawingsCount.text = String(userInstance.getDrawings().count)
+            cell.profileImage.image = userInstance!.profileImage
+            cell.followingCount.text = String(userInstance!.getFollowing().count)
+            cell.followersCount.text = String(userInstance!.getFollowers().count)
+            cell.drawingsCount.text = String(userInstance!.getDrawings().count)
             
-            if userInstance.userId == api.getActiveUser().userId {
+            if userInstance!.userId == api.getActiveUser().userId {
                 cell.followButton.setImage(nil, forState: .Normal)
                 cell.followButton.enabled = false
             }
             
             return cell
         } else {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! DrawingCell
-            
-            if cell.delagate == nil {
-                cell.delagate = self
-            }
+            let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
+
             return cell
         }
     }
@@ -106,7 +53,7 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
         if indexPath.section == 0 {
             
         } else {
-            let content = userInstance.getDrawings()[indexPath.row]
+            let content = userInstance!.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
             
             content.delagate = drawingCell
@@ -117,6 +64,9 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
             drawingCell.drawingImage.image = content.getImage()
             drawingCell.timeCreated.text = content.getTimeSinceSent()
             drawingCell.likeButton.selected = content.liked(api.getActiveUser())
+            
+            drawingCell.delagate = self
+
             
             let comments = content.getComments().count
             if comments == 1 {
@@ -132,64 +82,21 @@ class ProfileViewController: UITableViewController, DrawingCellDelagate, APIDela
             }
         }
     }
-    
-    private func setLikes(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            let likes = drawing.getLikes().count
-            if likes == 0 {
-                drawingCell.likes.text = ""
-                drawingCell.likeCount.enabled = false
-            } else if likes == 1 {
-                drawingCell.likeCount.enabled = true
-                drawingCell.likes.text = "1 like"
-            } else {
-                drawingCell.likeCount.enabled = true
-                drawingCell.likes.text = String(likes) + " likes"
-            }
-        }
-    }
-    
-    func like(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            api.like(drawing)
-            self.setLikes(drawingCell)
-        }
-    }
-    
-    func unlike(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            api.unlike(drawing)
-            self.setLikes(drawingCell)
-        }
-    }
-    
-    func refresh() {
-        dispatch_async(dispatch_get_main_queue(), {
-            self.bottomRefreshControl.endRefreshing()
-            self.tableView.reloadData()
-        })
-    }
-    
-    func upload(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
-            let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
-            avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-            self.presentViewController(avc, animated: true, completion: nil)
-        }
-    }
-    
-    func setSelectedDrawing(drawing: Drawing) {
-        self.selectedDrawing = drawing
-    }
-    
+
+    /*
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
-            targetController.users = self.selectedDrawing.getLikes()
+            targetController.users = api.getWall()[sender!.tag].getLikes()
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
-            targetController.drawingInstance = self.selectedDrawing
+            targetController.drawingInstance = api.getWall()[sender!.tag]
+        } else if segue.identifier == "showUser" {
+            let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.userInstance = api.getWall()[sender!.tag].getArtist()
         }
     }
+ 
+ */
 }

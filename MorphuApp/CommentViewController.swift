@@ -12,7 +12,6 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     
     var drawingInstance: Drawing?
     private var writeCommentCell: WriteCommentCell?
-    private var selectedComment: Comment?
     
     
     func setDrawingInstance(drawing: Drawing) {
@@ -20,13 +19,11 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         self.tableView.reloadData()
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -57,6 +54,8 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         cell.timeStamp.text = comment.getTimeSinceSent()
         cell.commentText.text = comment.text
         
+        cell.userButton.tag = indexPath.row
+        
         cell.comment = comment
         cell.delagate = self
 
@@ -76,17 +75,12 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         return cell
     }
     
-    func selectComment(comment: Comment) {
-        print("selectComment")
-        self.selectedComment = comment
-    }
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         print(tableView.indexPathForSelectedRow?.row)
         
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
-            targetController.userInstance = self.selectedComment!.user
+            targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
         }
     }
     

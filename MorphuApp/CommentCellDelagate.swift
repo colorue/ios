@@ -9,5 +9,4 @@
 import Foundation
 
 protocol CommentCellDelagate {
-    func selectComment(comment: Comment)
 }

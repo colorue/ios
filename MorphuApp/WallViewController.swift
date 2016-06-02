@@ -47,10 +47,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         self.refreshControl?.endRefreshing()
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent;
-    }
-    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
@@ -61,7 +57,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("InboxDrawingCell", forIndexPath: indexPath) as! DrawingCell
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
         return cell
     }
         
@@ -101,7 +97,7 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         }
     }
     
-    private func setLikes(drawingCell: DrawingCell) {
+    func setLikes(drawingCell: DrawingCell) {
         if let drawing = drawingCell.drawing {
             let likes = drawing.getLikes().count
             if likes == 0 {
@@ -159,11 +155,6 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
             let targetController = segue.destinationViewController as! ProfileViewController
             targetController.userInstance = api.getWall()[sender!.tag].getArtist()
         }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func backToHome(segue: UIStoryboardSegue) {}

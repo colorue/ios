@@ -12,6 +12,8 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     
     var users = [User]()
     
+    let api = API.sharedInstance
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,15 +49,23 @@ class UserListViewController: UITableViewController, UserCellDelagate {
         cell.profileImage.image = user.profileImage
         cell.delagate = self
         cell.user = user
-        cell.followButton.selected = false
-        cell.followButton.hidden = true
-
+        
+        if user.userId == api.getActiveUser().userId {
+            cell.followButton.hidden = true
+        } else {
+            cell.followButton.selected = api.getActiveUser().isFollowing(user)
+        }
         
         return cell
     }
     
     func followAction(userCell: UserCell) {
         userCell.followButton.selected = true
+        
+        if let user = userCell.user {
+            api.getActiveUser().follow(user)
+            api.follow(user)
+        }
     }
     
     func unfollowAction(userCell: UserCell) {
@@ -71,6 +81,10 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     
     private func unfollow(userCell: UserCell) {
         userCell.followButton.selected = false
+        if let user = userCell.user {
+            api.getActiveUser().unfollow(user)
+            api.unfollow(user)
+        }
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
