@@ -17,7 +17,6 @@
 		8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */; };
 		8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* WallViewController.swift */; };
 		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
-		8763D2D81CEE226700E3D528 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C81CEE226700E3D528 /* FriendsViewController.swift */; };
 		8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */; };
 		8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CB1CEE226700E3D528 /* LoginViewController.swift */; };
 		8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */; };
@@ -43,7 +42,7 @@
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* UserViewController.swift */; };
 		879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */; };
-		879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */; };
+		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
 		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
@@ -68,7 +67,6 @@
 		8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		8763D2C01CEE226700E3D528 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 		8763D2C61CEE226700E3D528 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		8763D2C81CEE226700E3D528 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		8763D2CB1CEE226700E3D528 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
@@ -94,7 +92,7 @@
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCellDelagate.swift; sourceTree = "<group>"; };
-		879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikeViewController.swift; sourceTree = "<group>"; };
+		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
@@ -176,10 +174,7 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8763D3201CEE251800E3D528 /* Wall */,
-				8763D3211CEE252300E3D528 /* Drawing */,
-				8763D3221CEE253100E3D528 /* Friends */,
-				8774BA431CFF7E7D00B26931 /* Profile */,
+				87C32C551D00A10D003817D8 /* Main */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
 				8763D3251CEE256200E3D528 /* Loading */,
 				8763D3231CEE254100E3D528 /* Navigation */,
@@ -273,32 +268,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8763D3201CEE251800E3D528 /* Wall */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
-				879BCC951CF3F04F00CD95E7 /* LikeViewController.swift */,
-				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
-			);
-			name = Wall;
-			sourceTree = "<group>";
-		};
-		8763D3211CEE252300E3D528 /* Drawing */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
-			);
-			name = Drawing;
-			sourceTree = "<group>";
-		};
-		8763D3221CEE253100E3D528 /* Friends */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2C81CEE226700E3D528 /* FriendsViewController.swift */,
-			);
-			name = Friends;
-			sourceTree = "<group>";
-		};
 		8763D3231CEE254100E3D528 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -326,12 +295,16 @@
 			name = Loading;
 			sourceTree = "<group>";
 		};
-		8774BA431CFF7E7D00B26931 /* Profile */ = {
+		87C32C551D00A10D003817D8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
+				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
+				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
+				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
 				8774BA481CFFA08C00B26931 /* UserViewController.swift */,
 			);
-			name = Profile;
+			name = Main;
 			sourceTree = "<group>";
 		};
 		BAEE6982A2EBD2C1D64BAA23 /* Frameworks */ = {
@@ -485,7 +458,6 @@
 				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
-				8763D2D81CEE226700E3D528 /* FriendsViewController.swift in Sources */,
 				87C773D01CFBAC2700B70ED2 /* Wall.swift in Sources */,
 				8763D2FD1CEE229C00E3D528 /* DescriptionInputDelagate.swift in Sources */,
 				8763D2FC1CEE229C00E3D528 /* DescriptionInputView.swift in Sources */,
@@ -495,7 +467,7 @@
 				879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
-				879BCC961CF3F04F00CD95E7 /* LikeViewController.swift in Sources */,
+				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,

@@ -102,6 +102,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
         } else if let profileView = targetController as? UserViewController {
             profileView.userInstance = API.sharedInstance.getActiveUser()
+        } else if let friendsList = targetController as? UserListViewController {
+            friendsList.users = API.sharedInstance.getUsers()
         }
         
         return true

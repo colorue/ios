@@ -47,7 +47,6 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.navigationItem.title = userInstance.username
         
         self.tableView.reloadData()
         
@@ -188,24 +187,12 @@ class UserViewController: UITableViewController, DrawingCellDelagate, APIDelagat
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "toViewLikes" {
-            let targetController = segue.destinationViewController as! LikeViewController
-            targetController.drawingInstance = self.selectedDrawing
-        } else if segue.identifier == "toViewComments" {
+        if segue.identifier == "showLikes" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.users = self.selectedDrawing.getLikes()
+        } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.drawingInstance = self.selectedDrawing
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func unwind(sender: UIBarButtonItem) {
-        self.backButton.enabled = false
-        self.performSegueWithIdentifier("backToFriends", sender: self)
-    }
-    
-    @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }
