@@ -9,7 +9,7 @@
 import UIKit
 import CCBottomRefreshControl
 
-class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagate {
+class WallViewController: UITableViewController, APIDelagate {
     let api = API.sharedInstance
     
     let bottomRefreshControl = UIRefreshControl()
@@ -68,22 +68,35 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
         
         drawing.delagate = drawingCell
 
-        drawingCell.drawing = drawing
+//        drawingCell.drawing = drawing
         drawingCell.profileImage.image = drawing.getArtist().profileImage
         drawingCell.creator.text = drawing.getArtist().username
         drawingCell.drawingImage.image = drawing.getImage()
         drawingCell.timeCreated.text = drawing.getTimeSinceSent()
         drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
         
-        drawingCell.delagate = self
+//        drawingCell.delagate = self
         
         drawingCell.userButton.tag = indexPath.row
         drawingCell.uploadButton.tag = indexPath.row
-        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchUpInside)
         drawingCell.likeButton.tag = indexPath.row
         drawingCell.likesButton.tag = indexPath.row
         drawingCell.commentsButton.tag = indexPath.row
+        
+        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchDown)
+        drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchDown)
 
+        let likes = drawing.getLikes().count
+        if likes == 0 {
+            drawingCell.likes.text = ""
+            drawingCell.likesButton.enabled = false
+        } else if likes == 1 {
+            drawingCell.likesButton.enabled = true
+            drawingCell.likes.text = "1 like"
+        } else {
+            drawingCell.likesButton.enabled = true
+            drawingCell.likes.text = String(likes) + " likes"
+        }
  
         if drawing.getComments().count == 1 {
             drawingCell.commentCount.text = "1 comment"
@@ -91,15 +104,15 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
             drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
         }
         
-        self.setLikes(drawingCell)
-        
         if (indexPath.row + 1 >= api.getWall().count) {
             api.loadWall()
         }
     }
     
-    func setLikes(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
+    func setLikes(row: Int) {
+        
+        let drawing = api.getWall()[row]
+        let drawingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! DrawingCell
             let likes = drawing.getLikes().count
             if likes == 0 {
                 drawingCell.likes.text = ""
@@ -111,21 +124,19 @@ class WallViewController: UITableViewController, DrawingCellDelagate, APIDelagat
                 drawingCell.likesButton.enabled = true
                 drawingCell.likes.text = String(likes) + " likes"
             }
-        }
     }
     
-    func like(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
+    func likeButtonPressed(sender: UIButton) {
+        let drawing = api.getWall()[sender.tag]
+
+        if !(drawing.liked(api.getActiveUser())) {
+            sender.selected = true
             api.like(drawing)
-            self.setLikes(drawingCell)
-        }
-    }
-    
-    func unlike(drawingCell: DrawingCell) {
-        if let drawing = drawingCell.drawing {
+        } else {
+            sender.selected = false
             api.unlike(drawing)
-            self.setLikes(drawingCell)
         }
+        self.setLikes(sender.tag)
     }
     
     func refresh() {

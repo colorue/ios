@@ -58,14 +58,12 @@ class ProfileViewController: WallViewController {
             
             content.delagate = drawingCell
             
-            drawingCell.drawing = content
             drawingCell.profileImage.image = content.getArtist().profileImage
             drawingCell.creator.text = content.getArtist().username
             drawingCell.drawingImage.image = content.getImage()
             drawingCell.timeCreated.text = content.getTimeSinceSent()
             drawingCell.likeButton.selected = content.liked(api.getActiveUser())
             
-            drawingCell.delagate = self
 
             
             let comments = content.getComments().count
@@ -75,7 +73,7 @@ class ProfileViewController: WallViewController {
                 drawingCell.commentCount.text = String(content.getComments().count) + " comments"
             }
             
-            self.setLikes(drawingCell)
+//            self.setLikes(drawingCell)
             
             if (indexPath.row + 1 >= api.getWall().count) {
                 api.loadWall()

@@ -41,7 +41,6 @@
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
-		879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -92,7 +91,6 @@
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCellDelagate.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -241,7 +239,6 @@
 				8763D2E31CEE229C00E3D528 /* DescriptionInputDelagate.swift */,
 				8763D2E41CEE229C00E3D528 /* CanvasDelagate.swift */,
 				8763D2E51CEE229C00E3D528 /* ColorKeyboardDelagate.swift */,
-				879473D31CF3B3FC0002A004 /* DrawingCellDelagate.swift */,
 				8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */,
 				87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */,
 				87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */,
@@ -463,7 +460,6 @@
 				87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */,
 				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
-				879473D41CF3B3FC0002A004 /* DrawingCellDelagate.swift in Sources */,
 				8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
 				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,

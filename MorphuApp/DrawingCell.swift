@@ -10,10 +10,6 @@ import UIKit
 
 class DrawingCell: UITableViewCell, DrawingDelagate {
     
-    let api = API.sharedInstance
-    var delagate: DrawingCellDelagate?
-    var drawing: Drawing?
-    
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var creator: UILabel!
     @IBOutlet weak var drawingImage: UIImageView!
@@ -29,15 +25,6 @@ class DrawingCell: UITableViewCell, DrawingDelagate {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     
-    @IBAction func like(sender: UIButton) {
-        if !(drawing?.liked(api.getActiveUser()))! {
-            sender.selected = true
-            delagate?.like(self)
-        } else {
-            sender.selected = false
-            delagate?.unlike(self)
-        }
-    }
     
     func setProgress(progress: Float) {
         progressBar.setProgress(1.0 - progress, animated: true)

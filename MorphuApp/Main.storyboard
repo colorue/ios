@@ -302,9 +302,6 @@
                                                             <include reference="ykG-Qx-G2Z"/>
                                                         </mask>
                                                     </variation>
-                                                    <connections>
-                                                        <action selector="like:" destination="tAl-EB-dAq" eventType="touchUpInside" id="tEG-fG-JQH"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
                                                     <rect key="frame" x="152" y="0.0" width="125" height="36"/>
