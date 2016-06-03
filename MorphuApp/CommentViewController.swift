@@ -76,10 +76,9 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        print(tableView.indexPathForSelectedRow?.row)
-        
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.navigationItem.title = drawingInstance!.getComments()[sender!.tag].user.username
             targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
         }
     }
