@@ -26,7 +26,7 @@ class API {
 
     private var wall = [Drawing]()
     private var users = [User]()
-    private var activeUser = User()
+    private var activeUser: User?
     
     private var userDict = [String: User]()
     private var drawingDict = [String: Drawing]()
@@ -126,7 +126,7 @@ class API {
             self.getUser(snapshot.key, callback: { (follow: User) -> () in
                 user.follow(follow)
                 self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
+                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
                 })
             })
         })
@@ -135,7 +135,7 @@ class API {
             self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
                 user.unfollow(unfollow)
                 self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(snapshot.key)").removeValue()
+                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").removeValue()
                 })
             })
         })
@@ -164,9 +164,17 @@ class API {
     func checkLoggedIn(callback: (Bool)-> ()) {
         if let user = FIRAuth.auth()?.currentUser {
             
+            
             myRootRef.child("users/\(user.uid)/email").setValue("testEmail")
             myRootRef.child("users/\(user.uid)/username").setValue(user.displayName!)
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
+            
+
+            
+            
+        
+            
+            
 
             self.loadData(user)
             callback(true)
@@ -210,7 +218,10 @@ class API {
         prefs.setValue(false, forKey: "loggedIn")
         self.users.removeAll()
         self.wall.removeAll()
-        self.activeUser = User()
+        self.drawingDict.removeAll()
+        self.userDict.removeAll()
+        self.imageDict.removeAll()
+        self.activeUser = nil
         self.oldestTimeLoaded = -99999999999999
         self.newestTimeLoaded = 0
         
@@ -226,27 +237,27 @@ class API {
 
         self.uploadImage(drawing, progressCallback: progressCallback, finishedCallback:  { uploaded in
             if uploaded {
-                drawing.setArtist(self.activeUser)
+                drawing.setArtist(self.activeUser!)
                 newDrawing.setValue(drawing.toAnyObject())
-                self.myRootRef.child("users/\(self.activeUser.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
-                self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
             }
             finishedCallback(uploaded)
         })
     }
     
     func like(drawing: Drawing) {
-        drawing.like(self.activeUser)
-        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").setValue(true)
+        drawing.like(self.activeUser!)
+        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
     }
     
     func unlike(drawing: Drawing) {
-        drawing.unlike(self.activeUser)
-        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser.userId)").removeValue()
+        drawing.unlike(self.activeUser!)
+        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").removeValue()
     }
     
     func addComment(drawing: Drawing, text: String) {
-        let comment = Comment(user: self.activeUser, text: text)
+        let comment = Comment(user: self.activeUser!, text: text)
         let newComment = myRootRef.child("comments").childByAutoId()
 
         comment.setCommentId(newComment.key)
@@ -256,18 +267,18 @@ class API {
     }
     
     func follow(user: User) {
-        myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").setValue(true)
-        myRootRef.child("users/\(user.userId)/followers/\(activeUser.userId)").setValue(true)
+        myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
+        myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
     }
     
     func unfollow(user: User) {
-        myRootRef.child("users/\(activeUser.userId)/following/\(user.userId)").removeValue()
-        myRootRef.child("users/\(user.userId)/followers/\(activeUser.userId)").removeValue()
+        myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").removeValue()
+        myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").removeValue()
     }
     
     // MARK: Get Methods
     func getActiveUser() -> User {
-        return self.activeUser
+        return self.activeUser!
     }
     
     func getWall() -> [Drawing] {
@@ -283,7 +294,7 @@ class API {
     private func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
-            self.getFullUser(self.activeUser)
+            self.getFullUser(self.activeUser!)
             self.loadWall()
             self.loadUsers(user)
         })
