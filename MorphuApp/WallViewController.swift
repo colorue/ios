@@ -17,8 +17,6 @@ class WallViewController: UITableViewController, APIDelagate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // sets appDelagate as delagate for tabView controller
-        
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
@@ -69,7 +67,7 @@ class WallViewController: UITableViewController, APIDelagate {
         let drawingCell = cell as! DrawingCell
         
         drawingCell.drawingImage.alpha = 0.0
-        drawingCell.progressBar.hidden = false
+        drawingCell.progressBar.hidden = true
 
 
         api.downloadImage(drawing.getDrawingId(),

@@ -59,7 +59,7 @@ class ProfileViewController: WallViewController {
             let drawingCell = cell as! DrawingCell
             
             drawingCell.drawingImage.alpha = 0.0
-            drawingCell.progressBar.hidden = false
+            drawingCell.progressBar.hidden = true
             
             
             api.downloadImage(drawing.getDrawingId(),
@@ -154,12 +154,7 @@ class ProfileViewController: WallViewController {
     
     func addLogoutButton() {
         let chevron = UIImage(named: "Logout")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        let logoutButton = UIButton()
-        logoutButton.tintColor = UIColor.whiteColor()
-        logoutButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
-        logoutButton.setImage(chevron, forState: UIControlState.Normal)
-        logoutButton.addTarget(self, action: #selector(ProfileViewController.logout(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutButton)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logout(_:)))
     }
     
     @objc private func logout(sender: UIBarButtonItem) {
