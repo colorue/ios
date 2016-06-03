@@ -33,7 +33,9 @@ class ProfileViewController: WallViewController {
             cell.followingCount.text = String(userInstance!.getFollowing().count)
             cell.followersCount.text = String(userInstance!.getFollowers().count)
             cell.drawingsCount.text = String(userInstance!.getDrawings().count)
-            
+
+            cell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
+
             if userInstance!.userId == api.getActiveUser().userId {
                 cell.followButton.setImage(nil, forState: .Normal)
                 cell.followButton.enabled = false
@@ -72,7 +74,6 @@ class ProfileViewController: WallViewController {
                                 UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
                                     drawingCell.drawingImage.alpha = 1.0
                                     }, completion: nil)
-                                
             })
             
             drawingCell.profileImage.image = drawing.getArtist().profileImage
@@ -127,5 +128,46 @@ class ProfileViewController: WallViewController {
         let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
         avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
         self.presentViewController(avc, animated: true, completion: nil)
+    }
+    
+    func followAction(sender: UIButton) {
+        
+        if !sender.selected {
+            sender.selected = true
+            api.getActiveUser().follow(userInstance!)
+            api.follow(userInstance!)
+        } else {
+            let actionSelector = UIAlertController(title: "Unfollow \(userInstance!.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.Destructive,
+                handler: {(alert: UIAlertAction!) in self.unfollow(sender)}))
+            
+            self.presentViewController(actionSelector, animated: true, completion: nil)
+        }
+    }
+    
+    private func unfollow(sender: UIButton) {
+        sender.selected = false
+        api.getActiveUser().unfollow(userInstance!)
+        api.unfollow(userInstance!)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showLikes" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.navigationItem.title = "Likes"
+            targetController.users = userInstance!.getDrawings()[sender!.tag].getLikes()
+        } else if segue.identifier == "showComments" {
+            let targetController = segue.destinationViewController as! CommentViewController
+            targetController.drawingInstance = userInstance!.getDrawings()[sender!.tag]
+        }  else if segue.identifier == "showFollowers" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.navigationItem.title = "Followers"
+            targetController.users = userInstance!.getFollowers()
+        } else if segue.identifier == "showFollowing" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.navigationItem.title = "Following"
+            targetController.users = userInstance!.getFollowing()
+        }
     }
 }

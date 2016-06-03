@@ -14,10 +14,8 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var drawingsCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!
     @IBOutlet weak var followingCount: UILabel!
+    
+    @IBOutlet weak var followersButton: UIButton!
+    @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followButton: UIButton!
-    
-    @IBAction func followAction(sender: UIButton) {
-        
-    }
-    
 }
