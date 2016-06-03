@@ -68,14 +68,23 @@ class WallViewController: UITableViewController, APIDelagate {
         let drawing = api.getWall()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
-        drawingCell.drawingImage.image = nil
+        drawingCell.drawingImage.alpha = 0.0
+        drawingCell.progressBar.hidden = false
+
 
         api.downloadImage(drawing.getDrawingId(),
                           progressCallback: { (progress: Float) -> () in
                             drawingCell.progressBar.setProgress(progress, animated: true)
             },
                           finishedCallback: { (drawingImage: UIImage) -> () in
+                            drawingCell.progressBar.hidden = true
                             drawingCell.drawingImage.image = drawingImage
+                            drawing.setImage(drawingImage)
+
+                            UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+                                drawingCell.drawingImage.alpha = 1.0
+                                }, completion: nil)
+                            
         })
         
         drawingCell.profileImage.image = drawing.getArtist().profileImage

@@ -56,14 +56,23 @@ class ProfileViewController: WallViewController {
             let drawing = userInstance!.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
             
-            drawingCell.drawingImage.image = nil
+            drawingCell.drawingImage.alpha = 0.0
+            drawingCell.progressBar.hidden = false
+            
             
             api.downloadImage(drawing.getDrawingId(),
                               progressCallback: { (progress: Float) -> () in
                                 drawingCell.progressBar.setProgress(progress, animated: true)
                 },
                               finishedCallback: { (drawingImage: UIImage) -> () in
+                                drawingCell.progressBar.hidden = true
                                 drawingCell.drawingImage.image = drawingImage
+                                drawing.setImage(drawingImage)
+                                
+                                UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+                                    drawingCell.drawingImage.alpha = 1.0
+                                    }, completion: nil)
+                                
             })
             
             drawingCell.profileImage.image = drawing.getArtist().profileImage
@@ -111,5 +120,12 @@ class ProfileViewController: WallViewController {
             api.unlike(drawing)
         }
         self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
+    }
+    
+    override func upload(sender: UIButton) {
+        let drawing = userInstance!.getDrawings()[sender.tag]
+        let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
+        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
+        self.presentViewController(avc, animated: true, completion: nil)
     }
 }
