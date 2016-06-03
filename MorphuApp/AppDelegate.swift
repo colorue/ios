@@ -108,6 +108,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             if profileView.userInstance == nil {
                 profileView.navigationItem.title = API.sharedInstance.getActiveUser().username
                 profileView.userInstance = API.sharedInstance.getActiveUser()
+                profileView.addLogoutButton()
             }
         } else if let friendsList = targetController as? UserListViewController {
             if friendsList.users == nil {

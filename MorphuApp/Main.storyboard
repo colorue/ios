@@ -1010,7 +1010,6 @@
                     </refreshControl>
                     <connections>
                         <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvix" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
-                        <segue destination="FpX-q6-whp" kind="presentation" identifier="toLogin" modalTransitionStyle="crossDissolve" id="bgi-Ne-Bdd"/>
                         <segue destination="sJS-x6-3bU" kind="show" identifier="showUser" id="L5M-dB-8WQ"/>
                     </connections>
                 </tableViewController>
@@ -1359,7 +1358,7 @@
                         </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="sJS-x6-3bU" kind="relationship" relationship="rootViewController" id="xxt-zd-PQD"/>
+                        <segue destination="sJS-x6-3bU" kind="relationship" relationship="rootViewController" id="Qrb-Kh-4Y9"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SVc-A1-r3M" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1411,8 +1410,7 @@
                                                     <exclude reference="hmn-ar-ObV"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="0.0" y="92" width="600" height="10"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="YXt-0j-7XW"/>
                                                     <include reference="hmn-ar-ObV"/>
@@ -1503,9 +1501,6 @@
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twu-OJ-wtP">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="264" y="8" width="156" height="32"/>
-                                            </variation>
                                             <connections>
                                                 <segue destination="KbN-Ld-eZt" kind="show" identifier="showFollowers" id="7Ei-Vq-ke5">
                                                     <segue key="commit" inheritsFrom="parent" id="ixk-gx-kuX"/>
@@ -1515,9 +1510,6 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITr-Gm-7xY">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="436" y="8" width="156" height="32"/>
-                                            </variation>
                                             <connections>
                                                 <segue destination="KbN-Ld-eZt" kind="show" identifier="showFollowing" id="Bcz-de-uJI">
                                                     <segue key="commit" inheritsFrom="parent" id="kNL-bF-inF"/>
@@ -1841,8 +1833,7 @@
                                                     <exclude reference="ySr-ZV-rwp"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="231" y="534" width="200" height="22"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="ySr-ZV-rwp"/>
                                                 </mask>
@@ -2110,6 +2101,7 @@
                                     <outlet property="timeCreated" destination="IiF-fa-KQt" id="FPB-nC-i2x"/>
                                     <outlet property="uploadButton" destination="Cr1-GT-7Vv" id="xJP-IK-sRB"/>
                                     <outlet property="userButton" destination="rtP-pI-HG9" id="RjH-KG-404"/>
+                                    <segue destination="FpX-q6-whp" kind="presentation" identifier="logout" modalTransitionStyle="crossDissolve" id="Akv-Lb-KZF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -2147,10 +2139,10 @@
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bgi-Ne-Bdd"/>
-        <segue reference="7Ei-Vq-ke5"/>
-        <segue reference="xxt-zd-PQD"/>
         <segue reference="5uB-bY-P8D"/>
+        <segue reference="Akv-Lb-KZF"/>
+        <segue reference="Qrb-Kh-4Y9"/>
+        <segue reference="7Ei-Vq-ke5"/>
         <segue reference="Z2M-bE-noU"/>
     </inferredMetricsTieBreakers>
 </document>

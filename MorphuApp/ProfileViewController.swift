@@ -152,6 +152,21 @@ class ProfileViewController: WallViewController {
         api.unfollow(userInstance!)
     }
     
+    func addLogoutButton() {
+        let chevron = UIImage(named: "Logout")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let logoutButton = UIButton()
+        logoutButton.tintColor = UIColor.whiteColor()
+        logoutButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
+        logoutButton.setImage(chevron, forState: UIControlState.Normal)
+        logoutButton.addTarget(self, action: #selector(ProfileViewController.logout(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: logoutButton)
+    }
+    
+    @objc private func logout(sender: UIBarButtonItem) {
+        api.logout()
+        self.performSegueWithIdentifier("logout", sender: self)
+    }
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
