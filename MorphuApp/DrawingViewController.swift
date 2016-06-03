@@ -48,16 +48,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
         let prefs = NSUserDefaults.standardUserDefaults()
-        var baseImage: UIImage
+        var baseImage: UIImage? = nil
         
         if prefs.boolForKey("saved") {
             if let savedDrawing = prefs.stringForKey("savedDrawing") {
                 baseImage = UIImage.fromBase64(savedDrawing)
-            } else {
-                baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
             }
-        } else {
-            baseImage = UIImage.getImageWithColor(whiteColor, size: CGSize(width: canvasFrame.width * 2, height: canvasFrame.height * 2))
         }
         
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
