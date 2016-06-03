@@ -28,24 +28,9 @@ class ProfileViewController: WallViewController {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
-            cell.profileImage.image = userInstance!.profileImage
-            cell.followingCount.text = String(userInstance!.getFollowing().count)
-            cell.followersCount.text = String(userInstance!.getFollowers().count)
-            cell.drawingsCount.text = String(userInstance!.getDrawings().count)
-
-            cell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
-
-            if userInstance!.userId == api.getActiveUser().userId {
-                cell.followButton.setImage(nil, forState: .Normal)
-                cell.followButton.enabled = false
-            }
-            
-            return cell
+            return self.tableView.dequeueReusableCellWithIdentifier("ProfileCell", forIndexPath: indexPath) as! ProfileCell
         } else {
-            let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
-
-            return cell
+            return self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
         }
     }
     
@@ -53,6 +38,22 @@ class ProfileViewController: WallViewController {
                             forRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == 0 {
+            let profileCell = cell as! ProfileCell
+
+            profileCell.profileImage.image = userInstance!.profileImage
+            profileCell.followingCount.text = String(userInstance!.getFollowing().count)
+            profileCell.followersCount.text = String(userInstance!.getFollowers().count)
+            profileCell.drawingsCount.text = String(userInstance!.getDrawings().count)
+            
+            profileCell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
+            
+            if userInstance!.userId == api.getActiveUser().userId {
+                profileCell.followButton.setImage(nil, forState: .Normal)
+                profileCell.followButton.enabled = false
+            } else {
+                print(api.getActiveUser().isFollowing(userInstance!))
+                profileCell.followButton.selected = api.getActiveUser().isFollowing(userInstance!)
+            }
             
         } else {
             let drawing = userInstance!.getDrawings()[indexPath.row]
