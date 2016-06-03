@@ -1487,9 +1487,6 @@
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <state key="selected" image="Unfollow Long"/>
-                                                    <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                        <rect key="frame" x="24" y="46" width="250" height="33"/>
-                                                    </variation>
                                                 </button>
                                             </subviews>
                                             <constraints>

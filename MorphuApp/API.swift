@@ -43,8 +43,6 @@ class API {
     
     // MARK: Internal methods
     
-    
-
     private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) { //callback
         if let drawing = self.drawingDict[drawingId] {
             callback(drawing, false)
@@ -115,6 +113,9 @@ class API {
                         newUser.profileImage = UIImage(data: data!)!
                     }
                 }
+                
+                self.getFullUser(newUser)
+                
                 self.userDict[userId] = newUser
                 callback(newUser)
             })
@@ -169,13 +170,6 @@ class API {
             myRootRef.child("users/\(user.uid)/username").setValue(user.displayName!)
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
-
-            
-            
-        
-            
-            
-
             self.loadData(user)
             callback(true)
         } else {
@@ -294,7 +288,7 @@ class API {
     private func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
-            self.getFullUser(self.activeUser!)
+//            self.getFullUser(self.activeUser!)
             self.loadWall()
             self.loadUsers(user)
         })
@@ -350,7 +344,7 @@ class API {
                 let userId = snapshot.key
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
                     if !(userId == currentUser.uid) {
-                        self.getFullUser(user)
+//                        self.getFullUser(user)
                         self.users.append(user)
                     }
                 })
