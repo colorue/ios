@@ -153,7 +153,9 @@ class API {
         })
         
         self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
-            user.addDrawingId(snapshot.key)
+            self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                user.addDrawing(drawing)
+            })
         })
     }
     
@@ -288,7 +290,7 @@ class API {
     }
 
     func loadWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(4).queryStartingAtValue(self.oldestTimeLoaded)
+        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {

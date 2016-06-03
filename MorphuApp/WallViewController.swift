@@ -12,8 +12,6 @@ import CCBottomRefreshControl
 class WallViewController: UITableViewController, APIDelagate {
     let api = API.sharedInstance
     
-//    let drawings = API.sharedInstance.getWall()
-    
     let bottomRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -27,7 +25,7 @@ class WallViewController: UITableViewController, APIDelagate {
         tableView.backgroundColor = backgroundColor
         
         api.delagate = self
-        self.refreshControl!.beginRefreshing()
+        self.refreshControl?.beginRefreshing()
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
@@ -117,10 +115,9 @@ class WallViewController: UITableViewController, APIDelagate {
         }
     }
     
-    func setLikes(row: Int) {
+    func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
         
-        let drawing = api.getWall()[row]
-        let drawingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: row, inSection: 0)) as! DrawingCell
+        let drawingCell = tableView.cellForRowAtIndexPath(indexPath) as! DrawingCell
             let likes = drawing.getLikes().count
             if likes == 0 {
                 drawingCell.likes.text = ""
@@ -144,13 +141,13 @@ class WallViewController: UITableViewController, APIDelagate {
             sender.selected = false
             api.unlike(drawing)
         }
-        self.setLikes(sender.tag)
+        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 0))
     }
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
-            self.refreshControl!.endRefreshing()
+            self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         })
     }
@@ -172,6 +169,7 @@ class WallViewController: UITableViewController, APIDelagate {
             targetController.drawingInstance = api.getWall()[sender!.tag]
         } else if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.navigationItem.title = api.getWall()[sender!.tag].getArtist().username
             targetController.userInstance = api.getWall()[sender!.tag].getArtist()
         }
     }

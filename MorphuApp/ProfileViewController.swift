@@ -53,47 +53,63 @@ class ProfileViewController: WallViewController {
         if indexPath.section == 0 {
             
         } else {
-            let content = userInstance!.getDrawings()[indexPath.row]
+            let drawing = userInstance!.getDrawings()[indexPath.row]
             let drawingCell = cell as! DrawingCell
             
+            drawingCell.drawingImage.image = nil
             
-            drawingCell.profileImage.image = content.getArtist().profileImage
-            drawingCell.creator.text = content.getArtist().username
-            drawingCell.drawingImage.image = content.getImage()
-            drawingCell.timeCreated.text = content.getTimeSinceSent()
-            drawingCell.likeButton.selected = content.liked(api.getActiveUser())
+            api.downloadImage(drawing.getDrawingId(),
+                              progressCallback: { (progress: Float) -> () in
+                                drawingCell.progressBar.setProgress(progress, animated: true)
+                },
+                              finishedCallback: { (drawingImage: UIImage) -> () in
+                                drawingCell.drawingImage.image = drawingImage
+            })
             
-
+            drawingCell.profileImage.image = drawing.getArtist().profileImage
+            drawingCell.creator.text = drawing.getArtist().username
+            drawingCell.timeCreated.text = drawing.getTimeSinceSent()
+            drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
             
-            let comments = content.getComments().count
-            if comments == 1 {
+            drawingCell.userButton.tag = indexPath.row
+            drawingCell.uploadButton.tag = indexPath.row
+            drawingCell.likeButton.tag = indexPath.row
+            drawingCell.likesButton.tag = indexPath.row
+            drawingCell.commentsButton.tag = indexPath.row
+            
+            drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchDown)
+            drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchDown)
+            
+            let likes = drawing.getLikes().count
+            if likes == 0 {
+                drawingCell.likes.text = ""
+                drawingCell.likesButton.enabled = false
+            } else if likes == 1 {
+                drawingCell.likesButton.enabled = true
+                drawingCell.likes.text = "1 like"
+            } else {
+                drawingCell.likesButton.enabled = true
+                drawingCell.likes.text = String(likes) + " likes"
+            }
+            
+            if drawing.getComments().count == 1 {
                 drawingCell.commentCount.text = "1 comment"
             } else {
-                drawingCell.commentCount.text = String(content.getComments().count) + " comments"
-            }
-            
-//            self.setLikes(drawingCell)
-            
-            if (indexPath.row + 1 >= api.getWall().count) {
-                api.loadWall()
+                drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
             }
         }
     }
-
-    /*
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showLikes" {
-            let targetController = segue.destinationViewController as! UserListViewController
-            targetController.navigationItem.title = "Likes"
-            targetController.users = api.getWall()[sender!.tag].getLikes()
-        } else if segue.identifier == "showComments" {
-            let targetController = segue.destinationViewController as! CommentViewController
-            targetController.drawingInstance = api.getWall()[sender!.tag]
-        } else if segue.identifier == "showUser" {
-            let targetController = segue.destinationViewController as! ProfileViewController
-            targetController.userInstance = api.getWall()[sender!.tag].getArtist()
+    
+    override func likeButtonPressed(sender: UIButton) {
+        let drawing = userInstance!.getDrawings()[sender.tag]
+        
+        if !(drawing.liked(api.getActiveUser())) {
+            sender.selected = true
+            api.like(drawing)
+        } else {
+            sender.selected = false
+            api.unlike(drawing)
         }
+        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
     }
- 
- */
 }
