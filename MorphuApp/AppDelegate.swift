@@ -89,7 +89,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
     }
     
+    
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+        
+//        print(tabBarController.selectedIndex)
+        
         
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
@@ -101,10 +105,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 return false
             }
         } else if let profileView = targetController as? ProfileViewController {
-            profileView.navigationItem.title = API.sharedInstance.getActiveUser().username
-            profileView.userInstance = API.sharedInstance.getActiveUser()
+            if profileView.userInstance == nil {
+                profileView.navigationItem.title = API.sharedInstance.getActiveUser().username
+                profileView.userInstance = API.sharedInstance.getActiveUser()
+            }
         } else if let friendsList = targetController as? UserListViewController {
-            friendsList.users = API.sharedInstance.getUsers()
+            if friendsList.users == nil {
+                friendsList.users = API.sharedInstance.getUsers()
+            }
         }
         
         return true

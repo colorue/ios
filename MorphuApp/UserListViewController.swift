@@ -10,7 +10,7 @@ import UIKit
 
 class UserListViewController: UITableViewController, UserCellDelagate {
     
-    var users = [User]()
+    var users: [User]?
     
     let api = API.sharedInstance
     
@@ -38,13 +38,13 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
+        return users!.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
         
-        let user = users[indexPath.row]
+        let user = users![indexPath.row]
         cell.username.text = user.username
         cell.profileImage.image = user.profileImage
         cell.delagate = self
@@ -96,8 +96,8 @@ class UserListViewController: UITableViewController, UserCellDelagate {
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
-                targetController.navigationItem.title = users[row].username
-                targetController.userInstance = users[row]
+                targetController.navigationItem.title = users![row].username
+                targetController.userInstance = users![row]
             }
         }
     }

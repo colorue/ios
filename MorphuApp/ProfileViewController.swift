@@ -51,7 +51,6 @@ class ProfileViewController: WallViewController {
                 profileCell.followButton.setImage(nil, forState: .Normal)
                 profileCell.followButton.enabled = false
             } else {
-                print(api.getActiveUser().isFollowing(userInstance!))
                 profileCell.followButton.selected = api.getActiveUser().isFollowing(userInstance!)
             }
             

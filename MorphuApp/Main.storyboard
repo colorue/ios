@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="fiD-lJ-IKR">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -303,7 +302,7 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
                                                     <rect key="frame" x="152" y="0.0" width="134" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
@@ -359,7 +358,8 @@
                                                     <exclude reference="mvq-pU-7Kc"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="272" y="555" width="120" height="12"/>
                                                 <mask key="constraints">
                                                     <include reference="mvq-pU-7Kc"/>
                                                 </mask>
@@ -660,7 +660,8 @@
                                         <exclude reference="Ejp-DG-bJm"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="-450" width="600" height="1500"/>
                                     <mask key="constraints">
                                         <include reference="Ejp-DG-bJm"/>
                                     </mask>
@@ -686,7 +687,8 @@
                                         <exclude reference="rJ0-3t-eju"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
                                     <mask key="constraints">
                                         <exclude reference="CD9-ZP-JXH"/>
                                         <include reference="rJ0-3t-eju"/>
@@ -700,6 +702,9 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fDS-yY-Bjt">
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="282" y="50" width="37" height="37"/>
+                                </variation>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -904,6 +909,9 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="42" y="22" width="550" height="0.0"/>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iz-ew-6aY">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -917,7 +925,8 @@
                                                     <exclude reference="5SL-M8-ze3"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="565" y="8" width="27" height="27"/>
                                                 <mask key="constraints">
                                                     <include reference="5SL-M8-ze3"/>
                                                 </mask>
@@ -1045,7 +1054,8 @@
                                                     <exclude reference="qJQ-yx-FC6"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="562" y="8" width="30" height="12"/>
                                                 <mask key="constraints">
                                                     <include reference="S2M-VS-T4y"/>
                                                     <include reference="qJQ-yx-FC6"/>
@@ -1106,6 +1116,9 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="12" y="28" width="576" height="45"/>
+                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUH-2h-S3O">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1237,7 +1250,8 @@
                                                     <exclude reference="oW5-Y3-eZj"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="569" y="8" width="23" height="23"/>
                                                 <mask key="constraints">
                                                     <exclude reference="DEH-Co-57k"/>
                                                     <include reference="YGu-kM-Li9"/>
@@ -1253,6 +1267,9 @@
                                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="8" y="8" width="553" height="23"/>
+                                            </variation>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -1331,7 +1348,7 @@
         <scene sceneID="PcC-ob-b0o">
             <objects>
                 <navigationController id="I09-XK-7yA" customClass="NavigationController" customModule="Canvix" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="Follow" id="Ok4-nY-Hjm">
+                    <tabBarItem key="tabBarItem" title="" image="Profile" id="Ok4-nY-Hjm">
                         <inset key="imageInsets" minX="0.0" minY="6" maxX="0.0" maxY="-6"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="eaP-hC-tly">
@@ -1394,7 +1411,8 @@
                                                     <exclude reference="hmn-ar-ObV"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="0.0" y="92" width="600" height="10"/>
                                                 <mask key="constraints">
                                                     <include reference="YXt-0j-7XW"/>
                                                     <include reference="hmn-ar-ObV"/>
@@ -1404,19 +1422,19 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
                                             <rect key="frame" x="96" y="-12" width="188" height="53"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
                                                     <rect key="frame" x="0.0" y="0.0" width="161" height="32"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
                                                             <rect key="frame" x="0.0" y="0.0" width="43" height="32"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
                                                                     <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
                                                                     <rect key="frame" x="0.0" y="12" width="43" height="20"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1424,16 +1442,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
                                                             <rect key="frame" x="59" y="0.0" width="43" height="32"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
                                                                     <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
                                                                     <rect key="frame" x="0.0" y="12" width="43" height="20"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1441,16 +1459,16 @@
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
                                                             <rect key="frame" x="118" y="0.0" width="43" height="32"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
                                                                     <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
                                                                     <rect key="frame" x="0.0" y="12" width="43" height="20"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -1460,7 +1478,7 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
                                                     <rect key="frame" x="0.0" y="34" width="161" height="36"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <state key="normal" image="Follow Long">
@@ -1485,6 +1503,9 @@
                                         </stackView>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Twu-OJ-wtP">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="264" y="8" width="156" height="32"/>
+                                            </variation>
                                             <connections>
                                                 <segue destination="KbN-Ld-eZt" kind="show" identifier="showFollowers" id="7Ei-Vq-ke5">
                                                     <segue key="commit" inheritsFrom="parent" id="ixk-gx-kuX"/>
@@ -1494,6 +1515,9 @@
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ITr-Gm-7xY">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="436" y="8" width="156" height="32"/>
+                                            </variation>
                                             <connections>
                                                 <segue destination="KbN-Ld-eZt" kind="show" identifier="showFollowing" id="Bcz-de-uJI">
                                                     <segue key="commit" inheritsFrom="parent" id="kNL-bF-inF"/>
@@ -1780,7 +1804,7 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
                                                     <rect key="frame" x="152" y="0.0" width="134" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="Y5A-Wi-f76"/>
@@ -1817,7 +1841,8 @@
                                                     <exclude reference="ySr-ZV-rwp"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact">
+                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                                <rect key="frame" x="231" y="534" width="200" height="22"/>
                                                 <mask key="constraints">
                                                     <include reference="ySr-ZV-rwp"/>
                                                 </mask>
@@ -2116,6 +2141,7 @@
         <image name="Liked" width="30" height="30"/>
         <image name="Logo Inactive" width="30" height="30"/>
         <image name="Morphu Brand" width="512" height="1000"/>
+        <image name="Profile" width="30" height="30"/>
         <image name="Unfollow Long" width="108" height="36"/>
         <image name="Upload" width="36" height="36"/>
         <image name="facebook-logo" width="32" height="32"/>
@@ -2123,8 +2149,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="bgi-Ne-Bdd"/>
         <segue reference="7Ei-Vq-ke5"/>
-        <segue reference="L5M-dB-8WQ"/>
-        <segue reference="Z2M-bE-noU"/>
+        <segue reference="xxt-zd-PQD"/>
         <segue reference="5uB-bY-P8D"/>
+        <segue reference="Z2M-bE-noU"/>
     </inferredMetricsTieBreakers>
 </document>

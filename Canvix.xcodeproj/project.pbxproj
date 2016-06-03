@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68F0F0915CDDB70405E84C74 /* Pods_Canvix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16AB2B7F27F47CF9D5D1C263 /* Pods_Canvix.framework */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
 		874AF5971CFE927A0013E194 /* SF_Cartoonist_Hand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */; };
 		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
@@ -51,12 +50,14 @@
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
+		D84E186B262428E791E28D93 /* Pods_Canvix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0C249B57430DC2D160AB501C /* Pods-Canvix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.release.xcconfig"; sourceTree = "<group>"; };
-		16AB2B7F27F47CF9D5D1C263 /* Pods_Canvix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canvix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		873AFA0D1CED7697006FD34A /* Canvix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canvix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.debug.xcconfig"; sourceTree = "<group>"; };
+		7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.release.xcconfig"; sourceTree = "<group>"; };
+		872E82E11D01296F005A56A3 /* Canvix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Cartoonist_Hand.ttf; sourceTree = "<group>"; };
@@ -101,7 +102,6 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		A3C86F3C03D04B9DADF93D5E /* Pods-Canvix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,18 +109,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68F0F0915CDDB70405E84C74 /* Pods_Canvix.framework in Frameworks */,
+				D84E186B262428E791E28D93 /* Pods_Canvix.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1434282B85DD599183CA51DD /* Pods */ = {
+		6AA7B21F98929F59F5124881 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				A3C86F3C03D04B9DADF93D5E /* Pods-Canvix.debug.xcconfig */,
-				0C249B57430DC2D160AB501C /* Pods-Canvix.release.xcconfig */,
+				79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */,
+				7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -130,18 +130,10 @@
 			children = (
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
 				873AFA0F1CED7697006FD34A /* Canvix */,
-				873AFA0E1CED7697006FD34A /* Products */,
-				1434282B85DD599183CA51DD /* Pods */,
-				BAEE6982A2EBD2C1D64BAA23 /* Frameworks */,
+				6AA7B21F98929F59F5124881 /* Pods */,
+				DE439F15BD0892DF68EBA465 /* Frameworks */,
+				872E82E11D01296F005A56A3 /* Canvix.app */,
 			);
-			sourceTree = "<group>";
-		};
-		873AFA0E1CED7697006FD34A /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				873AFA0D1CED7697006FD34A /* Canvix.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		873AFA0F1CED7697006FD34A /* Canvix */ = {
@@ -315,10 +307,10 @@
 			name = Drawing;
 			sourceTree = "<group>";
 		};
-		BAEE6982A2EBD2C1D64BAA23 /* Frameworks */ = {
+		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				16AB2B7F27F47CF9D5D1C263 /* Pods_Canvix.framework */,
+				119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -343,7 +335,7 @@
 			);
 			name = Canvix;
 			productName = MorphuApp;
-			productReference = 873AFA0D1CED7697006FD34A /* Canvix.app */;
+			productReference = 872E82E11D01296F005A56A3 /* Canvix.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -376,7 +368,7 @@
 				Base,
 			);
 			mainGroup = 873AFA041CED7697006FD34A;
-			productRefGroup = 873AFA0E1CED7697006FD34A /* Products */;
+			productRefGroup = 873AFA041CED7697006FD34A;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -582,10 +574,12 @@
 		};
 		873AFA201CED7697006FD34A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A3C86F3C03D04B9DADF93D5E /* Pods-Canvix.debug.xcconfig */;
+			baseConfigurationReference = 79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
 				PRODUCT_NAME = Canvix;
@@ -594,10 +588,12 @@
 		};
 		873AFA211CED7697006FD34A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0C249B57430DC2D160AB501C /* Pods-Canvix.release.xcconfig */;
+			baseConfigurationReference = 7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
 				PRODUCT_NAME = Canvix;
