@@ -17,6 +17,8 @@ class User {
     private var followers = [User]()
     private var drawings = [Drawing]()
     
+    private var newestDrawing: Double = 0
+    
     init(userId: String = "", email: String = "", username: String = "", profileImage: UIImage = UIImage()) {
         self.userId = userId
         self.username = username
@@ -74,7 +76,12 @@ class User {
     }
     
     func addDrawing(drawing: Drawing) {
-        self.drawings.append(drawing)
+        if drawing.timeStamp < newestDrawing {
+            self.newestDrawing = drawing.timeStamp
+            self.drawings.insert(drawing, atIndex: 0)
+        } else {
+            self.drawings.append(drawing)
+        }
     }
     
     func getDrawings() -> [Drawing] {

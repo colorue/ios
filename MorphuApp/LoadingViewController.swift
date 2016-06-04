@@ -21,6 +21,7 @@ class LoadingViewController: UIViewController {
         if loginValid {
             self.performSegueWithIdentifier("toMainController", sender: self)
         } else {
+            API.sharedInstance.logout()
             self.performSegueWithIdentifier("toLoginController", sender: self)
         }
     }
