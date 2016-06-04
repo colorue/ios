@@ -15,11 +15,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let undoButton = UIButton()
     let trashButton = UIButton()
     let dropperButton = UIButton()
+    let eraserButton = UIButton()
     let alphaButton = UIButton()
     let progressBar = UIProgressView()
     private let prefs = NSUserDefaults.standardUserDefaults()
     
     private var currentAlpha = alphaType.High
+    
     enum alphaType: CGFloat {
         case High = 1.0
         case Medium = 0.7
@@ -49,9 +51,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         self.addSubview(currentColorView)
         
         
-//        brushSizeSlider.maximumValueImage = UIImage(named: "Size Slider")!
-//        brushSizeSlider.minimumValueImage = UIImage(named: "Size Slider 2")!
-        
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
         brushSizeSlider.maximumValue = 10.0
@@ -65,38 +64,41 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.setImage(UIImage(named: "UndoIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         undoButton.tintColor = .whiteColor()
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
-        undoButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        undoButton.frame = CGRect(x: buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        undoButton.showsTouchWhenHighlighted = true
         self.addSubview(undoButton)
-        
-        
-        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
-
-        dropperButton.tintColor = .whiteColor()
-        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
-        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-//        self.addSubview(dropperButton)
-        
-        
-        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        
-        alphaButton.tintColor = .whiteColor()
-        alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
-        alphaButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-        
-        self.addSubview(alphaButton)
-
         
         trashButton.setImage(UIImage(named: "TrashIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         trashButton.tintColor = .whiteColor()
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
         trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
-        trashButton.showsTouchWhenHighlighted = true
-        undoButton.showsTouchWhenHighlighted = true
+//        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+//        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+//        dropperButton.tintColor = .whiteColor()
+//        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
+//        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+//        dropperButton.showsTouchWhenHighlighted = true
+//        self.addSubview(dropperButton)
+        
+        eraserButton.setImage(UIImage(named: "Eraser")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        eraserButton.tintColor = .whiteColor()
+        eraserButton.addTarget(self, action: #selector(ColorKeyboardView.eraser(_:)), forControlEvents: .TouchUpInside)
+        eraserButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        eraserButton.showsTouchWhenHighlighted = true
+        self.addSubview(eraserButton)
+        
+        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        alphaButton.tintColor = .whiteColor()
+        alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
+        alphaButton.frame = CGRect(x: frame.maxX - buttonSize - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
-        dropperButton.showsTouchWhenHighlighted = true
+        self.addSubview(alphaButton)
+
+
+        
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
         separatorU.backgroundColor = dividerColor
@@ -123,7 +125,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         updateButtonColor()
     }
     
-    func colorButton(withColor color:UIColor, tag: Int) -> UIButton {
+    private func colorButton(withColor color:UIColor, tag: Int) -> UIButton {
         let newButton = UIButton()
         newButton.backgroundColor = color
         newButton.tag = tag
@@ -138,20 +140,27 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         return newButton
     }
     
-    func undo(sender: UIButton) {
+    @objc private func undo(sender: UIButton) {
         delagate.undo()
     }
     
-    func trash(sender: UIButton) {
+    @objc private func trash(sender: UIButton) {
         delagate.trash()
     }
     
-    func dropper(sender: UIButton) {
+    @objc private func dropper(sender: UIButton) {
         self.delagate.setDropperActive(!self.delagate.getDropperActive())
         self.setDropper()
     }
     
-    func switchAlpha(sender: UIButton) {
+    @objc private func eraser(sender: UIButton) {
+        self.currentAlpha = .High
+        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        self.currentColorView.backgroundColor = whiteColor
+        updateButtonColor()
+    }
+    
+    @objc private func switchAlpha(sender: UIButton) {
         switch(currentAlpha) {
         case .High:
             self.currentAlpha = .Medium
@@ -170,18 +179,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         self.dropperButton.selected = self.delagate.getDropperActive()
     }
     
-    func buttonHeld(sender: UITapGestureRecognizer) {
+    @objc private func buttonHeld(sender: UITapGestureRecognizer) {
         currentColorView.backgroundColor = colors[sender.view!.tag]
         updateButtonColor()
     }
     
-    func buttonTapped(sender: UIButton) {
+    @objc private func buttonTapped(sender: UIButton) {
         let percentMix: CGFloat = 0.1
         currentColorView.backgroundColor = self.blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
         updateButtonColor()
     }
     
-    func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
+    private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
         let c1 = color1.coreImageColor!
         let c2 = color2.coreImageColor!
         return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
@@ -205,7 +214,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         updateButtonColor()
     }
     
-    func updateButtonColor() {
+    private func updateButtonColor() {
         let coreColor = currentColorView.backgroundColor?.coreImageColor!
         let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
         
@@ -235,11 +244,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             trashButton.tintColor = .whiteColor()
             dropperButton.tintColor = .whiteColor()
             alphaButton.tintColor = .whiteColor()
+            eraserButton.tintColor = .whiteColor()
         } else {
             undoButton.tintColor = .blackColor()
             trashButton.tintColor = .blackColor()
             dropperButton.tintColor = .blackColor()
             alphaButton.tintColor = .blackColor()
+            eraserButton.tintColor = .blackColor()
         }
     }
     

@@ -660,8 +660,7 @@
                                         <exclude reference="Ejp-DG-bJm"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="-450" width="600" height="1500"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <include reference="Ejp-DG-bJm"/>
                                     </mask>
@@ -687,8 +686,7 @@
                                         <exclude reference="rJ0-3t-eju"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="0.0" y="540" width="600" height="60"/>
+                                <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
                                         <exclude reference="CD9-ZP-JXH"/>
                                         <include reference="rJ0-3t-eju"/>
@@ -702,9 +700,6 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fDS-yY-Bjt">
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="282" y="50" width="37" height="37"/>
-                                </variation>
                             </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -909,9 +904,6 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="42" y="22" width="550" height="0.0"/>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iz-ew-6aY">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -925,8 +917,7 @@
                                                     <exclude reference="5SL-M8-ze3"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="565" y="8" width="27" height="27"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="5SL-M8-ze3"/>
                                                 </mask>
@@ -1053,8 +1044,7 @@
                                                     <exclude reference="qJQ-yx-FC6"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="562" y="8" width="30" height="12"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="S2M-VS-T4y"/>
                                                     <include reference="qJQ-yx-FC6"/>
@@ -1115,9 +1105,6 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="12" y="28" width="576" height="45"/>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUH-2h-S3O">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1249,8 +1236,7 @@
                                                     <exclude reference="oW5-Y3-eZj"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="569" y="8" width="23" height="23"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <exclude reference="DEH-Co-57k"/>
                                                     <include reference="YGu-kM-Li9"/>
@@ -1266,9 +1252,6 @@
                                             <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences" keyboardAppearance="alert"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="8" width="553" height="23"/>
-                                            </variation>
                                         </textField>
                                     </subviews>
                                     <constraints>
@@ -2157,8 +2140,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="5uB-bY-P8D"/>
         <segue reference="iPn-KR-9oK"/>
-        <segue reference="v3h-Ag-kjK"/>
-        <segue reference="7Ei-Vq-ke5"/>
+        <segue reference="sFW-OK-Bh1"/>
         <segue reference="Z2M-bE-noU"/>
+        <segue reference="7Ei-Vq-ke5"/>
     </inferredMetricsTieBreakers>
 </document>
