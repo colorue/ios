@@ -131,13 +131,7 @@
                             <outlet property="delegate" destination="fn1-ch-IF1" id="P2P-UA-BqZ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="cX3-JK-V5E">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="C3x-Bf-5e8">
-                            <connections>
-                                <action selector="cancelButton:" destination="fn1-ch-IF1" id="p1h-2u-BXc"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="cX3-JK-V5E"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOE-Xz-STP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
