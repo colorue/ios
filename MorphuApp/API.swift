@@ -114,7 +114,7 @@ class API {
                     }
                 }
                 
-                self.getFullUser(newUser)
+//                self.getFullUser(newUser)
                 
                 self.userDict[userId] = newUser
                 callback(newUser)
@@ -122,7 +122,9 @@ class API {
         }
     }
     
-    private func getFullUser(user: User) {
+    func getFullUser(user: User, delagate: APIDelagate?) {
+        
+        if !user.getfullUserLoaded() {
         self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
             self.getUser(snapshot.key, callback: { (follow: User) -> () in
                 user.follow(follow)
@@ -158,6 +160,10 @@ class API {
                 user.addDrawing(drawing)
             })
         })
+            
+        delagate?.refresh()
+        user.setfullUserLoaded()
+        }
     }
     
     // MARK: External Methods

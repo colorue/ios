@@ -13,6 +13,11 @@ class ProfileViewController: WallViewController {
     
     var userInstance: User?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        API.sharedInstance.getFullUser(userInstance!, delagate: self)
+    }
+    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2

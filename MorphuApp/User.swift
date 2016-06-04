@@ -19,6 +19,16 @@ class User {
     
     private var newestDrawing: Double = 0
     
+    private var fullUserLoaded = false
+    
+    func setfullUserLoaded() {
+        self.fullUserLoaded = true
+    }
+    
+    func getfullUserLoaded() -> Bool {
+        return self.fullUserLoaded
+    }
+    
     init(userId: String = "", email: String = "", username: String = "", profileImage: UIImage = UIImage()) {
         self.userId = userId
         self.username = username
