@@ -20,9 +20,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let progressBar = UIProgressView()
     private let prefs = NSUserDefaults.standardUserDefaults()
     
-    private var currentAlpha = alphaType.High
+    private var currentAlpha = AlphaType.High
     
-    enum alphaType: CGFloat {
+    enum AlphaType: CGFloat {
         case High = 1.0
         case Medium = 0.7
         case Low = 0.3
@@ -90,7 +90,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         eraserButton.showsTouchWhenHighlighted = true
         self.addSubview(eraserButton)
         
-        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
         alphaButton.frame = CGRect(x: frame.maxX - buttonSize - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
@@ -115,11 +114,27 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             let green = CGFloat(prefs.floatForKey("colorGreen"))
             let blue = CGFloat(prefs.floatForKey("colorBlue"))
             
+            let alpha = CGFloat(prefs.floatForKey("alpha"))
+            
+            print(round(1000 * alpha) / 1000)
+            switch (round(1000 * alpha) / 1000) {
+            case AlphaType.Low.rawValue:
+                alphaButton.setImage(UIImage(named: "Alpha Low")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                currentAlpha = .Low
+            case AlphaType.Medium.rawValue:
+                alphaButton.setImage(UIImage(named: "Alpha Mid")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                currentAlpha = .Medium
+            default:
+                alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                currentAlpha = .High
+            }
+
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
             brushSizeSlider.value = prefs.floatForKey("brushSize")
         } else {
             brushSizeSlider.value = 5.5
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
+            alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         }
         
         updateButtonColor()
