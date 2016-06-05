@@ -104,14 +104,18 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             
             if sender.state == .Began {
                 let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
-                self.delagate.setColor(dropperColor)
+                if let color = dropperColor {
+                    self.delagate.setColor(color)
+                }
                 self.delagate.showUnderFingerView()
                 self.delagate.setAlphaHigh()
                 currentPoint = sender.locationInView(imageView)
                 self.drawPositionIndicator(dropperPoint)
             } else if sender.state == .Changed {
                 let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
-                self.delagate.setColor(dropperColor)
+                if let color = dropperColor {
+                    self.delagate.setColor(color)
+                }
                 currentPoint = sender.locationInView(imageView)
                 self.drawPositionIndicator(dropperPoint)
             } else if sender.state == .Ended {

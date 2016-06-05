@@ -11,10 +11,14 @@
 
 
 @implementation UIImage (Picker)
-- (UIColor *)colorAtPosition:(CGPoint)position {
+- (nullable UIColor *)colorAtPosition:(CGPoint)position {
     
     CGRect sourceRect = CGRectMake(position.x, position.y, 1.f, 1.f);
     CGImageRef imageRef = CGImageCreateWithImageInRect(self.CGImage, sourceRect);
+    
+    if (position.y < 0 || position.y > self.size.height || position.x < 0 || position.x > self.size.width) {
+        return nil;
+    }
     
     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
     unsigned char *buffer = malloc(4);

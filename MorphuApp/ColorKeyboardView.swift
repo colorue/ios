@@ -146,10 +146,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     @objc private func undo(sender: UIButton) {
         delagate.undo()
+        self.delagate.setDropperActive(false)
     }
     
     @objc private func trash(sender: UIButton) {
         delagate.trash()
+        self.delagate.setDropperActive(false)
     }
     
     @objc private func dropper(sender: UIButton) {
@@ -176,6 +178,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             self.currentAlpha = .High
             alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         }
+        self.delagate.setDropperActive(false)
+
     }
     
     func setDropper() {
@@ -186,12 +190,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
         self.setCurrentColor(colors[sender.view!.tag], animationTime: 0.3)
         self.updateButtonColor()
+        self.delagate.setDropperActive(false)
     }
     
     @objc private func buttonTapped(sender: UIButton) {
         let percentMix: CGFloat = 0.1
         self.setCurrentColor(self.blendColor(self.currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix), animationTime: 0.1)
         self.updateButtonColor()
+        self.delagate.setDropperActive(false)
     }
     
     private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {

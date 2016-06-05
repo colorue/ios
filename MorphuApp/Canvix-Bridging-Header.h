@@ -7,6 +7,6 @@
 
 @interface UIImage (Picker)
 
-- (UIColor *)colorAtPosition:(CGPoint)position;
+- (nullable UIColor *)colorAtPosition:(CGPoint)position;
 
 @end
