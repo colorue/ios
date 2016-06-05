@@ -56,10 +56,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if self.delagate.getDropperActive() {
             self.delagate.setDropperActive(false)
             
-            //            let dropperPoint = sender.locationInView(imageView)
-            
-            //            let dropperColor = self.getColorAtPoint(dropperPoint)
-            //            self.delagate.setColor(dropperColor)
             return
         }
         
@@ -96,13 +92,21 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.mergeImages(true)
         
         if self.delagate.getDropperActive() {
-            let dropperPoint = sender.locationInView(imageView)
-            //            let dropperColor = self.getColorAtPoint(dropperPoint)
-            //            self.delagate.setColor(dropperColor)
             
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: dropperPoint.x * resizeScale, y: dropperPoint.y * resizeScale), cropSize: underFingerSize))
+            let dropperPoint =  CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
             
-            if sender.state == .Ended {
+            let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
+            self.delagate.setColor(dropperColor)
+            
+           
+            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(dropperPoint, cropSize: underFingerSize))
+            
+            
+            
+            if sender.state == .Began {
+                self.delagate.showUnderFingerView()
+                self.delagate.setAlphaHigh()
+            } else if sender.state == .Ended {
                 self.delagate.setDropperActive(false)
                 self.delagate.hideUnderFingerView()
             }

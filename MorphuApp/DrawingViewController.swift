@@ -103,6 +103,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         return colorKeyboard?.getAlpha()
     }
     
+    func setAlphaHigh() {
+        colorKeyboard?.setAlphaHigh()
+    }
+    
     func undo() {
         self.canvas!.undo()
     }

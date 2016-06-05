@@ -75,13 +75,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
-//        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-//        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
-//        dropperButton.tintColor = .whiteColor()
-//        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
-//        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-//        dropperButton.showsTouchWhenHighlighted = true
-//        self.addSubview(dropperButton)
+        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        dropperButton.tintColor = .whiteColor()
+        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
+        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        dropperButton.showsTouchWhenHighlighted = true
+        self.addSubview(dropperButton)
         
         eraserButton.setImage(UIImage(named: "Eraser")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         eraserButton.tintColor = .whiteColor()
@@ -220,6 +220,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     func getAlpha() -> CGFloat? {
         return self.currentAlpha.rawValue
+    }
+    
+    func setAlphaHigh() {
+        self.currentAlpha = .High
+        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
     }
     
     func setColor(color: UIColor) {
