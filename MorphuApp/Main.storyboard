@@ -2255,10 +2255,10 @@
         <image name="facebook-logo" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5uB-bY-P8D"/>
         <segue reference="iPn-KR-9oK"/>
-        <segue reference="L5M-dB-8WQ"/>
-        <segue reference="7Ei-Vq-ke5"/>
+        <segue reference="sFW-OK-Bh1"/>
         <segue reference="Z2M-bE-noU"/>
+        <segue reference="7Ei-Vq-ke5"/>
+        <segue reference="5uB-bY-P8D"/>
     </inferredMetricsTieBreakers>
 </document>
