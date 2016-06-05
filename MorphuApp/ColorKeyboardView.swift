@@ -75,20 +75,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
-        dropperButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dropperButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        dropperButton.setImage(UIImage(named: "Dropper")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        dropperButton.setImage(UIImage(named: "DropperActive")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
         dropperButton.tintColor = .whiteColor()
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
-        dropperButton.frame = CGRect(x: frame.maxX - 75 - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        dropperButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
         self.addSubview(dropperButton)
         
-        eraserButton.setImage(UIImage(named: "Eraser")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        eraserButton.tintColor = .whiteColor()
-        eraserButton.addTarget(self, action: #selector(ColorKeyboardView.eraser(_:)), forControlEvents: .TouchUpInside)
-        eraserButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-        eraserButton.showsTouchWhenHighlighted = true
-        self.addSubview(eraserButton)
         
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
@@ -96,8 +90,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         alphaButton.showsTouchWhenHighlighted = true
         self.addSubview(alphaButton)
 
-
-        
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
         separatorU.backgroundColor = dividerColor
@@ -191,6 +183,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     func setDropper() {
         self.dropperButton.selected = self.delagate.getDropperActive()
+        self.dropperButton.highlighted = self.delagate.getDropperActive()
     }
     
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
