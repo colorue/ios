@@ -154,6 +154,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func setDropperActive(active: Bool) {
         self.dropperActive = active
         self.colorKeyboard!.setDropper()
+        self.colorKeyboard!.updateButtonColor()
     }
     
     @IBAction func done(sender: UIBarButtonItem) {

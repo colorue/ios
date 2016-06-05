@@ -83,13 +83,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.showsTouchWhenHighlighted = true
         self.addSubview(dropperButton)
         
-        
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
         alphaButton.frame = CGRect(x: frame.maxX - buttonSize - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
         self.addSubview(alphaButton)
-
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
         separatorU.backgroundColor = dividerColor
@@ -180,21 +178,20 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    
     func setDropper() {
         self.dropperButton.selected = self.delagate.getDropperActive()
         self.dropperButton.highlighted = self.delagate.getDropperActive()
     }
     
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
-        currentColorView.backgroundColor = colors[sender.view!.tag]
-        updateButtonColor()
+        self.setCurrentColor(colors[sender.view!.tag], animationTime: 0.3)
+        self.updateButtonColor()
     }
     
     @objc private func buttonTapped(sender: UIButton) {
         let percentMix: CGFloat = 0.1
-        currentColorView.backgroundColor = self.blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
-        updateButtonColor()
+        self.setCurrentColor(self.blendColor(self.currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix), animationTime: 0.1)
+        self.updateButtonColor()
     }
     
     private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
@@ -221,12 +218,16 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func setColor(color: UIColor) {
-        self.currentColorView.backgroundColor = color
-        
-        updateButtonColor()
+        self.setCurrentColor(color, animationTime: 0.5)
     }
     
-    private func updateButtonColor() {
+    private func setCurrentColor(color: UIColor, animationTime: Double) {
+        UIView.animateWithDuration(animationTime,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+            self.currentColorView.backgroundColor = color
+            }, completion: nil)
+    }
+    
+    func updateButtonColor() {
         let coreColor = currentColorView.backgroundColor?.coreImageColor!
         let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
         

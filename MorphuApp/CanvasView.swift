@@ -17,6 +17,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var imageView = UIImageView()
     let prefs = NSUserDefaults.standardUserDefaults()
     
+    let positionIndicator = UIImage(named: "PositionIndicator")!
+
+    
     var dataType: UnsafePointer<UInt8>?
     
     let resizeScale: CGFloat = 2.0
@@ -59,6 +62,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return
         }
         
+        print("handleTap")
+        
         lastPoint = sender.locationInView(imageView)
         currentPoint = sender.locationInView(imageView)
         self.drawImage()
@@ -93,43 +98,46 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         if self.delagate.getDropperActive() {
             
-            let dropperPoint =  CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
-            
-            let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
-            self.delagate.setColor(dropperColor)
-            
+            let dropperPoint = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
            
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(dropperPoint, cropSize: underFingerSize))
-            
-            
+            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(dropperPoint, cropSize: CGSize(width: minUnderFinger, height: minUnderFinger)))
             
             if sender.state == .Began {
+                let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
+                self.delagate.setColor(dropperColor)
                 self.delagate.showUnderFingerView()
                 self.delagate.setAlphaHigh()
+                currentPoint = sender.locationInView(imageView)
+                self.drawPositionIndicator(dropperPoint)
+            } else if sender.state == .Changed {
+                let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
+                self.delagate.setColor(dropperColor)
+                currentPoint = sender.locationInView(imageView)
+                self.drawPositionIndicator(dropperPoint)
             } else if sender.state == .Ended {
                 self.delagate.setDropperActive(false)
                 self.delagate.hideUnderFingerView()
+                self.currentStroke = nil
+                self.mergeImages(false)
             }
-            return
-        }
+        } else {
         
-        if sender.state == .Began {
-            lastPoint = sender.locationOfTouch(0, inView: imageView)
-            currentPoint = sender.locationInView(imageView)
-            self.drawImage()
-            self.delagate.showUnderFingerView()
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: lastPoint!.x * resizeScale, y: lastPoint!.y * resizeScale), cropSize: underFingerSize))
-        }
-        else if sender.state == .Changed {
-            currentPoint = sender.locationOfTouch(0, inView: imageView)
-            drawImage()
-            lastPoint = currentPoint
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: currentPoint!.x * resizeScale, y: currentPoint!.y * resizeScale), cropSize: underFingerSize))
-        }
-        else if sender.state == .Ended {
-            self.shiftUndoStack()
-            self.currentStroke = nil
-            self.delagate.hideUnderFingerView()
+            if sender.state == .Began {
+                lastPoint = sender.locationOfTouch(0, inView: imageView)
+                currentPoint = sender.locationInView(imageView)
+                self.drawImage()
+                self.delagate.showUnderFingerView()
+                self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: lastPoint!.x * resizeScale, y: lastPoint!.y * resizeScale), cropSize: underFingerSize))
+            } else if sender.state == .Changed {
+                currentPoint = sender.locationOfTouch(0, inView: imageView)
+                drawImage()
+                lastPoint = currentPoint
+                self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: currentPoint!.x * resizeScale, y: currentPoint!.y * resizeScale), cropSize: underFingerSize))
+            } else if sender.state == .Ended {
+                self.shiftUndoStack()
+                self.currentStroke = nil
+                self.delagate.hideUnderFingerView()
+            }
         }
     }
     
@@ -140,8 +148,17 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.currentStroke = nil
     }
     
+    private func drawPositionIndicator(point: CGPoint) {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
+        positionIndicator.drawAtPoint(CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
+        CGContextStrokePath(UIGraphicsGetCurrentContext())
+        CGContextFlush(UIGraphicsGetCurrentContext())
+        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
     
-    func drawImage() {
+    
+    private func drawImage() {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
         currentStroke?.drawAtPoint(CGPoint.zero)
         
@@ -152,8 +169,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         if let lastP = lastPoint {
             CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastP.x * resizeScale, lastP.y * resizeScale)
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint!.x * resizeScale, currentPoint!.y * resizeScale)
         }
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), currentPoint!.x * resizeScale, currentPoint!.y * resizeScale)
+        
         CGContextSetLineJoin(UIGraphicsGetCurrentContext(), CGLineJoin.Round);
         CGContextSetMiterLimit(UIGraphicsGetCurrentContext(), 10.0);
         
