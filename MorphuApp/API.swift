@@ -177,9 +177,58 @@ class API {
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
             self.loadData(user)
+//            self.getFBFriends()
+            self.getActiveFBID({ (FBID: Int) -> () in
+                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
+            })
+            
             callback(true)
         } else {
             callback(false)
+        }
+    }
+    
+    func getFBFriends() {
+        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
+        
+        // Get request Of Friends
+        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+            result:AnyObject!, error:NSError!) -> Void in
+                
+                if let error = error {
+                    print(error.description)
+                }
+                let resultdict = result as! NSDictionary
+                print("Result Dict: \(resultdict)")
+                let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                
+                for i in 0 ..< data.count {
+                    let valueDict : NSDictionary = data[i] as! NSDictionary
+                    let id = valueDict.objectForKey("id") as! String
+                    print("the id value is \(id)")
+                }
+                
+                let friends = resultdict.objectForKey("data") as! NSArray
+                print("Found \(friends.count) friends")
+        }
+    }
+    
+    func getActiveFBID(callback: (Int) -> ()) {
+        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
+        
+        // Get request Of Friends
+        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+            result:AnyObject!, error:NSError!) -> Void in
+            
+            if let error = error {
+                print(error.description)
+            }
+            let resultdict = result as! NSDictionary
+            print("Result Dict: \(resultdict)")
+            
+            
+            
+            callback(Int(resultdict.objectForKey("id") as! String)!)
         }
     }
     
@@ -196,6 +245,7 @@ class API {
             callback(false)
         } else {
             let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+            
             FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
 
                 if error != nil {
@@ -204,6 +254,7 @@ class API {
                 } else {
                     if user != nil {
                         callback(true)
+                        
                     } else {
                         callback(false)
                     }

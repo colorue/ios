@@ -76,7 +76,7 @@ class ProfileViewController: WallViewController {
                                 drawingCell.drawingImage.image = drawingImage
                                 drawing.setImage(drawingImage)
                                 
-                                UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+                                UIView.animateWithDuration(0.3,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
                                     drawingCell.drawingImage.alpha = 1.0
                                     }, completion: nil)
             })

@@ -116,7 +116,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             
             let alpha = CGFloat(prefs.floatForKey("alpha"))
             
-            print(round(1000 * alpha) / 1000)
             switch (round(1000 * alpha) / 1000) {
             case AlphaType.Low.rawValue:
                 alphaButton.setImage(UIImage(named: "Alpha Low")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
