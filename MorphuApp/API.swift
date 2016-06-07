@@ -161,7 +161,6 @@ class API {
             })
         })
             
-        delagate?.refresh()
         user.setfullUserLoaded()
         }
     }
@@ -357,6 +356,7 @@ class API {
 //            self.getFullUser(self.activeUser!)
             self.loadWall()
             self.loadUsers(user)
+            self.delagate?.refresh()
         })
     }
     
@@ -449,6 +449,8 @@ class API {
                     i += 1
                 }
             })
+        
+        self.delagate?.refresh()
     }
     
     func downloadImage(imageId: String, progressCallback: (Float) -> (), finishedCallback: (UIImage) -> ()) {

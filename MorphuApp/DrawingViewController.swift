@@ -28,6 +28,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print(prefs.boolForKey("drawingHowTo"))
+        
         let logo = UIImage(named: "Logo Inactive")! // UIImage(named: "Logo Clear")!
         let imageView = UIImageView(image:logo)
         self.navigationItem.titleView = imageView
@@ -46,7 +48,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
-        let prefs = NSUserDefaults.standardUserDefaults()
         var baseImage: UIImage? = nil
         
         if prefs.boolForKey("saved") {

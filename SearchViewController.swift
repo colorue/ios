@@ -10,11 +10,12 @@ import UIKit
 
 class SearchViewController: UITableViewController, UISearchBarDelegate {
     
-    let searchBar = UISearchBar(frame: CGRectMake(0, 0, 340, 20))
+    let searchBar = UISearchBar()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 35, 20)
 
         searchBar.placeholder = "Search coming soon..."
         
@@ -31,7 +32,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
-        searchBar.frame = CGRectMake(0, 0, 340, 20)
+        searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 35, 20)
 
 
         self.navigationItem.setRightBarButtonItem(nil, animated: true)
@@ -44,8 +45,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
     
     func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
 
-        searchBar.frame = CGRectMake(0, 0, 285, 20)
-        
+        searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 85, 20)
         
         let cancelSearchBarButtonItem = UIBarButtonItem(title: "Cancel", style: UIBarButtonItemStyle.Plain, target: self, action: #selector(SearchViewController.cancelBarButtonItemClicked(_:)))
         self.navigationItem.setRightBarButtonItem(cancelSearchBarButtonItem, animated: true)

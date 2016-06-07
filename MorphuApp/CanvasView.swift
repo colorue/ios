@@ -55,7 +55,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.addGestureRecognizer(drag)
         
         mergeImages(false)
-
     }
     
     func handleTap(sender: UITapGestureRecognizer) {

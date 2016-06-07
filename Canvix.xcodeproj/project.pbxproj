@@ -93,7 +93,7 @@
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		876614B91D034F1200DF4590 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		876614B91D034F1200DF4590 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ../SearchViewController.swift; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
@@ -142,7 +142,6 @@
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
-				876614B91D034F1200DF4590 /* SearchViewController.swift */,
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
 				873AFA0F1CED7697006FD34A /* Canvix */,
 				6AA7B21F98929F59F5124881 /* Pods */,
@@ -181,9 +180,9 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8730D80C1D0735D000E1D939 /* UIActivities */,
 				87C32C551D00A10D003817D8 /* Main */,
 				87CC7D411D00A2C20056DF73 /* Drawing */,
+				8730D80C1D0735D000E1D939 /* UIActivities */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
 				8763D3251CEE256200E3D528 /* Loading */,
 				8763D3231CEE254100E3D528 /* Navigation */,
@@ -308,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
+				876614B91D034F1200DF4590 /* SearchViewController.swift */,
 				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
 				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
 				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,

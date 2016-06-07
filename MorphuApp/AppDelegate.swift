@@ -68,6 +68,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     func applicationWillResignActive(application: UIApplication) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
+        
+        print("applicationWillResignActive")
         notificationCenter.postNotificationName(UIApplicationWillResignActiveNotification, object: nil)
     }
     
