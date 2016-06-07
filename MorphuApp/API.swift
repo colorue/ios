@@ -176,16 +176,17 @@ class API {
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
             self.loadData(user)
-//            self.getFBFriends()
-//            self.getActiveFBID({ (FBID: String) -> () in
-//                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
-//            })
+            self.getFBFriends()
+            self.getActiveFBID({ (FBID: String) -> () in
+                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
+            })
             
             callback(true)
         } else {
             callback(false)
         }
     }
+    
     
     func getFBFriends() {
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
@@ -199,11 +200,9 @@ class API {
                 }
                 let resultdict = result as! NSDictionary
                 let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                print(data)
                 for i in 0 ..< data.count {
                     let valueDict : NSDictionary = data[i] as! NSDictionary
                     let id = valueDict.objectForKey("id") as! String
-                    print(id)
                     self.loadUserByFBID(id)
             }
         }
@@ -355,7 +354,7 @@ class API {
             self.activeUser = activeUser
 //            self.getFullUser(self.activeUser!)
             self.loadWall()
-            self.loadUsers(user)
+//            self.loadUsers(user)
             self.delagate?.refresh()
         })
     }
@@ -414,13 +413,9 @@ class API {
         }
     
     private func loadUserByFBID(FBID: String) {
-        print("loadUserByFBID \(FBID)")
         myRootRef.child("users").queryOrderedByChild("fbId").queryEqualToValue(FBID)
-            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+            .observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
-                    
-                    print("Add user \(user.username)")
-
                     self.users.append(user)
                 })
             })

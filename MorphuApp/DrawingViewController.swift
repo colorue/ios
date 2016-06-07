@@ -159,6 +159,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
+        
+        self.baseImage = nil
         self.postButton.enabled = false
         self.colorKeyboard!.uploading(0)
         self.view.userInteractionEnabled = false
