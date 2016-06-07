@@ -158,8 +158,17 @@ class WallViewController: UITableViewController, APIDelagate {
     }
     
     func upload(sender: UIButton) {
+        
         let drawing = api.getWall()[sender.tag]
-        let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
+        let avc: UIActivityViewController
+        
+        if drawing.getArtist().userId == api.getActiveUser().userId {
+            let deleteActivity = DeleteActivity()
+            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [deleteActivity])
+        } else {
+            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
+        }
+        
         avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
         self.presentViewController(avc, animated: true, completion: nil)
     }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */; };
+		8730D8101D073C4A00E1D939 /* FacebookShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
 		874AF5971CFE927A0013E194 /* SF_Cartoonist_Hand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */; };
 		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
@@ -58,6 +60,8 @@
 		79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.debug.xcconfig"; sourceTree = "<group>"; };
 		7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.release.xcconfig"; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Canvix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
+		8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookShareActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Cartoonist_Hand.ttf; sourceTree = "<group>"; };
@@ -126,6 +130,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8730D80C1D0735D000E1D939 /* UIActivities */ = {
+			isa = PBXGroup;
+			children = (
+				8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */,
+				8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */,
+			);
+			name = UIActivities;
+			sourceTree = "<group>";
+		};
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +181,7 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8730D80C1D0735D000E1D939 /* UIActivities */,
 				87C32C551D00A10D003817D8 /* Main */,
 				87CC7D411D00A2C20056DF73 /* Drawing */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
@@ -455,6 +469,7 @@
 				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */,
+				8730D8101D073C4A00E1D939 /* FacebookShareActivity.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
 				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
@@ -465,6 +480,7 @@
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
 				879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */,
+				8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,

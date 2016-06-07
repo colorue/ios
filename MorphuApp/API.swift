@@ -290,6 +290,24 @@ class API {
         })
     }
     
+    func deleteDrawing(drawing: Drawing) {
+        myRootRef.child("drawings/\(drawing.getDrawingId())").removeValue()
+        myRootRef.child("users/\(activeUser!.userId)/drawings/\(drawing.getDrawingId())").removeValue()
+        myRootRef.child("users/\(activeUser!.userId)/wall/\(drawing.getDrawingId())").removeValue()
+        
+        let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
+        
+        desertRef.deleteWithCompletion { (error) -> Void in
+            if (error != nil) {
+                print("File deletion error")
+            } else {
+                print("File deleted successfully")
+            }
+        }
+        
+        delagate?.refresh()
+    }
+    
     func like(drawing: Drawing) {
         drawing.like(self.activeUser!)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
@@ -343,6 +361,15 @@ class API {
             self.loadUsers(user)
         })
     }
+    
+//    private func addDrawings() {
+//        myRootRef.child("drawings").queryOrderedByChild("artist").queryEqualToValue(self.activeUser?.userId).observeEventType(.ChildAdded, withBlock: { snapshot in
+//            let drawingId = snapshot.key
+//            let timeStamp = snapshot.value!["timeStamp"] as! Double
+//            self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawingId)").setValue(timeStamp)
+//            self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawingId)").setValue(timeStamp)
+//        })
+//    }
 
     func loadWall() {
         myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
