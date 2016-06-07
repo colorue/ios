@@ -17,7 +17,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var canvas: CanvasView?
     var underFingerView = UIImageView()
     var keyboardCover = UIView()
-
     
     let backButton = UIButton(type: UIButtonType.Custom)
 

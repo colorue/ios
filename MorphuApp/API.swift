@@ -178,9 +178,9 @@ class API {
             
             self.loadData(user)
 //            self.getFBFriends()
-            self.getActiveFBID({ (FBID: Int) -> () in
-                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
-            })
+//            self.getActiveFBID({ (FBID: String) -> () in
+//                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
+//            })
             
             callback(true)
         } else {
@@ -199,24 +199,20 @@ class API {
                     print(error.description)
                 }
                 let resultdict = result as! NSDictionary
-                print("Result Dict: \(resultdict)")
                 let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                
+                print(data)
                 for i in 0 ..< data.count {
                     let valueDict : NSDictionary = data[i] as! NSDictionary
                     let id = valueDict.objectForKey("id") as! String
-                    print("the id value is \(id)")
-                }
-                
-                let friends = resultdict.objectForKey("data") as! NSArray
-                print("Found \(friends.count) friends")
+                    print(id)
+                    self.loadUserByFBID(id)
+            }
         }
     }
     
-    func getActiveFBID(callback: (Int) -> ()) {
+    func getActiveFBID(callback: (String) -> ()) {
         let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
         
-        // Get request Of Friends
         request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
             result:AnyObject!, error:NSError!) -> Void in
             
@@ -224,11 +220,8 @@ class API {
                 print(error.description)
             }
             let resultdict = result as! NSDictionary
-            print("Result Dict: \(resultdict)")
             
-            
-            
-            callback(Int(resultdict.objectForKey("id") as! String)!)
+            callback(resultdict.objectForKey("id") as! String)
         }
     }
     
@@ -394,6 +387,19 @@ class API {
                 }
             })
         }
+    
+    private func loadUserByFBID(FBID: String) {
+        print("loadUserByFBID \(FBID)")
+        myRootRef.child("users").queryOrderedByChild("fbId").queryEqualToValue(FBID)
+            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+                self.getUser(snapshot.key, callback: { (user: User) -> () in
+                    
+                    print("Add user \(user.username)")
+
+                    self.users.append(user)
+                })
+            })
+    }
     
     private func loadUsers(currentUser: FIRUser) {
         myRootRef.child("users").queryOrderedByKey()
