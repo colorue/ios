@@ -24,24 +24,24 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     let resizeScale: CGFloat = 2.0
     
-    init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage?) {
-        if let base = baseImage {
-            self.undoStack.append(base)
-        }
-        
-        self.delagate = delagate
-        super.init(frame : frame)
-        displayCanvas()
-        
-        mergeImages(false)
-    }
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
     }
     
-    func displayCanvas() {
-        imageView.backgroundColor = UIColor.whiteColor()
+    init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage?) {
+        self.delagate = delagate
+        super.init(frame : frame)
+        displayCanvas(baseImage)
+    }
+    
+    func displayCanvas(baseImage: UIImage?) {
+        
+        if let base = baseImage {
+            self.undoStack.append(base)
+        } else {
+            self.undoStack.append(UIImage.getImageWithColor(UIColor.whiteColor(), size: CGSize(width: self.frame.width * resizeScale, height: self.frame.height * resizeScale)))
+        }
+//        imageView.backgroundColor = UIColor.whiteColor()
         imageView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
         self.addSubview(imageView)
         
@@ -53,6 +53,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         drag.minimumPressDuration = 0.01
         drag.delegate = self
         self.addGestureRecognizer(drag)
+        
+        mergeImages(false)
+
     }
     
     func handleTap(sender: UITapGestureRecognizer) {

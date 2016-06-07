@@ -301,11 +301,9 @@ class API {
             if (error != nil) {
                 print("File deletion error")
             } else {
-                print("File deleted successfully")
+                self.delagate?.refresh()
             }
         }
-        
-        delagate?.refresh()
     }
     
     func like(drawing: Drawing) {
