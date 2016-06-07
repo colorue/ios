@@ -112,6 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         } else if let friendsList = targetController as? UserListViewController {
             if friendsList.users == nil {
                 API.sharedInstance.getFullUser(api.getActiveUser(), delagate: friendsList)
+//                friendsList.addInviteButton()
                 friendsList.users = api.getUsers()
             }
         }

@@ -94,6 +94,14 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
 //        self.refreshControl?.endRefreshing()
     }
     
+    func addInviteButton() {
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite", style: .Plain, target: self, action: #selector(UserListViewController.invite(_:)))
+    }
+    
+    @objc private func invite(sender: UIBarButtonItem) {
+        self.performSegueWithIdentifier("toInvite", sender: self)
+    }
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showUser", sender: self)
     }
