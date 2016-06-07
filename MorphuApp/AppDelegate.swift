@@ -93,9 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
-        
-//        print(tabBarController.selectedIndex)
-        
+        let api = API.sharedInstance
         
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
@@ -108,13 +106,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
         } else if let profileView = targetController as? ProfileViewController {
             if profileView.userInstance == nil {
-                profileView.navigationItem.title = API.sharedInstance.getActiveUser().username
-                profileView.userInstance = API.sharedInstance.getActiveUser()
+                profileView.navigationItem.title = api.getActiveUser().username
+                profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
             }
         } else if let friendsList = targetController as? UserListViewController {
             if friendsList.users == nil {
-                friendsList.users = API.sharedInstance.getUsers()
+                API.sharedInstance.getFullUser(api.getActiveUser(), delagate: friendsList)
+                friendsList.users = api.getUsers()
             }
         }
         

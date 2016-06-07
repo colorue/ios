@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserListViewController: UITableViewController, UserCellDelagate {
+class UserListViewController: UITableViewController, UserCellDelagate, APIDelagate {
     
     var users: [User]?
     
@@ -86,6 +86,11 @@ class UserListViewController: UITableViewController, UserCellDelagate {
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
+    }
+    
+    func refresh() {
+        self.tableView.reloadData()
+//        self.refreshControl?.endRefreshing()
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
