@@ -231,6 +231,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return UIImage.getImageWithColor(UIColor.whiteColor(), size: self.frame.size)
         }
     }
+    
+    func setDrawing(drawing: Drawing) {
+        self.imageView.image = drawing.getImage()
+    }
 }
 
 //

@@ -94,8 +94,8 @@ class WallViewController: UITableViewController, APIDelagate {
         drawingCell.likesButton.tag = indexPath.row
         drawingCell.commentsButton.tag = indexPath.row
         
-        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchDown)
-        drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchDown)
+        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchUpInside)
+        drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchUpInside)
 
         let likes = drawing.getLikes().count
         if likes == 0 {
@@ -163,8 +163,9 @@ class WallViewController: UITableViewController, APIDelagate {
         let avc: UIActivityViewController
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
+            let editActivity = EditActivity()
             let deleteActivity = DeleteActivity()
-            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [deleteActivity])
+            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [editActivity, deleteActivity])
         } else {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
         }

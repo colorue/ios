@@ -10,6 +10,8 @@ import UIKit
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate {
     
+    var baseImage: UIImage?
+
     let api = API.sharedInstance
     let prefs = NSUserDefaults.standardUserDefaults()
 
@@ -27,8 +29,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print(prefs.boolForKey("drawingHowTo"))
         
         let logo = UIImage(named: "Logo Inactive")! // UIImage(named: "Logo Clear")!
         let imageView = UIImageView(image:logo)
@@ -48,11 +48,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
-        var baseImage: UIImage? = nil
         
         if prefs.boolForKey("saved") {
-            if let savedDrawing = prefs.stringForKey("savedDrawing") {
-                baseImage = UIImage.fromBase64(savedDrawing)
+            if baseImage == nil {
+                if let savedDrawing = prefs.stringForKey("savedDrawing") {
+                    baseImage = UIImage.fromBase64(savedDrawing)
+                }
             }
         }
         

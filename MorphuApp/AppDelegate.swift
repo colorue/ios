@@ -99,7 +99,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let targetController = destinationNavigationController?.topViewController
         
         if targetController is DrawingViewController {
-        
             if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
                 tabBarController.presentViewController(newVC, animated: true, completion: nil)
                 return false
