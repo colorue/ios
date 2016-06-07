@@ -160,7 +160,7 @@ class API {
                 user.addDrawing(drawing)
             })
         })
-            
+        delagate?.refresh()
         user.setfullUserLoaded()
         }
     }
@@ -352,7 +352,7 @@ class API {
     private func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
-//            self.getFullUser(self.activeUser!)
+            self.getFullUser(self.activeUser!, delagate: nil)
             self.loadWall()
 //            self.loadUsers(user)
             self.delagate?.refresh()
