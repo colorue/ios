@@ -22,7 +22,7 @@ class EditActivity: UIActivity {
     }
     
     override func activityImage() -> UIImage? {
-        return nil
+        return UIImage(named: "Edit Icon")
     }
     
     override func canPerformWithActivityItems(activityItems: [AnyObject]) -> Bool {
