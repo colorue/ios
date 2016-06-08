@@ -17,5 +17,6 @@ class TabBarController: UITabBarController {
 
         self.tabBar.barStyle = .Default
         self.tabBar.tintColor = morhpuColor
+        self.tabBar.translucent = false
     }
 }

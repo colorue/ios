@@ -176,10 +176,10 @@ class API {
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
             self.loadData(user)
-            self.getFBFriends()
-            self.getActiveFBID({ (FBID: String) -> () in
-                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
-            })
+//            self.getFBFriends()
+//            self.getActiveFBID({ (FBID: String) -> () in
+//                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
+//            })
             
             callback(true)
         } else {
@@ -354,7 +354,7 @@ class API {
             self.activeUser = activeUser
             self.getFullUser(self.activeUser!, delagate: nil)
             self.loadWall()
-//            self.loadUsers(user)
+            self.loadUsers(user)
             self.delagate?.refresh()
         })
     }

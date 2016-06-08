@@ -10,7 +10,6 @@
 		8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */; };
 		8730D8101D073C4A00E1D939 /* FacebookShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
-		874AF5971CFE927A0013E194 /* SF_Cartoonist_Hand.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */; };
 		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
 		87619AE61D076457000BBCC5 /* EditActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE51D076457000BBCC5 /* EditActivity.swift */; };
 		87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE71D0786FF000BBCC5 /* InviteViewController.swift */; };
@@ -67,7 +66,6 @@
 		8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookShareActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
-		874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SF_Cartoonist_Hand.ttf; sourceTree = "<group>"; };
 		874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellDelagate.swift; sourceTree = "<group>"; };
 		87619AE51D076457000BBCC5 /* EditActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivity.swift; sourceTree = "<group>"; };
 		87619AE71D0786FF000BBCC5 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
@@ -178,7 +176,6 @@
 		8763D3161CEE241000E3D528 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */,
 				87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */,
 				8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */,
 			);
@@ -412,7 +409,6 @@
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */,
-				874AF5971CFE927A0013E194 /* SF_Cartoonist_Hand.ttf in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

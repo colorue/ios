@@ -9,16 +9,16 @@
 import UIKit
 
 class NavigationController: UINavigationController, UINavigationBarDelegate {
+    
+    let font = UIFont(name: "Playtime With Hot Toddies", size: 22)!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let font = UIFont(name: "Playtime With Hot Toddies", size: 22)!
+        navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: blackColor]
 
         navigationBar.barTintColor = UIColor.whiteColor()
-        navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: redColor]
         navigationBar.translucent = false
         
-        self.navigationBar.tintColor = blueColor
         setStatusBarBackgroundColor(UIColor.whiteColor())
     }
 
@@ -27,5 +27,10 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
             return
         }
         statusBar.backgroundColor = color
+    }
+    
+    func setColors(mainColor: UIColor) {
+
+        navigationBar.tintColor = mainColor
     }
 }

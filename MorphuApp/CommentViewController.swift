@@ -68,7 +68,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         cell.delagate = self
         
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
-        separatorU.backgroundColor = dividerColor
+        separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
         self.writeCommentCell = cell

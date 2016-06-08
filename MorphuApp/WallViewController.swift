@@ -16,6 +16,12 @@ class WallViewController: UITableViewController, APIDelagate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self is ProfileViewController {
+            
+        } else {
+            self.setTitle()
+        }
 
         
         tableView.rowHeight = UITableViewAutomaticDimension
