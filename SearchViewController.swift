@@ -18,7 +18,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 35, 20)
 
         searchBar.placeholder = "Search coming soon..."
-        
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
@@ -33,7 +32,6 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         searchBar.resignFirstResponder()
         
         searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 35, 20)
-
 
         self.navigationItem.setRightBarButtonItem(nil, animated: true)
     }

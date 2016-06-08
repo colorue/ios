@@ -49,6 +49,7 @@
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
 		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
 		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
+		87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
@@ -61,7 +62,7 @@
 		119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canvix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.debug.xcconfig"; sourceTree = "<group>"; };
 		7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.release.xcconfig"; sourceTree = "<group>"; };
-		872E82E11D01296F005A56A3 /* Canvix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Canvix.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		872E82E11D01296F005A56A3 /* Coloroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coloroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
 		8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookShareActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -105,6 +106,7 @@
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCell.swift; sourceTree = "<group>"; };
+		87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
 		87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellDelagate.swift; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 				873AFA0F1CED7697006FD34A /* Canvix */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
-				872E82E11D01296F005A56A3 /* Canvix.app */,
+				872E82E11D01296F005A56A3 /* Coloroo.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -177,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				874AF5961CFE927A0013E194 /* SF_Cartoonist_Hand.ttf */,
+				87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */,
 				8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */,
 			);
 			name = Fonts;
@@ -340,9 +343,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		873AFA0C1CED7697006FD34A /* Canvix */ = {
+		873AFA0C1CED7697006FD34A /* Coloroo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvix" */;
+			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Coloroo" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
 				873AFA091CED7697006FD34A /* Sources */,
@@ -355,9 +358,9 @@
 			);
 			dependencies = (
 			);
-			name = Canvix;
+			name = Coloroo;
 			productName = MorphuApp;
-			productReference = 872E82E11D01296F005A56A3 /* Canvix.app */;
+			productReference = 872E82E11D01296F005A56A3 /* Coloroo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -381,7 +384,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvix" */;
+			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Coloroo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -394,7 +397,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				873AFA0C1CED7697006FD34A /* Canvix */,
+				873AFA0C1CED7697006FD34A /* Coloroo */,
 			);
 		};
 /* End PBXProject section */
@@ -405,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
+				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2BF1CEE223000E3D528 /* GoogleService-Info.plist in Resources */,
@@ -609,7 +613,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Canvix;
+				PRODUCT_NAME = Coloroo;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -626,7 +630,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Canvix;
+				PRODUCT_NAME = Coloroo;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 			};
 			name = Release;
@@ -634,7 +638,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Canvix" */ = {
+		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Coloroo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA1D1CED7697006FD34A /* Debug */,
@@ -643,7 +647,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Canvix" */ = {
+		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Coloroo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA201CED7697006FD34A /* Debug */,

@@ -16,6 +16,7 @@ class WallViewController: UITableViewController, APIDelagate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
@@ -27,6 +28,12 @@ class WallViewController: UITableViewController, APIDelagate {
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+    }
+    
+    func setTitle() {
+        let logo = UIImage(named: "Colorue")! // UIImage(named: "Logo Clear")!
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
     }
     
     func refreshBottom(sender: UIRefreshControl) {

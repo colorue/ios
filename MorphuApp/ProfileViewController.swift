@@ -15,6 +15,7 @@ class ProfileViewController: WallViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         API.sharedInstance.getFullUser(userInstance!, delagate: self)
     }
     

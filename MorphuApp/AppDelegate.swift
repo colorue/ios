@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        UIApplication.sharedApplication().statusBarStyle = .LightContent
+        UIApplication.sharedApplication().statusBarStyle = .Default
                 
         if let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView  {
             statusBar.backgroundColor = morhpuColor
@@ -99,22 +99,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let targetController = destinationNavigationController?.topViewController
         
         if targetController is DrawingViewController {
+//            tabBarController.tabBar.tintColor = whiteColor
             if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
                 tabBarController.presentViewController(newVC, animated: true, completion: nil)
-                return false
+//                return false
             }
         } else if let profileView = targetController as? ProfileViewController {
+            tabBarController.tabBar.tintColor = purpleColor
+
             if profileView.userInstance == nil {
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
             }
         } else if let friendsList = targetController as? UserListViewController {
+            tabBarController.tabBar.tintColor = blueColor
             if friendsList.users == nil {
                 API.sharedInstance.getFullUser(api.getActiveUser(), delagate: friendsList)
 //                friendsList.addInviteButton()
                 friendsList.users = api.getUsers()
             }
+        } else if let wall = targetController as? WallViewController {
+            
+            tabBarController.tabBar.tintColor = redColor
+            wall.setTitle()
+        } else if let wall = targetController as? SearchViewController {
+            tabBarController.tabBar.tintColor = orangeColor
         }
         
         return true

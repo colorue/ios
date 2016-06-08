@@ -44,6 +44,7 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
+		<string>playtime.ttf</string>
 		<string>SF_Cartoonist_Hand.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
 	</array>
