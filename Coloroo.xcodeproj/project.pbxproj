@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00AB3772AB04B8D4B5E10083 /* Pods_Coloroo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */; };
 		8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */; };
 		8730D8101D073C4A00E1D939 /* FacebookShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
@@ -54,13 +55,10 @@
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
-		D84E186B262428E791E28D93 /* Pods_Canvix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Canvix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.debug.xcconfig"; sourceTree = "<group>"; };
-		7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Canvix.release.xcconfig"; path = "Pods/Target Support Files/Pods-Canvix/Pods-Canvix.release.xcconfig"; sourceTree = "<group>"; };
+		7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coloroo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo.release.xcconfig"; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Coloroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coloroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
 		8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookShareActivity.swift; sourceTree = "<group>"; };
@@ -111,6 +109,8 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coloroo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo.debug.xcconfig"; sourceTree = "<group>"; };
+		FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Coloroo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D84E186B262428E791E28D93 /* Pods_Canvix.framework in Frameworks */,
+				00AB3772AB04B8D4B5E10083 /* Pods_Coloroo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +128,8 @@
 		6AA7B21F98929F59F5124881 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */,
-				7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */,
+				DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */,
+				7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -148,14 +148,14 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
-				873AFA0F1CED7697006FD34A /* Canvix */,
+				873AFA0F1CED7697006FD34A /* Coloroo */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
 				872E82E11D01296F005A56A3 /* Coloroo.app */,
 			);
 			sourceTree = "<group>";
 		};
-		873AFA0F1CED7697006FD34A /* Canvix */ = {
+		873AFA0F1CED7697006FD34A /* Coloroo */ = {
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
@@ -169,7 +169,7 @@
 				8763D31A1CEE244500E3D528 /* API */,
 				8763D31F1CEE247F00E3D528 /* Supporting Files */,
 			);
-			name = Canvix;
+			name = Coloroo;
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};
@@ -332,7 +332,7 @@
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				119E129ED3B5C1BD32784C59 /* Pods_Canvix.framework */,
+				FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -443,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Canvix/Pods-Canvix-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */ = {
@@ -458,7 +458,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Canvix/Pods-Canvix-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -600,7 +600,7 @@
 		};
 		873AFA201CED7697006FD34A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 79F3E2260541AA45510B67A9 /* Pods-Canvix.debug.xcconfig */;
+			baseConfigurationReference = DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -617,7 +617,7 @@
 		};
 		873AFA211CED7697006FD34A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D891EF1EEAC5DD4AD9461E2 /* Pods-Canvix.release.xcconfig */;
+			baseConfigurationReference = 7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

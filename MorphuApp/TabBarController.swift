@@ -16,7 +16,7 @@ class TabBarController: UITabBarController {
         self.delegate = UIApplication.sharedApplication().delegate as? UITabBarControllerDelegate
 
         self.tabBar.barStyle = .Default
-        self.tabBar.tintColor = morhpuColor
+        self.tabBar.tintColor = redColor
         self.tabBar.translucent = false
     }
 }

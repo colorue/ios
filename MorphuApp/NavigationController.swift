@@ -19,15 +19,15 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
         navigationBar.barTintColor = UIColor.whiteColor()
         navigationBar.translucent = false
         
-        setStatusBarBackgroundColor(UIColor.whiteColor())
+//        setStatusBarBackgroundColor(UIColor.whiteColor())
     }
 
-    func setStatusBarBackgroundColor(color: UIColor) {
-        guard  let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView else {
-            return
-        }
-        statusBar.backgroundColor = color
-    }
+//    func setStatusBarBackgroundColor(color: UIColor) {
+//        guard  let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView else {
+//            return
+//        }
+//        statusBar.backgroundColor = color
+//    }
     
     func setColors(mainColor: UIColor) {
 

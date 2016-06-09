@@ -176,10 +176,10 @@ class API {
             myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
             self.loadData(user)
-//            self.getFBFriends()
-//            self.getActiveFBID({ (FBID: String) -> () in
-//                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
-//            })
+            self.getFBFriends()
+            self.getActiveFBID({ (FBID: String) -> () in
+                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
+            })
             
             callback(true)
         } else {
@@ -197,15 +197,17 @@ class API {
                 
                 if let error = error {
                     print(error.description)
+                    return
+                } else {
+                    let resultdict = result as! NSDictionary
+                    let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                    for i in 0 ..< data.count {
+                        let valueDict : NSDictionary = data[i] as! NSDictionary
+                        let id = valueDict.objectForKey("id") as! String
+                        self.loadUserByFBID(id)
+                    }
                 }
-                let resultdict = result as! NSDictionary
-                let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                for i in 0 ..< data.count {
-                    let valueDict : NSDictionary = data[i] as! NSDictionary
-                    let id = valueDict.objectForKey("id") as! String
-                    self.loadUserByFBID(id)
             }
-        }
     }
     
     func getActiveFBID(callback: (String) -> ()) {
@@ -216,10 +218,10 @@ class API {
             
             if let error = error {
                 print(error.description)
+            } else {
+                let resultdict = result as! NSDictionary
+                callback(resultdict.objectForKey("id") as! String)
             }
-            let resultdict = result as! NSDictionary
-            
-            callback(resultdict.objectForKey("id") as! String)
         }
     }
     
@@ -354,7 +356,7 @@ class API {
             self.activeUser = activeUser
             self.getFullUser(self.activeUser!, delagate: nil)
             self.loadWall()
-            self.loadUsers(user)
+//            self.loadUsers(user)
             self.delagate?.refresh()
         })
     }
@@ -500,6 +502,9 @@ class API {
         uploadTask.observeStatus(.Failure) { snapshot in
             finishedCallback(false)
         }
+    }
+    deinit {
+        print("deinit")
     }
     
     

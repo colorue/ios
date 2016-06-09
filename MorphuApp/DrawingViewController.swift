@@ -85,7 +85,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if (!prefs.boolForKey("drawingHowTo")) {
-            let drawingHowTo = UIAlertController(title: "Drawing", message: "Tap a color selectors to mix colors. Press them to switch colors.  The slider changes the brush size." , preferredStyle: UIAlertControllerStyle.Alert)
+            let drawingHowTo = UIAlertController(title: "Drawing", message: "Tap a color selector to mix colors. Press them to switch colors.  The slider changes the brush size." , preferredStyle: UIAlertControllerStyle.Alert)
             drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(drawingHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "drawingHowTo")
