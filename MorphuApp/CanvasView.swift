@@ -33,26 +33,27 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.delagate = delagate
         super.init(frame : frame)
         
-        actualSize = CGSize(width: frame.width * resizeScale, height: frame.height * resizeScale)
 
         displayCanvas(baseImage)
     }
     
     private func displayCanvas(baseImage: UIImage?) {
-        if let base = baseImage {
-            undoStack.append(base)
-        } else {
-            undoStack.append(UIImage.getImageWithColor(UIColor.whiteColor(), size: actualSize))
-        }
+        actualSize = CGSize(width: frame.width * resizeScale, height: frame.height * resizeScale)
         imageView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         addSubview(imageView)
+        
+        if let base = baseImage {
+            undoStack.append(base)
+            mergeCurrentStroke(false)
+        } else {
+            trash()
+        }
         
         let drag = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
         drag.minimumPressDuration = 0.0
         drag.delegate = self
         addGestureRecognizer(drag)
         
-        mergeCurrentStroke(false)
     }
     
     
@@ -205,7 +206,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func trash() {
-        currentStroke = (UIImage.getImageWithColor(whiteColor, size: actualSize))
+        currentStroke = (UIImage.getImageWithColor(UIColor.whiteColor(), size: actualSize))
         mergeCurrentStroke(false)
         addToUndoStack(imageView.image)
         currentStroke = nil
