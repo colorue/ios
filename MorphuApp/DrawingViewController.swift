@@ -116,10 +116,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.canvas!.trash()
     }
     
-    func dropper() {
-        self.canvas!.dropper()
-    }
-    
     func setUnderfingerView(underFingerImage: UIImage) {
         self.colorKeyboard?.userInteractionEnabled = false
         if underFingerView.hidden {

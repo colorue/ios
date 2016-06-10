@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-               BuildableName = "Coloroo.app"
-               BlueprintName = "Coloroo"
-               ReferencedContainer = "container:Coloroo.xcodeproj">
+               BuildableName = "ColorCouch.app"
+               BlueprintName = "ColorCouch"
+               ReferencedContainer = "container:Color Couch.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Coloroo.app"
-            BlueprintName = "Coloroo"
-            ReferencedContainer = "container:Coloroo.xcodeproj">
+            BuildableName = "ColorCouch.app"
+            BlueprintName = "ColorCouch"
+            ReferencedContainer = "container:Color Couch.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -56,9 +56,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Coloroo.app"
-            BlueprintName = "Coloroo"
-            ReferencedContainer = "container:Coloroo.xcodeproj">
+            BuildableName = "ColorCouch.app"
+            BlueprintName = "ColorCouch"
+            ReferencedContainer = "container:Color Couch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -75,9 +75,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "873AFA0C1CED7697006FD34A"
-            BuildableName = "Coloroo.app"
-            BlueprintName = "Coloroo"
-            ReferencedContainer = "container:Coloroo.xcodeproj">
+            BuildableName = "ColorCouch.app"
+            BlueprintName = "ColorCouch"
+            ReferencedContainer = "container:Color Couch.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

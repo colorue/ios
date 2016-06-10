@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00AB3772AB04B8D4B5E10083 /* Pods_Coloroo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */; };
 		8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */; };
 		8730D8101D073C4A00E1D939 /* FacebookShareActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
@@ -52,14 +51,15 @@
 		87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
+		87E176B5C5560C0B5C767763 /* Pods_ColorCouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */; };
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coloroo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo.release.xcconfig"; sourceTree = "<group>"; };
-		872E82E11D01296F005A56A3 /* Coloroo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Coloroo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch.debug.xcconfig"; sourceTree = "<group>"; };
+		872E82E11D01296F005A56A3 /* ColorCouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorCouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
 		8730D80F1D073C4A00E1D939 /* FacebookShareActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookShareActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -109,8 +109,8 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Coloroo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo.debug.xcconfig"; sourceTree = "<group>"; };
-		FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Coloroo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorCouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00AB3772AB04B8D4B5E10083 /* Pods_Coloroo.framework in Frameworks */,
+				87E176B5C5560C0B5C767763 /* Pods_ColorCouch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -128,8 +128,8 @@
 		6AA7B21F98929F59F5124881 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */,
-				7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */,
+				1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */,
+				E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -151,7 +151,7 @@
 				873AFA0F1CED7697006FD34A /* Coloroo */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
-				872E82E11D01296F005A56A3 /* Coloroo.app */,
+				872E82E11D01296F005A56A3 /* ColorCouch.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,7 +332,7 @@
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FADBCA52306A19B4DD99E72C /* Pods_Coloroo.framework */,
+				8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -340,9 +340,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		873AFA0C1CED7697006FD34A /* Coloroo */ = {
+		873AFA0C1CED7697006FD34A /* ColorCouch */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Coloroo" */;
+			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "ColorCouch" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
 				873AFA091CED7697006FD34A /* Sources */,
@@ -355,9 +355,9 @@
 			);
 			dependencies = (
 			);
-			name = Coloroo;
+			name = ColorCouch;
 			productName = MorphuApp;
-			productReference = 872E82E11D01296F005A56A3 /* Coloroo.app */;
+			productReference = 872E82E11D01296F005A56A3 /* ColorCouch.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -381,7 +381,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Coloroo" */;
+			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "ColorCouch" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -394,7 +394,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				873AFA0C1CED7697006FD34A /* Coloroo */,
+				873AFA0C1CED7697006FD34A /* ColorCouch */,
 			);
 		};
 /* End PBXProject section */
@@ -443,7 +443,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */ = {
@@ -458,7 +458,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Coloroo/Pods-Coloroo-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -600,7 +600,7 @@
 		};
 		873AFA201CED7697006FD34A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DD79281036A188805AA51C98 /* Pods-Coloroo.debug.xcconfig */;
+			baseConfigurationReference = 1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -609,7 +609,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Coloroo;
+				PRODUCT_NAME = ColorCouch;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -617,7 +617,7 @@
 		};
 		873AFA211CED7697006FD34A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E6DA305241CB55D7067D4A4 /* Pods-Coloroo.release.xcconfig */;
+			baseConfigurationReference = E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -626,7 +626,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = Coloroo;
+				PRODUCT_NAME = ColorCouch;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 			};
 			name = Release;
@@ -634,7 +634,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Coloroo" */ = {
+		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "ColorCouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA1D1CED7697006FD34A /* Debug */,
@@ -643,7 +643,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Coloroo" */ = {
+		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "ColorCouch" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA201CED7697006FD34A /* Debug */,

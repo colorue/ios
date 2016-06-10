@@ -180,7 +180,7 @@
             </objects>
             <point key="canvasLocation" x="-776" y="1083"/>
         </scene>
-        <!--Coloroo-->
+        <!--ColorCouch-->
         <scene sceneID="bc8-ho-2Cx">
             <objects>
                 <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Coloroo" customModuleProvider="target" sceneMemberID="viewController">
@@ -196,7 +196,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="586"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-2o-Cdl">
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="G8d-2o-Cdl">
                                             <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="aHA-jk-65B"/>
@@ -214,7 +214,7 @@
                                                 </mask>
                                             </variation>
                                         </progressView>
-                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WER-7B-wRv" userLabel="Divider">
+                                        <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WER-7B-wRv" userLabel="Divider">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <color key="backgroundColor" red="0.86274509799999999" green="0.86274509799999999" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
@@ -324,11 +324,11 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
-                                            <rect key="frame" x="231" y="534" width="286" height="36"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
+                                            <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="IG8-Jh-kor"/>
                                                         <constraint firstAttribute="width" constant="22" id="PAG-Kb-mcZ"/>
@@ -348,8 +348,8 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
-                                                    <rect key="frame" x="106" y="0.0" width="30" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
+                                                    <rect key="frame" x="71" y="0.0" width="1" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -375,8 +375,8 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
+                                                    <rect key="frame" x="88" y="0.0" width="134" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
                                                     </constraints>
@@ -694,7 +694,7 @@
                             <outlet property="delegate" destination="4Ba-st-mMB" id="Uth-Sk-Yup"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Coloroo" id="0FW-Cj-j2H">
+                    <navigationItem key="navigationItem" title="ColorCouch" id="0FW-Cj-j2H">
                         <barButtonItem key="backBarButtonItem" title=" " id="FmM-20-kR3">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </barButtonItem>
@@ -710,7 +710,7 @@
             </objects>
             <point key="canvasLocation" x="978" y="2254.5"/>
         </scene>
-        <!--Coloroo-->
+        <!--ColorCouch-->
         <scene sceneID="DzX-pb-Yw0">
             <objects>
                 <viewController id="FpX-q6-whp" customClass="OnboardingViewController" customModule="Coloroo" customModuleProvider="target" sceneMemberID="viewController">
@@ -825,7 +825,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Coloroo" id="FjR-YB-ts2">
+                    <navigationItem key="navigationItem" title="ColorCouch" id="FjR-YB-ts2">
                         <barButtonItem key="backBarButtonItem" title=" " id="4Do-Xl-gad"/>
                     </navigationItem>
                     <connections>
@@ -1525,7 +1525,7 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
                                             <rect key="frame" x="96" y="-12" width="193" height="59"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
@@ -1742,7 +1742,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="586"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-Fr-gcv">
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="LTp-Fr-gcv">
                                             <rect key="frame" x="0.0" y="-2" width="150" height="2"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="200" id="3UR-Qa-MKQ"/>
@@ -1870,11 +1870,11 @@
                                                 </mask>
                                             </variation>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jHa-AO-ATL">
-                                            <rect key="frame" x="231" y="534" width="286" height="36"/>
+                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jHa-AO-ATL">
+                                            <rect key="frame" x="231" y="534" width="222" height="24"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cr1-GT-7Vv">
-                                                    <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cr1-GT-7Vv">
+                                                    <rect key="frame" x="0.0" y="0.0" width="55" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="Tab-Av-hPr"/>
                                                         <constraint firstAttribute="width" constant="22" id="kwf-PK-hDE"/>
@@ -1894,8 +1894,8 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-fj-Md7">
-                                                    <rect key="frame" x="106" y="0.0" width="30" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-fj-Md7">
+                                                    <rect key="frame" x="71" y="0.0" width="1" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="RPd-86-E8X">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="22"/>
@@ -1921,8 +1921,8 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
+                                                    <rect key="frame" x="88" y="0.0" width="134" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="Y5A-Wi-f76"/>
                                                     </constraints>

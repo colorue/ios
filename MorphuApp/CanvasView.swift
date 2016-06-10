@@ -1,9 +1,9 @@
 //
 //  CanvasView.swift
-//  Morphu
+//  ColorCouch
 //
 //  Created by Dylan Wight on 4/9/16.
-//  Copyright Â© 2016 Dylan Wight. All rights reserved.
+//  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
 import UIKit
@@ -15,14 +15,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var currentStroke: UIImage?
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
-    let prefs = NSUserDefaults.standardUserDefaults()
     
-    let positionIndicator = UIImage(named: "PositionIndicator")!
-
     
-    var dataType: UnsafePointer<UInt8>?
+    private let prefs = NSUserDefaults.standardUserDefaults()
     
-    let resizeScale: CGFloat = 2.0
+    private let positionIndicator = UIImage(named: "PositionIndicator")!
+    private let resizeScale: CGFloat = 2.0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -34,51 +32,85 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         displayCanvas(baseImage)
     }
     
-    func displayCanvas(baseImage: UIImage?) {
-        
+    private func displayCanvas(baseImage: UIImage?) {
         if let base = baseImage {
             self.undoStack.append(base)
         } else {
             self.undoStack.append(UIImage.getImageWithColor(UIColor.whiteColor(), size: CGSize(width: self.frame.width * resizeScale, height: self.frame.height * resizeScale)))
         }
-//        imageView.backgroundColor = UIColor.whiteColor()
         imageView.frame = CGRect(origin: CGPoint.zero, size: self.frame.size)
         self.addSubview(imageView)
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(CanvasView.handleTap(_:)))
-        tap.delegate = self
-        self.addGestureRecognizer(tap)
-        
         let drag = UILongPressGestureRecognizer(target: self, action: #selector(CanvasView.handleDrag(_:)))
-        drag.minimumPressDuration = 0.01
+        drag.minimumPressDuration = 0.0
         drag.delegate = self
         self.addGestureRecognizer(drag)
         
         mergeImages(false)
     }
     
-    func handleTap(sender: UITapGestureRecognizer) {
-        if self.delagate.getDropperActive() {
-            self.delagate.setDropperActive(false)
-            
-            return
-        }
+    @objc private func handleDrag(sender: UILongPressGestureRecognizer) {
         
-        print("handleTap")
-        
-        lastPoint = sender.locationInView(imageView)
-        currentPoint = sender.locationInView(imageView)
-        self.drawImage()
         self.mergeImages(true)
-        self.shiftUndoStack()
-        self.currentStroke = nil
+        
+        if self.delagate.getDropperActive() {
+            self.dropperTouch(sender)
+        } else {
+            self.colorTouch(sender)
+        }
     }
     
-    func handleDrag(sender: UILongPressGestureRecognizer) {
+    private func colorTouch(sender: UILongPressGestureRecognizer) {
+        if sender.state == .Began {
+            lastPoint = sender.locationOfTouch(0, inView: imageView)
+            currentPoint = sender.locationInView(imageView)
+            self.drawImage()
+            self.delagate.showUnderFingerView()
+            self.setUnderFingerView(false)
+        } else if sender.state == .Changed {
+            currentPoint = sender.locationOfTouch(0, inView: imageView)
+            drawImage()
+            lastPoint = currentPoint
+            self.setUnderFingerView(false)
+        } else if sender.state == .Ended {
+            self.addToUndoStack(self.imageView.image)
+            self.currentStroke = nil
+            self.delagate.hideUnderFingerView()
+        }
+    }
+    
+    private func dropperTouch(sender: UILongPressGestureRecognizer) {
+        let dropperPoint = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
         
-        if (sender.numberOfTouches() > 1) { return }
-        
-        let brushSize = Double(self.delagate.getCurrentBrushSize())
+        if sender.state == .Began {
+            let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
+            if let color = dropperColor {
+                self.delagate.setColor(color)
+            }
+            self.delagate.showUnderFingerView()
+            self.delagate.setAlphaHigh()
+            currentPoint = sender.locationInView(imageView)
+            self.drawDropperIndicator(dropperPoint)
+            self.setUnderFingerView(true)
+            
+        } else if sender.state == .Changed {
+            let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
+            if let color = dropperColor {
+                self.delagate.setColor(color)
+            }
+            currentPoint = sender.locationInView(imageView)
+            self.drawDropperIndicator(dropperPoint)
+            self.setUnderFingerView(true)
+            
+        } else if sender.state == .Ended {
+            self.delagate.setDropperActive(false)
+            self.delagate.hideUnderFingerView()
+            self.currentStroke = nil
+            self.mergeImages(false) // clears the positionIndicator image
+        }
+    }
+    
+    private func setUnderFingerView(dropper: Bool) {
         let underFingerSize: CGSize
         
         let maxUnderFinger = 400.0
@@ -86,83 +118,26 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         let ceilingSize = 80.0
         let baseSize = 10.0
-        
-        if (brushSize > ceilingSize) {
-            underFingerSize = CGSize(width: maxUnderFinger, height: maxUnderFinger)
-        } else if (brushSize < baseSize){
+
+        if dropper {
             underFingerSize = CGSize(width: minUnderFinger, height: minUnderFinger)
         } else {
-            let underFinger = ((brushSize - baseSize) / ceilingSize) * (maxUnderFinger - minUnderFinger) + minUnderFinger
-            underFingerSize = CGSize(width: underFinger, height: underFinger)
-        }
+            let brushSize = Double(self.delagate.getCurrentBrushSize())
         
-        self.mergeImages(true)
-        
-        if self.delagate.getDropperActive() {
-            
-            let dropperPoint = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
-           
-            self.delagate.setUnderfingerView(imageView.image!.cropToSquare(dropperPoint, cropSize: CGSize(width: minUnderFinger, height: minUnderFinger)))
-            
-            if sender.state == .Began {
-                let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
-                if let color = dropperColor {
-                    self.delagate.setColor(color)
-                }
-                self.delagate.showUnderFingerView()
-                self.delagate.setAlphaHigh()
-                currentPoint = sender.locationInView(imageView)
-                self.drawPositionIndicator(dropperPoint)
-            } else if sender.state == .Changed {
-                let dropperColor = self.imageView.image!.colorAtPosition(dropperPoint)
-                if let color = dropperColor {
-                    self.delagate.setColor(color)
-                }
-                currentPoint = sender.locationInView(imageView)
-                self.drawPositionIndicator(dropperPoint)
-            } else if sender.state == .Ended {
-                self.delagate.setDropperActive(false)
-                self.delagate.hideUnderFingerView()
-                self.currentStroke = nil
-                self.mergeImages(false)
-            }
-        } else {
-        
-            if sender.state == .Began {
-                lastPoint = sender.locationOfTouch(0, inView: imageView)
-                currentPoint = sender.locationInView(imageView)
-                self.drawImage()
-                self.delagate.showUnderFingerView()
-                self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: lastPoint!.x * resizeScale, y: lastPoint!.y * resizeScale), cropSize: underFingerSize))
-            } else if sender.state == .Changed {
-                currentPoint = sender.locationOfTouch(0, inView: imageView)
-                drawImage()
-                lastPoint = currentPoint
-                self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: currentPoint!.x * resizeScale, y: currentPoint!.y * resizeScale), cropSize: underFingerSize))
-            } else if sender.state == .Ended {
-                self.shiftUndoStack()
-                self.currentStroke = nil
-                self.delagate.hideUnderFingerView()
+            if (brushSize > ceilingSize) {
+                underFingerSize = CGSize(width: maxUnderFinger, height: maxUnderFinger)
+            } else if (brushSize < baseSize){
+                underFingerSize = CGSize(width: minUnderFinger, height: minUnderFinger)
+            } else {
+                let underFinger = ((brushSize - baseSize) / ceilingSize) * (maxUnderFinger - minUnderFinger) + minUnderFinger
+                underFingerSize = CGSize(width: underFinger, height: underFinger)
             }
         }
+        
+        self.delagate.setUnderfingerView(imageView.image!.cropToSquare(CGPoint(x: currentPoint!.x * resizeScale, y: currentPoint!.y * resizeScale), cropSize: underFingerSize))
     }
     
-    func trash() {
-        self.currentStroke = UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale))
-        self.mergeImages(false)
-        self.shiftUndoStack()
-        self.currentStroke = nil
-    }
-    
-    private func drawPositionIndicator(point: CGPoint) {
-        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
-        positionIndicator.drawAtPoint(CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        CGContextFlush(UIGraphicsGetCurrentContext())
-        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-    }
-    
+    // MARK: Drawing Methods
     
     private func drawImage() {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
@@ -185,33 +160,46 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         CGContextFlush(UIGraphicsGetCurrentContext())
         currentStroke = UIGraphicsGetImageFromCurrentImageContext()    // sets tempImage to line or dot drawn
         UIGraphicsEndImageContext()
-        
     }
-    
-    func shiftUndoStack() {
-        if undoStack.count < 11 {
-            undoStack.append(self.imageView.image!)
-        } else {
-            undoStack.removeAtIndex(0)
-            undoStack.append(self.imageView.image!)
-        }
-    }
-    
-    func mergeImages(alpha: Bool) {
+
+    private func drawDropperIndicator(point: CGPoint) {
         UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
-        
+        positionIndicator.drawAtPoint(CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
+        CGContextStrokePath(UIGraphicsGetCurrentContext())
+        CGContextFlush(UIGraphicsGetCurrentContext())
+        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+    
+    // Displays the currentStroke on top of the last image in the undo stack
+    private func mergeImages(alpha: Bool) {
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale), false, 1.0)
         undoStack.last?.drawAtPoint(CGPoint.zero)
-        
         if alpha {
             currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate.getAlpha()!)
         } else {
             currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
         }
-        
         self.imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        
         UIGraphicsEndImageContext()
     }
+    
+
+    private func addToUndoStack(image: UIImage?) {
+        if let image = image {
+            if undoStack.count <= 10 {
+                undoStack.append(image)
+            } else {
+                undoStack.removeAtIndex(0)
+                undoStack.append(image)
+            }
+        }
+    }
+    
+
+    
+    // MARK: External Methods
     
     func undo() {
         if undoStack.count > 1 {
@@ -220,8 +208,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    func dropper() {
-        self.delagate.setDropperActive(true)
+    func trash() {
+        self.currentStroke = (UIImage.getImageWithColor(whiteColor, size: CGSize(width: imageView.frame.size.width * resizeScale, height: imageView.frame.size.height * resizeScale)))
+        self.mergeImages(false)
+        self.addToUndoStack(self.imageView.image)
+        self.currentStroke = nil
     }
     
     func getDrawing() -> UIImage {
@@ -231,10 +222,4 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             return UIImage.getImageWithColor(UIColor.whiteColor(), size: self.frame.size)
         }
     }
-    
-    func setDrawing(drawing: Drawing) {
-        self.imageView.image = drawing.getImage()
-    }
 }
-
-//

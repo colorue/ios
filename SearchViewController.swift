@@ -17,7 +17,7 @@ class SearchViewController: UITableViewController, UISearchBarDelegate {
         
         searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 35, 20)
 
-        searchBar.placeholder = "Search coming soon..."
+        searchBar.placeholder = "Search coming someday..."
         let leftNavBarButton = UIBarButtonItem(customView:searchBar)
         self.navigationItem.leftBarButtonItem = leftNavBarButton
         
