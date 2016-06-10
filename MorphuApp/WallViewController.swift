@@ -10,8 +10,8 @@ import UIKit
 import CCBottomRefreshControl
 
 class WallViewController: UITableViewController, APIDelagate {
-    let api = API.sharedInstance
     
+    let api = API.sharedInstance
     let bottomRefreshControl = UIRefreshControl()
 
     override func viewDidLoad() {
@@ -22,24 +22,28 @@ class WallViewController: UITableViewController, APIDelagate {
         } else {
             self.setTitle()
         }
-
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-        api.delagate = self
-        self.refreshControl?.beginRefreshing()
+//        self.refreshControl?.beginRefreshing()
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
     
-    func setTitle() {
-        let logo = UIImage(named: "Colorue")! // UIImage(named: "Logo Clear")!
-        let imageView = UIImageView(image:logo)
-        self.navigationItem.titleView = imageView
+    private func setTitle() {
+        let button =  UIButton(type: .Custom)
+        button.frame = CGRectMake(0, 0, 100, 40) as CGRect
+        button.setImage(UIImage(named: "Colorue")!, forState: .Normal)
+        button.addTarget(self, action: #selector(WallViewController.scrollToTop(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        self.navigationItem.titleView = button
+    }
+    
+    @objc private func scrollToTop(sender: UIButton) {
+        self.tableView.setContentOffset(CGPointZero, animated: true)
     }
     
     func refreshBottom(sender: UIRefreshControl) {
@@ -49,6 +53,8 @@ class WallViewController: UITableViewController, APIDelagate {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        api.delagate = self
+
         self.tableView.reloadData()
         self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
     }
@@ -133,7 +139,7 @@ class WallViewController: UITableViewController, APIDelagate {
         }
     }
     
-    func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
+    private func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
         
         let drawingCell = tableView.cellForRowAtIndexPath(indexPath) as! DrawingCell
             let likes = drawing.getLikes().count
@@ -149,7 +155,7 @@ class WallViewController: UITableViewController, APIDelagate {
             }
     }
     
-    func likeButtonPressed(sender: UIButton) {
+    @objc private func likeButtonPressed(sender: UIButton) {
         let drawing = api.getWall()[sender.tag]
 
         if !(drawing.liked(api.getActiveUser())) {
@@ -170,7 +176,7 @@ class WallViewController: UITableViewController, APIDelagate {
         })
     }
     
-    func upload(sender: UIButton) {
+    @objc private func upload(sender: UIButton) {
         
         let drawing = api.getWall()[sender.tag]
         let avc: UIActivityViewController
@@ -191,7 +197,7 @@ class WallViewController: UITableViewController, APIDelagate {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
-            targetController.users = api.getWall()[sender!.tag].getLikes()
+            targetController.userSource = { self.api.getWall()[sender!.tag].getLikes() }
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.drawingInstance = api.getWall()[sender!.tag]

@@ -10,8 +10,9 @@ import UIKit
 
 class UserListViewController: UITableViewController, UserCellDelagate, APIDelagate {
     
-    var users: [User]?
     
+    var userSource: () -> [User] = API.sharedInstance.getUsers
+
     let api = API.sharedInstance
     
     override func viewDidLoad() {
@@ -26,6 +27,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         super.viewDidAppear(animated)
 
         self.tableView.reloadData()
+        
+        api.delagate = self
     }
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -38,13 +41,13 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users!.count
+        return userSource().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
         
-        let user = users![indexPath.row]
+        let user = userSource()[indexPath.row]
         cell.username.text = user.username
         cell.profileImage.image = user.profileImage
         cell.delagate = self
@@ -110,8 +113,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
-                targetController.navigationItem.title = users![row].username
-                targetController.userInstance = users![row]
+                targetController.navigationItem.title = userSource()[row].username
+                targetController.userInstance = userSource()[row]
             }
         }
     }

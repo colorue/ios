@@ -55,9 +55,8 @@ class DeleteActivity: UIActivity {
             self.performActivity()
         }))
         
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: { (action: UIAlertAction!) in
-            print("Handle Cancel Logic here")
-        }))
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+
         
         return deleteAlert
     }

@@ -10,6 +10,8 @@ import UIKit
 
 class TabBarController: UITabBarController {
     
+    var initialIndex = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,5 +20,7 @@ class TabBarController: UITabBarController {
         self.tabBar.barStyle = .Default
         self.tabBar.tintColor = redColor
         self.tabBar.translucent = false
+        
+        self.selectedIndex = initialIndex
     }
 }

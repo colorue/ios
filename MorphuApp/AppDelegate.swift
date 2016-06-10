@@ -16,11 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     var window: UIWindow?
     
+
+    
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UIApplication.sharedApplication().statusBarStyle = .Default
-                
+        
 //        if let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView  {
 //            statusBar.backgroundColor = whiteColor
 //        }
@@ -91,10 +93,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
     }
     
-    
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         let api = API.sharedInstance
-        
+
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
         
@@ -118,11 +119,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             let nav = friendsList.navigationController as! NavigationController
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor
-            if friendsList.users == nil {
-                API.sharedInstance.getFullUser(api.getActiveUser(), delagate: friendsList)
-//                friendsList.addInviteButton()
-                friendsList.users = api.getUsers()
-            }
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
             nav.setColors(redColor)

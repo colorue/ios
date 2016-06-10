@@ -30,9 +30,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = UIImage(named: "Logo Clear")! // UIImage(named: "Logo Clear")!
-        let imageView = UIImageView(image:logo)
-        self.navigationItem.titleView = imageView
+//        let logo = UIImage(named: "Logo Clear")! // UIImage(named: "Logo Clear")!
+//        let imageView = UIImageView(image:logo)
+//        self.navigationItem.titleView = imageView
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         
@@ -113,7 +113,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func trash() {
-        self.canvas!.trash()
+        
+        let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+            self.canvas!.trash()
+        }))
+        
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+        self.presentViewController(deleteAlert, animated: true, completion: nil)
     }
     
     func setUnderfingerView(underFingerImage: UIImage) {
@@ -192,6 +200,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             let targetController = segue.destinationViewController as! WallViewController
             
             targetController.tableView.setContentOffset(CGPointZero, animated: true)
+
         }
     }
     

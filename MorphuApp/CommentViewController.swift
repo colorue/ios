@@ -10,7 +10,9 @@ import UIKit
 
 class CommentViewController: UITableViewController, WriteCommentCellDelagate, CommentCellDelagate {
     
+    let api = API.sharedInstance
     var drawingInstance: Drawing?
+    
     private var writeCommentCell: WriteCommentCell?
     
     
@@ -21,7 +23,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
     }
@@ -82,6 +84,28 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
             targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
         }
     }
+    
+//    --- DELETE COMMENTS ---
+//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+//        if editingStyle == .Delete {
+//            api.deleteComment(drawingInstance!, comment: drawingInstance!.getComments()[indexPath.row])
+//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
+//        }
+//    }
+//
+//    
+//    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+//        return  UITableViewCellEditingStyle.Delete
+//    }
+//    
+//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        if indexPath.section == 0 {
+//            if drawingInstance?.getComments()[indexPath.row].user.userId == api.getActiveUser().userId {
+//                return true
+//            }
+//        }
+//        return false
+//    }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40

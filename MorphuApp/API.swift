@@ -326,6 +326,10 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
     }
     
+    func deleteComment(drawing: Drawing, comment: Comment) {
+        drawing.removeComment(comment)
+    }
+    
     func follow(user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
@@ -354,21 +358,12 @@ class API {
     private func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
-            self.getFullUser(self.activeUser!, delagate: nil)
+            self.getFullUser(activeUser, delagate: nil)
             self.loadWall()
 //            self.loadUsers(user)
             self.delagate?.refresh()
         })
     }
-    
-//    private func addDrawings() {
-//        myRootRef.child("drawings").queryOrderedByChild("artist").queryEqualToValue(self.activeUser?.userId).observeEventType(.ChildAdded, withBlock: { snapshot in
-//            let drawingId = snapshot.key
-//            let timeStamp = snapshot.value!["timeStamp"] as! Double
-//            self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawingId)").setValue(timeStamp)
-//            self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawingId)").setValue(timeStamp)
-//        })
-//    }
 
     func loadWall() {
         myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
@@ -419,6 +414,7 @@ class API {
             .observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
                     self.users.append(user)
+                    self.delagate?.refresh()
                 })
             })
     }

@@ -172,18 +172,18 @@ class ProfileViewController: WallViewController {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
-            targetController.users = userInstance!.getDrawings()[sender!.tag].getLikes()
+            targetController.userSource = { self.userInstance!.getDrawings()[sender!.tag].getLikes() }
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.drawingInstance = userInstance!.getDrawings()[sender!.tag]
         }  else if segue.identifier == "showFollowers" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Followers"
-            targetController.users = userInstance!.getFollowers()
+            targetController.userSource = { self.userInstance!.getFollowers() }
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Following"
-            targetController.users = userInstance!.getFollowing()
+            targetController.userSource = { self.userInstance!.getFollowing() }
         }
     }
 }
