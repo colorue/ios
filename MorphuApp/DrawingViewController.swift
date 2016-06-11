@@ -30,9 +30,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let logo = UIImage(named: "Logo Clear")! // UIImage(named: "Logo Clear")!
-//        let imageView = UIImageView(image:logo)
-//        self.navigationItem.titleView = imageView
+        let logo = UIImage(named: "Logo Clear")! 
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         

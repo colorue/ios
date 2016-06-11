@@ -51,6 +51,8 @@
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
 		87C204E51D0B8F6F0061DDB2 /* ProfilePicActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
+		87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */; };
+		87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */; };
 		87E176B5C5560C0B5C767763 /* Pods_ColorCouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */; };
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
@@ -59,7 +61,7 @@
 
 /* Begin PBXFileReference section */
 		1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch.debug.xcconfig"; sourceTree = "<group>"; };
-		872E82E11D01296F005A56A3 /* ColorCouch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorCouch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
@@ -106,6 +108,8 @@
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicActivity.swift; sourceTree = "<group>"; };
 		87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellDelagate.swift; sourceTree = "<group>"; };
+		87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUsernameViewController.swift; sourceTree = "<group>"; };
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
@@ -148,14 +152,14 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BE1CEE223000E3D528 /* GoogleService-Info.plist */,
-				873AFA0F1CED7697006FD34A /* Coloroo */,
+				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
-				872E82E11D01296F005A56A3 /* ColorCouch.app */,
+				872E82E11D01296F005A56A3 /* Colorue.app */,
 			);
 			sourceTree = "<group>";
 		};
-		873AFA0F1CED7697006FD34A /* Coloroo */ = {
+		873AFA0F1CED7697006FD34A /* Colorue */ = {
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
@@ -169,7 +173,7 @@
 				8763D31A1CEE244500E3D528 /* API */,
 				8763D31F1CEE247F00E3D528 /* Supporting Files */,
 			);
-			name = Coloroo;
+			name = Colorue;
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};
@@ -294,8 +298,9 @@
 			isa = PBXGroup;
 			children = (
 				8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */,
-				8763D2CB1CEE226700E3D528 /* LoginViewController.swift */,
-				8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */,
+				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
+				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
+				87DF2BCB1D0C88B4006ED9AF /* Unused */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -329,6 +334,15 @@
 			name = Drawing;
 			sourceTree = "<group>";
 		};
+		87DF2BCB1D0C88B4006ED9AF /* Unused */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2CB1CEE226700E3D528 /* LoginViewController.swift */,
+				8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */,
+			);
+			name = Unused;
+			sourceTree = "<group>";
+		};
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,9 +354,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		873AFA0C1CED7697006FD34A /* ColorCouch */ = {
+		873AFA0C1CED7697006FD34A /* Colorue */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "ColorCouch" */;
+			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Colorue" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
 				873AFA091CED7697006FD34A /* Sources */,
@@ -355,9 +369,9 @@
 			);
 			dependencies = (
 			);
-			name = ColorCouch;
+			name = Colorue;
 			productName = MorphuApp;
-			productReference = 872E82E11D01296F005A56A3 /* ColorCouch.app */;
+			productReference = 872E82E11D01296F005A56A3 /* Colorue.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -381,7 +395,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "ColorCouch" */;
+			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Colorue" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -394,7 +408,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				873AFA0C1CED7697006FD34A /* ColorCouch */,
+				873AFA0C1CED7697006FD34A /* Colorue */,
 			);
 		};
 /* End PBXProject section */
@@ -504,10 +518,12 @@
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */,
+				87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */,
 				8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */,
 				8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
 				87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */,
+				87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */,
 				879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -608,8 +624,8 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = ColorCouch;
+				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
+				PRODUCT_NAME = Colorue;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -625,8 +641,8 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Morphu;
-				PRODUCT_NAME = ColorCouch;
+				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
+				PRODUCT_NAME = Colorue;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 			};
 			name = Release;
@@ -634,7 +650,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "ColorCouch" */ = {
+		873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Colorue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA1D1CED7697006FD34A /* Debug */,
@@ -643,7 +659,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "ColorCouch" */ = {
+		873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Colorue" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				873AFA201CED7697006FD34A /* Debug */,

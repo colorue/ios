@@ -121,8 +121,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             tabBarController.tabBar.tintColor = blueColor
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
-            nav.setColors(redColor)
-            tabBarController.tabBar.tintColor = redColor
+            nav.setColors(purpleColor)
+            tabBarController.tabBar.tintColor = purpleColor
         } else if let search = targetController as? SearchViewController {
             let nav = search.navigationController as! NavigationController
             nav.setColors(orangeColor)

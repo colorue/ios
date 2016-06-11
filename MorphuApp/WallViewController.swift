@@ -30,7 +30,7 @@ class WallViewController: UITableViewController, APIDelagate {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-//        self.refreshControl?.beginRefreshing()
+        self.refreshControl?.beginRefreshing()
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
@@ -44,7 +44,7 @@ class WallViewController: UITableViewController, APIDelagate {
         self.navigationItem.titleView = button
     }
     
-    @objc private func scrollToTop(sender: UIButton) {
+    func scrollToTop(sender: UIButton) {
         self.tableView.setContentOffset(CGPointZero, animated: true)
     }
     

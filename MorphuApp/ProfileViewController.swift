@@ -15,10 +15,21 @@ class ProfileViewController: WallViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+                
         self.drawingSource = userInstance!.getDrawings
         API.sharedInstance.getFullUser(userInstance!, delagate: self)
     }
+    
+//    private func setTitle() {
+//        
+//        let view = self.navigationItem.titleView
+//        let button =  UIButton(type: .Custom)
+//        button.frame = CGRectMake(0, 0, 200, 40) as CGRect
+//        button.addTarget(self, action: #selector(ProfileViewController.scrollToTop(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//        view?.addSubview(button)
+//
+//        self.navigationItem.titleView = button
+//    }
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -112,7 +123,7 @@ class ProfileViewController: WallViewController {
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logout(_:)))
     }
     
-    @objc private func logout(sender: UIBarButtonItem) {
+    func logout(sender: UIBarButtonItem) {
         api.logout()
         self.performSegueWithIdentifier("logout", sender: self)
     }
