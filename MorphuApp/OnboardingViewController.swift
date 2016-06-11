@@ -1,6 +1,6 @@
 //
-//  onboardingViewController.swift
-//  Morphu
+//  OnboardingViewController.swift
+//  Colorue
 //
 //  Created by Dylan Wight on 5/5/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.
@@ -22,12 +22,16 @@ class OnboardingViewController: UIViewController {
         API.sharedInstance.connectWithFacebook(self, callback: facebookCallback)
     }
     
-    func facebookCallback(valid: Bool) {
+    func facebookCallback(result: FacebookLoginResult) {
 
-        if valid {
-            API.sharedInstance.checkLoggedIn(loginCallback)
-        } else {
+        switch (result) {
+        case .Failed:
             activityIndicator.stopAnimating()
+        case .Registered:
+            break
+        case .LoggedIn:
+            break
+//            API.sharedInstance.checkLoggedIn(loginCallback)
         }
     }
     

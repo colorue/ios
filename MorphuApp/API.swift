@@ -38,7 +38,7 @@ class API {
     var delagate: APIDelagate?
     
     init() {
-        self.storageRef = storage.referenceForURL("gs://project-3272790237826499087.appspot.com")
+        self.storageRef = storage.referenceForURL("gs://project-6663883006145995611.appspot.com")
     }
     
     // MARK: Internal methods
@@ -167,25 +167,7 @@ class API {
     
     // MARK: External Methods
     
-    func checkLoggedIn(callback: (Bool)-> ()) {
-        if let user = FIRAuth.auth()?.currentUser {
-            
-            
-            myRootRef.child("users/\(user.uid)/email").setValue("testEmail")
-            myRootRef.child("users/\(user.uid)/username").setValue(user.displayName!)
-//            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
-            
-            self.loadData(user)
-            self.getFBFriends()
-            self.getActiveFBID({ (FBID: String) -> () in
-                self.myRootRef.child("users/\(user.uid)/fbId").setValue(FBID)
-            })
-            
-            callback(true)
-        } else {
-            callback(false)
-        }
-    }
+
     
     
     func getFBFriends() {
@@ -225,54 +207,7 @@ class API {
         }
     }
     
-    func connectWithFacebook(viewController: UIViewController, callback: (Bool)  -> ()) {
-        
-        facebookLogin.logInWithReadPermissions(["email", "user_friends"], fromViewController: viewController, handler: {
-        (facebookResult, facebookError) -> Void in
-    
-        if facebookError != nil {
-            print("Facebook login failed. Error \(facebookError)")
-            callback(false)
-        } else if facebookResult.isCancelled {
-            print("Facebook login was cancelled.")
-            callback(false)
-        } else {
-            let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-            
-            FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
 
-                if error != nil {
-                    print("Login failed. \(error)")
-                    callback(false)
-                } else {
-                    if user != nil {
-                        callback(true)
-                        
-                    } else {
-                        callback(false)
-                    }
-                }
-            }
-            }
-        })
-    }
-    
-    func logout() {
-        let prefs = NSUserDefaults.standardUserDefaults()
-        prefs.setValue(false, forKey: "loggedIn")
-        self.users.removeAll()
-        self.wall.removeAll()
-        self.drawingDict.removeAll()
-        self.userDict.removeAll()
-        self.imageDict.removeAll()
-        self.activeUser = nil
-        self.oldestTimeLoaded = -99999999999999
-        self.newestTimeLoaded = 0
-        
-        self.myRootRef.removeAllObservers()
-        try! FIRAuth.auth()!.signOut()
-        FBSDKLoginManager().logOut()
-    }
 
     
     func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
@@ -522,8 +457,115 @@ class API {
     lazy var newUser = NewUser()
     
     func createAccount(newUser: NewUser, callback: (Bool) -> ()) {
-        
+        FIRAuth.auth()?.createUserWithEmail(newUser.email!, password: newUser.password!) { (user, error) in
+            if error == nil {
+                self.myRootRef.child("users/\(user!.uid)").setValue(newUser.toAnyObject())
+                callback(true)
+            } else {
+                callback(false)
+            }
+        }
     }
+    
+    func emailLogin(email: String, password: String, callback: (Bool)-> ()) {
+        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+            if error == nil {
+                if let user = user {
+                    self.loadData(user)
+                    // Save password and email
+                    callback(true)
+                } else {
+                    callback(false)
+                }
+            } else {
+                callback(false)
+            }
+        }
+    }
+    
+    func connectWithFacebook(viewController: UIViewController, callback: (FacebookLoginResult)  -> ()) {
+        
+        facebookLogin.logInWithReadPermissions(["email", "user_friends"], fromViewController: viewController, handler: {
+            (facebookResult, facebookError) -> Void in
+            
+            if facebookError != nil {
+                print("Facebook login failed. Error \(facebookError)")
+                callback(.Failed)
+            } else if facebookResult.isCancelled {
+                print("Facebook login was cancelled.")
+                callback(.Failed)
+            } else {
+                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                
+                
+                FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                    
+                    if error != nil {
+                        print("Login failed. \(error)")
+                        callback(.Failed)
+                    } else {
+                        if let user = user {
+                            
+                            self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+                                if (snapshot.exists()) {
+                                    self.loadData(user)
+                                    callback(.LoggedIn)
+                                } else {
+                                    self.newUser.email = user.email
+                                    self.newUser.fullName = user.displayName!
+                                    self.newUser.FacebookSignUp = true
+                                    
+                                    self.getActiveFBID({ (FBID: String) -> () in
+                                        self.newUser.FacebookID = FBID
+                                    })
+                                    callback(.Registered)
+                                }
+                            })
+                        } else {
+                            callback(.Failed)
+                        }
+                    }
+                }
+            }
+        })
+    }
+    
+    
+    func checkLoggedIn(callback: (Bool)-> ()) {
+        if let user = FIRAuth.auth()?.currentUser {
+            
+            
+            self.loadData(user)
+            self.getFBFriends()
+
+            
+            callback(true)
+        } else {
+            callback(false)
+        }
+    }
+    
+    func logout() {
+        let prefs = NSUserDefaults.standardUserDefaults()
+        prefs.setValue(false, forKey: "loggedIn")
+        self.users.removeAll()
+        self.wall.removeAll()
+        self.drawingDict.removeAll()
+        self.userDict.removeAll()
+        self.imageDict.removeAll()
+        self.activeUser = nil
+        self.oldestTimeLoaded = -99999999999999
+        self.newestTimeLoaded = 0
+        
+        self.myRootRef.removeAllObservers()
+        try! FIRAuth.auth()!.signOut()
+        FBSDKLoginManager().logOut()
+    }
+    
+    
+    //            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
+
+
     
     
     /*

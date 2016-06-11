@@ -36,6 +36,9 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -92,9 +95,6 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="8" width="584" height="27"/>
-                                            </variation>
                                         </label>
                                     </subviews>
                                     <constraints>
@@ -328,9 +328,9 @@
                                             </variation>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
-                                            <rect key="frame" x="231" y="534" width="286" height="36"/>
+                                            <rect key="frame" x="231" y="534" width="277" height="36"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="IG8-Jh-kor"/>
@@ -351,7 +351,7 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wVC-Ju-X9z">
                                                     <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="76" id="glf-Yx-FDj">
@@ -379,7 +379,7 @@
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
                                                     </constraints>
@@ -744,11 +744,11 @@
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QRH-8F-bBJ">
-                                <rect key="frame" x="30" y="602" width="340" height="193"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="QRH-8F-bBJ">
+                                <rect key="frame" x="30" y="602" width="178" height="111"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
-                                        <rect key="frame" x="20" y="20" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TXD-xw-z5l">
+                                        <rect key="frame" x="0.0" y="0.0" width="178" height="21"/>
                                         <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="CD9-ZP-JXH"/>
@@ -783,8 +783,8 @@
                                             <segue destination="vLN-Co-cNl" kind="presentation" identifier="toMainController" modalTransitionStyle="crossDissolve" id="5uB-bY-P8D"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1p-Do-fCM">
-                                        <rect key="frame" x="20" y="76" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1p-Do-fCM">
+                                        <rect key="frame" x="0.0" y="33" width="178" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="SyU-ZX-hBQ">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="40"/>
@@ -801,21 +801,21 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
+                                                <exclude reference="SyU-ZX-hBQ"/>
                                                 <exclude reference="ak7-kv-TE1"/>
                                                 <exclude reference="bGE-of-UnT"/>
-                                                <exclude reference="SyU-ZX-hBQ"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
+                                                <include reference="SyU-ZX-hBQ"/>
                                                 <exclude reference="ak7-kv-TE1"/>
                                                 <include reference="bGE-of-UnT"/>
-                                                <include reference="SyU-ZX-hBQ"/>
                                             </mask>
                                         </variation>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7v-Ux-vy4">
-                                        <rect key="frame" x="20" y="133" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U7v-Ux-vy4">
+                                        <rect key="frame" x="0.0" y="78" width="178" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="4Wo-WR-fPj">
                                                 <variation key="heightClass=regular-widthClass=compact" constant="40"/>
@@ -832,16 +832,16 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="yZI-wm-YLL"/>
-                                                <exclude reference="IKo-hS-Ujg"/>
                                                 <exclude reference="4Wo-WR-fPj"/>
+                                                <exclude reference="IKo-hS-Ujg"/>
+                                                <exclude reference="yZI-wm-YLL"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <exclude reference="yZI-wm-YLL"/>
-                                                <include reference="IKo-hS-Ujg"/>
                                                 <include reference="4Wo-WR-fPj"/>
+                                                <include reference="IKo-hS-Ujg"/>
+                                                <exclude reference="yZI-wm-YLL"/>
                                             </mask>
                                         </variation>
                                     </button>
@@ -864,13 +864,13 @@
                                 <exclude reference="fDS-yY-Bjt"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="S0L-hD-hds"/>
+                                <exclude reference="Y9s-P1-2OX"/>
+                                <exclude reference="H0h-3U-3Ub"/>
+                                <exclude reference="zpQ-Z4-yAQ"/>
                                 <exclude reference="DEP-LT-nZe"/>
                                 <exclude reference="oV2-MT-QPC"/>
                                 <exclude reference="wM4-tX-eeh"/>
-                                <exclude reference="H0h-3U-3Ub"/>
-                                <exclude reference="zpQ-Z4-yAQ"/>
-                                <exclude reference="Y9s-P1-2OX"/>
-                                <exclude reference="S0L-hD-hds"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -879,13 +879,13 @@
                                 <include reference="fDS-yY-Bjt"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="S0L-hD-hds"/>
+                                <include reference="Y9s-P1-2OX"/>
+                                <include reference="H0h-3U-3Ub"/>
+                                <include reference="zpQ-Z4-yAQ"/>
                                 <include reference="DEP-LT-nZe"/>
                                 <include reference="oV2-MT-QPC"/>
                                 <include reference="wM4-tX-eeh"/>
-                                <include reference="H0h-3U-3Ub"/>
-                                <include reference="zpQ-Z4-yAQ"/>
-                                <include reference="Y9s-P1-2OX"/>
-                                <include reference="S0L-hD-hds"/>
                             </mask>
                         </variation>
                     </view>
@@ -1045,9 +1045,6 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="42" y="22" width="550" height="0.0"/>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1iz-ew-6aY">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1061,8 +1058,7 @@
                                                     <exclude reference="5SL-M8-ze3"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="565" y="8" width="27" height="27"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="5SL-M8-ze3"/>
                                                 </mask>
@@ -1230,8 +1226,7 @@
                                                     <exclude reference="qJQ-yx-FC6"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="562" y="8" width="30" height="12"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <include reference="S2M-VS-T4y"/>
                                                     <include reference="qJQ-yx-FC6"/>
@@ -1292,9 +1287,6 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="12" y="28" width="576" height="45"/>
-                                            </variation>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUH-2h-S3O">
                                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -1423,8 +1415,7 @@
                                                     <exclude reference="oW5-Y3-eZj"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="569" y="8" width="23" height="23"/>
+                                            <variation key="heightClass=regular-widthClass=compact">
                                                 <mask key="constraints">
                                                     <exclude reference="DEH-Co-57k"/>
                                                     <include reference="YGu-kM-Li9"/>
@@ -1442,7 +1433,7 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                                <rect key="frame" x="8" y="8" width="553" height="23"/>
+                                                <rect key="frame" x="9" y="6" width="552" height="23"/>
                                             </variation>
                                         </textField>
                                     </subviews>
@@ -1599,54 +1590,54 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="mzC-mt-aFP">
                                             <rect key="frame" x="96" y="-12" width="193" height="59"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
-                                                    <rect key="frame" x="29" y="0.0" width="193" height="32"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
+                                                    <rect key="frame" x="26" y="0.0" width="199" height="38"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
-                                                            <rect key="frame" x="0.0" y="0.0" width="43" height="32"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
-                                                            <rect key="frame" x="75" y="0.0" width="43" height="32"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
+                                                            <rect key="frame" x="77" y="0.0" width="45" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                         </stackView>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
-                                                            <rect key="frame" x="150" y="0.0" width="43" height="32"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
+                                                            <rect key="frame" x="154" y="0.0" width="45" height="38"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1655,8 +1646,8 @@
                                                         </stackView>
                                                     </subviews>
                                                 </stackView>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
-                                                    <rect key="frame" x="0.0" y="40" width="251" height="29"/>
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
+                                                    <rect key="frame" x="0.0" y="46" width="251" height="29"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <state key="normal" image="Follow Long">
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1936,9 +1927,9 @@
                                             </variation>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="jHa-AO-ATL">
-                                            <rect key="frame" x="231" y="534" width="286" height="36"/>
+                                            <rect key="frame" x="231" y="534" width="277" height="36"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cr1-GT-7Vv">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cr1-GT-7Vv">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="22" id="Tab-Av-hPr"/>
@@ -1959,7 +1950,7 @@
                                                         </mask>
                                                     </variation>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-fj-Md7">
+                                                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fPb-fj-Md7">
                                                     <rect key="frame" x="106" y="0.0" width="30" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="RPd-86-E8X">
@@ -1987,7 +1978,7 @@
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="Y5A-Wi-f76"/>
                                                     </constraints>
@@ -2382,15 +2373,12 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8K-6h-9HI">
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
-                                    <rect key="frame" x="182" y="50" width="37" height="37"/>
-                                </variation>
                             </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vkh-mk-zMB">
-                                <rect key="frame" x="30" y="602" width="340" height="193"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vkh-mk-zMB">
+                                <rect key="frame" x="30" y="602" width="178" height="111"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ney-UL-Ygc">
-                                        <rect key="frame" x="20" y="20" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ney-UL-Ygc">
+                                        <rect key="frame" x="0.0" y="0.0" width="178" height="21"/>
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="HTQ-Mx-K4O"/>
@@ -2408,24 +2396,24 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="kg2-Oh-fCc"/>
                                                 <exclude reference="HTQ-Mx-K4O"/>
                                                 <exclude reference="KwZ-Uf-GL8"/>
+                                                <exclude reference="kg2-Oh-fCc"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <exclude reference="kg2-Oh-fCc"/>
                                                 <include reference="HTQ-Mx-K4O"/>
                                                 <include reference="KwZ-Uf-GL8"/>
+                                                <exclude reference="kg2-Oh-fCc"/>
                                             </mask>
                                         </variation>
                                         <connections>
                                             <action selector="facebookButton:" destination="frb-J4-RJY" eventType="touchUpInside" id="LfP-Ot-sKH"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ue-oA-Dow">
-                                        <rect key="frame" x="20" y="76" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ue-oA-Dow">
+                                        <rect key="frame" x="0.0" y="33" width="178" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="100" id="8nU-6k-ANf"/>
                                             <constraint firstAttribute="width" constant="300" id="Mwm-Gv-69S"/>
@@ -2458,8 +2446,8 @@
                                             <segue destination="ls1-wt-iiM" kind="show" id="UQP-pZ-VeE"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTC-sb-fdu">
-                                        <rect key="frame" x="20" y="133" width="300" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTC-sb-fdu">
+                                        <rect key="frame" x="0.0" y="78" width="178" height="33"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="300" id="7En-0k-DP0"/>
                                             <constraint firstAttribute="height" constant="60" id="QuA-87-6KW">
@@ -2476,16 +2464,16 @@
                                         </state>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="TZV-kS-yWI"/>
                                                 <exclude reference="7En-0k-DP0"/>
                                                 <exclude reference="QuA-87-6KW"/>
+                                                <exclude reference="TZV-kS-yWI"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <exclude reference="TZV-kS-yWI"/>
                                                 <include reference="7En-0k-DP0"/>
                                                 <include reference="QuA-87-6KW"/>
+                                                <exclude reference="TZV-kS-yWI"/>
                                             </mask>
                                         </variation>
                                         <connections>
@@ -2511,13 +2499,13 @@
                                 <exclude reference="w8K-6h-9HI"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="hFW-QL-VHC"/>
+                                <exclude reference="Toi-dV-lRx"/>
+                                <exclude reference="f1e-Nm-FD3"/>
+                                <exclude reference="iFY-9g-asU"/>
+                                <exclude reference="1PL-Q9-DkD"/>
                                 <exclude reference="WSg-9c-ZPA"/>
                                 <exclude reference="inS-18-ZI0"/>
-                                <exclude reference="1PL-Q9-DkD"/>
-                                <exclude reference="iFY-9g-asU"/>
-                                <exclude reference="f1e-Nm-FD3"/>
-                                <exclude reference="Toi-dV-lRx"/>
-                                <exclude reference="hFW-QL-VHC"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2526,13 +2514,13 @@
                                 <include reference="w8K-6h-9HI"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="hFW-QL-VHC"/>
+                                <include reference="Toi-dV-lRx"/>
+                                <include reference="f1e-Nm-FD3"/>
+                                <include reference="iFY-9g-asU"/>
+                                <include reference="1PL-Q9-DkD"/>
                                 <include reference="WSg-9c-ZPA"/>
                                 <include reference="inS-18-ZI0"/>
-                                <include reference="1PL-Q9-DkD"/>
-                                <include reference="iFY-9g-asU"/>
-                                <include reference="f1e-Nm-FD3"/>
-                                <include reference="Toi-dV-lRx"/>
-                                <include reference="hFW-QL-VHC"/>
                             </mask>
                         </variation>
                     </view>
@@ -2557,21 +2545,22 @@
                         <viewControllerLayoutGuide type="bottom" id="HOz-qw-TKL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ahn-HC-Dpp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uan-yW-nsU">
-                                <rect key="frame" x="20" y="52" width="360" height="139"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="uan-yW-nsU">
+                                <rect key="frame" x="20" y="52" width="165" height="68"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JZQ-RO-Q4f">
-                                        <rect key="frame" x="20" y="20" width="320" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="JZQ-RO-Q4f">
+                                        <rect key="frame" x="0.0" y="0.0" width="165" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xnw-uO-QUc">
-                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xnw-uO-QUc">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" keyboardType="emailAddress"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
-                                                <rect key="frame" x="337" y="20" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
+                                                <rect key="frame" x="135" y="0.0" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="8SI-aw-Heq" secondAttribute="height" multiplier="1:1" id="6pE-HJ-hs6"/>
                                                     <constraint firstAttribute="width" secondItem="8SI-aw-Heq" secondAttribute="height" multiplier="1:1" id="OHH-pT-5Lu"/>
@@ -2604,30 +2593,30 @@
                                             </mask>
                                         </variation>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NDD-sV-fb8">
-                                        <rect key="frame" x="20" y="79" width="101" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="NDD-sV-fb8">
+                                        <rect key="frame" x="0.0" y="38" width="165" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MM8-U1-zbK">
-                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Create Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MM8-U1-zbK">
+                                                <rect key="frame" x="0.0" y="0.0" width="130" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-BX-CE3">
-                                                <rect key="frame" x="337" y="20" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="k2Z-BX-CE3">
+                                                <rect key="frame" x="135" y="0.0" width="30" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="k2Z-BX-CE3" secondAttribute="height" multiplier="1:1" id="boa-HC-bQs"/>
                                                     <constraint firstAttribute="width" secondItem="k2Z-BX-CE3" secondAttribute="height" multiplier="1:1" id="hv3-Ba-DNS"/>
                                                 </constraints>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="hv3-Ba-DNS"/>
                                                         <exclude reference="boa-HC-bQs"/>
+                                                        <exclude reference="hv3-Ba-DNS"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=compact">
                                                     <mask key="constraints">
-                                                        <include reference="hv3-Ba-DNS"/>
                                                         <include reference="boa-HC-bQs"/>
+                                                        <include reference="hv3-Ba-DNS"/>
                                                     </mask>
                                                 </variation>
                                             </imageView>
@@ -2703,18 +2692,19 @@
                         <viewControllerLayoutGuide type="bottom" id="MeF-98-7Ed"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="DHu-r6-oT0">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9wL-1K-Ctu">
-                                <rect key="frame" x="0.0" y="52" width="400" height="190"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9wL-1K-Ctu">
+                                <rect key="frame" x="0.0" y="52" width="246" height="68"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="V8T-SW-H7S">
-                                        <rect key="frame" x="20" y="20" width="360" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="V8T-SW-H7S">
+                                        <rect key="frame" x="0.0" y="0.0" width="246" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="78J-2H-8Ib">
-                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="78J-2H-8Ib">
+                                                <rect key="frame" x="0.0" y="0.0" width="246" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                             </textField>
                                         </subviews>
                                         <constraints>
@@ -2731,19 +2721,19 @@
                                             </mask>
                                         </variation>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="k8H-Ot-Zqa">
-                                        <rect key="frame" x="20" y="68" width="360" height="40"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="k8H-Ot-Zqa">
+                                        <rect key="frame" x="0.0" y="38" width="246" height="30"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-qN-NNR">
-                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-qN-NNR">
+                                                <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                                     <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
                                                 </variation>
                                             </textField>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAP-h9-erU">
-                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAP-h9-erU">
+                                                <rect key="frame" x="191" y="0.0" width="55" height="30"/>
                                                 <state key="normal" title="Confirm"/>
                                                 <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
                                                     <rect key="frame" x="305" y="0.0" width="55" height="40"/>
@@ -2764,16 +2754,16 @@
                                             </mask>
                                         </variation>
                                     </stackView>
-                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TPF-7A-Lfb">
-                                        <rect key="frame" x="54" y="130" width="133" height="40"/>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TPF-7A-Lfb">
+                                        <rect key="frame" x="0.0" y="68" width="246" height="0.0"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3m-us-7t9">
-                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3m-us-7t9">
+                                                <rect key="frame" x="0.0" y="0.0" width="211" height="0.0"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="1vk-7v-eES">
-                                                <rect key="frame" x="337" y="20" width="30" height="30"/>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="1vk-7v-eES">
+                                                <rect key="frame" x="216" y="0.0" width="30" height="0.0"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="1vk-7v-eES" secondAttribute="height" multiplier="1:1" id="cQD-fM-8h4"/>
                                                     <constraint firstAttribute="width" secondItem="1vk-7v-eES" secondAttribute="height" multiplier="1:1" id="pwn-IT-1rD"/>
@@ -2811,7 +2801,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one will see your phone number on Colorue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOV-Aw-VNI">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -2828,11 +2818,11 @@
                                 <exclude reference="zOV-Aw-VNI"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="0MM-cc-L4m"/>
+                                <exclude reference="z1S-fu-ELY"/>
                                 <exclude reference="PHf-Is-Zzd"/>
                                 <exclude reference="t9x-wp-84S"/>
                                 <exclude reference="ynP-23-rtW"/>
-                                <exclude reference="0MM-cc-L4m"/>
-                                <exclude reference="z1S-fu-ELY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2840,11 +2830,11 @@
                                 <include reference="zOV-Aw-VNI"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="0MM-cc-L4m"/>
+                                <include reference="z1S-fu-ELY"/>
                                 <include reference="PHf-Is-Zzd"/>
                                 <include reference="t9x-wp-84S"/>
                                 <include reference="ynP-23-rtW"/>
-                                <include reference="0MM-cc-L4m"/>
-                                <include reference="z1S-fu-ELY"/>
                             </mask>
                         </variation>
                     </view>
@@ -2863,6 +2853,7 @@
                         <outlet property="confirmationStack" destination="TPF-7A-Lfb" id="qIg-Yd-qPM"/>
                         <outlet property="nameInput" destination="78J-2H-8Ib" id="kfT-B1-BnG"/>
                         <outlet property="phoneNumberInput" destination="gsg-qN-NNR" id="Tjg-0W-41Z"/>
+                        <segue destination="vLN-Co-cNl" kind="presentation" identifier="login" modalTransitionStyle="crossDissolve" id="bNW-Ro-fAc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKL-vz-j4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2878,6 +2869,7 @@
                         <viewControllerLayoutGuide type="bottom" id="fXv-3w-5uJ"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="EQH-kt-7Fh">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="wtN-LS-uTR">
@@ -2886,7 +2878,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7tt-zZ-Yva">
                                         <rect key="frame" x="20" y="20" width="130" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                     </textField>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="TeP-nE-gRG">
                                         <rect key="frame" x="337" y="20" width="30" height="30"/>
@@ -2896,14 +2888,14 @@
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="TPz-hT-9ND"/>
                                                 <exclude reference="QsX-eL-pcr"/>
+                                                <exclude reference="TPz-hT-9ND"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=compact">
                                             <mask key="constraints">
-                                                <include reference="TPz-hT-9ND"/>
                                                 <include reference="QsX-eL-pcr"/>
+                                                <include reference="TPz-hT-9ND"/>
                                             </mask>
                                         </variation>
                                     </imageView>
@@ -2977,6 +2969,7 @@
                         <viewControllerLayoutGuide type="bottom" id="7qj-2d-P6w"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="3gG-zA-iGi">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PGJ-Pb-rqR">
@@ -2984,7 +2977,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="119" y="276" width="180" height="30"/>
+                                    <rect key="frame" x="121" y="274" width="180" height="30"/>
                                 </variation>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dZp-cv-t11">
@@ -2992,7 +2985,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="119" y="339" width="203" height="30"/>
+                                    <rect key="frame" x="121" y="338" width="204" height="30"/>
                                 </variation>
                             </textField>
                         </subviews>
@@ -3036,11 +3029,11 @@
         <image name="facebook-logo" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5uB-bY-P8D"/>
-        <segue reference="iPn-KR-9oK"/>
         <segue reference="L5M-dB-8WQ"/>
         <segue reference="vFq-zO-4EH"/>
         <segue reference="zBz-Gp-Xuu"/>
         <segue reference="twb-TU-Nyl"/>
+        <segue reference="bNW-Ro-fAc"/>
+        <segue reference="Uh2-XG-9G7"/>
     </inferredMetricsTieBreakers>
 </document>

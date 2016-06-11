@@ -18,8 +18,6 @@
 		8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* WallViewController.swift */; };
 		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
 		8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */; };
-		8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CB1CEE226700E3D528 /* LoginViewController.swift */; };
-		8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */; };
 		8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CD1CEE226700E3D528 /* NavigationController.swift */; };
 		8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CE1CEE226700E3D528 /* TabBarController.swift */; };
 		8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */; };
@@ -50,19 +48,20 @@
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
 		87C204E51D0B8F6F0061DDB2 /* ProfilePicActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
+		87D91EBB1D0CC650004CD25D /* FacebookLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */; };
 		87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */; };
 		87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */; };
 		87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */; };
 		87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD21D0CA731006ED9AF /* NewUser.swift */; };
 		87DF2BD51D0CAD3E006ED9AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */; };
-		87E176B5C5560C0B5C767763 /* Pods_ColorCouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */; };
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
+		FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C591373F34C788F4677031 /* Pods_Colorue.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCouch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch.debug.xcconfig"; sourceTree = "<group>"; };
+		16C591373F34C788F4677031 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,8 +75,6 @@
 		8763D2C01CEE226700E3D528 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
 		8763D2C61CEE226700E3D528 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		8763D2CA1CEE226700E3D528 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		8763D2CB1CEE226700E3D528 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		8763D2CD1CEE226700E3D528 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		8763D2CE1CEE226700E3D528 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +106,7 @@
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicActivity.swift; sourceTree = "<group>"; };
 		87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellDelagate.swift; sourceTree = "<group>"; };
+		87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginResult.swift; sourceTree = "<group>"; };
 		87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUsernameViewController.swift; sourceTree = "<group>"; };
 		87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFoundViewController.swift; sourceTree = "<group>"; };
@@ -117,8 +115,8 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorCouch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorCouch.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch.release.xcconfig"; sourceTree = "<group>"; };
+		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
+		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,7 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87E176B5C5560C0B5C767763 /* Pods_ColorCouch.framework in Frameworks */,
+				FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -136,8 +134,8 @@
 		6AA7B21F98929F59F5124881 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */,
-				E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */,
+				C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */,
+				E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -229,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2EF1CEE229C00E3D528 /* API.swift */,
+				87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -306,7 +305,6 @@
 				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
 				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
 				87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */,
-				87DF2BCB1D0C88B4006ED9AF /* Unused */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -340,19 +338,10 @@
 			name = Drawing;
 			sourceTree = "<group>";
 		};
-		87DF2BCB1D0C88B4006ED9AF /* Unused */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2CB1CEE226700E3D528 /* LoginViewController.swift */,
-				8763D2CC1CEE226700E3D528 /* RegisterViewController.swift */,
-			);
-			name = Unused;
-			sourceTree = "<group>";
-		};
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				8D171A9624EC88A43BE84EB6 /* Pods_ColorCouch.framework */,
+				16C591373F34C788F4677031 /* Pods_Colorue.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -463,7 +452,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Colorue/Pods-Colorue-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */ = {
@@ -478,7 +467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorCouch/Pods-ColorCouch-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Colorue/Pods-Colorue-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -526,10 +515,9 @@
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* OnboardingViewController.swift in Sources */,
 				87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */,
-				8763D2DC1CEE226700E3D528 /* RegisterViewController.swift in Sources */,
-				8763D2DB1CEE226700E3D528 /* LoginViewController.swift in Sources */,
 				87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
+				87D91EBB1D0CC650004CD25D /* FacebookLoginResult.swift in Sources */,
 				87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */,
 				87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */,
 				879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */,
@@ -624,7 +612,7 @@
 		};
 		873AFA201CED7697006FD34A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1C43ACED9297AF825AA28DB9 /* Pods-ColorCouch.debug.xcconfig */;
+			baseConfigurationReference = C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -641,7 +629,7 @@
 		};
 		873AFA211CED7697006FD34A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E4D29DF651F40E0857CF16B9 /* Pods-ColorCouch.release.xcconfig */;
+			baseConfigurationReference = E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

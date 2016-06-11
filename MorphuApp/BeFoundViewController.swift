@@ -11,6 +11,7 @@ import UIKit
 
 class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
+    let api = API.sharedInstance
     let validImage = UIImage(named: "Liked")
     let invalidImage = UIImage(named: "Like")
     
@@ -63,17 +64,22 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
     
     @IBAction func createAccount(sender: UIBarButtonItem) {
+        
         self.newUser.fullName = nameInput.text
         self.newUser.phoneNumber = phoneNumberInput.text
-        print(newUser.toAnyObject())
+        
+        api.createAccount(newUser, callback: createAccountCallback)
     }
     
+    func createAccountCallback(valid: Bool) {
+        api.emailLogin(newUser.email!, password: newUser.password!, callback: loginCallback)
+    }
     
-    
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        self.newUser.fullName = nameInput.text
-//        self.newUser.phoneNumber = phoneNumberInput.text
-//        
-//        print(newUser.toAnyObject())
-//    }
+    func loginCallback(valid: Bool) {
+        if valid {
+            self.performSegueWithIdentifier("login", sender: self)
+        } else {
+            print("login failed")
+        }
+    }
 }
