@@ -173,7 +173,7 @@ class API {
             
             myRootRef.child("users/\(user.uid)/email").setValue("testEmail")
             myRootRef.child("users/\(user.uid)/username").setValue(user.displayName!)
-            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
+//            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
             
             self.loadData(user)
             self.getFBFriends()
@@ -304,6 +304,22 @@ class API {
                 self.delagate?.refresh()
             }
         }
+    }
+    
+    func makeProfilePic(drawing: Drawing) {
+        let drawingRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
+        
+
+        drawingRef.downloadURLWithCompletion { (URL, error) -> Void in
+            if (error != nil) {
+                print(error)
+            } else {
+                self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(URL?.absoluteString)
+                self.getActiveUser().profileImage = drawing.getImage()
+                self.delagate?.refresh()
+            }
+        }
+
     }
     
     func like(drawing: Drawing) {
@@ -498,9 +514,6 @@ class API {
         uploadTask.observeStatus(.Failure) { snapshot in
             finishedCallback(false)
         }
-    }
-    deinit {
-        print("deinit")
     }
     
     

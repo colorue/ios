@@ -13,6 +13,8 @@ class WallViewController: UITableViewController, APIDelagate {
     
     let api = API.sharedInstance
     let bottomRefreshControl = UIRefreshControl()
+    
+    var drawingSource = API.sharedInstance.getWall
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,11 +68,15 @@ class WallViewController: UITableViewController, APIDelagate {
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return api.getWall().count
+        if section == 0 {
+            return 0
+        } else {
+            return drawingSource().count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -82,7 +88,7 @@ class WallViewController: UITableViewController, APIDelagate {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
-        let drawing = api.getWall()[indexPath.row]
+        let drawing = drawingSource()[indexPath.row]
         let drawingCell = cell as! DrawingCell
         
         drawingCell.drawingImage.alpha = 0.0
@@ -134,12 +140,12 @@ class WallViewController: UITableViewController, APIDelagate {
             drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
         }
         
-        if (indexPath.row + 1 >= api.getWall().count) {
+        if (indexPath.row + 1 >= drawingSource().count) {
             api.loadWall()
         }
     }
     
-    private func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
+    func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
         
         let drawingCell = tableView.cellForRowAtIndexPath(indexPath) as! DrawingCell
             let likes = drawing.getLikes().count
@@ -155,8 +161,8 @@ class WallViewController: UITableViewController, APIDelagate {
             }
     }
     
-    @objc private func likeButtonPressed(sender: UIButton) {
-        let drawing = api.getWall()[sender.tag]
+    func likeButtonPressed(sender: UIButton) {
+        let drawing = drawingSource()[sender.tag]
 
         if !(drawing.liked(api.getActiveUser())) {
             sender.selected = true
@@ -165,7 +171,7 @@ class WallViewController: UITableViewController, APIDelagate {
             sender.selected = false
             api.unlike(drawing)
         }
-        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 0))
+        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
     }
     
     func refresh() {
@@ -176,15 +182,17 @@ class WallViewController: UITableViewController, APIDelagate {
         })
     }
     
-    @objc private func upload(sender: UIButton) {
+    func upload(sender: UIButton) {
         
-        let drawing = api.getWall()[sender.tag]
+        let drawing = drawingSource()[sender.tag]
         let avc: UIActivityViewController
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
             let editActivity = EditActivity()
             let deleteActivity = DeleteActivity()
-            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [editActivity, deleteActivity])
+            let profilePicActivity = ProfilePicActivity()
+
+            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
         } else {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
         }
@@ -197,14 +205,14 @@ class WallViewController: UITableViewController, APIDelagate {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
-            targetController.userSource = { self.api.getWall()[sender!.tag].getLikes() }
+            targetController.userSource = self.drawingSource()[sender!.tag].getLikes
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
-            targetController.drawingInstance = api.getWall()[sender!.tag]
+            targetController.drawingInstance = drawingSource()[sender!.tag]
         } else if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
-            targetController.navigationItem.title = api.getWall()[sender!.tag].getArtist().username
-            targetController.userInstance = api.getWall()[sender!.tag].getArtist()
+            targetController.navigationItem.title = drawingSource()[sender!.tag].getArtist().username
+            targetController.userInstance = drawingSource()[sender!.tag].getArtist()
         }
     }
     

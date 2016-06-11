@@ -16,6 +16,7 @@ class ProfileViewController: WallViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.drawingSource = userInstance!.getDrawings
         API.sharedInstance.getFullUser(userInstance!, delagate: self)
     }
     
@@ -61,81 +62,10 @@ class ProfileViewController: WallViewController {
             }
             
         } else {
-            let drawing = userInstance!.getDrawings()[indexPath.row]
-            let drawingCell = cell as! DrawingCell
-            
-            drawingCell.drawingImage.alpha = 0.0
-            drawingCell.progressBar.hidden = true
-            
-            
-            api.downloadImage(drawing.getDrawingId(),
-                              progressCallback: { (progress: Float) -> () in
-                                drawingCell.progressBar.setProgress(progress, animated: true)
-                },
-                              finishedCallback: { (drawingImage: UIImage) -> () in
-                                drawingCell.progressBar.hidden = true
-                                drawingCell.drawingImage.image = drawingImage
-                                drawing.setImage(drawingImage)
-                                
-                                UIView.animateWithDuration(0.3,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
-                                    drawingCell.drawingImage.alpha = 1.0
-                                    }, completion: nil)
-            })
-            
-            drawingCell.profileImage.image = drawing.getArtist().profileImage
-            drawingCell.creator.text = drawing.getArtist().username
-            drawingCell.timeCreated.text = drawing.getTimeSinceSent()
-            drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
-            
-            drawingCell.userButton.tag = indexPath.row
-            drawingCell.uploadButton.tag = indexPath.row
-            drawingCell.likeButton.tag = indexPath.row
-            drawingCell.likesButton.tag = indexPath.row
-            drawingCell.commentsButton.tag = indexPath.row
-            
-            drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchDown)
-            drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchDown)
-            
-            let likes = drawing.getLikes().count
-            if likes == 0 {
-                drawingCell.likes.text = ""
-                drawingCell.likesButton.enabled = false
-            } else if likes == 1 {
-                drawingCell.likesButton.enabled = true
-                drawingCell.likes.text = "1 like"
-            } else {
-                drawingCell.likesButton.enabled = true
-                drawingCell.likes.text = String(likes) + " likes"
-            }
-            
-            if drawing.getComments().count == 1 {
-                drawingCell.commentCount.text = "1 comment"
-            } else {
-                drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
-            }
+            super.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
         }
     }
-    
-    override func likeButtonPressed(sender: UIButton) {
-        let drawing = userInstance!.getDrawings()[sender.tag]
-        
-        if !(drawing.liked(api.getActiveUser())) {
-            sender.selected = true
-            api.like(drawing)
-        } else {
-            sender.selected = false
-            api.unlike(drawing)
-        }
-        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
-    }
-    
-    override func upload(sender: UIButton) {
-        let drawing = userInstance!.getDrawings()[sender.tag]
-        let avc = UIActivityViewController(activityItems: [drawing.getImage()], applicationActivities: nil)
-        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-        self.presentViewController(avc, animated: true, completion: nil)
-    }
-    
+
     func followAction(sender: UIButton) {
         
         if !sender.selected {
@@ -150,22 +80,6 @@ class ProfileViewController: WallViewController {
             
             self.presentViewController(actionSelector, animated: true, completion: nil)
         }
-    }
-    
-    private func unfollow(sender: UIButton) {
-        sender.selected = false
-        api.getActiveUser().unfollow(userInstance!)
-        api.unfollow(userInstance!)
-    }
-    
-    func addLogoutButton() {
-        let chevron = UIImage(named: "Logout")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logout(_:)))
-    }
-    
-    @objc private func logout(sender: UIBarButtonItem) {
-        api.logout()
-        self.performSegueWithIdentifier("logout", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -185,5 +99,21 @@ class ProfileViewController: WallViewController {
             targetController.navigationItem.title = "Following"
             targetController.userSource = { self.userInstance!.getFollowing() }
         }
+    }
+
+    private func unfollow(sender: UIButton) {
+        sender.selected = false
+        api.getActiveUser().unfollow(userInstance!)
+        api.unfollow(userInstance!)
+    }
+    
+    func addLogoutButton() {
+        let chevron = UIImage(named: "Logout")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logout(_:)))
+    }
+    
+    @objc private func logout(sender: UIBarButtonItem) {
+        api.logout()
+        self.performSegueWithIdentifier("logout", sender: self)
     }
 }
