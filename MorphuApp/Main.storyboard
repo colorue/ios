@@ -35,6 +35,7 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -2696,7 +2697,7 @@
         <!--Be Found-->
         <scene sceneID="z2n-nf-5mQ">
             <objects>
-                <viewController id="6fj-7j-2rX" sceneMemberID="viewController">
+                <viewController id="6fj-7j-2rX" customClass="BeFoundViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iGQ-Qh-v3c"/>
                         <viewControllerLayoutGuide type="bottom" id="MeF-98-7Ed"/>
@@ -2704,63 +2705,165 @@
                     <view key="view" contentMode="scaleToFill" id="DHu-r6-oT0">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="B23-uG-qKV">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="110" y="265" width="180" height="30"/>
-                                </variation>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6u0-7O-JAU">
-                                <rect key="frame" x="-25" y="-30" width="97" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="110" y="314" width="203" height="30"/>
-                                </variation>
-                            </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Make it easy for friends to find you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fDd-lh-pMN">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="9wL-1K-Ctu">
+                                <rect key="frame" x="0.0" y="52" width="400" height="190"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="V8T-SW-H7S">
+                                        <rect key="frame" x="20" y="20" width="360" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="78J-2H-8Ib">
+                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="yku-eM-Ozl"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="yku-eM-Ozl"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="yku-eM-Ozl"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="k8H-Ot-Zqa">
+                                        <rect key="frame" x="20" y="68" width="360" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (Optional)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gsg-qN-NNR">
+                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="300" height="40"/>
+                                                </variation>
+                                            </textField>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GAP-h9-erU">
+                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <state key="normal" title="Confirm"/>
+                                                <variation key="heightClass=regular-widthClass=compact" ambiguous="YES">
+                                                    <rect key="frame" x="305" y="0.0" width="55" height="40"/>
+                                                </variation>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="clS-tW-EGO"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="clS-tW-EGO"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="clS-tW-EGO"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                    <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TPF-7A-Lfb">
+                                        <rect key="frame" x="54" y="130" width="133" height="40"/>
+                                        <subviews>
+                                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmation Code" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q3m-us-7t9">
+                                                <rect key="frame" x="20" y="20" width="130" height="30"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Like" translatesAutoresizingMaskIntoConstraints="NO" id="1vk-7v-eES">
+                                                <rect key="frame" x="337" y="20" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="1vk-7v-eES" secondAttribute="height" multiplier="1:1" id="cQD-fM-8h4"/>
+                                                    <constraint firstAttribute="width" secondItem="1vk-7v-eES" secondAttribute="height" multiplier="1:1" id="pwn-IT-1rD"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="cQD-fM-8h4"/>
+                                                        <exclude reference="pwn-IT-1rD"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=compact">
+                                                    <mask key="constraints">
+                                                        <include reference="cQD-fM-8h4"/>
+                                                        <include reference="pwn-IT-1rD"/>
+                                                    </mask>
+                                                </variation>
+                                            </imageView>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="dXn-Wr-yjJ"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="dXn-Wr-yjJ"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="dXn-Wr-yjJ"/>
+                                            </mask>
+                                        </variation>
+                                    </stackView>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one will see your phone number on Colorue" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOV-Aw-VNI">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="68" y="183" width="264" height="21"/>
-                                </variation>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No one will see your phone number on Colorue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zOV-Aw-VNI">
-                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                                <variation key="heightClass=regular-widthClass=compact" fixedFrame="YES">
-                                    <rect key="frame" x="27" y="425" width="368" height="21"/>
-                                </variation>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="zOV-Aw-VNI" firstAttribute="centerX" secondItem="DHu-r6-oT0" secondAttribute="centerX" id="0MM-cc-L4m"/>
+                            <constraint firstItem="9wL-1K-Ctu" firstAttribute="leading" secondItem="DHu-r6-oT0" secondAttribute="leadingMargin" id="PHf-Is-Zzd"/>
+                            <constraint firstItem="9wL-1K-Ctu" firstAttribute="top" secondItem="iGQ-Qh-v3c" secondAttribute="bottom" constant="8" id="t9x-wp-84S"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9wL-1K-Ctu" secondAttribute="trailing" id="ynP-23-rtW"/>
+                            <constraint firstItem="zOV-Aw-VNI" firstAttribute="top" secondItem="9wL-1K-Ctu" secondAttribute="bottom" constant="8" id="z1S-fu-ELY"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="B23-uG-qKV"/>
-                                <exclude reference="6u0-7O-JAU"/>
-                                <exclude reference="fDd-lh-pMN"/>
                                 <exclude reference="zOV-Aw-VNI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="PHf-Is-Zzd"/>
+                                <exclude reference="t9x-wp-84S"/>
+                                <exclude reference="ynP-23-rtW"/>
+                                <exclude reference="0MM-cc-L4m"/>
+                                <exclude reference="z1S-fu-ELY"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="B23-uG-qKV"/>
-                                <include reference="6u0-7O-JAU"/>
-                                <include reference="fDd-lh-pMN"/>
                                 <include reference="zOV-Aw-VNI"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="PHf-Is-Zzd"/>
+                                <include reference="t9x-wp-84S"/>
+                                <include reference="ynP-23-rtW"/>
+                                <include reference="0MM-cc-L4m"/>
+                                <include reference="z1S-fu-ELY"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Be Found" id="KST-ZK-C5m">
                         <barButtonItem key="backBarButtonItem" title=" " id="3lp-9s-CxZ"/>
-                        <barButtonItem key="rightBarButtonItem" title="Join!" id="4FG-sX-ui3"/>
+                        <barButtonItem key="rightBarButtonItem" title="Join!" id="4FG-sX-ui3">
+                            <connections>
+                                <action selector="createAccount:" destination="6fj-7j-2rX" id="Fxx-7X-Lf6"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="confirmPhoneButton" destination="GAP-h9-erU" id="6TN-uR-3fK"/>
+                        <outlet property="confirmationCodeInput" destination="Q3m-us-7t9" id="wFr-ay-MLW"/>
+                        <outlet property="confirmationCodeValid" destination="1vk-7v-eES" id="lh9-Ev-Z53"/>
+                        <outlet property="confirmationStack" destination="TPF-7A-Lfb" id="qIg-Yd-qPM"/>
+                        <outlet property="nameInput" destination="78J-2H-8Ib" id="kfT-B1-BnG"/>
+                        <outlet property="phoneNumberInput" destination="gsg-qN-NNR" id="Tjg-0W-41Z"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WKL-vz-j4e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

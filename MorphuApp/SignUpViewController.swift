@@ -12,7 +12,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     let validImage = UIImage(named: "Liked")
     let invalidImage = UIImage(named: "Like")
-
+    
+    let newUser = API.sharedInstance.newUser
 
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -48,7 +49,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        
         if textField.tag == 0 {
             if emailValid {
                 passwordInput.becomeFirstResponder()
@@ -62,9 +62,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         return true
     }
-    
-    
-    
     
     @objc private func emailDidChange(sender: UITextField) {
         if isValidEmail(sender.text!) {
@@ -105,5 +102,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         } else {
             return false
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        self.newUser.email = emailInput.text
+        self.newUser.password = passwordInput.text
     }
 }

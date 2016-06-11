@@ -517,6 +517,14 @@ class API {
     }
     
     
+    // MARK: Onboarding Methods
+    
+    lazy var newUser = NewUser()
+    
+    func createAccount(newUser: NewUser, callback: (Bool) -> ()) {
+        
+    }
+    
     
     /*
     

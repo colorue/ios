@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>755692571660-mebb3q3rkba9ha8ubkqe2lr8kfdkfq70.apps.googleusercontent.com</string>
+	<string>881756450601-7gkbqdpqd705jjgejj6kqn8es269g2pg.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.755692571660-mebb3q3rkba9ha8ubkqe2lr8kfdkfq70</string>
+	<string>com.googleusercontent.apps.881756450601-7gkbqdpqd705jjgejj6kqn8es269g2pg</string>
 	<key>API_KEY</key>
-	<string>AIzaSyAOzKk_uAAQGmtHpjoplyiCyTuF7slfnRA</string>
+	<string>AIzaSyAeaSFd1a5gCWVEMXREzOGWCzO0qLU-GZw</string>
 	<key>GCM_SENDER_ID</key>
-	<string>755692571660</string>
+	<string>881756450601</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>Morphu</string>
+	<string>Wight-Dylan.Colorue</string>
 	<key>PROJECT_ID</key>
-	<string>project-3272790237826499087</string>
+	<string>project-6663883006145995611</string>
 	<key>STORAGE_BUCKET</key>
-	<string>project-3272790237826499087.appspot.com</string>
+	<string>project-6663883006145995611.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true/>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:755692571660:ios:023c023df4aed633</string>
+	<string>1:881756450601:ios:d62930c5fb1f8d6f</string>
 	<key>DATABASE_URL</key>
-	<string>https://morphu.firebaseio.com</string>
+	<string>https://project-6663883006145995611.firebaseio.com</string>
 </dict>
 </plist>
