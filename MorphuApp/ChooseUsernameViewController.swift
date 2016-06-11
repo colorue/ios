@@ -24,15 +24,21 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationController?.navigationBarHidden = false
+        
         usernameValidIndicator.image = invalidImage
         nextButton.enabled = false
         
         usernameInput.delegate = self
         usernameInput.addTarget(self, action: #selector(ChooseUsernameViewController.usernameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        
+        usernameInput.text = newUser.username
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        self.navigationController?.navigationBarHidden = false
+
         usernameInput.becomeFirstResponder()
     }
     
@@ -64,5 +70,10 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.newUser.username = usernameInput.text
+        
+        if let onboarding = segue.destinationViewController as? OnboardingViewController {
+            print("hide bar")
+            onboarding.navigationController?.navigationBarHidden = true
+        }
     }
 }

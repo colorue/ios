@@ -30,6 +30,9 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmationCodeValid.image = invalidImage
+        
+        nameInput.text = newUser.fullName
+        phoneNumberInput.text = newUser.phoneNumber
     }
     
     override func viewDidAppear(animated: Bool) {

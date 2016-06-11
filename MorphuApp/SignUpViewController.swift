@@ -14,6 +14,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     let invalidImage = UIImage(named: "Like")
     
     let newUser = API.sharedInstance.newUser
+    
+    var emailValid = false
+    var passwordValid = false
 
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
@@ -21,10 +24,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var emailValidIndicator: UIImageView!
     @IBOutlet weak var passwordValidIndicator: UIImageView!
     
-    var emailValid = false
-    var passwordValid = false
-    
     @IBOutlet weak var nextButton: UIBarButtonItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,14 +38,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         passwordInput.delegate = self
         
         emailInput.addTarget(self, action: #selector(SignUpViewController.emailDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-
-        
         passwordInput.addTarget(self, action: #selector(SignUpViewController.passwordDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         emailInput.becomeFirstResponder()
     }
 
@@ -59,7 +58,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         } else {
             textField.resignFirstResponder()
         }
-        
         return true
     }
     
@@ -103,6 +101,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
             return false
         }
     }
+
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.newUser.email = emailInput.text
