@@ -49,6 +49,7 @@
 		87C204E51D0B8F6F0061DDB2 /* ProfilePicActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
 		87D91EBB1D0CC650004CD25D /* FacebookLoginResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */; };
+		87DEFB231D0CEDBD00924FDC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */; };
 		87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */; };
 		87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */; };
 		87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */; };
@@ -107,6 +108,7 @@
 		87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicActivity.swift; sourceTree = "<group>"; };
 		87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellDelagate.swift; sourceTree = "<group>"; };
 		87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookLoginResult.swift; sourceTree = "<group>"; };
+		87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUsernameViewController.swift; sourceTree = "<group>"; };
 		87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFoundViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
 				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
 				87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */,
+				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,
+				87DEFB231D0CEDBD00924FDC /* SignInViewController.swift in Sources */,
 				8763D2DD1CEE226700E3D528 /* NavigationController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,

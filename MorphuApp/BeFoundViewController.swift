@@ -70,8 +70,12 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         
         self.newUser.fullName = nameInput.text
         self.newUser.phoneNumber = phoneNumberInput.text
-        
-        api.createAccount(newUser, callback: createAccountCallback)
+        if newUser.FacebookSignUp {
+            api.addNewUserToDatabase(newUser)
+            self.performSegueWithIdentifier("login", sender: self)
+        } else {
+            api.createEmailAccount(newUser, callback: createAccountCallback)
+        }
     }
     
     func createAccountCallback(valid: Bool) {

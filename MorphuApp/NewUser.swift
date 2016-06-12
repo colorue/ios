@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class NewUser {
     var userId: String?
@@ -16,6 +17,7 @@ class NewUser {
     var fullName: String?
     var phoneNumber: String?
     var FacebookID: String?
+    var userRer: FIRUser?
     
     var FacebookSignUp = false
     

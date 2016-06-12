@@ -456,15 +456,21 @@ class API {
     
     lazy var newUser = NewUser()
     
-    func createAccount(newUser: NewUser, callback: (Bool) -> ()) {
+    func createEmailAccount(newUser: NewUser, callback: (Bool) -> ()) {
         FIRAuth.auth()?.createUserWithEmail(newUser.email!, password: newUser.password!) { (user, error) in
             if error == nil {
-                self.myRootRef.child("users/\(user!.uid)").setValue(newUser.toAnyObject())
+                newUser.userId = user!.uid
+                self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
                 callback(true)
             } else {
                 callback(false)
             }
         }
+    }
+    
+    func addNewUserToDatabase(newUser: NewUser) {
+        self.loadData(newUser.userRer!)
+        self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
     }
     
     func emailLogin(email: String, password: String, callback: (Bool)-> ()) {
@@ -511,9 +517,12 @@ class API {
                                     self.loadData(user)
                                     callback(.LoggedIn)
                                 } else {
+                                    self.newUser.userId = user.uid
                                     self.newUser.email = user.email
-                                    self.newUser.fullName = user.displayName!
+                                    self.newUser.fullName = user.displayName
                                     self.newUser.FacebookSignUp = true
+                                    
+                                    self.newUser.userRer = user
                                     
                                     self.getActiveFBID({ (FBID: String) -> () in
                                         self.newUser.FacebookID = FBID
@@ -556,6 +565,7 @@ class API {
         self.activeUser = nil
         self.oldestTimeLoaded = -99999999999999
         self.newestTimeLoaded = 0
+        self.newUser = NewUser()
         
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
