@@ -105,8 +105,9 @@ class API {
             
                 let username = snapshot.value!["username"] as! String
                 let email = snapshot.value!["email"] as! String
+                let fullname = snapshot.value!["fullName"] as! String
             
-                let newUser = User(userId: userId, username: username, email: email)
+                let newUser = User(userId: userId, username: username, fullname: fullname, email: email)
             
                 if let url = snapshot.value!["photoURL"] as? String {
                     dispatch_async(dispatch_get_main_queue()) {

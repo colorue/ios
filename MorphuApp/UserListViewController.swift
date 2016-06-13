@@ -49,6 +49,7 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         
         let user = userSource()[indexPath.row]
         cell.username.text = user.username
+        cell.fullName.text = user.fullname
         cell.profileImage.image = user.profileImage
         cell.delagate = self
         cell.user = user

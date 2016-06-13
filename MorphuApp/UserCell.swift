@@ -15,7 +15,8 @@ class UserCell: UITableViewCell {
     @IBOutlet weak var followButton: UIButton!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var username: UILabel!
-    
+    @IBOutlet weak var fullName: UILabel!
+
     @IBAction func followAction(sender: UIButton) {
         
         if !(sender.selected) {

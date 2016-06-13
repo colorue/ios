@@ -11,6 +11,7 @@ class User {
     
     let userId: String
     let username: String
+    let fullname: String
     let email: String
     var profileImage: UIImage  //make getter and setter
     private var following = [User]()
@@ -29,9 +30,10 @@ class User {
         return self.fullUserLoaded
     }
     
-    init(userId: String = "", email: String = "", username: String = "", profileImage: UIImage = UIImage()) {
+    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileImage: UIImage = UIImage()) {
         self.userId = userId
         self.username = username
+        self.fullname = fullname
         self.email = email
         self.profileImage = profileImage
     }

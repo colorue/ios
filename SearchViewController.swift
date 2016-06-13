@@ -28,7 +28,8 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, User
         textField.backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         
         searchController.searchBar.searchBarStyle = .Prominent
-        
+        searchController.searchBar.placeholder = "Search users"
+
         filteredUsers = userSource()
         
         self.searchController.searchResultsUpdater = self
@@ -59,6 +60,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, User
         let user = userSource()[indexPath.row]
         cell.username.text = user.username
         cell.profileImage.image = user.profileImage
+        cell.fullName.text = user.fullname
         cell.delagate = self
         cell.user = user
         
@@ -76,7 +78,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, User
             filteredUsers = userSource()
         } else {
             filteredUsers = userSource().filter({( user : User) -> Bool in
-                return user.username.lowercaseString.containsString(searchText.lowercaseString)
+                return (user.username.lowercaseString.containsString(searchText.lowercaseString) || user.fullname.lowercaseString.containsString(searchText.lowercaseString))
             })
         }
         tableView.reloadData()
