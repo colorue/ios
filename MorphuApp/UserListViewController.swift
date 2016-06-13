@@ -11,7 +11,7 @@ import UIKit
 class UserListViewController: UITableViewController, UserCellDelagate, APIDelagate {
     
     
-    var userSource: () -> [User] = API.sharedInstance.getUsers
+    var userSource: () -> [User] = API.sharedInstance.getFacebookFriends
 
     let api = API.sharedInstance
     
@@ -101,9 +101,12 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite", style: .Plain, target: self, action: #selector(UserListViewController.invite(_:)))
     }
     
+    // MARK: Segue Methods
+    
     @objc private func invite(sender: UIBarButtonItem) {
         self.performSegueWithIdentifier("toInvite", sender: self)
     }
+
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.performSegueWithIdentifier("showUser", sender: self)

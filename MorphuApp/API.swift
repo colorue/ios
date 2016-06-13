@@ -26,6 +26,8 @@ class API {
 
     private var wall = [Drawing]()
     private var users = [User]()
+    private var facebookFriends = [User]()
+
     private var activeUser: User?
     
     private var userDict = [String: User]()
@@ -304,6 +306,10 @@ class API {
         return self.users
     }
     
+    func getFacebookFriends() -> [User] {
+        return self.facebookFriends
+    }
+    
     //MARK: Load Data
     
     private func loadData(user: FIRUser) {
@@ -311,7 +317,7 @@ class API {
             self.activeUser = activeUser
             self.getFullUser(activeUser, delagate: nil)
             self.loadWall()
-//            self.loadUsers(user)
+            self.loadUsers(user)
             self.delagate?.refresh()
         })
     }
@@ -364,7 +370,7 @@ class API {
         myRootRef.child("users").queryOrderedByChild("fbId").queryEqualToValue(FBID)
             .observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
-                    self.users.append(user)
+                    self.facebookFriends.append(user)
                     self.delagate?.refresh()
                 })
             })
@@ -562,6 +568,7 @@ class API {
     func logout() {
         let prefs = NSUserDefaults.standardUserDefaults()
         prefs.setValue(false, forKey: "loggedIn")
+        self.facebookFriends.removeAll()
         self.users.removeAll()
         self.wall.removeAll()
         self.drawingDict.removeAll()

@@ -76,7 +76,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAe-qX-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ebr-du-21l" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="135" y="109.5"/>
+            <point key="canvasLocation" x="-2415" y="286.5"/>
         </scene>
         <!--Search View Controller-->
         <scene sceneID="OAz-wx-CXM">
@@ -214,10 +214,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="cX3-JK-V5E"/>
+                    <connections>
+                        <segue destination="sJS-x6-3bU" kind="show" id="cKZ-HY-fD9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zOE-Xz-STP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2349" y="42.75"/>
+            <point key="canvasLocation" x="933" y="13.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="fsR-Tj-QvC">
@@ -239,7 +242,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXz-WY-GOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-736.5" y="103.5"/>
+            <point key="canvasLocation" x="-1635" y="268.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">
@@ -2233,7 +2236,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wUt-t3-TFx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1669.5" y="319.5"/>
+            <point key="canvasLocation" x="135" y="13.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Ng0-kq-0ll">
@@ -3030,8 +3033,8 @@
         <segue reference="twb-TU-Nyl"/>
         <segue reference="TVe-4o-ZdK"/>
         <segue reference="aBg-fO-FdL"/>
+        <segue reference="cKZ-HY-fD9"/>
         <segue reference="vFq-zO-4EH"/>
-        <segue reference="L5M-dB-8WQ"/>
         <segue reference="zBz-Gp-Xuu"/>
     </inferredMetricsTieBreakers>
 </document>
