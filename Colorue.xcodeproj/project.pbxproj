@@ -193,11 +193,11 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8763D3251CEE256200E3D528 /* Loading */,
 				87C32C551D00A10D003817D8 /* Main */,
 				87CC7D411D00A2C20056DF73 /* Drawing */,
-				8730D80C1D0735D000E1D939 /* UIActivities */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
-				8763D3251CEE256200E3D528 /* Loading */,
+				8730D80C1D0735D000E1D939 /* UIActivities */,
 				8763D3231CEE254100E3D528 /* Navigation */,
 			);
 			name = Controller;

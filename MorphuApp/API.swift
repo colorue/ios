@@ -461,6 +461,8 @@ class API {
             if error == nil {
                 newUser.userId = user!.uid
                 self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
+                self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
+                
                 callback(true)
             } else {
                 callback(false)
@@ -471,6 +473,7 @@ class API {
     func addNewUserToDatabase(newUser: NewUser) {
         self.loadData(newUser.userRer!)
         self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
+        self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
     }
     
     func emailLogin(email: String, password: String, callback: (Bool)-> ()) {
@@ -524,6 +527,8 @@ class API {
                                     
                                     self.newUser.userRer = user
                                     
+                                    
+                                    // not working
                                     self.getActiveFBID({ (FBID: String) -> () in
                                         self.newUser.FacebookID = FBID
                                     })
@@ -570,6 +575,16 @@ class API {
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
         FBSDKLoginManager().logOut()
+    }
+    
+    func checkUsernameAvaliability(username: String, callback: (Bool) -> ()) {
+        self.myRootRef.child("usernames/\(username)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+            if (snapshot.exists()) {
+                callback(false)
+            } else {
+                callback(true)
+            }
+        })
     }
     
     

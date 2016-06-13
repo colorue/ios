@@ -27,6 +27,10 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var confirmationStack: UIStackView!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var joinButton: UIBarButtonItem!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         confirmationCodeValid.image = invalidImage
@@ -68,6 +72,9 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func createAccount(sender: UIBarButtonItem) {
         
+        joinButton.enabled = false
+        activityIndicator.startAnimating()
+
         self.newUser.fullName = nameInput.text
         self.newUser.phoneNumber = phoneNumberInput.text
         if newUser.FacebookSignUp {
@@ -83,10 +90,12 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     }
     
     func loginCallback(valid: Bool) {
+        activityIndicator.stopAnimating()
         if valid {
             self.performSegueWithIdentifier("login", sender: self)
         } else {
             print("login failed")
+            joinButton.enabled = true
         }
     }
 }

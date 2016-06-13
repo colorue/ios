@@ -18,6 +18,9 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var doneButton: UIBarButtonItem!
     
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -42,10 +45,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func doneAction(sender: UIBarButtonItem) {
+        activityIndicator.startAnimating()
         API.sharedInstance.emailLogin(emailInput.text!, password: passwordInput.text!, callback: logginCallback)
     }
     
     func logginCallback(valid: Bool) {
+        activityIndicator.stopAnimating()
         if valid {
             self.performSegueWithIdentifier("signIn", sender: self)
         }

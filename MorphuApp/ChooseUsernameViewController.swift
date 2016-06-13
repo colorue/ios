@@ -16,6 +16,8 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     
     let newUser = API.sharedInstance.newUser
     
+    let api = API.sharedInstance
+    
     @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var usernameValidIndicator: UIImageView!
     @IBOutlet weak var nextButton: UIBarButtonItem!
@@ -43,12 +45,19 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func usernameDidChange(sender: UITextField) {
+        usernameValidIndicator.image = invalidImage
+        nextButton.enabled = false
         if isValidUsername(sender.text!) {
+            // startSpining
+            api.checkUsernameAvaliability(usernameInput.text!, callback: usernameAvaliableCallback)
+        }
+    }
+        
+    @objc private func usernameAvaliableCallback(avaliable: Bool) {
+        // stopSpining
+        if avaliable {
             usernameValidIndicator.image = validImage
             nextButton.enabled = true
-        } else {
-            usernameValidIndicator.image = invalidImage
-            nextButton.enabled = false
         }
     }
     
