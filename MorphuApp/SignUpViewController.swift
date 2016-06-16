@@ -29,6 +29,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var drawing: UIImageView!
     
+    var emailFirstResponder = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,19 +47,24 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         
-        drawingLook.minimumPressDuration = 0.0
+        drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
     }
     
     func drawingTap(sender: UILongPressGestureRecognizer) {
         if sender.state ==  .Began {
-            emailInput.resignFirstResponder()
-            passwordInput.resignFirstResponder()
-        } else if sender.state ==  .Ended {
-            if emailValid {
-                passwordInput.becomeFirstResponder()
+            if emailInput.isFirstResponder() {
+                emailFirstResponder = true
+                emailInput.resignFirstResponder()
             } else {
+                emailFirstResponder = false
+                passwordInput.resignFirstResponder()
+            }
+        } else if sender.state ==  .Ended {
+            if emailFirstResponder {
                 emailInput.becomeFirstResponder()
+            } else {
+                passwordInput.becomeFirstResponder()
             }
         }
     }
