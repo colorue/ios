@@ -12,6 +12,8 @@ import UIKit
 class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
     let api = API.sharedInstance
+    let prefs = NSUserDefaults.standardUserDefaults()
+
     let validImage = UIImage(named: "Liked")
     let invalidImage = UIImage(named: "Like")
     
@@ -92,6 +94,10 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     func loginCallback(valid: Bool) {
         activityIndicator.stopAnimating()
         if valid {
+            if !newUser.FacebookSignUp {
+                prefs.setValue(newUser.email, forKey: "email")
+                prefs.setValue(newUser.password, forKey: "password")
+            }
             self.performSegueWithIdentifier("login", sender: self)
         } else {
             print("login failed")

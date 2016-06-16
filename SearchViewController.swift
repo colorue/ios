@@ -4,13 +4,12 @@
 import UIKit
 
 class SearchViewController: UITableViewController, UISearchResultsUpdating, UserCellDelagate {
-    
-    let api = API.sharedInstance
-    
+
     // MARK: - Properties
-    var filteredUsers = [User]()
-    var userSource = API.sharedInstance.getUsers
+    let api = API.sharedInstance
     let searchController = UISearchController(searchResultsController: nil)
+    var userSource = API.sharedInstance.getUsers
+    var filteredUsers = [User]()
     
     // MARK: - View Setup
     override func viewDidLoad() {

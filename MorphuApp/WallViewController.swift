@@ -11,11 +11,13 @@ import CCBottomRefreshControl
 
 class WallViewController: UITableViewController, APIDelagate {
     
+    // MARK: Properties
     let api = API.sharedInstance
     let bottomRefreshControl = UIRefreshControl()
-    
     var drawingSource = API.sharedInstance.getWall
 
+    
+    // MARK: Loading Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,6 +38,21 @@ class WallViewController: UITableViewController, APIDelagate {
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        api.delagate = self
+        
+        self.tableView.reloadData()
+        self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
+        
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if (!prefs.boolForKey("firstOpen")) {
+            self.tabBarController?.selectedIndex = 2
+            prefs.setValue(true, forKey: "firstOpen")
+        }
+    }
+    
     private func setTitle() {
         let button =  UIButton(type: .Custom)
         button.frame = CGRectMake(0, 0, 100, 40) as CGRect
@@ -50,15 +67,6 @@ class WallViewController: UITableViewController, APIDelagate {
     
     func refreshBottom(sender: UIRefreshControl) {
         refresh()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        api.delagate = self
-
-        self.tableView.reloadData()
-        self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {

@@ -112,8 +112,10 @@ class API {
                 if let url = snapshot.value!["photoURL"] as? String {
                     dispatch_async(dispatch_get_main_queue()) {
                         let url = NSURL(string: url)
-                        let data = NSData(contentsOfURL: url!)
-                        newUser.profileImage = UIImage(data: data!)!
+                        let data = NSData(contentsOfURL : url!)
+                        if let data = data {
+                            newUser.profileImage = UIImage(data: data)
+                        }
                     }
                 }
                 
@@ -583,6 +585,17 @@ class API {
         self.myRootRef.removeAllObservers()
         try! FIRAuth.auth()!.signOut()
         FBSDKLoginManager().logOut()
+    }
+    
+    func resetPasswordEmail(email: String, callback: (Bool) -> ()) {
+        FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
+            if let error = error {
+                print(error)
+                callback(false)
+            } else {
+                callback(true)
+            }
+        }
     }
     
     func checkUsernameAvaliability(username: String, callback: (Bool) -> ()) {

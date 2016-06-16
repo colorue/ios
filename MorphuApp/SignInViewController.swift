@@ -16,16 +16,31 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var passwordInput: UITextField!
     
     @IBOutlet weak var doneButton: UIBarButtonItem!
-    
+    @IBOutlet weak var forgotPasswordButton: UIButton!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
+    let prefs = NSUserDefaults.standardUserDefaults()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         emailInput.delegate = self
         passwordInput.delegate = self
+        
+        emailInput.addTarget(self, action: #selector(SignInViewController.emailDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        doneButton.enabled = false
+        forgotPasswordButton.enabled = false
+        
+        if let email = prefs.stringForKey("email") {
+            emailInput.text = email
+            doneButton.enabled = true
+            forgotPasswordButton.enabled = true
+        }
+        if let password = prefs.stringForKey("password") {
+            passwordInput.text = password
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -44,6 +59,21 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
         return true
     }
     
+    @objc private func emailDidChange(sender: UITextField) {
+        if isValidEmail(sender.text!) {
+            doneButton.enabled = true
+            forgotPasswordButton.enabled = true
+        } else {
+            doneButton.enabled = false
+            forgotPasswordButton.enabled = false
+        }
+    }
+    
+    private func isValidEmail(candidate: String) -> Bool {
+        let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(candidate)
+    }
+    
     @IBAction func doneAction(sender: UIBarButtonItem) {
         activityIndicator.startAnimating()
         API.sharedInstance.emailLogin(emailInput.text!, password: passwordInput.text!, callback: logginCallback)
@@ -52,7 +82,35 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     func logginCallback(valid: Bool) {
         activityIndicator.stopAnimating()
         if valid {
+            prefs.setValue(emailInput.text, forKey: "email")
+            prefs.setValue(passwordInput.text, forKey: "password")
             self.performSegueWithIdentifier("signIn", sender: self)
         }
     }
+    
+    @IBAction func forgotPassword(sender: UIButton) {
+        let forgotPasswordEmail = UIAlertController(title: "Forgot Password", message: "Send password reset email to '\(emailInput.text!)'?" , preferredStyle: UIAlertControllerStyle.Alert)
+        forgotPasswordEmail.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+            API.sharedInstance.resetPasswordEmail(self.emailInput.text!, callback: self.passwordResetCallback)
+            }))
+        forgotPasswordEmail.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        self.presentViewController(forgotPasswordEmail, animated: true, completion: nil)
+    }
+    
+    private func passwordResetCallback(valid: Bool) {
+        if valid {
+            let emailSent = UIAlertController(title: "Email Sent!", message: nil , preferredStyle: UIAlertControllerStyle.Alert)
+            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.presentViewController(emailSent, animated: true, completion: nil)
+            }
+        } else {
+            let emailSent = UIAlertController(title: "Issue resetting password", message: "We couldn't find an account associated with '\(emailInput.text!)'. Please try again." , preferredStyle: UIAlertControllerStyle.Alert)
+            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            NSOperationQueue.mainQueue().addOperationWithBlock {
+                self.presentViewController(emailSent, animated: true, completion: nil)
+            }
+        }
+    }
+    
 }

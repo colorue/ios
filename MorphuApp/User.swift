@@ -13,7 +13,7 @@ class User {
     let username: String
     let fullname: String
     let email: String
-    var profileImage: UIImage  //make getter and setter
+    var profileImage: UIImage?  //make getter and setter
     private var following = [User]()
     private var followers = [User]()
     private var drawings = [Drawing]()
@@ -30,7 +30,7 @@ class User {
         return self.fullUserLoaded
     }
     
-    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileImage: UIImage = UIImage()) {
+    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileImage: UIImage? = nil) {
         self.userId = userId
         self.username = username
         self.fullname = fullname
