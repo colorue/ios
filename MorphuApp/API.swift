@@ -12,6 +12,7 @@ import Firebase
 
 import FBSDKCoreKit
 import FBSDKLoginKit
+import SinchVerification
 
 class API {
     
@@ -608,11 +609,28 @@ class API {
         })
     }
     
+    func callVerification(phoneNumber: String, callback: (Bool) -> ()) {
+        // Get user's current region by carrier info
+
+        let verification = CalloutVerification(applicationKey: "938e93e3-fab4-4ce4-97e1-3e463891326a", phoneNumber: "+14135888889")
+        verification.initiate({(valid, error) in
+            if let error = error {
+                print("verification error: \(error)")
+                callback(false)
+            } else if !valid {
+                print("invalid verification")
+                callback(false)
+            } else {
+                print("number verified")
+                callback(true)
+            }
+        })
+    }
     
     //            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
 
 
-    
+
     
     /*
     

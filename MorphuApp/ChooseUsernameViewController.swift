@@ -21,7 +21,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var usernameValidIndicator: UIImageView!
     @IBOutlet weak var nextButton: UIBarButtonItem!
-    
+    @IBOutlet weak var drawing: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,9 +80,9 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         self.newUser.username = usernameInput.text
         
-        if let onboarding = segue.destinationViewController as? OnboardingViewController {
-            print("hide bar")
-            onboarding.navigationController?.navigationBarHidden = true
-        }
+//        if let onboarding = segue.destinationViewController as? OnboardingViewController {
+//            print("hide bar")
+//            onboarding.navigationController?.navigationBarHidden = true
+//        }
     }
 }

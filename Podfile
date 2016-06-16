@@ -17,4 +17,5 @@ target 'Colorue' do
     pod 'Firebase/Storage'
 
     pod 'CCBottomRefreshControl'
+    pod 'SinchVerification-Swift'
 end
