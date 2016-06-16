@@ -22,6 +22,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var usernameValidIndicator: UIImageView!
     @IBOutlet weak var nextButton: UIBarButtonItem!
     @IBOutlet weak var drawing: UIImageView!
+    @IBOutlet weak var checkAvailabilityButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         usernameInput.addTarget(self, action: #selector(ChooseUsernameViewController.usernameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         usernameInput.text = newUser.username
+        checkAvailabilityButton.enabled = false
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -45,20 +47,38 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func usernameDidChange(sender: UITextField) {
-        usernameValidIndicator.image = invalidImage
         nextButton.enabled = false
+        checkAvailabilityButton.hidden = false
+        usernameValidIndicator.hidden = true
+        
+        api.releaseUsernameHold()
+
         if isValidUsername(sender.text!) {
-            // startSpining
-            api.checkUsernameAvaliability(usernameInput.text!, callback: usernameAvaliableCallback)
+            checkAvailabilityButton.enabled = true
+        } else {
+            checkAvailabilityButton.enabled = false
         }
     }
-        
+    
+    @IBAction func checkAvailability(sender: UIButton) {
+        checkAvailabilityButton.hidden = true
+        api.checkUsernameAvaliability(usernameInput.text!, callback: usernameAvaliableCallback)
+    }
+    
     @objc private func usernameAvaliableCallback(avaliable: Bool) {
         // stopSpining
+        usernameValidIndicator.hidden = false
         if avaliable {
             usernameValidIndicator.image = validImage
             nextButton.enabled = true
+        } else {
+            usernameValidIndicator.image = invalidImage
         }
+    }
+    
+    private func isValidUsername(candidate: String) -> Bool {
+        let usernameRegex = "[A-Z0-9a-z_]{2,15}"
+        return NSPredicate(format: "SELF MATCHES %@", usernameRegex).evaluateWithObject(candidate)
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -70,11 +90,6 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         }
         
         return true
-    }
-    
-    private func isValidUsername(candidate: String) -> Bool {
-        let usernameRegex = "[A-Z0-9a-z_]{2,15}"
-        return NSPredicate(format: "SELF MATCHES %@", usernameRegex).evaluateWithObject(candidate)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

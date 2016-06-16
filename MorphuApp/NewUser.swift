@@ -22,9 +22,13 @@ class NewUser {
     var FacebookSignUp = false
     
     func toAnyObject()-> NSDictionary {
-        return ["email": self.email!,
-                "username": self.username!,
-                "fullName": self.fullName!,
-                "phoneNumber": self.phoneNumber!]
+        let object: NSMutableDictionary = ["email": self.email!,
+                                           "username": self.username!, "fullName": self.fullName!]
+        
+        if let phoneNumber = self.phoneNumber {
+            object["phoneNumber"] = phoneNumber
+        }
+        
+        return  object
     }
 }

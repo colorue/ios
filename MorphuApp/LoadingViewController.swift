@@ -14,6 +14,7 @@ class LoadingViewController: UIViewController {
     let prefs = NSUserDefaults.standardUserDefaults()
     
     override func viewDidAppear(animated: Bool) {
+//        API.sharedInstance.logout()
         API.sharedInstance.checkLoggedIn(loginCallback)
     }
     

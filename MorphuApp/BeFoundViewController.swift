@@ -67,18 +67,20 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         
         let stringArray = phoneNumberInput.text!.componentsSeparatedByCharactersInSet(
             NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        let newString = "+1" + stringArray.joinWithSeparator("")
+        let phone = "+1" + stringArray.joinWithSeparator("")
         
-        print(newString)
         self.verificatoinButton.hidden = true
         self.callingIndicatoy.startAnimating()
-        api.callVerification(newString, callback: { valid in
+        self.phoneNumberInput.enabled = false
+
+        api.callVerification(phone, callback: { valid in
             self.callingIndicatoy.stopAnimating()
             if valid {
-                self.phoneNumberInput.enabled = false
                 self.verifiedIndicator.hidden = false
+                self.newUser.phoneNumber = phone
             } else {
                 self.verificatoinButton.hidden = false
+                self.phoneNumberInput.enabled = true
             }
         })
     }
@@ -90,7 +92,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         activityIndicator.startAnimating()
 
         self.newUser.fullName = nameInput.text
-        self.newUser.phoneNumber = phoneNumberInput.text
+        
         if newUser.FacebookSignUp {
             api.addNewUserToDatabase(newUser)
             self.performSegueWithIdentifier("login", sender: self)
@@ -123,7 +125,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         {
             let newString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
             
-            self.verificatoinButton.enabled = newString.characters.count > 12
+            self.verificatoinButton.enabled = newString.characters.count > 13
 
             let components = newString.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
             
@@ -149,7 +151,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
             if (length - index) > 3
             {
                 let areaCode = decimalString.substringWithRange(NSMakeRange(index, 3))
-                formattedString.appendFormat("(%@)", areaCode)
+                formattedString.appendFormat("(%@) ", areaCode)
                 index += 3
             }
             if length - index > 3

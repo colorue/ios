@@ -171,10 +171,8 @@ class API {
         }
     }
     
+    
     // MARK: External Methods
-    
-
-    
     
     func getFBFriends() {
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
@@ -212,10 +210,7 @@ class API {
             }
         }
     }
-    
-
-
-    
+ 
     func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
@@ -473,6 +468,10 @@ class API {
                 self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
                 self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
                 
+                if let phoneNumber = newUser.phoneNumber {
+                    self.myRootRef.child("phoneNumbers/\(phoneNumber)").setValue(newUser.userId!)
+                }
+                
                 callback(true)
             } else {
                 callback(false)
@@ -484,6 +483,10 @@ class API {
         self.loadData(newUser.userRer!)
         self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
         self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
+        
+        if let phoneNumber = newUser.phoneNumber {
+            self.myRootRef.child("phoneNumbers/\(phoneNumber)").setValue(newUser.userId!)
+        }
     }
     
     func emailLogin(email: String, password: String, callback: (Bool)-> ()) {
@@ -528,6 +531,10 @@ class API {
                             self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
                                 if (snapshot.exists()) {
                                     self.loadData(user)
+                                    self.getUser(user.uid, callback: { active in
+                                        self.activeUser = active
+                                    })
+                                    
                                     callback(.LoggedIn)
                                 } else {
                                     self.newUser.userId = user.uid
@@ -558,7 +565,9 @@ class API {
     func checkLoggedIn(callback: (Bool)-> ()) {
         if let user = FIRAuth.auth()?.currentUser {
             
-            
+            self.getUser(user.uid, callback: { active in
+                self.activeUser = active
+            })
             self.loadData(user)
             self.getFBFriends()
 
@@ -599,14 +608,25 @@ class API {
         }
     }
     
+    var usernameHold: String?
+    
     func checkUsernameAvaliability(username: String, callback: (Bool) -> ()) {
         self.myRootRef.child("usernames/\(username)").observeSingleEventOfType(.Value, withBlock: {snapshot in
             if (snapshot.exists()) {
                 callback(false)
             } else {
+                self.usernameHold = username
+                self.myRootRef.child("usernames/\(username)").setValue("hold")
                 callback(true)
             }
         })
+    }
+    
+    func releaseUsernameHold() {
+        if let username = self.usernameHold {
+            self.myRootRef.child("usernames/\(username)").removeValue()
+            self.usernameHold = nil
+        }
     }
     
     func callVerification(phoneNumber: String, callback: (Bool) -> ()) {
