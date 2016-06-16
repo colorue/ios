@@ -2586,7 +2586,7 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FE32777A-8DDC-4C6D-B104-15CA52DF12D7" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="81458CA7-8E02-4D4D-A399-FB988D8718FE" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
                                 <rect key="frame" x="134" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8SI-aw-Heq" secondAttribute="height" multiplier="1:1" id="6pE-HJ-hs6"/>
@@ -2780,7 +2780,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-WH-f5G">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-WH-f5G">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VoH-DI-u07">
@@ -2851,7 +2851,6 @@
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="ksb-WH-f5G"/>
                                 <exclude reference="VoH-DI-u07"/>
                                 <exclude reference="Icw-Mc-auX"/>
                                 <exclude reference="lyu-3I-bC2"/>
@@ -2876,7 +2875,6 @@
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
                             <mask key="subviews">
-                                <include reference="ksb-WH-f5G"/>
                                 <include reference="VoH-DI-u07"/>
                                 <include reference="Icw-Mc-auX"/>
                                 <include reference="lyu-3I-bC2"/>
@@ -2911,6 +2909,7 @@
                     <connections>
                         <outlet property="activityIndicator" destination="lyu-3I-bC2" id="3dC-83-bbP"/>
                         <outlet property="doneButton" destination="bqB-CU-GDq" id="f6m-XL-fLp"/>
+                        <outlet property="drawing" destination="ksb-WH-f5G" id="eer-fg-OCR"/>
                         <outlet property="emailInput" destination="VoH-DI-u07" id="dsn-Qo-2Aw"/>
                         <outlet property="forgotPasswordButton" destination="Tb7-Vt-ZMh" id="qSr-2F-gm0"/>
                         <outlet property="passwordInput" destination="Icw-Mc-auX" id="Z2O-Tp-tWC"/>
@@ -3303,7 +3302,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="FE32777A-8DDC-4C6D-B104-15CA52DF12D7" width="30" height="30">
+        <image name="81458CA7-8E02-4D4D-A399-FB988D8718FE" width="30" height="30">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -3432,9 +3431,9 @@ GFIYVRhaAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAGFw
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LPo-iS-QTV"/>
-        <segue reference="iNE-CT-9eW"/>
-        <segue reference="pnl-W5-kJW"/>
+        <segue reference="0OX-Ax-R2N"/>
         <segue reference="TVe-4o-ZdK"/>
+        <segue reference="pnl-W5-kJW"/>
         <segue reference="vFq-zO-4EH"/>
         <segue reference="zBz-Gp-Xuu"/>
     </inferredMetricsTieBreakers>

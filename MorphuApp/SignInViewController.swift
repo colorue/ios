@@ -12,6 +12,8 @@ import UIKit
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
     
+    @IBOutlet weak var drawing: UIImageView!
+    
     @IBOutlet weak var emailInput: UITextField!
     @IBOutlet weak var passwordInput: UITextField!
     
@@ -21,6 +23,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     let prefs = NSUserDefaults.standardUserDefaults()
+    
+    var emailFirstResponder = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +42,32 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
             doneButton.enabled = true
             forgotPasswordButton.enabled = true
         }
+        
         if let password = prefs.stringForKey("password") {
             passwordInput.text = password
+        }
+        
+        
+        let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
+        drawingLook.minimumPressDuration = 0.2
+        drawing.addGestureRecognizer(drawingLook)
+    }
+    
+    func drawingTap(sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .Began {
+            if emailInput.isFirstResponder() {
+                emailFirstResponder = true
+                emailInput.resignFirstResponder()
+            } else {
+                emailFirstResponder = false
+                passwordInput.resignFirstResponder()
+            }
+        } else if sender.state ==  .Ended {
+            if emailFirstResponder {
+                emailInput.becomeFirstResponder()
+            } else {
+                passwordInput.becomeFirstResponder()
+            }
         }
     }
     
