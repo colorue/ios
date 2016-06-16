@@ -46,7 +46,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
-        
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
     }
@@ -83,8 +82,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         } else if nextButton.enabled {
             textField.resignFirstResponder()
             UIApplication.sharedApplication().sendAction(nextButton.action, to: nextButton.target, from: nil, forEvent: nil)
-        } else {
-            textField.resignFirstResponder()
         }
         return true
     }

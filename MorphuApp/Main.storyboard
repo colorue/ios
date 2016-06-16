@@ -2586,7 +2586,7 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="C8A0D2D6-E13C-428F-8320-3E7766A734C7" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="FE32777A-8DDC-4C6D-B104-15CA52DF12D7" translatesAutoresizingMaskIntoConstraints="NO" id="8SI-aw-Heq">
                                 <rect key="frame" x="134" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8SI-aw-Heq" secondAttribute="height" multiplier="1:1" id="6pE-HJ-hs6"/>
@@ -3303,7 +3303,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="C8A0D2D6-E13C-428F-8320-3E7766A734C7" width="30" height="30">
+        <image name="FE32777A-8DDC-4C6D-B104-15CA52DF12D7" width="30" height="30">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

@@ -37,6 +37,18 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         
         usernameInput.text = newUser.username
         checkAvailabilityButton.enabled = false
+    
+        let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
+        drawingLook.minimumPressDuration = 0.2
+        drawing.addGestureRecognizer(drawingLook)
+    }
+    
+    func drawingTap(sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .Began {
+            usernameInput.resignFirstResponder()
+        } else if sender.state ==  .Ended {
+            usernameInput.becomeFirstResponder()
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -85,8 +97,6 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         if nextButton.enabled {
             usernameInput.resignFirstResponder()
             UIApplication.sharedApplication().sendAction(nextButton.action, to: nextButton.target, from: nil, forEvent: nil)
-        } else {
-            usernameInput.resignFirstResponder()
         }
         
         return true

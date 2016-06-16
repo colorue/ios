@@ -33,7 +33,8 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var callingIndicatoy: UIActivityIndicatorView!
     
-    
+    var nameFirstResponder = true
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +45,29 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         nameInput.delegate = self
         phoneNumberInput.delegate = self
         verificatoinButton.enabled = false
+        
+        
+        let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
+        drawingLook.minimumPressDuration = 0.2
+        drawing.addGestureRecognizer(drawingLook)
+    }
+    
+    func drawingTap(sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .Began {
+            if nameInput.isFirstResponder() {
+                nameFirstResponder = true
+                nameInput.resignFirstResponder()
+            } else {
+                nameFirstResponder = false
+                phoneNumberInput.resignFirstResponder()
+            }
+        } else if sender.state ==  .Ended {
+            if nameFirstResponder {
+                nameInput.becomeFirstResponder()
+            } else {
+                phoneNumberInput.becomeFirstResponder()
+            }
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
