@@ -16,8 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     var window: UIWindow?
     
-
-    
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -32,70 +30,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         application.registerUserNotificationSettings(settings)
         application.registerForRemoteNotifications()
         
-        connectToFcm()
+//        connectToFcm()
         FIRApp.configure()
+        FIRDatabase.database().persistenceEnabled = true
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func applicationDidBecomeActive(application: UIApplication) {
         FBSDKAppEvents.activateApp()
-        connectToFcm()
+//        connectToFcm()
     }
     
     func application(application: UIApplication, openURL url: NSURL,
                      sourceApplication: String?, annotation: AnyObject) -> Bool {
         return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-
-    func applicationDidEnterBackground(application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        
-        FIRMessaging.messaging().disconnect()
-    }
-    
-    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
-                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        // If you are receiving a notification message while your app is in the background,
-        // this callback will not be fired till the user taps on the notification launching the application.
-        // TODO: Handle data of notification
-        
-        // Print message ID.
-        print("Message ID: \(userInfo["gcm.message_id"]!)")
-        
-        // Print full message.
-        print("%@", userInfo)
-    }
     
     func applicationWillResignActive(application: UIApplication) {
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        
-        print("applicationWillResignActive")
+        // Saves active drawing
         notificationCenter.postNotificationName(UIApplicationWillResignActiveNotification, object: nil)
     }
     
-    func tokenRefreshNotificaiton(notification: NSNotification) {
-        let refreshedToken = FIRInstanceID.instanceID().token()!
-        print("InstanceID token: \(refreshedToken)")
-        
-        // Connect to FCM since connection may have failed when attempted before having a token.
-        connectToFcm()
-    }
-    
-    func connectToFcm() {
-        FIRMessaging.messaging().connectWithCompletion { (error) in
-            if (error != nil) {
-                print("Unable to connect with FCM. \(error)")
-            } else {
-                print("Connected to FCM.")
-            }
-        }
-    }
-    
+    // MARK: TabBarControllerDelegate Methods
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         let api = API.sharedInstance
-
+        
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
         
@@ -109,7 +70,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             let nav = profileView.navigationController as! NavigationController
             nav.setColors(purpleColor)
             tabBarController.tabBar.tintColor = purpleColor
-
+            
             if profileView.userInstance == nil {
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
@@ -131,5 +92,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         return true
     }
+
+//    func applicationDidEnterBackground(application: UIApplication) {
+//        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+//        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+//        
+//        FIRMessaging.messaging().disconnect()
+//    }
+    
+//    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject],
+//                     fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+//        // If you are receiving a notification message while your app is in the background,
+//        // this callback will not be fired till the user taps on the notification launching the application.
+//        // TODO: Handle data of notification
+//        
+//        // Print message ID.
+//        print("Message ID: \(userInfo["gcm.message_id"]!)")
+//        
+//        // Print full message.
+//        print("%@", userInfo)
+//    }
+    
+    
+//    func tokenRefreshNotificaiton(notification: NSNotification) {
+//        let refreshedToken = FIRInstanceID.instanceID().token()!
+//        print("InstanceID token: \(refreshedToken)")
+//        
+//        // Connect to FCM since connection may have failed when attempted before having a token.
+//        connectToFcm()
+//    }
+    
+//    func connectToFcm() {
+//        FIRMessaging.messaging().connectWithCompletion { (error) in
+//            if (error != nil) {
+//                print("Unable to connect with FCM. \(error)")
+//            } else {
+//                print("Connected to FCM.")
+//            }
+//        }
+//    }
+    
+
 
 }

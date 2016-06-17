@@ -7,11 +7,34 @@
 //
 
 import UIKit
-//import FBSDKLoginKit
+import FBSDKLoginKit
 
 class OnboardingViewController: UIViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var facebookButton: UIButton!
+    @IBOutlet weak var signUpButton: UIButton!
+    @IBOutlet weak var logginButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let fb = FBSDKLoginButton()
+        
+        fb.center = view.center
+//        view.addSubview(fb)
+        
+        facebookButton.layer.cornerRadius = 3
+        
+        signUpButton.layer.cornerRadius = 4
+        signUpButton.layer.borderWidth = 1
+        signUpButton.layer.borderColor = blackColor.CGColor
+        
+        logginButton.layer.cornerRadius = 5
+        logginButton.layer.borderWidth = 1
+        logginButton.layer.borderColor = blackColor.CGColor
+    }
 
     
     @IBAction func facebookButton(sender: AnyObject) {

@@ -197,18 +197,20 @@ class API {
     }
     
     func getActiveFBID(callback: (String) -> ()) {
-        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
-        
-        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-            result:AnyObject!, error:NSError!) -> Void in
-            
-            if let error = error {
-                print(error.description)
-            } else {
-                let resultdict = result as! NSDictionary
-                callback(resultdict.objectForKey("id") as! String)
-            }
-        }
+//        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
+//        
+//
+//        print("gettiveFBID")
+//        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+//            result:AnyObject!, error:NSError!) -> Void in
+//            
+//            if let error = error {
+//                print(error.description)
+//            } else {
+//                let resultdict = result as! NSDictionary
+//                callback(resultdict.objectForKey("id") as! String)
+//            }
+//        }
     }
  
     func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
@@ -528,12 +530,14 @@ class API {
                     } else {
                         if let user = user {
                             
+                            // Set active user
+                            self.getUser(user.uid, callback: { active in
+                                self.activeUser = active
+                            })
+                            
                             self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
                                 if (snapshot.exists()) {
                                     self.loadData(user)
-                                    self.getUser(user.uid, callback: { active in
-                                        self.activeUser = active
-                                    })
                                     
                                     callback(.LoggedIn)
                                 } else {

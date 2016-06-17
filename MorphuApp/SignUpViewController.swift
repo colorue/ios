@@ -10,8 +10,8 @@ import UIKit
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
-    let validImage = UIImage(named: "Liked")
-    let invalidImage = UIImage(named: "Like")
+    let validImage = UIImage(named: "Check")
+    let invalidImage = UIImage(named: "X")
     
     let newUser = API.sharedInstance.newUser
     
@@ -34,6 +34,12 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let color = redColor
+        self.navigationController!.navigationBar.tintColor = color
+        nextButton.tintColor = color
+        emailInput.tintColor = color
+        passwordInput.tintColor = color
+        
         emailValidIndicator.image = invalidImage
         passwordValidIndicator.image = invalidImage
         nextButton.enabled = false
@@ -44,6 +50,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         emailInput.addTarget(self, action: #selector(SignUpViewController.emailDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         passwordInput.addTarget(self, action: #selector(SignUpViewController.passwordDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
+        emailInput.text = newUser.email
+        passwordInput.text = newUser.password
+        
+        self.emailDidChange(emailInput)
+        self.passwordDidChange(passwordInput)
         
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
@@ -70,7 +81,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        self.navigationController!.navigationBar.tintColor = redColor
         emailInput.becomeFirstResponder()
     }
 
@@ -87,6 +98,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func emailDidChange(sender: UITextField) {
+        self.newUser.email = sender.text
         if isValidEmail(sender.text!) {
             emailValidIndicator.image = validImage
             emailValid = true
@@ -101,6 +113,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc private func passwordDidChange(sender: UITextField) {
+        self.newUser.password = sender.text
         if isValidPassword(sender.text) {
             passwordValidIndicator.image = validImage
             passwordValid = true
@@ -125,11 +138,5 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         } else {
             return false
         }
-    }
-
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.newUser.email = emailInput.text
-        self.newUser.password = passwordInput.text
     }
 }

@@ -11,8 +11,8 @@ import UIKit
 
 class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     
-    let validImage = UIImage(named: "Liked")
-    let invalidImage = UIImage(named: "Like")
+    let validImage = UIImage(named: "Check")
+    let invalidImage = UIImage(named: "X")
     
     let newUser = API.sharedInstance.newUser
     
@@ -27,6 +27,12 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let color = blueColor
+        self.navigationController!.navigationBar.tintColor = color
+        nextButton.tintColor = color
+        usernameInput.tintColor = color
+        checkAvailabilityButton.tintColor = color
+        
         self.navigationController?.navigationBarHidden = false
         
         usernameValidIndicator.image = invalidImage
@@ -36,11 +42,22 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         usernameInput.addTarget(self, action: #selector(ChooseUsernameViewController.usernameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         
         usernameInput.text = newUser.username
+        self.usernameDidChange(usernameInput)
+        self.checkAvailability(checkAvailabilityButton)
+        
         checkAvailabilityButton.enabled = false
     
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.navigationBarHidden = false
+        self.navigationController!.navigationBar.tintColor = blueColor
+        
+        usernameInput.becomeFirstResponder()
     }
     
     func drawingTap(sender: UILongPressGestureRecognizer) {
@@ -51,18 +68,13 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        self.navigationController?.navigationBarHidden = false
-
-        usernameInput.becomeFirstResponder()
-    }
-    
     @objc private func usernameDidChange(sender: UITextField) {
         nextButton.enabled = false
         checkAvailabilityButton.hidden = false
         usernameValidIndicator.hidden = true
         
+        self.newUser.username = sender.text
+
         api.releaseUsernameHold()
 
         if isValidUsername(sender.text!) {
@@ -97,17 +109,10 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         if nextButton.enabled {
             usernameInput.resignFirstResponder()
             UIApplication.sharedApplication().sendAction(nextButton.action, to: nextButton.target, from: nil, forEvent: nil)
+        } else {
+            self.checkAvailability(checkAvailabilityButton)
         }
         
         return true
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        self.newUser.username = usernameInput.text
-        
-//        if let onboarding = segue.destinationViewController as? OnboardingViewController {
-//            print("hide bar")
-//            onboarding.navigationController?.navigationBarHidden = true
-//        }
     }
 }

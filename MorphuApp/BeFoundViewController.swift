@@ -14,8 +14,8 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     let api = API.sharedInstance
     let prefs = NSUserDefaults.standardUserDefaults()
 
-    let validImage = UIImage(named: "Liked")
-    let invalidImage = UIImage(named: "Like")
+    let validImage = UIImage(named: "Check")
+    let invalidImage = UIImage(named: "X")
     
     let newUser = API.sharedInstance.newUser
     
@@ -28,28 +28,49 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var drawing: UIImageView!
     
     @IBOutlet weak var verificatoinButton: UIButton!
-    
     @IBOutlet weak var verifiedIndicator: UIImageView!
-    
     @IBOutlet weak var callingIndicatoy: UIActivityIndicatorView!
     
     var nameFirstResponder = true
 
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let color = purpleColor
+        self.navigationController!.navigationBar.tintColor = color
+        joinButton.tintColor = color
+        nameInput.tintColor = color
+        phoneNumberInput.tintColor = color
+        verificatoinButton.tintColor = color
+        
         nameInput.text = newUser.fullName
-        phoneNumberInput.text = newUser.phoneNumber
+        
+        if let phone = newUser.phoneNumber {
+            phoneNumberInput.text = phone
+            self.verificatoinButton.hidden = true
+            self.verifiedIndicator.hidden = false
+            self.phoneNumberInput.enabled = false
+        }
         
         nameInput.delegate = self
+        nameInput.addTarget(self, action: #selector(BeFoundViewController.nameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        
         phoneNumberInput.delegate = self
         verificatoinButton.enabled = false
-        
         
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController!.navigationBar.tintColor = purpleColor
+        nameInput.becomeFirstResponder()
+    }
+    
+    @objc private func nameDidChange(sender: UITextField) {
+        self.newUser.fullName = sender.text
     }
     
     func drawingTap(sender: UILongPressGestureRecognizer) {
@@ -70,18 +91,15 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        nameInput.becomeFirstResponder()
-    }
-    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if phoneNumberInput.isFirstResponder() && joinButton.enabled{
-            phoneNumberInput.resignFirstResponder()
-            nameInput.resignFirstResponder()
-        UIApplication.sharedApplication().sendAction(joinButton.action, to: joinButton.target, from: nil, forEvent: nil)
-        } else if nameInput.isFirstResponder() {
-            phoneNumberInput.becomeFirstResponder()
+        if nameInput.isFirstResponder() {
+            if phoneNumberInput.enabled {
+                phoneNumberInput.becomeFirstResponder()
+            } else {
+                nameInput.resignFirstResponder()
+            }
+        } else if verificatoinButton.enabled {
+            self.answerVerificationCall(verificatoinButton)
         }
         
         return true
