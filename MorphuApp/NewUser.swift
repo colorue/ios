@@ -17,7 +17,7 @@ class NewUser {
     var fullName: String?
     var phoneNumber: String?
     var FacebookID: String?
-    var userRer: FIRUser?
+    var userRef: FIRUser?
     
     var FacebookSignUp = false
     
@@ -27,6 +27,10 @@ class NewUser {
         
         if let phoneNumber = self.phoneNumber {
             object["phoneNumber"] = phoneNumber
+        }
+        
+        if let FacebookID = self.FacebookID {
+            object["FacebookID"] = FacebookID
         }
         
         return  object

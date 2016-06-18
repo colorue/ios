@@ -138,13 +138,14 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         
         if newUser.FacebookSignUp {
             api.addNewUserToDatabase(newUser)
+            API.sharedInstance.loadData(newUser.userRef!)
             self.performSegueWithIdentifier("login", sender: self)
         } else {
-            api.createEmailAccount(newUser, callback: createAccountCallback)
+            api.createEmailAccount(newUser, callback: createEmailAccountCallback)
         }
     }
     
-    func createAccountCallback(valid: Bool) {
+    private func createEmailAccountCallback(valid: Bool) {
         api.emailLogin(newUser.email!, password: newUser.password!, callback: loginCallback)
     }
     

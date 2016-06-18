@@ -195,7 +195,6 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				8763D3251CEE256200E3D528 /* Loading */,
 				87C32C551D00A10D003817D8 /* Main */,
 				87CC7D411D00A2C20056DF73 /* Drawing */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
@@ -306,6 +305,7 @@
 		8763D3241CEE255A00E3D528 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
 				8763D2CA1CEE226700E3D528 /* WelcomeViewController.swift */,
 				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
 				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
@@ -313,14 +313,6 @@
 				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
 			);
 			name = Onboarding;
-			sourceTree = "<group>";
-		};
-		8763D3251CEE256200E3D528 /* Loading */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
-			);
-			name = Loading;
 			sourceTree = "<group>";
 		};
 		87C32C551D00A10D003817D8 /* Main */ = {

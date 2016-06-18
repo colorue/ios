@@ -118,9 +118,6 @@ class API {
                         }
                     }
                 }
-                
-//                self.getFullUser(newUser)
-                
                 self.userDict[userId] = newUser
                 callback(newUser)
             })
@@ -171,8 +168,6 @@ class API {
     }
     
     
-    // MARK: External Methods
-    
     func getFBFriends() {
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
         
@@ -194,24 +189,10 @@ class API {
                 }
             }
     }
-    
-    func getActiveFBID(callback: (String) -> ()) {
-//        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
-//        
-//
-//        print("gettiveFBID")
-//        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-//            result:AnyObject!, error:NSError!) -> Void in
-//            
-//            if let error = error {
-//                print(error.description)
-//            } else {
-//                let resultdict = result as! NSDictionary
-//                callback(resultdict.objectForKey("id") as! String)
-//            }
-//        }
-    }
  
+    
+    // MARK: User Action Methods
+    
     func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
@@ -293,7 +274,9 @@ class API {
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").removeValue()
     }
     
+    
     // MARK: Get Methods
+    
     func getActiveUser() -> User {
         return self.activeUser!
     }
@@ -321,7 +304,20 @@ class API {
             self.delagate?.refresh()
         })
     }
+    
+    func clearData() {
+        self.facebookFriends.removeAll()
+        self.users.removeAll()
+        self.wall.removeAll()
+        self.drawingDict.removeAll()
+        self.userDict.removeAll()
+        self.imageDict.removeAll()
+        self.activeUser = nil
+        self.oldestTimeLoaded = -99999999999999
+        self.newestTimeLoaded = 0
+    }
 
+    // Used both for initial load and to add older drawings
     func loadWall() {
         myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -403,6 +399,30 @@ class API {
         self.delagate?.refresh()
     }
     
+    // MARK: Image Upload + Download Methods
+    
+    func uploadImage(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
+        
+        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").putData(UIImagePNGRepresentation(drawing.getImage())!)
+        
+        uploadTask.observeStatus(.Progress) { snapshot in
+            // Upload reported progress
+            if let progress = snapshot.progress {
+                let percentComplete = Float(100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
+                progressCallback(percentComplete)
+            }
+        }
+        
+        uploadTask.observeStatus(.Success) { snapshot in
+            progressCallback(1.0)
+            finishedCallback(true)
+        }
+        
+        uploadTask.observeStatus(.Failure) { snapshot in
+            finishedCallback(false)
+        }
+    }
+    
     func downloadImage(imageId: String, progressCallback: (Float) -> (), finishedCallback: (UIImage) -> ()) {
         if let image = imageDict[imageId] {
             finishedCallback(image)
@@ -433,49 +453,6 @@ class API {
             }
         }
     }
-    
-    
-    func uploadImage(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
-
-        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").putData(UIImagePNGRepresentation(drawing.getImage())!)
-    
-        uploadTask.observeStatus(.Progress) { snapshot in
-            // Upload reported progress
-            if let progress = snapshot.progress {
-                let percentComplete = Float(100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
-                progressCallback(percentComplete)
-            }
-        }
-        
-        uploadTask.observeStatus(.Success) { snapshot in
-            progressCallback(1.0)
-            finishedCallback(true)
-        }
-    
-        uploadTask.observeStatus(.Failure) { snapshot in
-            finishedCallback(false)
-        }
-    }
-    
-    func clearData() {
-        self.facebookFriends.removeAll()
-        self.users.removeAll()
-        self.wall.removeAll()
-        self.drawingDict.removeAll()
-        self.userDict.removeAll()
-        self.imageDict.removeAll()
-        self.activeUser = nil
-        self.oldestTimeLoaded = -99999999999999
-        self.newestTimeLoaded = 0
-    }
-    
-    
-
-    
-    //            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
-
-
-
     
     /*
     
