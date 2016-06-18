@@ -73,7 +73,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         checkAvailabilityButton.hidden = false
         usernameValidIndicator.hidden = true
         
-        self.newUser.username = sender.text
+//        self.newUser.username = sender.text
 
         api.releaseUsernameHold()
 

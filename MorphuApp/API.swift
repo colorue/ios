@@ -167,30 +167,6 @@ class API {
         }
     }
     
-    
-    func getFBFriends() {
-        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
-        
-        // Get request Of Friends
-        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-            result:AnyObject!, error:NSError!) -> Void in
-                
-                if let error = error {
-                    print(error.description)
-                    return
-                } else {
-                    let resultdict = result as! NSDictionary
-                    let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                    for i in 0 ..< data.count {
-                        let valueDict : NSDictionary = data[i] as! NSDictionary
-                        let id = valueDict.objectForKey("id") as! String
-                        self.loadUserByFBID(id)
-                    }
-                }
-            }
-    }
- 
-    
     // MARK: User Action Methods
     
     func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
@@ -301,6 +277,7 @@ class API {
             self.getFullUser(activeUser, delagate: nil)
             self.loadWall()
             self.loadUsers(user)
+            self.loadFacebookFriends()
             self.delagate?.refresh()
         })
     }
@@ -362,16 +339,6 @@ class API {
             })
         }
     
-    private func loadUserByFBID(FBID: String) {
-        myRootRef.child("users").queryOrderedByChild("fbId").queryEqualToValue(FBID)
-            .observeSingleEventOfType(.ChildAdded, withBlock: { snapshot in
-                self.getUser(snapshot.key, callback: { (user: User) -> () in
-                    self.facebookFriends.append(user)
-                    self.delagate?.refresh()
-                })
-            })
-    }
-    
     private func loadUsers(currentUser: FIRUser) {
         myRootRef.child("users").queryOrderedByKey()
             .observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -397,6 +364,36 @@ class API {
             })
         
         self.delagate?.refresh()
+    }
+    
+    private func loadFacebookFriends() {
+        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
+        
+        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+            result:AnyObject!, error:NSError!) -> Void in
+            
+            if let error = error {
+                print(error.description)
+                return
+            } else {
+                let resultdict = result as! NSDictionary
+                let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                for i in 0 ..< data.count {
+                    let valueDict : NSDictionary = data[i] as! NSDictionary
+                    let id = valueDict.objectForKey("id") as! String
+                    self.loadUserByFBID(id)
+                }
+            }
+        }
+    }
+    
+    private func loadUserByFBID(FBID: String) {
+        myRootRef.child("userLookup/FacebookIDs/FBID").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            self.getUser(snapshot.key, callback: { (user: User) -> () in
+                self.facebookFriends.append(user)
+                self.delagate?.refresh()
+            })
+        })
     }
     
     // MARK: Image Upload + Download Methods
