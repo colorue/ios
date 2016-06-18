@@ -14,9 +14,9 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     let validImage = UIImage(named: "Check")
     let invalidImage = UIImage(named: "X")
     
-    let newUser = API.sharedInstance.newUser
+    let newUser = AuthAPI.sharedInstance.newUser
     
-    let api = API.sharedInstance
+    let api = AuthAPI.sharedInstance
     
     @IBOutlet weak var usernameInput: UITextField!
     @IBOutlet weak var usernameValidIndicator: UIImageView!

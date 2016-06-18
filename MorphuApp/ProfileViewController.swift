@@ -124,7 +124,8 @@ class ProfileViewController: WallViewController {
     }
     
     func logout(sender: UIBarButtonItem) {
-        api.logout()
+        api.clearData()
+        AuthAPI.sharedInstance.logout()
         self.performSegueWithIdentifier("logout", sender: self)
     }
 }

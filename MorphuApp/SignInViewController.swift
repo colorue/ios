@@ -8,6 +8,7 @@
 
 
 import UIKit
+import Firebase
 
 class SignInViewController: UIViewController, UITextFieldDelegate {
     
@@ -109,12 +110,13 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func doneAction(sender: UIBarButtonItem) {
         activityIndicator.startAnimating()
-        API.sharedInstance.emailLogin(emailInput.text!, password: passwordInput.text!, callback: logginCallback)
+        AuthAPI.sharedInstance.emailLogin(emailInput.text!, password: passwordInput.text!, callback: logginCallback)
     }
     
-    func logginCallback(valid: Bool) {
+    func logginCallback(user: FIRUser?) {
         activityIndicator.stopAnimating()
-        if valid {
+        if let user = user {
+            API.sharedInstance.loadData(user)
             prefs.setValue(emailInput.text, forKey: "email")
             prefs.setValue(passwordInput.text, forKey: "password")
             self.performSegueWithIdentifier("signIn", sender: self)
@@ -124,7 +126,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     @IBAction func forgotPassword(sender: UIButton) {
         let forgotPasswordEmail = UIAlertController(title: "Forgot Password", message: "Send password reset email to '\(emailInput.text!)'?" , preferredStyle: UIAlertControllerStyle.Alert)
         forgotPasswordEmail.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
-            API.sharedInstance.resetPasswordEmail(self.emailInput.text!, callback: self.passwordResetCallback)
+            AuthAPI.sharedInstance.resetPasswordEmail(self.emailInput.text!, callback: self.passwordResetCallback)
             }))
         forgotPasswordEmail.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
         self.presentViewController(forgotPasswordEmail, animated: true, completion: nil)

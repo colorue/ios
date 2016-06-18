@@ -2350,7 +2350,7 @@
         <!--Colorue-->
         <scene sceneID="9gL-pa-3yB">
             <objects>
-                <viewController id="frb-J4-RJY" customClass="OnboardingViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="frb-J4-RJY" customClass="WelcomeViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Lp9-Z2-Bvn"/>
                         <viewControllerLayoutGuide type="bottom" id="e1S-e0-1i8"/>
@@ -2359,18 +2359,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-NN-Ssk">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding4" translatesAutoresizingMaskIntoConstraints="NO" id="7Wq-NN-Ssk">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="w8K-6h-9HI">
                                 <rect key="frame" x="282" y="533" width="37" height="37"/>
                                 <color key="color" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kav-vd-r85">
-                                <rect key="frame" x="-10" y="655" width="410" height="126"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="kav-vd-r85">
+                                <rect key="frame" x="-10" y="655" width="174" height="68"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ney-UL-Ygc">
-                                        <rect key="frame" x="30" y="20" width="360" height="40"/>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ney-UL-Ygc">
+                                        <rect key="frame" x="0.0" y="0.0" width="174" height="30"/>
                                         <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="220" id="oMB-Mg-iYo">
@@ -2398,11 +2398,11 @@
                                             <action selector="facebookButton:" destination="frb-J4-RJY" eventType="touchUpInside" id="LfP-Ot-sKH"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="20a-6w-HNi">
-                                        <rect key="frame" x="20" y="73" width="96" height="33"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="20a-6w-HNi">
+                                        <rect key="frame" x="29" y="38" width="116" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ue-oA-Dow">
-                                                <rect key="frame" x="20" y="20" width="170" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Ue-oA-Dow">
+                                                <rect key="frame" x="0.0" y="0.0" width="54" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                                                 <state key="normal" title="Sign Up">
@@ -2415,8 +2415,8 @@
                                                     <segue destination="ls1-wt-iiM" kind="show" id="UQP-pZ-VeE"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTC-sb-fdu">
-                                                <rect key="frame" x="223" y="20" width="167" height="40"/>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oTC-sb-fdu">
+                                                <rect key="frame" x="62" y="0.0" width="54" height="30"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
                                                 <state key="normal" title="Log in">
@@ -2442,7 +2442,8 @@
                                         <exclude reference="Vf2-ZR-sFx"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="722" width="360" height="74"/>
                                     <mask key="constraints">
                                         <include reference="TAh-3P-Kae"/>
                                         <include reference="Vf2-ZR-sFx"/>
@@ -2478,6 +2479,9 @@
                                 <exclude reference="7Wq-NN-Ssk"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="MNH-hY-yB4"/>
+                                <exclude reference="Q6F-oZ-v09"/>
+                                <exclude reference="YQa-Og-EGf"/>
                                 <exclude reference="Csn-KG-Kfa"/>
                                 <exclude reference="QVN-6q-X6w"/>
                                 <exclude reference="Qqs-5B-mrs"/>
@@ -2489,9 +2493,6 @@
                                 <exclude reference="iFY-9g-asU"/>
                                 <exclude reference="gE6-tH-qty"/>
                                 <exclude reference="tBS-LG-DqV"/>
-                                <exclude reference="MNH-hY-yB4"/>
-                                <exclude reference="Q6F-oZ-v09"/>
-                                <exclude reference="YQa-Og-EGf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
@@ -2499,6 +2500,9 @@
                                 <include reference="7Wq-NN-Ssk"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="MNH-hY-yB4"/>
+                                <include reference="Q6F-oZ-v09"/>
+                                <include reference="YQa-Og-EGf"/>
                                 <include reference="Csn-KG-Kfa"/>
                                 <include reference="QVN-6q-X6w"/>
                                 <exclude reference="Qqs-5B-mrs"/>
@@ -2510,9 +2514,6 @@
                                 <include reference="iFY-9g-asU"/>
                                 <include reference="gE6-tH-qty"/>
                                 <include reference="tBS-LG-DqV"/>
-                                <exclude reference="MNH-hY-yB4"/>
-                                <include reference="Q6F-oZ-v09"/>
-                                <include reference="YQa-Og-EGf"/>
                             </mask>
                         </variation>
                     </view>
@@ -2544,7 +2545,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="Ee4-GF-fyK">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Onboarding3" translatesAutoresizingMaskIntoConstraints="NO" id="Ee4-GF-fyK">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Ee4-GF-fyK" secondAttribute="height" multiplier="1:1.3" id="j22-C3-Hbo"/>
@@ -2764,7 +2765,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-WH-f5G">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="ksb-WH-f5G">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VoH-DI-u07">
@@ -2916,7 +2917,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Onboarding3" translatesAutoresizingMaskIntoConstraints="NO" id="dIt-77-XqR">
+                            <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Onboarding1" translatesAutoresizingMaskIntoConstraints="NO" id="dIt-77-XqR">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="dIt-77-XqR" secondAttribute="height" multiplier="1:1.3" id="8PA-0g-69y"/>
@@ -2937,7 +2938,7 @@
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="yes" returnKeyType="next"/>
                             </textField>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="X" translatesAutoresizingMaskIntoConstraints="NO" id="cer-eQ-0Qr">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="X" translatesAutoresizingMaskIntoConstraints="NO" id="cer-eQ-0Qr">
                                 <rect key="frame" x="134" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="cer-eQ-0Qr" secondAttribute="height" multiplier="1:1" id="gea-D8-Qce"/>
@@ -2956,10 +2957,13 @@
                                     </mask>
                                 </variation>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3f-AR-ao2">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n3f-AR-ao2">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                 <state key="normal" title="Check Availability  "/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="301" y="74" width="85" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="answerVerificationCall:" destination="ilx-Yl-Pc5" eventType="touchUpInside" id="TBr-lL-4Zl"/>
                                     <action selector="checkAvailability:" destination="8xy-pE-3Lo" eventType="touchUpInside" id="29Y-WI-ynn"/>
@@ -3001,13 +3005,13 @@
                                 <exclude reference="VHf-O3-tmG"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Ody-Uz-D2o"/>
-                                <exclude reference="PKR-by-KwE"/>
-                                <exclude reference="eaB-qU-RlG"/>
                                 <exclude reference="5m8-Ig-Wip"/>
                                 <exclude reference="FgI-YX-oVy"/>
                                 <exclude reference="XLh-xz-PmN"/>
                                 <exclude reference="xTa-AI-UxK"/>
+                                <exclude reference="Ody-Uz-D2o"/>
+                                <exclude reference="PKR-by-KwE"/>
+                                <exclude reference="eaB-qU-RlG"/>
                                 <exclude reference="9ld-F1-kkX"/>
                                 <exclude reference="Uec-ES-nGl"/>
                                 <exclude reference="qsd-mu-xQn"/>
@@ -3023,13 +3027,13 @@
                                 <include reference="VHf-O3-tmG"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Ody-Uz-D2o"/>
-                                <include reference="PKR-by-KwE"/>
-                                <include reference="eaB-qU-RlG"/>
                                 <include reference="5m8-Ig-Wip"/>
                                 <include reference="FgI-YX-oVy"/>
                                 <include reference="XLh-xz-PmN"/>
                                 <exclude reference="xTa-AI-UxK"/>
+                                <include reference="Ody-Uz-D2o"/>
+                                <include reference="PKR-by-KwE"/>
+                                <include reference="eaB-qU-RlG"/>
                                 <include reference="9ld-F1-kkX"/>
                                 <include reference="Uec-ES-nGl"/>
                                 <include reference="qsd-mu-xQn"/>
@@ -3097,15 +3101,18 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="HqD-n8-7dx">
                                 <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                             </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84B-lZ-KrO">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="84B-lZ-KrO">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                 <state key="normal" title="Call to Verify  "/>
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="324" y="114" width="62" height="30"/>
+                                </variation>
                                 <connections>
                                     <action selector="answerVerificationCall:" destination="ilx-Yl-Pc5" eventType="touchUpInside" id="UBd-sA-G5f"/>
                                 </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check" translatesAutoresizingMaskIntoConstraints="NO" id="wau-Hl-avV">
+                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="Check" translatesAutoresizingMaskIntoConstraints="NO" id="wau-Hl-avV">
                                 <rect key="frame" x="134" y="0.0" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="wau-Hl-avV" secondAttribute="height" multiplier="1:1" id="ZdM-TF-Oga"/>
@@ -3113,21 +3120,21 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="v7w-Kk-rST"/>
                                         <exclude reference="ZdM-TF-Oga"/>
+                                        <exclude reference="v7w-Kk-rST"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <exclude reference="v7w-Kk-rST"/>
                                         <include reference="ZdM-TF-Oga"/>
+                                        <exclude reference="v7w-Kk-rST"/>
                                     </mask>
                                 </variation>
                             </imageView>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mgv-XA-a44">
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="mgv-XA-a44">
                                 <rect key="frame" x="-10" y="-10" width="20" height="20"/>
                             </activityIndicatorView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k2K-PQ-m3G">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Full Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k2K-PQ-m3G">
                                 <rect key="frame" x="0.0" y="0.0" width="129" height="30"/>
                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="yes" returnKeyType="next"/>
@@ -3194,14 +3201,9 @@
                                 <exclude reference="HqD-n8-7dx"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Jdc-aV-Mh7"/>
-                                <exclude reference="Ny3-GA-ol1"/>
-                                <exclude reference="tEu-cU-TDC"/>
-                                <exclude reference="SMh-gi-QYZ"/>
-                                <exclude reference="A1R-9F-0Xb"/>
-                                <exclude reference="MjM-ag-3Rk"/>
-                                <exclude reference="c5a-mu-E41"/>
-                                <exclude reference="s7y-IP-8xz"/>
+                                <exclude reference="Eua-oH-xYp"/>
+                                <exclude reference="PvJ-tX-hji"/>
+                                <exclude reference="cNL-E1-cnq"/>
                                 <exclude reference="1WO-vC-PqF"/>
                                 <exclude reference="1cl-Sc-H0n"/>
                                 <exclude reference="3Tp-Qm-BZo"/>
@@ -3213,14 +3215,19 @@
                                 <exclude reference="oVP-gI-qUK"/>
                                 <exclude reference="xPQ-rH-qse"/>
                                 <exclude reference="zSi-kp-4HN"/>
-                                <exclude reference="Eua-oH-xYp"/>
-                                <exclude reference="PvJ-tX-hji"/>
-                                <exclude reference="cNL-E1-cnq"/>
+                                <exclude reference="Jdc-aV-Mh7"/>
+                                <exclude reference="Ny3-GA-ol1"/>
+                                <exclude reference="tEu-cU-TDC"/>
+                                <exclude reference="A1R-9F-0Xb"/>
+                                <exclude reference="MjM-ag-3Rk"/>
+                                <exclude reference="c5a-mu-E41"/>
+                                <exclude reference="s7y-IP-8xz"/>
+                                <exclude reference="Gk5-Vd-SGt"/>
+                                <exclude reference="s2a-MQ-6BR"/>
                                 <exclude reference="QmD-ki-N32"/>
                                 <exclude reference="YFi-mO-JPZ"/>
                                 <exclude reference="qRq-4Y-fIB"/>
-                                <exclude reference="Gk5-Vd-SGt"/>
-                                <exclude reference="s2a-MQ-6BR"/>
+                                <exclude reference="SMh-gi-QYZ"/>
                                 <exclude reference="9sI-aC-Y5w"/>
                                 <exclude reference="eos-8N-cyu"/>
                             </mask>
@@ -3231,14 +3238,9 @@
                                 <include reference="HqD-n8-7dx"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Jdc-aV-Mh7"/>
-                                <include reference="Ny3-GA-ol1"/>
-                                <include reference="tEu-cU-TDC"/>
-                                <include reference="SMh-gi-QYZ"/>
-                                <include reference="A1R-9F-0Xb"/>
-                                <exclude reference="MjM-ag-3Rk"/>
-                                <include reference="c5a-mu-E41"/>
-                                <include reference="s7y-IP-8xz"/>
+                                <include reference="Eua-oH-xYp"/>
+                                <exclude reference="PvJ-tX-hji"/>
+                                <include reference="cNL-E1-cnq"/>
                                 <include reference="1WO-vC-PqF"/>
                                 <include reference="1cl-Sc-H0n"/>
                                 <exclude reference="3Tp-Qm-BZo"/>
@@ -3250,14 +3252,19 @@
                                 <exclude reference="oVP-gI-qUK"/>
                                 <include reference="xPQ-rH-qse"/>
                                 <include reference="zSi-kp-4HN"/>
-                                <include reference="Eua-oH-xYp"/>
-                                <exclude reference="PvJ-tX-hji"/>
-                                <include reference="cNL-E1-cnq"/>
+                                <include reference="Jdc-aV-Mh7"/>
+                                <include reference="Ny3-GA-ol1"/>
+                                <include reference="tEu-cU-TDC"/>
+                                <include reference="A1R-9F-0Xb"/>
+                                <exclude reference="MjM-ag-3Rk"/>
+                                <include reference="c5a-mu-E41"/>
+                                <include reference="s7y-IP-8xz"/>
+                                <include reference="Gk5-Vd-SGt"/>
+                                <include reference="s2a-MQ-6BR"/>
                                 <include reference="QmD-ki-N32"/>
                                 <include reference="YFi-mO-JPZ"/>
                                 <include reference="qRq-4Y-fIB"/>
-                                <include reference="Gk5-Vd-SGt"/>
-                                <include reference="s2a-MQ-6BR"/>
+                                <include reference="SMh-gi-QYZ"/>
                                 <exclude reference="9sI-aC-Y5w"/>
                                 <include reference="eos-8N-cyu"/>
                             </mask>
@@ -3302,6 +3309,7 @@
         <image name="Onboarding1" width="375" height="487"/>
         <image name="Onboarding2" width="375" height="487"/>
         <image name="Onboarding3" width="375" height="487"/>
+        <image name="Onboarding4" width="375" height="487"/>
         <image name="Profile" width="30" height="30"/>
         <image name="Search" width="30" height="30"/>
         <image name="Unfollow Long" width="250" height="29"/>
@@ -3310,10 +3318,10 @@
         <image name="facebook-logo" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LPo-iS-QTV"/>
-        <segue reference="fMk-QW-u7c"/>
-        <segue reference="TVe-4o-ZdK"/>
         <segue reference="pnl-W5-kJW"/>
+        <segue reference="TVe-4o-ZdK"/>
+        <segue reference="fMk-QW-u7c"/>
+        <segue reference="LPo-iS-QTV"/>
         <segue reference="vFq-zO-4EH"/>
         <segue reference="zBz-Gp-Xuu"/>
     </inferredMetricsTieBreakers>

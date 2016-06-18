@@ -190,15 +190,21 @@ class WallViewController: UITableViewController, APIDelagate {
         })
     }
     
+    let editActivity = EditActivity()
+    let deleteActivity = DeleteActivity()
+    let profilePicActivity = ProfilePicActivity()
+    var avc = UIActivityViewController(activityItems: [], applicationActivities: nil) // Speeds up first load?
+
+    
     func upload(sender: UIButton) {
         
         let drawing = drawingSource()[sender.tag]
-        let avc: UIActivityViewController
+//        let avc: UIActivityViewController
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
-            let editActivity = EditActivity()
-            let deleteActivity = DeleteActivity()
-            let profilePicActivity = ProfilePicActivity()
+//            let editActivity = EditActivity()
+//            let deleteActivity = DeleteActivity()
+//            let profilePicActivity = ProfilePicActivity()
 
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
         } else {

@@ -23,7 +23,6 @@ class API {
     let storage = FIRStorage.storage()
     let storageRef: FIRStorageReference
     
-    private let facebookLogin = FBSDKLoginManager()
 
     private var wall = [Drawing]()
     private var users = [User]()
@@ -313,7 +312,7 @@ class API {
     
     //MARK: Load Data
     
-    private func loadData(user: FIRUser) {
+    func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
             self.getFullUser(activeUser, delagate: nil)
@@ -458,133 +457,7 @@ class API {
         }
     }
     
-    
-    // MARK: Onboarding Methods
-    
-    lazy var newUser = NewUser()
-    
-    func createEmailAccount(newUser: NewUser, callback: (Bool) -> ()) {
-        FIRAuth.auth()?.createUserWithEmail(newUser.email!, password: newUser.password!) { (user, error) in
-            if error == nil {
-                newUser.userId = user!.uid
-                self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
-                self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
-                
-                if let phoneNumber = newUser.phoneNumber {
-                    self.myRootRef.child("phoneNumbers/\(phoneNumber)").setValue(newUser.userId!)
-                }
-                
-                callback(true)
-            } else {
-                callback(false)
-            }
-        }
-    }
-    
-    func addNewUserToDatabase(newUser: NewUser) {
-        self.loadData(newUser.userRer!)
-        self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
-        self.myRootRef.child("usernames/\(newUser.username!)").setValue(newUser.userId!)
-        
-        if let phoneNumber = newUser.phoneNumber {
-            self.myRootRef.child("phoneNumbers/\(phoneNumber)").setValue(newUser.userId!)
-        }
-    }
-    
-    func emailLogin(email: String, password: String, callback: (Bool)-> ()) {
-        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
-            if error == nil {
-                if let user = user {
-                    self.loadData(user)
-                    // Save password and email
-                    callback(true)
-                } else {
-                    callback(false)
-                }
-            } else {
-                callback(false)
-            }
-        }
-    }
-    
-    func connectWithFacebook(viewController: UIViewController, callback: (FacebookLoginResult)  -> ()) {
-        
-        facebookLogin.logInWithReadPermissions(["email", "user_friends"], fromViewController: viewController, handler: {
-            (facebookResult, facebookError) -> Void in
-            
-            if facebookError != nil {
-                print("Facebook login failed. Error \(facebookError)")
-                callback(.Failed)
-            } else if facebookResult.isCancelled {
-                print("Facebook login was cancelled.")
-                callback(.Failed)
-            } else {
-                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
-                
-                
-                FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
-                    
-                    if error != nil {
-                        print("Login failed. \(error)")
-                        callback(.Failed)
-                    } else {
-                        if let user = user {
-                            
-                            // Set active user
-                            self.getUser(user.uid, callback: { active in
-                                self.activeUser = active
-                            })
-                            
-                            self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
-                                if (snapshot.exists()) {
-                                    self.loadData(user)
-                                    
-                                    callback(.LoggedIn)
-                                } else {
-                                    self.newUser.userId = user.uid
-                                    self.newUser.email = user.email
-                                    self.newUser.fullName = user.displayName
-                                    self.newUser.FacebookSignUp = true
-                                    
-                                    self.newUser.userRer = user
-                                    
-                                    
-                                    // not working
-                                    self.getActiveFBID({ (FBID: String) -> () in
-                                        self.newUser.FacebookID = FBID
-                                    })
-                                    callback(.Registered)
-                                }
-                            })
-                        } else {
-                            callback(.Failed)
-                        }
-                    }
-                }
-            }
-        })
-    }
-    
-    
-    func checkLoggedIn(callback: (Bool)-> ()) {
-        if let user = FIRAuth.auth()?.currentUser {
-            
-            self.getUser(user.uid, callback: { active in
-                self.activeUser = active
-            })
-            self.loadData(user)
-            self.getFBFriends()
-
-            
-            callback(true)
-        } else {
-            callback(false)
-        }
-    }
-    
-    func logout() {
-        let prefs = NSUserDefaults.standardUserDefaults()
-        prefs.setValue(false, forKey: "loggedIn")
+    func clearData() {
         self.facebookFriends.removeAll()
         self.users.removeAll()
         self.wall.removeAll()
@@ -594,62 +467,10 @@ class API {
         self.activeUser = nil
         self.oldestTimeLoaded = -99999999999999
         self.newestTimeLoaded = 0
-        self.newUser = NewUser()
-        
-        self.myRootRef.removeAllObservers()
-        try! FIRAuth.auth()!.signOut()
-        FBSDKLoginManager().logOut()
     }
     
-    func resetPasswordEmail(email: String, callback: (Bool) -> ()) {
-        FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
-            if let error = error {
-                print(error)
-                callback(false)
-            } else {
-                callback(true)
-            }
-        }
-    }
     
-    var usernameHold: String?
-    
-    func checkUsernameAvaliability(username: String, callback: (Bool) -> ()) {
-        self.myRootRef.child("usernames/\(username)").observeSingleEventOfType(.Value, withBlock: {snapshot in
-            if (snapshot.exists()) {
-                callback(false)
-            } else {
-                self.usernameHold = username
-                self.myRootRef.child("usernames/\(username)").setValue("hold")
-                callback(true)
-            }
-        })
-    }
-    
-    func releaseUsernameHold() {
-        if let username = self.usernameHold {
-            self.myRootRef.child("usernames/\(username)").removeValue()
-            self.usernameHold = nil
-        }
-    }
-    
-    func callVerification(phoneNumber: String, callback: (Bool) -> ()) {
-        // Get user's current region by carrier info
 
-        let verification = CalloutVerification(applicationKey: "938e93e3-fab4-4ce4-97e1-3e463891326a", phoneNumber: "+14135888889")
-        verification.initiate({(valid, error) in
-            if let error = error {
-                print("verification error: \(error)")
-                callback(false)
-            } else if !valid {
-                print("invalid verification")
-                callback(false)
-            } else {
-                print("number verified")
-                callback(true)
-            }
-        })
-    }
     
     //            myRootRef.child("users/\(user.uid)/photoURL").setValue(user.photoURL?.absoluteString)
 

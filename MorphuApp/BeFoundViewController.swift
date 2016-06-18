@@ -8,16 +8,17 @@
 
 
 import UIKit
+import Firebase
 
 class BeFoundViewController: UIViewController, UITextFieldDelegate {
     
-    let api = API.sharedInstance
+    let api = AuthAPI.sharedInstance
     let prefs = NSUserDefaults.standardUserDefaults()
 
     let validImage = UIImage(named: "Check")
     let invalidImage = UIImage(named: "X")
     
-    let newUser = API.sharedInstance.newUser
+    let newUser = AuthAPI.sharedInstance.newUser
     
     @IBOutlet weak var nameInput: UITextField!
     @IBOutlet weak var phoneNumberInput: UITextField!
@@ -147,13 +148,14 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         api.emailLogin(newUser.email!, password: newUser.password!, callback: loginCallback)
     }
     
-    func loginCallback(valid: Bool) {
+    func loginCallback(user: FIRUser?) {
         activityIndicator.stopAnimating()
-        if valid {
+        if let user = user {
             if !newUser.FacebookSignUp {
                 prefs.setValue(newUser.email, forKey: "email")
                 prefs.setValue(newUser.password, forKey: "password")
             }
+            API.sharedInstance.loadData(user)
             self.performSegueWithIdentifier("login", sender: self)
         } else {
             print("login failed")

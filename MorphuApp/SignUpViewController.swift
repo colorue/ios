@@ -13,7 +13,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     let validImage = UIImage(named: "Check")
     let invalidImage = UIImage(named: "X")
     
-    let newUser = API.sharedInstance.newUser
+    let newUser = AuthAPI.sharedInstance.newUser
     
     var emailValid = false
     var passwordValid = false
