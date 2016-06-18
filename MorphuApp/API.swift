@@ -388,10 +388,24 @@ class API {
     }
     
     private func loadUserByFBID(FBID: String) {
-        myRootRef.child("userLookup/FacebookIDs/FBID").observeSingleEventOfType(.Value, withBlock: { snapshot in
-            self.getUser(snapshot.key, callback: { (user: User) -> () in
+        print("loadUserByFBID: \(FBID)")
+        myRootRef.child("userLookup/FacebookIDs/\(FBID)").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if !snapshot.exists() { return }
+            let userID = snapshot.value as! String
+            self.getUser(userID, callback: { (user: User) -> () in
                 self.facebookFriends.append(user)
                 self.delagate?.refresh()
+            })
+        })
+    }
+    
+    
+    func checkNumber(number: String, callback: (User) -> ()) {
+        myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEventOfType(.Value, withBlock: { snapshot in
+            if !snapshot.exists() { return }
+            let userID = snapshot.value as! String
+            self.getUser(userID, callback: { (user: User) -> () in
+                callback(user)
             })
         })
     }

@@ -25,10 +25,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 //            statusBar.backgroundColor = whiteColor
 //        }
         
-        let settings: UIUserNotificationSettings =
-            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
+//        let settings: UIUserNotificationSettings =
+//            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
+//        application.registerUserNotificationSettings(settings)
+//        application.registerForRemoteNotifications()
         
 //        connectToFcm()
         FIRApp.configure()
@@ -77,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 profileView.addLogoutButton()
             }
         } else if let friendsList = targetController as? UserListViewController {
+            friendsList.addInviteButton()
             let nav = friendsList.navigationController as! NavigationController
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor

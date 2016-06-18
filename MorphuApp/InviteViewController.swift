@@ -11,7 +11,8 @@ import Contacts
 
 class InviteViewController: UITableViewController, UISearchBarDelegate {
     
-    var contacts: [CNContact] = []
+    lazy var contacts = Contacts()
+    let api = API.sharedInstance
     
     let searchBar = UISearchBar()
 
@@ -37,31 +38,6 @@ class InviteViewController: UITableViewController, UISearchBarDelegate {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-        let contactStore = CNContactStore()
-        
-        let keysToFetch = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName)]
-
-        var allContainers: [CNContainer] = []
-        do {
-            allContainers = try contactStore.containersMatchingPredicate(nil)
-        } catch {
-            print("Error fetching containers")
-        }
-        
-        
-        // Loop the containers
-        for container in allContainers {
-            let fetchPredicate = CNContact.predicateForContactsInContainerWithIdentifier(container.identifier)
-            
-            do {
-                let containerResults = try contactStore.unifiedContactsMatchingPredicate(fetchPredicate, keysToFetch: keysToFetch)
-                // Put them into "contacts"
-                contacts.appendContentsOf(containerResults)
-            } catch {
-                print("Error fetching results for container")
-            }
-        }
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,25 +55,52 @@ class InviteViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        if section == 0 {
+            return contacts.getLinkedUsers().count
+        } else {
+            return contacts.getContacts().count
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ContactCell")!
         
-        let contact = contacts[indexPath.row]
-        
-        cell.textLabel?.text = contact.givenName + " " + contact.familyName
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
+            
+            let user = contacts.getLinkedUsers()[indexPath.row]
+            cell.username.text = user.username
+            cell.fullName.text = user.fullname
+            cell.profileImage.image = user.profileImage
+//            cell.delagate = self
+            cell.user = user
+            
+            if user.userId == api.getActiveUser().userId {
+                cell.followButton.hidden = true
+            } else {
+                cell.followButton.selected = api.getActiveUser().isFollowing(user)
+            }
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("ContactCell")!
+            
+            let contact = contacts.getContacts()[indexPath.row]
+            
+            
+            cell.textLabel?.text = contact.getPhoneNumbers()[0]
+            
+            return cell
+        }
+
     }
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        }
+    }
 
 }
