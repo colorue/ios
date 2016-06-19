@@ -8,13 +8,15 @@
 
 import UIKit
 import Contacts
+import MessageUI
 
-class InviteViewController: UITableViewController, UISearchBarDelegate {
+class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate {
     
-    lazy var contacts = Contacts()
+    lazy var contacts = ContactsAPI()
     let api = API.sharedInstance
     
     let searchBar = UISearchBar()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,11 +57,13 @@ class InviteViewController: UITableViewController, UISearchBarDelegate {
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
+            return api.getFacebookFriends().count
+        } else if section == 1 {
             return contacts.getLinkedUsers().count
         } else {
             return contacts.getContacts().count
@@ -69,6 +73,25 @@ class InviteViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         if indexPath.section == 0 {
+            
+            let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
+            
+            let user = api.getFacebookFriends()[indexPath.row]
+            cell.username.text = user.username
+            cell.fullName.text = user.fullname
+            cell.profileImage.image = user.profileImage
+            //            cell.delagate = self
+            cell.user = user
+            
+            if user.userId == api.getActiveUser().userId {
+                cell.followButton.hidden = true
+            } else {
+                cell.followButton.selected = api.getActiveUser().isFollowing(user)
+            }
+            
+            return cell
+
+        } else if indexPath.section == 1 {
             let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
             
             let user = contacts.getLinkedUsers()[indexPath.row]
@@ -91,16 +114,53 @@ class InviteViewController: UITableViewController, UISearchBarDelegate {
             let contact = contacts.getContacts()[indexPath.row]
             
             
-            cell.textLabel?.text = contact.getPhoneNumbers()[0]
+            cell.textLabel?.text = contact.name
             
             return cell
         }
 
     }
-
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let  headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell")!
+        headerCell.backgroundColor = backgroundColor
+        
+        switch (section) {
+        case 0:
+            headerCell.textLabel?.text = "Facebook Friends";
+        //return sectionHeaderView
+        case 1:
+            headerCell.textLabel?.text = "Contacts";
+        //return sectionHeaderView
+        case 2:
+            headerCell.textLabel?.text = "Invite";
+        //return sectionHeaderView
+        default:
+            headerCell.textLabel?.text = "Other";
+        }
+        
+        return headerCell
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        if indexPath.section == 2 {
+            sendInvite(contacts.getContacts()[indexPath.row])
+        }
     }
+    
+    private func sendInvite(contact: Contact) {
+        let controller = MFMessageComposeViewController()
 
+        if (MFMessageComposeViewController.canSendText()) {
+            controller.body = "Test"
+            controller.recipients = contact.getPhoneNumbers()
+            controller.messageComposeDelegate = self
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    // MARK: MFMessageComposeViewControllerDelegate Methods
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

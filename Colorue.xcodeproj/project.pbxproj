@@ -11,7 +11,7 @@
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
 		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
 		875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */; };
-		875B4E0B1D15E443004F4CD2 /* Contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* Contacts.swift */; };
+		875B4E0B1D15E443004F4CD2 /* ContactsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactsAPI.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
 		87619AE61D076457000BBCC5 /* EditActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE51D076457000BBCC5 /* EditActivity.swift */; };
 		87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE71D0786FF000BBCC5 /* InviteViewController.swift */; };
@@ -72,7 +72,7 @@
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellDelagate.swift; sourceTree = "<group>"; };
 		875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
-		875B4E0A1D15E443004F4CD2 /* Contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contacts.swift; sourceTree = "<group>"; };
+		875B4E0A1D15E443004F4CD2 /* ContactsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsAPI.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		87619AE51D076457000BBCC5 /* EditActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditActivity.swift; sourceTree = "<group>"; };
 		87619AE71D0786FF000BBCC5 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
@@ -226,7 +226,6 @@
 				87E7ADE71CF38BEB00DC226A /* Drawing.swift */,
 				879BCC971CF4137F00CD95E7 /* Comment.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
-				875B4E0A1D15E443004F4CD2 /* Contacts.swift */,
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 			);
 			name = Model;
@@ -235,6 +234,7 @@
 		8763D31A1CEE244500E3D528 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				875B4E0A1D15E443004F4CD2 /* ContactsAPI.swift */,
 				8763D2EF1CEE229C00E3D528 /* API.swift */,
 				875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */,
 				87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */,
@@ -519,7 +519,7 @@
 				87619AE61D076457000BBCC5 /* EditActivity.swift in Sources */,
 				875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
-				875B4E0B1D15E443004F4CD2 /* Contacts.swift in Sources */,
+				875B4E0B1D15E443004F4CD2 /* ContactsAPI.swift in Sources */,
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* WelcomeViewController.swift in Sources */,
 				87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */,

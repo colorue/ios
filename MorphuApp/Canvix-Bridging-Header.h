@@ -10,3 +10,7 @@
 - (nullable UIColor *)colorAtPosition:(CGPoint)position;
 
 @end
+
+@interface SmoothedCanvas : UIView
+
+@end

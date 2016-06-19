@@ -58,6 +58,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
         
         let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
+//        let canvas = SmoothedCanvas(frame: canvasFrame)
+        
         self.view.addSubview(canvas)
         self.canvas = canvas
         

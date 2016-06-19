@@ -410,6 +410,8 @@ class API {
         })
     }
     
+
+    
     // MARK: Image Upload + Download Methods
     
     func uploadImage(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {

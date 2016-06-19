@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let selectorWidth: CGFloat
@@ -53,8 +54,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
-        brushSizeSlider.maximumValue = 10.0
-        brushSizeSlider.minimumValue = 1.5
+        brushSizeSlider.maximumValue = 6.31
+        brushSizeSlider.minimumValue = 0.75
         
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
         self.addSubview(brushSizeSlider)
@@ -211,7 +212,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func getCurrentBrushSize() -> Float {
-        return brushSizeSlider.value * brushSizeSlider.value
+        return  pow(brushSizeSlider.value, 2.5)
     }
     
     func getAlpha() -> CGFloat? {

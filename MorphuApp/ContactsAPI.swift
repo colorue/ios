@@ -10,7 +10,7 @@ import Foundation
 import Contacts
 
 
-class Contacts {
+class ContactsAPI {
     
     private var contacts = [Contact]()
     

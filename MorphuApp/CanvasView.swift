@@ -9,6 +9,10 @@
 import UIKit
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
+    
+    private var path: UIBezierPath
+    var pts = [CGPoint]()
+
     private var delagate: CanvasDelagate
     private var lastPoint: CGPoint?
     private var currentStroke: UIImage?
@@ -31,6 +35,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     init (frame: CGRect, delagate: CanvasDelagate, baseImage: UIImage?) {
         self.delagate = delagate
+        self.path = UIBezierPath()
         super.init(frame : frame)
         
 
@@ -66,7 +71,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if delagate.getDropperActive() {
             dropperTouch(actualPosition, state: sender.state)
         } else {
-            drawingTouch(actualPosition, state: sender.state)
+            curveTouch(actualPosition, state: sender.state)
         }
     }
     
@@ -111,6 +116,40 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             delagate.hideUnderFingerView()
         }
     }
+    
+    private func curveTouch(position: CGPoint, state: UIGestureRecognizerState) {
+        
+        if state == .Began {
+            pts.removeAll()
+            pts.append(position)
+            delagate.showUnderFingerView()
+            setUnderFingerView(position, dropper: false)
+        } else if state == .Changed {
+            pts.append(position)
+            if pts.count == 5 {
+                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
+                
+                path.moveToPoint(pts[0])
+                path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+                
+                self.drawCurve()
+                pts[0] = pts[3]
+                pts[1] = pts[4]
+                pts.removeLast(3)
+            }
+            setUnderFingerView(position, dropper: false)
+        } else if state == .Ended {
+            self.drawCurve()
+            path.removeAllPoints()
+            pts.removeAll()
+            addToUndoStack(imageView.image)
+            currentStroke = nil
+            delagate.hideUnderFingerView()
+        }
+  
+    }
+    
+    
     
     private func setUnderFingerView(position: CGPoint, dropper: Bool) {
         let underFingerSize: CGSize // The underfinger view shows more of the drawing when the brush size is big
@@ -158,6 +197,17 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         CGContextStrokePath(UIGraphicsGetCurrentContext())
         CGContextFlush(UIGraphicsGetCurrentContext())
+        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+    }
+    
+    private func drawCurve() {
+        UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+        currentStroke?.drawAtPoint(CGPoint.zero)
+        delagate.getCurrentColor().setStroke()
+        path.lineWidth = CGFloat(delagate.getCurrentBrushSize()) * resizeScale
+        path.lineCapStyle = CGLineCap.Round
+        path.stroke()
         currentStroke = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
