@@ -225,7 +225,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         prefs.setValue(color?.coreImageColor!.red, forKey: "colorRed")
         prefs.setValue(color?.coreImageColor!.green, forKey: "colorGreen")
         prefs.setValue(color?.coreImageColor!.blue, forKey: "colorBlue")
-        prefs.setValue(sqrt((self.colorKeyboard?.getCurrentBrushSize())!), forKey: "brushSize")
+        prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: "brushSize")
         prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
         
         prefs.setValue(colorKeyboard?.getAlpha(), forKey: "alpha")

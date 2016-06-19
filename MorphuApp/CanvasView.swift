@@ -100,25 +100,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func drawingTouch(position: CGPoint, state: UIGestureRecognizerState) {
-        if state == .Began {
-            lastPoint = position
-            drawLineTo(position)
-            delagate.showUnderFingerView()
-            setUnderFingerView(position, dropper: false)
-        } else if state == .Changed {
-            drawLineTo(position)
-            lastPoint = position
-            setUnderFingerView(position, dropper: false)
-        } else if state == .Ended {
-            addToUndoStack(imageView.image)
-            currentStroke = nil
-            delagate.hideUnderFingerView()
-        }
-    }
-    
     private func curveTouch(position: CGPoint, state: UIGestureRecognizerState) {
-        
         if state == .Began {
             pts.removeAll()
             pts.append(position)
@@ -139,7 +121,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             }
             setUnderFingerView(position, dropper: false)
         } else if state == .Ended {
-            self.drawCurve()
+            pts.append(position)
+            if pts.count >= 5 {
+                self.drawCurve()
+            } else {
+                self.drawDot()
+            }
             path.removeAllPoints()
             pts.removeAll()
             addToUndoStack(imageView.image)
@@ -181,24 +168,23 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     // MARK: Drawing Methods
     
-    private func drawLineTo(position: CGPoint) {
-        UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-        currentStroke?.drawAtPoint(CGPoint.zero)
-        
-        let color = delagate.getCurrentColor()
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
-        
-        if let lastP = lastPoint {
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), lastP.x, lastP.y)
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), position.x, position.y)
+    private func drawDot() {
+        if !pts.isEmpty {
+            UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+            currentStroke?.drawAtPoint(CGPoint.zero)
+            
+            let color = delagate.getCurrentColor()
+            CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
+            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
+            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
+            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
+            
+            CGContextStrokePath(UIGraphicsGetCurrentContext())
+            CGContextFlush(UIGraphicsGetCurrentContext())
+            currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
         }
-        
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        CGContextFlush(UIGraphicsGetCurrentContext())
-        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
     }
     
     private func drawCurve() {

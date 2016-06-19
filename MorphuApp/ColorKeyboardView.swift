@@ -21,6 +21,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let progressBar = UIProgressView()
     private let prefs = NSUserDefaults.standardUserDefaults()
     
+    let sliderConstant:Float = 2.5
+    
     private var currentAlpha = AlphaType.High
     
     enum AlphaType: CGFloat {
@@ -54,8 +56,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
-        brushSizeSlider.maximumValue = 6.31
-        brushSizeSlider.minimumValue = 0.75
+        brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
+        brushSizeSlider.minimumValue = pow(0.5, 1/sliderConstant)
         
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
         self.addSubview(brushSizeSlider)
@@ -120,9 +122,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             }
 
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-            brushSizeSlider.value = prefs.floatForKey("brushSize")
+            brushSizeSlider.value = pow(prefs.floatForKey("brushSize"), 1/self.sliderConstant)
         } else {
-            brushSizeSlider.value = 5.5
+            brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
             alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         }
@@ -212,7 +214,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func getCurrentBrushSize() -> Float {
-        return  pow(brushSizeSlider.value, 2.5)
+        return  pow(brushSizeSlider.value, sliderConstant)
     }
     
     func getAlpha() -> CGFloat? {
