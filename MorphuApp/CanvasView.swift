@@ -16,6 +16,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var delagate: CanvasDelagate
     private var lastPoint: CGPoint?
     private var currentStroke: UIImage?
+    private var currentLine: UIImage?
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
     private let positionIndicator = UIImage(named: "PositionIndicator")!
@@ -118,12 +119,24 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
                 pts[0] = pts[3]
                 pts[1] = pts[4]
                 pts.removeLast(3)
+                currentLine = nil
+            } else {
+                self.drawDot()
             }
             setUnderFingerView(position, dropper: false)
         } else if state == .Ended {
             pts.append(position)
             if pts.count >= 5 {
+                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
+                
+                path.moveToPoint(pts[0])
+                path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+                
                 self.drawCurve()
+                pts[0] = pts[3]
+                pts[1] = pts[4]
+                pts.removeLast(3)
+                currentLine = nil
             } else {
                 self.drawDot()
             }
@@ -131,6 +144,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             pts.removeAll()
             addToUndoStack(imageView.image)
             currentStroke = nil
+            currentLine = nil
             delagate.hideUnderFingerView()
         }
   
@@ -169,21 +183,35 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     // MARK: Drawing Methods
     
     private func drawDot() {
+        
         if !pts.isEmpty {
             UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-            currentStroke?.drawAtPoint(CGPoint.zero)
             
+
             let color = delagate.getCurrentColor()
+            if pts.count == 2 {
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts.first!.x, pts.first!.y)
+                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pts.last!.x, pts.last!.y)
+            } else if pts.count == 3 {
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
+                CGContextAddQuadCurveToPoint(UIGraphicsGetCurrentContext(), pts[1].x, pts[1].y, pts[2].x, pts[2].y)
+            }
+            else if pts.count == 4 {
+                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
+                CGContextAddQuadCurveToPoint(UIGraphicsGetCurrentContext(), pts[1].x, pts[1].y, pts[3].x, pts[3].y)
+            }
+            
             CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
             CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
             CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
-            CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
-            CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
             
             CGContextStrokePath(UIGraphicsGetCurrentContext())
             CGContextFlush(UIGraphicsGetCurrentContext())
-            currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+            currentLine = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
+        } else {
+            print("empty")
+            currentLine = nil
         }
     }
     
@@ -210,11 +238,17 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     private func mergeCurrentStroke(alpha: Bool) {
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+        currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
+        currentLine?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
+        let current = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
         undoStack.last?.drawAtPoint(CGPoint.zero)
         if alpha {
-            currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate.getAlpha()!)
+            current?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate.getAlpha()!)
         } else {
-            currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
+            current?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
         }
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
