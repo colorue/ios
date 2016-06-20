@@ -102,7 +102,7 @@ class InviteViewController: UITableViewController, UserCellDelagate, MFMessageCo
 
         if (MFMessageComposeViewController.canSendText()) {
             controller.body = "Test"
-            controller.recipients = contact.getPhoneNumbers()
+            controller.recipients = [contact.getPhoneNumber()!]
             controller.messageComposeDelegate = self
             self.presentViewController(controller, animated: true, completion: nil)
         }

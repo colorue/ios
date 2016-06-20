@@ -13,24 +13,49 @@ class Contact {
     let api = API.sharedInstance
     
     let name: String
-    private var phoneNumbers = [String]()
+    private var iPhoneNumber: String?
+    private var mobileNumber: String?
+    private var mainNumber: String?
+    private var homeNumber: String?
+    private var workNumber: String?
+    private var blankNumber: String?
+
+    
     private var user: User?
     
     init(name: String) {
         self.name = name
     }
     
-    func addPhoneNumber(number: String) {
+    func addPhoneNumber(number: String, type: phoneType) {
         let stringArray = number.componentsSeparatedByCharactersInSet(
             NSCharacterSet.decimalDigitCharacterSet().invertedSet)
         
         if stringArray.joinWithSeparator("").characters.count == 10 {
             let phone = "+1" + stringArray.joinWithSeparator("")
-            self.phoneNumbers.append(phone)
+            self.setPhoneNumber(number, type: type)
             api.checkNumber(phone, callback: self.linkUser)
         } else if stringArray.joinWithSeparator("").characters.count == 11 {
             let phone = "+" + stringArray.joinWithSeparator("")
-            self.phoneNumbers.append(phone)
+            self.setPhoneNumber(number, type: type)
+            api.checkNumber(phone, callback: self.linkUser)
+        }
+    }
+    
+    private func setPhoneNumber(number: String, type: phoneType) {
+        switch (type) {
+        case .Mobile:
+            self.mobileNumber = number
+        case .Home:
+            self.homeNumber = number
+        case .Work:
+            self.workNumber = number
+        case .Main:
+            self.mainNumber = number
+        case .Iphone:
+            self.iPhoneNumber = number
+        case .Blank:
+            self.blankNumber = number
         }
     }
     
@@ -38,15 +63,35 @@ class Contact {
         self.user = user
     }
     
-    func getPhoneNumbers() -> [String] {
-        return self.phoneNumbers
-    }
-    
-    func hasNumber() -> Bool {
-        return !self.phoneNumbers.isEmpty
+    func getPhoneNumber() -> String? {
+        // phone type Priority
+        if let iPhoneNumber = self.iPhoneNumber {
+            return iPhoneNumber
+        } else if let mobileNumber = self.mobileNumber {
+            return mobileNumber
+        } else if let mainNumber = self.mainNumber {
+            return mainNumber
+        } else if let homeNumber = self.homeNumber {
+            return homeNumber
+        } else if let workNumber = self.workNumber {
+            return workNumber
+        } else if let blankNumber = self.blankNumber {
+            return blankNumber
+        } else {
+            return nil
+        }
     }
     
     func getUser() -> User? {
         return self.user
     }
+}
+
+enum phoneType: String {
+    case Mobile = "_$!<Mobile>!$_"
+    case Home = "_$!<Home>!$_"
+    case Work = "_$!<Work>!$_"
+    case Main = "_$!<Main>!$_"
+    case Iphone = "iPhone"
+    case Blank = ""
 }
