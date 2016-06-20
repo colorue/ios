@@ -57,7 +57,8 @@ class ProfileViewController: WallViewController {
         
         if indexPath.section == 0 {
             let profileCell = cell as! ProfileCell
-
+            
+            profileCell.fullName.text = userInstance!.fullname
             profileCell.profileImage.image = userInstance!.profileImage
             profileCell.followingCount.text = String(userInstance!.getFollowing().count)
             profileCell.followersCount.text = String(userInstance!.getFollowers().count)

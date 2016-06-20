@@ -10,6 +10,7 @@ import UIKit
 
 class ProfileCell: UITableViewCell {
 
+    @IBOutlet weak var fullName: UILabel!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var drawingsCount: UILabel!
     @IBOutlet weak var followersCount: UILabel!
