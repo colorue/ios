@@ -10,36 +10,19 @@ import UIKit
 import Contacts
 import MessageUI
 
-class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessageComposeViewControllerDelegate {
+class InviteViewController: UITableViewController, UserCellDelagate, MFMessageComposeViewControllerDelegate {
     
     lazy var contacts = ContactsAPI()
     let api = API.sharedInstance
-    
-    let searchBar = UISearchBar()
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        searchBar.frame = CGRectMake(0, 0, self.view.frame.width - 85, 20)
-        
-        searchBar.placeholder = "Search contacts"
-        
-        let searchBarItem = UIBarButtonItem(customView:searchBar)
-        
-        self.navigationItem.leftBarButtonItem = searchBarItem
-        
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-        searchBar.delegate = self
-        
-        let cancelSearchBarButtonItem = UIBarButtonItem(title: "Invite", style: UIBarButtonItemStyle.Plain, target: self, action: nil)
-        self.navigationItem.setRightBarButtonItem(cancelSearchBarButtonItem, animated: true)
-        
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = backgroundColor
-        
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 44.0
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -48,12 +31,6 @@ class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessag
         self.tableView.reloadData()
     }
     
-    
-    func searchBarShouldBeginEditing(searchBar: UISearchBar) -> Bool {
-        
-
-        return true
-    }
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -80,7 +57,7 @@ class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessag
             cell.username.text = user.username
             cell.fullName.text = user.fullname
             cell.profileImage.image = user.profileImage
-            //            cell.delagate = self
+            cell.delagate = self
             cell.user = user
             
             if user.userId == api.getActiveUser().userId {
@@ -98,7 +75,7 @@ class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessag
             cell.username.text = user.username
             cell.fullName.text = user.fullname
             cell.profileImage.image = user.profileImage
-//            cell.delagate = self
+            cell.delagate = self
             cell.user = user
             
             if user.userId == api.getActiveUser().userId {
@@ -109,43 +86,15 @@ class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessag
             
             return cell
         } else {
-            let cell = tableView.dequeueReusableCellWithIdentifier("ContactCell")!
+            let cell = tableView.dequeueReusableCellWithIdentifier("InviteCell")! as! InviteCell
             
             let contact = contacts.getContacts()[indexPath.row]
             
-            
-            cell.textLabel?.text = contact.name
+            cell.contactName.text = contact.name
             
             return cell
         }
 
-    }
-    
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let  headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell")!
-        headerCell.backgroundColor = backgroundColor
-        
-        switch (section) {
-        case 0:
-            headerCell.textLabel?.text = "Facebook Friends";
-        //return sectionHeaderView
-        case 1:
-            headerCell.textLabel?.text = "Contacts";
-        //return sectionHeaderView
-        case 2:
-            headerCell.textLabel?.text = "Invite";
-        //return sectionHeaderView
-        default:
-            headerCell.textLabel?.text = "Other";
-        }
-        
-        return headerCell
-    }
-    
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 2 {
-            sendInvite(contacts.getContacts()[indexPath.row])
-        }
     }
     
     private func sendInvite(contact: Contact) {
@@ -159,8 +108,64 @@ class InviteViewController: UITableViewController, UISearchBarDelegate, MFMessag
         }
     }
     
+    
+    // MARK: UserCellDelagate Methods
+    
+    func followAction(userCell: UserCell) {
+        userCell.followButton.selected = true
+        
+        api.getActiveUser().follow(userCell.user!)
+        api.follow(userCell.user!)
+    }
+    
+    func unfollowAction(userCell: UserCell) {
+        if let user = userCell.user {
+            let actionSelector = UIAlertController(title: "Unfollow \(user.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.Destructive,
+                handler: {(alert: UIAlertAction!) in self.unfollow(userCell)}))
+            
+            self.presentViewController(actionSelector, animated: true, completion: nil)
+        }
+    }
+    
+    private func unfollow(userCell: UserCell) {
+        userCell.followButton.selected = false
+        api.getActiveUser().unfollow(userCell.user!)
+        api.unfollow(userCell.user!)
+    }
+    
+    
     // MARK: MFMessageComposeViewControllerDelegate Methods
+    
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    // MARK: Segues
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 2 {
+            sendInvite(contacts.getContacts()[indexPath.row])
+        } else {
+            self.performSegueWithIdentifier("showUser", sender: self)
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showUser" {
+            let targetController = segue.destinationViewController as! ProfileViewController
+            if let indexPath = tableView.indexPathForSelectedRow {
+                let user: User
+                if indexPath.section == 0 {
+                    user = api.getFacebookFriends()[indexPath.row]
+                } else {
+                    user = contacts.getLinkedUsers()[indexPath.row]
+                }
+                targetController.navigationItem.title = user.username
+                targetController.userInstance = user
+            }
+        }
     }
 }

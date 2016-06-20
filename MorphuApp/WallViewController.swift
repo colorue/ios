@@ -42,14 +42,19 @@ class WallViewController: UITableViewController, APIDelagate {
         super.viewDidAppear(animated)
         
         api.delagate = self
+        self.refresh()
         
         self.tableView.reloadData()
         self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
         
         let prefs = NSUserDefaults.standardUserDefaults()
         if (!prefs.boolForKey("firstOpen")) {
-            self.tabBarController?.selectedIndex = 2
             prefs.setValue(true, forKey: "firstOpen")
+            if let newVC = self.tabBarController!.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
+                self.tabBarController!.presentViewController(newVC, animated: true, completion: nil)
+            }
+        } else if false {
+            //"Want to know if someone follows you or comments on your drawings?
         }
     }
     
@@ -184,6 +189,7 @@ class WallViewController: UITableViewController, APIDelagate {
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
+            print("refresh")
             self.bottomRefreshControl.endRefreshing()
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()

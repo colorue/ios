@@ -56,7 +56,7 @@ class SearchViewController: UITableViewController, UISearchResultsUpdating, User
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
         
-        let user = userSource()[indexPath.row]
+        let user = filteredUsers[indexPath.row]
         cell.username.text = user.username
         cell.profileImage.image = user.profileImage
         cell.fullName.text = user.fullname

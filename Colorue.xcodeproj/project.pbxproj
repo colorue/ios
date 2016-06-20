@@ -61,6 +61,7 @@
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
+		87F754F01D187184005B4A14 /* InviteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F754EF1D187184005B4A14 /* InviteCell.swift */; };
 		FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C591373F34C788F4677031 /* Pods_Colorue.framework */; };
 /* End PBXBuildFile section */
 
@@ -123,6 +124,7 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		87F754EF1D187184005B4A14 /* InviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCell.swift; sourceTree = "<group>"; };
 		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
 		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -161,6 +163,7 @@
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
+				87F754EF1D187184005B4A14 /* InviteCell.swift */,
 				87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
@@ -200,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				87C32C551D00A10D003817D8 /* Main */,
-				87CC7D411D00A2C20056DF73 /* Drawing */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
 				8730D80C1D0735D000E1D939 /* UIActivities */,
 				8763D3231CEE254100E3D528 /* Navigation */,
@@ -324,22 +326,31 @@
 		87C32C551D00A10D003817D8 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
-				876614B91D034F1200DF4590 /* SearchViewController.swift */,
-				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
-				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
-				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
-				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
+				87F754ED1D1865E0005B4A14 /* Tabs */,
+				87F754EE1D1865EF005B4A14 /* Other */,
 			);
 			name = Main;
 			sourceTree = "<group>";
 		};
-		87CC7D411D00A2C20056DF73 /* Drawing */ = {
+		87F754ED1D1865E0005B4A14 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
+				876614B91D034F1200DF4590 /* SearchViewController.swift */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
+				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
+				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
 			);
-			name = Drawing;
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		87F754EE1D1865EF005B4A14 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
+				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
@@ -488,6 +499,7 @@
 				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				8763D2FF1CEE229C00E3D528 /* ColorKeyboardDelagate.swift in Sources */,
+				87F754F01D187184005B4A14 /* InviteCell.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
 				8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,

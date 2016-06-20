@@ -60,35 +60,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
         
-        if targetController is DrawingViewController {
-            if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
-                tabBarController.presentViewController(newVC, animated: true, completion: nil)
-                return false
-            }
-        } else if let profileView = targetController as? ProfileViewController {
-            
+        
+        if let profileView = targetController as? ProfileViewController {
             let nav = profileView.navigationController as! NavigationController
-            nav.setColors(purpleColor)
-            tabBarController.tabBar.tintColor = purpleColor
-            
+            nav.setColors(redColor)
+            tabBarController.tabBar.tintColor = redColor
             if profileView.userInstance == nil {
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
             }
-        } else if let friendsList = targetController as? UserListViewController {
-            friendsList.addInviteButton()
+        } else if let friendsList = targetController as? InviteViewController {
             let nav = friendsList.navigationController as! NavigationController
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor
+        } else if targetController is DrawingViewController {
+            if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
+                tabBarController.presentViewController(newVC, animated: true, completion: nil)
+                return false
+            }
+        } else if let search = targetController as? SearchViewController {
+                let nav = search.navigationController as! NavigationController
+                nav.setColors(orangeColor)
+                tabBarController.tabBar.tintColor = orangeColor
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
             nav.setColors(purpleColor)
             tabBarController.tabBar.tintColor = purpleColor
-        } else if let search = targetController as? SearchViewController {
-            let nav = search.navigationController as! NavigationController
-            nav.setColors(orangeColor)
-            tabBarController.tabBar.tintColor = orangeColor
         }
         
         return true
