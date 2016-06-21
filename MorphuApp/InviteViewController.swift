@@ -10,10 +10,12 @@ import UIKit
 import Contacts
 import MessageUI
 
-class InviteViewController: UITableViewController, UserCellDelagate, MFMessageComposeViewControllerDelegate {
+class InviteViewController: UITableViewController, UserCellDelagate, MFMessageComposeViewControllerDelegate, APIDelagate {
     
     lazy var contacts = ContactsAPI()
     let api = API.sharedInstance
+    
+    let tintColor = blueColor
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,7 @@ class InviteViewController: UITableViewController, UserCellDelagate, MFMessageCo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        api.delagate = self
         self.tableView.reloadData()
     }
     
@@ -101,13 +104,16 @@ class InviteViewController: UITableViewController, UserCellDelagate, MFMessageCo
         let controller = MFMessageComposeViewController()
 
         if (MFMessageComposeViewController.canSendText()) {
-            controller.body = "Test"
+            controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test:\nhttps://goo.gl/i0Kpmf\nIt's an iOS app for easily drawing on your phone and sharing your creations"
+            if let image = api.getActiveUser().profileImage {
+                controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "\(api.getActiveUser().username)'s profile.png")
+            }
             controller.recipients = [contact.getPhoneNumber()!]
             controller.messageComposeDelegate = self
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
-    
+
     
     // MARK: UserCellDelagate Methods
     
@@ -142,6 +148,11 @@ class InviteViewController: UITableViewController, UserCellDelagate, MFMessageCo
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // MARK: APIDelagate Methods
+    
+    func refresh() {
+        self.tableView.reloadData()
+    }
     
     // MARK: Segues
     
@@ -163,6 +174,7 @@ class InviteViewController: UITableViewController, UserCellDelagate, MFMessageCo
                 } else {
                     user = contacts.getLinkedUsers()[indexPath.row]
                 }
+                targetController.tintColor = self.tintColor
                 targetController.navigationItem.title = user.username
                 targetController.userInstance = user
             }

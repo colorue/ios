@@ -15,6 +15,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
 
     let api = API.sharedInstance
     
+    var tintColor = purpleColor
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -117,6 +119,7 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
+                targetController.tintColor = self.tintColor
                 targetController.navigationItem.title = userSource()[row].username
                 targetController.userInstance = userSource()[row]
             }

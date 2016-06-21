@@ -25,6 +25,7 @@ class API {
     
 
     private var wall = [Drawing]()
+    private var explore = [Drawing]()
     private var users = [User]()
     private var facebookFriends = [User]()
 
@@ -261,6 +262,10 @@ class API {
         return self.wall
     }
     
+    func getExplore() -> [Drawing] {
+        return self.explore
+    }
+    
     func getUsers() -> [User] {
         return self.users
     }
@@ -325,6 +330,7 @@ class API {
                 })
             })
         
+        
         myRootRef.child("users/\(getActiveUser().userId)/wall").observeEventType(.ChildRemoved, withBlock: { snapshot in
                 let drawingId = snapshot.key
                 var i = 0
@@ -338,6 +344,29 @@ class API {
                 }
             })
         }
+    
+    func loadExplore() {
+        myRootRef.child("drawings").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
+            .observeEventType(.ChildAdded, withBlock: { snapshot in
+                let drawingId = snapshot.key
+                self.getDrawing(drawingId, callback: { (drawing: Drawing, new: Bool) -> () in
+                    self.explore.append(drawing)
+                })
+            })
+        
+//        myRootRef.child("drawings").observeEventType(.ChildRemoved, withBlock: { snapshot in
+//            let drawingId = snapshot.key
+//            var i = 0
+//            self.drawingDict[drawingId] = nil
+//            for drawing in self.wall {
+//                if drawing.getDrawingId() == drawingId {
+//                    self.wall.removeAtIndex(i)
+//                    return
+//                }
+//                i += 1
+//            }
+//        })
+    }
     
     private func loadUsers(currentUser: FIRUser) {
         myRootRef.child("users").queryOrderedByKey()
@@ -388,7 +417,6 @@ class API {
     }
     
     private func loadUserByFBID(FBID: String) {
-        print("loadUserByFBID: \(FBID)")
         myRootRef.child("userLookup/FacebookIDs/\(FBID)").observeSingleEventOfType(.Value, withBlock: { snapshot in
             if !snapshot.exists() { return }
             let userID = snapshot.value as! String
@@ -406,6 +434,7 @@ class API {
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
                 callback(user)
+                self.delagate?.refresh()
             })
         })
     }

@@ -30,8 +30,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = UIImage(named: "Logo Clear")! 
+        let logo = UIImage(named: "Logo Inactive")!
         let imageView = UIImageView(image:logo)
+        imageView.tintColor = blackColor
         self.navigationItem.titleView = imageView
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
@@ -87,7 +88,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if (!prefs.boolForKey("drawingHowTo")) {
-            let drawingHowTo = UIAlertController(title: "Welcome! Draw your first masterpiece:", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertControllerStyle.Alert)
+            let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertControllerStyle.Alert)
             drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(drawingHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "drawingHowTo")

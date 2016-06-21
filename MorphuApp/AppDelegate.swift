@@ -63,9 +63,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         if let profileView = targetController as? ProfileViewController {
             let nav = profileView.navigationController as! NavigationController
-            nav.setColors(redColor)
-            tabBarController.tabBar.tintColor = redColor
+            nav.setColors(purpleColor)
             if profileView.userInstance == nil {
+                profileView.tintColor = purpleColor
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
@@ -82,11 +82,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         } else if let search = targetController as? SearchViewController {
                 let nav = search.navigationController as! NavigationController
                 nav.setColors(orangeColor)
-                tabBarController.tabBar.tintColor = orangeColor
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
-            nav.setColors(purpleColor)
-            tabBarController.tabBar.tintColor = purpleColor
+            nav.setColors(redColor)
         }
         
         return true

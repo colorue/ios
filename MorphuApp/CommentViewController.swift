@@ -13,6 +13,8 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     let api = API.sharedInstance
     var drawingInstance: Drawing?
     
+    var tintColor = redColor
+    
     private var writeCommentCell: WriteCommentCell?
     
     
@@ -80,6 +82,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.tintColor = self.tintColor
             targetController.navigationItem.title = drawingInstance!.getComments()[sender!.tag].user.username
             targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
         }

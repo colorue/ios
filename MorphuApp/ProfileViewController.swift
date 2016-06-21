@@ -12,24 +12,13 @@ import CCBottomRefreshControl
 class ProfileViewController: WallViewController {
     
     var userInstance: User?
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+                        
         self.drawingSource = userInstance!.getDrawings
         API.sharedInstance.getFullUser(userInstance!, delagate: self)
     }
-    
-//    private func setTitle() {
-//        
-//        let view = self.navigationItem.titleView
-//        let button =  UIButton(type: .Custom)
-//        button.frame = CGRectMake(0, 0, 200, 40) as CGRect
-//        button.addTarget(self, action: #selector(ProfileViewController.scrollToTop(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-//        view?.addSubview(button)
-//
-//        self.navigationItem.titleView = button
-//    }
     
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -65,6 +54,7 @@ class ProfileViewController: WallViewController {
             profileCell.drawingsCount.text = String(userInstance!.getDrawings().count)
             
             profileCell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
+            profileCell.followButton.tintColor = tintColor
             
             if userInstance!.userId == api.getActiveUser().userId {
                 profileCell.followButton.setImage(nil, forState: .Normal)
@@ -98,16 +88,20 @@ class ProfileViewController: WallViewController {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
+            targetController.tintColor = self.tintColor
             targetController.userSource = { self.userInstance!.getDrawings()[sender!.tag].getLikes() }
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
+            targetController.tintColor = self.tintColor
             targetController.drawingInstance = userInstance!.getDrawings()[sender!.tag]
         }  else if segue.identifier == "showFollowers" {
             let targetController = segue.destinationViewController as! UserListViewController
+            targetController.tintColor = self.tintColor
             targetController.navigationItem.title = "Followers"
             targetController.userSource = { self.userInstance!.getFollowers() }
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destinationViewController as! UserListViewController
+            targetController.tintColor = self.tintColor
             targetController.navigationItem.title = "Following"
             targetController.userSource = { self.userInstance!.getFollowing() }
         }

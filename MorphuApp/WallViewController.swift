@@ -15,17 +15,12 @@ class WallViewController: UITableViewController, APIDelagate {
     let api = API.sharedInstance
     let bottomRefreshControl = UIRefreshControl()
     var drawingSource = API.sharedInstance.getWall
-
     
+    var tintColor = redColor
+
     // MARK: Loading Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        if self is ProfileViewController {
-            
-        } else {
-            self.setTitle()
-        }
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
@@ -35,7 +30,7 @@ class WallViewController: UITableViewController, APIDelagate {
         self.refreshControl?.beginRefreshing()
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refreshBottom(_:)), forControlEvents: .ValueChanged)
+        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refresh), forControlEvents: .ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -59,19 +54,15 @@ class WallViewController: UITableViewController, APIDelagate {
     }
     
     private func setTitle() {
-        let button =  UIButton(type: .Custom)
-        button.frame = CGRectMake(0, 0, 100, 40) as CGRect
-        button.setImage(UIImage(named: "Colorue")!, forState: .Normal)
-        button.addTarget(self, action: #selector(WallViewController.scrollToTop(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        self.navigationItem.titleView = button
+//        let button =  UIButton(type: .Custom)
+//        button.frame = CGRectMake(0, 0, 100, 40) as CGRect
+//        button.setImage(UIImage(named: "Colorue")!, forState: .Normal)
+//        button.addTarget(self, action: #selector(WallViewController.scrollToTop(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+//        self.navigationItem.titleView = button
     }
     
     func scrollToTop(sender: UIButton) {
         self.tableView.setContentOffset(CGPointZero, animated: true)
-    }
-    
-    func refreshBottom(sender: UIRefreshControl) {
-        refresh()
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
@@ -93,10 +84,7 @@ class WallViewController: UITableViewController, APIDelagate {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
-        
-
-        return cell
+        return self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
@@ -131,6 +119,11 @@ class WallViewController: UITableViewController, APIDelagate {
         drawingCell.likeButton.tag = indexPath.row
         drawingCell.likesButton.tag = indexPath.row
         drawingCell.commentsButton.tag = indexPath.row
+        
+        drawingCell.uploadButton.tintColor = tintColor
+        drawingCell.likeButton.tintColor = tintColor
+        drawingCell.likes.textColor = tintColor
+        drawingCell.commentCount.textColor = tintColor
         
         drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchUpInside)
         drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchUpInside)
@@ -189,7 +182,6 @@ class WallViewController: UITableViewController, APIDelagate {
     
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
-            print("refresh")
             self.bottomRefreshControl.endRefreshing()
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()

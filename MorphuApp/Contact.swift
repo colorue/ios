@@ -19,7 +19,6 @@ class Contact {
     private var homeNumber: String?
     private var workNumber: String?
     private var blankNumber: String?
-
     
     private var user: User?
     
@@ -30,7 +29,6 @@ class Contact {
     func addPhoneNumber(number: String, type: phoneType) {
         let stringArray = number.componentsSeparatedByCharactersInSet(
             NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        
         if stringArray.joinWithSeparator("").characters.count == 10 {
             let phone = "+1" + stringArray.joinWithSeparator("")
             self.setPhoneNumber(number, type: type)
@@ -71,12 +69,12 @@ class Contact {
             return mobileNumber
         } else if let mainNumber = self.mainNumber {
             return mainNumber
+        } else if let blankNumber = self.blankNumber {
+            return blankNumber
         } else if let homeNumber = self.homeNumber {
             return homeNumber
         } else if let workNumber = self.workNumber {
             return workNumber
-        } else if let blankNumber = self.blankNumber {
-            return blankNumber
         } else {
             return nil
         }
