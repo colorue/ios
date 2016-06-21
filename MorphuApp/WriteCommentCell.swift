@@ -8,7 +8,7 @@
 
 import UIKit
 
-class WriteCommentCell: UITableViewCell {
+class WriteCommentCell: UITableViewCell, UITextFieldDelegate {
     var delagate: WriteCommentCellDelagate?
     
     @IBOutlet weak var addButton: UIButton!
@@ -19,5 +19,10 @@ class WriteCommentCell: UITableViewCell {
         if let text = commentText.text {
             delagate?.addComment(text)
         }
+    }
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        self.addComment(self.addButton)
+        return true
     }
 }

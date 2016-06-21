@@ -29,6 +29,8 @@ class WallViewController: UITableViewController, APIDelagate {
                 
         self.refreshControl?.beginRefreshing()
         
+        self.navigationController?.navigationBar.tintColor = self.tintColor
+        
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refresh), forControlEvents: .ValueChanged)
     }

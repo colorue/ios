@@ -76,7 +76,9 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         cell.addSubview(separatorU)
         
         cell.commentText.tintColor = self.tintColor
-//        cell.addButton.text = self.tintColor
+        cell.addButton.setTitleColor(self.tintColor, forState: .Normal)
+        
+        cell.commentText.delegate = cell
         self.writeCommentCell = cell
         return cell
     }
