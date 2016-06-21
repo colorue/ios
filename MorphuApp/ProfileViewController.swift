@@ -115,12 +115,20 @@ class ProfileViewController: WallViewController {
     
     func addLogoutButton() {
         let chevron = UIImage(named: "Logout")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logout(_:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: chevron, style: .Plain, target: self,                                                                action: #selector(ProfileViewController.logoutPopup(_:)))
     }
     
-    func logout(sender: UIBarButtonItem) {
-        api.clearData()
-        AuthAPI.sharedInstance.logout()
-        self.performSegueWithIdentifier("logout", sender: self)
+    func logoutPopup(sender: UIBarButtonItem) {
+        
+        let logoutConfirm = UIAlertController(title: "Log out?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        
+        logoutConfirm.addAction(UIAlertAction(title: "Log out", style: .Destructive, handler: { (action: UIAlertAction!) in
+            self.api.clearData()
+            AuthAPI.sharedInstance.logout()
+            self.performSegueWithIdentifier("logout", sender: self)
+        }))
+        
+        logoutConfirm.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+        self.presentViewController(logoutConfirm, animated: true, completion: nil)
     }
 }

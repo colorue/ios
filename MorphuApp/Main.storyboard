@@ -2217,6 +2217,7 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="addButton" destination="kaq-Kb-Ih3" id="6dL-7v-jga"/>
                                     <outlet property="commentText" destination="7Qs-I9-leV" id="gcL-2X-oW1"/>
                                 </connections>
                             </tableViewCell>
@@ -4080,7 +4081,7 @@
         <image name="ProfileU" width="30" height="30"/>
         <image name="Search" width="36" height="36"/>
         <image name="SearchU" width="36" height="36"/>
-        <image name="Unfollow Long" width="250" height="29"/>
+        <image name="Unfollow Long" width="245" height="25"/>
         <image name="Upload" width="36" height="36"/>
         <image name="X" width="30" height="30"/>
         <image name="facebook-logo" width="21" height="21"/>

@@ -75,6 +75,8 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
+        cell.commentText.tintColor = self.tintColor
+//        cell.addButton.text = self.tintColor
         self.writeCommentCell = cell
         return cell
     }

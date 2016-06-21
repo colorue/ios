@@ -17,6 +17,7 @@
     CGImageRef imageRef = CGImageCreateWithImageInRect(self.CGImage, sourceRect);
     
     if (position.y < 0 || position.y > self.size.height || position.x < 0 || position.x > self.size.width) {
+        CGImageRelease(imageRef);
         return nil;
     }
     

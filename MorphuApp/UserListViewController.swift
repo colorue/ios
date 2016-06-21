@@ -23,6 +23,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
+//        let nav = self.navigationController as! NavigationController
+//        nav.setColors(tintColor)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -55,6 +57,7 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         cell.profileImage.image = user.profileImage
         cell.delagate = self
         cell.user = user
+        cell.followButton.tintColor = self.tintColor
         
         if user.userId == api.getActiveUser().userId {
             cell.followButton.hidden = true

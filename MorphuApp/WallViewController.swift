@@ -26,7 +26,7 @@ class WallViewController: UITableViewController, APIDelagate {
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
-        
+                
         self.refreshControl?.beginRefreshing()
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
@@ -217,13 +217,16 @@ class WallViewController: UITableViewController, APIDelagate {
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
+            targetController.tintColor = self.tintColor
             targetController.userSource = self.drawingSource()[sender!.tag].getLikes
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
+            targetController.tintColor = self.tintColor
             targetController.drawingInstance = drawingSource()[sender!.tag]
         } else if segue.identifier == "showUser" {
             let targetController = segue.destinationViewController as! ProfileViewController
             targetController.navigationItem.title = drawingSource()[sender!.tag].getArtist().username
+            targetController.tintColor = self.tintColor
             targetController.userInstance = drawingSource()[sender!.tag].getArtist()
         }
     }
