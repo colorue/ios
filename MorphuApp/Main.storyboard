@@ -90,7 +90,87 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YAe-qX-nXf" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Ebr-du-21l" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-2415" y="286.5"/>
+            <point key="canvasLocation" x="135" y="-700.5"/>
+        </scene>
+        <!--Share View Controller-->
+        <scene sceneID="pAd-5F-oUS">
+            <objects>
+                <navigationItem title="Share" id="bCi-TR-An8"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IM4-YS-TGI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="boT-qm-Pat" customClass="ShareViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="18D-Cz-2dC"/>
+                        <viewControllerLayoutGuide type="bottom" id="ha2-PD-Rni"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3z3-Bc-VAh">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hz-Vf-gUS">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8hz-Vf-gUS" secondAttribute="height" multiplier="1:1.3" id="aLZ-oS-lSy"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="aLZ-oS-lSy"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="aLZ-oS-lSy"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EhF-EA-Gl0">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Facebook"/>
+                                <connections>
+                                    <action selector="facebookButton:" destination="boT-qm-Pat" eventType="touchUpInside" id="W6i-gf-6rj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8hz-Vf-gUS" firstAttribute="top" secondItem="18D-Cz-2dC" secondAttribute="bottom" constant="25" id="3B1-eA-w1z"/>
+                            <constraint firstItem="8hz-Vf-gUS" firstAttribute="leading" secondItem="3z3-Bc-VAh" secondAttribute="leadingMargin" constant="-20" id="8Gs-WU-FI1"/>
+                            <constraint firstItem="EhF-EA-Gl0" firstAttribute="centerX" secondItem="3z3-Bc-VAh" secondAttribute="centerX" id="MVU-lQ-dg3"/>
+                            <constraint firstItem="EhF-EA-Gl0" firstAttribute="top" secondItem="8hz-Vf-gUS" secondAttribute="bottom" constant="8" id="RJl-CC-Gis"/>
+                            <constraint firstItem="EhF-EA-Gl0" firstAttribute="centerY" secondItem="3z3-Bc-VAh" secondAttribute="centerY" id="RsJ-vC-f6l"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="8hz-Vf-gUS" secondAttribute="trailing" constant="-20" id="m8g-CA-6lX"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="EhF-EA-Gl0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="3B1-eA-w1z"/>
+                                <exclude reference="8Gs-WU-FI1"/>
+                                <exclude reference="m8g-CA-6lX"/>
+                                <exclude reference="MVU-lQ-dg3"/>
+                                <exclude reference="RJl-CC-Gis"/>
+                                <exclude reference="RsJ-vC-f6l"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="EhF-EA-Gl0"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="3B1-eA-w1z"/>
+                                <include reference="8Gs-WU-FI1"/>
+                                <include reference="m8g-CA-6lX"/>
+                                <include reference="MVU-lQ-dg3"/>
+                                <include reference="RJl-CC-Gis"/>
+                                <exclude reference="RsJ-vC-f6l"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="8hz-Vf-gUS" id="Meq-cP-IUA"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="901.5" y="-700.5"/>
         </scene>
         <!--Search-->
         <scene sceneID="OAz-wx-CXM">
@@ -809,7 +889,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXz-WY-GOU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1635" y="268.5"/>
+            <point key="canvasLocation" x="-663" y="-700.5"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="PXS-jc-i1i">

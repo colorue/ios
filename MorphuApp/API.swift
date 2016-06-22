@@ -279,7 +279,6 @@ class API {
     func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
-            self.getFullUser(activeUser, delagate: nil)
             self.loadWall()
             self.loadUsers(user)
             self.loadFacebookFriends()
@@ -374,7 +373,6 @@ class API {
                 let userId = snapshot.key
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
                     if !(userId == currentUser.uid) {
-//                        self.getFullUser(user)
                         self.users.append(user)
                     }
                 })
@@ -392,28 +390,31 @@ class API {
                 }
             })
         
-        self.delagate?.refresh()
+//        self.delagate?.refresh()
     }
     
     private func loadFacebookFriends() {
-        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
-        
-        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-            result:AnyObject!, error:NSError!) -> Void in
+        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+
+            let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
             
-            if let error = error {
-                print(error.description)
-                return
-            } else {
-                let resultdict = result as! NSDictionary
-                let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                for i in 0 ..< data.count {
-                    let valueDict : NSDictionary = data[i] as! NSDictionary
-                    let id = valueDict.objectForKey("id") as! String
-                    self.loadUserByFBID(id)
+            request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+                result:AnyObject!, error:NSError!) -> Void in
+                
+                if let error = error {
+                    print(error.description)
+                    return
+                } else {
+                    let resultdict = result as! NSDictionary
+                    let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                    for i in 0 ..< data.count {
+                        let valueDict : NSDictionary = data[i] as! NSDictionary
+                        let id = valueDict.objectForKey("id") as! String
+                        self.loadUserByFBID(id)
+                    }
                 }
             }
-        }
+        })
     }
     
     private func loadUserByFBID(FBID: String) {

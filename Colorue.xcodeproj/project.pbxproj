@@ -48,6 +48,7 @@
 		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
 		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
 		87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */; };
+		87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB2481D19FE490016FC59 /* ShareViewController.swift */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
 		87C204E51D0B8F6F0061DDB2 /* ProfilePicActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */; };
 		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
@@ -110,6 +111,7 @@
 		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCell.swift; sourceTree = "<group>"; };
 		87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
+		87AFB2481D19FE490016FC59 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87C204E41D0B8F6F0061DDB2 /* ProfilePicActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePicActivity.swift; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 		87F754EE1D1865EF005B4A14 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				87AFB2481D19FE490016FC59 /* ShareViewController.swift */,
 				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
 				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
 			);
@@ -514,6 +517,7 @@
 				879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */,
 				8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
+				87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,
 				87DEFB231D0CEDBD00924FDC /* SignInViewController.swift in Sources */,

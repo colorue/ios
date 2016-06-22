@@ -192,10 +192,22 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func unwind(sender: UIBarButtonItem) {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
         self.save()
-        self.backButton.enabled = false
-        self.performSegueWithIdentifier("backToHome", sender: self)
+
+        if (!prefs.boolForKey("firstCloseCanvas")) {
+            let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.Alert)
+            firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alert in
+                NSNotificationCenter.defaultCenter().removeObserver(self)
+                self.performSegueWithIdentifier("backToHome", sender: self)
+            }))
+            firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+
+            self.presentViewController(firstCloseCanvas, animated: true, completion: nil)
+            prefs.setValue(true, forKey: "firstCloseCanvas")
+        } else {
+            NSNotificationCenter.defaultCenter().removeObserver(self)
+            self.performSegueWithIdentifier("backToHome", sender: self)
+        }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -204,6 +216,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             
             targetController.tableView.setContentOffset(CGPointZero, animated: true)
 
+        } else if  segue.identifier == "toShare" {
+            let newDrawing = Drawing(artist: User(), drawingId: "")
+            newDrawing.setImage((canvas?.getDrawing())!)
+            
+            let targetController = segue.destinationViewController as! ShareViewController
+            
+            targetController.drawingInstance = newDrawing
         }
     }
     

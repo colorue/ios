@@ -15,9 +15,24 @@ class ProfileViewController: WallViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-                        
+        
+        self.navigationController?.hidesBarsOnSwipe = false
+
         self.drawingSource = userInstance!.getDrawings
         API.sharedInstance.getFullUser(userInstance!, delagate: self)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+
+        let prefs = NSUserDefaults.standardUserDefaults()
+        if (!prefs.boolForKey("firstProfileView")) && userInstance?.userId == API.sharedInstance.getActiveUser().userId {
+            prefs.setValue(true, forKey: "firstProfileView")
+            
+            let firstProfileView = UIAlertController(title: "Set your profile drawing", message: "Press ↥ to edit, delete, upload, download, or set a drawing as your profile picture" , preferredStyle: UIAlertControllerStyle.Alert)
+            firstProfileView.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(firstProfileView, animated: true, completion: nil)
+        }
     }
     
     // MARK: - Table view data source

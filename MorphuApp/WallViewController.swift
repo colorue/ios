@@ -31,6 +31,8 @@ class WallViewController: UITableViewController, APIDelagate {
         
         self.navigationController?.navigationBar.tintColor = self.tintColor
         
+//        self.navigationController?.hidesBarsOnSwipe = true
+        
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refresh), forControlEvents: .ValueChanged)
     }
@@ -207,7 +209,7 @@ class WallViewController: UITableViewController, APIDelagate {
         }
         
         avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-        self.presentViewController(avc, animated: false, completion: nil)
+        self.presentViewController(avc, animated: true, completion: nil)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

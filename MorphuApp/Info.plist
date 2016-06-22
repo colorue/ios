@@ -23,16 +23,17 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>colorue</string>
 				<string>fb1213218985375111</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>1213218985375111</string>
 	<key>FacebookDisplayName</key>
-	<string>Canvi</string>
+	<string>Colorue</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -45,7 +46,6 @@
 	<key>UIAppFonts</key>
 	<array>
 		<string>playtime.ttf</string>
-		<string>SF_Cartoonist_Hand.ttf</string>
 		<string>OpenSans-Regular.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
