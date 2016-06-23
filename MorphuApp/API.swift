@@ -395,27 +395,24 @@ class API {
     }
     
     private func loadFacebookFriends() {
-        dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-
-            let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
+        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
+        
+        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+            result:AnyObject!, error:NSError!) -> Void in
             
-            request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-                result:AnyObject!, error:NSError!) -> Void in
-                
-                if let error = error {
-                    print(error.description)
-                    return
-                } else {
-                    let resultdict = result as! NSDictionary
-                    let data : NSArray = resultdict.objectForKey("data") as! NSArray
-                    for i in 0 ..< data.count {
-                        let valueDict : NSDictionary = data[i] as! NSDictionary
-                        let id = valueDict.objectForKey("id") as! String
-                        self.loadUserByFBID(id)
-                    }
+            if let error = error {
+                print(error.description)
+                return
+            } else {
+                let resultdict = result as! NSDictionary
+                let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                for i in 0 ..< data.count {
+                    let valueDict : NSDictionary = data[i] as! NSDictionary
+                    let id = valueDict.objectForKey("id") as! String
+                    self.loadUserByFBID(id)
                 }
             }
-        })
+        }
     }
     
     private func loadUserByFBID(FBID: String) {
