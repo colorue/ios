@@ -16,8 +16,11 @@ class WallViewController: DrawingListViewController {
         self.tintColor = redColor
         super.viewDidLoad()
         
+        loadMoreDrawings = api.loadWall
+        
         self.refreshControl?.beginRefreshing()
 //        self.navigationController?.hidesBarsOnSwipe = true
+        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refresh), forControlEvents: .ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {

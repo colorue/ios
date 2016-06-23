@@ -36,6 +36,7 @@ class API {
     private var imageDict = [String: UIImage]()
     
     private var oldestTimeLoaded: Double = -99999999999999
+    private var oldestExploreLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
     
     var delagate: APIDelagate?
@@ -293,6 +294,7 @@ class API {
         self.userDict.removeAll()
         self.imageDict.removeAll()
         self.activeUser = nil
+        self.oldestExploreLoaded = -99999999999999
         self.oldestTimeLoaded = -99999999999999
         self.newestTimeLoaded = 0
     }
@@ -344,10 +346,11 @@ class API {
         }
     
     func loadExplore() {
-        myRootRef.child("drawings").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
-            .observeEventType(.ChildAdded, withBlock: { snapshot in
+        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8)
+            .queryStartingAtValue(self.oldestExploreLoaded).observeEventType(.ChildAdded, withBlock: { snapshot in
                 let drawingId = snapshot.key
                 self.getDrawing(drawingId, callback: { (drawing: Drawing, new: Bool) -> () in
+                    self.oldestExploreLoaded = drawing.timeStamp + 1
                     self.explore.append(drawing)
                 })
             })
@@ -431,7 +434,6 @@ class API {
             })
         })
     }
-    
 
     
     // MARK: Image Upload + Download Methods

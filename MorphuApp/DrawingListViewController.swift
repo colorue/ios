@@ -23,6 +23,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     let profilePicActivity = ProfilePicActivity()
     var avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
     
+    var loadMoreDrawings: (()->())?
+    
     // MARK: Loading Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         //        self.navigationController?.hidesBarsOnSwipe = true
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(WallViewController.refresh), forControlEvents: .ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -138,7 +139,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
         
         if (indexPath.row + 1 >= drawingSource().count) {
-            api.loadWall()
+            self.loadMoreDrawings!()
         }
     }
     

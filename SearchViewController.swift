@@ -20,6 +20,10 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
         api.loadExplore()
         self.drawingSource = API.sharedInstance.getExplore
         
+        loadMoreDrawings = api.loadExplore
+
+        bottomRefreshControl.addTarget(self, action: #selector(SearchViewController.refresh), forControlEvents: .ValueChanged)
+
         super.viewDidLoad()
     }
     
