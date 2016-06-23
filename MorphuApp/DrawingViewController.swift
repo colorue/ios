@@ -53,7 +53,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         if prefs.boolForKey("saved") {
             if baseImage == nil {
                 if let savedDrawing = prefs.stringForKey("savedDrawing") {
-                    baseImage = UIImage.fromBase64(savedDrawing)
+                    baseImage = UIImage(named: "Onboarding5")//UIImage.fromBase64(savedDrawing)
                 }
             }
         }

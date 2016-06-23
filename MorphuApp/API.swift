@@ -279,6 +279,7 @@ class API {
     func loadData(user: FIRUser) {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
+            self.getFullUser(activeUser, delagate: self.delagate)
             self.loadWall()
             self.loadUsers(user)
             self.loadFacebookFriends()
