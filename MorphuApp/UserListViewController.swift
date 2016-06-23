@@ -16,9 +16,15 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     let api = API.sharedInstance
     
     var tintColor = purpleColor
+    
+    var controller: UIViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if controller == nil {
+            controller = self
+        }
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
@@ -110,12 +116,12 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     // MARK: Segue Methods
     
     @objc private func invite(sender: UIBarButtonItem) {
-        self.performSegueWithIdentifier("toInvite", sender: self)
+        self.controller!.performSegueWithIdentifier("toInvite", sender: self)
     }
 
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.performSegueWithIdentifier("showUser", sender: self)
+        self.controller!.performSegueWithIdentifier("showUser", sender: self)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

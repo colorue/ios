@@ -9,7 +9,7 @@
 import UIKit
 import CCBottomRefreshControl
 
-class ProfileViewController: WallViewController {
+class ProfileViewController: DrawingListViewController {
     
     var userInstance: User?
         
@@ -99,33 +99,28 @@ class ProfileViewController: WallViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showLikes" {
-            let targetController = segue.destinationViewController as! UserListViewController
-            targetController.navigationItem.title = "Likes"
-            targetController.tintColor = self.tintColor
-            targetController.userSource = { self.userInstance!.getDrawings()[sender!.tag].getLikes() }
-        } else if segue.identifier == "showComments" {
-            let targetController = segue.destinationViewController as! CommentViewController
-            targetController.tintColor = self.tintColor
-            targetController.drawingInstance = userInstance!.getDrawings()[sender!.tag]
-        }  else if segue.identifier == "showFollowers" {
-            let targetController = segue.destinationViewController as! UserListViewController
-            targetController.tintColor = self.tintColor
-            targetController.navigationItem.title = "Followers"
-            targetController.userSource = { self.userInstance!.getFollowers() }
-        } else if segue.identifier == "showFollowing" {
-            let targetController = segue.destinationViewController as! UserListViewController
-            targetController.tintColor = self.tintColor
-            targetController.navigationItem.title = "Following"
-            targetController.userSource = { self.userInstance!.getFollowing() }
-        }
-    }
-
     private func unfollow(sender: UIButton) {
         sender.selected = false
         api.getActiveUser().unfollow(userInstance!)
         api.unfollow(userInstance!)
+    }
+    
+    
+    // MARK: Segues
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
+        if segue.identifier == "showFollowers" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.tintColor = self.tintColor!
+            targetController.navigationItem.title = "Followers"
+            targetController.userSource = { self.userInstance!.getFollowers() }
+        } else if segue.identifier == "showFollowing" {
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.tintColor = self.tintColor!
+            targetController.navigationItem.title = "Following"
+            targetController.userSource = { self.userInstance!.getFollowing() }
+        }
     }
     
     func addLogoutButton() {
