@@ -355,18 +355,18 @@ class API {
                 })
             })
         
-//        myRootRef.child("drawings").observeEventType(.ChildRemoved, withBlock: { snapshot in
-//            let drawingId = snapshot.key
-//            var i = 0
-//            self.drawingDict[drawingId] = nil
-//            for drawing in self.wall {
-//                if drawing.getDrawingId() == drawingId {
-//                    self.wall.removeAtIndex(i)
-//                    return
-//                }
-//                i += 1
-//            }
-//        })
+        myRootRef.child("drawings").observeEventType(.ChildRemoved, withBlock: { snapshot in
+            let drawingId = snapshot.key
+            var i = 0
+            self.drawingDict[drawingId] = nil
+            for drawing in self.explore {
+                if drawing.getDrawingId() == drawingId {
+                    self.explore.removeAtIndex(i)
+                    return
+                }
+                i += 1
+            }
+        })
     }
     
     private func loadUsers(currentUser: FIRUser) {

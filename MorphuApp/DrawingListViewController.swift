@@ -41,6 +41,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         //        self.navigationController?.hidesBarsOnSwipe = true
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
+        bottomRefreshControl.addTarget(self, action: #selector(DrawingListViewController.refresh), forControlEvents: .ValueChanged)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -139,7 +140,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
         
         if (indexPath.row + 1 >= drawingSource().count) {
-            self.loadMoreDrawings!()
+            self.loadMoreDrawings?()
         }
     }
     
@@ -205,7 +206,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawingSource()[sender!.tag]
-        } else if segue.identifier == "showUser" {
+        } else if segue.identifier == "showUserButton" {
             let targetController = segue.destinationViewController as! ProfileViewController
             targetController.navigationItem.title = drawingSource()[sender!.tag].getArtist().username
             targetController.tintColor = self.tintColor!

@@ -70,6 +70,19 @@ class ProfileViewController: DrawingListViewController {
             
             profileCell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
             profileCell.followButton.tintColor = tintColor
+
+            profileCell.followButton.setImage(UIImage(named: "Follow Long")!, forState: .Normal)
+
+            if tintColor == redColor {
+                profileCell.followButton.setImage(UIImage(named: "Followed Red"), forState: .Selected)
+            } else if tintColor == orangeColor {
+                profileCell.followButton.setImage(UIImage(named: "Followed Orange"), forState: .Selected)
+            } else if tintColor == blueColor {
+                profileCell.followButton.setImage(UIImage(named: "Followed Blue"), forState: .Selected)
+            } else {
+                profileCell.followButton.setImage(UIImage(named: "Followed Purple"), forState: .Selected)
+            }
+            
             
             if userInstance!.userId == api.getActiveUser().userId {
                 profileCell.followButton.setImage(nil, forState: .Normal)

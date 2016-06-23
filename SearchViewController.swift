@@ -73,6 +73,7 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if searchController.active {
+            print("searchController.active")
             let userListController = searchController.searchResultsController as! UserListViewController
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = userListController.tableView.indexPathForSelectedRow?.row {
