@@ -29,7 +29,7 @@ class ProfileViewController: WallViewController {
         if (!prefs.boolForKey("firstProfileView")) && userInstance?.userId == API.sharedInstance.getActiveUser().userId {
             prefs.setValue(true, forKey: "firstProfileView")
             
-            let firstProfileView = UIAlertController(title: "Set your profile drawing", message: "Press ↥ to edit, delete, upload, download, or set a drawing as your profile picture" , preferredStyle: UIAlertControllerStyle.Alert)
+            let firstProfileView = UIAlertController(title: "Set your profile drawing", message: "Press ↥ to upload, download, edit, or set a drawing as your profile picture" , preferredStyle: UIAlertControllerStyle.Alert)
             firstProfileView.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             self.presentViewController(firstProfileView, animated: true, completion: nil)
         }
