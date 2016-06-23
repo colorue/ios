@@ -17,6 +17,11 @@ class WallViewController: UITableViewController, APIDelagate {
     var drawingSource = API.sharedInstance.getWall
     
     var tintColor = redColor
+    
+    let editActivity = EditActivity()
+    let deleteActivity = DeleteActivity()
+    let profilePicActivity = ProfilePicActivity()
+    var avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
 
     // MARK: Loading Methods
     override func viewDidLoad() {
@@ -196,13 +201,8 @@ class WallViewController: UITableViewController, APIDelagate {
     func upload(sender: UIButton) {
         
         let drawing = drawingSource()[sender.tag]
-        let avc: UIActivityViewController
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
-            let editActivity = EditActivity()
-            let deleteActivity = DeleteActivity()
-            let profilePicActivity = ProfilePicActivity()
-
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
         } else {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)

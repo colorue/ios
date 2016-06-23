@@ -4084,7 +4084,7 @@
             </objects>
             <point key="canvasLocation" x="-1092" y="3390"/>
         </scene>
-        <!--Friends-->
+        <!--Invite-->
         <scene sceneID="Rvq-N9-hH6">
             <objects>
                 <tableViewController id="Iy0-4o-KD9" customClass="InviteViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
@@ -4189,7 +4189,7 @@
                             <outlet property="delegate" destination="Iy0-4o-KD9" id="znL-XP-BHr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="x98-vM-URW">
+                    <navigationItem key="navigationItem" title="Invite" id="x98-vM-URW">
                         <barButtonItem key="backBarButtonItem" title=" " id="LlW-3p-dyi"/>
                     </navigationItem>
                 </tableViewController>

@@ -17,7 +17,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     
     let tintColor = blueColor
     
-    let controller = MFMessageComposeViewController()
+    var controller = MFMessageComposeViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,14 +55,19 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     }
     
     private func sendInvite(contact: Contact) {
+
         if (MFMessageComposeViewController.canSendText()) {
             controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test:\nhttps://goo.gl/i0Kpmf\nIt's an iOS app for easily drawing on your phone and sharing your creations"
-            if let image = api.getActiveUser().profileImage {
-                controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "\(api.getActiveUser().username)'s profile.png")
-            }
+
             controller.recipients = [contact.getPhoneNumber()!]
+            if let image = self.api.getActiveUser().profileImage {
+                controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "\(self.api.getActiveUser().username)'s profile.png")
+            }
             controller.messageComposeDelegate = self
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.resignFirstResponder()
+
+            self.presentViewController(controller, animated: true, completion: {
+            })
         }
     }
     
@@ -75,6 +80,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     
     func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
         self.dismissViewControllerAnimated(true, completion: nil)
+        self.controller = MFMessageComposeViewController()
     }
     
     // MARK: APIDelagate Methods

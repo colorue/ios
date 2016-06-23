@@ -163,7 +163,6 @@ class API {
                 user.addDrawing(drawing)
             })
         })
-        delagate?.refresh()
         user.setfullUserLoaded()
         }
     }
@@ -283,7 +282,6 @@ class API {
             self.loadWall()
             self.loadUsers(user)
             self.loadFacebookFriends()
-            self.delagate?.refresh()
         })
     }
     
@@ -390,8 +388,6 @@ class API {
                     i += 1
                 }
             })
-        
-//        self.delagate?.refresh()
     }
     
     private func loadFacebookFriends() {
@@ -421,7 +417,6 @@ class API {
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
                 self.facebookFriends.append(user)
-                self.delagate?.refresh()
             })
         })
     }
@@ -433,7 +428,6 @@ class API {
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
                 callback(user)
-                self.delagate?.refresh()
             })
         })
     }
