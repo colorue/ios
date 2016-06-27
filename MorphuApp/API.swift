@@ -315,7 +315,7 @@ class API {
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
                         self.newestTimeLoaded = drawing.timeStamp
-                        self.wall.insert(drawing, atIndex: 0)
+                        self.wall.insert(drawing, atIndex: 1)
                     } else {
                         if new {
                             var i = 0
@@ -373,6 +373,7 @@ class API {
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
             self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
+                drawing.drawingOfTheDay = true
                 self.wall.insert(drawing, atIndex: 0)
             })
         })
@@ -432,7 +433,6 @@ class API {
             })
         })
     }
-    
     
     func checkNumber(number: String, callback: (User) -> ()) {
         myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEventOfType(.Value, withBlock: { snapshot in

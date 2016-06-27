@@ -17,6 +17,7 @@ class Drawing {
     private var comments = [Comment]()
     private var image = UIImage()
     var delagate: DrawingDelagate?
+    var drawingOfTheDay = false
     
     init(artist: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, drawingId: String = "") {
         self.artist = artist
