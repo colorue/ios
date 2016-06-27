@@ -22,10 +22,10 @@ class API {
     
     let storage = FIRStorage.storage()
     let storageRef: FIRStorageReference
-    
 
     private var wall = [Drawing]()
     private var explore = [Drawing]()
+    private var drawingOfTheDay: Drawing?
     private var users = [User]()
     private var facebookFriends = [User]()
 
@@ -280,6 +280,7 @@ class API {
         self.getUser(user.uid, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
             self.getFullUser(activeUser, delagate: self.delagate)
+            self.loadDrawingOfTheDay()
             self.loadWall()
             self.loadUsers(user)
             self.loadFacebookFriends()
@@ -366,6 +367,14 @@ class API {
                 }
                 i += 1
             }
+        })
+    }
+    
+    func loadDrawingOfTheDay() {
+        myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
+            self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
+                self.wall.insert(drawing, atIndex: 0)
+            })
         })
     }
     

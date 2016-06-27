@@ -82,8 +82,11 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
-        let drawing = drawingSource()[indexPath.row]
+        
         let drawingCell = cell as! DrawingCell
+        let drawing: Drawing
+
+        drawing = drawingSource()[indexPath.row]
         
         drawingCell.drawingImage.alpha = 0.0
         drawingCell.progressBar.hidden = true

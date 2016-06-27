@@ -130,7 +130,7 @@
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		87F754EF1D187184005B4A14 /* InviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteCell.swift; sourceTree = "<group>"; };
+		87F754EF1D187184005B4A14 /* InviteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InviteCell.swift; path = ../InviteCell.swift; sourceTree = "<group>"; };
 		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
 		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -169,7 +169,6 @@
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
-				87F754EF1D187184005B4A14 /* InviteCell.swift */,
 				87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
@@ -261,6 +260,7 @@
 		8763D31C1CEE245F00E3D528 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				87F754EF1D187184005B4A14 /* InviteCell.swift */,
 				8774BA461CFF823B00B26931 /* ProfileCell.swift */,
 				8763D2E61CEE229C00E3D528 /* UserCell.swift */,
 				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
