@@ -151,7 +151,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
     
     func loginCallback(user: FIRUser?) {
         activityIndicator.stopAnimating()
-        if let user = user {
+        if user != nil {
             if !newUser.FacebookSignUp {
                 prefs.setValue(newUser.email, forKey: "email")
                 prefs.setValue(newUser.password, forKey: "password")

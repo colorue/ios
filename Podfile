@@ -13,8 +13,9 @@ target 'Colorue' do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
-    pod 'Firebase/Messaging'
+#    pod 'Firebase/Messaging'
     pod 'Firebase/Storage'
+    pod 'Firebase/Crash'
 
     pod 'CCBottomRefreshControl'
     pod 'SinchVerification-Swift'
