@@ -16,7 +16,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var delagate: CanvasDelagate
     private var lastPoint: CGPoint?
     private var currentStroke: UIImage?
-//    private var currentLine: UIImage?
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
     private let positionIndicator = UIImage(named: "PositionIndicator")!
@@ -105,6 +104,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if state == .Began {
             pts.removeAll()
             pts.append(position)
+            finishStroke()
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
         } else if state == .Changed {
@@ -119,7 +119,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
                 pts[0] = pts[3]
                 pts[1] = pts[4]
                 pts.removeLast(3)
-//                currentLine = nil
             }
             setUnderFingerView(position, dropper: false)
         } else if state == .Ended {
@@ -134,15 +133,13 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
                 pts[0] = pts[3]
                 pts[1] = pts[4]
                 pts.removeLast(3)
-//                currentLine = nil
             } else {
-                self.drawDot()
+                self.finishStroke()
             }
             path.removeAllPoints()
             pts.removeAll()
             addToUndoStack(imageView.image)
             currentStroke = nil
-//            currentLine = nil
             delagate.hideUnderFingerView()
         }
   
@@ -180,7 +177,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     // MARK: Drawing Methods
     
-    private func drawDot() {
+    private func finishStroke() {
         
         if !pts.isEmpty {
             UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
@@ -188,7 +185,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
 
             let color = delagate.getCurrentColor()
-            if pts.count == 2 {
+            
+            
+            if pts.count <= 2 {
                 CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts.first!.x, pts.first!.y)
                 CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pts.last!.x, pts.last!.y)
             } else if pts.count == 3 {

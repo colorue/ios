@@ -280,14 +280,17 @@ class API {
     //MARK: Load Data
     
     func loadData() {
-        let userId = FIRAuth.auth()!.currentUser!.uid
-        self.getUser(userId, callback: { (activeUser: User) -> () in
-            self.activeUser = activeUser
-            self.getFullUser(activeUser, delagate: self.delagate)
-//            self.loadDrawingOfTheDay()
-            self.loadWall()
-//            self.loadUsers(user)
-            self.loadFacebookFriends()
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            let userId = FIRAuth.auth()!.currentUser!.uid
+            self.getUser(userId, callback: { (activeUser: User) -> () in
+                self.activeUser = activeUser
+                self.getFullUser(activeUser, delagate: self.delagate)
+    //            self.loadDrawingOfTheDay()
+                self.loadWall()
+                self.loadExplore()
+                self.loadUsers(activeUser)
+                self.loadFacebookFriends()
+            })
         })
     }
     
@@ -383,12 +386,12 @@ class API {
         })
     }
     
-    private func loadUsers(currentUser: FIRUser) {
+    private func loadUsers(activeUser: User) {
         myRootRef.child("users").queryOrderedByKey()
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 let userId = snapshot.key
                 self.getUser(snapshot.key, callback: { (user: User) -> () in
-                    if !(userId == currentUser.uid) {
+                    if !(userId == activeUser.userId) {
                         self.users.append(user)
                     }
                 })

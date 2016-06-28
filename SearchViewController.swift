@@ -17,7 +17,6 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         self.tintColor = orangeColor
         self.setUpSearchController()
-        api.loadExplore()
         self.drawingSource = API.sharedInstance.getExplore
         
         loadMoreDrawings = api.loadExplore

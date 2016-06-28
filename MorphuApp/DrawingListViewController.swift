@@ -34,11 +34,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
         
-        self.refreshControl?.beginRefreshing()
-        
         self.navigationController?.navigationBar.tintColor = self.tintColor
-        
-        //        self.navigationController?.hidesBarsOnSwipe = true
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(DrawingListViewController.refresh), forControlEvents: .ValueChanged)
@@ -50,8 +46,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         api.delagate = self
         self.refresh()
         
-        self.tableView.reloadData()
-        self.tableView.bottomRefreshControl = bottomRefreshControl // Needs to be in viewDidApear
+        // bottomRefreshControl needs to be set in viewDidApear
+        self.tableView.bottomRefreshControl = bottomRefreshControl
     }
     
     func scrollToTop(sender: UIButton) {
