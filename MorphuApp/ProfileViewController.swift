@@ -19,7 +19,7 @@ class ProfileViewController: DrawingListViewController {
         self.navigationController?.hidesBarsOnSwipe = false
 
         self.drawingSource = userInstance!.getDrawings
-        API.sharedInstance.getFullUser(userInstance!, delagate: self)
+        API.sharedInstance.loadFulUser(userInstance!)
     }
     
     override func viewDidAppear(animated: Bool) {

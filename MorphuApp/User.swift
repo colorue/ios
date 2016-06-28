@@ -96,6 +96,17 @@ class User {
         }
     }
     
+    func removeDrawing(drawing: Drawing) {
+        var i = 0
+        for drawing_ in self.drawings {
+            if drawing_.getDrawingId() == drawing.getDrawingId() {
+                self.drawings.removeAtIndex(i)
+                return
+            }
+            i += 1
+        }
+    }
+    
     func getDrawings() -> [Drawing] {
         return self.drawings
     }

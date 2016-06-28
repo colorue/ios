@@ -127,8 +127,7 @@ class API {
         }
     }
     
-    func getFullUser(user: User, delagate: APIDelagate?) {
-        
+    func getFullActiveUser(user: User) {
         if !user.getfullUserLoaded() {
             self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
                 self.getUser(snapshot.key, callback: { (follow: User) -> () in
@@ -163,6 +162,48 @@ class API {
             self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.addDrawing(drawing)
+                })
+            })
+            user.setfullUserLoaded()
+        }
+    }
+    
+    
+    func loadFulUser(user: User) {
+        if !user.getfullUserLoaded() {
+            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (follow: User) -> () in
+                    user.follow(follow)
+                })
+            })
+            
+            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
+                    user.unfollow(unfollow)
+                })
+            })
+            
+            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (follower: User) -> () in
+                    user.addFollower(follower)
+                })
+            })
+            
+            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
+                    user.removeFollower(unfollower)
+                })
+            })
+            
+            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                    user.addDrawing(drawing)
+                })
+            })
+            
+            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                    user.removeDrawing(drawing)
                 })
             })
             user.setfullUserLoaded()
@@ -289,7 +330,7 @@ class API {
             let userId = FIRAuth.auth()!.currentUser!.uid
             self.getUser(userId, callback: { (activeUser: User) -> () in
                 self.activeUser = activeUser
-                self.getFullUser(activeUser, delagate: self.delagate)
+                self.getFullActiveUser(activeUser)
                 self.loadDrawingOfTheDay()
                 self.loadWall()
                 self.setDeleteWall()

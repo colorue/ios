@@ -84,18 +84,18 @@ class DrawingListViewController: UITableViewController, APIDelagate {
 
         if indexPath.section == 0 {
             drawing = api.getDrawingOfTheDay()[0]
+            self.loadDrawingCell(drawing, drawingCell: drawingCell, tag: -1)
         } else {
             drawing = drawingSource()[indexPath.row]
+            self.loadDrawingCell(drawing, drawingCell: drawingCell, tag: indexPath.row)
         }
-        
-        self.loadDrawingCell(drawing, drawingCell: drawingCell, indexPath: indexPath)
         
         if (indexPath.row + 1 >= drawingSource().count) {
             self.loadMoreDrawings?()
         }
     }
     
-    private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, indexPath: NSIndexPath) {
+    private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, tag: Int) {
         drawingCell.drawingImage.alpha = 0.0
         drawingCell.progressBar.hidden = true
         
@@ -118,11 +118,11 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         drawingCell.timeCreated.text = drawing.getTimeSinceSent()
         drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
         
-        drawingCell.userButton.tag = indexPath.row
-        drawingCell.uploadButton.tag = indexPath.row
-        drawingCell.likeButton.tag = indexPath.row
-        drawingCell.likesButton.tag = indexPath.row
-        drawingCell.commentsButton.tag = indexPath.row
+        drawingCell.userButton.tag = tag
+        drawingCell.uploadButton.tag = tag
+        drawingCell.likeButton.tag = tag
+        drawingCell.likesButton.tag = tag
+        drawingCell.commentsButton.tag = tag
         
         drawingCell.uploadButton.tintColor = tintColor
         drawingCell.likeButton.tintColor = tintColor
@@ -192,7 +192,12 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     func upload(sender: UIButton) {
         
-        let drawing = drawingSource()[sender.tag]
+        let drawing: Drawing
+        if sender.tag > 0 {
+            drawing = drawingSource()[sender.tag]
+        } else {
+            drawing = api.getDrawingOfTheDay()[0]
+        }
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
@@ -205,20 +210,27 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let drawing: Drawing
+        if sender!.tag > 0 {
+            drawing = drawingSource()[sender!.tag]
+        } else {
+            drawing = api.getDrawingOfTheDay()[0]
+        }
+        
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = self.drawingSource()[sender!.tag].getLikes
+            targetController.userSource = drawing.getLikes
         } else if segue.identifier == "showComments" {
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.tintColor = self.tintColor!
-            targetController.drawingInstance = drawingSource()[sender!.tag]
+            targetController.drawingInstance = drawing
         } else if segue.identifier == "showUserButton" {
             let targetController = segue.destinationViewController as! ProfileViewController
-            targetController.navigationItem.title = drawingSource()[sender!.tag].getArtist().username
+            targetController.navigationItem.title = drawing.getArtist().username
             targetController.tintColor = self.tintColor!
-            targetController.userInstance = drawingSource()[sender!.tag].getArtist()
+            targetController.userInstance = drawing.getArtist()
         }
     }
     

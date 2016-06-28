@@ -32,7 +32,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        api.delagate = self
+//        api.delagate = self
         self.tableView.reloadData()
     }
     
