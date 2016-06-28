@@ -25,6 +25,7 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var likesButton: UIButton!
     @IBOutlet weak var commentsButton: UIButton!
     
+    @IBOutlet weak var drawingOfTheDayLabel: UILabel!
     
     func stProgress(progress: Float) {
         progressBar.setProgress(1.0 - progress, animated: true)

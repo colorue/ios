@@ -82,8 +82,20 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         let drawingCell = cell as! DrawingCell
         let drawing: Drawing
 
-        drawing = drawingSource()[indexPath.row]
+        if indexPath.section == 0 {
+            drawing = api.getDrawingOfTheDay()[0]
+        } else {
+            drawing = drawingSource()[indexPath.row]
+        }
         
+        self.loadDrawingCell(drawing, drawingCell: drawingCell, indexPath: indexPath)
+        
+        if (indexPath.row + 1 >= drawingSource().count) {
+            self.loadMoreDrawings?()
+        }
+    }
+    
+    private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, indexPath: NSIndexPath) {
         drawingCell.drawingImage.alpha = 0.0
         drawingCell.progressBar.hidden = true
         
@@ -137,11 +149,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         } else {
             drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
         }
-        
-        if (indexPath.row + 1 >= drawingSource().count) {
-            self.loadMoreDrawings?()
-        }
     }
+
     
     func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
         
@@ -212,4 +221,5 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             targetController.userInstance = drawingSource()[sender!.tag].getArtist()
         }
     }
+    
 }

@@ -23,9 +23,9 @@ class API {
     let storage = FIRStorage.storage()
     let storageRef: FIRStorageReference
 
+    private var drawingOfTheDay = [Drawing]()
     private var wall = [Drawing]()
     private var explore = [Drawing]()
-    private var drawingOfTheDay: Drawing?
     private var users = [User]()
     private var facebookFriends = [User]()
 
@@ -38,6 +38,7 @@ class API {
     private var oldestTimeLoaded: Double = -99999999999999
     private var oldestExploreLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
+    
     
     var delagate: APIDelagate?
     
@@ -129,42 +130,42 @@ class API {
     func getFullUser(user: User, delagate: APIDelagate?) {
         
         if !user.getfullUserLoaded() {
-        self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
-            self.getUser(snapshot.key, callback: { (follow: User) -> () in
-                user.follow(follow)
-                self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
+            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (follow: User) -> () in
+                    user.follow(follow)
+                    self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                        self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
+                    })
                 })
             })
-        })
-        
-        self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
-            self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
-                user.unfollow(unfollow)
-                self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
-                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").removeValue()
+            
+            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
+                    user.unfollow(unfollow)
+                    self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                        self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").removeValue()
+                    })
                 })
             })
-        })
-        
-        self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
-            self.getUser(snapshot.key, callback: { (follower: User) -> () in
-                user.addFollower(follower)
+            
+            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (follower: User) -> () in
+                    user.addFollower(follower)
+                })
             })
-        })
-        
-        self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
-            self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
-                user.removeFollower(unfollower)
+            
+            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
+                    user.removeFollower(unfollower)
+                })
             })
-        })
-        
-        self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
-            self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
-                user.addDrawing(drawing)
+            
+            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                    user.addDrawing(drawing)
+                })
             })
-        })
-        user.setfullUserLoaded()
+            user.setfullUserLoaded()
         }
     }
     
@@ -261,6 +262,10 @@ class API {
         return self.activeUser!
     }
     
+    func getDrawingOfTheDay() -> [Drawing] {
+        return self.drawingOfTheDay
+    }
+    
     func getWall() -> [Drawing] {
         return self.wall
     }
@@ -285,9 +290,11 @@ class API {
             self.getUser(userId, callback: { (activeUser: User) -> () in
                 self.activeUser = activeUser
                 self.getFullUser(activeUser, delagate: self.delagate)
-    //            self.loadDrawingOfTheDay()
+                self.loadDrawingOfTheDay()
                 self.loadWall()
+                self.setDeleteWall()
                 self.loadExplore()
+                self.setDeleteExplore()
                 self.loadUsers(activeUser)
                 self.loadFacebookFriends()
             })
@@ -316,13 +323,12 @@ class API {
                         self.wall.append(drawing)
                         self.oldestTimeLoaded = drawing.timeStamp
                         self.newestTimeLoaded = drawing.timeStamp
-                        self.delagate?.refresh()
                     } else if drawing.timeStamp > self.oldestTimeLoaded {
                         self.oldestTimeLoaded = drawing.timeStamp
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
                         self.newestTimeLoaded = drawing.timeStamp
-                        self.wall.insert(drawing, atIndex: 1)
+                        self.wall.insert(drawing, atIndex: 0)
                     } else {
                         if new {
                             var i = 0
@@ -338,7 +344,9 @@ class API {
                 })
             })
         
-        
+    }
+    
+    private func setDeleteWall() {
         myRootRef.child("users/\(getActiveUser().userId)/wall").observeEventType(.ChildRemoved, withBlock: { snapshot in
                 let drawingId = snapshot.key
                 var i = 0
@@ -352,7 +360,8 @@ class API {
                 }
             })
         }
-    
+
+
     func loadExplore() {
         myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8)
             .queryStartingAtValue(self.oldestExploreLoaded).observeEventType(.ChildAdded, withBlock: { snapshot in
@@ -362,7 +371,9 @@ class API {
                     self.explore.append(drawing)
                 })
             })
-        
+    }
+    
+    private func setDeleteExplore() {
         myRootRef.child("drawings").observeEventType(.ChildRemoved, withBlock: { snapshot in
             let drawingId = snapshot.key
             var i = 0
@@ -380,8 +391,9 @@ class API {
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
             self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
-                drawing.drawingOfTheDay = true
-                self.wall.insert(drawing, atIndex: 0)
+                self.drawingOfTheDay.removeAll()
+                self.drawingOfTheDay.append(drawing)
+                self.delagate?.refresh()
             })
         })
     }

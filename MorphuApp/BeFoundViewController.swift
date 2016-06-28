@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class BeFoundViewController: UIViewController, UITextFieldDelegate {
+class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     
     let api = AuthAPI.sharedInstance
     let prefs = NSUserDefaults.standardUserDefaults()
@@ -138,8 +138,8 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         
         if newUser.FacebookSignUp {
             api.addNewUserToDatabase(newUser)
+            API.sharedInstance.delagate = self
             API.sharedInstance.loadData()
-            self.performSegueWithIdentifier("login", sender: self)
         } else {
             api.createEmailAccount(newUser, callback: createEmailAccountCallback)
         }
@@ -156,12 +156,18 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
                 prefs.setValue(newUser.email, forKey: "email")
                 prefs.setValue(newUser.password, forKey: "password")
             }
+            API.sharedInstance.delagate = self
             API.sharedInstance.loadData()
-            self.performSegueWithIdentifier("login", sender: self)
         } else {
             print("login failed")
             joinButton.enabled = true
         }
+    }
+    
+    
+    func refresh() {
+        activityIndicator.stopAnimating()
+        self.performSegueWithIdentifier("login", sender: self)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
@@ -217,4 +223,5 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
             return true
         }
     }
+
 }

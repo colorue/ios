@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: UIViewController, APIDelagate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var facebookButton: UIButton!
@@ -37,15 +37,20 @@ class WelcomeViewController: UIViewController {
     }
     
     func facebookCallback(result: FacebookLoginResult, user: FIRUser?) {
-        activityIndicator.stopAnimating()
         switch (result) {
         case .Failed:
-            break
+            activityIndicator.stopAnimating()
         case .Registered:
+            activityIndicator.stopAnimating()
             self.performSegueWithIdentifier("facebookRegister", sender: self)
         case .LoggedIn:
+            API.sharedInstance.delagate = self
             API.sharedInstance.loadData()
-            self.performSegueWithIdentifier("toMainController", sender: self)
         }
+    }
+    
+    func refresh() {
+        activityIndicator.stopAnimating()
+        self.performSegueWithIdentifier("toMainController", sender: self)
     }
 }

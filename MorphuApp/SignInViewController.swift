@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController, UITextFieldDelegate {
+class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     
     
     @IBOutlet weak var drawing: UIImageView!
@@ -114,13 +114,12 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func logginCallback(user: FIRUser?) {
-        activityIndicator.stopAnimating()
         AuthAPI.sharedInstance.checkLoggedIn({ loggedIn in
             if loggedIn {
+                API.sharedInstance.delagate = self
                 API.sharedInstance.loadData()
                 self.prefs.setValue(self.emailInput.text, forKey: "email")
                 self.prefs.setValue(self.passwordInput.text, forKey: "password")
-                self.performSegueWithIdentifier("signIn", sender: self)
             }
         })
     }
@@ -148,6 +147,11 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
                 self.presentViewController(emailSent, animated: true, completion: nil)
             }
         }
+    }
+    
+    func refresh() {
+        activityIndicator.stopAnimating()
+        self.performSegueWithIdentifier("signIn", sender: self)
     }
     
 }

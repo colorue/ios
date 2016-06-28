@@ -36,9 +36,6 @@ class ProfileViewController: DrawingListViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {

@@ -36,5 +36,28 @@ class WallViewController: DrawingListViewController {
         }
     }
     
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            return api.getDrawingOfTheDay().count
+        } else {
+            return drawingSource().count
+        }
+    }
+    
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
+        
+        if indexPath.section == 0  {
+            cell.drawingOfTheDayLabel.hidden = false
+        } else {
+            cell.drawingOfTheDayLabel.hidden = true
+        }
+        return cell
+    }
+    
+    
+    
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }
