@@ -217,6 +217,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "logout" { return }
+        
         let drawing = getClickedDrawing(sender!)
         
         if segue.identifier == "showLikes" {
