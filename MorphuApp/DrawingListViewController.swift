@@ -169,7 +169,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     func likeButtonPressed(sender: UIButton) {
-        let drawing = drawingSource()[sender.tag]
+        let drawing = getClickedDrawing(sender)
         
         if !(drawing.liked(api.getActiveUser())) {
             sender.selected = true
@@ -178,7 +178,11 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             sender.selected = false
             api.unlike(drawing)
         }
-        self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
+        if sender.tag >= 0 {
+            self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
+        } else {
+            self.setLikes(drawing, indexPath: NSIndexPath(forRow: 0, inSection: 0))
+        }
     }
     
     func refresh() {
@@ -192,12 +196,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     func upload(sender: UIButton) {
         
-        let drawing: Drawing
-        if sender.tag > 0 {
-            drawing = drawingSource()[sender.tag]
-        } else {
-            drawing = api.getDrawingOfTheDay()[0]
-        }
+        let drawing = getClickedDrawing(sender)
         
         if drawing.getArtist().userId == api.getActiveUser().userId {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
@@ -209,13 +208,16 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         self.presentViewController(avc, animated: true, completion: nil)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        let drawing: Drawing
-        if sender!.tag > 0 {
-            drawing = drawingSource()[sender!.tag]
+    private func getClickedDrawing(sender: AnyObject) -> Drawing {
+        if sender.tag >= 0 {
+            return drawingSource()[sender.tag]
         } else {
-            drawing = api.getDrawingOfTheDay()[0]
+            return api.getDrawingOfTheDay()[0]
         }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let drawing = getClickedDrawing(sender!)
         
         if segue.identifier == "showLikes" {
             let targetController = segue.destinationViewController as! UserListViewController
