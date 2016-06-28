@@ -182,6 +182,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         }
         self.delagate.setDropperActive(false)
+        self.delagate.switchAlphaHowTo()
     }
     
     func setDropper() {

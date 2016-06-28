@@ -354,6 +354,13 @@ class API {
         self.oldestTimeLoaded = -99999999999999
         self.newestTimeLoaded = 0
     }
+    
+    func releaseMemory() {
+        print("releaseMemory")
+        self.userDict.removeAll()
+        self.drawingDict.removeAll()
+        self.imageDict.removeAll()
+    }
 
     // Used both for initial load and to add older drawings
     func loadWall() {
@@ -559,6 +566,8 @@ class API {
             }
         }
     }
+    
+
     
     /*
     

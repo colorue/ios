@@ -13,4 +13,5 @@ protocol ColorKeyboardDelagate {
     func trash()
     func getDropperActive() -> Bool
     func setDropperActive(active: Bool)
+    func switchAlphaHowTo()
 }

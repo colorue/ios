@@ -20,10 +20,7 @@ class LoadingViewController: UIViewController, APIDelagate {
     }
     
     private func loginCallback(loggedIn: Bool) {
-        
         let api = API.sharedInstance
-
-        print("loginCallback")
         if loggedIn {
             api.delagate = self
             api.loadData()

@@ -217,25 +217,30 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "logout" { return }
-        
-        let drawing = getClickedDrawing(sender!)
-        
+                
         if segue.identifier == "showLikes" {
+            let drawing = getClickedDrawing(sender!)
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
             targetController.userSource = drawing.getLikes
         } else if segue.identifier == "showComments" {
+            let drawing = getClickedDrawing(sender!)
             let targetController = segue.destinationViewController as! CommentViewController
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawing
         } else if segue.identifier == "showUserButton" {
+            let drawing = getClickedDrawing(sender!)
             let targetController = segue.destinationViewController as! ProfileViewController
             targetController.navigationItem.title = drawing.getArtist().username
             targetController.tintColor = self.tintColor!
             targetController.userInstance = drawing.getArtist()
         }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        api.releaseMemory()
+        super.didReceiveMemoryWarning()
     }
     
 }

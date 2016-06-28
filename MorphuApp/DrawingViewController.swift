@@ -159,9 +159,26 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func setDropperActive(active: Bool) {
+        if active {
+            if (!prefs.boolForKey("dropperHowTo")) {
+                let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.Alert)
+                dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+                self.presentViewController(dropperHowTo, animated: true, completion: nil)
+                prefs.setValue(true, forKey: "dropperHowTo")
+            }
+        }
         self.dropperActive = active
         self.colorKeyboard!.setDropper()
         self.colorKeyboard!.updateButtonColor()
+    }
+    
+    func switchAlphaHowTo() {
+        if (!prefs.boolForKey("alphaHowTo")) {
+            let alphaHowTo = UIAlertController(title: "Opacity Rotator", message: "Tap this button to rotate through solid, sorta transparent, and mostly transparent lines.", preferredStyle: UIAlertControllerStyle.Alert)
+            alphaHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alphaHowTo, animated: true, completion: nil)
+            prefs.setValue(true, forKey: "alphaHowTo")
+        }
     }
     
     @IBAction func done(sender: UIBarButtonItem) {
