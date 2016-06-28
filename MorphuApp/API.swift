@@ -192,6 +192,9 @@ class API {
         
         let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
         
+        self.delagate?.refresh()
+
+        
         desertRef.deleteWithCompletion { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")
@@ -276,13 +279,14 @@ class API {
     
     //MARK: Load Data
     
-    func loadData(user: FIRUser) {
-        self.getUser(user.uid, callback: { (activeUser: User) -> () in
+    func loadData() {
+        let userId = FIRAuth.auth()!.currentUser!.uid
+        self.getUser(userId, callback: { (activeUser: User) -> () in
             self.activeUser = activeUser
             self.getFullUser(activeUser, delagate: self.delagate)
-            self.loadDrawingOfTheDay()
+//            self.loadDrawingOfTheDay()
             self.loadWall()
-            self.loadUsers(user)
+//            self.loadUsers(user)
             self.loadFacebookFriends()
         })
     }

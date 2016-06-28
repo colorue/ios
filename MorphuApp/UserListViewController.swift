@@ -104,7 +104,6 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     }
     
     func refresh() {
-        print("delagate called refresh")
         self.tableView.reloadData()
 //        self.refreshControl?.endRefreshing()
     }

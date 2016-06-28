@@ -15,12 +15,14 @@ class LoadingViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
 //        AuthAPI.sharedInstance.logout()
-        self.loginCallback(AuthAPI.sharedInstance.checkLoggedIn())
+        AuthAPI.sharedInstance.checkLoggedIn(loginCallback)
     }
     
-    private func loginCallback(user: FIRUser?) {
-        if let user = user {
-            API.sharedInstance.loadData(user)
+    private func loginCallback(loggedIn: Bool) {
+        
+        print("loginCallback")
+        if loggedIn {
+            API.sharedInstance.loadData()
             self.performSegueWithIdentifier("toMainController", sender: self)
         } else {
             API.sharedInstance.clearData()

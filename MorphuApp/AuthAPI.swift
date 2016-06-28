@@ -14,7 +14,6 @@ import SinchVerification
 
 class AuthAPI {
     
-    
     // MARK: Properties
 
     static let sharedInstance = AuthAPI()
@@ -26,8 +25,17 @@ class AuthAPI {
     
     // MARK: Login/Registration Methods
     
-    func checkLoggedIn() -> FIRUser? {
-        return FIRAuth.auth()?.currentUser
+    func checkLoggedIn(callback: (Bool) -> ()) {
+        
+        print("checkLoggedIn")
+        if let userID = FIRAuth.auth()?.currentUser?.uid {
+            self.myRootRef.child("users/\(userID)").observeEventType(.Value, withBlock: { snapshot in
+                print("checkLoggedInExists")
+                callback(snapshot.exists())
+            })
+        } else {
+            callback(false)
+        }
     }
     
     func connectWithFacebook(viewController: UIViewController, callback: (FacebookLoginResult, FIRUser?)  -> ()) {
@@ -51,7 +59,6 @@ class AuthAPI {
                         callback(.Failed, nil)
                     } else {
                         if let user = user {
-                            
                             self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
                                 if (snapshot.exists()) {
                                     callback(.LoggedIn, user)

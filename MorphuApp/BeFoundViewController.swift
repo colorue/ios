@@ -138,7 +138,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
         
         if newUser.FacebookSignUp {
             api.addNewUserToDatabase(newUser)
-            API.sharedInstance.loadData(newUser.userRef!)
+            API.sharedInstance.loadData()
             self.performSegueWithIdentifier("login", sender: self)
         } else {
             api.createEmailAccount(newUser, callback: createEmailAccountCallback)
@@ -156,7 +156,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate {
                 prefs.setValue(newUser.email, forKey: "email")
                 prefs.setValue(newUser.password, forKey: "password")
             }
-            API.sharedInstance.loadData(user)
+            API.sharedInstance.loadData()
             self.performSegueWithIdentifier("login", sender: self)
         } else {
             print("login failed")

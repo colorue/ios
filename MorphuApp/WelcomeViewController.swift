@@ -44,7 +44,7 @@ class WelcomeViewController: UIViewController {
         case .Registered:
             self.performSegueWithIdentifier("facebookRegister", sender: self)
         case .LoggedIn:
-            API.sharedInstance.loadData(user!)
+            API.sharedInstance.loadData()
             self.performSegueWithIdentifier("toMainController", sender: self)
         }
     }

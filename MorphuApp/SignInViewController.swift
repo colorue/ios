@@ -115,12 +115,14 @@ class SignInViewController: UIViewController, UITextFieldDelegate {
     
     func logginCallback(user: FIRUser?) {
         activityIndicator.stopAnimating()
-        if let user = user {
-            API.sharedInstance.loadData(user)
-            prefs.setValue(emailInput.text, forKey: "email")
-            prefs.setValue(passwordInput.text, forKey: "password")
-            self.performSegueWithIdentifier("signIn", sender: self)
-        }
+        AuthAPI.sharedInstance.checkLoggedIn({ loggedIn in
+            if loggedIn {
+                API.sharedInstance.loadData()
+                self.prefs.setValue(self.emailInput.text, forKey: "email")
+                self.prefs.setValue(self.passwordInput.text, forKey: "password")
+                self.performSegueWithIdentifier("signIn", sender: self)
+            }
+        })
     }
     
     @IBAction func forgotPassword(sender: UIButton) {
