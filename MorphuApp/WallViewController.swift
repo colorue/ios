@@ -44,7 +44,6 @@ class WallViewController: DrawingListViewController {
         }
     }
     
-    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
         let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
@@ -56,8 +55,6 @@ class WallViewController: DrawingListViewController {
         }
         return cell
     }
-    
-    
     
     @IBAction func backToHome(segue: UIStoryboardSegue) {}
 }

@@ -11,7 +11,9 @@ import UIKit
 class UserListViewController: UITableViewController, UserCellDelagate, APIDelagate {
     
     
-    var userSource: () -> [User] = API.sharedInstance.getFacebookFriends
+//    var userSource: () -> [User] = API.sharedInstance.getFacebookFriends
+    
+    var userSource = API.sharedInstance.getFacebookFriends()
 
     let api = API.sharedInstance
     
@@ -51,13 +53,13 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userSource().count
+        return userSource.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
-        
-        let user = userSource()[indexPath.row]
+                
+        let user = userSource[indexPath.row]
         cell.username.text = user.username
         cell.fullName.text = user.fullname
         cell.profileImage.image = user.profileImage
@@ -73,6 +75,7 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         
         return cell
     }
+    
     
     func followAction(userCell: UserCell) {
         userCell.followButton.selected = true
@@ -128,8 +131,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
                 targetController.tintColor = self.tintColor
-                targetController.navigationItem.title = userSource()[row].username
-                targetController.userInstance = userSource()[row]
+                targetController.navigationItem.title = userSource[row].username
+                targetController.userInstance = userSource[row]
             }
         }
     }

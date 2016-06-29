@@ -222,7 +222,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = drawing.getLikes
+            targetController.userSource = drawing.getLikes()
         } else if segue.identifier == "showComments" {
             let drawing = getClickedDrawing(sender!)
             let targetController = segue.destinationViewController as! CommentViewController

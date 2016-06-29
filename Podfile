@@ -19,4 +19,6 @@ target 'Colorue' do
 
     pod 'CCBottomRefreshControl'
     pod 'SinchVerification-Swift'
+    
+    pod 'ReactiveCocoa'
 end

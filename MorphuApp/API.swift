@@ -26,7 +26,6 @@ class API {
     private var drawingOfTheDay = [Drawing]()
     private var wall = [Drawing]()
     private var explore = [Drawing]()
-    private var users = [User]()
     private var facebookFriends = [User]()
 
     private var activeUser: User?
@@ -296,6 +295,23 @@ class API {
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").removeValue()
     }
     
+    func searchUsers(search: String, callback: (User)->()) {
+        let lowercase = search.lowercaseString
+        let searchStart = lowercase
+        let searchEnd = lowercase + "z"
+        myRootRef.child("userLookup/usernames").removeAllObservers()
+        myRootRef.child("userLookup/usernames").queryOrderedByKey()
+            .queryStartingAtValue(searchStart)
+            .queryEndingAtValue(searchEnd)
+            .queryLimitedToFirst(8)
+            .observeEventType(.ChildAdded, withBlock: { snapshot in
+                let userId = snapshot.value as! String
+                self.getUser(userId, callback: { (user: User) -> () in
+                    callback(user)
+                })
+            })
+    }
+    
     
     // MARK: Get Methods
     
@@ -313,10 +329,6 @@ class API {
     
     func getExplore() -> [Drawing] {
         return self.explore
-    }
-    
-    func getUsers() -> [User] {
-        return self.users
     }
     
     func getFacebookFriends() -> [User] {
@@ -344,7 +356,6 @@ class API {
     
     func clearData() {
         self.facebookFriends.removeAll()
-        self.users.removeAll()
         self.wall.removeAll()
         self.drawingDict.removeAll()
         self.userDict.removeAll()
@@ -449,30 +460,6 @@ class API {
                 self.delagate?.refresh()
             })
         })
-    }
-    
-    private func loadUsers(activeUser: User) {
-        myRootRef.child("users").queryOrderedByKey()
-            .observeEventType(.ChildAdded, withBlock: { snapshot in
-                let userId = snapshot.key
-                self.getUser(snapshot.key, callback: { (user: User) -> () in
-                    if !(userId == activeUser.userId) {
-                        self.users.append(user)
-                    }
-                })
-            })
-        
-        myRootRef.child("users").queryOrderedByKey()
-            .observeEventType(.ChildRemoved, withBlock: { snapshot in
-                let userId = snapshot.key
-                var i = 0
-                for user in self.users {
-                    if user.userId == userId {
-                        self.users.removeAtIndex(i)
-                    }
-                    i += 1
-                }
-            })
     }
     
     private func loadFacebookFriends() {

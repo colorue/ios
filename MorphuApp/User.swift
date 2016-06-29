@@ -7,20 +7,30 @@
 //
 
 import UIKit
-class User {
+
+// MARK: Equatable
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.userId == rhs.userId
+}
+
+class User: Hashable {
     
     let userId: String
     let username: String
     let fullname: String
     let email: String
     var profileImage: UIImage?  //make getter and setter
-    private var following = [User]()
-    private var followers = [User]()
+    private var following = Set<User>()
+    private var followers = Set<User>()
     private var drawings = [Drawing]()
     
     private var newestDrawing: Double = 0
     
     private var fullUserLoaded = false
+    
+    var hashValue: Int {
+        return userId.hashValue
+    }
     
     func setfullUserLoaded() {
         self.fullUserLoaded = true
@@ -38,25 +48,16 @@ class User {
         self.profileImage = profileImage
     }
     
-    func getFollowing() -> [User] {
+    func getFollowing() -> Set<User> {
         return self.following
     }
     
     func follow(user: User) {
-        if !self.isFollowing(user) {
-            following.append(user)
-        }
+        following.insert(user)
     }
     
     func unfollow(user: User) {
-        var i = 0
-        for followee in self.following {
-            if followee.userId == user.userId {
-                self.following.removeAtIndex(i)
-                return
-            }
-            i += 1
-        }
+        following.remove(user)
     }
     
     func isFollowing(user: User) -> Bool {
@@ -69,21 +70,14 @@ class User {
     }
     
     func addFollower(user: User) {
-        followers.append(user)
+        followers.insert(user)
     }
     
     func removeFollower(user: User) {
-        var i = 0
-        for follower in self.followers {
-            if follower.userId == user.userId {
-                self.followers.removeAtIndex(i)
-                return
-            }
-            i += 1
-        }
+        followers.remove(user)
     }
     
-    func getFollowers() -> [User] {
+    func getFollowers() -> Set<User> {
         return self.followers
     }
     

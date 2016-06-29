@@ -124,12 +124,12 @@ class ProfileViewController: DrawingListViewController {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Followers"
-            targetController.userSource = { self.userInstance!.getFollowers() }
+            targetController.userSource = Array(self.userInstance!.getFollowers())
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Following"
-            targetController.userSource = { self.userInstance!.getFollowing() }
+            targetController.userSource = Array(self.userInstance!.getFollowing())
         }
     }
     

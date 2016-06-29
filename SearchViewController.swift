@@ -4,11 +4,11 @@
 import UIKit
 
 class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
-
+    
     // MARK: - Properties
     
     var searchController = UISearchController(searchResultsController: nil)
-    var userSource = API.sharedInstance.getUsers
+    var userSource = API.sharedInstance.getActiveUser().getFollowers().intersect(API.sharedInstance.getActiveUser().getFollowing())
     var filteredUsers = [User]()
     
     
@@ -20,7 +20,7 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
         self.drawingSource = API.sharedInstance.getExplore
         
         loadMoreDrawings = api.loadExplore
-
+        
         bottomRefreshControl.addTarget(self, action: #selector(SearchViewController.refresh), forControlEvents: .ValueChanged)
         
         super.viewDidLoad()
@@ -57,14 +57,20 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
         
         filterContentForSearchText(searchController.searchBar.text!)
         
-        userListController.userSource = { return self.filteredUsers }
+        userListController.userSource = self.filteredUsers
         userListController.refresh()
     }
     
     private func filterContentForSearchText(searchText: String) {
-        filteredUsers = userSource().filter({( user : User) -> Bool in
+        filteredUsers = userSource.filter({( user : User) -> Bool in
             return (user.username.lowercaseString.containsString(searchText.lowercaseString) || user.fullname.lowercaseString.containsString(searchText.lowercaseString))
         })
+        
+         api.searchUsers(searchText, callback: addToSearch)
+    }
+    
+    private func addToSearch(user: User) {
+        userSource.insert(user)
     }
     
     

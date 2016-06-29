@@ -43,6 +43,7 @@
 		876614BA1D034F1200DF4590 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876614B91D034F1200DF4590 /* SearchViewController.swift */; };
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
+		8794B92B1D234BCF00FF6E06 /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8794B92A1D234BCF00FF6E06 /* SearchAPI.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -109,6 +110,7 @@
 		876614B91D034F1200DF4590 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ../SearchViewController.swift; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8794B92A1D234BCF00FF6E06 /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -248,6 +250,7 @@
 				8763D2EF1CEE229C00E3D528 /* API.swift */,
 				875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */,
 				87D91EBA1D0CC650004CD25D /* FacebookLoginResult.swift */,
+				8794B92A1D234BCF00FF6E06 /* SearchAPI.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
 				87D91EBB1D0CC650004CD25D /* FacebookLoginResult.swift in Sources */,
+				8794B92B1D234BCF00FF6E06 /* SearchAPI.swift in Sources */,
 				87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */,
 				87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */,
 				879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */,
