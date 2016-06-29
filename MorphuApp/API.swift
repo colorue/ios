@@ -336,7 +336,7 @@ class API {
                 self.setDeleteWall()
                 self.loadExplore()
                 self.setDeleteExplore()
-                self.loadUsers(activeUser)
+//                self.loadUsers(activeUser)
                 self.loadFacebookFriends()
             })
         })
@@ -356,7 +356,12 @@ class API {
     }
     
     func releaseMemory() {
-        print("releaseMemory")
+        for drawing in wall {
+            drawing.setImage(nil)
+        }
+        for drawing in explore {
+            drawing.setImage(nil)
+        }
         self.userDict.removeAll()
         self.drawingDict.removeAll()
         self.imageDict.removeAll()
@@ -499,6 +504,17 @@ class API {
                 self.facebookFriends.append(user)
             })
         })
+    }
+    
+    func removeFBFriend(user: User) {
+        var i = 0
+        for fbFriend in self.facebookFriends {
+            if fbFriend.userId == user.userId {
+                self.facebookFriends.removeAtIndex(i)
+                return
+            }
+            i += 1
+        }
     }
     
     func checkNumber(number: String, callback: (User) -> ()) {

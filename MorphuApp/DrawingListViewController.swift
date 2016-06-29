@@ -143,7 +143,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             drawingCell.likesButton.enabled = true
             drawingCell.likes.text = String(likes) + " likes"
         }
-        
         if drawing.getComments().count == 1 {
             drawingCell.commentCount.text = "1 comment"
         } else {

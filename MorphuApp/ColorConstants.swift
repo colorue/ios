@@ -20,7 +20,7 @@ let pinkColor = UIColor(red: 255.0/255.0, green: 0.0/255.0, blue: 255.0/255.0, a
 let whiteColor = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
 let colors = [blackColor, redColor, orangeColor, yellowColor, greenColor, cyanColor, blueColor, purpleColor, pinkColor, whiteColor]
 
-let backgroundColor = UIColor(red: 220.0/255.0, green: 220.0/255.0, blue: 220.0/255.0, alpha: 1.0)
+let backgroundColor = UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
 let contentBackgroundColor = UIColor.whiteColor()//UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
 let dividerColor = UIColor(red: 220.0/255.0, green: 220.0/255.0, blue: 220.0/255.0, alpha: 1.0)
 

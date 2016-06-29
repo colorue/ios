@@ -356,8 +356,8 @@
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 				876614B91D034F1200DF4590 /* SearchViewController.swift */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
-				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
 				87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */,
+				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";

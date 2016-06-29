@@ -15,7 +15,7 @@ class Drawing {
     private var artist: User
     private var likes = [User]()
     private var comments = [Comment]()
-    private var image = UIImage()
+    private var image: UIImage?
     var delagate: DrawingDelagate?
     var drawingOfTheDay = false
     
@@ -37,13 +37,16 @@ class Drawing {
         self.delagate?.setProgress(progress)
     }
     
-    func setImage(image: UIImage) {
+    func setImage(image: UIImage?) {
         self.image = image
-        self.delagate?.imageLoaded(image)
     }
     
     func getImage() -> UIImage {
-        return self.image
+        if let image = self.image {
+            return image
+        } else {
+            return UIImage()
+        }
     }
     
     func setArtist(artist: User) {

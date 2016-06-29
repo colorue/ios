@@ -68,15 +68,14 @@ class ContactsAPI {
         var i = 0
         for contact in contacts {
             if let user = contact.getUser() {
+                API.sharedInstance.removeFBFriend(user)
                 users.append(user)
-//                contacts.removeAtIndex(i)
             }
             i += 1
         }
         return users
     }
 }
-
 
 extension Array {
     func insertionIndexOf(elem: Element, isOrderedBefore: (Element, Element) -> Bool) -> Int {
