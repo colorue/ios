@@ -26,7 +26,8 @@ class API {
     private var drawingOfTheDay = [Drawing]()
     private var wall = [Drawing]()
     private var explore = [Drawing]()
-    private var facebookFriends = [User]()
+    private var facebookFriends = Set<User>()
+    private var popularUsers = Set<User>()
 
     private var activeUser: User?
     
@@ -331,8 +332,12 @@ class API {
         return self.explore
     }
     
+    func getSuggustedUsers() -> [User] {
+        return Array(self.popularUsers.union(self.facebookFriends))
+    }
+    
     func getFacebookFriends() -> [User] {
-        return self.facebookFriends
+        return Array(self.facebookFriends)
     }
     
     //MARK: Load Data
@@ -462,7 +467,7 @@ class API {
         })
     }
     
-    private func loadFacebookFriends() {
+    func loadFacebookFriends() {
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
         
         request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
@@ -488,20 +493,23 @@ class API {
             if !snapshot.exists() { return }
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
-                self.facebookFriends.append(user)
+                self.facebookFriends.insert(user)
             })
         })
     }
     
     func removeFBFriend(user: User) {
-        var i = 0
-        for fbFriend in self.facebookFriends {
-            if fbFriend.userId == user.userId {
-                self.facebookFriends.removeAtIndex(i)
-                return
-            }
-            i += 1
-        }
+        self.facebookFriends.remove(user)
+    }
+    
+    func loadPopularUsers() {
+        myRootRef.child("popularUsers").observeEventType(.ChildAdded, withBlock: { snapshot in
+            if !snapshot.exists() { return }
+            let userID = snapshot.key
+            self.getUser(userID, callback: { (user: User) -> () in
+                self.popularUsers.insert(user)
+            })
+        })
     }
     
     func checkNumber(number: String, callback: (User) -> ()) {

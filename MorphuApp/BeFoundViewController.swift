@@ -167,7 +167,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
     
     func refresh() {
         activityIndicator.stopAnimating()
-        self.performSegueWithIdentifier("login", sender: self)
+        self.performSegueWithIdentifier("toFollowPeople", sender: self)
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool

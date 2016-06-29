@@ -28,6 +28,8 @@ class WelcomeViewController: UIViewController, APIDelagate {
         logginButton.layer.cornerRadius = 4
         logginButton.layer.borderWidth = 1
         logginButton.layer.borderColor = blackColor.CGColor
+        
+        API.sharedInstance.loadPopularUsers()
     }
 
     
@@ -42,6 +44,7 @@ class WelcomeViewController: UIViewController, APIDelagate {
             activityIndicator.stopAnimating()
         case .Registered:
             activityIndicator.stopAnimating()
+            API.sharedInstance.loadFacebookFriends()
             self.performSegueWithIdentifier("facebookRegister", sender: self)
         case .LoggedIn:
             API.sharedInstance.delagate = self

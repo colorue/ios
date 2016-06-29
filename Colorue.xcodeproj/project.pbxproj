@@ -49,6 +49,7 @@
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
 		879BCC9C1CF41DE600CD95E7 /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */; };
 		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
+		87A109571D241AE300BCE744 /* PeopleToFollowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A109561D241AE300BCE744 /* PeopleToFollowController.swift */; };
 		87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */; };
 		87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB2481D19FE490016FC59 /* ShareViewController.swift */; };
 		87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */; };
@@ -116,6 +117,7 @@
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
 		879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
 		879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCell.swift; sourceTree = "<group>"; };
+		87A109561D241AE300BCE744 /* PeopleToFollowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleToFollowController.swift; sourceTree = "<group>"; };
 		87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
 		87AFB2481D19FE490016FC59 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 		8763D3171CEE242100E3D528 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
 				87C32C551D00A10D003817D8 /* Main */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
 				8730D80C1D0735D000E1D939 /* UIActivities */,
@@ -325,12 +328,12 @@
 		8763D3241CEE255A00E3D528 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
 				8763D2CA1CEE226700E3D528 /* WelcomeViewController.swift */,
+				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
 				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
 				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
 				87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */,
-				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
+				87A109561D241AE300BCE744 /* PeopleToFollowController.swift */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
@@ -554,6 +557,7 @@
 				8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */,
+				87A109571D241AE300BCE744 /* PeopleToFollowController.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,
 				87DEFB231D0CEDBD00924FDC /* SignInViewController.swift in Sources */,
@@ -678,6 +682,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -695,6 +700,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
