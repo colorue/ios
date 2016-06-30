@@ -8,8 +8,11 @@
 
 import UIKit
 import CCBottomRefreshControl
+import AirshipKit
 
 class WallViewController: DrawingListViewController {
+
+    let prefs = NSUserDefaults.standardUserDefaults()
 
     // MARK: Loading Methods
     override func viewDidLoad() {
@@ -19,20 +22,29 @@ class WallViewController: DrawingListViewController {
         loadMoreDrawings = api.loadWall
         
         self.refreshControl?.beginRefreshing()
-//        self.navigationController?.hidesBarsOnSwipe = true
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        let prefs = NSUserDefaults.standardUserDefaults()
         if (!prefs.boolForKey("firstOpen")) {
             prefs.setValue(true, forKey: "firstOpen")
             if let newVC = self.tabBarController!.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
                 self.tabBarController!.presentViewController(newVC, animated: true, completion: nil)
             }
-        } else if false {
-            //"Want to know if someone follows you or comments on your drawings?
+        } else if !prefs.boolForKey("pushAsk1") {
+            let pushAsk1 = UIAlertController(title: "Notifications", message: "Want to know if someone follows you or comments on your drawings?", preferredStyle: UIAlertControllerStyle.Alert)
+            pushAsk1.addAction(UIAlertAction(title: "Nope", style: UIAlertActionStyle.Default, handler: nil))
+            pushAsk1.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.Default, handler: { alert in
+                UAirship.push().userPushNotificationsEnabled = true
+                UAirship.push().namedUser.identifier = self.api.getActiveUser().userId
+            }))
+            self.presentViewController(pushAsk1, animated: true, completion: nil)
+            prefs.setValue(true, forKey: "pushAsk1")
+        } else if !UAirship.push().userPushNotificationsEnabled
+            && api.getActiveUser().getFollowers().count > 2 {
+            UAirship.push().userPushNotificationsEnabled = true
+            UAirship.push().namedUser.identifier = self.api.getActiveUser().userId
         }
     }
     

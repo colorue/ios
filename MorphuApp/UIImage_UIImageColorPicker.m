@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "Canvix-Bridging-Header.h"
 
-
 @implementation UIImage (Picker)
 - (nullable UIColor *)colorAtPosition:(CGPoint)position {
     
@@ -36,7 +35,7 @@
     CGFloat a = buffer[3] / 255.f;
     
     free(buffer);
-    
+
     return [UIColor colorWithRed:r green:g blue:b alpha:a];
 }
 @end

@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FBSDKLoginKit
+import AirshipKit
 
 class LoadingViewController: UIViewController, APIDelagate {
     let prefs = NSUserDefaults.standardUserDefaults()
@@ -32,6 +33,10 @@ class LoadingViewController: UIViewController, APIDelagate {
     }
     
     func refresh() {
+        let config = UAConfig.defaultConfig()
+        config.analyticsEnabled = false
+        config.developmentLogLevel = UALogLevel.Warn
+        UAirship.takeOff(config)
         self.performSegueWithIdentifier("toMainController", sender: self)
     }
 }

@@ -98,6 +98,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, tag: Int) {
         drawingCell.drawingImage.alpha = 0.0
         drawingCell.progressBar.hidden = true
+        drawingCell.imageView?.image = nil
         
         api.downloadImage(drawing.getDrawingId(),
                           progressCallback: { (progress: Float) -> () in

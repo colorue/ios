@@ -13,7 +13,7 @@ target 'Colorue' do
     pod 'Firebase/Core'
     pod 'Firebase/Database'
     pod 'Firebase/Auth'
-#    pod 'Firebase/Messaging'
+    pod 'Firebase/Messaging'
     pod 'Firebase/Storage'
     pod 'Firebase/Crash'
 
@@ -21,4 +21,5 @@ target 'Colorue' do
     pod 'SinchVerification-Swift'
     
     pod 'UrbanAirship-iOS-SDK'
+    pod 'Alamofire'
 end

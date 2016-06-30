@@ -2,16 +2,15 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>detectProvisioningMode</key>
-    <true/>
-    <key>developmentAppKey</key>
-    <string>cIcCiNpfTkKJ9NvKoHFUeA</string>
-    <key>developmentAppSecret</key>
-    <string>Maioy8toRT-VdPyLJ-DO1g</string>
-    <key>productionAppKey</key>
-    <string>Your Production App Key</string>
-    <key>productionAppSecret</key>
-    <string>Your Production App Secret</string>
-    
+	<key>detectProvisioningMode</key>
+	<true/>
+	<key>developmentAppKey</key>
+	<string>cIcCiNpfTkKJ9NvKoHFUeA</string>
+	<key>developmentAppSecret</key>
+	<string>Maioy8toRT-VdPyLJ-DO1g</string>
+	<key>productionAppKey</key>
+	<string>-0k3pKjRSPuQmX0BXS_66w</string>
+	<key>productionAppSecret</key>
+	<string>Gj0HYwX_SNyg0Myf1-TmEA</string>
 </dict>
 </plist>

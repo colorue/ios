@@ -7,12 +7,12 @@
 //
 
 import Foundation
-
 import Firebase
-
 import FBSDKCoreKit
 import FBSDKLoginKit
 import SinchVerification
+import Alamofire
+import AirshipKit
 
 class API {
     
@@ -22,6 +22,8 @@ class API {
     
     let storage = FIRStorage.storage()
     let storageRef: FIRStorageReference
+    
+    var airshipKey = ""
 
     private var drawingOfTheDay = [Drawing]()
     private var wall = [Drawing]()
@@ -234,14 +236,13 @@ class API {
         
         let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
         
-        self.delagate?.refresh()
-
+        dispatch_async(dispatch_get_main_queue()) {
+            self.delagate?.refresh()
+        }
         
         desertRef.deleteWithCompletion { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")
-            } else {
-                self.delagate?.refresh()
             }
         }
     }
@@ -256,7 +257,9 @@ class API {
             } else {
                 self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(URL?.absoluteString)
                 self.getActiveUser().profileImage = drawing.getImage()
-                self.delagate?.refresh()
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.delagate?.refresh()
+                }
             }
         }
 
@@ -265,6 +268,8 @@ class API {
     func like(drawing: Drawing) {
         drawing.like(self.activeUser!)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
+        
+        sendPushNotification("\(activeUser!.username) liked your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
     func unlike(drawing: Drawing) {
@@ -280,6 +285,8 @@ class API {
         drawing.addComment(comment)
         newComment.setValue(comment.toAnyObject())
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
+        
+        sendPushNotification("\(activeUser!.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
     func deleteComment(drawing: Drawing, comment: Comment) {
@@ -289,6 +296,8 @@ class API {
     func follow(user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
+        
+        sendPushNotification("\(activeUser!.username) is following you!", recipient: user.userId, badge: "+0")
     }
     
     func unfollow(user: User) {
@@ -353,8 +362,8 @@ class API {
                 self.setDeleteWall()
                 self.loadExplore()
                 self.setDeleteExplore()
-//                self.loadUsers(activeUser)
                 self.loadFacebookFriends()
+                self.getAirshipKey()
             })
         })
     }
@@ -462,7 +471,9 @@ class API {
             self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
-                self.delagate?.refresh()
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.delagate!.refresh()
+                }
             })
         })
     }
@@ -521,7 +532,14 @@ class API {
             })
         })
     }
-
+    
+    
+    private func getAirshipKey() {
+        myRootRef.child("airshipKey").observeEventType(.Value, withBlock: { snapshot in
+            let key = snapshot.value as! String
+            self.airshipKey = key
+        })
+    }
     
     // MARK: Image Upload + Download Methods
     
@@ -578,29 +596,26 @@ class API {
         }
     }
     
-
-    
-    /*
     
     // MARK: Push Notifications
     func sendPushNotification(message: String, recipient: String, badge: String) {
-
-        let iosData: NSDictionary = ["alert": message, "sound": "default", "badge": badge]
+    
+        let iosData: NSDictionary = ["alert": message] //, "sound": "default", "badge": badge
         let notificationData: NSDictionary = ["ios": iosData]
-        let iPhone6: NSDictionary = ["named_user": recipient]
+        let namedUser: NSDictionary = ["named_user": recipient]
         
         //let audienceData: NSDictionary = ["OR": [iPhone6]]
         
         Alamofire.request(.POST, "https://go.urbanairship.com/api/push",
-            headers:   ["Authorization" : self.urbanAirshipKey,
+            headers:   ["Authorization" : self.airshipKey,
                 "Accept" : "application/vnd.urbanairship+json; version=3",
                 "Drawing-Type" : "application/json"],
-            parameters: ["audience":iPhone6, "notification":notificationData, "device_types":["ios"]],
+            parameters: ["audience":namedUser, "notification":notificationData, "device_types":["ios"]],
             encoding: .JSON)
             .response { request, response, data, error in
                 let dataString = NSString(data: data!, encoding:NSUTF8StringEncoding)
                 print(dataString!)
             }
     }
- */
-}
+    
+ }
