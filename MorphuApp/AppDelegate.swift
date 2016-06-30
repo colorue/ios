@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import Firebase
+import AirshipKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
@@ -20,10 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         UIApplication.sharedApplication().statusBarStyle = .Default
-        
-//        if let statusBar = UIApplication.sharedApplication().valueForKey("statusBarWindow")?.valueForKey("statusBar") as? UIView  {
-//            statusBar.backgroundColor = whiteColor
-//        }
         
 //        let settings: UIUserNotificationSettings =
 //            UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)

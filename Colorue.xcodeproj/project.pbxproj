@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
 		8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */; };
 		8748A6B71CF4C844003CEEE0 /* WriteCommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		16C591373F34C788F4677031 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = "<group>"; };
 		8730D80D1D0735ED00E1D939 /* DeleteActivity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteActivity.swift; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 			children = (
 				87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */,
 				872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */,
+				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
@@ -455,6 +458,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */,
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
@@ -683,12 +687,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
 				PRODUCT_NAME = Colorue;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -701,12 +707,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
 				PRODUCT_NAME = Colorue;
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 			};
 			name = Release;

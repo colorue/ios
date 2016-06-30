@@ -20,5 +20,5 @@ target 'Colorue' do
     pod 'CCBottomRefreshControl'
     pod 'SinchVerification-Swift'
     
-    pod 'ReactiveCocoa'
+    pod 'UrbanAirship-iOS-SDK'
 end

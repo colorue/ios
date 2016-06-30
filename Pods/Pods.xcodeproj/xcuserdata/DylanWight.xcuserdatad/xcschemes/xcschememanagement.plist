@@ -39,12 +39,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>ReactiveCocoa.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Result.xcscheme</key>
+		<key>UrbanAirship-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -72,7 +67,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5893E863DD8BD0DE1C94166460FC6611</key>
+		<key>6828460DD400BF409B776135842F0FBB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,17 +77,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>978B997B5C10BA8521873DE5436A80CD</key>
+		<key>D1E16BFEE2FF0FD7BFA22048D3708EC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>DD1559592F5FECF5E008347EC681DF67</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EAAC3BBE51A4CBB662B84F307089255E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
