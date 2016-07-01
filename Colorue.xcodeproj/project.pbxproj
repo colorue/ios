@@ -44,6 +44,7 @@
 		876614BA1D034F1200DF4590 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876614B91D034F1200DF4590 /* SearchViewController.swift */; };
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
+		877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FA9A21D26D45700830980 /* SharingViewController.swift */; };
 		8794B92B1D234BCF00FF6E06 /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8794B92A1D234BCF00FF6E06 /* SearchAPI.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
@@ -113,6 +114,7 @@
 		876614B91D034F1200DF4590 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = ../SearchViewController.swift; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		877FA9A21D26D45700830980 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
 		8794B92A1D234BCF00FF6E06 /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 		87F754EE1D1865EF005B4A14 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				877FA9A21D26D45700830980 /* SharingViewController.swift */,
 				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
 				87AFB2481D19FE490016FC59 /* ShareViewController.swift */,
 				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
@@ -564,6 +567,7 @@
 				8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */,
+				877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */,
 				87A109571D241AE300BCE744 /* PeopleToFollowController.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */,

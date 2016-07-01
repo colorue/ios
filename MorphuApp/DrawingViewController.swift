@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate {
+class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate, UIPopoverPresentationControllerDelegate {
     
     var baseImage: UIImage?
 
@@ -183,15 +183,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     @IBAction func done(sender: UIBarButtonItem) {
         
-        self.baseImage = nil
-        self.postButton.enabled = false
-        self.colorKeyboard!.uploading(0)
-        self.view.userInteractionEnabled = false
-        
-        let newDrawing = Drawing(artist: User(), drawingId: "")
-        newDrawing.setImage((canvas?.getDrawing())!)
-        
-        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+//        self.baseImage = nil
+//        self.postButton.enabled = false
+//        self.colorKeyboard!.uploading(0)
+//        self.view.userInteractionEnabled = false
+//        
+//        let newDrawing = Drawing(artist: User(), drawingId: "")
+//        newDrawing.setImage((canvas?.getDrawing())!)
+//        
+//        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
     }
     
     func postCallback(uploaded: Bool) {
@@ -233,12 +233,18 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             targetController.tableView.setContentOffset(CGPointZero, animated: true)
 
         } else if  segue.identifier == "toShare" {
-            let newDrawing = Drawing(artist: User(), drawingId: "")
-            newDrawing.setImage((canvas?.getDrawing())!)
+            let dvc = segue.destinationViewController as! SharingViewController
+            let controller = dvc.popoverPresentationController
+            if let controller = controller {
+                controller.delegate = self
+            }
+            dvc.drawing = canvas?.getDrawing()
+            dvc.popoverController = self
+            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
             
-            let targetController = segue.destinationViewController as! ShareViewController
+            self.view.alpha = 0.4
+            self.navigationController?.navigationBar.alpha = 0.4
             
-            targetController.drawingInstance = newDrawing
         }
     }
     
@@ -266,4 +272,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         prefs.setValue(colorKeyboard?.getAlpha(), forKey: "alpha")
     }
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
+    
+    func popoverPresentationControllerShouldDismissPopover(popoverController: UIPopoverPresentationController) -> Bool  {
+        UIView.animateWithDuration(0.3, animations: {
+            self.view.alpha = 1.0
+            self.navigationController?.navigationBar.alpha = 1.0
+        })
+        return true
+   }
 }
