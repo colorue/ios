@@ -53,7 +53,6 @@
 		879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */; };
 		87A109571D241AE300BCE744 /* PeopleToFollowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A109561D241AE300BCE744 /* PeopleToFollowController.swift */; };
 		87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */; };
-		87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB2481D19FE490016FC59 /* ShareViewController.swift */; };
 		87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */; };
 		87AFB24E1D1C58CC0016FC59 /* DrawingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
@@ -123,7 +122,6 @@
 		879BCC9D1CF4C4A000CD95E7 /* WriteCommentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCell.swift; sourceTree = "<group>"; };
 		87A109561D241AE300BCE744 /* PeopleToFollowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleToFollowController.swift; sourceTree = "<group>"; };
 		87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
-		87AFB2481D19FE490016FC59 /* ShareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
 		87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingListViewController.swift; sourceTree = "<group>"; };
 		87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -378,7 +376,6 @@
 			children = (
 				877FA9A21D26D45700830980 /* SharingViewController.swift */,
 				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
-				87AFB2481D19FE490016FC59 /* ShareViewController.swift */,
 				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
 				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
 			);
@@ -566,7 +563,6 @@
 				879BCC9E1CF4C4A000CD95E7 /* WriteCommentCell.swift in Sources */,
 				8730D80E1D0735ED00E1D939 /* DeleteActivity.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
-				87AFB2491D19FE490016FC59 /* ShareViewController.swift in Sources */,
 				877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */,
 				87A109571D241AE300BCE744 /* PeopleToFollowController.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
