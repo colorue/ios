@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKShareKit
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate, UIPopoverPresentationControllerDelegate {
     
@@ -73,9 +74,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.keyboardCover.alpha = 0.0
         self.view.addSubview(keyboardCover)
         
-        
 
-        
         self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
         underFingerView.backgroundColor = UIColor.whiteColor()
         self.underFingerView.alpha = 0.0
@@ -181,17 +180,20 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    @IBAction func done(sender: UIBarButtonItem) {
+    func postDrawing(saveToPhotos: Bool, postToFacebook: Bool) {
+        self.baseImage = nil
+        self.postButton.enabled = false
+        self.colorKeyboard!.uploading(0)
+        self.view.userInteractionEnabled = false
         
-//        self.baseImage = nil
-//        self.postButton.enabled = false
-//        self.colorKeyboard!.uploading(0)
-//        self.view.userInteractionEnabled = false
-//        
-//        let newDrawing = Drawing(artist: User(), drawingId: "")
-//        newDrawing.setImage((canvas?.getDrawing())!)
-//        
-//        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+        let newDrawing = Drawing(artist: User(), drawingId: "")
+        newDrawing.setImage((canvas?.getDrawing())!)
+        
+        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+        
+        if saveToPhotos {
+            UIImageWriteToSavedPhotosAlbum(canvas!.getDrawing(), self, nil, nil)
+        }
     }
     
     func postCallback(uploaded: Bool) {
@@ -240,11 +242,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             }
             dvc.drawing = canvas?.getDrawing()
             dvc.popoverController = self
-            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: 300)
+            
+            print( self.view.frame.width)
+            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: 300/300.0 * (self.view.frame.width - 75.0))
             
             self.view.alpha = 0.4
             self.navigationController?.navigationBar.alpha = 0.4
-            
         }
     }
     
