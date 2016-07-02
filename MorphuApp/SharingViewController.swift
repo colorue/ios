@@ -8,56 +8,54 @@
 
 import UIKit
 import FBSDKShareKit
+import MessageUI
 
-class SharingViewController: UIViewController {
+
+class SharingViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
-    @IBOutlet weak var drawingImage: UIImageView!
+    let cornerRadius: CGFloat = 4.0
     
-    @IBOutlet weak var photosLabel: UILabel!
-    @IBOutlet weak var photosSwitch: UISwitch!
-    
-    @IBOutlet weak var facebookLabel: UILabel!
-    @IBOutlet weak var facebookSwitch: UISwitch!
+    var controller = MFMessageComposeViewController()
     
     var drawing: UIImage?
     var popoverController: DrawingViewController?
     
     let prefs = NSUserDefaults.standardUserDefaults()
+
     
-    override func viewDidLoad() {
-        self.drawingImage.image = drawing
-        self.popoverPresentationController?.backgroundColor = blackColor
-        
-        photosSwitch.addTarget(self, action: #selector(SharingViewController.switchChanged(_:)), forControlEvents: .ValueChanged)
-        facebookSwitch.addTarget(self, action: #selector(SharingViewController.switchChanged(_:)), forControlEvents: .ValueChanged)
-        
-        photosSwitch.on = prefs.boolForKey("saveToPhotos")
-//        facebookSwitch.on = prefs.boolForKey("postToFacebook")
-        
-        switchChanged(photosSwitch)
-//        switchChanged(facebookSwitch)
+    @IBOutlet weak var drawingImage: UIImageView!
+    
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.addTarget(self, action: #selector(SharingViewController.saveDrawing(_:)), forControlEvents: .TouchUpInside)
+        }
     }
-    
-    func switchChanged(sender: UISwitch) {
-        if sender == photosSwitch {
-            if sender.on {
-                photosLabel.textColor = UIColor.blackColor()
-            } else {
-                photosLabel.textColor = UIColor.lightGrayColor()
-            }
-            prefs.setValue(sender.on, forKey: "saveToPhotos")
-        } else if sender == facebookSwitch {
-            if sender.on {
-                facebookLabel.textColor = UIColor.blackColor()
-                postToFacebook()
-            } else {
-                facebookLabel.textColor = UIColor.lightGrayColor()
-            }
-//            prefs.setValue(sender.on, forKey: "postToFacebook")
+
+    @IBOutlet weak var sendButton: UIButton! {
+        didSet {
+            sendButton.addTarget(self, action: #selector(SharingViewController.sendDrawing(_:)), forControlEvents: .TouchUpInside)
         }
     }
     
-    private func postToFacebook() {
+    @IBOutlet weak var shareButton: UIButton! {
+        didSet {
+            shareButton.layer.cornerRadius = cornerRadius
+            shareButton.addTarget(self, action: #selector(SharingViewController.shareToFacebook(_:)), forControlEvents: .TouchUpInside)
+        }
+    }
+    
+    @IBOutlet weak var postButton: UIButton! {
+        didSet {
+            postButton.layer.cornerRadius = cornerRadius
+            postButton.addTarget(self, action: #selector(SharingViewController.postDrawing(_:)), forControlEvents: .TouchUpInside)
+        }
+    }
+    
+    override func viewDidLoad() {
+        self.drawingImage.image = drawing
+    }
+    
+    @objc private func shareToFacebook(sender: UIButton) {
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing, userGenerated: true)
         content.photos  = [photo]
@@ -72,13 +70,40 @@ class SharingViewController: UIViewController {
         }
     }
     
-    @IBAction func post(sender: UIButton) {
+    @objc private func saveDrawing(sender: UIButton) {
+        if let drawing = drawing {
+            UIImageWriteToSavedPhotosAlbum(drawing, self, nil, nil)
+            sender.enabled = false
+        }
+    }
+    
+    @objc private func sendDrawing(sender: UIButton) {
+        if (MFMessageComposeViewController.canSendText()) {
+            if let image = drawing {
+                controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "colorue.png")
+            }
+            controller.messageComposeDelegate = self
+            self.resignFirstResponder()
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func postDrawing(sender: UIButton) {
         UIView.animateWithDuration(0.3, animations: {
             self.popoverController!.view.alpha = 1.0
             self.popoverController!.navigationController?.navigationBar.alpha = 1.0
        })
         
         popoverController!.dismissViewControllerAnimated(true, completion: nil)
-        popoverController!.postDrawing(photosSwitch.on, postToFacebook: facebookSwitch.on)
+        popoverController!.postDrawing()
+    }
+    
+    
+    // MARK: MFMessageComposeViewControllerDelegate Methods
+    
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.controller = MFMessageComposeViewController()
     }
 }

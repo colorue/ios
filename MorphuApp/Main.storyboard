@@ -60,6 +60,8 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -81,7 +83,7 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="done:" destination="OHZ-gn-DsE" id="PxV-kB-HVG"/>
-                                <segue destination="Vrf-QH-ch9" kind="popoverPresentation" identifier="toShare" popoverAnchorBarButtonItem="mVr-dO-lxG" id="pC8-tg-vvt">
+                                <segue destination="Vrf-QH-ch9" kind="popoverPresentation" identifier="toShare" popoverAnchorBarButtonItem="mVr-dO-lxG" id="exX-94-cOc">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
@@ -110,76 +112,102 @@
                     <view key="view" contentMode="scaleToFill" id="grt-zg-OgC">
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="o85-v7-iDg">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" distribution="fillEqually" alignment="center" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="o85-v7-iDg">
                                 <rect key="frame" x="217" y="50" width="185" height="262"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="iET-IP-7mh">
-                                        <rect key="frame" x="0.0" y="0.0" width="102" height="53"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Save to Photos" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRa-4K-Fak">
-                                                <rect key="frame" x="10" y="0.0" width="83" height="14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="FK9-w1-mu3"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="FK9-w1-mu3"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <exclude reference="FK9-w1-mu3"/>
-                                                    </mask>
-                                                </variation>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ktI-UK-zQW">
-                                                <rect key="frame" x="27" y="22" width="51" height="31"/>
-                                                <color key="onTintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="vnQ-9M-7mK">
-                                        <rect key="frame" x="0.0" y="85" width="102" height="53"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" misplaced="YES" text="Post to Facebook" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h3M-yl-hna">
-                                                <rect key="frame" x="0.0" y="0.0" width="102" height="14"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="34" id="rS7-nj-Hcr"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                <nil key="highlightedColor"/>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="rS7-nj-Hcr"/>
-                                                    </mask>
-                                                </variation>
-                                                <variation key="heightClass=regular-widthClass=compact">
-                                                    <mask key="constraints">
-                                                        <exclude reference="rS7-nj-Hcr"/>
-                                                    </mask>
-                                                </variation>
-                                            </label>
-                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="3PI-xb-g6a">
-                                                <rect key="frame" x="27" y="22" width="51" height="31"/>
-                                                <color key="onTintColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </switch>
-                                        </subviews>
-                                    </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rs1-E7-vYp">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dTj-iP-eBP">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                                        <state key="normal" title="Share">
-                                            <color key="titleColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title=" Save  " image="Save Icon">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <connections>
-                                            <action selector="post:" destination="Vrf-QH-ch9" eventType="touchUpInside" id="5Wm-6X-01h"/>
-                                        </connections>
+                                        <state key="disabled" title=" Saved" image="Save IconG">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted" image="Save IconG">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nWj-zH-MsO">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <state key="normal" title=" Send" image="Message Icon">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <state key="highlighted" image="Send IconG">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qB2-Lj-IlT">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="8iP-aA-rAa">
+                                                <variation key="heightClass=regular-widthClass=compact" constant="80"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <state key="normal" title="  Share" image="FacebookS">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="8iP-aA-rAa"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="8iP-aA-rAa"/>
+                                            </mask>
+                                        </variation>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7wu-yl-jfB">
+                                        <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="sGj-wW-uFQ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <state key="normal" title=" Post" image="Logo InactiveS"/>
+                                        <state key="highlighted">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="sGj-wW-uFQ"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=compact">
+                                            <mask key="constraints">
+                                                <include reference="sGj-wW-uFQ"/>
+                                            </mask>
+                                        </variation>
                                     </button>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="qB2-Lj-IlT" firstAttribute="width" secondItem="dTj-iP-eBP" secondAttribute="width" id="4jw-jK-fu2"/>
+                                    <constraint firstItem="7wu-yl-jfB" firstAttribute="width" secondItem="dTj-iP-eBP" secondAttribute="width" id="Svf-b2-mwH"/>
+                                    <constraint firstItem="nWj-zH-MsO" firstAttribute="width" secondItem="dTj-iP-eBP" secondAttribute="width" id="wtL-c9-321"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="wtL-c9-321"/>
+                                        <exclude reference="4jw-jK-fu2"/>
+                                        <exclude reference="Svf-b2-mwH"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="wtL-c9-321"/>
+                                        <include reference="4jw-jK-fu2"/>
+                                        <include reference="Svf-b2-mwH"/>
+                                    </mask>
+                                </variation>
                             </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dga-gl-G2J">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -200,11 +228,25 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dga-gl-G2J" firstAttribute="bottom" secondItem="o85-v7-iDg" secondAttribute="bottom" id="3xA-4u-ANZ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o85-v7-iDg" secondAttribute="trailing" constant="-8" id="7Hb-UR-Yoq"/>
+                            <constraint firstItem="o85-v7-iDg" firstAttribute="leading" secondItem="dga-gl-G2J" secondAttribute="trailing" constant="8" id="8Sr-Pt-p9w"/>
+                            <constraint firstItem="nFE-sX-ldC" firstAttribute="top" secondItem="dga-gl-G2J" secondAttribute="bottom" constant="8" id="C3a-35-nD2"/>
                             <constraint firstItem="o85-v7-iDg" firstAttribute="centerY" secondItem="grt-zg-OgC" secondAttribute="centerY" id="Fvy-26-SDf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="dga-gl-G2J" secondAttribute="trailing" constant="-8" id="HqN-VH-Zes"/>
                             <constraint firstAttribute="trailingMargin" secondItem="o85-v7-iDg" secondAttribute="trailing" id="J1O-Gq-EpZ"/>
                             <constraint firstItem="o85-v7-iDg" firstAttribute="top" secondItem="dga-gl-G2J" secondAttribute="top" id="Ldb-qE-EXx"/>
+                            <constraint firstItem="o85-v7-iDg" firstAttribute="leading" secondItem="dga-gl-G2J" secondAttribute="trailing" constant="85" id="PB3-6P-34d"/>
                             <constraint firstItem="o85-v7-iDg" firstAttribute="leading" secondItem="dga-gl-G2J" secondAttribute="trailing" constant="8" id="RRh-Rn-cbK"/>
+                            <constraint firstItem="nFE-sX-ldC" firstAttribute="top" secondItem="o85-v7-iDg" secondAttribute="bottom" constant="8" id="SvF-nz-MJz">
+                                <variation key="heightClass=regular-widthClass=compact" constant="16"/>
+                            </constraint>
+                            <constraint firstItem="dga-gl-G2J" firstAttribute="leading" secondItem="grt-zg-OgC" secondAttribute="leadingMargin" constant="-8" id="Tzg-iW-xTa"/>
+                            <constraint firstItem="o85-v7-iDg" firstAttribute="centerY" secondItem="grt-zg-OgC" secondAttribute="centerY" id="YLR-DZ-wjA"/>
+                            <constraint firstItem="o85-v7-iDg" firstAttribute="leading" secondItem="grt-zg-OgC" secondAttribute="leadingMargin" id="c9P-gY-2QF"/>
+                            <constraint firstItem="dga-gl-G2J" firstAttribute="top" secondItem="o85-v7-iDg" secondAttribute="top" id="gl6-Vc-4VG"/>
                             <constraint firstItem="nFE-sX-ldC" firstAttribute="top" secondItem="o85-v7-iDg" secondAttribute="bottom" constant="8" id="icg-Aw-u2H"/>
+                            <constraint firstItem="dga-gl-G2J" firstAttribute="leading" secondItem="o85-v7-iDg" secondAttribute="trailing" constant="8" id="mvf-tL-PzK"/>
                             <constraint firstItem="o85-v7-iDg" firstAttribute="centerY" secondItem="grt-zg-OgC" secondAttribute="centerY" id="p9S-hB-lAW"/>
                             <constraint firstItem="dga-gl-G2J" firstAttribute="top" secondItem="grt-zg-OgC" secondAttribute="topMargin" id="w0Z-YE-Kt5">
                                 <variation key="heightClass=regular-widthClass=compact" constant="8"/>
@@ -219,41 +261,62 @@
                             <constraint firstItem="dga-gl-G2J" firstAttribute="leading" secondItem="grt-zg-OgC" secondAttribute="leadingMargin" id="xQh-qu-SC2">
                                 <variation key="heightClass=regular-widthClass=compact" constant="-8"/>
                             </constraint>
+                            <constraint firstItem="o85-v7-iDg" firstAttribute="top" secondItem="qjr-Ig-xnb" secondAttribute="bottom" constant="16" id="zys-WA-v4k"/>
                         </constraints>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="dga-gl-G2J"/>
-                            </mask>
                             <mask key="constraints">
+                                <exclude reference="3xA-4u-ANZ"/>
+                                <exclude reference="HqN-VH-Zes"/>
+                                <exclude reference="Tzg-iW-xTa"/>
+                                <exclude reference="gl6-Vc-4VG"/>
+                                <exclude reference="mvf-tL-PzK"/>
                                 <exclude reference="w0Z-YE-Kt5"/>
                                 <exclude reference="woL-Z7-OfU"/>
                                 <exclude reference="xQh-qu-SC2"/>
+                                <exclude reference="C3a-35-nD2"/>
+                                <exclude reference="SvF-nz-MJz"/>
+                                <exclude reference="icg-Aw-u2H"/>
+                                <exclude reference="7Hb-UR-Yoq"/>
+                                <exclude reference="8Sr-Pt-p9w"/>
                                 <exclude reference="Fvy-26-SDf"/>
                                 <exclude reference="J1O-Gq-EpZ"/>
                                 <exclude reference="Ldb-qE-EXx"/>
+                                <exclude reference="PB3-6P-34d"/>
                                 <exclude reference="RRh-Rn-cbK"/>
+                                <exclude reference="YLR-DZ-wjA"/>
+                                <exclude reference="c9P-gY-2QF"/>
                                 <exclude reference="p9S-hB-lAW"/>
                                 <exclude reference="w1d-f8-qtx"/>
                                 <exclude reference="wEV-ee-7Tu"/>
-                                <exclude reference="icg-Aw-u2H"/>
+                                <exclude reference="zys-WA-v4k"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="subviews">
-                                <include reference="dga-gl-G2J"/>
-                            </mask>
                             <mask key="constraints">
+                                <exclude reference="3xA-4u-ANZ"/>
+                                <exclude reference="HqN-VH-Zes"/>
+                                <include reference="Tzg-iW-xTa"/>
+                                <exclude reference="gl6-Vc-4VG"/>
+                                <exclude reference="mvf-tL-PzK"/>
                                 <include reference="w0Z-YE-Kt5"/>
-                                <include reference="woL-Z7-OfU"/>
-                                <include reference="xQh-qu-SC2"/>
+                                <exclude reference="woL-Z7-OfU"/>
+                                <exclude reference="xQh-qu-SC2"/>
+                                <include reference="C3a-35-nD2"/>
+                                <exclude reference="SvF-nz-MJz"/>
+                                <exclude reference="icg-Aw-u2H"/>
+                                <include reference="7Hb-UR-Yoq"/>
+                                <include reference="8Sr-Pt-p9w"/>
                                 <exclude reference="Fvy-26-SDf"/>
-                                <include reference="J1O-Gq-EpZ"/>
+                                <exclude reference="J1O-Gq-EpZ"/>
                                 <exclude reference="Ldb-qE-EXx"/>
-                                <include reference="RRh-Rn-cbK"/>
-                                <include reference="p9S-hB-lAW"/>
+                                <exclude reference="PB3-6P-34d"/>
+                                <exclude reference="RRh-Rn-cbK"/>
+                                <include reference="YLR-DZ-wjA"/>
+                                <exclude reference="c9P-gY-2QF"/>
+                                <exclude reference="p9S-hB-lAW"/>
                                 <exclude reference="w1d-f8-qtx"/>
                                 <exclude reference="wEV-ee-7Tu"/>
-                                <exclude reference="icg-Aw-u2H"/>
+                                <exclude reference="zys-WA-v4k"/>
                             </mask>
                         </variation>
                     </view>
@@ -261,10 +324,10 @@
                     <size key="freeformSize" width="400" height="300"/>
                     <connections>
                         <outlet property="drawingImage" destination="dga-gl-G2J" id="RCF-yi-dah"/>
-                        <outlet property="facebookLabel" destination="h3M-yl-hna" id="YZ8-nU-yxi"/>
-                        <outlet property="facebookSwitch" destination="3PI-xb-g6a" id="CAE-B9-vqR"/>
-                        <outlet property="photosLabel" destination="FRa-4K-Fak" id="xre-45-3M6"/>
-                        <outlet property="photosSwitch" destination="ktI-UK-zQW" id="u0t-vH-EGj"/>
+                        <outlet property="postButton" destination="7wu-yl-jfB" id="GKQ-ds-5eJ"/>
+                        <outlet property="saveButton" destination="dTj-iP-eBP" id="gIa-Kg-ywn"/>
+                        <outlet property="sendButton" destination="nWj-zH-MsO" id="W1h-l3-qTf"/>
+                        <outlet property="shareButton" destination="qB2-Lj-IlT" id="OZo-tH-tMg"/>
                     </connections>
                 </viewController>
             </objects>
@@ -2366,7 +2429,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
                                                     <rect key="frame" x="0.0" y="68" width="251" height="29"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
-                                                    <state key="normal" image="82D7C955-69A9-4E4A-94CC-A51120AD045C">
+                                                    <state key="normal" image="BDD77E25-B4B8-433B-8315-826CAB5CEE46">
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <state key="selected" image="Unfollow Long"/>
@@ -3159,7 +3222,8 @@
                                         <exclude reference="Vf2-ZR-sFx"/>
                                     </mask>
                                 </variation>
-                                <variation key="heightClass=regular-widthClass=compact">
+                                <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
+                                    <rect key="frame" x="20" y="722" width="360" height="74"/>
                                     <mask key="constraints">
                                         <include reference="TAh-3P-Kae"/>
                                         <include reference="Vf2-ZR-sFx"/>
@@ -4311,7 +4375,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="82D7C955-69A9-4E4A-94CC-A51120AD045C" width="250" height="29">
+        <image name="BDD77E25-B4B8-433B-8315-826CAB5CEE46" width="250" height="29">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4846,6 +4910,7 @@ Q3tQe1V7V3tZe157Zntpe257dnt5e4t7jnuTAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAe5U
 </mutableData>
         </image>
         <image name="Check" width="30" height="30"/>
+        <image name="FacebookS" width="19" height="19"/>
         <image name="Follow" width="36" height="36"/>
         <image name="Followed" width="36" height="36"/>
         <image name="Friends" width="30" height="30"/>
@@ -4855,6 +4920,8 @@ Q3tQe1V7V3tZe157Zntpe257dnt5e4t7jnuTAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAe5U
         <image name="Like" width="30" height="30"/>
         <image name="Liked" width="30" height="30"/>
         <image name="Logo Inactive" width="30" height="30"/>
+        <image name="Logo InactiveS" width="20" height="20"/>
+        <image name="Message Icon" width="20" height="20"/>
         <image name="Morphu Brand" width="512" height="1000"/>
         <image name="Onboarding1" width="375" height="487"/>
         <image name="Onboarding2" width="312" height="406"/>
@@ -4863,8 +4930,11 @@ Q3tQe1V7V3tZe157Zntpe257dnt5e4t7jnuTAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAe5U
         <image name="Onboarding5" width="375" height="487"/>
         <image name="Profile" width="30" height="30"/>
         <image name="ProfileU" width="30" height="30"/>
+        <image name="Save Icon" width="20" height="20"/>
+        <image name="Save IconG" width="20" height="20"/>
         <image name="Search" width="30" height="30"/>
         <image name="SearchU" width="30" height="30"/>
+        <image name="Send IconG" width="36" height="36"/>
         <image name="Unfollow Long" width="245" height="25"/>
         <image name="Upload" width="36" height="36"/>
         <image name="X" width="30" height="30"/>

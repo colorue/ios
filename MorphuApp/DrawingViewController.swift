@@ -180,7 +180,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    func postDrawing(saveToPhotos: Bool, postToFacebook: Bool) {
+    func postDrawing() {
         self.baseImage = nil
         self.postButton.enabled = false
         self.colorKeyboard!.uploading(0)
@@ -190,10 +190,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         newDrawing.setImage((canvas?.getDrawing())!)
         
         api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
-        
-        if saveToPhotos {
-            UIImageWriteToSavedPhotosAlbum(canvas!.getDrawing(), self, nil, nil)
-        }
+
     }
     
     func postCallback(uploaded: Bool) {
