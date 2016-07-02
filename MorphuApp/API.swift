@@ -236,13 +236,13 @@ class API {
         
         let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
         
-        dispatch_async(dispatch_get_main_queue()) {
-            self.delagate?.refresh()
-        }
+        self.delagate?.refresh()
         
         desertRef.deleteWithCompletion { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")
+            } else {
+                self.delagate?.refresh()
             }
         }
     }
@@ -257,9 +257,7 @@ class API {
             } else {
                 self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(URL?.absoluteString)
                 self.getActiveUser().profileImage = drawing.getImage()
-                dispatch_async(dispatch_get_main_queue()) {
-                    self.delagate?.refresh()
-                }
+                self.delagate?.refresh()
             }
         }
 

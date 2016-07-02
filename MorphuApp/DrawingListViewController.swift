@@ -189,8 +189,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
             self.refreshControl?.endRefreshing()
-            self.tableView.reloadData()
         })
+        self.tableView.reloadData()
     }
     
     
