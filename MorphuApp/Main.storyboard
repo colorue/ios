@@ -91,7 +91,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="mVr-dO-lxG" id="UEx-w3-foj"/>
-                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToHome:" id="FAr-m3-UeF"/>
+                        <segue destination="Ebr-du-21l" kind="unwind" identifier="backToHome" unwindAction="backToMain:" id="FAr-m3-UeF"/>
                         <segue destination="Ebr-du-21l" kind="unwind" identifier="saveToHome" unwindAction="backToHome:" id="DJH-Tb-Def"/>
                     </connections>
                 </viewController>
@@ -136,7 +136,7 @@
                                         <state key="normal" title=" Send" image="Message Icon">
                                             <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
-                                        <state key="highlighted" image="Send IconG">
+                                        <state key="highlighted" image="Message IconG">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
@@ -2429,7 +2429,7 @@
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
                                                     <rect key="frame" x="0.0" y="68" width="251" height="29"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
-                                                    <state key="normal" image="BDD77E25-B4B8-433B-8315-826CAB5CEE46">
+                                                    <state key="normal" image="B3118996-FA2D-4639-9BDE-2571516E945E">
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
                                                     <state key="selected" image="Unfollow Long"/>
@@ -4375,7 +4375,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BDD77E25-B4B8-433B-8315-826CAB5CEE46" width="250" height="29">
+        <image name="B3118996-FA2D-4639-9BDE-2571516E945E" width="250" height="29">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -4922,6 +4922,7 @@ Q3tQe1V7V3tZe157Zntpe257dnt5e4t7jnuTAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAe5U
         <image name="Logo Inactive" width="30" height="30"/>
         <image name="Logo InactiveS" width="20" height="20"/>
         <image name="Message Icon" width="20" height="20"/>
+        <image name="Message IconG" width="20" height="20"/>
         <image name="Morphu Brand" width="512" height="1000"/>
         <image name="Onboarding1" width="375" height="487"/>
         <image name="Onboarding2" width="312" height="406"/>
@@ -4934,7 +4935,6 @@ Q3tQe1V7V3tZe157Zntpe257dnt5e4t7jnuTAAAAAAAAAgEAAAAAAAAAQQAAAAAAAAAAAAAAAAAAe5U
         <image name="Save IconG" width="20" height="20"/>
         <image name="Search" width="30" height="30"/>
         <image name="SearchU" width="30" height="30"/>
-        <image name="Send IconG" width="36" height="36"/>
         <image name="Unfollow Long" width="245" height="25"/>
         <image name="Upload" width="36" height="36"/>
         <image name="X" width="30" height="30"/>

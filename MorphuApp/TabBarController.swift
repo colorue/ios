@@ -23,4 +23,6 @@ class TabBarController: UITabBarController {
         
         self.selectedIndex = initialIndex
     }
+    
+    @IBAction func backToMain(segue: UIStoryboardSegue) {}
 }
