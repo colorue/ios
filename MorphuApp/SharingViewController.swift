@@ -12,7 +12,6 @@ import FBSDKShareKit
 class SharingViewController: UIViewController {
     
     @IBOutlet weak var drawingImage: UIImageView!
-    @IBOutlet weak var postButton: UIButton!
     
     @IBOutlet weak var photosLabel: UILabel!
     @IBOutlet weak var photosSwitch: UISwitch!
