@@ -256,7 +256,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.save()
         self.hideUnderFingerView()
         
-        print("app moved to background")
 //        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     

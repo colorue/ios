@@ -247,7 +247,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     private func addToUndoStack(image: UIImage?) {
         if let image = image {
-            if undoStack.count <= 10 {
+            if undoStack.count <= 20 {
                 undoStack.append(image)
             } else {
                 undoStack.removeAtIndex(0)

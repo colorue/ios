@@ -45,8 +45,12 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         self.tableView.bottomRefreshControl = bottomRefreshControl
     }
     
-    func scrollToTop(sender: UIButton) {
-        self.tableView.setContentOffset(CGPointZero, animated: true)
+    func scrollToTop() {
+        if tableView.numberOfRowsInSection(0) > 0 {
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        } else if tableView.numberOfRowsInSection(1) > 0 {
+            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        }
     }
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
@@ -179,27 +183,21 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
     }
     
+    @IBAction func refreshPulled(sender: UIRefreshControl) {
+        refresh()
+    }
+    
     func refresh() {
         dispatch_async(dispatch_get_main_queue(), {
             self.bottomRefreshControl.endRefreshing()
             self.refreshControl?.endRefreshing()
+            self.tableView.reloadData()
         })
-        self.tableView.reloadData()
     }
-    
     
     func presentDrawingActions(sender: UIButton) {
         
         let drawing = getClickedDrawing(sender)
-        
-//        if (drawing.getArtist().userId == api.getActiveUser().userId) {
-//            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
-//        } else {
-//            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
-//        }
-//        
-//        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-//        self.presentViewController(avc, animated: true, completion: nil)
         
         let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
@@ -224,10 +222,10 @@ class DrawingListViewController: UITableViewController, APIDelagate {
                 self.presentViewController(activity, animated: true, completion: nil)
             }))
         } else {
-            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
-                //self.performActivity()
-                
-            }))
+//            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+//                //self.performActivity()
+//                
+//            }))
         }
         
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))

@@ -42,13 +42,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         notificationCenter.postNotificationName(UIApplicationWillResignActiveNotification, object: nil)
     }
     
+    
+    var previousController: UIViewController?
+
+    
     // MARK: TabBarControllerDelegate Methods
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         let api = API.sharedInstance
         
         let destinationNavigationController = viewController as? UINavigationController
         let targetController = destinationNavigationController?.topViewController
-        
         
         if let profileView = targetController as? ProfileViewController {
             let nav = profileView.navigationController as! NavigationController
@@ -58,6 +61,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
+            }
+            if previousController == viewController {
+                profileView.scrollToTop()
             }
         } else if let friendsList = targetController as? FriendsViewController {
             friendsList.addInviteButton()
@@ -70,13 +76,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 return false
             }
         } else if let search = targetController as? SearchViewController {
-                let nav = search.navigationController as! NavigationController
-                nav.setColors(orangeColor)
+            let nav = search.navigationController as! NavigationController
+            nav.setColors(orangeColor)
+            if previousController == viewController {
+                search.scrollToTop()
+            }
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
             nav.setColors(redColor)
+            if previousController == viewController {
+                wall.scrollToTop()
+            }
         }
         
+        self.previousController = viewController
+
         return true
     }
 

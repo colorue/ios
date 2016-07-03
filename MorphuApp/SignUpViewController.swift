@@ -26,7 +26,6 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var nextButton: UIBarButtonItem!
     
-    
     @IBOutlet weak var drawing: UIImageView!
     
     var emailFirstResponder = true
