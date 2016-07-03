@@ -254,7 +254,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func appMovedToBackground() {
         self.save()
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        self.hideUnderFingerView()
+        
+        print("app moved to background")
+//        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private func save() {

@@ -241,8 +241,6 @@ class API {
         
         let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
         
-        self.delagate?.refresh()
-        
         desertRef.deleteWithCompletion { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")

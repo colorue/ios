@@ -44,7 +44,7 @@ class DeleteActivity: UIActivity {
     
     override func performActivity() {
         for drawing in self.drawings {
-            self.api.deleteDrawing(drawing)
+//            self.api.deleteDrawing(drawing)
         }
     }
     

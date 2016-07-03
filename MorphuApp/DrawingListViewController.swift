@@ -18,11 +18,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     var tintColor: UIColor?
     
-    let editActivity = EditActivity()
-    let deleteActivity = DeleteActivity()
-    let profilePicActivity = ProfilePicActivity()
-    var avc = UIActivityViewController(activityItems: [], applicationActivities: nil)
-    
     var loadMoreDrawings: (()->())?
     
     // MARK: Loading Methods
@@ -130,7 +125,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         drawingCell.likes.textColor = tintColor
         drawingCell.commentCount.textColor = tintColor
         
-        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.upload(_:)), forControlEvents: .TouchUpInside)
+        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.presentDrawingActions(_:)), forControlEvents: .TouchUpInside)
         drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         let likes = drawing.getLikes().count
@@ -193,18 +188,53 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     
-    func upload(sender: UIButton) {
+    func presentDrawingActions(sender: UIButton) {
         
         let drawing = getClickedDrawing(sender)
         
+//        if (drawing.getArtist().userId == api.getActiveUser().userId) {
+//            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
+//        } else {
+//            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
+//        }
+//        
+//        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
+//        self.presentViewController(avc, animated: true, completion: nil)
+        
+        let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        
         if (drawing.getArtist().userId == api.getActiveUser().userId) {
-            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
+            drawingActions.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+                let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+                    self.api.deleteDrawing(drawing)
+                    //tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: sender.tag, inSection: 1)], withRowAnimation: .Fade)
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .Default, handler: { (action: UIAlertAction!) in
+                self.api.makeProfilePic(drawing)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
+                let drawingViewController = activity.topViewController as! DrawingViewController
+                drawingViewController.baseImage = drawing.getImage()
+                self.presentViewController(activity, animated: true, completion: nil)
+            }))
         } else {
-            avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)
+            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+                //self.performActivity()
+                
+            }))
         }
         
-        avc.excludedActivityTypes = [UIActivityTypeMail, UIActivityTypePostToVimeo, UIActivityTypePostToFlickr, UIActivityTypePrint, UIActivityTypeCopyToPasteboard, UIActivityTypeAssignToContact, UIActivityTypeAddToReadingList, UIActivityTypeAirDrop]
-        self.presentViewController(avc, animated: true, completion: nil)
+        drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+        drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+            UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+        }))
+        self.presentViewController(drawingActions, animated: true, completion: nil)
     }
     
     private func getClickedDrawing(sender: AnyObject) -> Drawing {
