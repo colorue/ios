@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-//        UIApplication.sharedApplication().statusBarStyle = .Default
-        
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
 

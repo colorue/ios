@@ -57,7 +57,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     private func sendInvite(contact: Contact) {
 
         if (MFMessageComposeViewController.canSendText()) {
-            controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test:\nhttps://goo.gl/i0Kpmf\nIt's an iOS app for easily drawing on your phone and sharing your creations"
+            controller.body = "\(api.getActiveUser().username) invited you to join to Colorue. It's an app for drawing on your iPhone and sharing your creations\nwww.facebook.com/colorueApp/"
 
             controller.recipients = [contact.getPhoneNumber()!]
             if let image = self.api.getActiveUser().profileImage {
