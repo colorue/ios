@@ -150,7 +150,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
         }
     }
-
     
     func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
         
@@ -198,7 +197,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         
         let drawing = getClickedDrawing(sender)
         
-        if drawing.getArtist().userId == api.getActiveUser().userId {
+        if (drawing.getArtist().userId == api.getActiveUser().userId) {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: [profilePicActivity, editActivity, deleteActivity])
         } else {
             avc = UIActivityViewController(activityItems: [drawing.getImage(), drawing], applicationActivities: nil)

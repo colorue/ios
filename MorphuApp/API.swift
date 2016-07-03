@@ -114,15 +114,20 @@ class API {
             
                 let newUser = User(userId: userId, username: username, fullname: fullname, email: email)
             
-                if let url = snapshot.value!["photoURL"] as? String {
-                    dispatch_async(dispatch_get_main_queue()) {
-                        let url = NSURL(string: url)
-                        let data = NSData(contentsOfURL : url!)
-                        if let data = data {
-                            newUser.profileImage = UIImage(data: data)
-                        }
-                    }
+                if let profileDrawing = snapshot.value!["photoURL"] as? String {
+                    self.downloadImage(profileDrawing, progressCallback: nil, finishedCallback: { image in
+                        newUser.profileImage = image
+                    })
                 }
+//                if let url = snapshot.value!["photoURL"] as? String {
+//                    dispatch_async(dispatch_get_main_queue()) {
+//                        let url = NSURL(string: url)
+//                        let data = NSData(contentsOfURL : url!)
+//                        if let data = data {
+//                            newUser.profileImage = UIImage(data: data)
+//                        }
+//                    }
+//                }
                 self.userDict[userId] = newUser
                 callback(newUser)
             })
@@ -248,19 +253,9 @@ class API {
     }
     
     func makeProfilePic(drawing: Drawing) {
-        let drawingRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
-        
-
-        drawingRef.downloadURLWithCompletion { (URL, error) -> Void in
-            if (error != nil) {
-                print(error)
-            } else {
-                self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(URL?.absoluteString)
-                self.getActiveUser().profileImage = drawing.getImage()
-                self.delagate?.refresh()
-            }
-        }
-
+        self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(drawing.getDrawingId())
+        self.getActiveUser().profileImage = drawing.getImage()
+        self.delagate?.refresh()
     }
     
     func like(drawing: Drawing) {
@@ -563,7 +558,7 @@ class API {
         }
     }
     
-    func downloadImage(imageId: String, progressCallback: (Float) -> (), finishedCallback: (UIImage) -> ()) {
+    func downloadImage(imageId: String, progressCallback: ((Float) -> ())?, finishedCallback: (UIImage) -> ()) {
         if let image = imageDict[imageId] {
             finishedCallback(image)
         } else {
@@ -575,7 +570,7 @@ class API {
                     print(error)
                     } else {
                     if let imageData = data {
-                        progressCallback(1.0)
+                        progressCallback?(1.0)
                         let image = UIImage(data: imageData)!
                         self.imageDict[imageId] = image
                         finishedCallback(image)
@@ -588,7 +583,7 @@ class API {
             downloadTask.observeStatus(.Progress) { (snapshot) -> Void in
                 if let progress = snapshot.progress {
                     let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
-                    progressCallback(percentComplete)
+                    progressCallback?(percentComplete)
                 }
             }
         }

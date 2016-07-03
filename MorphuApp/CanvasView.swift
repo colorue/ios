@@ -235,10 +235,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
         undoStack.last?.drawAtPoint(CGPoint.zero)
+
         if alpha {
             currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate.getAlpha()!)
         } else {
-            currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: 1.0)
+            currentStroke?.drawAtPoint(CGPoint.zero)
         }
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
