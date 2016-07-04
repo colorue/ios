@@ -120,6 +120,8 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
                 API.sharedInstance.loadData()
                 self.prefs.setValue(self.emailInput.text, forKey: "email")
                 self.prefs.setValue(self.passwordInput.text, forKey: "password")
+            } else {
+                self.activityIndicator.stopAnimating()
             }
         })
     }
@@ -150,6 +152,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     }
     
     func refresh() {
+        print("sign in")
         activityIndicator.stopAnimating()
         self.performSegueWithIdentifier("signIn", sender: self)
     }
