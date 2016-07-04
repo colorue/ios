@@ -21,6 +21,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         FIRApp.configure()
         FIRDatabase.database().persistenceEnabled = true
+        
+        let config = UAConfig.defaultConfig()
+        config.analyticsEnabled = false
+        config.developmentLogLevel = UALogLevel.Warn
+        UAirship.takeOff(config)
 
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

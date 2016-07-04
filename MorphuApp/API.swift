@@ -12,7 +12,6 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import SinchVerification
 import Alamofire
-import AirshipKit
 
 class API {
     
@@ -119,15 +118,7 @@ class API {
                         newUser.profileImage = image
                     })
                 }
-//                if let url = snapshot.value!["photoURL"] as? String {
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        let url = NSURL(string: url)
-//                        let data = NSData(contentsOfURL : url!)
-//                        if let data = data {
-//                            newUser.profileImage = UIImage(data: data)
-//                        }
-//                    }
-//                }
+
                 self.userDict[userId] = newUser
                 callback(newUser)
             })

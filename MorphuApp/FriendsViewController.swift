@@ -88,6 +88,11 @@ class FriendsViewController: UITableViewController, UserCellDelagate, APIDelagat
             return cell
         }
     }
+    
+    @IBAction func pullRefresh(sender: UIRefreshControl) {
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
 
     
     // MARK: UserCellDelagate Methods
