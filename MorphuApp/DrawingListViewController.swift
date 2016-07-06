@@ -222,10 +222,14 @@ class DrawingListViewController: UITableViewController, APIDelagate {
                 self.presentViewController(activity, animated: true, completion: nil)
             }))
         } else {
-//            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
-//                //self.performActivity()
-//                
-//            }))
+            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+                let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+                    self.api.reportDrawing(drawing)
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
+            }))
         }
         
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))

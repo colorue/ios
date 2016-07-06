@@ -19,8 +19,7 @@ class API {
 
     private let myRootRef = FIRDatabase.database().reference()
     
-    let storage = FIRStorage.storage()
-    let storageRef: FIRStorageReference
+    let storageRef = FIRStorage.storage().reference()
     
     var airshipKey = ""
 
@@ -42,10 +41,6 @@ class API {
     
     
     var delagate: APIDelagate?
-    
-    init() {
-        self.storageRef = storage.referenceForURL("gs://project-6663883006145995611.appspot.com")
-    }
     
     // MARK: Internal methods
     
@@ -305,6 +300,18 @@ class API {
     }
     
     
+    func reportDrawing(drawing: Drawing) {
+        if let active = activeUser {
+            myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+        }
+    }
+    
+    func reportComment(comment: Comment) {
+        if let active = activeUser {
+            myRootRef.child("reported/comments/\(comment.getCommetId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+        }
+    }
+    
     // MARK: Get Methods
     
     func getActiveUser() -> User {
@@ -450,6 +457,7 @@ class API {
     
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
+            guard snapshot.exists() else { return }
             self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
@@ -482,7 +490,7 @@ class API {
     }
     
     private func loadUserByFBID(FBID: String) {
-        myRootRef.child("userLookup/FacebookIDs/\(FBID)").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        myRootRef.child("userLookup/FacebookIDs/\(FBID)").observeEventType(.Value, withBlock: { snapshot in
             if !snapshot.exists() { return }
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
@@ -497,7 +505,7 @@ class API {
     
     func loadPopularUsers() {
         myRootRef.child("popularUsers").observeEventType(.ChildAdded, withBlock: { snapshot in
-            if !snapshot.exists() { return }
+            guard snapshot.exists() else { return }
             let userID = snapshot.key
             self.getUser(userID, callback: { (user: User) -> () in
                 self.popularUsers.insert(user)
@@ -507,7 +515,7 @@ class API {
     
     func checkNumber(number: String, callback: (User) -> ()) {
         myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEventOfType(.Value, withBlock: { snapshot in
-            if !snapshot.exists() { return }
+            guard snapshot.exists() else { return }
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
                 callback(user)
@@ -518,6 +526,7 @@ class API {
     
     private func getAirshipKey() {
         myRootRef.child("airshipKey").observeEventType(.Value, withBlock: { snapshot in
+            guard snapshot.exists() else { return }
             let key = snapshot.value as! String
             self.airshipKey = key
         })

@@ -26,11 +26,10 @@ class AuthAPI {
     // MARK: Login/Registration Methods
     
     func checkLoggedIn(callback: (Bool) -> ()) {
-        
-        print("checkLoggedIn")
+                
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             self.myRootRef.child("users/\(userID)").observeEventType(.Value, withBlock: { snapshot in
-                print("checkLoggedInExists")
+                
                 callback(snapshot.exists())
             })
         } else {
