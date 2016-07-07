@@ -56,6 +56,10 @@ class API {
                 
                 let drawing = Drawing(artist: artist, timeStamp: snapshot.value!["timeStamp"] as! Double, drawingId: drawingId)
                 
+                if let urlString = snapshot.value!["url"] as?  String {
+                    drawing.url = NSURL(string: urlString)
+                }
+                
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
                     self.getUser(snapshot.key, callback: { (liker: User) -> () in
                         drawing.like(liker)

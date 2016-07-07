@@ -22,4 +22,6 @@ target 'Colorue' do
     
     pod 'UrbanAirship-iOS-SDK'
     pod 'Alamofire'
+    
+    pod 'Kingfisher'
 end

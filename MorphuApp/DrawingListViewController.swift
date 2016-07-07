@@ -8,6 +8,7 @@
 
 import UIKit
 import CCBottomRefreshControl
+import Kingfisher
 
 class DrawingListViewController: UITableViewController, APIDelagate {
     
@@ -95,23 +96,12 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, tag: Int) {
-        drawingCell.drawingImage.alpha = 0.0
         drawingCell.progressBar.hidden = true
-        drawingCell.imageView?.image = nil
         
-        api.downloadImage(drawing.getDrawingId(),
-                          progressCallback: { (progress: Float) -> () in
-                            drawingCell.progressBar.setProgress(progress, animated: true)
-            },
-                          finishedCallback: { (drawingImage: UIImage) -> () in
-                            drawingCell.progressBar.hidden = true
-                            drawingCell.drawingImage.image = drawingImage
-                            drawing.setImage(drawingImage)
-                            
-                            UIView.animateWithDuration(0.3,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
-                                drawingCell.drawingImage.alpha = 1.0
-                                }, completion: nil)
-        })
+        if let url = drawing.url {
+            drawingCell.drawingImage.kf_setImageWithURL(url, optionsInfo: [.Transition(.Fade(0.2))])
+        }
+        
         
         drawingCell.profileImage.image = drawing.getArtist().profileImage
         drawingCell.creator.text = drawing.getArtist().username

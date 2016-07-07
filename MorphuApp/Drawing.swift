@@ -18,6 +18,7 @@ class Drawing {
     private var image: UIImage?
     var delagate: DrawingDelagate?
     var drawingOfTheDay = false
+    var url: NSURL?
     
     init(artist: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, drawingId: String = "") {
         self.artist = artist
