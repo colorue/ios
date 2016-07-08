@@ -102,7 +102,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             drawingCell.drawingImage.kf_setImageWithURL(url, optionsInfo: [.Transition(.Fade(0.2))])
         }
         
-        
         drawingCell.profileImage.image = drawing.getArtist().profileImage
         drawingCell.creator.text = drawing.getArtist().username
         drawingCell.timeCreated.text = drawing.getTimeSinceSent()

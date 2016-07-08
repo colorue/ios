@@ -58,6 +58,8 @@ class API {
                 
                 if let urlString = snapshot.value!["url"] as?  String {
                     drawing.url = NSURL(string: urlString)
+                } else {
+                    self.setDrawingURL(drawingId)
                 }
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
@@ -588,6 +590,15 @@ class API {
                     progressCallback?(percentComplete)
                 }
             }
+        }
+    }
+    
+    func setDrawingURL(drawingId: String) {
+        let drawingRef = storageRef.child("drawings/\(drawingId).png")
+        
+        drawingRef.downloadURLWithCompletion { (URL, error) -> Void in
+            guard error == nil else { return }
+            self.myRootRef.child("drawings/\(drawingId)/url").setValue(URL?.absoluteString)
         }
     }
     
