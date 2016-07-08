@@ -91,28 +91,36 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
             targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
         }
     }
+
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return  UITableViewCellEditingStyle.Delete
+    }
     
-//    --- DELETE COMMENTS ---
-//    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-//        if editingStyle == .Delete {
-//            api.deleteComment(drawingInstance!, comment: drawingInstance!.getComments()[indexPath.row])
-//            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Left)
-//        }
-//    }
-//
-//    
-//    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-//        return  UITableViewCellEditingStyle.Delete
-//    }
-//    
-//    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-//        if indexPath.section == 0 {
-//            if drawingInstance?.getComments()[indexPath.row].user.userId == api.getActiveUser().userId {
-//                return true
-//            }
-//        }
-//        return false
-//    }
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath: NSIndexPath) -> [UITableViewRowAction] {
+        if drawingInstance?.getComments()[editActionsForRowAtIndexPath.row].user.userId == api.getActiveUser().userId {
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Delete", handler: { action, indexPath in
+                self.setEditing(false, animated: true)
+                let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+                    self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                    self.tableView.reloadData()
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
+            })
+            return [deleteAction]
+        } else {
+            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Report", handler: { action, indexPath in
+                print("report")
+                self.setEditing(false, animated: true)
+            })
+            return [reportAction]
+        }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
     
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
