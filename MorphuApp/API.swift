@@ -279,12 +279,13 @@ class API {
     
     func deleteComment(drawing: Drawing, comment: Comment) {
         drawing.removeComment(comment)
+        myRootRef.child("comments/\(comment.getCommetId())").removeValue()
+        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
     }
     
     func follow(user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
-        
         sendPushNotification("\(activeUser!.username) is following you!", recipient: user.userId, badge: "+0")
     }
     

@@ -111,7 +111,12 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
             return [deleteAction]
         } else {
             let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Report", handler: { action, indexPath in
-                print("report")
+                let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+                    self.api.reportComment((self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
                 self.setEditing(false, animated: true)
             })
             return [reportAction]
