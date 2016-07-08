@@ -130,6 +130,7 @@ class Drawing {
     
     func toAnyObject()-> NSDictionary {
         return ["artist": self.artist.userId,
-                "timeStamp": self.timeStamp]
+                "timeStamp": self.timeStamp,
+                "url": self.url!.absoluteString]
     }
 }

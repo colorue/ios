@@ -99,7 +99,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         drawingCell.progressBar.hidden = true
         
         if let url = drawing.url {
-            drawingCell.drawingImage.kf_setImageWithURL(url, optionsInfo: [.Transition(.Fade(0.2))])
+            drawingCell.drawingImage.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: [.Transition(.Fade(0.2))])
         }
         
         drawingCell.profileImage.image = drawing.getArtist().profileImage

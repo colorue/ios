@@ -59,7 +59,9 @@ class API {
                 if let urlString = snapshot.value!["url"] as?  String {
                     drawing.url = NSURL(string: urlString)
                 } else {
-                    self.setDrawingURL(drawingId)
+                    self.setDrawingURL(drawingId, callback: { url in
+                        drawing.url = url
+                    })
                 }
                 
                 self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
@@ -218,9 +220,12 @@ class API {
         self.uploadImage(drawing, progressCallback: progressCallback, finishedCallback:  { uploaded in
             if uploaded {
                 drawing.setArtist(self.activeUser!)
-                newDrawing.setValue(drawing.toAnyObject())
-                self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
-                self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                self.setDrawingURL(drawing.getDrawingId(), callback: { url in
+                    drawing.url = url
+                    newDrawing.setValue(drawing.toAnyObject())
+                    self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                })
             }
             finishedCallback(uploaded)
         })
@@ -593,12 +598,13 @@ class API {
         }
     }
     
-    func setDrawingURL(drawingId: String) {
+    func setDrawingURL(drawingId: String, callback: ((NSURL?)->())) {
         let drawingRef = storageRef.child("drawings/\(drawingId).png")
         
         drawingRef.downloadURLWithCompletion { (URL, error) -> Void in
             guard error == nil else { return }
             self.myRootRef.child("drawings/\(drawingId)/url").setValue(URL?.absoluteString)
+            callback(URL)
         }
     }
     
