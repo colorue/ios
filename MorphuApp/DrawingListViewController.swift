@@ -78,7 +78,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
                             forRowAtIndexPath indexPath: NSIndexPath) {
-        
         let drawingCell = cell as! DrawingCell
         let drawing: Drawing
 
@@ -99,7 +98,9 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         drawingCell.progressBar.hidden = true
         
         if let url = drawing.url {
-            drawingCell.drawingImage.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: [.Transition(.Fade(0.2))])
+            drawingCell.drawingImage.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: [.Transition(.Fade(0.2))],                         completionHandler: { (image, error, cacheType, imageURL) -> () in
+                drawing.setImage(image)
+            })
         }
         
         drawingCell.profileImage.image = drawing.getArtist().profileImage
@@ -237,7 +238,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-                
         if segue.identifier == "showLikes" {
             let drawing = getClickedDrawing(sender!)
             let targetController = segue.destinationViewController as! UserListViewController
