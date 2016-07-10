@@ -51,6 +51,16 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
         }
     }
     
+    @IBAction func quitSharing(sender: UIButton) {
+        UIView.animateWithDuration(0.3, animations: {
+            self.popoverController!.view.alpha = 1.0
+            self.popoverController!.navigationController?.navigationBar.alpha = 1.0
+        })
+        
+        popoverController!.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
     override func viewDidLoad() {
         self.drawingImage.image = drawing
     }
