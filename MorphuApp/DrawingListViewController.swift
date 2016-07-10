@@ -9,6 +9,8 @@
 import UIKit
 import CCBottomRefreshControl
 import Kingfisher
+import FBSDKShareKit
+import MessageUI
 
 class DrawingListViewController: UITableViewController, APIDelagate {
     
@@ -17,6 +19,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     let bottomRefreshControl = UIRefreshControl()
     var drawingSource = API.sharedInstance.getWall
     
+    var controller = MFMessageComposeViewController()
+
     var tintColor: UIColor?
     
     var loadMoreDrawings: (()->())?
@@ -192,6 +196,25 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         if (drawing.getArtist().userId == api.getActiveUser().userId) {
+            drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .Default, handler: { (action: UIAlertAction!) in
+                self.api.makeProfilePic(drawing)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Share to Facebook", style: .Default, handler: { (action: UIAlertAction!) in
+                self.shareToFacebook(drawing)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Send as Text", style: .Default, handler: { (action: UIAlertAction!) in
+                self.sendDrawing(drawing)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+                UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
+                let drawingViewController = activity.topViewController as! DrawingViewController
+                drawingViewController.baseImage = drawing.getImage()
+                self.presentViewController(activity, animated: true, completion: nil)
+            }))
             drawingActions.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
@@ -201,21 +224,14 @@ class DrawingListViewController: UITableViewController, APIDelagate {
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
             }))
-            drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .Default, handler: { (action: UIAlertAction!) in
-                self.api.makeProfilePic(drawing)
-            }))
-            drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
-                let drawingViewController = activity.topViewController as! DrawingViewController
-                drawingViewController.baseImage = drawing.getImage()
-                self.presentViewController(activity, animated: true, completion: nil)
-            }))
         } else {
             drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportDrawing(drawing)
+                }))
+                drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+                    UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
@@ -223,10 +239,33 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
         
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
-        drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
-            UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
-        }))
+
         self.presentViewController(drawingActions, animated: true, completion: nil)
+    }
+    
+    private func sendDrawing(drawing: Drawing) {
+        if (MFMessageComposeViewController.canSendText()) {
+            controller.addAttachmentData(UIImagePNGRepresentation(drawing.getImage())!, typeIdentifier: "public.data", filename: "colorue.png")
+            controller.messageComposeDelegate = self
+            controller.resignFirstResponder()
+            
+            self.presentViewController(controller, animated: true, completion: nil)
+        }
+    }
+    
+    private func shareToFacebook(drawing: Drawing) {
+        let content = FBSDKSharePhotoContent()
+        let photo = FBSDKSharePhoto(image: drawing.getImage(), userGenerated: true)
+        content.photos  = [photo]
+        
+        let dialog = FBSDKShareDialog()
+        dialog.fromViewController = self
+        dialog.shareContent = content
+        dialog.mode = FBSDKShareDialogMode.Native
+        if !dialog.show() {
+            dialog.mode = FBSDKShareDialogMode.Automatic
+            dialog.show()
+        }
     }
     
     private func getClickedDrawing(sender: AnyObject) -> Drawing {
@@ -262,5 +301,12 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         api.releaseMemory()
         super.didReceiveMemoryWarning()
     }
+}
+
+extension DrawingListViewController: MFMessageComposeViewControllerDelegate {
     
+    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+        self.controller = MFMessageComposeViewController()
+    }
 }
