@@ -230,11 +230,11 @@ class DrawingListViewController: UITableViewController, APIDelagate {
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportDrawing(drawing)
                 }))
-                drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
-                    UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
-                }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
+            }))
+            drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+                UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
             }))
         }
         

@@ -302,7 +302,7 @@ class API {
         myRootRef.child("userLookup/usernames").queryOrderedByKey()
             .queryStartingAtValue(searchStart)
             .queryEndingAtValue(searchEnd)
-            .queryLimitedToFirst(8)
+            .queryLimitedToFirst(16)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 let userId = snapshot.value as! String
                 self.getUser(userId, callback: { (user: User) -> () in
@@ -395,7 +395,7 @@ class API {
 
     // Used both for initial load and to add older drawings
     func loadWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(8).queryStartingAtValue(self.oldestTimeLoaded)
+        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(16).queryStartingAtValue(self.oldestTimeLoaded)
             .observeEventType(.ChildAdded, withBlock: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
@@ -442,7 +442,7 @@ class API {
 
 
     func loadExplore() {
-        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(8)
+        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(16)
             .queryStartingAtValue(self.oldestExploreLoaded).observeEventType(.ChildAdded, withBlock: { snapshot in
                 let drawingId = snapshot.key
                 self.getDrawing(drawingId, callback: { (drawing: Drawing, new: Bool) -> () in
