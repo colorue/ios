@@ -60,7 +60,9 @@ class User: Hashable {
         following.remove(user)
     }
     
-    func isFollowing(user: User) -> Bool {
+    func isFollowing(user: User?) -> Bool {
+        guard let user = user else { return false }
+        
         for followee in self.following {
             if followee.userId == user.userId {
                 return true

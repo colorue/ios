@@ -324,6 +324,10 @@ class API {
         }
     }
     
+    func makeDOD(drawing: Drawing) {
+        myRootRef.child("drawingOfTheDay").setValue(drawing.getDrawingId())
+    }
+    
     // MARK: Get Methods
     
     func getActiveUser() -> User {

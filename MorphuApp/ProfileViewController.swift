@@ -15,9 +15,6 @@ class ProfileViewController: DrawingListViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.hidesBarsOnSwipe = false
-
         self.drawingSource = userInstance!.getDrawings
         API.sharedInstance.loadFulUser(userInstance!)
     }
@@ -34,8 +31,12 @@ class ProfileViewController: DrawingListViewController {
             self.presentViewController(firstProfileView, animated: true, completion: nil)
         }
     }
-    
-    // MARK: - Table view data source
+}
+
+
+// MARK: - Table view data source
+
+extension ProfileViewController {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
@@ -58,41 +59,16 @@ class ProfileViewController: DrawingListViewController {
         
         if indexPath.section == 0 {
             let profileCell = cell as! ProfileCell
-            
-            profileCell.fullName.text = userInstance!.fullname
-            profileCell.profileImage.image = userInstance!.profileImage
-            profileCell.followingCount.text = String(userInstance!.getFollowing().count)
-            profileCell.followersCount.text = String(userInstance!.getFollowers().count)
-            profileCell.drawingsCount.text = String(userInstance!.getDrawings().count)
-            
-            profileCell.followButton.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
-            profileCell.followButton.tintColor = tintColor
-
-            profileCell.followButton.setImage(UIImage(named: "Follow Long")!, forState: .Normal)
-
-            if tintColor == redColor {
-                profileCell.followButton.setImage(UIImage(named: "Followed Red"), forState: .Selected)
-            } else if tintColor == orangeColor {
-                profileCell.followButton.setImage(UIImage(named: "Followed Orange"), forState: .Selected)
-            } else if tintColor == blueColor {
-                profileCell.followButton.setImage(UIImage(named: "Followed Blue"), forState: .Selected)
-            } else {
-                profileCell.followButton.setImage(UIImage(named: "Followed Purple"), forState: .Selected)
-            }
-            
-            
-            if userInstance!.userId == api.getActiveUser().userId {
-                profileCell.followButton.setImage(nil, forState: .Normal)
-                profileCell.followButton.enabled = false
-            } else {
-                profileCell.followButton.selected = api.getActiveUser().isFollowing(userInstance!)
-            }
-            
+            profileCell.user = userInstance
+            profileCell.color = tintColor ?? redColor
+            profileCell.delagate = self
         } else {
             super.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
         }
     }
+}
 
+extension ProfileViewController: ProfileCellDelagate {
     func followAction(sender: UIButton) {
         
         if !sender.selected {
@@ -114,9 +90,12 @@ class ProfileViewController: DrawingListViewController {
         api.getActiveUser().unfollow(userInstance!)
         api.unfollow(userInstance!)
     }
-    
-    
-    // MARK: Segues
+}
+
+
+// MARK: Segues
+
+extension ProfileViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         super.prepareForSegue(segue, sender: sender)
         

@@ -238,6 +238,12 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             }))
         }
         
+        if api.getActiveUser().userId == "5Apylh3iA6bDpkDDGwcG3G8BWZ42" {
+            drawingActions.addAction(UIAlertAction(title: "Make DOD!", style: .Default, handler:  { (action: UIAlertAction!) in
+                self.api.makeDOD(drawing)
+            }))
+        }
+        
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
 
         self.presentViewController(drawingActions, animated: true, completion: nil)
