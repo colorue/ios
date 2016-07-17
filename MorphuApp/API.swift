@@ -27,6 +27,7 @@ class API {
     private var wall = [Drawing]()
     private var explore = [Drawing]()
     private var facebookFriends = Set<User>()
+    private var contacts = Set<User>()
     private var popularUsers = Set<User>()
 
     private var activeUser: User?
@@ -39,6 +40,7 @@ class API {
     private var oldestExploreLoaded: Double = -99999999999999
     private var newestTimeLoaded: Double = 0
     
+    private lazy var contactStore = ContactStore()
     
     var delagate: APIDelagate?
     
@@ -350,8 +352,12 @@ class API {
         return Array(self.popularUsers.union(self.facebookFriends))
     }
     
-    func getFacebookFriends() -> [User] {
-        return Array(self.facebookFriends)
+    func getFriends() -> [User] {
+        return Array(facebookFriends.union(contacts))
+    }
+    
+    func getContacts() -> [Contact] {
+        return contactStore.getContacts().sort( { $0.name < $1.name } )
     }
     
     //MARK: Load Data
@@ -529,12 +535,15 @@ class API {
         })
     }
     
-    func checkNumber(number: String, callback: (User) -> ()) {
+    func checkNumber(number: String) {
+
         myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEventOfType(.Value, withBlock: { snapshot in
             guard snapshot.exists() else { return }
+            
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
-                callback(user)
+                self.contacts.insert(user)
+                self.delagate?.refresh()
             })
         })
     }

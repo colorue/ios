@@ -13,7 +13,7 @@ class PeopleToFollowController: UserListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.setHidesBackButton(true, animated:true)
-        self.userSource =  api.getSuggustedUsers()
+        self.userSource =  api.getSuggustedUsers
     }
     
     override func viewDidAppear(animated: Bool) {

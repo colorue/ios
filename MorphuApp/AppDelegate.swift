@@ -76,7 +76,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 profileView.scrollToTop()
             }
         } else if let friendsList = targetController as? FriendsViewController {
-            friendsList.addInviteButton()
             let nav = friendsList.navigationController as! NavigationController
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor

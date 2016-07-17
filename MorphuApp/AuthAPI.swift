@@ -12,6 +12,12 @@ import FBSDKCoreKit
 import FBSDKLoginKit
 import SinchVerification
 
+enum FacebookLoginResult {
+    case Failed
+    case Registered
+    case LoggedIn
+}
+
 class AuthAPI {
     
     // MARK: Properties

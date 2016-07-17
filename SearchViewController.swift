@@ -57,7 +57,7 @@ class SearchViewController: DrawingListViewController, UISearchResultsUpdating {
         
         filterContentForSearchText(searchController.searchBar.text!)
         
-        userListController.userSource = self.filteredUsers
+        userListController.userSource = { return self.filteredUsers }
         userListController.refresh()
     }
     

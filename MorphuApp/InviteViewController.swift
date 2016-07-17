@@ -12,7 +12,6 @@ import MessageUI
 
 class InviteViewController: UITableViewController, MFMessageComposeViewControllerDelegate, APIDelagate {
     
-    lazy var contacts = ContactsAPI()
     let api = API.sharedInstance
     
     let tintColor = blueColor
@@ -43,13 +42,13 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.getContacts().count
+        return api.getContacts().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
 
         let cell = tableView.dequeueReusableCellWithIdentifier("InviteCell")! as! InviteCell
-        let contact = contacts.getContacts()[indexPath.row]
+        let contact = api.getContacts()[indexPath.row]
         cell.contactName.text = contact.name
         return cell
     }
@@ -72,7 +71,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.sendInvite(contacts.getContacts()[indexPath.row])
+        self.sendInvite(api.getContacts()[indexPath.row])
     }
 
     

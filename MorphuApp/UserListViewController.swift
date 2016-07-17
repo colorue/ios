@@ -8,16 +8,13 @@
 
 import UIKit
 
-class UserListViewController: UITableViewController, UserCellDelagate, APIDelagate {
+class UserListViewController: UITableViewController {
     
+    var userSource: () -> [User] = API.sharedInstance.getFriends
     
-//    var userSource: () -> [User] = API.sharedInstance.getFacebookFriends
-    
-    var userSource = API.sharedInstance.getFacebookFriends()
-
     let api = API.sharedInstance
     
-    var tintColor = purpleColor
+    var tintColor = blueColor
     
     var controller: UIViewController?
 
@@ -30,21 +27,13 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
         
         tableView.tableFooterView = UIView()
         tableView.backgroundColor = backgroundColor
-        
-//        let nav = self.navigationController as! NavigationController
-//        nav.setColors(tintColor)
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
 
         self.tableView.reloadData()
-        
         api.delagate = self
-    }
-    
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return UIStatusBarStyle.LightContent
     }
     
     // MARK: - Table view data source
@@ -53,32 +42,43 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userSource.count
+        return userSource().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
-                
-        let user = userSource[indexPath.row]
-        cell.username.text = user.username
-        cell.fullName.text = user.fullname
-        cell.profileImage.image = user.profileImage
         cell.delagate = self
-        cell.user = user
-        cell.followButton.tintColor = self.tintColor
-        
-        if user.userId == api.getActiveUser().userId {
-            cell.followButton.hidden = true
-        } else {
-            cell.followButton.selected = api.getActiveUser().isFollowing(user)
-        }
-        
+        cell.color = self.tintColor
         return cell
     }
     
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
+                            forRowAtIndexPath indexPath: NSIndexPath) {
+        if let userCell = cell as? UserCell {
+            userCell.user = userSource()[indexPath.row]
+        }
+    }
+    
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 52.0
+    }
+    
+    @IBAction func pullRefresh(sender: UIRefreshControl) {
+        self.tableView.reloadData()
+        self.refreshControl?.endRefreshing()
+    }
+}
+
+extension UserListViewController: APIDelagate {
+    func refresh() {
+        self.tableView.reloadData()
+    }
+}
+
+extension UserListViewController: UserCellDelagate {
     
     func followAction(userCell: UserCell) {
-        userCell.followButton.selected = true
+        userCell.followButton?.selected = true
         
         api.getActiveUser().follow(userCell.user!)
         api.follow(userCell.user!)
@@ -96,32 +96,16 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
     }
     
     private func unfollow(userCell: UserCell) {
-        userCell.followButton.selected = false
+        userCell.followButton?.selected = false
         api.getActiveUser().unfollow(userCell.user!)
         api.unfollow(userCell.user!)
     }
-    
-    @IBAction func pullRefresh(sender: UIRefreshControl) {
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
-    }
-    
-    func refresh() {
-        self.tableView.reloadData()
-//        self.refreshControl?.endRefreshing()
-    }
-    
-    func addInviteButton() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Invite", style: .Plain, target: self, action: #selector(UserListViewController.invite(_:)))
-    }
+}
+
+extension UserListViewController {
     
     // MARK: Segue Methods
-    
-    @objc private func invite(sender: UIBarButtonItem) {
-        self.controller!.performSegueWithIdentifier("toInvite", sender: self)
-    }
 
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         self.controller!.performSegueWithIdentifier("showUser", sender: self)
     }
@@ -131,8 +115,8 @@ class UserListViewController: UITableViewController, UserCellDelagate, APIDelaga
             let targetController = segue.destinationViewController as! ProfileViewController
             if let row = tableView.indexPathForSelectedRow?.row {
                 targetController.tintColor = self.tintColor
-                targetController.navigationItem.title = userSource[row].username
-                targetController.userInstance = userSource[row]
+                targetController.navigationItem.title = userSource()[row].username
+                targetController.userInstance = userSource()[row]
             }
         }
     }

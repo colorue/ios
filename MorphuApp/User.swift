@@ -8,12 +8,7 @@
 
 import UIKit
 
-// MARK: Equatable
-func == (lhs: User, rhs: User) -> Bool {
-    return lhs.userId == rhs.userId
-}
-
-class User: Hashable {
+class User {
     
     let userId: String
     let username: String
@@ -25,12 +20,8 @@ class User: Hashable {
     private var drawings = [Drawing]()
     
     private var newestDrawing: Double = 0
-    
     private var fullUserLoaded = false
     
-    var hashValue: Int {
-        return userId.hashValue
-    }
     
     func setfullUserLoaded() {
         self.fullUserLoaded = true
@@ -106,4 +97,15 @@ class User: Hashable {
     func getDrawings() -> [Drawing] {
         return self.drawings
     }
+}
+
+extension User: Hashable {
+    var hashValue: Int {
+        return userId.hashValue
+    }
+}
+
+// MARK: Equatable
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.userId == rhs.userId
 }

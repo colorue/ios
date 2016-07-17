@@ -103,12 +103,12 @@ extension ProfileViewController {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Followers"
-            targetController.userSource = Array(self.userInstance!.getFollowers())
+            targetController.userSource = { return Array(self.userInstance!.getFollowers()) }
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Following"
-            targetController.userSource = Array(self.userInstance!.getFollowing())
+            targetController.userSource = { return Array(self.userInstance!.getFollowing()) }
         }
     }
     
@@ -119,7 +119,7 @@ extension ProfileViewController {
     
     func logoutPopup(sender: UIBarButtonItem) {
         
-        let logoutConfirm = UIAlertController(title: "Log out?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let logoutConfirm = UIAlertController(title: "Log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         logoutConfirm.addAction(UIAlertAction(title: "Log out", style: .Destructive, handler: { (action: UIAlertAction!) in
             self.api.clearData()

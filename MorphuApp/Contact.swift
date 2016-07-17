@@ -8,6 +8,15 @@
 
 import Foundation
 
+enum phoneType: String {
+    case Mobile = "_$!<Mobile>!$_"
+    case Home = "_$!<Home>!$_"
+    case Work = "_$!<Work>!$_"
+    case Main = "_$!<Main>!$_"
+    case Iphone = "iPhone"
+    case Blank = ""
+}
+
 class Contact {
     
     let api = API.sharedInstance
@@ -20,7 +29,7 @@ class Contact {
     private var workNumber: String?
     private var blankNumber: String?
     
-    private var user: User?
+//    private var user: User?
     
     init(name: String) {
         self.name = name
@@ -29,14 +38,16 @@ class Contact {
     func addPhoneNumber(number: String, type: phoneType) {
         let stringArray = number.componentsSeparatedByCharactersInSet(
             NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+        
         if stringArray.joinWithSeparator("").characters.count == 10 {
             let phone = "+1" + stringArray.joinWithSeparator("")
             self.setPhoneNumber(number, type: type)
-            api.checkNumber(phone, callback: self.linkUser)
+            api.checkNumber(phone)
         } else if stringArray.joinWithSeparator("").characters.count == 11 {
             let phone = "+" + stringArray.joinWithSeparator("")
             self.setPhoneNumber(number, type: type)
-            api.checkNumber(phone, callback: self.linkUser)
+            api.checkNumber(phone)
+
         }
     }
     
@@ -57,9 +68,9 @@ class Contact {
         }
     }
     
-    private func linkUser(user: User) {
-        self.user = user
-    }
+//    private func linkUser(user: User) {
+//        self.user = user
+//    }
     
     func getPhoneNumber() -> String? {
         // phone type Priority
@@ -80,16 +91,18 @@ class Contact {
         }
     }
     
-    func getUser() -> User? {
-        return self.user
+//    func getUser() -> User? {
+//        return self.user
+//    }
+}
+
+extension Contact: Hashable {
+    var hashValue: Int {
+        return getPhoneNumber()?.hashValue ?? 0.hashValue
     }
 }
 
-enum phoneType: String {
-    case Mobile = "_$!<Mobile>!$_"
-    case Home = "_$!<Home>!$_"
-    case Work = "_$!<Work>!$_"
-    case Main = "_$!<Main>!$_"
-    case Iphone = "iPhone"
-    case Blank = ""
+// MARK: Equatable
+func == (lhs: Contact, rhs: Contact) -> Bool {
+    return lhs.getPhoneNumber() == lhs.getPhoneNumber()
 }
