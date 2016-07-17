@@ -51,9 +51,9 @@ class ProfileCell: UITableViewCell {
         didSet {
             if color == redColor {
                 followButton?.setImage(UIImage(named: "Followed Red"), forState: .Selected)
-            } else if tintColor == orangeColor {
+            } else if color == orangeColor {
                 followButton?.setImage(UIImage(named: "Followed Orange"), forState: .Selected)
-            } else if tintColor == blueColor {
+            } else if color == blueColor {
                 followButton?.setImage(UIImage(named: "Followed Blue"), forState: .Selected)
             } else {
                 followButton?.setImage(UIImage(named: "Followed Purple"), forState: .Selected)
