@@ -61,9 +61,9 @@ class WallViewController: DrawingListViewController {
         let cell = self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
         
         if indexPath.section == 0  {
-            cell.drawingOfTheDayLabel.hidden = false
+            cell.drawingOfTheDayLabel?.hidden = false
         } else {
-            cell.drawingOfTheDayLabel.hidden = true
+            cell.drawingOfTheDayLabel?.hidden = true
         }
         return cell
     }

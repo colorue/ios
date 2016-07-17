@@ -84,96 +84,23 @@ class DrawingListViewController: UITableViewController, APIDelagate {
                             forRowAtIndexPath indexPath: NSIndexPath) {
         let drawingCell = cell as! DrawingCell
         let drawing: Drawing
+        let tag: Int
 
         if indexPath.section == 0 {
             drawing = api.getDrawingOfTheDay()[0]
-            self.loadDrawingCell(drawing, drawingCell: drawingCell, tag: -1)
+            tag = -1
         } else {
             drawing = drawingSource()[indexPath.row]
-            self.loadDrawingCell(drawing, drawingCell: drawingCell, tag: indexPath.row)
+            tag = indexPath.row
         }
+        
+        drawingCell.drawing = drawing
+        drawingCell.color = tintColor
+        drawingCell.delagate = self
+        drawingCell.cellTag = tag
         
         if (indexPath.row + 1 >= drawingSource().count) {
             self.loadMoreDrawings?()
-        }
-    }
-    
-    private func loadDrawingCell(drawing: Drawing, drawingCell: DrawingCell, tag: Int) {
-        drawingCell.progressBar.hidden = true
-        
-        if let url = drawing.url {
-            drawingCell.drawingImage.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: [.Transition(.Fade(0.2))],                         completionHandler: { (image, error, cacheType, imageURL) -> () in
-                drawing.setImage(image)
-            })
-        }
-        
-        drawingCell.profileImage.image = drawing.getArtist().profileImage
-        drawingCell.creator.text = drawing.getArtist().username
-        drawingCell.timeCreated.text = drawing.getTimeSinceSent()
-        drawingCell.likeButton.selected = drawing.liked(api.getActiveUser())
-        
-        drawingCell.userButton.tag = tag
-        drawingCell.uploadButton.tag = tag
-        drawingCell.likeButton.tag = tag
-        drawingCell.likesButton.tag = tag
-        drawingCell.commentsButton.tag = tag
-        
-        drawingCell.uploadButton.tintColor = tintColor
-        drawingCell.likeButton.tintColor = tintColor
-        drawingCell.likes.textColor = tintColor
-        drawingCell.commentCount.textColor = tintColor
-        
-        drawingCell.uploadButton.addTarget(self, action: #selector(WallViewController.presentDrawingActions(_:)), forControlEvents: .TouchUpInside)
-        drawingCell.likeButton.addTarget(self, action: #selector(WallViewController.likeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        
-        let likes = drawing.getLikes().count
-        if likes == 0 {
-            drawingCell.likes.text = ""
-            drawingCell.likesButton.enabled = false
-        } else if likes == 1 {
-            drawingCell.likesButton.enabled = true
-            drawingCell.likes.text = "1 like"
-        } else {
-            drawingCell.likesButton.enabled = true
-            drawingCell.likes.text = String(likes) + " likes"
-        }
-        if drawing.getComments().count == 1 {
-            drawingCell.commentCount.text = "1 comment"
-        } else {
-            drawingCell.commentCount.text = String(drawing.getComments().count) + " comments"
-        }
-    }
-    
-    func setLikes(drawing: Drawing, indexPath: NSIndexPath) {
-        
-        let drawingCell = tableView.cellForRowAtIndexPath(indexPath) as! DrawingCell
-        let likes = drawing.getLikes().count
-        if likes == 0 {
-            drawingCell.likes.text = ""
-            drawingCell.likesButton.enabled = false
-        } else if likes == 1 {
-            drawingCell.likesButton.enabled = true
-            drawingCell.likes.text = "1 like"
-        } else {
-            drawingCell.likesButton.enabled = true
-            drawingCell.likes.text = String(likes) + " likes"
-        }
-    }
-    
-    func likeButtonPressed(sender: UIButton) {
-        let drawing = getClickedDrawing(sender)
-        
-        if !(drawing.liked(api.getActiveUser())) {
-            sender.selected = true
-            api.like(drawing)
-        } else {
-            sender.selected = false
-            api.unlike(drawing)
-        }
-        if sender.tag >= 0 {
-            self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
-        } else {
-            self.setLikes(drawing, indexPath: NSIndexPath(forRow: 0, inSection: 0))
         }
     }
     
@@ -189,9 +116,65 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         })
     }
     
-    func presentDrawingActions(sender: UIButton) {
+    private func getClickedDrawing(sender: AnyObject) -> Drawing {
+        if sender.tag >= 0 {
+            return drawingSource()[sender.tag]
+        } else {
+            return api.getDrawingOfTheDay()[0]
+        }
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showLikes" {
+            let drawing = getClickedDrawing(sender!)
+            let targetController = segue.destinationViewController as! UserListViewController
+            targetController.navigationItem.title = "Likes"
+            targetController.tintColor = self.tintColor!
+            targetController.userSource = { return drawing.getLikes() }
+        } else if segue.identifier == "showComments" {
+            let drawing = getClickedDrawing(sender!)
+            let targetController = segue.destinationViewController as! CommentViewController
+            targetController.tintColor = self.tintColor!
+            targetController.drawingInstance = drawing
+        } else if segue.identifier == "showUserButton" {
+            let drawing = getClickedDrawing(sender!)
+            let targetController = segue.destinationViewController as! ProfileViewController
+            targetController.navigationItem.title = drawing.getArtist().username
+            targetController.tintColor = self.tintColor!
+            targetController.userInstance = drawing.getArtist()
+        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        api.releaseMemory()
+        super.didReceiveMemoryWarning()
+    }
+}
+
+
+
+extension DrawingListViewController: DrawingCellDelagate {
+    
+    func likeButtonPressed(drawing: Drawing) {
+//        let drawing = getClickedDrawing(sender)
         
-        let drawing = getClickedDrawing(sender)
+        if !(drawing.liked(api.getActiveUser())) {
+            api.like(drawing)
+        } else {
+//            sender.selected = false
+            api.unlike(drawing)
+        }
+        //        if sender.tag >= 0 {
+        //            self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
+        //        } else {
+        //            self.setLikes(drawing, indexPath: NSIndexPath(forRow: 0, inSection: 0))
+        //        }
+    }
+    
+    
+    func presentDrawingActions(drawing: Drawing) {
+        
+        //        let drawing = getClickedDrawing(sender)
         
         let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
@@ -245,7 +228,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
         
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
-
+        
         self.presentViewController(drawingActions, animated: true, completion: nil)
     }
     
@@ -272,40 +255,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             dialog.mode = FBSDKShareDialogMode.Automatic
             dialog.show()
         }
-    }
-    
-    private func getClickedDrawing(sender: AnyObject) -> Drawing {
-        if sender.tag >= 0 {
-            return drawingSource()[sender.tag]
-        } else {
-            return api.getDrawingOfTheDay()[0]
-        }
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showLikes" {
-            let drawing = getClickedDrawing(sender!)
-            let targetController = segue.destinationViewController as! UserListViewController
-            targetController.navigationItem.title = "Likes"
-            targetController.tintColor = self.tintColor!
-            targetController.userSource = { return drawing.getLikes() }
-        } else if segue.identifier == "showComments" {
-            let drawing = getClickedDrawing(sender!)
-            let targetController = segue.destinationViewController as! CommentViewController
-            targetController.tintColor = self.tintColor!
-            targetController.drawingInstance = drawing
-        } else if segue.identifier == "showUserButton" {
-            let drawing = getClickedDrawing(sender!)
-            let targetController = segue.destinationViewController as! ProfileViewController
-            targetController.navigationItem.title = drawing.getArtist().username
-            targetController.tintColor = self.tintColor!
-            targetController.userInstance = drawing.getArtist()
-        }
-    }
-    
-    override func didReceiveMemoryWarning() {
-        api.releaseMemory()
-        super.didReceiveMemoryWarning()
     }
 }
 
