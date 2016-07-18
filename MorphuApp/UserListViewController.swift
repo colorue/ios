@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class UserListViewController: UITableViewController {
     
@@ -82,6 +83,7 @@ extension UserListViewController: UserCellDelagate {
         
         api.getActiveUser().follow(userCell.user!)
         api.follow(userCell.user!)
+        FIRAnalytics.logEventWithName("followedUser", parameters: [:])
     }
     
     func unfollowAction(userCell: UserCell) {
@@ -99,6 +101,7 @@ extension UserListViewController: UserCellDelagate {
         userCell.followButton?.selected = false
         api.getActiveUser().unfollow(userCell.user!)
         api.unfollow(userCell.user!)
+        FIRAnalytics.logEventWithName("unfollowedUser", parameters: [:])
     }
 }
 

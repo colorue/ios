@@ -9,7 +9,7 @@
 import UIKit
 import FBSDKShareKit
 import MessageUI
-
+import Firebase
 
 class SharingViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
@@ -66,6 +66,8 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     }
     
     @objc private func shareToFacebook(sender: UIButton) {
+        FIRAnalytics.logEventWithName("shareToFacebookClickedSharing", parameters: [:])
+
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing, userGenerated: true)
         content.photos  = [photo]
@@ -83,6 +85,7 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     @objc private func saveDrawing(sender: UIButton) {
         if let drawing = drawing {
             UIImageWriteToSavedPhotosAlbum(drawing, self, nil, nil)
+            FIRAnalytics.logEventWithName("savedDrawingFromSharing", parameters: [:])
             sender.enabled = false
         }
     }
@@ -95,11 +98,15 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
             controller.messageComposeDelegate = self
             self.resignFirstResponder()
             
+            FIRAnalytics.logEventWithName("sendDrawingClickedSharing", parameters: [:])
+
             self.presentViewController(controller, animated: true, completion: nil)
         }
     }
     
     func postDrawing(sender: UIButton) {
+        FIRAnalytics.logEventWithName("postDrawing", parameters: [:])
+
         UIView.animateWithDuration(0.3, animations: {
             self.popoverController!.view.alpha = 1.0
             self.popoverController!.navigationController?.navigationBar.alpha = 1.0

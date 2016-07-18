@@ -116,6 +116,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     func logginCallback(user: FIRUser?) {
         AuthAPI.sharedInstance.checkLoggedIn({ loggedIn in
             if loggedIn {
+                FIRAnalytics.logEventWithName("signedInWithEmail", parameters: [:])
                 API.sharedInstance.delagate = self
                 API.sharedInstance.loadData()
                 self.prefs.setValue(self.emailInput.text, forKey: "email")
@@ -137,6 +138,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     
     private func passwordResetCallback(valid: Bool) {
         if valid {
+            FIRAnalytics.logEventWithName("resetPasswordEmailSent", parameters: [:])
             let emailSent = UIAlertController(title: "Email Sent!", message: nil , preferredStyle: UIAlertControllerStyle.Alert)
             emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
             NSOperationQueue.mainQueue().addOperationWithBlock {
@@ -152,7 +154,6 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     }
     
     func refresh() {
-        print("sign in")
         activityIndicator.stopAnimating()
         self.performSegueWithIdentifier("signIn", sender: self)
     }

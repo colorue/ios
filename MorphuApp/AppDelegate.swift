@@ -10,6 +10,9 @@ import UIKit
 import FBSDKCoreKit
 import Firebase
 import AirshipKit
+import Fabric
+import Crashlytics
+
 
 let dev = false
 
@@ -21,11 +24,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        if dev {
-            FIRApp.configureWithOptions(FIROptions(googleAppID: "1:150640015777:ios:d62930c5fb1f8d6f", bundleID: "Wight-Dylan.Colorue", GCMSenderID: "150640015777", APIKey: "AIzaSyD7NrfnBoVFGbaGtjJfdE4Xo9C0e6AjQfQ", clientID: "150640015777-ne2252fp6vf1bq29484dlv1hp2mtir7h.apps.googleusercontent.com", trackingID: "", androidClientID: "", databaseURL: "https://coloruedev.firebaseio.com", storageBucket: "coloruedev.appspot.com", deepLinkURLScheme: ""))
-        } else {
+//        if dev {
+//            FIRApp.configureWithOptions(FIROptions(googleAppID: "1:150640015777:ios:d62930c5fb1f8d6f", bundleID: "Wight-Dylan.Colorue", GCMSenderID: "150640015777", APIKey: "AIzaSyD7NrfnBoVFGbaGtjJfdE4Xo9C0e6AjQfQ", clientID: "150640015777-ne2252fp6vf1bq29484dlv1hp2mtir7h.apps.googleusercontent.com", trackingID: "", androidClientID: "", databaseURL: "https://coloruedev.firebaseio.com", storageBucket: "coloruedev.appspot.com", deepLinkURLScheme: ""))
+//        } else {
             FIRApp.configure()
-        }
+//        }
         
         FIRDatabase.database().persistenceEnabled = true
         
@@ -33,7 +36,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         config.analyticsEnabled = false
         config.developmentLogLevel = UALogLevel.Warn
         UAirship.takeOff(config)
-
+        
+        Fabric.with([Crashlytics.self])
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -8,6 +8,7 @@
 
 
 import UIKit
+import Firebase
 
 class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     
@@ -58,6 +59,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         self.navigationController!.navigationBar.tintColor = blueColor
         
         usernameInput.becomeFirstResponder()
+        FIRAnalytics.logEventWithName("ChooseUsernameViewController", parameters: [:])
     }
     
     func drawingTap(sender: UILongPressGestureRecognizer) {

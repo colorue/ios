@@ -6,8 +6,7 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import UIKit
-import CCBottomRefreshControl
+import Firebase
 
 class ProfileViewController: DrawingListViewController {
     
@@ -75,6 +74,7 @@ extension ProfileViewController: ProfileCellDelagate {
             sender.selected = true
             api.getActiveUser().follow(userInstance!)
             api.follow(userInstance!)
+            FIRAnalytics.logEventWithName("followedUser", parameters: [:])
         } else {
             let actionSelector = UIAlertController(title: "Unfollow \(userInstance!.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
             actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
@@ -89,6 +89,7 @@ extension ProfileViewController: ProfileCellDelagate {
         sender.selected = false
         api.getActiveUser().unfollow(userInstance!)
         api.unfollow(userInstance!)
+        FIRAnalytics.logEventWithName("unfollowedUser", parameters: [:])
     }
 }
 
@@ -122,6 +123,7 @@ extension ProfileViewController {
         let logoutConfirm = UIAlertController(title: "Log out?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         logoutConfirm.addAction(UIAlertAction(title: "Log out", style: .Destructive, handler: { (action: UIAlertAction!) in
+            FIRAnalytics.logEventWithName("loggedOut", parameters: [:])
             self.api.clearData()
             AuthAPI.sharedInstance.logout()
             self.performSegueWithIdentifier("logout", sender: self)

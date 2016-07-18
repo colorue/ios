@@ -381,6 +381,7 @@
 				CB89312FB0493140F375FFF3 /* 📦 Embed Pods Frameworks */,
 				DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */,
 				872FDF101D22F7EE00FD277A /* ShellScript */,
+				873AB94E1D3C4A860081C5A4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -479,6 +480,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=Colorue-da64083b8488.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:881756450601:ios:d62930c5fb1f8d6f\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
+		};
+		873AB94E1D3C4A860081C5A4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6e3362ad60bc62677eb92c8d480ed82efc7c4890 5e07fc71e5822841b305ad1ad7be410514a6f5050d1736f5eff119e390899e8a";
 		};
 		CB89312FB0493140F375FFF3 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

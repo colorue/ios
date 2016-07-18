@@ -45,8 +45,11 @@ class WelcomeViewController: UIViewController, APIDelagate {
         case .Registered:
             activityIndicator.stopAnimating()
             API.sharedInstance.loadFacebookFriends()
+            FIRAnalytics.logEventWithName("registeredWithFacebook", parameters: [:])
+
             self.performSegueWithIdentifier("facebookRegister", sender: self)
         case .LoggedIn:
+            FIRAnalytics.logEventWithName("loggedInWithFacebook", parameters: [:])
             API.sharedInstance.delagate = self
             API.sharedInstance.loadData()
         }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
@@ -82,6 +83,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         super.viewDidAppear(animated)
         self.navigationController!.navigationBar.tintColor = redColor
         emailInput.becomeFirstResponder()
+        FIRAnalytics.logEventWithName("SignUpViewController", parameters: [:])
     }
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

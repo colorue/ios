@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CommentViewController: UITableViewController, WriteCommentCellDelagate, CommentCellDelagate {
     
@@ -103,6 +104,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
                 let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                    FIRAnalytics.logEventWithName("deletedComment", parameters: [:])
                     self.tableView.reloadData()
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
@@ -114,6 +116,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
                 let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportComment((self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                    FIRAnalytics.logEventWithName("reportedComment", parameters: [:])
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
@@ -134,6 +137,7 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     func addComment(text: String) {
         API.sharedInstance.addComment(drawingInstance!, text: text)
         self.writeCommentCell?.commentText.text = ""
+        FIRAnalytics.logEventWithName("wroteComment", parameters: [:])
         self.tableView.reloadData()
     }
     

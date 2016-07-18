@@ -9,6 +9,7 @@
 import UIKit
 import Contacts
 import MessageUI
+import Firebase
 
 class InviteViewController: UITableViewController, MFMessageComposeViewControllerDelegate, APIDelagate {
     
@@ -56,6 +57,9 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     private func sendInvite(contact: Contact) {
 
         if (MFMessageComposeViewController.canSendText()) {
+            
+            FIRAnalytics.logEventWithName("inviteTextOpened", parameters: [:])
+
             controller.body = "\(api.getActiveUser().username) invited you to join to Colorue. It's an app for drawing on your iPhone and sharing your creations\nwww.facebook.com/colorueApp/"
 
             controller.recipients = [contact.getPhoneNumber()!]

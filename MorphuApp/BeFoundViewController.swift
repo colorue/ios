@@ -62,6 +62,8 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
+        
+        FIRAnalytics.logEventWithName("BeFoundViewController", parameters: [:])
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -121,6 +123,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
             if valid {
                 self.verifiedIndicator.hidden = false
                 self.newUser.phoneNumber = phone
+                FIRAnalytics.logEventWithName("phoneVerified", parameters: [:])
             } else {
                 self.verificatoinButton.hidden = false
                 self.phoneNumberInput.enabled = true
@@ -167,6 +170,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
     
     func refresh() {
         activityIndicator.stopAnimating()
+        FIRAnalytics.logEventWithName("accountCreated", parameters: [:])
         self.performSegueWithIdentifier("toFollowPeople", sender: self)
     }
     

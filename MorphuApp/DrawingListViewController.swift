@@ -11,6 +11,7 @@ import CCBottomRefreshControl
 import Kingfisher
 import FBSDKShareKit
 import MessageUI
+import Firebase
 
 class DrawingListViewController: UITableViewController, APIDelagate {
     
@@ -156,31 +157,24 @@ class DrawingListViewController: UITableViewController, APIDelagate {
 extension DrawingListViewController: DrawingCellDelagate {
     
     func likeButtonPressed(drawing: Drawing) {
-//        let drawing = getClickedDrawing(sender)
-        
         if !(drawing.liked(api.getActiveUser())) {
             api.like(drawing)
+            FIRAnalytics.logEventWithName("likedDrawing", parameters: [:])
         } else {
-//            sender.selected = false
             api.unlike(drawing)
+            FIRAnalytics.logEventWithName("unlikedDrawing", parameters: [:])
         }
-        //        if sender.tag >= 0 {
-        //            self.setLikes(drawing, indexPath: NSIndexPath(forRow: sender.tag, inSection: 1))
-        //        } else {
-        //            self.setLikes(drawing, indexPath: NSIndexPath(forRow: 0, inSection: 0))
-        //        }
     }
     
     
     func presentDrawingActions(drawing: Drawing) {
-        
-        //        let drawing = getClickedDrawing(sender)
         
         let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
         
         if (drawing.getArtist().userId == api.getActiveUser().userId) {
             drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .Default, handler: { (action: UIAlertAction!) in
                 self.api.makeProfilePic(drawing)
+                FIRAnalytics.logEventWithName("setProfileDrawing", parameters: [:])
             }))
             drawingActions.addAction(UIAlertAction(title: "Share to Facebook", style: .Default, handler: { (action: UIAlertAction!) in
                 self.shareToFacebook(drawing)
@@ -190,18 +184,22 @@ extension DrawingListViewController: DrawingCellDelagate {
             }))
             drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
                 UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+                FIRAnalytics.logEventWithName("ownDrawingSavedFeed", parameters: [:])
             }))
             drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
                 let drawingViewController = activity.topViewController as! DrawingViewController
                 drawingViewController.baseImage = drawing.getImage()
+                FIRAnalytics.logEventWithName("editDrawing", parameters: [:])
                 self.presentViewController(activity, animated: true, completion: nil)
             }))
             drawingActions.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteDrawing(drawing)
+                    FIRAnalytics.logEventWithName("drawingDeleted", parameters: [:])
+
                     //tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: sender.tag, inSection: 1)], withRowAnimation: .Fade)
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
@@ -212,12 +210,14 @@ extension DrawingListViewController: DrawingCellDelagate {
                 let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportDrawing(drawing)
+                    FIRAnalytics.logEventWithName("drawingReported", parameters: [:])
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
             }))
             drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
                 UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+                FIRAnalytics.logEventWithName("friendDrawingSavedFeed", parameters: [:])
             }))
         }
         
@@ -233,6 +233,8 @@ extension DrawingListViewController: DrawingCellDelagate {
     }
     
     private func sendDrawing(drawing: Drawing) {
+        FIRAnalytics.logEventWithName("sendDrawingClickedFeed", parameters: [:])
+
         if (MFMessageComposeViewController.canSendText()) {
             controller.addAttachmentData(UIImagePNGRepresentation(drawing.getImage())!, typeIdentifier: "public.data", filename: "colorue.png")
             controller.messageComposeDelegate = self
@@ -243,6 +245,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     }
     
     private func shareToFacebook(drawing: Drawing) {
+        FIRAnalytics.logEventWithName("shareToFacebookClickedFeed", parameters: [:])
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing.getImage(), userGenerated: true)
         content.photos  = [photo]
