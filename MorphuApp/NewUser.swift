@@ -22,8 +22,8 @@ class NewUser {
     var FacebookSignUp = false
     
     func toAnyObject()-> NSDictionary {
-        let object: NSMutableDictionary = ["email": self.email!,
-                                           "username": self.username!, "fullName": self.fullName!]
+        let object: NSMutableDictionary = ["email": self.email ?? "",
+                                           "username": self.username ?? "", "fullName": self.fullName ?? ""]
         
         if let phoneNumber = self.phoneNumber {
             object["phoneNumber"] = phoneNumber
