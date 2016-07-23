@@ -10,8 +10,6 @@ import UIKit
 import FBSDKCoreKit
 import Firebase
 import AirshipKit
-import Fabric
-import Crashlytics
 
 
 let dev = false
@@ -36,8 +34,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         config.analyticsEnabled = false
         config.developmentLogLevel = UALogLevel.Warn
         UAirship.takeOff(config)
-        
-        Fabric.with([Crashlytics.self])
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

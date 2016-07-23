@@ -8,8 +8,8 @@
 
 import UIKit
 
-@objc protocol ProfileCellDelagate {
-    @objc func followAction(sender: UIButton) -> ()
+protocol ProfileCellDelagate {
+    func followAction(sender: UIButton) -> ()
 }
 
 class ProfileCell: UITableViewCell {
@@ -41,14 +41,9 @@ class ProfileCell: UITableViewCell {
         }
     }
     
-    var delagate: ProfileCellDelagate? {
-        didSet {
-            followButton?.addTarget(self, action: #selector(delagate?.followAction(_:)), forControlEvents: .TouchUpInside)
-        }
-    }
-    
     var color: UIColor = redColor {
         didSet {
+            followButton?.tintColor = color
             if color == redColor {
                 followButton?.setImage(UIImage(named: "Followed Red"), forState: .Selected)
             } else if color == orangeColor {

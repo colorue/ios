@@ -43,6 +43,7 @@
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
 		877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FA9A21D26D45700830980 /* SharingViewController.swift */; };
+		879614D91D40478800DAB1E4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 879614D81D40478800DAB1E4 /* GoogleService-Info.plist */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -59,7 +60,6 @@
 		87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */; };
 		87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */; };
 		87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD21D0CA731006ED9AF /* NewUser.swift */; };
-		87DF2BD51D0CAD3E006ED9AF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */; };
 		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
 		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
@@ -72,7 +72,7 @@
 		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = "<group>"; };
-		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = MorphuApp/Info.plist; sourceTree = "<group>"; };
 		8748A6B61CF4C844003CEEE0 /* WriteCommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WriteCommentCellDelagate.swift; sourceTree = "<group>"; };
 		874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellDelagate.swift; sourceTree = "<group>"; };
 		875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
@@ -107,6 +107,7 @@
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		877FA9A21D26D45700830980 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
+		879614D81D40478800DAB1E4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "MorphuApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUsernameViewController.swift; sourceTree = "<group>"; };
 		87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFoundViewController.swift; sourceTree = "<group>"; };
 		87DF2BD21D0CA731006ED9AF /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
-		87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
 		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
@@ -157,8 +157,9 @@
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
-				87DF2BD41D0CAD3E006ED9AF /* GoogleService-Info.plist */,
+				879614D81D40478800DAB1E4 /* GoogleService-Info.plist */,
 				872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */,
+				873AFA1C1CED7697006FD34A /* Info.plist */,
 				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
@@ -173,7 +174,6 @@
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
 				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
 				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
-				873AFA1C1CED7697006FD34A /* Info.plist */,
 				8763D3141CEE22D300E3D528 /* Assets.xcassets */,
 				8763D3171CEE242100E3D528 /* Controller */,
 				8763D3181CEE243400E3D528 /* View */,
@@ -381,7 +381,6 @@
 				CB89312FB0493140F375FFF3 /* 📦 Embed Pods Frameworks */,
 				DFC7560C6D79885D4B5988F3 /* 📦 Copy Pods Resources */,
 				872FDF101D22F7EE00FD277A /* ShellScript */,
-				873AB94E1D3C4A860081C5A4 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -441,9 +440,9 @@
 			files = (
 				871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */,
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
+				879614D91D40478800DAB1E4 /* GoogleService-Info.plist in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
-				87DF2BD51D0CAD3E006ED9AF /* GoogleService-Info.plist in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,
@@ -479,20 +478,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=Colorue-da64083b8488.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:881756450601:ios:d62930c5fb1f8d6f\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
-		};
-		873AB94E1D3C4A860081C5A4 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 6e3362ad60bc62677eb92c8d480ed82efc7c4890 5e07fc71e5822841b305ad1ad7be410514a6f5050d1736f5eff119e390899e8a";
+			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=/Users/DylanWight/Desktop/Colorue/morphua/Colorue-da64083b8488.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:881756450601:ios:d62930c5fb1f8d6f\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
 		};
 		CB89312FB0493140F375FFF3 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -25,5 +25,4 @@ target 'Colorue' do
     
     pod 'Kingfisher'
     
-    pod 'Crashlytics'
 end

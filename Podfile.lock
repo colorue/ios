@@ -8,9 +8,6 @@ PODS:
   - Bolts/Tasks (1.7.0)
   - CCBottomRefreshControl (0.5.1):
     - Masonry (~> 0.6.2)
-  - Crashlytics (3.7.0):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.7)
   - FBSDKCoreKit (4.11.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.11.0):
@@ -80,7 +77,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - CCBottomRefreshControl
-  - Crashlytics
   - FBSDKCoreKit
   - FBSDKLoginKit
   - FBSDKShareKit
@@ -98,8 +94,6 @@ SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
-  Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
-  Fabric: caf7580c725e64db144f610ac65cd60956911dc7
   FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
   FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
   FBSDKShareKit: 2d1746144cfc8a9dbbd24997c34ee0471be51b6a
@@ -121,6 +115,6 @@ SPEC CHECKSUMS:
   SinchVerification-Swift: b62b0472825ce2be237d84c9ccc323eeccb4e0b6
   UrbanAirship-iOS-SDK: f64e45ba7f7ea9f76ccdb646138cbde5d4c1806e
 
-PODFILE CHECKSUM: 83f8c540feec8f830fedfee67adadaa28cb2ba5b
+PODFILE CHECKSUM: 8676d789472eabd1580173db37e05dbfdf4a995d
 
 COCOAPODS: 1.0.0

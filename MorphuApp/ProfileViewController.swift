@@ -60,7 +60,7 @@ extension ProfileViewController {
             let profileCell = cell as! ProfileCell
             profileCell.user = userInstance
             profileCell.color = tintColor ?? redColor
-            profileCell.delagate = self
+            profileCell.followButton?.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), forControlEvents: .TouchUpInside)
         } else {
             super.tableView(tableView, willDisplayCell: cell, forRowAtIndexPath: indexPath)
         }
