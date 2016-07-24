@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PaintBucket
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
     
@@ -69,9 +70,25 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         let actualPosition = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
         mergeCurrentStroke(true)
         if delagate.getDropperActive() {
-            dropperTouch(actualPosition, state: sender.state)
+//            dropperTouch(actualPosition, state: sender.state)
+            paintBucket(actualPosition, state: sender.state)
         } else {
             curveTouch(actualPosition, state: sender.state)
+        }
+    }
+    
+    private func paintBucket(position: CGPoint, state: UIGestureRecognizerState) {
+        
+        if state == .Ended {
+            currentStroke = nil
+            delagate.setDropperActive(false)
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: self.delagate.getCurrentColor(), tolerance: 50)
+                self.addToUndoStack(filledImage)
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.mergeCurrentStroke(false)
+                }
+            }
         }
     }
     

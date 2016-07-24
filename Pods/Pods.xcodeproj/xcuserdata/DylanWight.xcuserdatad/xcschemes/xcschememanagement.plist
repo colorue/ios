@@ -44,6 +44,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PaintBucket.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Colorue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +72,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>296319F7B3AC7203125AD72E110ACD65</key>
+		<key>17C23A465E3070BB4D10FD2D6114C3C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,17 +97,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>ADD2821C25E8D110F5DE801E799C306C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CD97F293CA2909EE1B15D2F905306022</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DD1559592F5FECF5E008347EC681DF67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E96E13C4D3B5B5FC0651440734C2BF4D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EC032A0DF42DCDA40F18F77C0E74C370</key>
 		<dict>
 			<key>primary</key>
 			<true/>

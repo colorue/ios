@@ -71,6 +71,7 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
   - Kingfisher (2.4.1)
   - Masonry (0.6.4)
+  - PaintBucket (0.1.1)
   - SinchVerification-Swift (1.4.4)
   - UrbanAirship-iOS-SDK (7.1.2)
 
@@ -87,6 +88,7 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - PaintBucket (~> 0.1)
   - SinchVerification-Swift
   - UrbanAirship-iOS-SDK
 
@@ -112,9 +114,10 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Kingfisher: 41aed5b6c1ed8fa98cf6d75283ce89cf7890f517
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  PaintBucket: 991dd5c1a13ac75f7fc9cd06105348b501485a50
   SinchVerification-Swift: b62b0472825ce2be237d84c9ccc323eeccb4e0b6
   UrbanAirship-iOS-SDK: f64e45ba7f7ea9f76ccdb646138cbde5d4c1806e
 
-PODFILE CHECKSUM: 8676d789472eabd1580173db37e05dbfdf4a995d
+PODFILE CHECKSUM: 2202aa26327aa84c8b772d4420c7f1407939c05a
 
 COCOAPODS: 1.0.0
