@@ -7,7 +7,19 @@
 //
 
 import UIKit
-import PaintBucket
+
+protocol CanvasDelagate {
+    func getCurrentColor() -> UIColor
+    func getCurrentBrushSize() -> Float
+    func getAlpha() -> CGFloat?
+    func setAlphaHigh()
+    func setUnderfingerView(underFingerImage: UIImage)
+    func hideUnderFingerView()
+    func showUnderFingerView()
+    func setColor(color: UIColor)
+    func getKeyboardState() -> KeyboardToolState
+    func setKeyboardState(state: KeyboardToolState)
+}
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
     
@@ -69,11 +81,14 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         let actualPosition = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
         mergeCurrentStroke(true)
-        if delagate.getDropperActive() {
-//            dropperTouch(actualPosition, state: sender.state)
-            paintBucket(actualPosition, state: sender.state)
-        } else {
+        
+        switch (delagate.getKeyboardState()) {
+        case .none:
             curveTouch(actualPosition, state: sender.state)
+        case .colorDropper:
+            dropperTouch(actualPosition, state: sender.state)
+        case .paintBucket:
+            paintBucket(actualPosition, state: sender.state)
         }
     }
     
@@ -81,9 +96,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         if state == .Ended {
             currentStroke = nil
-            delagate.setDropperActive(false)
+            delagate.setKeyboardState(.none)
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
-                let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: self.delagate.getCurrentColor(), tolerance: 50)
+                let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: self.delagate.getCurrentColor(), tolerance: 5)
                 self.addToUndoStack(filledImage)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.mergeCurrentStroke(false)
@@ -110,7 +125,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             drawDropperIndicator(position)
             setUnderFingerView(position, dropper: true)
         } else if state == .Ended {
-            delagate.setDropperActive(false)
+            delagate.setKeyboardState(.none)
             delagate.hideUnderFingerView()
             currentStroke = nil
             mergeCurrentStroke(false) // clears the positionIndicator image

@@ -24,8 +24,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     let backButton = UIButton(type: UIButtonType.Custom)
 
     @IBOutlet weak var postButton: UIBarButtonItem!
-    private var dropperActive = false
-
     
     //MARK: Life Cycle
     override func viewDidLoad() {
@@ -153,8 +151,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.colorKeyboard!.setColor(color)
     }
     
-    func getDropperActive() -> Bool {
-        return self.dropperActive
+    func getKeyboardState() -> KeyboardToolState {
+        return self.colorKeyboard?.state ?? .none
+    }
+    
+    func setKeyboardState(state: KeyboardToolState) {
+        self.colorKeyboard?.state = state
     }
     
     func setDropperActive(active: Bool) {
@@ -166,8 +168,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
                 prefs.setValue(true, forKey: "dropperHowTo")
             }
         }
-        self.dropperActive = active
-        self.colorKeyboard!.setDropper()
+        self.colorKeyboard?.state = .colorDropper
         self.colorKeyboard!.updateButtonColor()
     }
     

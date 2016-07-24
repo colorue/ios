@@ -9,6 +9,18 @@
 import UIKit
 import Foundation
 
+protocol ColorKeyboardDelagate {
+    func undo()
+    func trash()
+    func switchAlphaHowTo()
+}
+
+enum KeyboardToolState: Int {
+    case none = 0
+    case colorDropper = 1
+    case paintBucket = 2
+}
+
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let selectorWidth: CGFloat
     let currentColorView = UIView()
@@ -16,12 +28,21 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let undoButton = UIButton()
     let trashButton = UIButton()
     let dropperButton = UIButton()
+    let paintBucketButton = UIButton()
+    
     let eraserButton = UIButton()
     let alphaButton = UIButton()
     let progressBar = UIProgressView()
     private let prefs = NSUserDefaults.standardUserDefaults()
     
     let sliderConstant:Float = 2.5
+    
+    var state: KeyboardToolState = .none {
+        didSet {
+            self.dropperButton.selected = state == .colorDropper
+            self.paintBucketButton.selected = state == .paintBucket
+        }
+    }
     
     private var currentAlpha = AlphaType.High
     
@@ -78,17 +99,25 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
+        paintBucketButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        paintBucketButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        paintBucketButton.tintColor = .whiteColor()
+        paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), forControlEvents: .TouchUpInside)
+        paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        paintBucketButton.showsTouchWhenHighlighted = true
+        self.addSubview(paintBucketButton)
+        
         dropperButton.setImage(UIImage(named: "Dropper")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         dropperButton.setImage(UIImage(named: "DropperActive")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
         dropperButton.tintColor = .whiteColor()
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
-        dropperButton.frame = CGRect(x: frame.maxX - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
         self.addSubview(dropperButton)
         
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
-        alphaButton.frame = CGRect(x: frame.maxX - buttonSize - buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        alphaButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
         self.addSubview(alphaButton)
 
@@ -149,24 +178,20 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     @objc private func undo(sender: UIButton) {
         delagate.undo()
-        self.delagate.setDropperActive(false)
+        state = .none
     }
     
     @objc private func trash(sender: UIButton) {
         delagate.trash()
-        self.delagate.setDropperActive(false)
+        state = .none
     }
     
     @objc private func dropper(sender: UIButton) {
-        self.delagate.setDropperActive(!self.delagate.getDropperActive())
-        self.setDropper()
+        state = .colorDropper
     }
     
-    @objc private func eraser(sender: UIButton) {
-        self.currentAlpha = .High
-        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        self.currentColorView.backgroundColor = whiteColor
-        updateButtonColor()
+    @objc private func paintBucket(sender: UIButton) {
+        state = .paintBucket
     }
     
     @objc private func switchAlpha(sender: UIButton) {
@@ -181,19 +206,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             self.currentAlpha = .High
             alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         }
-        self.delagate.setDropperActive(false)
+        state = .none
         self.delagate.switchAlphaHowTo()
-    }
-    
-    func setDropper() {
-        self.dropperButton.selected = self.delagate.getDropperActive()
-        self.dropperButton.highlighted = self.delagate.getDropperActive()
     }
     
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
         self.currentColorView.backgroundColor = colors[sender.view!.tag]
         self.updateButtonColor()
-        self.delagate.setDropperActive(false)
+        state = .none
     }
     
     @objc private func buttonTapped(sender: UIButton) {
@@ -201,7 +221,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         self.currentColorView.backgroundColor = self.blendColor(self.currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
 
         self.updateButtonColor()
-        self.delagate.setDropperActive(false)
+        state = .none
     }
     
     private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
@@ -266,12 +286,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             undoButton.tintColor = .whiteColor()
             trashButton.tintColor = .whiteColor()
             dropperButton.tintColor = .whiteColor()
+            paintBucketButton.tintColor = .whiteColor()
             alphaButton.tintColor = .whiteColor()
             eraserButton.tintColor = .whiteColor()
         } else {
             undoButton.tintColor = .blackColor()
             trashButton.tintColor = .blackColor()
             dropperButton.tintColor = .blackColor()
+            paintBucketButton.tintColor = .blackColor()
             alphaButton.tintColor = .blackColor()
             eraserButton.tintColor = .blackColor()
         }
