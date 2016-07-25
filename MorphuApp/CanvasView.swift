@@ -19,6 +19,8 @@ protocol CanvasDelagate {
     func setColor(color: UIColor)
     func getKeyboardState() -> KeyboardToolState
     func setKeyboardState(state: KeyboardToolState)
+    func startPaintBucketSpinner()
+    func stopPaintBucketSpinner()
 }
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
@@ -51,7 +53,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.path = UIBezierPath()
         super.init(frame : frame)
         
-
         displayCanvas(baseImage)
     }
     
@@ -94,14 +95,18 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     private func paintBucket(position: CGPoint, state: UIGestureRecognizerState) {
         
-        if state == .Ended {
+        if state == .Began {
+            
             currentStroke = nil
             delagate.setKeyboardState(.none)
+            delagate.startPaintBucketSpinner()
+            
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: self.delagate.getCurrentColor(), tolerance: 5)
                 self.addToUndoStack(filledImage)
                 dispatch_async(dispatch_get_main_queue()) {
                     self.mergeCurrentStroke(false)
+                    self.delagate.stopPaintBucketSpinner()
                 }
             }
         }

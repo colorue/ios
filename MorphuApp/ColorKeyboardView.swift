@@ -29,6 +29,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let trashButton = UIButton()
     let dropperButton = UIButton()
     let paintBucketButton = UIButton()
+    let paintBucketSpinner = UIActivityIndicatorView()
     
     let eraserButton = UIButton()
     let alphaButton = UIButton()
@@ -99,13 +100,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
-        paintBucketButton.setImage(UIImage(named: "Like")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        paintBucketButton.setImage(UIImage(named: "Liked")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        paintBucketButton.setImage(UIImage(named: "Paint Bucket")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        paintBucketButton.setImage(UIImage(named: "Paint Bucket Active")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
         paintBucketButton.tintColor = .whiteColor()
         paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), forControlEvents: .TouchUpInside)
         paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         paintBucketButton.showsTouchWhenHighlighted = true
         self.addSubview(paintBucketButton)
+        
+        paintBucketSpinner.hidesWhenStopped = true
+        paintBucketSpinner.center = paintBucketButton.center
+        paintBucketSpinner.color = .whiteColor()
+        self.addSubview(paintBucketSpinner)
         
         dropperButton.setImage(UIImage(named: "Dropper")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
         dropperButton.setImage(UIImage(named: "DropperActive")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
@@ -289,6 +295,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             paintBucketButton.tintColor = .whiteColor()
             alphaButton.tintColor = .whiteColor()
             eraserButton.tintColor = .whiteColor()
+            paintBucketSpinner.color = .whiteColor()
+
         } else {
             undoButton.tintColor = .blackColor()
             trashButton.tintColor = .blackColor()
@@ -296,6 +304,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             paintBucketButton.tintColor = .blackColor()
             alphaButton.tintColor = .blackColor()
             eraserButton.tintColor = .blackColor()
+            paintBucketSpinner.color = .blackColor()
+
         }
     }
     
@@ -317,7 +327,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.hidden = false
         alphaButton.hidden = false
         brushSizeSlider.hidden = false
-        
         progressBar.hidden = true
     }
 }

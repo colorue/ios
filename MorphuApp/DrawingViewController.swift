@@ -151,6 +151,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.colorKeyboard!.setColor(color)
     }
     
+    func startPaintBucketSpinner() {
+        colorKeyboard?.paintBucketButton.hidden = true
+        colorKeyboard?.paintBucketSpinner.startAnimating()
+    }
+    
+    func stopPaintBucketSpinner() {
+        colorKeyboard?.paintBucketSpinner.stopAnimating()
+        colorKeyboard?.paintBucketButton.hidden = false
+    }
+    
     func getKeyboardState() -> KeyboardToolState {
         return self.colorKeyboard?.state ?? .none
     }
