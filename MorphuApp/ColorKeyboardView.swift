@@ -78,8 +78,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
-        brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
-        brushSizeSlider.minimumValue = pow(0.5, 1/sliderConstant)
+        brushSizeSlider.maximumValue = pow(30, 1/sliderConstant)
+        brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
         self.addSubview(brushSizeSlider)
