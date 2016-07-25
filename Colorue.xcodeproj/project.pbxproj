@@ -164,6 +164,7 @@
 				873AFA1C1CED7697006FD34A /* Info.plist */,
 				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
+				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
 				872E82E11D01296F005A56A3 /* Colorue.app */,
@@ -173,7 +174,6 @@
 		873AFA0F1CED7697006FD34A /* Colorue */ = {
 			isa = PBXGroup;
 			children = (
-				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
 				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
 				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
@@ -345,6 +345,7 @@
 				87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */,
 			);
 			name = PaintBucket;
+			path = MorphuApp;
 			sourceTree = "<group>";
 		};
 		87F754ED1D1865E0005B4A14 /* Tabs */ = {

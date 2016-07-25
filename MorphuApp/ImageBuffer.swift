@@ -62,8 +62,10 @@ class ImageBuffer {
             
             let pointX = index % imageWidth
             let y = index / imageWidth
+            
             var minX = pointX - 1
             var maxX = pointX + 1
+            
             while minX >= 0 && testPixelAtPoint(minX, y) {
                 let index = indexFrom(minX, y)
                 self[index] = replacementPixel
@@ -77,14 +79,22 @@ class ImageBuffer {
                 maxX += 1
             }
             self[indexFrom(maxX, y)] = replacementPixel
-
+            
             
             for x in ((minX + 1)...(maxX - 1)) {
-                if y < imageHeight - 1 && testPixelAtPoint(x, y + 1) {
-                    indices.addIndex(indexFrom(x, y + 1))
+                if y < imageHeight - 1 {
+                    if testPixelAtPoint(x, y + 1) {
+                        indices.addIndex(indexFrom(x, y + 1))
+                    } else {
+                        self[indexFrom(x, y + 1)] = replacementPixel
+                    }
                 }
-                if y > 0 && testPixelAtPoint(x, y - 1) {
-                    indices.addIndex(indexFrom(x, y - 1))
+                if y > 0 {
+                    if testPixelAtPoint(x, y - 1) {
+                        indices.addIndex(indexFrom(x, y - 1))
+                    } else {
+                        self[indexFrom(x, y - 1)] = replacementPixel
+                    }
                 }
             }
         }
