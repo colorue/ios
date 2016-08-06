@@ -250,10 +250,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             dvc.drawing = canvas?.getDrawing()
             dvc.popoverController = self
             
-//            dvc.preferredContentSize = CGSize(width: 300.0, height: (self.view.frame.width + 160.0))
-//            
-//            self.view.alpha = 0.4
-//            self.navigationController?.navigationBar.alpha = 0.4
+            dvc.preferredContentSize = CGSize(width: 300.0, height: (self.view.frame.width + 160.0))
+            
+            self.view.alpha = 0.4
+            self.navigationController?.navigationBar.alpha = 0.4
         }
     }
     
