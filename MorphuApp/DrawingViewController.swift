@@ -12,6 +12,7 @@ import FBSDKShareKit
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate, UIPopoverPresentationControllerDelegate {
     
     var baseImage: UIImage?
+    var prompt: Prompt?
 
     let api = API.sharedInstance
     let prefs = NSUserDefaults.standardUserDefaults()
@@ -200,7 +201,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let newDrawing = Drawing(artist: User(), drawingId: "")
         newDrawing.setImage((canvas?.getDrawing())!)
         
-        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, prompt: prompt, finishedCallback: postCallback)
 
     }
     

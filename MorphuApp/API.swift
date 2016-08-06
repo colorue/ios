@@ -215,7 +215,7 @@ class API {
     
     // MARK: User Action Methods
     
-    func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
+    func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), prompt: Prompt?, finishedCallback: (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
 
@@ -227,6 +227,10 @@ class API {
                     newDrawing.setValue(drawing.toAnyObject())
                     self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
                     self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                    
+                    if let prompt = prompt {
+                        self.myRootRef.child("prompts/\(prompt.getPromptId())/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+                    }
                 })
             }
             finishedCallback(uploaded)
@@ -467,7 +471,16 @@ class API {
             let timeStamp = snapshot.value!["timeStamp"] as! Double
             
             self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
-                self.prompts.insert(Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text))
+                
+                let prompt = Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text)
+                self.prompts.insert(prompt)
+                
+                self.myRootRef.child("prompts/\(promptId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+                    
+                    self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                        prompt.drawings.append(drawing)
+                    })
+                })
             })
         })
     }

@@ -1,7 +1,13 @@
-
-
+//
+//  PromptViewController.swift
+//  Colorue
+//
+//  Created by Dylan Wight on 7/1/16.
+//  Copyright © 2016 Dylan Wight. All rights reserved.
+//
 
 import UIKit
+import Firebase
 
 class PromptViewController: DrawingListViewController {
     
@@ -25,6 +31,13 @@ class PromptViewController: DrawingListViewController {
     }
     
     @objc private func drawPrompt(sender: UIBarButtonItem) {
-        print(prompt!.text)
+        guard let prompt = prompt else { return }
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
+        let drawingViewController = activity.topViewController as! DrawingViewController
+        drawingViewController.prompt = prompt
+        self.presentViewController(activity, animated: true, completion: nil)
+        FIRAnalytics.logEventWithName("drawPrompt", parameters: ["text":prompt.text])
     }
 }

@@ -112,7 +112,7 @@ extension PromptsViewController {
         if api.getPrompts()[editActionsForRowAtIndexPath.row].user.userId == api.getActiveUser().userId {
             let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Delete", handler: { action, indexPath in
                 self.setEditing(false, animated: true)
-                let deleteAlert = UIAlertController(title: "Delete prompt?", message: "This prompt will be deleted permanently, but drawings will still exist.", preferredStyle: UIAlertControllerStyle.Alert)
+                let deleteAlert = UIAlertController(title: "Delete prompt?", message: "This prompt will be deleted permanently, but its drawings will still exist.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
 //                    self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
                     FIRAnalytics.logEventWithName("deletedPrompt", parameters: [:])
