@@ -14,7 +14,7 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
     
     let api = API.sharedInstance
     
-    var tintColor = redColor
+    var tintColor = orangeColor
     
     private var textInputCell: TextInputCell?
     
@@ -81,19 +81,9 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
         }
     }
     
-    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return  UITableViewCellEditingStyle.Delete
-    }
-    
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        return true
-    }
-    
     override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
     }
-    
-
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
@@ -107,5 +97,47 @@ extension PromptsViewController: TextInputCellDelagate {
         self.textInputCell?.textField?.text = ""
         FIRAnalytics.logEventWithName("submitPrompt", parameters: [:])
         self.tableView.reloadData()
+    }
+}
+
+
+// MARK: Edit Cells
+
+extension PromptsViewController {
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return  UITableViewCellEditingStyle.Delete
+    }
+    
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath: NSIndexPath) -> [UITableViewRowAction] {
+        if api.getPrompts()[editActionsForRowAtIndexPath.row].user.userId == api.getActiveUser().userId {
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Delete", handler: { action, indexPath in
+                self.setEditing(false, animated: true)
+                let deleteAlert = UIAlertController(title: "Delete prompt?", message: "This prompt will be deleted permanently, but drawings will still exist.", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+//                    self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                    FIRAnalytics.logEventWithName("deletedPrompt", parameters: [:])
+                    self.tableView.reloadData()
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
+            })
+            return [deleteAction]
+        } else {
+            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Report", handler: { action, indexPath in
+                let deleteAlert = UIAlertController(title: "Report prompt?", message: "Please report any prompts that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
+                deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+//                    self.api.reportComment((api.getPrompts()[editActionsForRowAtIndexPath.row])!)
+                    FIRAnalytics.logEventWithName("reportedPrompt", parameters: [:])
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+                self.presentViewController(deleteAlert, animated: true, completion: nil)
+                self.setEditing(false, animated: true)
+            })
+            return [reportAction]
+        }
+    }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
     }
 }
