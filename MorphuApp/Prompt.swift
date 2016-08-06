@@ -24,7 +24,7 @@ class Prompt {
         self.text = text
     }
     
-    func setPromptIdd(promptId: String) {
+    func setPromptId(promptId: String) {
         self.promptId = promptId
     }
     

@@ -76,10 +76,11 @@ class CommentViewController: UITableViewController {
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
-        cell.textField.tintColor = self.tintColor
-        cell.submitButton.setTitleColor(self.tintColor, forState: .Normal)
+        cell.textField?.tintColor = self.tintColor
+        cell.submitButton?.setTitleColor(self.tintColor, forState: .Normal)
         
-        cell.textField.delegate = cell
+        cell.textField?.delegate = cell
+        cell.textField?.placeholder = "Write comment..."
         self.writeCommentCell = cell
         return cell
     }
@@ -149,7 +150,7 @@ extension CommentViewController: CommentCellDelagate {
 extension CommentViewController: TextInputCellDelagate {
     func submit(text: String) {
         API.sharedInstance.addComment(drawingInstance!, text: text)
-        self.writeCommentCell?.textField.text = ""
+        self.writeCommentCell?.textField?.text = ""
         FIRAnalytics.logEventWithName("wroteComment", parameters: [:])
         self.tableView.reloadData()
     }

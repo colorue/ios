@@ -268,6 +268,8 @@ class API {
     }
     
     func addComment(drawing: Drawing, text: String) {
+        guard let activeUser = activeUser else { return }
+
         let comment = Comment(user: self.activeUser!, text: text)
         let newComment = myRootRef.child("comments").childByAutoId()
 
@@ -276,15 +278,18 @@ class API {
         newComment.setValue(comment.toAnyObject())
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
         
-        sendPushNotification("\(activeUser!.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
+        sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
     func createPrompt(text: String) {
         guard let activeUser = activeUser else { return }
-        let newPrompt = Prompt(user: activeUser, text: text)
+
+        let prompt = Prompt(user: activeUser, text: text)
+        let newPrompt = myRootRef.child("prompts").childByAutoId()
         
-        prompts.insert(newPrompt)
-        myRootRef.child("prompts").childByAutoId().setValue(newPrompt.toAnyObject())
+        prompt.setPromptId(newPrompt.key)
+        prompts.insert(prompt)
+        newPrompt.setValue(prompt.toAnyObject())
     }
     
     func deleteComment(drawing: Drawing, comment: Comment) {

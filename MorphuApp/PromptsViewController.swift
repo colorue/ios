@@ -63,10 +63,12 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
-        cell.textField.tintColor = self.tintColor
-        cell.submitButton.setTitleColor(self.tintColor, forState: .Normal)
+        cell.textField?.tintColor = self.tintColor
+        cell.submitButton?.setTitleColor(self.tintColor, forState: .Normal)
         
-        cell.textField.delegate = cell
+        cell.textField?.delegate = cell
+        cell.textField?.placeholder = "Create prompt..."
+
         self.textInputCell = cell
         return cell
     }
@@ -102,7 +104,7 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
 extension PromptsViewController: TextInputCellDelagate {
     func submit(text: String) {
         api.createPrompt(text)
-        self.textInputCell?.textField.text = ""
+        self.textInputCell?.textField?.text = ""
         FIRAnalytics.logEventWithName("submitPrompt", parameters: [:])
         self.tableView.reloadData()
     }
