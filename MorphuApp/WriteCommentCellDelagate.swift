@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol WriteCommentCellDelagate {
-    func addComment(text: String) -> ()
+protocol TextInputCellDelagate {
+    func submit(text: String) -> ()
 }

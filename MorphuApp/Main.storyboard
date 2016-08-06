@@ -2165,7 +2165,7 @@
                                     <outlet property="username" destination="Z11-yh-Fhg" id="XIF-3l-agG"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="WriteCommentCell" customModule="Colorue" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="WriteCommentCell" rowHeight="40" id="EzM-5m-5ac" customClass="TextInputCell" customModule="Colorue" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="EzM-5m-5ac" id="Ux9-46-s7a">
@@ -2201,7 +2201,7 @@
                                                 </mask>
                                             </variation>
                                             <connections>
-                                                <action selector="addComment:" destination="EzM-5m-5ac" eventType="touchUpInside" id="F4F-Gk-l2k"/>
+                                                <action selector="submit:" destination="EzM-5m-5ac" eventType="touchUpInside" id="9a4-og-F9Z"/>
                                             </connections>
                                         </button>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write comment..." textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="7Qs-I9-leV">
@@ -2259,8 +2259,8 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="addButton" destination="kaq-Kb-Ih3" id="6dL-7v-jga"/>
-                                    <outlet property="commentText" destination="7Qs-I9-leV" id="gcL-2X-oW1"/>
+                                    <outlet property="submitButton" destination="kaq-Kb-Ih3" id="2uA-2F-6Nf"/>
+                                    <outlet property="textField" destination="7Qs-I9-leV" id="7kg-89-QfP"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -4613,7 +4613,7 @@
                                     <segue destination="fn1-ch-IF1" kind="show" id="7Lc-wG-asB"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="WriteCommentCell" rowHeight="40" id="obY-jV-MZs" customClass="WriteCommentCell" customModule="Colorue" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="WriteCommentCell" rowHeight="40" id="obY-jV-MZs" customClass="TextInputCell" customModule="Colorue" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="110" width="600" height="40"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="obY-jV-MZs" id="boW-Nu-aCG">
@@ -4649,7 +4649,7 @@
                                                 </mask>
                                             </variation>
                                             <connections>
-                                                <action selector="addComment:" destination="obY-jV-MZs" eventType="touchUpInside" id="pDo-Wt-wjX"/>
+                                                <action selector="submit:" destination="obY-jV-MZs" eventType="touchUpInside" id="2I2-5P-72d"/>
                                             </connections>
                                         </button>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Write comment..." textAlignment="natural" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="ftp-i5-Buc">
@@ -4707,8 +4707,8 @@
                                     </variation>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <outlet property="addButton" destination="NZS-jI-s6k" id="0bY-GE-MNC"/>
-                                    <outlet property="commentText" destination="ftp-i5-Buc" id="uJi-HC-5zn"/>
+                                    <outlet property="submitButton" destination="NZS-jI-s6k" id="Ljb-qB-K1S"/>
+                                    <outlet property="textField" destination="ftp-i5-Buc" id="AYn-m1-dqJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -4773,7 +4773,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="0OX-Ax-R2N"/>
         <segue reference="4go-7C-aja"/>
-        <segue reference="fgS-wZ-c5x"/>
+        <segue reference="sFW-OK-Bh1"/>
         <segue reference="uBg-E9-rx7"/>
         <segue reference="qQ3-FT-9z4"/>
         <segue reference="pnl-W5-kJW"/>

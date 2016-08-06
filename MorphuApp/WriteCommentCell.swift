@@ -8,21 +8,21 @@
 
 import UIKit
 
-class WriteCommentCell: UITableViewCell, UITextFieldDelegate {
-    var delagate: WriteCommentCellDelagate?
+class TextInputCell: UITableViewCell, UITextFieldDelegate {
+    var delagate: TextInputCellDelagate?
     
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var submitButton: UIButton!
     
-    @IBOutlet weak var commentText: UITextField!
+    @IBOutlet weak var textField: UITextField!
     
-    @IBAction func addComment(sender: UIButton) {
-        if let text = commentText.text {
-            delagate?.addComment(text)
+    @IBAction func submit(sender: UIButton) {
+        if let text = textField.text {
+            delagate?.submit(text)
         }
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.addComment(self.addButton)
+        self.submit(self.submitButton)
         return true
     }
 }

@@ -9,14 +9,14 @@
 import UIKit
 import Firebase
 
-class CommentViewController: UITableViewController, WriteCommentCellDelagate, CommentCellDelagate {
+class CommentViewController: UITableViewController {
     
     let api = API.sharedInstance
     var drawingInstance: Drawing?
     
     var tintColor = redColor
     
-    private var writeCommentCell: WriteCommentCell?
+    private var writeCommentCell: TextInputCell?
     
     
     func setDrawingInstance(drawing: Drawing) {
@@ -69,17 +69,17 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! WriteCommentCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! TextInputCell
         cell.delagate = self
         
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
-        cell.commentText.tintColor = self.tintColor
-        cell.addButton.setTitleColor(self.tintColor, forState: .Normal)
+        cell.textField.tintColor = self.tintColor
+        cell.submitButton.setTitleColor(self.tintColor, forState: .Normal)
         
-        cell.commentText.delegate = cell
+        cell.textField.delegate = cell
         self.writeCommentCell = cell
         return cell
     }
@@ -134,15 +134,23 @@ class CommentViewController: UITableViewController, WriteCommentCellDelagate, Co
         return 40
     }
     
-    func addComment(text: String) {
-        API.sharedInstance.addComment(drawingInstance!, text: text)
-        self.writeCommentCell?.commentText.text = ""
-        FIRAnalytics.logEventWithName("wroteComment", parameters: [:])
-        self.tableView.reloadData()
-    }
+
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
+    }
+}
+
+extension CommentViewController: CommentCellDelagate {
+    
+}
+
+extension CommentViewController: TextInputCellDelagate {
+    func submit(text: String) {
+        API.sharedInstance.addComment(drawingInstance!, text: text)
+        self.writeCommentCell?.textField.text = ""
+        FIRAnalytics.logEventWithName("wroteComment", parameters: [:])
+        self.tableView.reloadData()
     }
 }

@@ -25,11 +25,10 @@ class API {
 
     private var drawingOfTheDay = [Drawing]()
     private var wall = [Drawing]()
-    private var explore = [Drawing]()
     private var facebookFriends = Set<User>()
     private var contacts = Set<User>()
     private var popularUsers = Set<User>()
-    private var prompts = [Prompt]()
+    private var prompts = Set<Prompt>()
 
     private var activeUser: User?
     
@@ -283,6 +282,8 @@ class API {
     func createPrompt(text: String) {
         guard let activeUser = activeUser else { return }
         let newPrompt = Prompt(user: activeUser, text: text)
+        
+        prompts.insert(newPrompt)
         myRootRef.child("prompts").childByAutoId().setValue(newPrompt.toAnyObject())
     }
     
@@ -351,10 +352,6 @@ class API {
         return self.wall
     }
     
-    func getExplore() -> [Drawing] {
-        return self.explore
-    }
-    
     func getSuggustedUsers() -> [User] {
         return Array(self.popularUsers.union(self.facebookFriends))
     }
@@ -368,14 +365,7 @@ class API {
     }
     
     func getPrompts() -> [Prompt] {
-        var testPrompts = [Prompt]()
-        let prompt1 = Prompt(user: getActiveUser(), timeStamp: 0, text: "test1")
-        prompt1.drawings.appendContentsOf([wall[0], wall[1]])
-        
-        let prompt2 = Prompt(user: getActiveUser(), timeStamp: 0, text: "test2 longer to test shit out. must be even longer blah blash")
-        prompt2.drawings.append(wall[2])
-        testPrompts.appendContentsOf([prompt1, prompt2])
-        return testPrompts
+        return prompts.sort( { $0.timeStamp < $1.timeStamp } )
     }
     
     //MARK: Load Data
@@ -389,8 +379,7 @@ class API {
                 self.loadDrawingOfTheDay()
                 self.loadWall()
                 self.setDeleteWall()
-                self.loadExplore()
-                self.setDeleteExplore()
+                self.loadPrompts()
                 self.loadFacebookFriends()
                 self.getAirshipKey()
             })
@@ -411,9 +400,6 @@ class API {
     
     func releaseMemory() {
         for drawing in wall {
-            drawing.setImage(nil)
-        }
-        for drawing in explore {
             drawing.setImage(nil)
         }
         self.userDict.removeAll()
@@ -467,34 +453,20 @@ class API {
                 }
             })
         }
-
-
-    func loadExplore() {
-        myRootRef.child("drawings").queryOrderedByChild("timeStamp").queryLimitedToFirst(16)
-            .queryStartingAtValue(self.oldestExploreLoaded).observeEventType(.ChildAdded, withBlock: { snapshot in
-                let drawingId = snapshot.key
-                self.getDrawing(drawingId, callback: { (drawing: Drawing, new: Bool) -> () in
-                    self.oldestExploreLoaded = drawing.timeStamp + 1
-                    self.explore.append(drawing)
-                })
-            })
-    }
     
-    private func setDeleteExplore() {
-        myRootRef.child("drawings").observeEventType(.ChildRemoved, withBlock: { snapshot in
-            let drawingId = snapshot.key
-            var i = 0
-            self.drawingDict[drawingId] = nil
-            for drawing in self.explore {
-                if drawing.getDrawingId() == drawingId {
-                    self.explore.removeAtIndex(i)
-                    return
-                }
-                i += 1
-            }
+    private func loadPrompts() {
+        myRootRef.child("prompts").observeEventType(.ChildAdded, withBlock: { snapshot in
+            let promptId = snapshot.key
+            
+            let text = snapshot.value!["text"] as! String
+            let timeStamp = snapshot.value!["timeStamp"] as! Double
+            
+            self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
+                self.prompts.insert(Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text))
+            })
         })
     }
-    
+
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
             guard snapshot.exists() else { return }

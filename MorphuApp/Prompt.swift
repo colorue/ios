@@ -52,3 +52,14 @@ class Prompt {
                 "timeStamp" : self.timeStamp]
     }
 }
+
+extension Prompt: Hashable {
+    var hashValue: Int {
+        return promptId.hashValue
+    }
+}
+
+// MARK: Equatable
+func == (lhs: Prompt, rhs: Prompt) -> Bool {
+    return lhs.promptId == rhs.promptId
+}

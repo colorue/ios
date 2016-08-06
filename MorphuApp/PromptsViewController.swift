@@ -16,7 +16,7 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
     
     var tintColor = redColor
     
-    private var writeCommentCell: WriteCommentCell?
+    private var textInputCell: TextInputCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,18 +56,18 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! WriteCommentCell
-//        cell.delagate = self
+        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! TextInputCell
+        cell.delagate = self
         
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
-        cell.commentText.tintColor = self.tintColor
-        cell.addButton.setTitleColor(self.tintColor, forState: .Normal)
+        cell.textField.tintColor = self.tintColor
+        cell.submitButton.setTitleColor(self.tintColor, forState: .Normal)
         
-        cell.commentText.delegate = cell
-        self.writeCommentCell = cell
+        cell.textField.delegate = cell
+        self.textInputCell = cell
         return cell
     }
     
@@ -91,12 +91,19 @@ class PromptsViewController: UITableViewController, CommentCellDelagate {
         return 40
     }
     
-    func addPrompt(text: String) {
-        
-    }
+
     
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
+    }
+}
+
+extension PromptsViewController: TextInputCellDelagate {
+    func submit(text: String) {
+        api.createPrompt(text)
+        self.textInputCell?.textField.text = ""
+        FIRAnalytics.logEventWithName("submitPrompt", parameters: [:])
+        self.tableView.reloadData()
     }
 }
