@@ -20,7 +20,7 @@ class FriendsViewController: UserListViewController {
     override func viewDidLoad() {
         self.setUpSearchController()
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Invite", style: .Plain,
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Invite ", style: .Plain,
                                                                        target: self, action: #selector(FriendsViewController.invite(_:)))
         super.viewDidLoad()
     }
@@ -84,16 +84,17 @@ extension FriendsViewController: UISearchResultsUpdating {
     // MARK: Segue
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        super.prepareForSegue(segue, sender: sender)
+        
         if searchController.active {
             let userListController = searchController.searchResultsController as! UserListViewController
-            let targetController = segue.destinationViewController as! ProfileViewController
-            if let row = userListController.tableView.indexPathForSelectedRow?.row {
-                targetController.tintColor = tintColor
-                targetController.navigationItem.title = filteredUsers[row].username
-                targetController.userInstance = filteredUsers[row]
+            if let targetController = segue.destinationViewController as? ProfileViewController {
+                if let row = userListController.tableView.indexPathForSelectedRow?.row {
+                    targetController.tintColor = tintColor
+                    targetController.navigationItem.title = filteredUsers[row].username
+                    targetController.userInstance = filteredUsers[row]
+                }
             }
-        } else {
-            super.prepareForSegue(segue, sender: sender)
         }
     }
 }

@@ -10,15 +10,13 @@
 import UIKit
 import Firebase
 
-class PromptViewController: UITableViewController, CommentCellDelagate {
+class PromptsViewController: UITableViewController, CommentCellDelagate {
     
     let api = API.sharedInstance
     
     var tintColor = redColor
     
     private var writeCommentCell: WriteCommentCell?
-    
-    var prompts: [Prompt]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,12 +72,11 @@ class PromptViewController: UITableViewController, CommentCellDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        if segue.identifier == "showUser" {
-//            let targetController = segue.destinationViewController as! ProfileViewController
-//            targetController.tintColor = self.tintColor
-//            targetController.navigationItem.title = drawingInstance!.getComments()[sender!.tag].user.username
-//            targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
-//        }
+        if let controller = segue.destinationViewController as? PromptViewController,
+            let row = tableView.indexPathForSelectedRow?.row {
+            controller.tintColor = self.tintColor
+            controller.prompt = api.getPrompts()[row]
+        }
     }
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

@@ -280,6 +280,12 @@ class API {
         sendPushNotification("\(activeUser!.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
+    func createPrompt(text: String) {
+        guard let activeUser = activeUser else { return }
+        let newPrompt = Prompt(user: activeUser, text: text)
+        myRootRef.child("prompts").childByAutoId().setValue(newPrompt.toAnyObject())
+    }
+    
     func deleteComment(drawing: Drawing, comment: Comment) {
         drawing.removeComment(comment)
         myRootRef.child("comments/\(comment.getCommetId())").removeValue()
@@ -363,8 +369,12 @@ class API {
     
     func getPrompts() -> [Prompt] {
         var testPrompts = [Prompt]()
-        testPrompts.append(Prompt(user: getActiveUser(), timeStamp: 0, text: "test1"))
-        testPrompts.append(Prompt(user: getActiveUser(), timeStamp: 0, text: "test2"))
+        let prompt1 = Prompt(user: getActiveUser(), timeStamp: 0, text: "test1")
+        prompt1.drawings.appendContentsOf([wall[0], wall[1]])
+        
+        let prompt2 = Prompt(user: getActiveUser(), timeStamp: 0, text: "test2 longer to test shit out. must be even longer blah blash")
+        prompt2.drawings.append(wall[2])
+        testPrompts.appendContentsOf([prompt1, prompt2])
         return testPrompts
     }
     

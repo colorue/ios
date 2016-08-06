@@ -371,7 +371,7 @@
         <!--Search-->
         <scene sceneID="OAz-wx-CXM">
             <objects>
-                <tableViewController id="fn1-ch-IF1" customClass="SearchViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="fn1-ch-IF1" customClass="PromptViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="HcO-hc-lSF">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4421,7 +4421,7 @@
         <!--Prompts-->
         <scene sceneID="6pm-lK-3S2">
             <objects>
-                <tableViewController id="XUF-aR-H42" customClass="PromptViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="XUF-aR-H42" customClass="PromptsViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEF-M0-bcS">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -4773,9 +4773,9 @@
     <inferredMetricsTieBreakers>
         <segue reference="0OX-Ax-R2N"/>
         <segue reference="4go-7C-aja"/>
-        <segue reference="gTs-3N-K90"/>
-        <segue reference="pnl-W5-kJW"/>
+        <segue reference="fgS-wZ-c5x"/>
         <segue reference="uBg-E9-rx7"/>
         <segue reference="qQ3-FT-9z4"/>
+        <segue reference="pnl-W5-kJW"/>
     </inferredMetricsTieBreakers>
 </document>
