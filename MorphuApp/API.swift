@@ -302,6 +302,11 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
     }
     
+    func deletePrompt(prompt: Prompt) {
+        prompts.remove(prompt)
+        myRootRef.child("prompts/\(prompt.getPromptId())").removeValue()
+    }
+    
     func follow(user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
@@ -340,6 +345,12 @@ class API {
     func reportComment(comment: Comment) {
         if let active = activeUser {
             myRootRef.child("reported/comments/\(comment.getCommetId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+        }
+    }
+    
+    func reportPrompt(prompt: Prompt) {
+        if let active = activeUser {
+            myRootRef.child("reported/prompts/\(prompt.getPromptId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
         }
     }
     

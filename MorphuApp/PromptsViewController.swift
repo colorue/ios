@@ -114,7 +114,7 @@ extension PromptsViewController {
                 self.setEditing(false, animated: true)
                 let deleteAlert = UIAlertController(title: "Delete prompt?", message: "This prompt will be deleted permanently, but its drawings will still exist.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
-//                    self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
+                    self.api.deletePrompt(self.api.getPrompts()[editActionsForRowAtIndexPath.row])
                     FIRAnalytics.logEventWithName("deletedPrompt", parameters: [:])
                     self.tableView.reloadData()
                 }))
@@ -126,7 +126,7 @@ extension PromptsViewController {
             let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.Destructive, title: "Report", handler: { action, indexPath in
                 let deleteAlert = UIAlertController(title: "Report prompt?", message: "Please report any prompts that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
-//                    self.api.reportComment((api.getPrompts()[editActionsForRowAtIndexPath.row])!)
+                    self.api.reportPrompt(self.api.getPrompts()[editActionsForRowAtIndexPath.row])
                     FIRAnalytics.logEventWithName("reportedPrompt", parameters: [:])
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))

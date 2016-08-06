@@ -78,7 +78,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
-        brushSizeSlider.maximumValue = pow(30, 1/sliderConstant)
+        brushSizeSlider.maximumValue = pow(50, 1/sliderConstant)
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         
         brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
@@ -313,6 +313,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.hidden = true
         trashButton.hidden = true
         dropperButton.hidden = true
+        paintBucketButton.hidden = true
         alphaButton.hidden = true
         brushSizeSlider.hidden = true
         
@@ -325,6 +326,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.hidden = false
         trashButton.hidden = false
         dropperButton.hidden = false
+        paintBucketButton.hidden = false
         alphaButton.hidden = false
         brushSizeSlider.hidden = false
         progressBar.hidden = true
