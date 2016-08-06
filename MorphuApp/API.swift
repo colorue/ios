@@ -29,6 +29,7 @@ class API {
     private var facebookFriends = Set<User>()
     private var contacts = Set<User>()
     private var popularUsers = Set<User>()
+    private var prompts = [Prompt]()
 
     private var activeUser: User?
     
@@ -358,6 +359,13 @@ class API {
     
     func getContacts() -> [Contact] {
         return contactStore.getContacts().sort( { $0.name < $1.name } )
+    }
+    
+    func getPrompts() -> [Prompt] {
+        var testPrompts = [Prompt]()
+        testPrompts.append(Prompt(user: getActiveUser(), timeStamp: 0, text: "test1"))
+        testPrompts.append(Prompt(user: getActiveUser(), timeStamp: 0, text: "test2"))
+        return testPrompts
     }
     
     //MARK: Load Data
