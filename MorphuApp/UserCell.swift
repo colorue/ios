@@ -8,6 +8,11 @@
 
 import UIKit
 
+protocol UserCellDelagate {
+    func followAction(userCell: UserCell)
+    func unfollowAction(userCell: UserCell)
+}
+
 class UserCell: UITableViewCell {
     var delagate: UserCellDelagate?
     var user: User? {

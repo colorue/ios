@@ -16,7 +16,6 @@ class Drawing {
     private var likes = [User]()
     private var comments = [Comment]()
     private var image: UIImage?
-    var delagate: DrawingDelagate?
     var drawingOfTheDay = false
     var url: NSURL?
     
@@ -32,10 +31,6 @@ class Drawing {
     
     func getDrawingId() -> String {
         return self.drawingId
-    }
-    
-    func setProgress(progress: Float) {
-        self.delagate?.setProgress(progress)
     }
     
     func setImage(image: UIImage?) {

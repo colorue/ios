@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Morphu Brand" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-HP-fpL">
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" misplaced="YES" image="Morphu Brand" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-HP-fpL">
                                 <rect key="frame" x="0.0" y="-200" width="600" height="1000"/>
                             </imageView>
                         </subviews>

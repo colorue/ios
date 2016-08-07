@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class PromptsViewController: UITableViewController, CommentCellDelagate {
+class PromptsViewController: UITableViewController {
     
     let api = API.sharedInstance
     

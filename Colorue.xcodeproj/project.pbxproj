@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
-		874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */; };
 		875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */; };
 		875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactStore.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
@@ -25,12 +24,10 @@
 		8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */; };
 		8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E01CEE229C00E3D528 /* CanvasView.swift */; };
 		8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */; };
-		8763D2FD1CEE229C00E3D528 /* DescriptionInputDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E31CEE229C00E3D528 /* DescriptionInputDelagate.swift */; };
 		8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E61CEE229C00E3D528 /* UserCell.swift */; };
 		8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E71CEE229C00E3D528 /* DrawingCell.swift */; };
 		8763D3081CEE229C00E3D528 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EE1CEE229C00E3D528 /* User.swift */; };
 		8763D3091CEE229C00E3D528 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2EF1CEE229C00E3D528 /* API.swift */; };
-		8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */; };
 		8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */; };
 		8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F71CEE229C00E3D528 /* ColorConstants.swift */; };
 		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
@@ -50,7 +47,6 @@
 		87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */; };
 		87AFB24E1D1C58CC0016FC59 /* DrawingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
-		87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */; };
 		87DB18E21D56326400C838DD /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E11D56326400C838DD /* Prompt.swift */; };
 		87DB18E51D5634BF00C838DD /* PromptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E41D5634BF00C838DD /* PromptsViewController.swift */; };
 		87DB18E71D56776800C838DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87DB18E61D56776800C838DD /* GoogleService-Info.plist */; };
@@ -59,8 +55,6 @@
 		87DF2BCF1D0C90EF006ED9AF /* ChooseUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */; };
 		87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */; };
 		87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD21D0CA731006ED9AF /* NewUser.swift */; };
-		87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */; };
-		87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -75,7 +69,6 @@
 		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = MorphuApp/Info.plist; sourceTree = "<group>"; };
-		874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCellDelagate.swift; sourceTree = "<group>"; };
 		875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		875B4E0A1D15E443004F4CD2 /* ContactStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -91,12 +84,10 @@
 		8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		8763D2E01CEE229C00E3D528 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorKeyboardView.swift; sourceTree = "<group>"; };
-		8763D2E31CEE229C00E3D528 /* DescriptionInputDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionInputDelagate.swift; sourceTree = "<group>"; };
 		8763D2E61CEE229C00E3D528 /* UserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCell.swift; sourceTree = "<group>"; };
 		8763D2E71CEE229C00E3D528 /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		8763D2EE1CEE229C00E3D528 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		8763D2EF1CEE229C00E3D528 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIStoryboardSegueFromRight.swift; sourceTree = "<group>"; };
 		8763D2F11CEE229C00E3D528 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		8763D2F71CEE229C00E3D528 /* ColorConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConstants.swift; sourceTree = "<group>"; };
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
@@ -117,7 +108,6 @@
 		87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingListViewController.swift; sourceTree = "<group>"; };
 		87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
-		87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentCellDelagate.swift; sourceTree = "<group>"; };
 		87DB18E11D56326400C838DD /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		87DB18E41D5634BF00C838DD /* PromptsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptsViewController.swift; sourceTree = "<group>"; };
 		87DB18E61D56776800C838DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -126,8 +116,6 @@
 		87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseUsernameViewController.swift; sourceTree = "<group>"; };
 		87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFoundViewController.swift; sourceTree = "<group>"; };
 		87DF2BD21D0CA731006ED9AF /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
-		87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingDelagate.swift; sourceTree = "<group>"; };
-		87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDelagate.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -166,7 +154,6 @@
 				873AFA1C1CED7697006FD34A /* Info.plist */,
 				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
-				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
 				872E82E11D01296F005A56A3 /* Colorue.app */,
@@ -176,14 +163,11 @@
 		873AFA0F1CED7697006FD34A /* Colorue */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
-				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
-				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
-				8763D3141CEE22D300E3D528 /* Assets.xcassets */,
-				8763D3171CEE242100E3D528 /* Controller */,
-				8763D3181CEE243400E3D528 /* View */,
-				8763D3191CEE243B00E3D528 /* Model */,
-				8763D31A1CEE244500E3D528 /* API */,
+				8786D6331D56B11A00AD3362 /* Delagates */,
+				8763D3171CEE242100E3D528 /* Modules */,
+				8786D6341D56B16700AD3362 /* Resourses */,
+				8786D6381D56B1C700AD3362 /* SDK */,
+				8786D6351D56B19300AD3362 /* Storyboards */,
 				8763D31F1CEE247F00E3D528 /* Supporting Files */,
 			);
 			name = Colorue;
@@ -199,26 +183,13 @@
 			name = Fonts;
 			sourceTree = "<group>";
 		};
-		8763D3171CEE242100E3D528 /* Controller */ = {
+		8763D3171CEE242100E3D528 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
-				87C32C551D00A10D003817D8 /* Main */,
+				8786D62D1D56AF8700AD3362 /* Main */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
-				8763D3231CEE254100E3D528 /* Navigation */,
 			);
-			name = Controller;
-			sourceTree = "<group>";
-		};
-		8763D3181CEE243400E3D528 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				8763D31E1CEE246C00E3D528 /* Elements */,
-				8763D31D1CEE246400E3D528 /* Delagates */,
-				8763D31C1CEE245F00E3D528 /* Cells */,
-				8763D31B1CEE245000E3D528 /* Segues */,
-			);
-			name = View;
+			name = Modules;
 			sourceTree = "<group>";
 		};
 		8763D3191CEE243B00E3D528 /* Model */ = {
@@ -244,52 +215,10 @@
 			name = API;
 			sourceTree = "<group>";
 		};
-		8763D31B1CEE245000E3D528 /* Segues */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2F01CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift */,
-			);
-			name = Segues;
-			sourceTree = "<group>";
-		};
-		8763D31C1CEE245F00E3D528 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				87F754EF1D187184005B4A14 /* InviteCell.swift */,
-				8774BA461CFF823B00B26931 /* ProfileCell.swift */,
-				8763D2E61CEE229C00E3D528 /* UserCell.swift */,
-				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
-				879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */,
-				879BCC9D1CF4C4A000CD95E7 /* TextInputCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		8763D31D1CEE246400E3D528 /* Delagates */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2E31CEE229C00E3D528 /* DescriptionInputDelagate.swift */,
-				87E1F67C1CF63AF5003FFF3F /* DrawingDelagate.swift */,
-				87E1F67E1CF69ED1003FFF3F /* APIDelagate.swift */,
-				874C111A1CFA8D0E00F5114C /* UserCellDelagate.swift */,
-				87CC7D421D00A92D0056DF73 /* CommentCellDelagate.swift */,
-			);
-			name = Delagates;
-			sourceTree = "<group>";
-		};
-		8763D31E1CEE246C00E3D528 /* Elements */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
-				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
-			);
-			name = Elements;
-			sourceTree = "<group>";
-		};
 		8763D31F1CEE247F00E3D528 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				8763D3161CEE241000E3D528 /* Fonts */,
+				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				8763D2F71CEE229C00E3D528 /* ColorConstants.swift */,
 				8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */,
 				8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */,
@@ -299,44 +228,257 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8763D3231CEE254100E3D528 /* Navigation */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2CD1CEE226700E3D528 /* NavigationController.swift */,
-				8763D2CE1CEE226700E3D528 /* TabBarController.swift */,
-			);
-			name = Navigation;
-			sourceTree = "<group>";
-		};
 		8763D3241CEE255A00E3D528 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2CA1CEE226700E3D528 /* WelcomeViewController.swift */,
-				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
-				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
-				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
-				87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */,
-				87A109561D241AE300BCE744 /* PeopleToFollowController.swift */,
+				8786D62C1D56AF6400AD3362 /* People to Follow */,
+				8786D62B1D56AF5C00AD3362 /* Be Found */,
+				8786D62A1D56AF5200AD3362 /* Choose Username */,
+				8786D6291D56AF4900AD3362 /* Sign Up */,
+				8786D6281D56AF4100AD3362 /* Sign In */,
+				8786D6271D56AF3700AD3362 /* Welcome */,
 			);
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
-		87AFB24C1D1C58B40016FC59 /* Abstract */ = {
+		8786D61D1D56AE6F00AD3362 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */,
+				8786D6311D56B0E100AD3362 /* Cells */,
+				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 			);
-			name = Abstract;
+			name = Feed;
 			sourceTree = "<group>";
 		};
-		87C32C551D00A10D003817D8 /* Main */ = {
+		8786D61E1D56AE7D00AD3362 /* Root */ = {
 			isa = PBXGroup;
 			children = (
-				87AFB24C1D1C58B40016FC59 /* Abstract */,
-				87F754ED1D1865E0005B4A14 /* Tabs */,
-				87F754EE1D1865EF005B4A14 /* Other */,
+				8763D2CF1CEE226700E3D528 /* LoadingViewController.swift */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		8786D61F1D56AE8600AD3362 /* Prompts */ = {
+			isa = PBXGroup;
+			children = (
+				87DB18E41D5634BF00C838DD /* PromptsViewController.swift */,
+			);
+			name = Prompts;
+			sourceTree = "<group>";
+		};
+		8786D6201D56AE9200AD3362 /* Prompt */ = {
+			isa = PBXGroup;
+			children = (
+				876614B91D034F1200DF4590 /* PromptViewController.swift */,
+			);
+			name = Prompt;
+			sourceTree = "<group>";
+		};
+		8786D6211D56AEAD00AD3362 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
+				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
+				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
+		8786D6221D56AED700AD3362 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				8786D6301D56B0C500AD3362 /* Cells */,
+				87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */,
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		8786D6231D56AEDE00AD3362 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				8786D62F1D56B0B300AD3362 /* Cells */,
+				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		8786D6241D56AEEB00AD3362 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+				877FA9A21D26D45700830980 /* SharingViewController.swift */,
+			);
+			name = Sharing;
+			sourceTree = "<group>";
+		};
+		8786D6251D56AEF600AD3362 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+				8786D62E1D56B0A800AD3362 /* Cells */,
+				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
+		8786D6261D56AF0000AD3362 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				8786D6321D56B0F400AD3362 /* Cells */,
+				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		8786D6271D56AF3700AD3362 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2CA1CEE226700E3D528 /* WelcomeViewController.swift */,
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		8786D6281D56AF4100AD3362 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */,
+			);
+			name = "Sign In";
+			sourceTree = "<group>";
+		};
+		8786D6291D56AF4900AD3362 /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */,
+			);
+			name = "Sign Up";
+			sourceTree = "<group>";
+		};
+		8786D62A1D56AF5200AD3362 /* Choose Username */ = {
+			isa = PBXGroup;
+			children = (
+				87DF2BCE1D0C90EF006ED9AF /* ChooseUsernameViewController.swift */,
+			);
+			name = "Choose Username";
+			sourceTree = "<group>";
+		};
+		8786D62B1D56AF5C00AD3362 /* Be Found */ = {
+			isa = PBXGroup;
+			children = (
+				87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */,
+			);
+			name = "Be Found";
+			sourceTree = "<group>";
+		};
+		8786D62C1D56AF6400AD3362 /* People to Follow */ = {
+			isa = PBXGroup;
+			children = (
+				87A109561D241AE300BCE744 /* PeopleToFollowController.swift */,
+			);
+			name = "People to Follow";
+			sourceTree = "<group>";
+		};
+		8786D62D1D56AF8700AD3362 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8786D6261D56AF0000AD3362 /* Comment */,
+				87AFB24C1D1C58B40016FC59 /* Common */,
+				8786D6211D56AEAD00AD3362 /* Drawing */,
+				8786D6221D56AED700AD3362 /* Friends */,
+				8786D6251D56AEF600AD3362 /* Invite */,
+				8786D6241D56AEEB00AD3362 /* Sharing */,
+				8786D6231D56AEDE00AD3362 /* Profile */,
+				8786D6201D56AE9200AD3362 /* Prompt */,
+				8786D61F1D56AE8600AD3362 /* Prompts */,
+				8786D61E1D56AE7D00AD3362 /* Root */,
+				8786D61D1D56AE6F00AD3362 /* Feed */,
 			);
 			name = Main;
+			sourceTree = "<group>";
+		};
+		8786D62E1D56B0A800AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				87F754EF1D187184005B4A14 /* InviteCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D62F1D56B0B300AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8774BA461CFF823B00B26931 /* ProfileCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D6301D56B0C500AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2E61CEE229C00E3D528 /* UserCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D6311D56B0E100AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D6321D56B0F400AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				879BCC9D1CF4C4A000CD95E7 /* TextInputCell.swift */,
+				879BCC9B1CF41DE600CD95E7 /* CommentCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D6331D56B11A00AD3362 /* Delagates */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
+			);
+			name = Delagates;
+			sourceTree = "<group>";
+		};
+		8786D6341D56B16700AD3362 /* Resourses */ = {
+			isa = PBXGroup;
+			children = (
+				8763D3161CEE241000E3D528 /* Fonts */,
+				8763D3141CEE22D300E3D528 /* Assets.xcassets */,
+			);
+			name = Resourses;
+			sourceTree = "<group>";
+		};
+		8786D6351D56B19300AD3362 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
+				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		8786D6381D56B1C700AD3362 /* SDK */ = {
+			isa = PBXGroup;
+			children = (
+				8763D3191CEE243B00E3D528 /* Model */,
+				8763D31A1CEE244500E3D528 /* API */,
+			);
+			name = SDK;
+			sourceTree = "<group>";
+		};
+		87AFB24C1D1C58B40016FC59 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2CD1CEE226700E3D528 /* NavigationController.swift */,
+				8763D2CE1CEE226700E3D528 /* TabBarController.swift */,
+				87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */,
+				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
+			);
+			name = Common;
 			sourceTree = "<group>";
 		};
 		87EF7E711D447BF9001089D2 /* PaintBucket */ = {
@@ -347,31 +489,6 @@
 				87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */,
 			);
 			name = PaintBucket;
-			path = MorphuApp;
-			sourceTree = "<group>";
-		};
-		87F754ED1D1865E0005B4A14 /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
-				87DB18E41D5634BF00C838DD /* PromptsViewController.swift */,
-				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
-				87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */,
-				8774BA481CFFA08C00B26931 /* ProfileViewController.swift */,
-			);
-			name = Tabs;
-			sourceTree = "<group>";
-		};
-		87F754EE1D1865EF005B4A14 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				876614B91D034F1200DF4590 /* PromptViewController.swift */,
-				877FA9A21D26D45700830980 /* SharingViewController.swift */,
-				87619AE71D0786FF000BBCC5 /* InviteViewController.swift */,
-				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
-				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
-			);
-			name = Other;
 			sourceTree = "<group>";
 		};
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
@@ -536,16 +653,12 @@
 				8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */,
 				8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
-				87E1F67F1CF69ED1003FFF3F /* APIDelagate.swift in Sources */,
 				87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */,
-				8763D30A1CEE229C00E3D528 /* UIStoryboardSegueFromRight.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				87F754F01D187184005B4A14 /* InviteCell.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
-				8763D2FD1CEE229C00E3D528 /* DescriptionInputDelagate.swift in Sources */,
-				87CC7D431D00A92D0056DF73 /* CommentCellDelagate.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
@@ -562,12 +675,10 @@
 				87AFB24E1D1C58CC0016FC59 /* DrawingListViewController.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
 				87DB18E51D5634BF00C838DD /* PromptsViewController.swift in Sources */,
-				87E1F67D1CF63AF5003FFF3F /* DrawingDelagate.swift in Sources */,
 				879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */,
 				876614BA1D034F1200DF4590 /* PromptViewController.swift in Sources */,
 				875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
-				874C111B1CFA8D0E00F5114C /* UserCellDelagate.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,

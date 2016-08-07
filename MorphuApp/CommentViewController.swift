@@ -143,10 +143,6 @@ class CommentViewController: UITableViewController {
     }
 }
 
-extension CommentViewController: CommentCellDelagate {
-    
-}
-
 extension CommentViewController: TextInputCellDelagate {
     func submit(text: String) {
         API.sharedInstance.addComment(drawingInstance!, text: text)

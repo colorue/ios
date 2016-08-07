@@ -13,6 +13,10 @@ import FBSDKLoginKit
 import SinchVerification
 import Alamofire
 
+protocol APIDelagate {
+    func refresh()
+}
+
 class API {
     
     static let sharedInstance = API()
