@@ -67,6 +67,11 @@
 		87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */; };
 		87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BD21D0CA731006ED9AF /* NewUser.swift */; };
 		87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ADE71CF38BEB00DC226A /* Drawing.swift */; };
+		87EE53D11D579EBB005B8FB3 /* Invite.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D01D579EBB005B8FB3 /* Invite.storyboard */; };
+		87EE53D31D579F27005B8FB3 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D21D579F27005B8FB3 /* Friends.storyboard */; };
+		87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D41D57A53C005B8FB3 /* Comments.storyboard */; };
+		87EE53D81D57A96B005B8FB3 /* Users.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D71D57A96B005B8FB3 /* Users.storyboard */; };
+		87EE53DA1D57AE6A005B8FB3 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
@@ -139,6 +144,11 @@
 		87DF2BD01D0CA035006ED9AF /* BeFoundViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeFoundViewController.swift; sourceTree = "<group>"; };
 		87DF2BD21D0CA731006ED9AF /* NewUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewUser.swift; sourceTree = "<group>"; };
 		87E7ADE71CF38BEB00DC226A /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		87EE53D01D579EBB005B8FB3 /* Invite.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Invite.storyboard; sourceTree = "<group>"; };
+		87EE53D21D579F27005B8FB3 /* Friends.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
+		87EE53D41D57A53C005B8FB3 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
+		87EE53D71D57A96B005B8FB3 /* Users.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Users.storyboard; sourceTree = "<group>"; };
+		87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
@@ -349,13 +359,13 @@
 			name = Invite;
 			sourceTree = "<group>";
 		};
-		8786D6261D56AF0000AD3362 /* Comment */ = {
+		8786D6261D56AF0000AD3362 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
 				8786D6321D56B0F400AD3362 /* Cells */,
 				879BCC991CF41A7900CD95E7 /* CommentViewController.swift */,
 			);
-			name = Comment;
+			name = Comments;
 			sourceTree = "<group>";
 		};
 		8786D6271D56AF3700AD3362 /* Welcome */ = {
@@ -409,16 +419,16 @@
 		8786D62D1D56AF8700AD3362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8786D6261D56AF0000AD3362 /* Comment */,
+				8786D6261D56AF0000AD3362 /* Comments */,
 				87AFB24C1D1C58B40016FC59 /* Common */,
 				8786D6211D56AEAD00AD3362 /* Drawing */,
+				8786D61D1D56AE6F00AD3362 /* Feed */,
 				8786D6221D56AED700AD3362 /* Friends */,
 				8786D6251D56AEF600AD3362 /* Invite */,
 				8786D6241D56AEEB00AD3362 /* Sharing */,
 				8786D6231D56AEDE00AD3362 /* Profile */,
 				8786D6201D56AE9200AD3362 /* Prompt */,
 				8786D61F1D56AE8600AD3362 /* Prompts */,
-				8786D61D1D56AE6F00AD3362 /* Feed */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -484,9 +494,9 @@
 		8786D6351D56B19300AD3362 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				8786D63E1D56BA5000AD3362 /* Root */,
 				8786D63C1D56BA2C00AD3362 /* Main */,
 				8786D63D1D56BA3100AD3362 /* Onboarding */,
+				8786D63E1D56BA5000AD3362 /* Root */,
 				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
 			);
 			name = Storyboards;
@@ -512,15 +522,16 @@
 		8786D63C1D56BA2C00AD3362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				8786D6481D56BA9800AD3362 /* Comment */,
+				8786D6481D56BA9800AD3362 /* Comments */,
 				8786D6471D56BA9100AD3362 /* Common */,
 				8786D6461D56BA8C00AD3362 /* Drawing */,
+				8786D6401D56BA6D00AD3362 /* Feed */,
 				8786D6451D56BA8700AD3362 /* Friends */,
 				8786D6441D56BA8200AD3362 /* Invite */,
 				8786D6431D56BA7D00AD3362 /* Sharing */,
 				8786D6421D56BA7900AD3362 /* Prompt */,
 				8786D6411D56BA7300AD3362 /* Prompts */,
-				8786D6401D56BA6D00AD3362 /* Feed */,
+				87EE53D61D57A957005B8FB3 /* Users */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -550,6 +561,7 @@
 		8786D6401D56BA6D00AD3362 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */,
 			);
 			name = Feed;
 			sourceTree = "<group>";
@@ -579,6 +591,7 @@
 		8786D6441D56BA8200AD3362 /* Invite */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53D01D579EBB005B8FB3 /* Invite.storyboard */,
 			);
 			name = Invite;
 			sourceTree = "<group>";
@@ -586,6 +599,7 @@
 		8786D6451D56BA8700AD3362 /* Friends */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53D21D579F27005B8FB3 /* Friends.storyboard */,
 			);
 			name = Friends;
 			sourceTree = "<group>";
@@ -605,11 +619,12 @@
 			name = Common;
 			sourceTree = "<group>";
 		};
-		8786D6481D56BA9800AD3362 /* Comment */ = {
+		8786D6481D56BA9800AD3362 /* Comments */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53D41D57A53C005B8FB3 /* Comments.storyboard */,
 			);
-			name = Comment;
+			name = Comments;
 			sourceTree = "<group>";
 		};
 		8786D6491D56BAAA00AD3362 /* Welcome */ = {
@@ -681,6 +696,14 @@
 				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
 			);
 			name = Common;
+			sourceTree = "<group>";
+		};
+		87EE53D61D57A957005B8FB3 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				87EE53D71D57A96B005B8FB3 /* Users.storyboard */,
+			);
+			name = Users;
 			sourceTree = "<group>";
 		};
 		87EF7E711D447BF9001089D2 /* PaintBucket */ = {
@@ -773,6 +796,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87EE53D81D57A96B005B8FB3 /* Users.storyboard in Resources */,
 				8786D6511D56BD6E00AD3362 /* Root.storyboard in Resources */,
 				871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */,
 				8786D6611D56DC5A00AD3362 /* Sharing.storyboard in Resources */,
@@ -780,15 +804,19 @@
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
+				87EE53D11D579EBB005B8FB3 /* Invite.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
+				87EE53D31D579F27005B8FB3 /* Friends.storyboard in Resources */,
 				8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */,
 				8786D65B1D56D43500AD3362 /* BeFound.storyboard in Resources */,
 				8786D6591D56D23200AD3362 /* ChooseUsername.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
+				87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */,
 				8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,
+				87EE53DA1D57AE6A005B8FB3 /* Feed.storyboard in Resources */,
 				87DB18E71D56776800C838DD /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
