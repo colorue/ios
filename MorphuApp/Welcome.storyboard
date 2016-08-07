@@ -47,10 +47,10 @@
                                     <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                 </variation>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lh5-cm-JR3">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Lh5-cm-JR3">
                                 <rect key="frame" x="20" y="516" width="560" height="74"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBF-wO-LfH">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MBF-wO-LfH">
                                         <rect key="frame" x="192" y="0.0" width="176" height="33"/>
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -79,10 +79,10 @@
                                             <action selector="facebookButton:" destination="WmL-53-RL1" eventType="touchUpInside" id="aLh-re-uwQ"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MPF-9T-YDg">
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="MPF-9T-YDg">
                                         <rect key="frame" x="222" y="41" width="116" height="33"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGV-Xb-IJz">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VGV-Xb-IJz">
                                                 <rect key="frame" x="0.0" y="0.0" width="54" height="33"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
@@ -96,7 +96,7 @@
                                                     <segue destination="GSz-L5-sZs" kind="show" id="Q7C-dO-WxU"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaG-Q9-PfB">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QaG-Q9-PfB">
                                                 <rect key="frame" x="62" y="0.0" width="54" height="33"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="15"/>
@@ -202,7 +202,7 @@
         <!--Choose Username-->
         <scene sceneID="m3k-mv-gXe">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Choose Username" id="byO-3S-3Gz" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="ChooseUsername" referencedIdentifier="Choose Username" id="byO-3S-3Gz" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ew9-89-cua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2972" y="3419"/>
@@ -210,7 +210,7 @@
         <!--Sign Up-->
         <scene sceneID="ZIn-cU-cry">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Sign Up" id="GSz-L5-sZs" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="SignUp" referencedIdentifier="Sign Up" id="GSz-L5-sZs" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdc-si-oUs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3003.5" y="3485"/>

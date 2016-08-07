@@ -42,6 +42,9 @@
 		8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6521D56C14400AD3362 /* Welcome.storyboard */; };
 		8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6541D56CD2C00AD3362 /* SignIn.storyboard */; };
 		8786D6571D56CED100AD3362 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6561D56CED100AD3362 /* SignUp.storyboard */; };
+		8786D6591D56D23200AD3362 /* ChooseUsername.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6581D56D23200AD3362 /* ChooseUsername.storyboard */; };
+		8786D65B1D56D43500AD3362 /* BeFound.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65A1D56D43500AD3362 /* BeFound.storyboard */; };
+		8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -107,6 +110,9 @@
 		8786D6521D56C14400AD3362 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		8786D6541D56CD2C00AD3362 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		8786D6561D56CED100AD3362 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
+		8786D6581D56D23200AD3362 /* ChooseUsername.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseUsername.storyboard; sourceTree = "<group>"; };
+		8786D65A1D56D43500AD3362 /* BeFound.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeFound.storyboard; sourceTree = "<group>"; };
+		8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PeopleToFollow.storyboard; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -616,6 +622,7 @@
 		8786D64C1D56BAFD00AD3362 /* People to Follow */ = {
 			isa = PBXGroup;
 			children = (
+				8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */,
 			);
 			name = "People to Follow";
 			sourceTree = "<group>";
@@ -623,6 +630,7 @@
 		8786D64D1D56BB0400AD3362 /* Choose Username */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6581D56D23200AD3362 /* ChooseUsername.storyboard */,
 			);
 			name = "Choose Username";
 			sourceTree = "<group>";
@@ -630,6 +638,7 @@
 		8786D64E1D56BB0B00AD3362 /* Be Found */ = {
 			isa = PBXGroup;
 			children = (
+				8786D65A1D56D43500AD3362 /* BeFound.storyboard */,
 			);
 			name = "Be Found";
 			sourceTree = "<group>";
@@ -754,8 +763,11 @@
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
 				8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */,
+				8786D65B1D56D43500AD3362 /* BeFound.storyboard in Resources */,
+				8786D6591D56D23200AD3362 /* ChooseUsername.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
+				8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,
 				87DB18E71D56776800C838DD /* GoogleService-Info.plist in Resources */,
 			);
