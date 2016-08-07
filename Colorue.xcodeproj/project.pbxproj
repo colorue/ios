@@ -45,6 +45,8 @@
 		8786D6591D56D23200AD3362 /* ChooseUsername.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6581D56D23200AD3362 /* ChooseUsername.storyboard */; };
 		8786D65B1D56D43500AD3362 /* BeFound.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65A1D56D43500AD3362 /* BeFound.storyboard */; };
 		8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */; };
+		8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65E1D56DC3900AD3362 /* Drawing.storyboard */; };
+		8786D6611D56DC5A00AD3362 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6601D56DC5A00AD3362 /* Sharing.storyboard */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -113,6 +115,8 @@
 		8786D6581D56D23200AD3362 /* ChooseUsername.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ChooseUsername.storyboard; sourceTree = "<group>"; };
 		8786D65A1D56D43500AD3362 /* BeFound.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BeFound.storyboard; sourceTree = "<group>"; };
 		8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PeopleToFollow.storyboard; sourceTree = "<group>"; };
+		8786D65E1D56DC3900AD3362 /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
+		8786D6601D56DC5A00AD3362 /* Sharing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -556,6 +560,7 @@
 		8786D6431D56BA7D00AD3362 /* Sharing */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6601D56DC5A00AD3362 /* Sharing.storyboard */,
 			);
 			name = Sharing;
 			sourceTree = "<group>";
@@ -577,6 +582,7 @@
 		8786D6461D56BA8C00AD3362 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				8786D65E1D56DC3900AD3362 /* Drawing.storyboard */,
 			);
 			name = Drawing;
 			sourceTree = "<group>";
@@ -757,9 +763,11 @@
 			files = (
 				8786D6511D56BD6E00AD3362 /* Root.storyboard in Resources */,
 				871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */,
+				8786D6611D56DC5A00AD3362 /* Sharing.storyboard in Resources */,
 				8786D6571D56CED100AD3362 /* SignUp.storyboard in Resources */,
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
+				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
 				8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */,

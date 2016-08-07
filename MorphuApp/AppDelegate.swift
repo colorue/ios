@@ -81,10 +81,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor
         } else if targetController is DrawingViewController {
-            if let newVC = tabBarController.storyboard?.instantiateViewControllerWithIdentifier("DrawingViewController") {
+            
+             let newVC = UIStoryboard(name: "Drawing", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController")
                 tabBarController.presentViewController(newVC, animated: true, completion: nil)
                 return false
-            }
+        
         } else if let search = targetController as? PromptsViewController {
             let nav = search.navigationController as! NavigationController
             nav.setColors(orangeColor)
