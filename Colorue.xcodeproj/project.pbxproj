@@ -38,6 +38,10 @@
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
 		877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FA9A21D26D45700830980 /* SharingViewController.swift */; };
 		8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8786D63A1D56B40600AD3362 /* PromptCell.swift */; };
+		8786D6511D56BD6E00AD3362 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6501D56BD6E00AD3362 /* Root.storyboard */; };
+		8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6521D56C14400AD3362 /* Welcome.storyboard */; };
+		8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6541D56CD2C00AD3362 /* SignIn.storyboard */; };
+		8786D6571D56CED100AD3362 /* SignUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6561D56CED100AD3362 /* SignUp.storyboard */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -99,6 +103,10 @@
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		877FA9A21D26D45700830980 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
 		8786D63A1D56B40600AD3362 /* PromptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptCell.swift; sourceTree = "<group>"; };
+		8786D6501D56BD6E00AD3362 /* Root.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
+		8786D6521D56C14400AD3362 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
+		8786D6541D56CD2C00AD3362 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
+		8786D6561D56CED100AD3362 /* SignUp.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignUp.storyboard; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -513,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
+				8786D6501D56BD6E00AD3362 /* Root.storyboard */,
 			);
 			name = Root;
 			sourceTree = "<group>";
@@ -583,6 +592,7 @@
 		8786D6491D56BAAA00AD3362 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6521D56C14400AD3362 /* Welcome.storyboard */,
 			);
 			name = Welcome;
 			sourceTree = "<group>";
@@ -590,6 +600,7 @@
 		8786D64A1D56BAF100AD3362 /* Sign Up */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6561D56CED100AD3362 /* SignUp.storyboard */,
 			);
 			name = "Sign Up";
 			sourceTree = "<group>";
@@ -597,6 +608,7 @@
 		8786D64B1D56BAF700AD3362 /* Sign In */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6541D56CD2C00AD3362 /* SignIn.storyboard */,
 			);
 			name = "Sign In";
 			sourceTree = "<group>";
@@ -734,10 +746,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8786D6511D56BD6E00AD3362 /* Root.storyboard in Resources */,
 				871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */,
+				8786D6571D56CED100AD3362 /* SignUp.storyboard in Resources */,
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
+				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
+				8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,
