@@ -1,6 +1,6 @@
 //
 //  ProfileCell.swift
-//  Canvi
+//  Colorue
 //
 //  Created by Dylan Wight on 6/1/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.

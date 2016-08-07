@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Canvix
+//  Colorue
 //
 //  Created by Dylan Wight on 4/8/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.
@@ -82,9 +82,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             tabBarController.tabBar.tintColor = blueColor
         } else if targetController is DrawingViewController {
             
-             let newVC = UIStoryboard(name: "Drawing", bundle: nil).instantiateViewControllerWithIdentifier("DrawingViewController")
-                tabBarController.presentViewController(newVC, animated: true, completion: nil)
+            if let drawingController = R.storyboard.drawing.drawingViewController() {
+                tabBarController.presentViewController(drawingController, animated: true, completion: nil)
                 return false
+            }
         
         } else if let search = targetController as? PromptsViewController {
             let nav = search.navigationController as! NavigationController

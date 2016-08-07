@@ -1,6 +1,6 @@
 //
 //  LoadingViewController.swift
-//  Morphu
+//  Colorue
 //
 //  Created by Dylan Wight on 4/29/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.

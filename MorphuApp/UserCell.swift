@@ -1,6 +1,6 @@
 //
 //  UserTableViewCell.swift
-//  Morphu
+//  Colorue
 //
 //  Created by Dylan Wight on 5/17/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.

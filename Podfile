@@ -24,5 +24,5 @@ target 'Colorue' do
     pod 'Alamofire'
     
     pod 'Kingfisher'
-#    pod 'PaintBucket', '~> 0.1'
+    pod 'R.swift'
 end

@@ -55,7 +55,7 @@
             <objects>
                 <tableViewController id="fn1-ch-IF1" customClass="PromptViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="HcO-hc-lSF">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -235,7 +235,7 @@
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kO4-NS-DLp">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="A6S-0D-05p"/>
                                                     </constraints>
@@ -599,7 +599,7 @@
             <objects>
                 <tableViewController id="4Ba-st-mMB" customClass="WallViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="HtL-VG-g21">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -721,7 +721,7 @@
                                             </variation>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="BPK-Yy-Fth">
-                                            <rect key="frame" x="231" y="534" width="286" height="36"/>
+                                            <rect key="frame" x="231" y="534" width="277" height="36"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yze-0X-GjG">
                                                     <rect key="frame" x="0.0" y="0.0" width="90" height="36"/>
@@ -772,7 +772,7 @@
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yPj-QC-hHK">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="pek-Yh-APA"/>
                                                     </constraints>
@@ -1187,7 +1187,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="UserListViewController" id="KbN-Ld-eZt" customClass="UserListViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="qZS-12-nUw">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1228,13 +1228,13 @@
                                             <rect key="frame" x="-20" y="-20" width="40" height="40"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Teo-0d-PwZ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oJn-uJ-1Tr">
-                                                    <rect key="frame" x="0.0" y="22" width="37" height="10"/>
+                                                    <rect key="frame" x="0.0" y="26" width="38" height="11"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="8"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1369,12 +1369,10 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="CKt-Sw-2U1" kind="unwind" identifier="unwindToGroups" customClass="UIStoryboardUnwindSegueFromRight" customModule="Colorue" customModuleProvider="target" unwindAction="backToGroups:" id="rrM-BF-W9l"/>
                         <segue destination="sJS-x6-3bU" kind="show" identifier="showUser" id="L5M-dB-8WQ"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iXa-pc-yIe" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="CKt-Sw-2U1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2562" y="814.5"/>
         </scene>
@@ -1383,7 +1381,7 @@
             <objects>
                 <tableViewController id="2fO-Iw-hGF" customClass="FriendsViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="LHO-54-U74">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1421,16 +1419,16 @@
                                             </variation>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="1XG-yn-l8k">
-                                            <rect key="frame" x="-20" y="-20" width="37" height="32"/>
+                                            <rect key="frame" x="-20" y="-20" width="38" height="37"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" ambiguous="YES" text="Test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kiS-9y-gp1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="37" height="20"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="38" height="24"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Kn-IF-Nm3">
-                                                    <rect key="frame" x="0.0" y="22" width="37" height="10"/>
+                                                    <rect key="frame" x="0.0" y="26" width="38" height="11"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="8"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -1580,7 +1578,7 @@
             <objects>
                 <tableViewController id="eSl-sZ-L0p" customClass="CommentViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="PeY-4c-kJZ">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1890,12 +1888,8 @@
                             <action selector="pullRefresh:" destination="eSl-sZ-L0p" eventType="valueChanged" id="orF-0e-5a2"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <segue destination="XdB-xt-AJz" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvi" unwindAction="backToHome:" id="u97-VB-HDt"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MWw-jc-d5G" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="XdB-xt-AJz" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2580" y="1582.5"/>
         </scene>
@@ -1926,7 +1920,7 @@
             <objects>
                 <tableViewController id="sJS-x6-3bU" customClass="ProfileViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" indicatorStyle="black" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="586" sectionHeaderHeight="28" sectionFooterHeight="28" id="17H-nV-nGr">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -1982,7 +1976,7 @@
                                             <rect key="frame" x="96" y="-12" width="193" height="59"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Full Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rcc-c4-tu8">
-                                                    <rect key="frame" x="87" y="0.0" width="77" height="20"/>
+                                                    <rect key="frame" x="85" y="0.0" width="80" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="10" id="byC-jO-ssD">
                                                             <variation key="heightClass=regular-widthClass=compact" constant="17"/>
@@ -2009,19 +2003,19 @@
                                                     </variation>
                                                 </label>
                                                 <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="jL2-BB-lzC">
-                                                    <rect key="frame" x="29" y="28" width="193" height="32"/>
+                                                    <rect key="frame" x="25" y="32" width="200" height="38"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="LXB-1m-4Re">
-                                                            <rect key="frame" x="0.0" y="0.0" width="43" height="32"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="45" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Drawings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4dS-S1-BHi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A6o-9k-LBP">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2029,16 +2023,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="T8i-XY-2n7">
-                                                            <rect key="frame" x="75" y="0.0" width="43" height="32"/>
+                                                            <rect key="frame" x="78" y="0.0" width="45" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Followers" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SxE-Tg-Ss7">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qG-Hd-jyh">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2046,16 +2040,16 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sR8-CS-8xI">
-                                                            <rect key="frame" x="150" y="0.0" width="43" height="32"/>
+                                                            <rect key="frame" x="155" y="0.0" width="45" height="38"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Following" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14T-9y-3at">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="43" height="12"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="45" height="14"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cY4-yE-sak">
-                                                                    <rect key="frame" x="0.0" y="12" width="43" height="20"/>
+                                                                    <rect key="frame" x="0.0" y="14" width="45" height="24"/>
                                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -2065,7 +2059,7 @@
                                                     </subviews>
                                                 </stackView>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="US0-Qp-HTU">
-                                                    <rect key="frame" x="0.0" y="68" width="251" height="29"/>
+                                                    <rect key="frame" x="0.0" y="78" width="250" height="29"/>
                                                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="16"/>
                                                     <state key="normal" image="Follow Long">
                                                         <color key="titleColor" red="0.2784313725" green="0.066666666669999999" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2391,7 +2385,7 @@
                                                     </variation>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-Rz-OgB">
-                                                    <rect key="frame" x="152" y="0.0" width="134" height="36"/>
+                                                    <rect key="frame" x="152" y="0.0" width="125" height="36"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="140" id="Y5A-Wi-f76"/>
                                                     </constraints>
@@ -2706,12 +2700,10 @@
                         </connections>
                     </refreshControl>
                     <connections>
-                        <segue destination="Vip-gR-1Ss" kind="unwind" identifier="backToFriends" customClass="UIStoryboardUnwindSegueFromRight" customModule="Colorue" customModuleProvider="target" unwindAction="backToFriends:" id="ENJ-Wo-drW"/>
                         <segue destination="btm-no-WA5" kind="presentation" identifier="logout" modalTransitionStyle="crossDissolve" id="3ZZ-ZN-eA1"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jds-EZ-IXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="Vip-gR-1Ss" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1155" y="1543.5"/>
         </scene>
@@ -2752,7 +2744,7 @@
             <objects>
                 <tableViewController id="Iy0-4o-KD9" customClass="InviteViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="RXa-nZ-hRK">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -2868,7 +2860,7 @@
             <objects>
                 <tableViewController id="XUF-aR-H42" customClass="PromptsViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="82" sectionHeaderHeight="28" sectionFooterHeight="28" id="oEF-M0-bcS">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -3176,12 +3168,8 @@
                             <action selector="pullRefresh:" destination="XUF-aR-H42" eventType="valueChanged" id="Fo7-0l-yVs"/>
                         </connections>
                     </refreshControl>
-                    <connections>
-                        <segue destination="QhP-me-cqr" kind="unwind" identifier="backToHome" customClass="UIStoryboardUnwindSegueFromRight" customModule="Canvi" unwindAction="backToHome:" id="KRG-Fl-4eW"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z6B-lb-svZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="QhP-me-cqr" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="441" y="13.5"/>
         </scene>
@@ -3204,7 +3192,7 @@
         <image name="Upload" width="36" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="sFW-OK-Bh1"/>
+        <segue reference="Qrb-Kh-4Y9"/>
         <segue reference="zBz-Gp-Xuu"/>
         <segue reference="vFq-zO-4EH"/>
     </inferredMetricsTieBreakers>

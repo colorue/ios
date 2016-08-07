@@ -1,6 +1,6 @@
 //
 //  UIImage_UIImageColorPicker.h
-//  Canvix
+//  Colorue
 //
 //  Created by Dylan Wight on 6/5/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.

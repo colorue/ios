@@ -1,6 +1,6 @@
 //
 //  User.swift
-//  Morphu
+//  Colorue
 //
 //  Created by Dylan Wight on 4/21/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.

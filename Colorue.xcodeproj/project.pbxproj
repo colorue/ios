@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
+		8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746362B1D56E3D5000BD73E /* R.generated.swift */; };
 		875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */; };
 		875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactStore.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
@@ -79,6 +80,8 @@
 		872E82E11D01296F005A56A3 /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = MorphuApp/Info.plist; sourceTree = "<group>"; };
+		8746362B1D56E3D5000BD73E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
+		8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		875B4E0A1D15E443004F4CD2 /* ContactStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
@@ -126,7 +129,6 @@
 		87AA5CFA1D088CAC00D2E7B5 /* playtime.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = playtime.ttf; sourceTree = "<group>"; };
 		87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingListViewController.swift; sourceTree = "<group>"; };
-		87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87DB18E11D56326400C838DD /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		87DB18E41D5634BF00C838DD /* PromptsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptsViewController.swift; sourceTree = "<group>"; };
@@ -190,6 +192,15 @@
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};
+		8746362D1D56E636000BD73E /* Objective-C */ = {
+			isa = PBXGroup;
+			children = (
+				8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */,
+				87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */,
+			);
+			name = "Objective-C";
+			sourceTree = "<group>";
+		};
 		8763D3161CEE241000E3D528 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,11 +248,11 @@
 			children = (
 				8786D64F1D56BB3600AD3362 /* Info */,
 				87EF7E711D447BF9001089D2 /* PaintBucket */,
+				8746362B1D56E3D5000BD73E /* R.generated.swift */,
 				8763D2F71CEE229C00E3D528 /* ColorConstants.swift */,
 				8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */,
 				8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */,
-				87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */,
-				87BB3C521D04B5D500662BA1 /* Canvix-Bridging-Header.h */,
+				8746362D1D56E636000BD73E /* Objective-C */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -698,6 +709,7 @@
 			buildConfigurationList = 873AFA1F1CED7697006FD34A /* Build configuration list for PBXNativeTarget "Colorue" */;
 			buildPhases = (
 				8096E78B139EE4586AD7A003 /* 📦 Check Pods Manifest.lock */,
+				874636271D56E0E2000BD73E /* ShellScript */,
 				873AFA091CED7697006FD34A /* Sources */,
 				873AFA0A1CED7697006FD34A /* Frameworks */,
 				873AFA0B1CED7697006FD34A /* Resources */,
@@ -812,6 +824,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Replace this path with the path to the key you just downloaded\nJSON_FILE=/Users/DylanWight/Desktop/Colorue/morphua/Colorue-da64083b8488.json\n\n# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:881756450601:ios:d62930c5fb1f8d6f\n\ndefaults write com.google.SymbolUpload version -integer 1   # creates file if it does not exist\nJSON=$(cat \"${JSON_FILE}\")\n/usr/bin/plutil -replace \"app_${GOOGLE_APP_ID//:/_}\" -json \"${JSON}\" \"$HOME/Library/Preferences/com.google.SymbolUpload.plist\"\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym";
 		};
+		874636271D56E0E2000BD73E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" \"$SRCROOT\"";
+		};
 		CB89312FB0493140F375FFF3 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -853,6 +878,7 @@
 				8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */,
 				8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
+				8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */,
 				87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				87F754F01D187184005B4A14 /* InviteCell.swift in Sources */,
