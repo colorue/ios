@@ -39,19 +39,9 @@ class PromptsViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell")! as! CommentCell
-        
-        let prompt = api.getPrompts()[indexPath.row]
-        cell.username.text = prompt.user.username
-        cell.profileImage.image = prompt.user.profileImage
-        cell.timeStamp.text = prompt.getTimeSinceSent()
-        cell.commentText.text = prompt.text
-        
-        cell.userButton.tag = indexPath.row
-        
-//        cell.comment = comment
-        cell.delagate = self
-        
+        let cell = tableView.dequeueReusableCellWithIdentifier("PromptCell")! as! PromptCell
+        cell.prompt = api.getPrompts()[indexPath.row]
+        cell.buttonTag = indexPath.row
         return cell
     }
     
@@ -59,7 +49,7 @@ class PromptsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! TextInputCell
         cell.delagate = self
         
-        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
+        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
         separatorU.backgroundColor = UIColor.lightGrayColor()
         cell.addSubview(separatorU)
         
@@ -76,7 +66,7 @@ class PromptsViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if let controller = segue.destinationViewController as? PromptViewController,
             let row = tableView.indexPathForSelectedRow?.row {
-            controller.tintColor = self.tintColor
+            controller.tintColor = tintColor
             controller.prompt = api.getPrompts()[row]
         }
     }

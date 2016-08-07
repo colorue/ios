@@ -1,22 +1,22 @@
 //
-//  InboxDrawingCell.swift
-//  Morphu
+//  PromptTableViewCell.swift
+//  Colorue
 //
-//  Created by Dylan Wight on 4/8/16.
+//  Created by Dylan Wight on 8/6/16.
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
 import UIKit
 
-class CommentCell: UITableViewCell {
-    var comment: Comment? {
+class PromptCell: UITableViewCell {
+    var prompt: Prompt? {
         didSet {
-            guard let comment = comment else { return }
+            guard let prompt = prompt else { return }
             
-            username?.text = comment.user.username
-            profileImage?.image = comment.user.profileImage
-            timeStamp?.text = comment.getTimeSinceSent()
-            commentText?.text = comment.text
+            username?.text = prompt.user.username
+            profileImage?.image = prompt.user.profileImage
+            timeStamp?.text = prompt.getTimeSinceSent()
+            commentText?.text = prompt.text
         }
     }
     

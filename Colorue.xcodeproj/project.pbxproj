@@ -37,6 +37,7 @@
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
 		877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FA9A21D26D45700830980 /* SharingViewController.swift */; };
+		8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8786D63A1D56B40600AD3362 /* PromptCell.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -97,6 +98,7 @@
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		877FA9A21D26D45700830980 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
+		8786D63A1D56B40600AD3362 /* PromptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptCell.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -149,10 +151,6 @@
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
-				87DB18E61D56776800C838DD /* GoogleService-Info.plist */,
-				872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */,
-				873AFA1C1CED7697006FD34A /* Info.plist */,
-				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
@@ -188,6 +186,7 @@
 			children = (
 				8786D62D1D56AF8700AD3362 /* Main */,
 				8763D3241CEE255A00E3D528 /* Onboarding */,
+				8786D61E1D56AE7D00AD3362 /* Root */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -218,6 +217,7 @@
 		8763D31F1CEE247F00E3D528 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8786D64F1D56BB3600AD3362 /* Info */,
 				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				8763D2F71CEE229C00E3D528 /* ColorConstants.swift */,
 				8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */,
@@ -231,11 +231,11 @@
 		8763D3241CEE255A00E3D528 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				8786D62C1D56AF6400AD3362 /* People to Follow */,
 				8786D62B1D56AF5C00AD3362 /* Be Found */,
 				8786D62A1D56AF5200AD3362 /* Choose Username */,
-				8786D6291D56AF4900AD3362 /* Sign Up */,
+				8786D62C1D56AF6400AD3362 /* People to Follow */,
 				8786D6281D56AF4100AD3362 /* Sign In */,
+				8786D6291D56AF4900AD3362 /* Sign Up */,
 				8786D6271D56AF3700AD3362 /* Welcome */,
 			);
 			name = Onboarding;
@@ -261,6 +261,7 @@
 		8786D61F1D56AE8600AD3362 /* Prompts */ = {
 			isa = PBXGroup;
 			children = (
+				8786D6391D56B3EC00AD3362 /* Cells */,
 				87DB18E41D5634BF00C838DD /* PromptsViewController.swift */,
 			);
 			name = Prompts;
@@ -388,7 +389,6 @@
 				8786D6231D56AEDE00AD3362 /* Profile */,
 				8786D6201D56AE9200AD3362 /* Prompt */,
 				8786D61F1D56AE8600AD3362 /* Prompts */,
-				8786D61E1D56AE7D00AD3362 /* Root */,
 				8786D61D1D56AE6F00AD3362 /* Feed */,
 			);
 			name = Main;
@@ -455,7 +455,9 @@
 		8786D6351D56B19300AD3362 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
+				8786D63E1D56BA5000AD3362 /* Root */,
+				8786D63C1D56BA2C00AD3362 /* Main */,
+				8786D63D1D56BA3100AD3362 /* Onboarding */,
 				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
 			);
 			name = Storyboards;
@@ -468,6 +470,168 @@
 				8763D31A1CEE244500E3D528 /* API */,
 			);
 			name = SDK;
+			sourceTree = "<group>";
+		};
+		8786D6391D56B3EC00AD3362 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8786D63A1D56B40600AD3362 /* PromptCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		8786D63C1D56BA2C00AD3362 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				8786D6481D56BA9800AD3362 /* Comment */,
+				8786D6471D56BA9100AD3362 /* Common */,
+				8786D6461D56BA8C00AD3362 /* Drawing */,
+				8786D6451D56BA8700AD3362 /* Friends */,
+				8786D6441D56BA8200AD3362 /* Invite */,
+				8786D6431D56BA7D00AD3362 /* Sharing */,
+				8786D6421D56BA7900AD3362 /* Prompt */,
+				8786D6411D56BA7300AD3362 /* Prompts */,
+				8786D6401D56BA6D00AD3362 /* Feed */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		8786D63D1D56BA3100AD3362 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8786D64E1D56BB0B00AD3362 /* Be Found */,
+				8786D64D1D56BB0400AD3362 /* Choose Username */,
+				8786D64C1D56BAFD00AD3362 /* People to Follow */,
+				8786D64B1D56BAF700AD3362 /* Sign In */,
+				8786D64A1D56BAF100AD3362 /* Sign Up */,
+				8786D6491D56BAAA00AD3362 /* Welcome */,
+			);
+			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		8786D63E1D56BA5000AD3362 /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
+			);
+			name = Root;
+			sourceTree = "<group>";
+		};
+		8786D6401D56BA6D00AD3362 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Feed;
+			sourceTree = "<group>";
+		};
+		8786D6411D56BA7300AD3362 /* Prompts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Prompts;
+			sourceTree = "<group>";
+		};
+		8786D6421D56BA7900AD3362 /* Prompt */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Prompt;
+			sourceTree = "<group>";
+		};
+		8786D6431D56BA7D00AD3362 /* Sharing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Sharing;
+			sourceTree = "<group>";
+		};
+		8786D6441D56BA8200AD3362 /* Invite */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Invite;
+			sourceTree = "<group>";
+		};
+		8786D6451D56BA8700AD3362 /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Friends;
+			sourceTree = "<group>";
+		};
+		8786D6461D56BA8C00AD3362 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
+		8786D6471D56BA9100AD3362 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		8786D6481D56BA9800AD3362 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Comment;
+			sourceTree = "<group>";
+		};
+		8786D6491D56BAAA00AD3362 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Welcome;
+			sourceTree = "<group>";
+		};
+		8786D64A1D56BAF100AD3362 /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Sign Up";
+			sourceTree = "<group>";
+		};
+		8786D64B1D56BAF700AD3362 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Sign In";
+			sourceTree = "<group>";
+		};
+		8786D64C1D56BAFD00AD3362 /* People to Follow */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "People to Follow";
+			sourceTree = "<group>";
+		};
+		8786D64D1D56BB0400AD3362 /* Choose Username */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Choose Username";
+			sourceTree = "<group>";
+		};
+		8786D64E1D56BB0B00AD3362 /* Be Found */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Be Found";
+			sourceTree = "<group>";
+		};
+		8786D64F1D56BB3600AD3362 /* Info */ = {
+			isa = PBXGroup;
+			children = (
+				87DB18E61D56776800C838DD /* GoogleService-Info.plist */,
+				872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */,
+				873AFA1C1CED7697006FD34A /* Info.plist */,
+				871FFCCE1D2564E80098B428 /* AirshipConfig.plist */,
+			);
+			name = Info;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		87AFB24C1D1C58B40016FC59 /* Common */ = {
@@ -660,6 +824,7 @@
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
+				8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */,
 				87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
 				879BCC9E1CF4C4A000CD95E7 /* TextInputCell.swift in Sources */,

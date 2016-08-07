@@ -18,7 +18,6 @@ class CommentViewController: UITableViewController {
     
     private var writeCommentCell: TextInputCell?
     
-    
     func setDrawingInstance(drawing: Drawing) {
         self.drawingInstance = drawing
         self.tableView.reloadData()
@@ -31,40 +30,19 @@ class CommentViewController: UITableViewController {
         tableView.backgroundColor = backgroundColor
     }
     
-    override func viewDidAppear(animated: Bool) {
-
-        super.viewDidAppear(animated)
-        self.tableView.reloadData()
-    }
-    
     // MARK: - Table view data source
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let drawing = drawingInstance {
-            return drawing.getComments().count
-        } else {
-            return 0
-        }
+        return drawingInstance?.getComments().count ?? 0
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell")! as! CommentCell
-        
-        let comment = drawingInstance!.getComments()[indexPath.row]
-        cell.username.text = comment.user.username
-        cell.profileImage.image = comment.user.profileImage
-        cell.timeStamp.text = comment.getTimeSinceSent()
-        cell.commentText.text = comment.text
-        
-        cell.userButton.tag = indexPath.row
-        
-        cell.comment = comment
-        cell.delagate = self
-
-
+        cell.comment = drawingInstance?.getComments()[indexPath.row]
+        cell.buttonTag = indexPath.row
         return cell
     }
     
