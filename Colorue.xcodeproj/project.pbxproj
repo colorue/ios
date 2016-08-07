@@ -14,7 +14,7 @@
 		875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactStore.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
 		87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE71D0786FF000BBCC5 /* InviteViewController.swift */; };
-		8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* Main.storyboard */; };
+		8763D2B91CEE21BC00E3D528 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
 		8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C01CEE226700E3D528 /* WallViewController.swift */; };
@@ -72,6 +72,9 @@
 		87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D41D57A53C005B8FB3 /* Comments.storyboard */; };
 		87EE53D81D57A96B005B8FB3 /* Users.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D71D57A96B005B8FB3 /* Users.storyboard */; };
 		87EE53DA1D57AE6A005B8FB3 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */; };
+		87EE53DC1D57B4A7005B8FB3 /* Prompts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */; };
+		87EE53DE1D57B643005B8FB3 /* Prompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */; };
+		87EE53E11D57BAF2005B8FB3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
@@ -91,7 +94,7 @@
 		875B4E0A1D15E443004F4CD2 /* ContactStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		87619AE71D0786FF000BBCC5 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
-		8763D2B81CEE21BC00E3D528 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		8763D2C01CEE226700E3D528 /* WallViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WallViewController.swift; sourceTree = "<group>"; };
@@ -149,6 +152,9 @@
 		87EE53D41D57A53C005B8FB3 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
 		87EE53D71D57A96B005B8FB3 /* Users.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Users.storyboard; sourceTree = "<group>"; };
 		87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
+		87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompts.storyboard; sourceTree = "<group>"; };
+		87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompt.storyboard; sourceTree = "<group>"; };
+		87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
@@ -497,7 +503,6 @@
 				8786D63C1D56BA2C00AD3362 /* Main */,
 				8786D63D1D56BA3100AD3362 /* Onboarding */,
 				8786D63E1D56BA5000AD3362 /* Root */,
-				8763D2B81CEE21BC00E3D528 /* Main.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -523,14 +528,15 @@
 			isa = PBXGroup;
 			children = (
 				8786D6481D56BA9800AD3362 /* Comments */,
-				8786D6471D56BA9100AD3362 /* Common */,
 				8786D6461D56BA8C00AD3362 /* Drawing */,
 				8786D6401D56BA6D00AD3362 /* Feed */,
 				8786D6451D56BA8700AD3362 /* Friends */,
 				8786D6441D56BA8200AD3362 /* Invite */,
 				8786D6431D56BA7D00AD3362 /* Sharing */,
+				87EE53DF1D57BA0A005B8FB3 /* Profile */,
 				8786D6421D56BA7900AD3362 /* Prompt */,
 				8786D6411D56BA7300AD3362 /* Prompts */,
+				87EE53E21D57BE69005B8FB3 /* Tab Bar */,
 				87EE53D61D57A957005B8FB3 /* Users */,
 			);
 			name = Main;
@@ -569,6 +575,7 @@
 		8786D6411D56BA7300AD3362 /* Prompts */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */,
 			);
 			name = Prompts;
 			sourceTree = "<group>";
@@ -576,6 +583,7 @@
 		8786D6421D56BA7900AD3362 /* Prompt */ = {
 			isa = PBXGroup;
 			children = (
+				87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */,
 			);
 			name = Prompt;
 			sourceTree = "<group>";
@@ -610,13 +618,6 @@
 				8786D65E1D56DC3900AD3362 /* Drawing.storyboard */,
 			);
 			name = Drawing;
-			sourceTree = "<group>";
-		};
-		8786D6471D56BA9100AD3362 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Common;
 			sourceTree = "<group>";
 		};
 		8786D6481D56BA9800AD3362 /* Comments */ = {
@@ -704,6 +705,22 @@
 				87EE53D71D57A96B005B8FB3 /* Users.storyboard */,
 			);
 			name = Users;
+			sourceTree = "<group>";
+		};
+		87EE53DF1D57BA0A005B8FB3 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
+		87EE53E21D57BE69005B8FB3 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */,
+			);
+			name = "Tab Bar";
 			sourceTree = "<group>";
 		};
 		87EF7E711D447BF9001089D2 /* PaintBucket */ = {
@@ -804,6 +821,7 @@
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
 				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
+				87EE53DC1D57B4A7005B8FB3 /* Prompts.storyboard in Resources */,
 				87EE53D11D579EBB005B8FB3 /* Invite.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
@@ -812,7 +830,9 @@
 				8786D65B1D56D43500AD3362 /* BeFound.storyboard in Resources */,
 				8786D6591D56D23200AD3362 /* ChooseUsername.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
-				8763D2B91CEE21BC00E3D528 /* Main.storyboard in Resources */,
+				87EE53E11D57BAF2005B8FB3 /* Profile.storyboard in Resources */,
+				8763D2B91CEE21BC00E3D528 /* TabBar.storyboard in Resources */,
+				87EE53DE1D57B643005B8FB3 /* Prompt.storyboard in Resources */,
 				87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */,
 				8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,

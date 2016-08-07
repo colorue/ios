@@ -203,7 +203,7 @@
         <!--Profile-->
         <scene sceneID="9gJ-Jg-exw">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Profile" id="Wwf-R2-FFk" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="Profile" id="Wwf-R2-FFk" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="31C-2t-gaK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3321" y="1657"/>
