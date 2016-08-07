@@ -22,7 +22,6 @@ enum KeyboardToolState: Int {
 }
 
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
-    let selectorWidth: CGFloat
     let currentColorView = UIView()
     let brushSizeSlider = UISlider()
     let undoButton = UIButton()
@@ -40,8 +39,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     var state: KeyboardToolState = .none {
         didSet {
-            self.dropperButton.selected = state == .colorDropper
-            self.paintBucketButton.selected = state == .paintBucket
+            dropperButton.selected = state == .colorDropper
+            paintBucketButton.selected = state == .paintBucket
         }
     }
     
@@ -53,27 +52,27 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         case Low = 0.3
     }
 
-    let delagate: ColorKeyboardDelagate
+    var delagate: ColorKeyboardDelagate?
     
-    init (frame: CGRect, delagate: ColorKeyboardDelagate) {
-        self.selectorWidth = frame.width/10
-        self.delagate = delagate
+    override init (frame: CGRect) {
         super.init(frame : frame)
         displayKeyboard()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        fatalError("NSCoding not supported")
+        super.init(coder: aDecoder)
+        displayKeyboard()
     }
     
     func displayKeyboard() {
+        let selectorWidth = frame.width/10
         
         for tag in 0...9 {
-            self.addSubview(colorButton(withColor: colors[tag], tag: tag))
+            addSubview(colorButton(withColor: colors[tag], tag: tag, selectorWidth: selectorWidth))
         }
         
-        currentColorView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: selectorWidth)
-        self.addSubview(currentColorView)
+        currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: selectorWidth)
+        addSubview(currentColorView)
         
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
@@ -81,8 +80,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         brushSizeSlider.maximumValue = pow(50, 1/sliderConstant)
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         
-        brushSizeSlider.center = CGPoint(x: self.frame.width/2.0, y: selectorWidth/2.0)
-        self.addSubview(brushSizeSlider)
+        brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
+        addSubview(brushSizeSlider)
         
         let buttonSize = selectorWidth
         
@@ -91,14 +90,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
         undoButton.frame = CGRect(x: buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
-        self.addSubview(undoButton)
+        addSubview(undoButton)
         
         trashButton.setImage(R.image.trashIcon(), forState: .Normal)
         trashButton.tintColor = .whiteColor()
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
         trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         trashButton.showsTouchWhenHighlighted = true
-        self.addSubview(trashButton)
+        addSubview(trashButton)
         
         paintBucketButton.setImage(R.image.paintBucket(), forState: .Normal)
         paintBucketButton.setImage(R.image.paintBucketActive(), forState: .Selected)
@@ -106,12 +105,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), forControlEvents: .TouchUpInside)
         paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         paintBucketButton.showsTouchWhenHighlighted = true
-        self.addSubview(paintBucketButton)
+        addSubview(paintBucketButton)
         
         paintBucketSpinner.hidesWhenStopped = true
         paintBucketSpinner.center = paintBucketButton.center
         paintBucketSpinner.color = .whiteColor()
-        self.addSubview(paintBucketSpinner)
+        addSubview(paintBucketSpinner)
         
         dropperButton.setImage(R.image.dropper(), forState: .Normal)
         dropperButton.setImage(R.image.dropperActive(), forState: .Selected)
@@ -119,29 +118,29 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
         dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
-        self.addSubview(dropperButton)
+        addSubview(dropperButton)
         
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
         alphaButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
-        self.addSubview(alphaButton)
+        addSubview(alphaButton)
 
-        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 0.5))
+        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
         separatorU.backgroundColor = UIColor.lightGrayColor()
-        self.addSubview(separatorU)
+        addSubview(separatorU)
         
-        self.progressBar.frame = CGRect(x: 0, y: 0, width: self.frame.width/2, height: 0)
-        self.progressBar.center = self.currentColorView.center
-        self.progressBar.progress = 0.0
-        self.progressBar.hidden = true
-        self.addSubview(progressBar)
+        progressBar.frame = CGRect(x: 0, y: 0, width: frame.width/2, height: 0)
+        progressBar.center = currentColorView.center
+        progressBar.progress = 0.0
+        progressBar.hidden = true
+        addSubview(progressBar)
         
         if prefs.boolForKey(Prefs.saved) {
             let red = CGFloat(prefs.floatForKey(Prefs.colorRed))
             let green = CGFloat(prefs.floatForKey(Prefs.colorGreen))
             let blue = CGFloat(prefs.floatForKey(Prefs.colorBlue))
-            let alpha = CGFloat(prefs.floatForKey(Prefs.colorBlue))
+            let alpha = CGFloat(prefs.floatForKey(Prefs.colorAlpha))
             
             switch (round(1000 * alpha) / 1000) {
             case AlphaType.Low.rawValue:
@@ -156,7 +155,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             }
 
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-            brushSizeSlider.value = pow(prefs.floatForKey(Prefs.brushSize), 1/self.sliderConstant)
+            brushSizeSlider.value = pow(prefs.floatForKey(Prefs.brushSize), 1/sliderConstant)
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
@@ -166,7 +165,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         updateButtonColor()
     }
     
-    private func colorButton(withColor color:UIColor, tag: Int) -> UIButton {
+    private func colorButton(withColor color:UIColor, tag: Int, selectorWidth: CGFloat) -> UIButton {
         let newButton = UIButton()
         newButton.backgroundColor = color
         newButton.tag = tag
@@ -182,12 +181,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func undo(sender: UIButton) {
-        delagate.undo()
+        delagate?.undo()
         state = .none
     }
     
     @objc private func trash(sender: UIButton) {
-        delagate.trash()
+        delagate?.trash()
         state = .none
     }
     
@@ -202,30 +201,30 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     @objc private func switchAlpha(sender: UIButton) {
         switch(currentAlpha) {
         case .High:
-            self.currentAlpha = .Medium
+            currentAlpha = .Medium
             alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
         case .Medium:
-            self.currentAlpha = .Low
+            currentAlpha = .Low
             alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
         case .Low:
-            self.currentAlpha = .High
+            currentAlpha = .High
             alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
         }
         state = .none
-        self.delagate.switchAlphaHowTo()
+        delagate?.switchAlphaHowTo()
     }
     
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
-        self.currentColorView.backgroundColor = colors[sender.view!.tag]
-        self.updateButtonColor()
+        currentColorView.backgroundColor = colors[sender.view!.tag]
+        updateButtonColor()
         state = .none
     }
     
     @objc private func buttonTapped(sender: UIButton) {
         let percentMix: CGFloat = 0.1
-        self.currentColorView.backgroundColor = self.blendColor(self.currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
+        currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
 
-        self.updateButtonColor()
+        updateButtonColor()
         state = .none
     }
     
@@ -236,7 +235,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func getCurrentColor() -> UIColor {
-        return self.currentColorView.backgroundColor!
+        return currentColorView.backgroundColor!
     }
     
     func getCurrentBrushSize() -> Float {
@@ -244,16 +243,16 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func getAlpha() -> CGFloat? {
-        return self.currentAlpha.rawValue
+        return currentAlpha.rawValue
     }
     
     func setAlphaHigh() {
-        self.currentAlpha = .High
+        currentAlpha = .High
         alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
     }
     
     func setColor(color: UIColor) {
-        self.setCurrentColor(color, animationTime: 0.5)
+        setCurrentColor(color, animationTime: 0.5)
     }
     
     private func setCurrentColor(color: UIColor, animationTime: Double) {
@@ -320,7 +319,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func uploadingFailed() {
-        self.progressBar.progress = 0.0
+        progressBar.progress = 0.0
         undoButton.hidden = false
         trashButton.hidden = false
         dropperButton.hidden = false

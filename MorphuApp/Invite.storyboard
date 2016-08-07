@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="X3q-CP-njy">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -45,7 +45,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NU-vA-OFh">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                            <rect key="frame" x="8" y="10" width="532" height="24"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="sFV-Gh-lVX"/>
                                             </constraints>
@@ -62,8 +62,8 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Invite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAq-fF-Nch">
-                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAq-fF-Nch">
+                                            <rect key="frame" x="548" y="13" width="44" height="17"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="44" id="xyk-Wu-vmC">
                                                     <variation key="heightClass=regular-widthClass=compact" constant="35"/>
@@ -72,16 +72,8 @@
                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" red="0.0" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="xyk-Wu-vmC"/>
-                                                </mask>
-                                            </variation>
                                             <variation key="heightClass=regular-widthClass=compact" misplaced="YES">
                                                 <rect key="frame" x="357" y="15" width="35" height="14"/>
-                                                <mask key="constraints">
-                                                    <include reference="xyk-Wu-vmC"/>
-                                                </mask>
                                             </variation>
                                         </label>
                                     </subviews>
@@ -89,39 +81,10 @@
                                         <constraint firstItem="VAq-fF-Nch" firstAttribute="leading" secondItem="4NU-vA-OFh" secondAttribute="trailing" constant="8" id="7Hf-1Y-gaV"/>
                                         <constraint firstItem="4NU-vA-OFh" firstAttribute="top" secondItem="5ry-MQ-SaJ" secondAttribute="topMargin" constant="2" id="DsG-fw-0BW"/>
                                         <constraint firstItem="4NU-vA-OFh" firstAttribute="leading" secondItem="5ry-MQ-SaJ" secondAttribute="leadingMargin" id="Lyn-4b-4BT"/>
-                                        <constraint firstItem="4NU-vA-OFh" firstAttribute="centerY" secondItem="5ry-MQ-SaJ" secondAttribute="centerY" id="Sxa-Lc-AeO"/>
                                         <constraint firstItem="VAq-fF-Nch" firstAttribute="centerY" secondItem="5ry-MQ-SaJ" secondAttribute="centerY" id="W0i-iA-b2J"/>
                                         <constraint firstItem="VAq-fF-Nch" firstAttribute="trailing" secondItem="5ry-MQ-SaJ" secondAttribute="trailingMargin" id="dJj-LD-rgN"/>
                                         <constraint firstAttribute="bottomMargin" secondItem="4NU-vA-OFh" secondAttribute="bottom" constant="1" id="iws-w4-iDG"/>
                                     </constraints>
-                                    <variation key="default">
-                                        <mask key="subviews">
-                                            <exclude reference="4NU-vA-OFh"/>
-                                        </mask>
-                                        <mask key="constraints">
-                                            <exclude reference="Lyn-4b-4BT"/>
-                                            <exclude reference="iws-w4-iDG"/>
-                                            <exclude reference="Sxa-Lc-AeO"/>
-                                            <exclude reference="DsG-fw-0BW"/>
-                                            <exclude reference="7Hf-1Y-gaV"/>
-                                            <exclude reference="dJj-LD-rgN"/>
-                                            <exclude reference="W0i-iA-b2J"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=compact">
-                                        <mask key="subviews">
-                                            <include reference="4NU-vA-OFh"/>
-                                        </mask>
-                                        <mask key="constraints">
-                                            <include reference="Lyn-4b-4BT"/>
-                                            <include reference="iws-w4-iDG"/>
-                                            <include reference="Sxa-Lc-AeO"/>
-                                            <include reference="DsG-fw-0BW"/>
-                                            <include reference="7Hf-1Y-gaV"/>
-                                            <include reference="dJj-LD-rgN"/>
-                                            <include reference="W0i-iA-b2J"/>
-                                        </mask>
-                                    </variation>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="contactName" destination="4NU-vA-OFh" id="WX6-qQ-r1O"/>

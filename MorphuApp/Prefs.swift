@@ -9,14 +9,18 @@
 import Foundation
 
 struct Prefs {
+    
+    // MARK: Save Drawing State
+    
     static let colorRed = "colorRed"
     static let colorGreen = "colorGreen"
-    static let colorBlue = "colorRed"
+    static let colorBlue = "colorBlue"
     static let colorAlpha = "colorAlpha"
-    
     static let brushSize = "brushSize"
-    static let drawing = "drawing"
-    
+    static let savedDrawing = "savedDrawing"
     static let saved = "saved"
+    
+    // MARK: Tutorials
+    
 
 }

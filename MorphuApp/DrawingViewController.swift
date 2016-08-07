@@ -30,14 +30,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let logo = UIImage(named: "Logo Inactive")!
+        let logo = R.image.logoInactive()
         let imageView = UIImageView(image:logo)
         imageView.tintColor = blackColor
         self.navigationItem.titleView = imageView
 
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
         
-        let chevron = UIImage(named: "ChevronDown")!.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+        let chevron = R.image.chevronDown()
         backButton.tintColor = blackColor
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, forState: UIControlState.Normal)
@@ -50,21 +50,25 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
         
-        if prefs.boolForKey("saved") {
+        if prefs.boolForKey(Prefs.saved) {
             if baseImage == nil {
-                if let savedDrawing = prefs.stringForKey("savedDrawing") {
+                if let savedDrawing = prefs.stringForKey(Prefs.savedDrawing) {
                     baseImage = UIImage.fromBase64(savedDrawing)
                 }
             }
         }
         
-        let canvas = CanvasView(frame: canvasFrame, delagate: self, baseImage: baseImage)
+        let canvas = CanvasView(frame: canvasFrame)
+        canvas.delagate = self
+        canvas.baseDrawing = baseImage
         
         self.view.addSubview(canvas)
         self.canvas = canvas
         
         let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight)
-        let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame, delagate: self)
+        let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame)
+        colorKeyboard.delagate = self
+        
         self.view.addSubview(colorKeyboard)
         self.colorKeyboard = colorKeyboard
         
@@ -208,10 +212,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func postCallback(uploaded: Bool) {
         if uploaded {
-            prefs.setValue(false, forKey: "saved")
+            prefs.setValue(false, forKey: Prefs.saved)
 
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            self.performSegueWithIdentifier("saveToHome", sender: self)
+            self.performSegueWithIdentifier(R.segue.drawingViewController.saveToHome, sender: self)
         } else {
             self.colorKeyboard!.uploadingFailed()
             self.view.userInteractionEnabled = true
@@ -226,7 +230,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.Alert)
             firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alert in
                 NSNotificationCenter.defaultCenter().removeObserver(self)
-                self.performSegueWithIdentifier("backToHome", sender: self)
+                self.performSegueWithIdentifier(R.segue.drawingViewController.backToHome, sender: self)
             }))
             firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
 
@@ -234,16 +238,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             prefs.setValue(true, forKey: "firstCloseCanvas")
         } else {
             NSNotificationCenter.defaultCenter().removeObserver(self)
-            self.performSegueWithIdentifier("backToHome", sender: self)
+            self.performSegueWithIdentifier(R.segue.drawingViewController.backToHome, sender: self)
         }
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "saveToHome" {
-            let targetController = segue.destinationViewController as! WallViewController
-            targetController.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-        } else if  segue.identifier == "toShare" {
-            let dvc = segue.destinationViewController as! SharingViewController
+            let targetController = segue.destinationViewController as? WallViewController
+            targetController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        } else if let dvc = segue.destinationViewController as? SharingViewController {
+            
             let controller = dvc.popoverPresentationController
             if let controller = controller {
                 controller.delegate = self
@@ -268,21 +272,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func appMovedToBackground() {
         self.save()
         self.hideUnderFingerView()
-        
-//        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     private func save() {
-        
         let color = self.colorKeyboard?.getCurrentColor()
-        
-        prefs.setValue(color?.coreImageColor!.red, forKey: "colorRed")
-        prefs.setValue(color?.coreImageColor!.green, forKey: "colorGreen")
-        prefs.setValue(color?.coreImageColor!.blue, forKey: "colorBlue")
-        prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: "brushSize")
-        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: "savedDrawing")
-        
-        prefs.setValue(colorKeyboard?.getAlpha(), forKey: "alpha")
+        prefs.setValue(color?.coreImageColor!.red, forKey: Prefs.colorRed)
+        prefs.setValue(color?.coreImageColor!.green, forKey: Prefs.colorGreen)
+        prefs.setValue(color?.coreImageColor!.blue, forKey: Prefs.colorBlue)
+        prefs.setValue(colorKeyboard?.getAlpha(), forKey: Prefs.colorAlpha)
+        prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: Prefs.brushSize)
+        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
     }
     
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

@@ -20,7 +20,7 @@
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Morphu Brand" translatesAutoresizingMaskIntoConstraints="NO" id="Gxs-Ak-voR">
                                 <rect key="frame" x="0.0" y="-200" width="600" height="1000"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="csA-Su-Yz1">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="csA-Su-Yz1">
                                 <rect key="frame" x="282" y="50" width="37" height="37"/>
                                 <color key="color" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             </activityIndicatorView>
@@ -28,29 +28,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="Gxs-Ak-voR" secondAttribute="trailing" constant="-20" id="Ou0-Em-tPm"/>
-                            <constraint firstItem="tNd-Lh-7Py" firstAttribute="top" secondItem="csA-Su-Yz1" secondAttribute="bottom" constant="30" id="PoX-ws-3V3"/>
-                            <constraint firstItem="tNd-Lh-7Py" firstAttribute="top" secondItem="csA-Su-Yz1" secondAttribute="bottom" constant="30" id="Y2S-MG-ESI"/>
                             <constraint firstItem="Gxs-Ak-voR" firstAttribute="centerY" secondItem="yyg-RT-bch" secondAttribute="centerY" id="htr-pO-wSy"/>
                             <constraint firstItem="csA-Su-Yz1" firstAttribute="top" secondItem="O97-Qr-ota" secondAttribute="bottom" constant="30" id="jSL-ao-ydS"/>
                             <constraint firstItem="csA-Su-Yz1" firstAttribute="centerX" secondItem="yyg-RT-bch" secondAttribute="centerX" id="kHp-KA-3DU"/>
                             <constraint firstItem="Gxs-Ak-voR" firstAttribute="leading" secondItem="yyg-RT-bch" secondAttribute="leadingMargin" constant="-20" id="kKD-g7-L6c"/>
-                            <constraint firstItem="csA-Su-Yz1" firstAttribute="top" secondItem="O97-Qr-ota" secondAttribute="bottom" constant="30" id="rch-8u-IPx"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="jSL-ao-ydS"/>
-                                <exclude reference="rch-8u-IPx"/>
-                                <exclude reference="PoX-ws-3V3"/>
-                            </mask>
-                        </variation>
-                        <variation key="heightClass=regular-widthClass=compact">
-                            <mask key="constraints">
-                                <include reference="jSL-ao-ydS"/>
-                                <exclude reference="rch-8u-IPx"/>
-                                <exclude reference="PoX-ws-3V3"/>
-                                <exclude reference="Y2S-MG-ESI"/>
-                            </mask>
-                        </variation>
                     </view>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>

@@ -37,7 +37,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c1y-7C-RxM" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="2lo-qD-s5v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="135" y="-700.5"/>
+            <point key="canvasLocation" x="125" y="-701"/>
         </scene>
         <!--Sharing-->
         <scene sceneID="fwd-ft-Z6m">
