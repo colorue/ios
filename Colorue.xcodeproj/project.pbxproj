@@ -435,6 +435,8 @@
 				8786D6231D56AEDE00AD3362 /* Profile */,
 				8786D6201D56AE9200AD3362 /* Prompt */,
 				8786D61F1D56AE8600AD3362 /* Prompts */,
+				87EE53E31D57C44A005B8FB3 /* Tab Bar */,
+				87EE53E41D57C465005B8FB3 /* Users */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -692,9 +694,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2CD1CEE226700E3D528 /* NavigationController.swift */,
-				8763D2CE1CEE226700E3D528 /* TabBarController.swift */,
 				87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */,
-				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -721,6 +721,22 @@
 				8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */,
 			);
 			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		87EE53E31D57C44A005B8FB3 /* Tab Bar */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2CE1CEE226700E3D528 /* TabBarController.swift */,
+			);
+			name = "Tab Bar";
+			sourceTree = "<group>";
+		};
+		87EE53E41D57C465005B8FB3 /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */,
+			);
+			name = Users;
 			sourceTree = "<group>";
 		};
 		87EF7E711D447BF9001089D2 /* PaintBucket */ = {

@@ -314,10 +314,10 @@
         <!--Profile-->
         <scene sceneID="T6q-XW-CD0">
             <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="Profile" id="f8q-4b-VVu" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="Profile" id="f8q-4b-VVu" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xu0-5L-6Lc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1687" y="64"/>
+            <point key="canvasLocation" x="1687" y="71"/>
         </scene>
     </scenes>
     <resources>

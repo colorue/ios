@@ -18,7 +18,9 @@ class FriendsViewController: UserListViewController {
     // MARK: - View Setup
     
     override func viewDidLoad() {
+        
         self.setUpSearchController()
+        
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Invite ", style: .Plain,
                                                                        target: self, action: #selector(FriendsViewController.invite(_:)))
@@ -34,7 +36,7 @@ class FriendsViewController: UserListViewController {
 extension FriendsViewController: UISearchResultsUpdating {
     
     private func setUpSearchController() {
-        let userListController = self.storyboard?.instantiateViewControllerWithIdentifier("UserListViewController") as! UserListViewController
+        guard let userListController = R.storyboard.users.users() else { return }
         
 //        userListController.tintColor = self.tintColor!
         userListController.controller = self
@@ -54,6 +56,7 @@ extension FriendsViewController: UISearchResultsUpdating {
         
         let textField = searchController.searchBar.valueForKey("searchField") as! UITextField
         textField.backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
+        
     }
     
     

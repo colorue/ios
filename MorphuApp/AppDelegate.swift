@@ -80,6 +80,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             let nav = friendsList.navigationController as! NavigationController
             nav.setColors(blueColor)
             tabBarController.tabBar.tintColor = blueColor
+            
+            
+            
         } else if targetController is DrawingViewController {
             
             if let drawingController = R.storyboard.drawing.drawingViewController() {
