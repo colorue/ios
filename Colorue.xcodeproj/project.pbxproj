@@ -75,6 +75,8 @@
 		87EE53DC1D57B4A7005B8FB3 /* Prompts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */; };
 		87EE53DE1D57B643005B8FB3 /* Prompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */; };
 		87EE53E11D57BAF2005B8FB3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */; };
+		87EE53E61D57C859005B8FB3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E51D57C859005B8FB3 /* Analytics.swift */; };
+		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
@@ -155,6 +157,8 @@
 		87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompts.storyboard; sourceTree = "<group>"; };
 		87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompt.storyboard; sourceTree = "<group>"; };
 		87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		87EE53E51D57C859005B8FB3 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
+		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
@@ -269,6 +273,8 @@
 				8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */,
 				8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */,
 				8746362D1D56E636000BD73E /* Objective-C */,
+				87EE53E51D57C859005B8FB3 /* Analytics.swift */,
+				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -323,8 +329,7 @@
 		8786D6211D56AEAD00AD3362 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
-				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
+				87EE53E71D57CD58005B8FB3 /* Views */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
 			);
 			name = Drawing;
@@ -739,6 +744,15 @@
 			name = Users;
 			sourceTree = "<group>";
 		};
+		87EE53E71D57CD58005B8FB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
+				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		87EF7E711D447BF9001089D2 /* PaintBucket */ = {
 			isa = PBXGroup;
 			children = (
@@ -940,6 +954,7 @@
 			files = (
 				87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */,
 				8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */,
+				87EE53E61D57C859005B8FB3 /* Analytics.swift in Sources */,
 				8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
 				8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */,
@@ -951,6 +966,7 @@
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */,
+				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
 				879BCC9E1CF4C4A000CD95E7 /* TextInputCell.swift in Sources */,

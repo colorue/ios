@@ -40,14 +40,14 @@ class CommentViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CommentCell")! as! CommentCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.commentCell)!
         cell.comment = drawingInstance?.getComments()[indexPath.row]
         cell.buttonTag = indexPath.row
         return cell
     }
     
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCellWithIdentifier("WriteCommentCell")! as! TextInputCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.writeCommentCell)!
         cell.delagate = self
         
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
@@ -64,8 +64,7 @@ class CommentViewController: UITableViewController {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showUser" {
-            let targetController = segue.destinationViewController as! ProfileViewController
+        if let targetController = segue.destinationViewController as? ProfileViewController {
             targetController.tintColor = self.tintColor
             targetController.navigationItem.title = drawingInstance!.getComments()[sender!.tag].user.username
             targetController.userInstance = drawingInstance!.getComments()[sender!.tag].user
@@ -83,7 +82,7 @@ class CommentViewController: UITableViewController {
                 let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
-                    FIRAnalytics.logEventWithName("deletedComment", parameters: [:])
+                    Analytics.logEvent(.deletedComment)
                     self.tableView.reloadData()
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
@@ -95,7 +94,7 @@ class CommentViewController: UITableViewController {
                 let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportComment((self.drawingInstance?.getComments()[editActionsForRowAtIndexPath.row])!)
-                    FIRAnalytics.logEventWithName("reportedComment", parameters: [:])
+                    Analytics.logEvent(.reportedComment)
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
                 self.presentViewController(deleteAlert, animated: true, completion: nil)
@@ -113,8 +112,6 @@ class CommentViewController: UITableViewController {
         return 40
     }
     
-
-    
     @IBAction func pullRefresh(sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
@@ -125,7 +122,7 @@ extension CommentViewController: TextInputCellDelagate {
     func submit(text: String) {
         API.sharedInstance.addComment(drawingInstance!, text: text)
         self.writeCommentCell?.textField?.text = ""
-        FIRAnalytics.logEventWithName("wroteComment", parameters: [:])
+        Analytics.logEvent(.wroteComment)
         self.tableView.reloadData()
     }
 }

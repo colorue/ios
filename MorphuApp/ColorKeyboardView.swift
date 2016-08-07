@@ -86,22 +86,22 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         let buttonSize = selectorWidth
         
-        undoButton.setImage(UIImage(named: "UndoIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        undoButton.setImage(R.image.undoIcon(), forState: .Normal)
         undoButton.tintColor = .whiteColor()
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
         undoButton.frame = CGRect(x: buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
         self.addSubview(undoButton)
         
-        trashButton.setImage(UIImage(named: "TrashIcon")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        trashButton.setImage(R.image.trashIcon(), forState: .Normal)
         trashButton.tintColor = .whiteColor()
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
         trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         trashButton.showsTouchWhenHighlighted = true
         self.addSubview(trashButton)
         
-        paintBucketButton.setImage(UIImage(named: "Paint Bucket")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        paintBucketButton.setImage(UIImage(named: "Paint Bucket Active")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        paintBucketButton.setImage(R.image.paintBucket(), forState: .Normal)
+        paintBucketButton.setImage(R.image.paintBucketActive(), forState: .Selected)
         paintBucketButton.tintColor = .whiteColor()
         paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), forControlEvents: .TouchUpInside)
         paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
@@ -113,8 +113,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         paintBucketSpinner.color = .whiteColor()
         self.addSubview(paintBucketSpinner)
         
-        dropperButton.setImage(UIImage(named: "Dropper")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
-        dropperButton.setImage(UIImage(named: "DropperActive")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Selected)
+        dropperButton.setImage(R.image.dropper(), forState: .Normal)
+        dropperButton.setImage(R.image.dropperActive(), forState: .Selected)
         dropperButton.tintColor = .whiteColor()
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
         dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
@@ -137,31 +137,30 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         self.progressBar.hidden = true
         self.addSubview(progressBar)
         
-        if prefs.boolForKey("saved") {
-            let red = CGFloat(prefs.floatForKey("colorRed"))
-            let green = CGFloat(prefs.floatForKey("colorGreen"))
-            let blue = CGFloat(prefs.floatForKey("colorBlue"))
-            
-            let alpha = CGFloat(prefs.floatForKey("alpha"))
+        if prefs.boolForKey(Prefs.saved) {
+            let red = CGFloat(prefs.floatForKey(Prefs.colorRed))
+            let green = CGFloat(prefs.floatForKey(Prefs.colorGreen))
+            let blue = CGFloat(prefs.floatForKey(Prefs.colorBlue))
+            let alpha = CGFloat(prefs.floatForKey(Prefs.colorBlue))
             
             switch (round(1000 * alpha) / 1000) {
             case AlphaType.Low.rawValue:
-                alphaButton.setImage(UIImage(named: "Alpha Low")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
                 currentAlpha = .Low
             case AlphaType.Medium.rawValue:
-                alphaButton.setImage(UIImage(named: "Alpha Mid")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
                 currentAlpha = .Medium
             default:
-                alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+                alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
                 currentAlpha = .High
             }
 
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-            brushSizeSlider.value = pow(prefs.floatForKey("brushSize"), 1/self.sliderConstant)
+            brushSizeSlider.value = pow(prefs.floatForKey(Prefs.brushSize), 1/self.sliderConstant)
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
-            alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
         }
         
         updateButtonColor()
@@ -204,13 +203,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         switch(currentAlpha) {
         case .High:
             self.currentAlpha = .Medium
-            alphaButton.setImage(UIImage(named: "Alpha Mid")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
         case .Medium:
             self.currentAlpha = .Low
-            alphaButton.setImage(UIImage(named: "Alpha Low")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
         case .Low:
             self.currentAlpha = .High
-            alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+            alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
         }
         state = .none
         self.delagate.switchAlphaHowTo()
@@ -250,7 +249,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     func setAlphaHigh() {
         self.currentAlpha = .High
-        alphaButton.setImage(UIImage(named: "Alpha High")?.imageWithRenderingMode(.AlwaysTemplate), forState: .Normal)
+        alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
     }
     
     func setColor(color: UIColor) {
@@ -316,7 +315,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         paintBucketButton.hidden = true
         alphaButton.hidden = true
         brushSizeSlider.hidden = true
-        
         progressBar.hidden = false
         progressBar.setProgress(progress, animated: true)
     }

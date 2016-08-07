@@ -16,7 +16,7 @@ protocol CanvasDelagate {
     func setUnderfingerView(underFingerImage: UIImage)
     func hideUnderFingerView()
     func showUnderFingerView()
-    func setColor(color: UIColor)
+    func setColor(color: UIColor?)
     func getKeyboardState() -> KeyboardToolState
     func setKeyboardState(state: KeyboardToolState)
     func startPaintBucketSpinner()
@@ -33,7 +33,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     private var currentStroke: UIImage?
     private var undoStack = [UIImage]()
     private var imageView = UIImageView()
-    private let positionIndicator = UIImage(named: "PositionIndicator")!
+    private let positionIndicator = R.image.positionIndicator()!
     
     // The image is twice the size of the imageView
     private let resizeScale: CGFloat = 2.0
@@ -72,7 +72,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         drag.minimumPressDuration = 0.0
         drag.delegate = self
         addGestureRecognizer(drag)
-        
     }
     
     
@@ -114,10 +113,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     private func dropperTouch(position: CGPoint, state: UIGestureRecognizerState) {
         if state == .Began {
-            let dropperColor = imageView.image!.colorAtPosition(position)
-            if let color = dropperColor {
-                delagate.setColor(color)
-            }
+            delagate.setColor(imageView.image!.colorAtPosition(position))
             delagate.showUnderFingerView()
             delagate.setAlphaHigh()
             drawDropperIndicator(position)
@@ -133,7 +129,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             delagate.setKeyboardState(.none)
             delagate.hideUnderFingerView()
             currentStroke = nil
-            mergeCurrentStroke(false) // clears the positionIndicator image
+            mergeCurrentStroke(false)
         }
     }
     
@@ -147,11 +143,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         } else if state == .Changed {
             pts.append(position)
             if pts.count == 5 {
-                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
-                
+                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0)
                 path.moveToPoint(pts[0])
                 path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
-                
                 self.drawCurve()
                 pts[0] = pts[3]
                 pts[1] = pts[4]
@@ -161,11 +155,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         } else if state == .Ended {
             pts.append(position)
             if pts.count >= 5 {
-                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0); // move the endpoint to the middle of the line joining the second control point of the first Bezier segment and the first control point of the second Bezier segment
-                
+                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0)
                 path.moveToPoint(pts[0])
                 path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
-                
                 self.drawCurve()
                 pts[0] = pts[3]
                 pts[1] = pts[4]
@@ -179,13 +171,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             currentStroke = nil
             delagate.hideUnderFingerView()
         }
-  
     }
     
-    
-    
     private func setUnderFingerView(position: CGPoint, dropper: Bool) {
-        let underFingerSize: CGSize // The underfinger view shows more of the drawing when the brush size is big
+        let underFingerSize: CGSize
         
         let maxUnderFinger = 400.0
         let minUnderFinger = 200.0
@@ -207,7 +196,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
                 underFingerSize = CGSize(width: underFinger, height: underFinger)
             }
         }
-        
         delagate.setUnderfingerView(imageView.image!.cropToSquare(position, cropSize: underFingerSize))
     }
     
@@ -220,9 +208,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
             currentStroke?.drawAtPoint(CGPoint.zero)
 
-
             let color = delagate.getCurrentColor()
-            
             
             if pts.count <= 2 {
                 CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts.first!.x, pts.first!.y)
@@ -292,7 +278,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             }
         }
     }
-    
     
     // MARK: External Methods
     

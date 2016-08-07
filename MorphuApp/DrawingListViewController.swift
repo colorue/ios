@@ -70,15 +70,11 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 0
-        } else {
-            return drawingSource().count
-        }
+        return section == 0 ? 0 : drawingSource().count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.tableView.dequeueReusableCellWithIdentifier("DrawingCell", forIndexPath: indexPath) as! DrawingCell
+        return self.tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.drawingCell, forIndexPath: indexPath)!
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
@@ -126,9 +122,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showLikes" {
+        if let targetController = segue.destinationViewController as? UserListViewController {
             let drawing = getClickedDrawing(sender!)
-            let targetController = segue.destinationViewController as! UserListViewController
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
             targetController.userSource = { return drawing.getLikes() }
@@ -136,9 +131,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             let drawing = getClickedDrawing(sender!)
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawing
-        } else if segue.identifier == "showUserButton" {
+        } else if let targetController = segue.destinationViewController as? ProfileViewController {
             let drawing = getClickedDrawing(sender!)
-            let targetController = segue.destinationViewController as! ProfileViewController
             targetController.navigationItem.title = drawing.getArtist().username
             targetController.tintColor = self.tintColor!
             targetController.userInstance = drawing.getArtist()
@@ -158,13 +152,12 @@ extension DrawingListViewController: DrawingCellDelagate {
     func likeButtonPressed(drawing: Drawing) {
         if !(drawing.liked(api.getActiveUser())) {
             api.like(drawing)
-            FIRAnalytics.logEventWithName("likedDrawing", parameters: [:])
+            Analytics.logEvent(.likedDrawing)
         } else {
             api.unlike(drawing)
-            FIRAnalytics.logEventWithName("unlikedDrawing", parameters: [:])
+            Analytics.logEvent(.unlikedDrawing)
         }
     }
-    
     
     func presentDrawingActions(drawing: Drawing) {
         
@@ -232,7 +225,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     }
     
     private func sendDrawing(drawing: Drawing) {
-        FIRAnalytics.logEventWithName("sendDrawingClickedFeed", parameters: [:])
+        Analytics.logEvent(.sendDrawing, parameters: ["feed": true])
 
         if (MFMessageComposeViewController.canSendText()) {
             controller.addAttachmentData(UIImagePNGRepresentation(drawing.getImage())!, typeIdentifier: "public.data", filename: "colorue.png")
@@ -244,7 +237,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     }
     
     private func shareToFacebook(drawing: Drawing) {
-        FIRAnalytics.logEventWithName("shareToFacebookClickedFeed", parameters: [:])
+        Analytics.logEvent(.postToFacebook, parameters: ["feed": true])
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing.getImage(), userGenerated: true)
         content.photos  = [photo]
@@ -261,8 +254,8 @@ extension DrawingListViewController: DrawingCellDelagate {
 }
 
 extension DrawingListViewController: MFMessageComposeViewControllerDelegate {
-    
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
+    func messageComposeViewController(controller: MFMessageComposeViewController,
+                                      didFinishWithResult result: MessageComposeResult) {
         self.dismissViewControllerAnimated(true, completion: nil)
         self.controller = MFMessageComposeViewController()
     }

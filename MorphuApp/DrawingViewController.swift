@@ -148,7 +148,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }, completion: nil)
     }
     
-    func setColor(color: UIColor) {
+    func setColor(color: UIColor?) {
+        guard let color = color else { return }
         self.colorKeyboard!.setColor(color)
     }
     
