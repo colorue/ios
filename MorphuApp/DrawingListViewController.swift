@@ -179,12 +179,12 @@ extension DrawingListViewController: DrawingCellDelagate {
                 FIRAnalytics.logEventWithName("ownDrawingSavedFeed", parameters: [:])
             }))
             drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
-                let drawingViewController = activity.topViewController as! DrawingViewController
-                drawingViewController.baseImage = drawing.getImage()
-                FIRAnalytics.logEventWithName("editDrawing", parameters: [:])
-                self.presentViewController(activity, animated: true, completion: nil)
+                let activity = R.storyboard.drawing.drawingViewController()!
+                if let drawingViewController = activity.topViewController as? DrawingViewController {
+                    drawingViewController.baseImage = drawing.getImage()
+                    FIRAnalytics.logEventWithName("editDrawing", parameters: [:])
+                    self.presentViewController(activity, animated: true, completion: nil)
+                }
             }))
             drawingActions.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)

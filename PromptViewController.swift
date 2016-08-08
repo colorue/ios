@@ -33,11 +33,11 @@ class PromptViewController: DrawingListViewController {
     @objc private func drawPrompt(sender: UIBarButtonItem) {
         guard let prompt = prompt else { return }
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let activity = storyboard.instantiateViewControllerWithIdentifier("DrawingViewController") as! UINavigationController
-        let drawingViewController = activity.topViewController as! DrawingViewController
-        drawingViewController.prompt = prompt
-        self.presentViewController(activity, animated: true, completion: nil)
-        FIRAnalytics.logEventWithName("drawPrompt", parameters: ["text":prompt.text])
+        let activity = R.storyboard.drawing.drawingViewController()!
+        if let drawingViewController = activity.topViewController as? DrawingViewController {
+            drawingViewController.prompt = prompt
+            self.presentViewController(activity, animated: true, completion: nil)
+            FIRAnalytics.logEventWithName("drawPrompt", parameters: ["text":prompt.text])
+        }
     }
 }
