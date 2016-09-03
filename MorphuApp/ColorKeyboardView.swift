@@ -13,6 +13,7 @@ protocol ColorKeyboardDelagate {
     func undo()
     func trash()
     func switchAlphaHowTo()
+    func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
 enum KeyboardToolState: Int {
@@ -219,6 +220,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func bullsEye(sender: UIButton) {
+        
+        if (!prefs.boolForKey("bullsEyeHowTo")) {
+            let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.Alert)
+            dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            delagate?.presentViewController(dropperHowTo, animated: true, completion: nil)
+            prefs.setValue(true, forKey: "bullsEyeHowTo")
+        }
         state = state == .bullsEye ? .none : .bullsEye
     }
     
@@ -336,6 +344,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.hidden = true
         paintBucketButton.hidden = true
         alphaButton.hidden = true
+        bullsEyeButton.hidden = true
         brushSizeSlider.hidden = true
         paintBucketSpinner.hidden = true
         progressBar.hidden = false
@@ -349,6 +358,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.hidden = false
         paintBucketButton.hidden = false
         alphaButton.hidden = false
+        bullsEyeButton.hidden = false
         paintBucketSpinner.hidden = false
         brushSizeSlider.hidden = false
         progressBar.hidden = true

@@ -244,9 +244,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        
         if segue.identifier == "saveToHome" {
             let targetController = segue.destinationViewController as? WallViewController
-            targetController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            if targetController?.tableView.numberOfRowsInSection(1) > 0 {
+                targetController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            }
         } else if let dvc = segue.destinationViewController as? SharingViewController {
             
             let controller = dvc.popoverPresentationController
