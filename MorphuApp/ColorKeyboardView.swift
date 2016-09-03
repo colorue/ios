@@ -19,6 +19,7 @@ enum KeyboardToolState: Int {
     case none = 0
     case colorDropper = 1
     case paintBucket = 2
+    case bullsEye = 3
 }
 
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
@@ -28,6 +29,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let trashButton = UIButton()
     let dropperButton = UIButton()
     let paintBucketButton = UIButton()
+    let bullsEyeButton = UIButton()
     let paintBucketSpinner = UIActivityIndicatorView()
     
     let eraserButton = UIButton()
@@ -41,6 +43,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         didSet {
             dropperButton.selected = state == .colorDropper
             paintBucketButton.selected = state == .paintBucket
+            bullsEyeButton.selected = state == .bullsEye
         }
     }
     
@@ -88,7 +91,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.setImage(R.image.undoIcon(), forState: .Normal)
         undoButton.tintColor = .whiteColor()
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
-        undoButton.frame = CGRect(x: buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        undoButton.frame = CGRect(x: frame.minX + buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
         addSubview(undoButton)
         
@@ -120,9 +123,17 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.showsTouchWhenHighlighted = true
         addSubview(dropperButton)
         
+        bullsEyeButton.setImage(R.image.dropper(), forState: .Normal)
+        bullsEyeButton.setImage(R.image.dropperActive(), forState: .Selected)
+        bullsEyeButton.tintColor = .whiteColor()
+        bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), forControlEvents: .TouchUpInside)
+        bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        bullsEyeButton.showsTouchWhenHighlighted = true
+        addSubview(bullsEyeButton)
+        
         alphaButton.tintColor = .whiteColor()
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
-        alphaButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        alphaButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
         addSubview(alphaButton)
 
@@ -182,7 +193,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     @objc private func undo(sender: UIButton) {
         delagate?.undo()
-        state = .none
+//        state = .none
     }
     
     @objc private func trash(sender: UIButton) {
@@ -195,7 +206,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func paintBucket(sender: UIButton) {
-        state = .paintBucket
+        state = state == .paintBucket ? .none : .paintBucket
+    }
+    
+    @objc private func bullsEye(sender: UIButton) {
+        state = state == .bullsEye ? .none : .bullsEye
     }
     
     @objc private func switchAlpha(sender: UIButton) {
@@ -217,7 +232,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     @objc private func buttonHeld(sender: UITapGestureRecognizer) {
         currentColorView.backgroundColor = colors[sender.view!.tag]
         updateButtonColor()
-        state = .none
+//        state = .none
     }
     
     @objc private func buttonTapped(sender: UIButton) {
@@ -225,7 +240,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
 
         updateButtonColor()
-        state = .none
+//        state = .none
     }
     
     private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
@@ -293,8 +308,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             paintBucketButton.tintColor = .whiteColor()
             alphaButton.tintColor = .whiteColor()
             eraserButton.tintColor = .whiteColor()
+            bullsEyeButton.tintColor = .whiteColor()
             paintBucketSpinner.color = .whiteColor()
-
         } else {
             undoButton.tintColor = .blackColor()
             trashButton.tintColor = .blackColor()
@@ -302,8 +317,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             paintBucketButton.tintColor = .blackColor()
             alphaButton.tintColor = .blackColor()
             eraserButton.tintColor = .blackColor()
+            bullsEyeButton.tintColor = .blackColor()
             paintBucketSpinner.color = .blackColor()
-
         }
     }
     
@@ -314,6 +329,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         paintBucketButton.hidden = true
         alphaButton.hidden = true
         brushSizeSlider.hidden = true
+        paintBucketSpinner.hidden = true
         progressBar.hidden = false
         progressBar.setProgress(progress, animated: true)
     }
@@ -325,6 +341,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.hidden = false
         paintBucketButton.hidden = false
         alphaButton.hidden = false
+        paintBucketSpinner.hidden = false
         brushSizeSlider.hidden = false
         progressBar.hidden = true
     }

@@ -91,6 +91,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             dropperTouch(actualPosition, state: sender.state)
         case .paintBucket:
             paintBucket(actualPosition, state: sender.state)
+        case .bullsEye:
+            bullsEye(actualPosition, state: sender.state)
         }
     }
     
@@ -109,6 +111,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 //            delagate.setKeyboardState(.none)
             delagate.startPaintBucketSpinner()
             delagate.hideUnderFingerView()
+            mergeCurrentStroke(false)
 
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: delagate.getCurrentColor(), tolerance: 5)
@@ -179,6 +182,32 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             } else {
                 self.finishStroke()
             }
+            path.removeAllPoints()
+            pts.removeAll()
+            addToUndoStack(imageView.image)
+            currentStroke = nil
+            delagate.hideUnderFingerView()
+        }
+    }
+    
+    private func bullsEye(position: CGPoint, state: UIGestureRecognizerState) {
+        guard let delagate = delagate else { return }
+        
+        if state == .Began {
+            pts.removeAll()
+            pts.append(position)
+            finishStroke()
+            delagate.showUnderFingerView()
+            setUnderFingerView(position, dropper: false)
+        } else if state == .Changed {
+            currentStroke = nil
+            mergeCurrentStroke(false)
+            pts.removeAll()
+            pts.append(position)
+            finishStroke()
+            delagate.showUnderFingerView()
+            setUnderFingerView(position, dropper: false)
+        } else if state == .Ended {
             path.removeAllPoints()
             pts.removeAll()
             addToUndoStack(imageView.image)

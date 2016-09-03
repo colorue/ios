@@ -172,7 +172,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func setKeyboardState(state: KeyboardToolState) {
-        self.colorKeyboard?.state = state
+        colorKeyboard?.state = state
+        colorKeyboard?.updateButtonColor()
     }
     
     func setDropperActive(active: Bool) {
