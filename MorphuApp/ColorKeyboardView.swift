@@ -37,7 +37,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let progressBar = UIProgressView()
     private let prefs = NSUserDefaults.standardUserDefaults()
     
-    let sliderConstant:Float = 2.5
+    let sliderConstant:Float = 2.0
     
     var state: KeyboardToolState = .none {
         didSet {
@@ -47,7 +47,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private var currentAlpha = AlphaType.High
+    private var currentAlpha = AlphaType.High {
+        didSet {
+            switch(currentAlpha) {
+            case .High:
+                alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
+            case .Medium:
+                alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
+            case .Low:
+                alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
+            }
+        }
+    }
     
     enum AlphaType: CGFloat {
         case High = 1.0
@@ -80,10 +91,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
         brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
-        brushSizeSlider.maximumValue = pow(50, 1/sliderConstant)
+        brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         
         brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
+        
+        brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), forControlEvents: .TouchUpInside)
         addSubview(brushSizeSlider)
         
         let buttonSize = selectorWidth
@@ -155,13 +168,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             
             switch (round(1000 * alpha) / 1000) {
             case AlphaType.Low.rawValue:
-                alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
                 currentAlpha = .Low
             case AlphaType.Medium.rawValue:
-                alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
                 currentAlpha = .Medium
             default:
-                alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
                 currentAlpha = .High
             }
 
@@ -170,7 +180,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
-            alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
         }
         
         updateButtonColor()
@@ -202,7 +211,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc private func dropper(sender: UIButton) {
-        state = .colorDropper
+        state = state == .colorDropper ? .none : .colorDropper
     }
     
     @objc private func paintBucket(sender: UIButton) {
@@ -213,19 +222,19 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         state = state == .bullsEye ? .none : .bullsEye
     }
     
+    @objc private func sliderChanged(sender: UISlider) {
+        sender.setValue(Float(lroundf(sender.value)), animated: true)
+    }
+    
     @objc private func switchAlpha(sender: UIButton) {
         switch(currentAlpha) {
         case .High:
             currentAlpha = .Medium
-            alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
         case .Medium:
             currentAlpha = .Low
-            alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
         case .Low:
             currentAlpha = .High
-            alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
         }
-        state = .none
         delagate?.switchAlphaHowTo()
     }
     
@@ -263,7 +272,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     func setAlphaHigh() {
         currentAlpha = .High
-        alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
     }
     
     func setColor(color: UIColor) {
