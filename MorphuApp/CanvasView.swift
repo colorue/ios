@@ -96,13 +96,20 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     private func paintBucket(position: CGPoint, state: UIGestureRecognizerState) {
         guard let delagate = delagate else { return }
-
+        
         if state == .Began {
-            
+            delagate.showUnderFingerView()
+            drawDropperIndicator(position)
+            setUnderFingerView(position, dropper: true)
+        } else if state == .Changed {
+            drawDropperIndicator(position)
+            setUnderFingerView(position, dropper: true)
+        } else if state == .Ended {
             currentStroke = nil
-            delagate.setKeyboardState(.none)
+//            delagate.setKeyboardState(.none)
             delagate.startPaintBucketSpinner()
-            
+            delagate.hideUnderFingerView()
+
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: delagate.getCurrentColor(), tolerance: 5)
                 self.addToUndoStack(filledImage)
