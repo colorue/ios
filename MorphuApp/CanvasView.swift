@@ -194,26 +194,40 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         guard let delagate = delagate else { return }
         
         if state == .Began {
-            pts.removeAll()
-            pts.append(position)
-            finishStroke()
+            drawDot(position)
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
         } else if state == .Changed {
-            currentStroke = nil
-            mergeCurrentStroke(false)
-            pts.removeAll()
-            pts.append(position)
-            finishStroke()
+            drawDot(position)
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
         } else if state == .Ended {
-            path.removeAllPoints()
-            pts.removeAll()
             addToUndoStack(imageView.image)
             currentStroke = nil
+            mergeCurrentStroke(false)
             delagate.hideUnderFingerView()
         }
+    }
+    
+    private func drawDot(position: CGPoint) {
+        
+        guard let delagate = delagate else { return }
+
+        UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+        
+        let color = delagate.getCurrentColor()
+        
+        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), position.x, position.y)
+        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), position.x, position.y)
+        
+        CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
+        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
+        
+        CGContextStrokePath(UIGraphicsGetCurrentContext())
+        CGContextFlush(UIGraphicsGetCurrentContext())
+        currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
     }
     
     private func setUnderFingerView(position: CGPoint, dropper: Bool) {

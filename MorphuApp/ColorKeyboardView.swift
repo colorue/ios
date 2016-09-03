@@ -123,8 +123,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         dropperButton.showsTouchWhenHighlighted = true
         addSubview(dropperButton)
         
-        bullsEyeButton.setImage(R.image.dropper(), forState: .Normal)
-        bullsEyeButton.setImage(R.image.dropperActive(), forState: .Selected)
+        bullsEyeButton.setImage(R.image.bullsEye(), forState: .Normal)
+        bullsEyeButton.setImage(R.image.bullsEyeActive(), forState: .Selected)
         bullsEyeButton.tintColor = .whiteColor()
         bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), forControlEvents: .TouchUpInside)
         bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
