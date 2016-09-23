@@ -98,8 +98,6 @@ extension ProfileViewController: ProfileCellDelagate {
 
 extension ProfileViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
-        
         if segue.identifier == "showFollowers" {
             let targetController = segue.destinationViewController as! UserListViewController
             targetController.tintColor = self.tintColor!
@@ -110,6 +108,20 @@ extension ProfileViewController {
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Following"
             targetController.userSource = { return Array(self.userInstance!.getFollowing()) }
+        } else if let targetController = segue.destinationViewController as? UserListViewController {
+            let drawing = getClickedDrawing(sender!)
+            targetController.navigationItem.title = "Likes"
+            targetController.tintColor = self.tintColor!
+            targetController.userSource = { return drawing.getLikes() }
+        } else if let targetController = segue.destinationViewController as? CommentViewController {
+            let drawing = getClickedDrawing(sender!)
+            targetController.tintColor = self.tintColor!
+            targetController.drawingInstance = drawing
+        } else if let targetController = segue.destinationViewController as? ProfileViewController {
+            let drawing = getClickedDrawing(sender!)
+            targetController.navigationItem.title = drawing.getArtist().username
+            targetController.tintColor = self.tintColor!
+            targetController.userInstance = drawing.getArtist()
         }
     }
     

@@ -113,7 +113,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         })
     }
     
-    private func getClickedDrawing(sender: AnyObject) -> Drawing {
+    func getClickedDrawing(sender: AnyObject) -> Drawing {
         if sender.tag >= 0 {
             return drawingSource()[sender.tag]
         } else {
