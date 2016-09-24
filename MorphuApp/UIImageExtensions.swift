@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIImage {
-    func cropToSquare(center: CGPoint, cropSize: CGSize) -> UIImage {
+    func cropToSquare(_ center: CGPoint, cropSize: CGSize) -> UIImage {
         var cropCenter = center
         // fixes cropping distorion on edges
         if (center.x < cropSize.width/2) {
@@ -29,34 +29,34 @@ extension UIImage {
         let rect: CGRect = CGRect(x: posX, y: posY, width: cropSize.width, height: cropSize.height)
         
         // Create bitmap image from context using the rect
-        let imageRef: CGImageRef = CGImageCreateWithImageInRect(self.CGImage, rect)!
+        let imageRef: CGImage = self.cgImage!.cropping(to: rect)!
         
         // Create a new image based on the imageRef and rotate back to the original orientation
-        let image: UIImage = UIImage(CGImage: imageRef)
+        let image: UIImage = UIImage(cgImage: imageRef)
         
         return image
     }
     
-    static func getImageWithColor(color: UIColor, size: CGSize) -> UIImage {
-        let rect = CGRectMake(0, 0, size.width, size.height)
+    static func getImageWithColor(_ color: UIColor, size: CGSize) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
         UIGraphicsBeginImageContextWithOptions(size, false, 0)
         color.setFill()
         UIRectFill(rect)
-        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()
+        let image: UIImage = UIGraphicsGetImageFromCurrentImageContext()!
         UIGraphicsEndImageContext()
         return image
     }
     
     func toBase64() -> String {
         let imageData = UIImagePNGRepresentation(self)!
-        let base64String: String = imageData.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
+        let base64String: String = imageData.base64EncodedString(options: NSData.Base64EncodingOptions())
         return base64String
     }
     
-    static func fromBase64(base64String: String) -> UIImage {
-        var decodedImage = UIImage.getImageWithColor(UIColor.clearColor(), size: CGSize(width: 1,height: 1))
+    static func fromBase64(_ base64String: String) -> UIImage {
+        var decodedImage = UIImage.getImageWithColor(UIColor.clear, size: CGSize(width: 1,height: 1))
         
-        if let decodedData = NSData(base64EncodedString: base64String, options: NSDataBase64DecodingOptions()) {
+        if let decodedData = Data(base64Encoded: base64String, options: NSData.Base64DecodingOptions()) {
             if let decodingImage = UIImage(data: decodedData) {
                 decodedImage = decodingImage
             }

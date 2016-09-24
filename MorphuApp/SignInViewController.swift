@@ -23,7 +23,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    let prefs = NSUserDefaults.standardUserDefaults()
+    let prefs = UserDefaults.standard
     
     var emailFirstResponder = true
     
@@ -39,17 +39,17 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
         emailInput.delegate = self
         passwordInput.delegate = self
         
-        emailInput.addTarget(self, action: #selector(SignInViewController.emailDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        doneButton.enabled = false
-        forgotPasswordButton.enabled = false
+        emailInput.addTarget(self, action: #selector(SignInViewController.emailDidChange(_:)), for: UIControlEvents.editingChanged)
+        doneButton.isEnabled = false
+        forgotPasswordButton.isEnabled = false
         
-        if let email = prefs.stringForKey("email") {
+        if let email = prefs.string(forKey: "email") {
             emailInput.text = email
-            doneButton.enabled = true
-            forgotPasswordButton.enabled = true
+            doneButton.isEnabled = true
+            forgotPasswordButton.isEnabled = true
         }
         
-        if let password = prefs.stringForKey("password") {
+        if let password = prefs.string(forKey: "password") {
             passwordInput.text = password
         }
         
@@ -59,16 +59,16 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
         drawing.addGestureRecognizer(drawingLook)
     }
     
-    func drawingTap(sender: UILongPressGestureRecognizer) {
-        if sender.state ==  .Began {
-            if emailInput.isFirstResponder() {
+    func drawingTap(_ sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .began {
+            if emailInput.isFirstResponder {
                 emailFirstResponder = true
                 emailInput.resignFirstResponder()
             } else {
                 emailFirstResponder = false
                 passwordInput.resignFirstResponder()
             }
-        } else if sender.state ==  .Ended {
+        } else if sender.state ==  .ended {
             if emailFirstResponder {
                 emailInput.becomeFirstResponder()
             } else {
@@ -77,46 +77,46 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         emailInput.becomeFirstResponder()
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.tag == 0 {
             passwordInput.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
-            UIApplication.sharedApplication().sendAction(doneButton.action, to: doneButton.target, from: nil, forEvent: nil)
+            UIApplication.shared.sendAction(doneButton.action!, to: doneButton.target, from: nil, for: nil)
         }
         return true
     }
     
-    @objc private func emailDidChange(sender: UITextField) {
+    @objc fileprivate func emailDidChange(_ sender: UITextField) {
         if isValidEmail(sender.text!) {
-            doneButton.enabled = true
-            forgotPasswordButton.enabled = true
+            doneButton.isEnabled = true
+            forgotPasswordButton.isEnabled = true
         } else {
-            doneButton.enabled = false
-            forgotPasswordButton.enabled = false
+            doneButton.isEnabled = false
+            forgotPasswordButton.isEnabled = false
         }
     }
     
-    private func isValidEmail(candidate: String) -> Bool {
+    fileprivate func isValidEmail(_ candidate: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(candidate)
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
     
-    @IBAction func doneAction(sender: UIBarButtonItem) {
+    @IBAction func doneAction(_ sender: UIBarButtonItem) {
         activityIndicator.startAnimating()
         AuthAPI.sharedInstance.emailLogin(emailInput.text!, password: passwordInput.text!, callback: logginCallback)
     }
     
-    func logginCallback(user: FIRUser?) {
+    func logginCallback(_ user: FIRUser?) {
         AuthAPI.sharedInstance.checkLoggedIn({ loggedIn in
             if loggedIn {
-                FIRAnalytics.logEventWithName("signedInWithEmail", parameters: [:])
+                FIRAnalytics.logEvent(withName: "signedInWithEmail", parameters: [:])
                 API.sharedInstance.delagate = self
                 API.sharedInstance.loadData()
                 self.prefs.setValue(self.emailInput.text, forKey: "email")
@@ -127,35 +127,35 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
         })
     }
     
-    @IBAction func forgotPassword(sender: UIButton) {
-        let forgotPasswordEmail = UIAlertController(title: "Forgot Password", message: "Send password reset email to '\(emailInput.text!)'?" , preferredStyle: UIAlertControllerStyle.Alert)
-        forgotPasswordEmail.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.Default, handler: { (action: UIAlertAction!) in
+    @IBAction func forgotPassword(_ sender: UIButton) {
+        let forgotPasswordEmail = UIAlertController(title: "Forgot Password", message: "Send password reset email to '\(emailInput.text!)'?" , preferredStyle: UIAlertControllerStyle.alert)
+        forgotPasswordEmail.addAction(UIAlertAction(title: "Send", style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) in
             AuthAPI.sharedInstance.resetPasswordEmail(self.emailInput.text!, callback: self.passwordResetCallback)
             }))
-        forgotPasswordEmail.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-        self.presentViewController(forgotPasswordEmail, animated: true, completion: nil)
+        forgotPasswordEmail.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+        self.present(forgotPasswordEmail, animated: true, completion: nil)
     }
     
-    private func passwordResetCallback(valid: Bool) {
+    fileprivate func passwordResetCallback(_ valid: Bool) {
         if valid {
-            FIRAnalytics.logEventWithName("resetPasswordEmailSent", parameters: [:])
-            let emailSent = UIAlertController(title: "Email Sent!", message: nil , preferredStyle: UIAlertControllerStyle.Alert)
-            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.presentViewController(emailSent, animated: true, completion: nil)
+            FIRAnalytics.logEvent(withName: "resetPasswordEmailSent", parameters: [:])
+            let emailSent = UIAlertController(title: "Email Sent!", message: nil , preferredStyle: UIAlertControllerStyle.alert)
+            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            OperationQueue.main.addOperation {
+                self.present(emailSent, animated: true, completion: nil)
             }
         } else {
-            let emailSent = UIAlertController(title: "Issue resetting password", message: "We couldn't find an account associated with '\(emailInput.text!)'. Please try again." , preferredStyle: UIAlertControllerStyle.Alert)
-            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            NSOperationQueue.mainQueue().addOperationWithBlock {
-                self.presentViewController(emailSent, animated: true, completion: nil)
+            let emailSent = UIAlertController(title: "Issue resetting password", message: "We couldn't find an account associated with '\(emailInput.text!)'. Please try again." , preferredStyle: UIAlertControllerStyle.alert)
+            emailSent.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            OperationQueue.main.addOperation {
+                self.present(emailSent, animated: true, completion: nil)
             }
         }
     }
     
     func refresh() {
         activityIndicator.stopAnimating()
-        self.performSegueWithIdentifier("signIn", sender: self)
+        self.performSegue(withIdentifier: "signIn", sender: self)
     }
     
 }

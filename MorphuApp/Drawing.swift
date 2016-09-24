@@ -11,21 +11,21 @@ import UIKit
 class Drawing {
     
     let timeStamp: Double
-    private var drawingId: String
-    private var artist: User
-    private var likes = [User]()
-    private var comments = [Comment]()
-    private var image: UIImage?
+    fileprivate var drawingId: String
+    fileprivate var artist: User
+    fileprivate var likes = [User]()
+    fileprivate var comments = [Comment]()
+    fileprivate var image: UIImage?
     var drawingOfTheDay = false
-    var url: NSURL?
+    var url: URL?
     
-    init(artist: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, drawingId: String = "") {
+    init(artist: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, drawingId: String = "") {
         self.artist = artist
         self.timeStamp = timeStamp
         self.drawingId = drawingId
     }
     
-    func setDrawingId(drawingId: String) {
+    func setDrawingId(_ drawingId: String) {
         self.drawingId = drawingId
     }
     
@@ -33,7 +33,7 @@ class Drawing {
         return self.drawingId
     }
     
-    func setImage(image: UIImage?) {
+    func setImage(_ image: UIImage?) {
         self.image = image
     }
     
@@ -45,7 +45,7 @@ class Drawing {
         }
     }
     
-    func setArtist(artist: User) {
+    func setArtist(_ artist: User) {
         self.artist = artist
     }
     
@@ -53,26 +53,26 @@ class Drawing {
         return self.artist
     }
     
-    func like(user: User) {
+    func like(_ user: User) {
         if !liked(user) {
             self.likes.append(user)
         }
     }
     
-    func unlike(user: User) {
+    func unlike(_ user: User) {
         var i = 0
         if self.likes.isEmpty { return }
         
         for liker in self.likes {
             if liker.userId == user.userId {
-                self.likes.removeAtIndex(i)
+                self.likes.remove(at: i)
                 return
             }
             i += 1
         }
     }
     
-    func liked(user: User) -> Bool {
+    func liked(_ user: User) -> Bool {
         for liker in self.likes {
             if liker.userId == user.userId {
                 return true
@@ -85,7 +85,7 @@ class Drawing {
         return self.likes
     }
     
-    func addComment(comment: Comment) {
+    func addComment(_ comment: Comment) {
         for comment_ in self.comments {
             if comment_.getCommetId() == comment.getCommetId() {
                 return
@@ -94,11 +94,11 @@ class Drawing {
         self.comments.append(comment)
     }
     
-    func removeComment(comment: Comment) {
+    func removeComment(_ comment: Comment) {
         var i = 0
         for comment_ in self.comments {
             if comment_.getCommetId() == comment.getCommetId() {
-                self.comments.removeAtIndex(i)
+                self.comments.remove(at: i)
                 break
             }
             i += 1
@@ -110,7 +110,7 @@ class Drawing {
     }
     
     func getTimeSinceSent() -> String {
-        let secondsSince =  NSDate().timeIntervalSince1970 + self.timeStamp
+        let secondsSince =  Date().timeIntervalSince1970 + self.timeStamp
         switch(secondsSince) {
         case 0..<60:
             return "now"

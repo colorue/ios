@@ -22,12 +22,12 @@ class Contact {
     let api = API.sharedInstance
     
     let name: String
-    private var iPhoneNumber: String?
-    private var mobileNumber: String?
-    private var mainNumber: String?
-    private var homeNumber: String?
-    private var workNumber: String?
-    private var blankNumber: String?
+    fileprivate var iPhoneNumber: String?
+    fileprivate var mobileNumber: String?
+    fileprivate var mainNumber: String?
+    fileprivate var homeNumber: String?
+    fileprivate var workNumber: String?
+    fileprivate var blankNumber: String?
     
 //    private var user: User?
     
@@ -35,23 +35,23 @@ class Contact {
         self.name = name
     }
     
-    func addPhoneNumber(number: String, type: phoneType) {
-        let stringArray = number.componentsSeparatedByCharactersInSet(
-            NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+    func addPhoneNumber(_ number: String, type: phoneType) {
+        let stringArray = number.components(
+            separatedBy: CharacterSet.decimalDigits.inverted)
         
-        if stringArray.joinWithSeparator("").characters.count == 10 {
-            let phone = "+1" + stringArray.joinWithSeparator("")
+        if stringArray.joined(separator: "").characters.count == 10 {
+            let phone = "+1" + stringArray.joined(separator: "")
             self.setPhoneNumber(number, type: type)
             api.checkNumber(phone)
-        } else if stringArray.joinWithSeparator("").characters.count == 11 {
-            let phone = "+" + stringArray.joinWithSeparator("")
+        } else if stringArray.joined(separator: "").characters.count == 11 {
+            let phone = "+" + stringArray.joined(separator: "")
             self.setPhoneNumber(number, type: type)
             api.checkNumber(phone)
 
         }
     }
     
-    private func setPhoneNumber(number: String, type: phoneType) {
+    fileprivate func setPhoneNumber(_ number: String, type: phoneType) {
         switch (type) {
         case .Mobile:
             self.mobileNumber = number

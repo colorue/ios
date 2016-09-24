@@ -9,8 +9,8 @@
 import UIKit
 
 protocol UserCellDelagate {
-    func followAction(userCell: UserCell)
-    func unfollowAction(userCell: UserCell)
+    func followAction(_ userCell: UserCell)
+    func unfollowAction(_ userCell: UserCell)
 }
 
 class UserCell: UITableViewCell {
@@ -22,10 +22,10 @@ class UserCell: UITableViewCell {
             profileImage?.image = user?.profileImage
             
             if user?.userId == API.sharedInstance.getActiveUser().userId {
-                followButton?.hidden = true
+                followButton?.isHidden = true
             } else {
-                followButton?.selected = API.sharedInstance.getActiveUser().isFollowing(user)
-                followButton?.hidden = false
+                followButton?.isSelected = API.sharedInstance.getActiveUser().isFollowing(user)
+                followButton?.isHidden = false
             }
         }
     }
@@ -41,9 +41,9 @@ class UserCell: UITableViewCell {
     @IBOutlet weak var username: UILabel?
     @IBOutlet weak var fullName: UILabel?
 
-    @IBAction func followAction(sender: UIButton) {
+    @IBAction func followAction(_ sender: UIButton) {
 
-        if !(sender.selected) {
+        if !(sender.isSelected) {
             delagate?.followAction(self)
         } else {
             delagate?.unfollowAction(self)

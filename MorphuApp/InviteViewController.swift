@@ -29,7 +29,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
         tableView.estimatedRowHeight = 44.0
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
 //        api.delagate = self
@@ -38,27 +38,27 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return api.getContacts().count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        let cell = tableView.dequeueReusableCellWithIdentifier("InviteCell")! as! InviteCell
-        let contact = api.getContacts()[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "InviteCell")! as! InviteCell
+        let contact = api.getContacts()[(indexPath as NSIndexPath).row]
         cell.contactName.text = contact.name
         return cell
     }
     
-    private func sendInvite(contact: Contact) {
+    fileprivate func sendInvite(_ contact: Contact) {
 
         if (MFMessageComposeViewController.canSendText()) {
             
-            FIRAnalytics.logEventWithName("inviteTextOpened", parameters: [:])
+            FIRAnalytics.logEvent(withName: "inviteTextOpened", parameters: [:])
 
             controller.body = "\(api.getActiveUser().username) invited you to join to Colorue. It's an app for drawing on your iPhone and sharing your creations\nwww.facebook.com/colorueApp/"
 
@@ -69,20 +69,20 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
             controller.messageComposeDelegate = self
             self.resignFirstResponder()
 
-            self.presentViewController(controller, animated: true, completion: {
+            self.present(controller, animated: true, completion: {
             })
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.sendInvite(api.getContacts()[indexPath.row])
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.sendInvite(api.getContacts()[(indexPath as NSIndexPath).row])
     }
 
     
     // MARK: MFMessageComposeViewControllerDelegate Methods
     
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
         self.controller = MFMessageComposeViewController()
     }
     

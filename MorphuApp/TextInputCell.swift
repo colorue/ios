@@ -11,7 +11,7 @@ import UIKit
 protocol TextInputCellDelagate {
     var tintColor: UIColor { get }
 
-    func submit(text: String) -> ()
+    func submit(_ text: String) -> ()
 }
 
 class TextInputCell: UITableViewCell, UITextFieldDelegate {
@@ -19,19 +19,19 @@ class TextInputCell: UITableViewCell, UITextFieldDelegate {
     
     @IBOutlet weak var submitButton: UIButton? {
         didSet {
-            submitButton?.setTitleColor(delagate?.tintColor, forState: .Normal)
+            submitButton?.setTitleColor(delagate?.tintColor, for: UIControlState())
         }
     }
     
     @IBOutlet weak var textField: UITextField?
     
-    @IBAction func submit(sender: UIButton?) {
+    @IBAction func submit(_ sender: UIButton?) {
         if let text = textField?.text {
             delagate?.submit(text)
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.submit(self.submitButton)
         return true
     }

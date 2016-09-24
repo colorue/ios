@@ -38,10 +38,10 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         self.navigationController?.navigationBar.tintColor = self.tintColor
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
-        bottomRefreshControl.addTarget(self, action: #selector(DrawingListViewController.refresh), forControlEvents: .ValueChanged)
+        bottomRefreshControl.addTarget(self, action: #selector(DrawingListViewController.refresh), for: .valueChanged)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         api.delagate = self
@@ -52,43 +52,43 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     }
     
     func scrollToTop() {
-        if tableView.numberOfRowsInSection(0) > 0 {
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-        } else if tableView.numberOfRowsInSection(1) > 0 {
-            self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+        if tableView.numberOfRows(inSection: 0) > 0 {
+            self.tableView.scrollToRow(at: IndexPath(item: 0, section: 0), at: UITableViewScrollPosition.top, animated: true)
+        } else if tableView.numberOfRows(inSection: 1) > 0 {
+            self.tableView.scrollToRow(at: IndexPath(item: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
         }
     }
     
-    @IBAction func pullRefresh(sender: UIRefreshControl) {
+    @IBAction func pullRefresh(_ sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return section == 0 ? 0 : drawingSource().count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return self.tableView.dequeueReusableCellWithIdentifier(R.reuseIdentifier.drawingCell, forIndexPath: indexPath)!
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.drawingCell, for: indexPath)!
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
-                            forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                            forRowAt indexPath: IndexPath) {
         let drawingCell = cell as! DrawingCell
         let drawing: Drawing
         let tag: Int
 
-        if indexPath.section == 0 {
+        if (indexPath as NSIndexPath).section == 0 {
             drawing = api.getDrawingOfTheDay()[0]
             tag = -1
         } else {
-            drawing = drawingSource()[indexPath.row]
-            tag = indexPath.row
+            drawing = drawingSource()[(indexPath as NSIndexPath).row]
+            tag = (indexPath as NSIndexPath).row
         }
         
         drawingCell.drawing = drawing
@@ -96,24 +96,24 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         drawingCell.delagate = self
         drawingCell.cellTag = tag
         
-        if (indexPath.row + 1 >= drawingSource().count) {
+        if ((indexPath as NSIndexPath).row + 1 >= drawingSource().count) {
             self.loadMoreDrawings?()
         }
     }
     
-    @IBAction func refreshPulled(sender: UIRefreshControl) {
+    @IBAction func refreshPulled(_ sender: UIRefreshControl) {
         refresh()
     }
     
     func refresh() {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             self.bottomRefreshControl.endRefreshing()
             self.refreshControl?.endRefreshing()
             self.tableView.reloadData()
         })
     }
     
-    func getClickedDrawing(sender: AnyObject) -> Drawing {
+    func getClickedDrawing(_ sender: AnyObject) -> Drawing {
         if sender.tag >= 0 {
             return drawingSource()[sender.tag]
         } else {
@@ -121,18 +121,18 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if let targetController = segue.destinationViewController as? UserListViewController {
-            let drawing = getClickedDrawing(sender!)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let targetController = segue.destination as? UserListViewController {
+            let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
             targetController.userSource = { return drawing.getLikes() }
-        } else if let targetController = segue.destinationViewController as? CommentViewController {
-            let drawing = getClickedDrawing(sender!)
+        } else if let targetController = segue.destination as? CommentViewController {
+            let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawing
-        } else if let targetController = segue.destinationViewController as? ProfileViewController {
-            let drawing = getClickedDrawing(sender!)
+        } else if let targetController = segue.destination as? ProfileViewController {
+            let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = drawing.getArtist().username
             targetController.tintColor = self.tintColor!
             targetController.userInstance = drawing.getArtist()
@@ -149,7 +149,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
 
 extension DrawingListViewController: DrawingCellDelagate {
     
-    func likeButtonPressed(drawing: Drawing) {
+    func likeButtonPressed(_ drawing: Drawing) {
         if !(drawing.liked(api.getActiveUser())) {
             api.like(drawing)
             Analytics.logEvent(.likedDrawing)
@@ -159,85 +159,85 @@ extension DrawingListViewController: DrawingCellDelagate {
         }
     }
     
-    func presentDrawingActions(drawing: Drawing) {
+    func presentDrawingActions(_ drawing: Drawing) {
         
-        let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
         if (drawing.getArtist().userId == api.getActiveUser().userId) {
-            drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .Default, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .default, handler: { (action: UIAlertAction!) in
                 self.api.makeProfilePic(drawing)
-                FIRAnalytics.logEventWithName("setProfileDrawing", parameters: [:])
+                FIRAnalytics.logEvent(withName: "setProfileDrawing", parameters: [:])
             }))
-            drawingActions.addAction(UIAlertAction(title: "Share to Facebook", style: .Default, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (action: UIAlertAction!) in
                 self.shareToFacebook(drawing)
             }))
-            drawingActions.addAction(UIAlertAction(title: "Send as Text", style: .Default, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Send as Text", style: .default, handler: { (action: UIAlertAction!) in
                 self.sendDrawing(drawing)
             }))
-            drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Save", style: .default, handler:  { (action: UIAlertAction!) in
                 UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
-                FIRAnalytics.logEventWithName("ownDrawingSavedFeed", parameters: [:])
+                FIRAnalytics.logEvent(withName: "ownDrawingSavedFeed", parameters: [:])
             }))
-            drawingActions.addAction(UIAlertAction(title: "Edit", style: .Default, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (action: UIAlertAction!) in
                 let activity = R.storyboard.drawing.drawingViewController()!
                 if let drawingViewController = activity.topViewController as? DrawingViewController {
                     drawingViewController.baseImage = drawing.getImage()
-                    FIRAnalytics.logEventWithName("editDrawing", parameters: [:])
-                    self.presentViewController(activity, animated: true, completion: nil)
+                    FIRAnalytics.logEvent(withName: "editDrawing", parameters: [:])
+                    self.present(activity, animated: true, completion: nil)
                 }
             }))
-            drawingActions.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
-                let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.Alert)
-                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.alert)
+                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteDrawing(drawing)
-                    FIRAnalytics.logEventWithName("drawingDeleted", parameters: [:])
+                    FIRAnalytics.logEvent(withName: "drawingDeleted", parameters: [:])
 
                     //tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: sender.tag, inSection: 1)], withRowAnimation: .Fade)
                 }))
-                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
-                self.presentViewController(deleteAlert, animated: true, completion: nil)
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+                self.present(deleteAlert, animated: true, completion: nil)
             }))
         } else {
-            drawingActions.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
-                let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.Alert)
-                deleteAlert.addAction(UIAlertAction(title: "Report", style: .Destructive, handler: { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
+                let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
+                deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportDrawing(drawing)
-                    FIRAnalytics.logEventWithName("drawingReported", parameters: [:])
+                    FIRAnalytics.logEvent(withName: "drawingReported", parameters: [:])
                 }))
-                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
-                self.presentViewController(deleteAlert, animated: true, completion: nil)
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+                self.present(deleteAlert, animated: true, completion: nil)
             }))
-            drawingActions.addAction(UIAlertAction(title: "Save", style: .Default, handler:  { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Save", style: .default, handler:  { (action: UIAlertAction!) in
                 UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
-                FIRAnalytics.logEventWithName("friendDrawingSavedFeed", parameters: [:])
+                FIRAnalytics.logEvent(withName: "friendDrawingSavedFeed", parameters: [:])
             }))
         }
         
         if api.getActiveUser().userId == "5Apylh3iA6bDpkDDGwcG3G8BWZ42" {
-            drawingActions.addAction(UIAlertAction(title: "Make DOD!", style: .Default, handler:  { (action: UIAlertAction!) in
+            drawingActions.addAction(UIAlertAction(title: "Make DOD!", style: .default, handler:  { (action: UIAlertAction!) in
                 self.api.makeDOD(drawing)
             }))
         }
         
-        drawingActions.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
+        drawingActions.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
         
-        self.presentViewController(drawingActions, animated: true, completion: nil)
+        self.present(drawingActions, animated: true, completion: nil)
     }
     
-    private func sendDrawing(drawing: Drawing) {
-        Analytics.logEvent(.sendDrawing, parameters: ["feed": true])
+    fileprivate func sendDrawing(_ drawing: Drawing) {
+        Analytics.logEvent(.sendDrawing, parameters: ["feed": true as NSObject])
 
         if (MFMessageComposeViewController.canSendText()) {
             controller.addAttachmentData(UIImagePNGRepresentation(drawing.getImage())!, typeIdentifier: "public.data", filename: "colorue.png")
             controller.messageComposeDelegate = self
             controller.resignFirstResponder()
             
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
-    private func shareToFacebook(drawing: Drawing) {
-        Analytics.logEvent(.postToFacebook, parameters: ["feed": true])
+    fileprivate func shareToFacebook(_ drawing: Drawing) {
+        Analytics.logEvent(.postToFacebook, parameters: ["feed": true as NSObject])
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing.getImage(), userGenerated: true)
         content.photos  = [photo]
@@ -245,18 +245,18 @@ extension DrawingListViewController: DrawingCellDelagate {
         let dialog = FBSDKShareDialog()
         dialog.fromViewController = self
         dialog.shareContent = content
-        dialog.mode = FBSDKShareDialogMode.Native
+        dialog.mode = FBSDKShareDialogMode.native
         if !dialog.show() {
-            dialog.mode = FBSDKShareDialogMode.Automatic
+            dialog.mode = FBSDKShareDialogMode.automatic
             dialog.show()
         }
     }
 }
 
 extension DrawingListViewController: MFMessageComposeViewControllerDelegate {
-    func messageComposeViewController(controller: MFMessageComposeViewController,
-                                      didFinishWithResult result: MessageComposeResult) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController,
+                                      didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
         self.controller = MFMessageComposeViewController()
     }
 }

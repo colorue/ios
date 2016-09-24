@@ -13,7 +13,7 @@ import Firebase
 class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     
     let api = AuthAPI.sharedInstance
-    let prefs = NSUserDefaults.standardUserDefaults()
+    let prefs = UserDefaults.standard
 
     let validImage = UIImage(named: "Check")
     let invalidImage = UIImage(named: "X")
@@ -48,44 +48,44 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
         
         if let phone = newUser.phoneNumber {
             phoneNumberInput.text = phone
-            self.verificatoinButton.hidden = true
-            self.verifiedIndicator.hidden = false
-            self.phoneNumberInput.enabled = false
+            self.verificatoinButton.isHidden = true
+            self.verifiedIndicator.isHidden = false
+            self.phoneNumberInput.isEnabled = false
         }
         
         nameInput.delegate = self
-        nameInput.addTarget(self, action: #selector(BeFoundViewController.nameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        nameInput.addTarget(self, action: #selector(BeFoundViewController.nameDidChange(_:)), for: UIControlEvents.editingChanged)
         
         phoneNumberInput.delegate = self
-        verificatoinButton.enabled = false
+        verificatoinButton.isEnabled = false
         
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
         
-        FIRAnalytics.logEventWithName("BeFoundViewController", parameters: [:])
+        FIRAnalytics.logEvent(withName: "BeFoundViewController", parameters: [:])
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController!.navigationBar.tintColor = purpleColor
         nameInput.becomeFirstResponder()
     }
     
-    @objc private func nameDidChange(sender: UITextField) {
+    @objc fileprivate func nameDidChange(_ sender: UITextField) {
         self.newUser.fullName = sender.text
     }
     
-    func drawingTap(sender: UILongPressGestureRecognizer) {
-        if sender.state ==  .Began {
-            if nameInput.isFirstResponder() {
+    func drawingTap(_ sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .began {
+            if nameInput.isFirstResponder {
                 nameFirstResponder = true
                 nameInput.resignFirstResponder()
             } else {
                 nameFirstResponder = false
                 phoneNumberInput.resignFirstResponder()
             }
-        } else if sender.state ==  .Ended {
+        } else if sender.state ==  .ended {
             if nameFirstResponder {
                 nameInput.becomeFirstResponder()
             } else {
@@ -94,47 +94,47 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if nameInput.isFirstResponder() {
-            if phoneNumberInput.enabled {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if nameInput.isFirstResponder {
+            if phoneNumberInput.isEnabled {
                 phoneNumberInput.becomeFirstResponder()
             } else {
                 nameInput.resignFirstResponder()
             }
-        } else if verificatoinButton.enabled {
+        } else if verificatoinButton.isEnabled {
             self.answerVerificationCall(verificatoinButton)
         }
         
         return true
     }
     
-    @IBAction func answerVerificationCall(sender: UIButton) {
+    @IBAction func answerVerificationCall(_ sender: UIButton) {
         
-        let stringArray = phoneNumberInput.text!.componentsSeparatedByCharactersInSet(
-            NSCharacterSet.decimalDigitCharacterSet().invertedSet)
-        let phone = "+1" + stringArray.joinWithSeparator("")
+        let stringArray = phoneNumberInput.text!.components(
+            separatedBy: CharacterSet.decimalDigits.inverted)
+        let phone = "+1" + stringArray.joined(separator: "")
         
-        self.verificatoinButton.hidden = true
+        self.verificatoinButton.isHidden = true
         self.callingIndicatoy.startAnimating()
-        self.phoneNumberInput.enabled = false
+        self.phoneNumberInput.isEnabled = false
 
         api.callVerification(phone, callback: { valid in
             self.callingIndicatoy.stopAnimating()
             if valid {
-                self.verifiedIndicator.hidden = false
+                self.verifiedIndicator.isHidden = false
                 self.newUser.phoneNumber = phone
-                FIRAnalytics.logEventWithName("phoneVerified", parameters: [:])
+                FIRAnalytics.logEvent(withName: "phoneVerified", parameters: [:])
             } else {
-                self.verificatoinButton.hidden = false
-                self.phoneNumberInput.enabled = true
+                self.verificatoinButton.isHidden = false
+                self.phoneNumberInput.isEnabled = true
             }
         })
     }
     
     
-    @IBAction func createAccount(sender: UIBarButtonItem) {
+    @IBAction func createAccount(_ sender: UIBarButtonItem) {
         
-        joinButton.enabled = false
+        joinButton.isEnabled = false
         activityIndicator.startAnimating()
 
         self.newUser.fullName = nameInput.text
@@ -148,11 +148,11 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
         }
     }
     
-    private func createEmailAccountCallback(valid: Bool) {
+    fileprivate func createEmailAccountCallback(_ valid: Bool) {
         api.emailLogin(newUser.email!, password: newUser.password!, callback: loginCallback)
     }
     
-    func loginCallback(user: FIRUser?) {
+    func loginCallback(_ user: FIRUser?) {
         activityIndicator.stopAnimating()
         if user != nil {
             if !newUser.FacebookSignUp {
@@ -163,31 +163,31 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
             API.sharedInstance.loadData()
         } else {
             print("login failed")
-            joinButton.enabled = true
+            joinButton.isEnabled = true
         }
     }
     
     
     func refresh() {
         activityIndicator.stopAnimating()
-        FIRAnalytics.logEventWithName("accountCreated", parameters: [:])
-        self.performSegueWithIdentifier("toFollowPeople", sender: self)
+        FIRAnalytics.logEvent(withName: "accountCreated", parameters: [:])
+        self.performSegue(withIdentifier: "toFollowPeople", sender: self)
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         if textField == phoneNumberInput
         {
-            let newString = (textField.text! as NSString).stringByReplacingCharactersInRange(range, withString: string)
+            let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
             
-            self.verificatoinButton.enabled = newString.characters.count > 13
+            self.verificatoinButton.isEnabled = newString.characters.count > 13
 
-            let components = newString.componentsSeparatedByCharactersInSet(NSCharacterSet.decimalDigitCharacterSet().invertedSet)
+            let components = newString.components(separatedBy: CharacterSet.decimalDigits.inverted)
             
-            let decimalString = components.joinWithSeparator("") as NSString
+            let decimalString = components.joined(separator: "") as NSString
             
             let length = decimalString.length
-            let hasLeadingOne = length > 0 && decimalString.characterAtIndex(0) == (1 as unichar)
+            let hasLeadingOne = length > 0 && decimalString.character(at: 0) == (1 as unichar)
             
             if length == 0 || (length > 10 && !hasLeadingOne) || length > 11
             {
@@ -200,24 +200,24 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
             
             if hasLeadingOne
             {
-                formattedString.appendString("1 ")
+                formattedString.append("1 ")
                 index += 1
             }
             if (length - index) > 3
             {
-                let areaCode = decimalString.substringWithRange(NSMakeRange(index, 3))
+                let areaCode = decimalString.substring(with: NSMakeRange(index, 3))
                 formattedString.appendFormat("(%@) ", areaCode)
                 index += 3
             }
             if length - index > 3
             {
-                let prefix = decimalString.substringWithRange(NSMakeRange(index, 3))
+                let prefix = decimalString.substring(with: NSMakeRange(index, 3))
                 formattedString.appendFormat("%@-", prefix)
                 index += 3
             }
             
-            let remainder = decimalString.substringFromIndex(index)
-            formattedString.appendString(remainder)
+            let remainder = decimalString.substring(from: index)
+            formattedString.append(remainder)
             textField.text = formattedString as String
             
             return false

@@ -15,13 +15,13 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.delegate = UIApplication.sharedApplication().delegate as? UITabBarControllerDelegate
+        self.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
 
-        self.tabBar.barStyle = .Default
-        self.tabBar.translucent = false
+        self.tabBar.barStyle = .default
+        self.tabBar.isTranslucent = false
         
         self.selectedIndex = initialIndex
     }
     
-    @IBAction func backToMain(segue: UIStoryboardSegue) {}
+    @IBAction func backToMain(_ segue: UIStoryboardSegue) {}
 }

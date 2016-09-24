@@ -13,7 +13,7 @@ protocol ColorKeyboardDelagate {
     func undo()
     func trash()
     func switchAlphaHowTo()
-    func presentViewController(viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
+    func presentViewController(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
 enum KeyboardToolState: Int {
@@ -36,35 +36,35 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let eraserButton = UIButton()
     let alphaButton = UIButton()
     let progressBar = UIProgressView()
-    private let prefs = NSUserDefaults.standardUserDefaults()
+    fileprivate let prefs = UserDefaults.standard
     
     let sliderConstant:Float = 2.0
     
     var state: KeyboardToolState = .none {
         didSet {
-            dropperButton.selected = state == .colorDropper
-            paintBucketButton.selected = state == .paintBucket
-            bullsEyeButton.selected = state == .bullsEye
+            dropperButton.isSelected = state == .colorDropper
+            paintBucketButton.isSelected = state == .paintBucket
+            bullsEyeButton.isSelected = state == .bullsEye
         }
     }
     
-    private var currentAlpha = AlphaType.High {
+    fileprivate var currentAlpha = AlphaType.high {
         didSet {
             switch(currentAlpha) {
-            case .High:
-                alphaButton.setImage(R.image.alphaHigh(), forState: .Normal)
-            case .Medium:
-                alphaButton.setImage(R.image.alphaMid(), forState: .Normal)
-            case .Low:
-                alphaButton.setImage(R.image.alphaLow(), forState: .Normal)
+            case .high:
+                alphaButton.setImage(R.image.alphaHigh(), for: UIControlState())
+            case .medium:
+                alphaButton.setImage(R.image.alphaMid(), for: UIControlState())
+            case .low:
+                alphaButton.setImage(R.image.alphaLow(), for: UIControlState())
             }
         }
     }
     
     enum AlphaType: CGFloat {
-        case High = 1.0
-        case Medium = 0.7
-        case Low = 0.3
+        case high = 1.0
+        case medium = 0.7
+        case low = 0.3
     }
 
     var delagate: ColorKeyboardDelagate?
@@ -90,94 +90,94 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         addSubview(currentColorView)
         
         
-        brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
-        brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
+        brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
+        brushSizeSlider.maximumTrackTintColor = UIColor.white
         brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         
         brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
         
-        brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), forControlEvents: .TouchUpInside)
+        brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
         addSubview(brushSizeSlider)
         
         let buttonSize = selectorWidth
         
-        undoButton.setImage(R.image.undoIcon(), forState: .Normal)
-        undoButton.tintColor = .whiteColor()
-        undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), forControlEvents: .TouchUpInside)
+        undoButton.setImage(R.image.undoIcon(), for: UIControlState())
+        undoButton.tintColor = .white()
+        undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
         undoButton.frame = CGRect(x: frame.minX + buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
         addSubview(undoButton)
         
-        trashButton.setImage(R.image.trashIcon(), forState: .Normal)
-        trashButton.tintColor = .whiteColor()
-        trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), forControlEvents: .TouchUpInside)
+        trashButton.setImage(R.image.trashIcon(), for: UIControlState())
+        trashButton.tintColor = .white()
+        trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
         trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         trashButton.showsTouchWhenHighlighted = true
         addSubview(trashButton)
         
-        paintBucketButton.setImage(R.image.paintBucket(), forState: .Normal)
-        paintBucketButton.setImage(R.image.paintBucketActive(), forState: .Selected)
-        paintBucketButton.tintColor = .whiteColor()
-        paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), forControlEvents: .TouchUpInside)
+        paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
+        paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
+        paintBucketButton.tintColor = .white()
+        paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
         paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         paintBucketButton.showsTouchWhenHighlighted = true
         addSubview(paintBucketButton)
         
         paintBucketSpinner.hidesWhenStopped = true
         paintBucketSpinner.center = paintBucketButton.center
-        paintBucketSpinner.color = .whiteColor()
+        paintBucketSpinner.color = .white()
         addSubview(paintBucketSpinner)
         
-        dropperButton.setImage(R.image.dropper(), forState: .Normal)
-        dropperButton.setImage(R.image.dropperActive(), forState: .Selected)
-        dropperButton.tintColor = .whiteColor()
-        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), forControlEvents: .TouchUpInside)
+        dropperButton.setImage(R.image.dropper(), for: UIControlState())
+        dropperButton.setImage(R.image.dropperActive(), for: .selected)
+        dropperButton.tintColor = .white()
+        dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
         dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
         addSubview(dropperButton)
         
-        bullsEyeButton.setImage(R.image.bullsEye(), forState: .Normal)
-        bullsEyeButton.setImage(R.image.bullsEyeActive(), forState: .Selected)
-        bullsEyeButton.tintColor = .whiteColor()
-        bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), forControlEvents: .TouchUpInside)
+        bullsEyeButton.setImage(R.image.bullsEye(), for: UIControlState())
+        bullsEyeButton.setImage(R.image.bullsEyeActive(), for: .selected)
+        bullsEyeButton.tintColor = .white()
+        bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
         bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         bullsEyeButton.showsTouchWhenHighlighted = true
         addSubview(bullsEyeButton)
         
-        alphaButton.tintColor = .whiteColor()
-        alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), forControlEvents: .TouchUpInside)
+        alphaButton.tintColor = .white()
+        alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), for: .touchUpInside)
         alphaButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
         addSubview(alphaButton)
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
-        separatorU.backgroundColor = UIColor.lightGrayColor()
+        separatorU.backgroundColor = UIColor.lightGray
         addSubview(separatorU)
         
         progressBar.frame = CGRect(x: 0, y: 0, width: frame.width/2, height: 0)
         progressBar.center = currentColorView.center
         progressBar.progress = 0.0
-        progressBar.hidden = true
+        progressBar.isHidden = true
         addSubview(progressBar)
         
-        if prefs.boolForKey(Prefs.saved) {
-            let red = CGFloat(prefs.floatForKey(Prefs.colorRed))
-            let green = CGFloat(prefs.floatForKey(Prefs.colorGreen))
-            let blue = CGFloat(prefs.floatForKey(Prefs.colorBlue))
-            let alpha = CGFloat(prefs.floatForKey(Prefs.colorAlpha))
+        if prefs.bool(forKey: Prefs.saved) {
+            let red = CGFloat(prefs.float(forKey: Prefs.colorRed))
+            let green = CGFloat(prefs.float(forKey: Prefs.colorGreen))
+            let blue = CGFloat(prefs.float(forKey: Prefs.colorBlue))
+            let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
             
             switch (round(1000 * alpha) / 1000) {
-            case AlphaType.Low.rawValue:
-                currentAlpha = .Low
-            case AlphaType.Medium.rawValue:
-                currentAlpha = .Medium
+            case AlphaType.low.rawValue:
+                currentAlpha = .low
+            case AlphaType.medium.rawValue:
+                currentAlpha = .medium
             default:
-                currentAlpha = .High
+                currentAlpha = .high
             }
 
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-            brushSizeSlider.value = pow(prefs.floatForKey(Prefs.brushSize), 1/sliderConstant)
+            brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
@@ -186,11 +186,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         updateButtonColor()
     }
     
-    private func colorButton(withColor color:UIColor, tag: Int, selectorWidth: CGFloat) -> UIButton {
+    fileprivate func colorButton(withColor color:UIColor, tag: Int, selectorWidth: CGFloat) -> UIButton {
         let newButton = UIButton()
         newButton.backgroundColor = color
         newButton.tag = tag
-        newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
         newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: selectorWidth, width: selectorWidth, height: frame.height - selectorWidth)
         
         let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
@@ -201,58 +201,58 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         return newButton
     }
     
-    @objc private func undo(sender: UIButton) {
+    @objc fileprivate func undo(_ sender: UIButton) {
         delagate?.undo()
 //        state = .none
     }
     
-    @objc private func trash(sender: UIButton) {
+    @objc fileprivate func trash(_ sender: UIButton) {
         delagate?.trash()
         state = .none
     }
     
-    @objc private func dropper(sender: UIButton) {
+    @objc fileprivate func dropper(_ sender: UIButton) {
         state = state == .colorDropper ? .none : .colorDropper
     }
     
-    @objc private func paintBucket(sender: UIButton) {
+    @objc fileprivate func paintBucket(_ sender: UIButton) {
         state = state == .paintBucket ? .none : .paintBucket
     }
     
-    @objc private func bullsEye(sender: UIButton) {
+    @objc fileprivate func bullsEye(_ sender: UIButton) {
         
-        if (!prefs.boolForKey("bullsEyeHowTo")) {
-            let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.Alert)
-            dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+        if (!prefs.bool(forKey: "bullsEyeHowTo")) {
+            let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
+            dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
             delagate?.presentViewController(dropperHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "bullsEyeHowTo")
         }
         state = state == .bullsEye ? .none : .bullsEye
     }
     
-    @objc private func sliderChanged(sender: UISlider) {
+    @objc fileprivate func sliderChanged(_ sender: UISlider) {
         sender.setValue(Float(lroundf(sender.value)), animated: true)
     }
     
-    @objc private func switchAlpha(sender: UIButton) {
+    @objc fileprivate func switchAlpha(_ sender: UIButton) {
         switch(currentAlpha) {
-        case .High:
-            currentAlpha = .Medium
-        case .Medium:
-            currentAlpha = .Low
-        case .Low:
-            currentAlpha = .High
+        case .high:
+            currentAlpha = .medium
+        case .medium:
+            currentAlpha = .low
+        case .low:
+            currentAlpha = .high
         }
         delagate?.switchAlphaHowTo()
     }
     
-    @objc private func buttonHeld(sender: UITapGestureRecognizer) {
+    @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
         currentColorView.backgroundColor = colors[sender.view!.tag]
         updateButtonColor()
 //        state = .none
     }
     
-    @objc private func buttonTapped(sender: UIButton) {
+    @objc fileprivate func buttonTapped(_ sender: UIButton) {
         let percentMix: CGFloat = 0.1
         currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
 
@@ -260,7 +260,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
 //        state = .none
     }
     
-    private func blendColor(color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
+    fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
         let c1 = color1.coreImageColor!
         let c2 = color2.coreImageColor!
         return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
@@ -279,15 +279,15 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func setAlphaHigh() {
-        currentAlpha = .High
+        currentAlpha = .high
     }
     
-    func setColor(color: UIColor) {
+    func setColor(_ color: UIColor) {
         setCurrentColor(color, animationTime: 0.5)
     }
     
-    private func setCurrentColor(color: UIColor, animationTime: Double) {
-        UIView.animateWithDuration(animationTime,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+    fileprivate func setCurrentColor(_ color: UIColor, animationTime: Double) {
+        UIView.animate(withDuration: animationTime,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
             self.currentColorView.backgroundColor = color
             }, completion: nil)
     }
@@ -297,71 +297,71 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
         
         if (colorDarkness < 1.6) {
-            brushSizeSlider.minimumTrackTintColor = UIColor.lightGrayColor()
-            brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
+            brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
+            brushSizeSlider.maximumTrackTintColor = UIColor.white
             
-            progressBar.tintColor = UIColor.lightGrayColor()
-            progressBar.trackTintColor = UIColor.whiteColor()
+            progressBar.tintColor = UIColor.lightGray
+            progressBar.trackTintColor = UIColor.white
             
         } else if colorDarkness < 2.67 {
-            brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
-            brushSizeSlider.maximumTrackTintColor = UIColor.whiteColor()
+            brushSizeSlider.minimumTrackTintColor = UIColor.black
+            brushSizeSlider.maximumTrackTintColor = UIColor.white
             
-            progressBar.tintColor = UIColor.blackColor()
-            progressBar.trackTintColor = UIColor.whiteColor()
+            progressBar.tintColor = UIColor.black
+            progressBar.trackTintColor = UIColor.white
         } else {
-            brushSizeSlider.minimumTrackTintColor = UIColor.blackColor()
-            brushSizeSlider.maximumTrackTintColor = UIColor.lightGrayColor()
+            brushSizeSlider.minimumTrackTintColor = UIColor.black
+            brushSizeSlider.maximumTrackTintColor = UIColor.lightGray
             
-            progressBar.tintColor = UIColor.blackColor()
-            progressBar.trackTintColor = UIColor.lightGrayColor()
+            progressBar.tintColor = UIColor.black
+            progressBar.trackTintColor = UIColor.lightGray
         }
         
         if (colorDarkness < 1.87) {
-            undoButton.tintColor = .whiteColor()
-            trashButton.tintColor = .whiteColor()
-            dropperButton.tintColor = .whiteColor()
-            paintBucketButton.tintColor = .whiteColor()
-            alphaButton.tintColor = .whiteColor()
-            eraserButton.tintColor = .whiteColor()
-            bullsEyeButton.tintColor = .whiteColor()
-            paintBucketSpinner.color = .whiteColor()
+            undoButton.tintColor = .white()
+            trashButton.tintColor = .white()
+            dropperButton.tintColor = .white()
+            paintBucketButton.tintColor = .white()
+            alphaButton.tintColor = .white()
+            eraserButton.tintColor = .white()
+            bullsEyeButton.tintColor = .white()
+            paintBucketSpinner.color = .white()
         } else {
-            undoButton.tintColor = .blackColor()
-            trashButton.tintColor = .blackColor()
-            dropperButton.tintColor = .blackColor()
-            paintBucketButton.tintColor = .blackColor()
-            alphaButton.tintColor = .blackColor()
-            eraserButton.tintColor = .blackColor()
-            bullsEyeButton.tintColor = .blackColor()
-            paintBucketSpinner.color = .blackColor()
+            undoButton.tintColor = .black()
+            trashButton.tintColor = .black()
+            dropperButton.tintColor = .black()
+            paintBucketButton.tintColor = .black()
+            alphaButton.tintColor = .black()
+            eraserButton.tintColor = .black()
+            bullsEyeButton.tintColor = .black()
+            paintBucketSpinner.color = .black()
         }
     }
     
-    func uploading(progress: Float) {
-        undoButton.hidden = true
-        trashButton.hidden = true
-        dropperButton.hidden = true
-        paintBucketButton.hidden = true
-        alphaButton.hidden = true
-        bullsEyeButton.hidden = true
-        brushSizeSlider.hidden = true
-        paintBucketSpinner.hidden = true
-        progressBar.hidden = false
+    func uploading(_ progress: Float) {
+        undoButton.isHidden = true
+        trashButton.isHidden = true
+        dropperButton.isHidden = true
+        paintBucketButton.isHidden = true
+        alphaButton.isHidden = true
+        bullsEyeButton.isHidden = true
+        brushSizeSlider.isHidden = true
+        paintBucketSpinner.isHidden = true
+        progressBar.isHidden = false
         progressBar.setProgress(progress, animated: true)
     }
     
     func uploadingFailed() {
         progressBar.progress = 0.0
-        undoButton.hidden = false
-        trashButton.hidden = false
-        dropperButton.hidden = false
-        paintBucketButton.hidden = false
-        alphaButton.hidden = false
-        bullsEyeButton.hidden = false
-        paintBucketSpinner.hidden = false
-        brushSizeSlider.hidden = false
-        progressBar.hidden = true
+        undoButton.isHidden = false
+        trashButton.isHidden = false
+        dropperButton.isHidden = false
+        paintBucketButton.isHidden = false
+        alphaButton.isHidden = false
+        bullsEyeButton.isHidden = false
+        paintBucketSpinner.isHidden = false
+        brushSizeSlider.isHidden = false
+        progressBar.isHidden = true
     }
 }
 

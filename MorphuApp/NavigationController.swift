@@ -15,11 +15,11 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
         if let font = R.font.playtimeWithHotToddies(size: 22) {
             navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: blackColor]
         }
-        navigationBar.barTintColor = UIColor.whiteColor()
-        navigationBar.translucent = false
+        navigationBar.barTintColor = UIColor.white
+        navigationBar.isTranslucent = false
     }
     
-    func setColors(mainColor: UIColor) {
+    func setColors(_ mainColor: UIColor) {
         navigationBar.tintColor = mainColor
     }
 }

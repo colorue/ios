@@ -11,15 +11,15 @@ import Firebase
 import FBSDKLoginKit
 
 class LoadingViewController: UIViewController, APIDelagate {
-    let prefs = NSUserDefaults.standardUserDefaults()
+    let prefs = UserDefaults.standard
     
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
 //        AuthAPI.sharedInstance.logout()
         AuthAPI.sharedInstance.checkLoggedIn(loginCallback)
     }
     
-    private func loginCallback(loggedIn: Bool) {
+    fileprivate func loginCallback(_ loggedIn: Bool) {
         let api = API.sharedInstance
         if loggedIn {
             api.delagate = self
@@ -27,11 +27,11 @@ class LoadingViewController: UIViewController, APIDelagate {
         } else {
             api.clearData()
             AuthAPI.sharedInstance.logout()
-            self.performSegueWithIdentifier("toLoginController", sender: self)
+            self.performSegue(withIdentifier: "toLoginController", sender: self)
         }
     }
     
     func refresh() {
-        self.performSegueWithIdentifier("toMainController", sender: self)
+        self.performSegue(withIdentifier: "toMainController", sender: self)
     }
 }

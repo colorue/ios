@@ -8,6 +8,26 @@
 
 import UIKit
 import Firebase
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class SignUpViewController: UIViewController, UITextFieldDelegate {
     
@@ -42,13 +62,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         
         emailValidIndicator.image = invalidImage
         passwordValidIndicator.image = invalidImage
-        nextButton.enabled = false
+        nextButton.isEnabled = false
         
         emailInput.delegate = self
         passwordInput.delegate = self
         
-        emailInput.addTarget(self, action: #selector(SignUpViewController.emailDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        passwordInput.addTarget(self, action: #selector(SignUpViewController.passwordDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        emailInput.addTarget(self, action: #selector(SignUpViewController.emailDidChange(_:)), for: UIControlEvents.editingChanged)
+        passwordInput.addTarget(self, action: #selector(SignUpViewController.passwordDidChange(_:)), for: UIControlEvents.editingChanged)
         
         emailInput.text = newUser.email
         passwordInput.text = newUser.password
@@ -61,16 +81,16 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         drawing.addGestureRecognizer(drawingLook)
     }
     
-    func drawingTap(sender: UILongPressGestureRecognizer) {
-        if sender.state ==  .Began {
-            if emailInput.isFirstResponder() {
+    func drawingTap(_ sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .began {
+            if emailInput.isFirstResponder {
                 emailFirstResponder = true
                 emailInput.resignFirstResponder()
             } else {
                 emailFirstResponder = false
                 passwordInput.resignFirstResponder()
             }
-        } else if sender.state ==  .Ended {
+        } else if sender.state ==  .ended {
             if emailFirstResponder {
                 emailInput.becomeFirstResponder()
             } else {
@@ -79,61 +99,61 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController!.navigationBar.tintColor = redColor
         emailInput.becomeFirstResponder()
-        FIRAnalytics.logEventWithName("SignUpViewController", parameters: [:])
+        FIRAnalytics.logEvent(withName: "SignUpViewController", parameters: [:])
     }
 
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.tag == 0 {
             if emailValid {
                 passwordInput.becomeFirstResponder()
             }
-        } else if nextButton.enabled {
+        } else if nextButton.isEnabled {
             textField.resignFirstResponder()
-            UIApplication.sharedApplication().sendAction(nextButton.action, to: nextButton.target, from: nil, forEvent: nil)
+            UIApplication.shared.sendAction(nextButton.action!, to: nextButton.target, from: nil, for: nil)
         }
         return true
     }
     
-    @objc private func emailDidChange(sender: UITextField) {
+    @objc fileprivate func emailDidChange(_ sender: UITextField) {
         self.newUser.email = sender.text
         if isValidEmail(sender.text!) {
             emailValidIndicator.image = validImage
             emailValid = true
             if passwordValid {
-                nextButton.enabled = true
+                nextButton.isEnabled = true
             }
         } else {
             emailValidIndicator.image = invalidImage
             emailValid = true
-            nextButton.enabled = false
+            nextButton.isEnabled = false
         }
     }
     
-    @objc private func passwordDidChange(sender: UITextField) {
+    @objc fileprivate func passwordDidChange(_ sender: UITextField) {
         self.newUser.password = sender.text
         if isValidPassword(sender.text) {
             passwordValidIndicator.image = validImage
             passwordValid = true
             if emailValid {
-                nextButton.enabled = true
+                nextButton.isEnabled = true
             }
         } else {
             passwordValidIndicator.image = invalidImage
             passwordValid = true
-            nextButton.enabled = false
+            nextButton.isEnabled = false
         }
     }
     
-    private func isValidEmail(candidate: String) -> Bool {
+    fileprivate func isValidEmail(_ candidate: String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
-        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluateWithObject(candidate)
+        return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: candidate)
     }
     
-    private func isValidPassword(password: String?) -> Bool {
+    fileprivate func isValidPassword(_ password: String?) -> Bool {
         if password?.characters.count > 5 {
             return true
         } else {

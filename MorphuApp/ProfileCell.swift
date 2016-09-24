@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProfileCellDelagate {
-    func followAction(sender: UIButton) -> ()
+    func followAction(_ sender: UIButton) -> ()
 }
 
 class ProfileCell: UITableViewCell {
@@ -33,10 +33,10 @@ class ProfileCell: UITableViewCell {
             followingCount?.text = String(user?.getFollowing().count ?? 0)
             
             if user?.userId == API.sharedInstance.getActiveUser().userId {
-                followButton?.setImage(nil, forState: .Normal)
-                followButton?.enabled = false
+                followButton?.setImage(nil, for: UIControlState())
+                followButton?.isEnabled = false
             } else {
-                followButton?.selected = API.sharedInstance.getActiveUser().isFollowing(user)
+                followButton?.isSelected = API.sharedInstance.getActiveUser().isFollowing(user)
             }
         }
     }
@@ -45,13 +45,13 @@ class ProfileCell: UITableViewCell {
         didSet {
             followButton?.tintColor = color
             if color == redColor {
-                followButton?.setImage(UIImage(named: "Followed Red"), forState: .Selected)
+                followButton?.setImage(UIImage(named: "Followed Red"), for: .selected)
             } else if color == orangeColor {
-                followButton?.setImage(UIImage(named: "Followed Orange"), forState: .Selected)
+                followButton?.setImage(UIImage(named: "Followed Orange"), for: .selected)
             } else if color == blueColor {
-                followButton?.setImage(UIImage(named: "Followed Blue"), forState: .Selected)
+                followButton?.setImage(UIImage(named: "Followed Blue"), for: .selected)
             } else {
-                followButton?.setImage(UIImage(named: "Followed Purple"), forState: .Selected)
+                followButton?.setImage(UIImage(named: "Followed Purple"), for: .selected)
             }
         }
     }

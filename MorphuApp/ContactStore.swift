@@ -12,7 +12,7 @@ import Contacts
 
 class ContactStore {
     
-    private var contacts = Set<Contact>()
+    fileprivate var contacts = Set<Contact>()
     
     let searchBar = UISearchBar()
     
@@ -20,11 +20,11 @@ class ContactStore {
         
         let contactStore = CNContactStore()
         
-        let keysToFetch = [CNContactFormatter.descriptorForRequiredKeysForStyle(.FullName), CNContactPhoneNumbersKey]
+        let keysToFetch = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName), CNContactPhoneNumbersKey] as [Any]
         
         var allContainers: [CNContainer] = []
         do {
-            allContainers = try contactStore.containersMatchingPredicate(nil)
+            allContainers = try contactStore.containers(matching: nil)
         } catch {
             print("Error fetching containers")
         }
@@ -32,17 +32,17 @@ class ContactStore {
         
         // Loop the containers
         for container in allContainers {
-            let fetchPredicate = CNContact.predicateForContactsInContainerWithIdentifier(container.identifier)
+            let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
             
             do {
-                let containerResults = try contactStore.unifiedContactsMatchingPredicate(fetchPredicate, keysToFetch: keysToFetch)
+                let containerResults = try contactStore.unifiedContacts(matching: fetchPredicate, keysToFetch: keysToFetch as! [CNKeyDescriptor])
                 // Put them into "contacts"
                 for result in containerResults {
                     let contact = Contact(name: result.givenName + " " + result.familyName)
                     
                     for phoneNumber:CNLabeledValue in result.phoneNumbers {
-                        let number = phoneNumber.value as! CNPhoneNumber
-                        if let phoneType = phoneType(rawValue: phoneNumber.label) {
+                        let number = phoneNumber.value 
+                        if let phoneType = phoneType(rawValue: phoneNumber.label!) {
                             contact.addPhoneNumber(number.stringValue, type: phoneType)
                         } else {
                             print(phoneNumber.label, contact.name)

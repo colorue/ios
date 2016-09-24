@@ -213,6 +213,7 @@
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.contentDescription forKey:@"description"];
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.contentURL forKey:@"link"];
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.quote forKey:@"quote"];
+    [FBSDKInternalUtility dictionary:parameters setObject:[self hashtagStringFromHashtag:linkContent.hashtag] forKey:@"hashtag"];
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.contentTitle forKey:@"name"];
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.imageURL forKey:@"picture"];
     [FBSDKInternalUtility dictionary:parameters setObject:linkContent.ref forKey:@"ref"];
@@ -837,7 +838,7 @@ forShareOpenGraphContent:(FBSDKShareOpenGraphContent *)openGraphContent
     }
     return NO;
   }
-  // ensure that the file exists.  per the latest spec for NSFileManager, we should not be checking for file existance,
+  // ensure that the file exists.  per the latest spec for NSFileManager, we should not be checking for file existence,
   // so they have removed that option for URLs and discourage it for paths, so we just construct a mapped NSData.
   NSError *fileError;
   if (![[NSData alloc] initWithContentsOfURL:URL

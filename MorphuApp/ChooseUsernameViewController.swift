@@ -34,83 +34,83 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
         usernameInput.tintColor = color
         checkAvailabilityButton.tintColor = color
         
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         
         usernameValidIndicator.image = invalidImage
-        nextButton.enabled = false
+        nextButton.isEnabled = false
         
         usernameInput.delegate = self
-        usernameInput.addTarget(self, action: #selector(ChooseUsernameViewController.usernameDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        usernameInput.addTarget(self, action: #selector(ChooseUsernameViewController.usernameDidChange(_:)), for: UIControlEvents.editingChanged)
         
         usernameInput.text = newUser.username
         self.usernameDidChange(usernameInput)
         self.checkAvailability(checkAvailabilityButton)
         
-        checkAvailabilityButton.enabled = false
+        checkAvailabilityButton.isEnabled = false
     
         let drawingLook = UILongPressGestureRecognizer(target: self, action: #selector(SignUpViewController.drawingTap(_:)))
         drawingLook.minimumPressDuration = 0.2
         drawing.addGestureRecognizer(drawingLook)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         self.navigationController!.navigationBar.tintColor = blueColor
         
         usernameInput.becomeFirstResponder()
-        FIRAnalytics.logEventWithName("ChooseUsernameViewController", parameters: [:])
+        FIRAnalytics.logEvent(withName: "ChooseUsernameViewController", parameters: [:])
     }
     
-    func drawingTap(sender: UILongPressGestureRecognizer) {
-        if sender.state ==  .Began {
+    func drawingTap(_ sender: UILongPressGestureRecognizer) {
+        if sender.state ==  .began {
             usernameInput.resignFirstResponder()
-        } else if sender.state ==  .Ended {
+        } else if sender.state ==  .ended {
             usernameInput.becomeFirstResponder()
         }
     }
     
-    @objc private func usernameDidChange(sender: UITextField) {
-        nextButton.enabled = false
-        checkAvailabilityButton.hidden = false
-        usernameValidIndicator.hidden = true
+    @objc fileprivate func usernameDidChange(_ sender: UITextField) {
+        nextButton.isEnabled = false
+        checkAvailabilityButton.isHidden = false
+        usernameValidIndicator.isHidden = true
         
 //        self.newUser.username = sender.text
 
         api.releaseUsernameHold()
 
         if isValidUsername(sender.text!) {
-            checkAvailabilityButton.enabled = true
+            checkAvailabilityButton.isEnabled = true
         } else {
-            checkAvailabilityButton.enabled = false
+            checkAvailabilityButton.isEnabled = false
         }
     }
     
-    @IBAction func checkAvailability(sender: UIButton) {
-        checkAvailabilityButton.hidden = true
+    @IBAction func checkAvailability(_ sender: UIButton) {
+        checkAvailabilityButton.isHidden = true
         api.checkUsernameAvaliability(usernameInput.text!, callback: usernameAvaliableCallback)
     }
     
-    @objc private func usernameAvaliableCallback(avaliable: Bool) {
+    @objc fileprivate func usernameAvaliableCallback(_ avaliable: Bool) {
         // stopSpining
-        usernameValidIndicator.hidden = false
+        usernameValidIndicator.isHidden = false
         if avaliable {
             usernameValidIndicator.image = validImage
-            nextButton.enabled = true
+            nextButton.isEnabled = true
         } else {
             usernameValidIndicator.image = invalidImage
         }
     }
     
-    private func isValidUsername(candidate: String) -> Bool {
+    fileprivate func isValidUsername(_ candidate: String) -> Bool {
         let usernameRegex = "[A-Z0-9a-z_]{2,15}"
-        return NSPredicate(format: "SELF MATCHES %@", usernameRegex).evaluateWithObject(candidate)
+        return NSPredicate(format: "SELF MATCHES %@", usernameRegex).evaluate(with: candidate)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if nextButton.enabled {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if nextButton.isEnabled {
             usernameInput.resignFirstResponder()
-            UIApplication.sharedApplication().sendAction(nextButton.action, to: nextButton.target, from: nil, forEvent: nil)
+            UIApplication.shared.sendAction(nextButton.action!, to: nextButton.target, from: nil, for: nil)
         } else {
             self.checkAvailability(checkAvailabilityButton)
         }

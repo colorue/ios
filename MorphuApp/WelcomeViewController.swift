@@ -23,33 +23,33 @@ class WelcomeViewController: UIViewController, APIDelagate {
         
         signUpButton.layer.cornerRadius = 4
         signUpButton.layer.borderWidth = 1
-        signUpButton.layer.borderColor = blackColor.CGColor
+        signUpButton.layer.borderColor = blackColor.cgColor
         
         logginButton.layer.cornerRadius = 4
         logginButton.layer.borderWidth = 1
-        logginButton.layer.borderColor = blackColor.CGColor
+        logginButton.layer.borderColor = blackColor.cgColor
         
         API.sharedInstance.loadPopularUsers()
     }
 
     
-    @IBAction func facebookButton(sender: AnyObject) {
+    @IBAction func facebookButton(_ sender: AnyObject) {
         activityIndicator.startAnimating()
         AuthAPI.sharedInstance.connectWithFacebook(self, callback: facebookCallback)
     }
     
-    func facebookCallback(result: FacebookLoginResult, user: FIRUser?) {
+    func facebookCallback(_ result: FacebookLoginResult, user: FIRUser?) {
         switch (result) {
-        case .Failed:
+        case .failed:
             activityIndicator.stopAnimating()
-        case .Registered:
+        case .registered:
             activityIndicator.stopAnimating()
             API.sharedInstance.loadFacebookFriends()
-            FIRAnalytics.logEventWithName("registeredWithFacebook", parameters: [:])
+            FIRAnalytics.logEvent(withName: "registeredWithFacebook", parameters: [:])
 
-            self.performSegueWithIdentifier("facebookRegister", sender: self)
-        case .LoggedIn:
-            FIRAnalytics.logEventWithName("loggedInWithFacebook", parameters: [:])
+            self.performSegue(withIdentifier: "facebookRegister", sender: self)
+        case .loggedIn:
+            FIRAnalytics.logEvent(withName: "loggedInWithFacebook", parameters: [:])
             API.sharedInstance.delagate = self
             API.sharedInstance.loadData()
         }
@@ -57,6 +57,6 @@ class WelcomeViewController: UIViewController, APIDelagate {
     
     func refresh() {
         activityIndicator.stopAnimating()
-        self.performSegueWithIdentifier("toMainController", sender: self)
+        self.performSegue(withIdentifier: "toMainController", sender: self)
     }
 }

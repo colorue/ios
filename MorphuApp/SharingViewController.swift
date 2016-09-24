@@ -20,44 +20,44 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     var drawing: UIImage?
     var popoverController: DrawingViewController?
     
-    let prefs = NSUserDefaults.standardUserDefaults()
+    let prefs = UserDefaults.standard
 
     
     @IBOutlet weak var drawingImage: UIImageView!
     
     @IBOutlet weak var saveButton: UIButton! {
         didSet {
-            saveButton.addTarget(self, action: #selector(SharingViewController.saveDrawing(_:)), forControlEvents: .TouchUpInside)
+            saveButton.addTarget(self, action: #selector(SharingViewController.saveDrawing(_:)), for: .touchUpInside)
         }
     }
 
     @IBOutlet weak var sendButton: UIButton! {
         didSet {
-            sendButton.addTarget(self, action: #selector(SharingViewController.sendDrawing(_:)), forControlEvents: .TouchUpInside)
+            sendButton.addTarget(self, action: #selector(SharingViewController.sendDrawing(_:)), for: .touchUpInside)
         }
     }
     
     @IBOutlet weak var shareButton: UIButton! {
         didSet {
             shareButton.layer.cornerRadius = cornerRadius
-            shareButton.addTarget(self, action: #selector(SharingViewController.shareToFacebook(_:)), forControlEvents: .TouchUpInside)
+            shareButton.addTarget(self, action: #selector(SharingViewController.shareToFacebook(_:)), for: .touchUpInside)
         }
     }
     
     @IBOutlet weak var postButton: UIButton! {
         didSet {
             postButton.layer.cornerRadius = cornerRadius
-            postButton.addTarget(self, action: #selector(SharingViewController.postDrawing(_:)), forControlEvents: .TouchUpInside)
+            postButton.addTarget(self, action: #selector(SharingViewController.postDrawing(_:)), for: .touchUpInside)
         }
     }
     
-    @IBAction func quitSharing(sender: UIButton) {
-        UIView.animateWithDuration(0.3, animations: {
+    @IBAction func quitSharing(_ sender: UIButton) {
+        UIView.animate(withDuration: 0.3, animations: {
             self.popoverController!.view.alpha = 1.0
             self.popoverController!.navigationController?.navigationBar.alpha = 1.0
         })
         
-        popoverController!.dismissViewControllerAnimated(true, completion: nil)
+        popoverController!.dismiss(animated: true, completion: nil)
     }
     
     
@@ -65,8 +65,8 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
         self.drawingImage.image = drawing
     }
     
-    @objc private func shareToFacebook(sender: UIButton) {
-        FIRAnalytics.logEventWithName("shareToFacebookClickedSharing", parameters: [:])
+    @objc fileprivate func shareToFacebook(_ sender: UIButton) {
+        FIRAnalytics.logEvent(withName: "shareToFacebookClickedSharing", parameters: [:])
 
         let content = FBSDKSharePhotoContent()
         let photo = FBSDKSharePhoto(image: drawing, userGenerated: true)
@@ -75,22 +75,22 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
         let dialog = FBSDKShareDialog()
         dialog.fromViewController = self
         dialog.shareContent = content
-        dialog.mode = FBSDKShareDialogMode.Native
+        dialog.mode = FBSDKShareDialogMode.native
         if !dialog.show() {
-            dialog.mode = FBSDKShareDialogMode.Automatic
+            dialog.mode = FBSDKShareDialogMode.automatic
             dialog.show()
         }
     }
     
-    @objc private func saveDrawing(sender: UIButton) {
+    @objc fileprivate func saveDrawing(_ sender: UIButton) {
         if let drawing = drawing {
             UIImageWriteToSavedPhotosAlbum(drawing, self, nil, nil)
-            FIRAnalytics.logEventWithName("savedDrawingFromSharing", parameters: [:])
-            sender.enabled = false
+            FIRAnalytics.logEvent(withName: "savedDrawingFromSharing", parameters: [:])
+            sender.isEnabled = false
         }
     }
     
-    @objc private func sendDrawing(sender: UIButton) {
+    @objc fileprivate func sendDrawing(_ sender: UIButton) {
         if (MFMessageComposeViewController.canSendText()) {
             if let image = drawing {
                 controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "colorue.png")
@@ -98,29 +98,29 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
             controller.messageComposeDelegate = self
             self.resignFirstResponder()
             
-            FIRAnalytics.logEventWithName("sendDrawingClickedSharing", parameters: [:])
+            FIRAnalytics.logEvent(withName: "sendDrawingClickedSharing", parameters: [:])
 
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
-    func postDrawing(sender: UIButton) {
-        FIRAnalytics.logEventWithName("postDrawing", parameters: [:])
+    func postDrawing(_ sender: UIButton) {
+        FIRAnalytics.logEvent(withName: "postDrawing", parameters: [:])
 
-        UIView.animateWithDuration(0.3, animations: {
+        UIView.animate(withDuration: 0.3, animations: {
             self.popoverController!.view.alpha = 1.0
             self.popoverController!.navigationController?.navigationBar.alpha = 1.0
        })
         
-        popoverController!.dismissViewControllerAnimated(true, completion: nil)
+        popoverController!.dismiss(animated: true, completion: nil)
         popoverController!.postDrawing()
     }
     
     
     // MARK: MFMessageComposeViewControllerDelegate Methods
     
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
         self.controller = MFMessageComposeViewController()
     }
 }

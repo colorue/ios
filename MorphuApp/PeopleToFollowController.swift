@@ -16,7 +16,7 @@ class PeopleToFollowController: UserListViewController {
         self.userSource =  api.getSuggustedUsers
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.tableView.reloadData()
     }

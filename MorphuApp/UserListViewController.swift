@@ -30,7 +30,7 @@ class UserListViewController: UITableViewController {
         tableView.backgroundColor = backgroundColor
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
         self.tableView.reloadData()
@@ -38,33 +38,33 @@ class UserListViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userSource().count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("UserCell")! as! UserCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell")! as! UserCell
         cell.delagate = self
         cell.color = self.tintColor
         return cell
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell,
-                            forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
+                            forRowAt indexPath: IndexPath) {
         if let userCell = cell as? UserCell {
-            userCell.user = userSource()[indexPath.row]
+            userCell.user = userSource()[(indexPath as NSIndexPath).row]
         }
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 52.0
     }
     
-    @IBAction func pullRefresh(sender: UIRefreshControl) {
+    @IBAction func pullRefresh(_ sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
     }
@@ -78,30 +78,30 @@ extension UserListViewController: APIDelagate {
 
 extension UserListViewController: UserCellDelagate {
     
-    func followAction(userCell: UserCell) {
-        userCell.followButton?.selected = true
+    func followAction(_ userCell: UserCell) {
+        userCell.followButton?.isSelected = true
         
         api.getActiveUser().follow(userCell.user!)
         api.follow(userCell.user!)
-        FIRAnalytics.logEventWithName("followedUser", parameters: [:])
+        FIRAnalytics.logEvent(withName: "followedUser", parameters: [:])
     }
     
-    func unfollowAction(userCell: UserCell) {
+    func unfollowAction(_ userCell: UserCell) {
         if let user = userCell.user {
-            let actionSelector = UIAlertController(title: "Unfollow \(user.username)?", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
-            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
-            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.Destructive,
+            let actionSelector = UIAlertController(title: "Unfollow \(user.username)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.destructive,
                 handler: {(alert: UIAlertAction!) in self.unfollow(userCell)}))
             
-            self.presentViewController(actionSelector, animated: true, completion: nil)
+            self.present(actionSelector, animated: true, completion: nil)
         }
     }
     
-    private func unfollow(userCell: UserCell) {
-        userCell.followButton?.selected = false
+    fileprivate func unfollow(_ userCell: UserCell) {
+        userCell.followButton?.isSelected = false
         api.getActiveUser().unfollow(userCell.user!)
         api.unfollow(userCell.user!)
-        FIRAnalytics.logEventWithName("unfollowedUser", parameters: [:])
+        FIRAnalytics.logEvent(withName: "unfollowedUser", parameters: [:])
     }
 }
 
@@ -109,14 +109,14 @@ extension UserListViewController {
     
     // MARK: Segue Methods
 
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.controller!.performSegueWithIdentifier("showUser", sender: self)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.controller!.performSegue(withIdentifier: "showUser", sender: self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showUser" {
-            let targetController = segue.destinationViewController as! ProfileViewController
-            if let row = tableView.indexPathForSelectedRow?.row {
+            let targetController = segue.destination as! ProfileViewController
+            if let row = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row {
                 targetController.tintColor = self.tintColor
                 targetController.navigationItem.title = userSource()[row].username
                 targetController.userInstance = userSource()[row]

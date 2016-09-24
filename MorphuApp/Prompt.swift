@@ -12,19 +12,19 @@ class Prompt {
     let user: User
     let timeStamp: Double
     let text: String
-    private var promptId: String
+    fileprivate var promptId: String
     var drawings = [Drawing]()
     
     let api = API.sharedInstance
     
-    init(promptId: String = "", user: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, text: String = "") {
+    init(promptId: String = "", user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, text: String = "") {
         self.promptId = promptId
         self.user = user
         self.timeStamp = timeStamp
         self.text = text
     }
     
-    func setPromptId(promptId: String) {
+    func setPromptId(_ promptId: String) {
         self.promptId = promptId
     }
     
@@ -33,7 +33,7 @@ class Prompt {
     }
     
     func getTimeSinceSent() -> String {
-        let secondsSince =  NSDate().timeIntervalSince1970 + self.timeStamp
+        let secondsSince =  Date().timeIntervalSince1970 + self.timeStamp
         switch(secondsSince) {
         case 0..<60:
             return "now"

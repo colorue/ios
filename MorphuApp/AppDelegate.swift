@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     var window: UIWindow?
     
-    func application(application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
 //        if dev {
 //            FIRApp.configureWithOptions(FIROptions(googleAppID: "1:150640015777:ios:d62930c5fb1f8d6f", bundleID: "Wight-Dylan.Colorue", GCMSenderID: "150640015777", APIKey: "AIzaSyD7NrfnBoVFGbaGtjJfdE4Xo9C0e6AjQfQ", clientID: "150640015777-ne2252fp6vf1bq29484dlv1hp2mtir7h.apps.googleusercontent.com", trackingID: "", androidClientID: "", databaseURL: "https://coloruedev.firebaseio.com", storageBucket: "coloruedev.appspot.com", deepLinkURLScheme: ""))
@@ -30,27 +30,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         FIRDatabase.database().persistenceEnabled = true
         
-        let config = UAConfig.defaultConfig()
-        config.analyticsEnabled = false
-        config.developmentLogLevel = UALogLevel.Warn
+        let config = UAConfig.default()
+        config.isAnalyticsEnabled = false
+        config.developmentLogLevel = UALogLevel.warn
         UAirship.takeOff(config)
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         FBSDKAppEvents.activateApp()
     }
     
-    func application(application: UIApplication, openURL url: NSURL,
-                     sourceApplication: String?, annotation: AnyObject) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, openURL: url, sourceApplication: sourceApplication, annotation: annotation)
+    func application(_ application: UIApplication, open url: URL,
+                     sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
     
-    func applicationWillResignActive(application: UIApplication) {
-        let notificationCenter = NSNotificationCenter.defaultCenter()
+    func applicationWillResignActive(_ application: UIApplication) {
+        let notificationCenter = NotificationCenter.default
         // Saves active drawing
-        notificationCenter.postNotificationName(UIApplicationWillResignActiveNotification, object: nil)
+        notificationCenter.post(name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
     }
     
     
@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     
     // MARK: TabBarControllerDelegate Methods
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let api = API.sharedInstance
         
         let destinationNavigationController = viewController as? UINavigationController
@@ -86,7 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         } else if targetController is DrawingViewController {
             
             if let drawingController = R.storyboard.drawing.drawingViewController() {
-                tabBarController.presentViewController(drawingController, animated: true, completion: nil)
+                tabBarController.present(drawingController, animated: true, completion: nil)
                 return false
             }
         

@@ -9,8 +9,8 @@
 import UIKit
 
 protocol DrawingCellDelagate {
-    func presentDrawingActions(drawing: Drawing)
-    func likeButtonPressed(drawing: Drawing)
+    func presentDrawingActions(_ drawing: Drawing)
+    func likeButtonPressed(_ drawing: Drawing)
 }
 
 class DrawingCell: UITableViewCell {
@@ -53,8 +53,8 @@ class DrawingCell: UITableViewCell {
     var delagate: DrawingCellDelagate? {
         didSet {
             // TODO: move to init
-            uploadButton?.addTarget(self, action: #selector(DrawingCell.presentDrawingActions(_:)), forControlEvents: .TouchUpInside)
-            likeButton?.addTarget(self, action: #selector(DrawingCell.likeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+            uploadButton?.addTarget(self, action: #selector(DrawingCell.presentDrawingActions(_:)), for: .touchUpInside)
+            likeButton?.addTarget(self, action: #selector(DrawingCell.likeButtonPressed(_:)), for: .touchUpInside)
         }
     }
     
@@ -62,7 +62,7 @@ class DrawingCell: UITableViewCell {
         didSet {
             
             if let url = drawing?.url {
-                drawingImage?.kf_setImageWithURL(url, placeholderImage: nil, optionsInfo: [.Transition(.Fade(0.2))],
+                drawingImage?.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.2))],
                                                  completionHandler: { (image, error, cacheType, imageURL) -> () in
                     self.drawing?.setImage(image)
                 })
@@ -71,7 +71,7 @@ class DrawingCell: UITableViewCell {
             profileImage?.image = drawing?.getArtist().profileImage
             creator?.text = drawing?.getArtist().username
             timeCreated?.text = drawing?.getTimeSinceSent()
-            likeButton?.selected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false
+            likeButton?.isSelected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false
             
             if drawing?.getComments().count == 1 {
                 commentCount?.text = "1 comment"
@@ -82,29 +82,29 @@ class DrawingCell: UITableViewCell {
         }
     }
     
-    @objc private func presentDrawingActions(sender: UIButton) {
+    @objc fileprivate func presentDrawingActions(_ sender: UIButton) {
         guard let drawing = drawing else { return }
         delagate?.presentDrawingActions(drawing)
     }
     
-    @objc private func likeButtonPressed(sender: UIButton) {
+    @objc fileprivate func likeButtonPressed(_ sender: UIButton) {
         guard let drawing = drawing else { return }
         
-        sender.selected = !sender.selected
+        sender.isSelected = !sender.isSelected
         delagate?.likeButtonPressed(drawing)
         setLikes()
     }
         
-    private func setLikes() {
+    fileprivate func setLikes() {
         let likeCount = drawing?.getLikes().count ?? 0
         if likeCount == 0 {
             likes?.text = ""
-            likesButton?.enabled = false
+            likesButton?.isEnabled = false
         } else if likeCount == 1 {
-            likesButton?.enabled = true
+            likesButton?.isEnabled = true
             likes?.text = "1 like"
         } else {
-            likesButton?.enabled = true
+            likesButton?.isEnabled = true
             likes?.text = String(likeCount) + " likes"
         }
     }

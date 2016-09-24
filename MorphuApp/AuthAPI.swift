@@ -10,12 +10,12 @@ import Firebase
 
 import FBSDKCoreKit
 import FBSDKLoginKit
-import SinchVerification
+//import SinchVerification
 
 enum FacebookLoginResult {
-    case Failed
-    case Registered
-    case LoggedIn
+    case failed
+    case registered
+    case loggedIn
 }
 
 class AuthAPI {
@@ -24,17 +24,17 @@ class AuthAPI {
 
     static let sharedInstance = AuthAPI()
     
-    private let myRootRef = FIRDatabase.database().reference()
-    private let facebookLogin = FBSDKLoginManager()
+    fileprivate let myRootRef = FIRDatabase.database().reference()
+    fileprivate let facebookLogin = FBSDKLoginManager()
     
     lazy var newUser = NewUser()
     
     // MARK: Login/Registration Methods
     
-    func checkLoggedIn(callback: (Bool) -> ()) {
+    func checkLoggedIn(_ callback: @escaping (Bool) -> ()) {
                 
         if let userID = FIRAuth.auth()?.currentUser?.uid {
-            self.myRootRef.child("users/\(userID)").observeEventType(.Value, withBlock: { snapshot in
+            self.myRootRef.child("users/\(userID)").observe(.value, with: { snapshot in
                 
                 callback(snapshot.exists())
             })
@@ -43,30 +43,30 @@ class AuthAPI {
         }
     }
     
-    func connectWithFacebook(viewController: UIViewController, callback: (FacebookLoginResult, FIRUser?)  -> ()) {
+    func connectWithFacebook(_ viewController: UIViewController, callback: @escaping (FacebookLoginResult, FIRUser?)  -> ()) {
         
-        facebookLogin.logInWithReadPermissions(["email", "user_friends"], fromViewController: viewController, handler: {
+        facebookLogin.logIn(withReadPermissions: ["email", "user_friends"], from: viewController, handler: {
             (facebookResult, facebookError) -> Void in
             
             if facebookError != nil {
                 print("Facebook login failed. Error \(facebookError)")
-                callback(.Failed, nil)
-            } else if facebookResult.isCancelled {
+                callback(.failed, nil)
+            } else if (facebookResult?.isCancelled)! {
                 print("Facebook login was cancelled.")
-                callback(.Failed, nil)
+                callback(.failed, nil)
             } else {
-                let credential = FIRFacebookAuthProvider.credentialWithAccessToken(FBSDKAccessToken.currentAccessToken().tokenString)
+                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
                 
-                FIRAuth.auth()?.signInWithCredential(credential) { (user, error) in
+                FIRAuth.auth()?.signIn(with: credential) { (user, error) in
                     
                     if error != nil {
                         print("Login failed. \(error)")
-                        callback(.Failed, nil)
+                        callback(.failed, nil)
                     } else {
                         if let user = user {
-                            self.myRootRef.child("users/\(user.uid)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+                            self.myRootRef.child("users/\(user.uid)").observeSingleEvent(of: .value, with: {snapshot in
                                 if (snapshot.exists()) {
-                                    callback(.LoggedIn, user)
+                                    callback(.loggedIn, user)
                                 } else {
                                     self.newUser.userId = user.uid
                                     self.newUser.email = user.email
@@ -76,12 +76,12 @@ class AuthAPI {
                                     
                                     self.getActiveFBID({ (FBID: String) -> () in
                                         self.newUser.FacebookID = FBID
-                                        callback(.Registered, user)
+                                        callback(.registered, user)
                                     })
                                 }
                             })
                         } else {
-                            callback(.Failed, nil)
+                            callback(.failed, nil)
                         }
                     }
                 }
@@ -89,8 +89,8 @@ class AuthAPI {
         })
     }
     
-    func createEmailAccount(newUser: NewUser, callback: (Bool) -> ()) {
-        FIRAuth.auth()?.createUserWithEmail(newUser.email!, password: newUser.password!) { (user, error) in
+    func createEmailAccount(_ newUser: NewUser, callback: @escaping (Bool) -> ()) {
+        FIRAuth.auth()?.createUser(withEmail: newUser.email!, password: newUser.password!) { (user, error) in
             if error == nil {
                 newUser.userId = user!.uid
                 self.addNewUserToDatabase(newUser)
@@ -101,8 +101,8 @@ class AuthAPI {
         }
     }
     
-    func emailLogin(email: String, password: String, callback: (FIRUser?)-> ()) {
-        FIRAuth.auth()?.signInWithEmail(email, password: password) { (user, error) in
+    func emailLogin(_ email: String, password: String, callback: @escaping (FIRUser?)-> ()) {
+        FIRAuth.auth()?.signIn(withEmail: email, password: password) { (user, error) in
             if let error = error {
                 print(error)
                 callback(nil)
@@ -112,7 +112,7 @@ class AuthAPI {
         }
     }
     
-    func addNewUserToDatabase(newUser: NewUser) {
+    func addNewUserToDatabase(_ newUser: NewUser) {
         self.myRootRef.child("users/\(newUser.userId!)").setValue(newUser.toAnyObject())
         self.myRootRef.child("userLookup/usernames/\(newUser.username!)").setValue(newUser.userId!)
         
@@ -135,8 +135,8 @@ class AuthAPI {
     
     // MARK: Username Methods
     
-    func checkUsernameAvaliability(username: String, callback: (Bool) -> ()) {
-        self.myRootRef.child("userLookup/usernames/\(username)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+    func checkUsernameAvaliability(_ username: String, callback: @escaping (Bool) -> ()) {
+        self.myRootRef.child("userLookup/usernames/\(username)").observeSingleEvent(of: .value, with: {snapshot in
             if (snapshot.exists()) {
                 callback(false)
             } else {
@@ -159,24 +159,24 @@ class AuthAPI {
     
     // MARK: Email/Phone Methods
 
-    func callVerification(phoneNumber: String, callback: (Bool) -> ()) {
-        let verification = CalloutVerification(applicationKey: "938e93e3-fab4-4ce4-97e1-3e463891326a", phoneNumber: phoneNumber)
-        verification.initiate({(valid, error) in
-            if let error = error {
-                print("verification error: \(error)")
-                callback(false)
-            } else if !valid {
-                print("invalid verification")
-                callback(false)
-            } else {
-                print("number verified")
-                callback(true)
-            }
-        })
+    func callVerification(_ phoneNumber: String, callback: @escaping (Bool) -> ()) {
+//        let verification = CalloutVerification(applicationKey: "938e93e3-fab4-4ce4-97e1-3e463891326a", phoneNumber: phoneNumber)
+//        verification.initiate({(valid, error) in
+//            if let error = error {
+//                print("verification error: \(error)")
+//                callback(false)
+//            } else if !valid {
+//                print("invalid verification")
+//                callback(false)
+//            } else {
+//                print("number verified")
+//                callback(true)
+//            }
+//        })
     }
     
-    func resetPasswordEmail(email: String, callback: (Bool) -> ()) {
-        FIRAuth.auth()?.sendPasswordResetWithEmail(email) { error in
+    func resetPasswordEmail(_ email: String, callback: @escaping (Bool) -> ()) {
+        FIRAuth.auth()?.sendPasswordReset(withEmail: email) { error in
             if let error = error {
                 print(error)
                 callback(false)
@@ -189,19 +189,18 @@ class AuthAPI {
     
     // MARK: Facebook Graph Methods
     
-    func getActiveFBID(callback: (String) -> ()) {
+    func getActiveFBID(_ callback: @escaping (String) -> ()) {
         
-        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, HTTPMethod: "GET")
+        let request = FBSDKGraphRequest(graphPath: "/me", parameters: nil, httpMethod: "GET")
         
-        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
-            result:AnyObject!, error:NSError!) -> Void in
-        
+        request?.start(completionHandler: { (connection, result, error) in
+            
             if let error = error {
-            print(error.description)
+                print(error.localizedDescription)
             } else {
                 let resultdict = result as! NSDictionary
-                callback(resultdict.objectForKey("id") as! String)
+                callback(resultdict.object(forKey: "id") as! String)
             }
-        }
+        })
     }
 }

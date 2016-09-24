@@ -23,21 +23,21 @@ class PromptViewController: DrawingListViewController {
     // MARK: - View Setup
     
     override func viewDidLoad() {
-        bottomRefreshControl.addTarget(self, action: #selector(PromptViewController.refresh), forControlEvents: .ValueChanged)
+        bottomRefreshControl.addTarget(self, action: #selector(PromptViewController.refresh), for: .valueChanged)
         
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Draw", style: .Plain,
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Draw", style: .plain,
                                                                 target: self, action: #selector(PromptViewController.drawPrompt(_:)))
         super.viewDidLoad()
     }
     
-    @objc private func drawPrompt(sender: UIBarButtonItem) {
+    @objc fileprivate func drawPrompt(_ sender: UIBarButtonItem) {
         guard let prompt = prompt else { return }
         
         let activity = R.storyboard.drawing.drawingViewController()!
         if let drawingViewController = activity.topViewController as? DrawingViewController {
             drawingViewController.prompt = prompt
-            self.presentViewController(activity, animated: true, completion: nil)
-            FIRAnalytics.logEventWithName("drawPrompt", parameters: ["text":prompt.text])
+            self.present(activity, animated: true, completion: nil)
+            FIRAnalytics.logEvent(withName: "drawPrompt", parameters: ["text":prompt.text as NSObject])
         }
     }
 }

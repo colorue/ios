@@ -10,7 +10,7 @@ import Foundation
 import Firebase
 import FBSDKCoreKit
 import FBSDKLoginKit
-import SinchVerification
+//import SinchVerification
 import Alamofire
 
 protocol APIDelagate {
@@ -21,68 +21,70 @@ class API {
     
     static let sharedInstance = API()
 
-    private let myRootRef = FIRDatabase.database().reference()
+    fileprivate let myRootRef = FIRDatabase.database().reference()
     
     let storageRef = FIRStorage.storage().reference()
     
     var airshipKey = ""
 
-    private var drawingOfTheDay = [Drawing]()
-    private var wall = [Drawing]()
-    private var facebookFriends = Set<User>()
-    private var contacts = Set<User>()
-    private var popularUsers = Set<User>()
-    private var prompts = Set<Prompt>()
+    fileprivate var drawingOfTheDay = [Drawing]()
+    fileprivate var wall = [Drawing]()
+    fileprivate var facebookFriends = Set<User>()
+    fileprivate var contacts = Set<User>()
+    fileprivate var popularUsers = Set<User>()
+    fileprivate var prompts = Set<Prompt>()
 
-    private var activeUser: User?
+    fileprivate var activeUser: User?
     
-    private var userDict = [String: User]()
-    private var drawingDict = [String: Drawing]()
-    private var imageDict = [String: UIImage]()
+    fileprivate var userDict = [String: User]()
+    fileprivate var drawingDict = [String: Drawing]()
+    fileprivate var imageDict = [String: UIImage]()
     
-    private var oldestTimeLoaded: Double = -99999999999999
-    private var oldestExploreLoaded: Double = -99999999999999
-    private var newestTimeLoaded: Double = 0
+    fileprivate var oldestTimeLoaded: Double = -99999999999999
+    fileprivate var oldestExploreLoaded: Double = -99999999999999
+    fileprivate var newestTimeLoaded: Double = 0
     
-    private lazy var contactStore = ContactStore()
+    fileprivate lazy var contactStore = ContactStore()
     
     var delagate: APIDelagate?
     
     // MARK: Internal methods
     
-    private func getDrawing(drawingId: String, callback: (Drawing, Bool) -> ()) { //callback
+    fileprivate func getDrawing(_ drawingId: String, callback: @escaping (Drawing, Bool) -> ()) { //callback
         if let drawing = self.drawingDict[drawingId] {
             callback(drawing, false)
         } else {
         
-        self.myRootRef.child("drawings/\(drawingId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+        self.myRootRef.child("drawings/\(drawingId)").observeSingleEvent(of: .value, with: {snapshot in
             if (!snapshot.exists()) { return }
             
-            self.getUser(snapshot.value!["artist"] as! String, callback: { (artist: User) -> () in
+            guard let value = snapshot.value as? [String:AnyObject] else { return }
+            
+            self.getUser(value["artist"] as! String, callback: { (artist: User) -> () in
                 
-                let drawing = Drawing(artist: artist, timeStamp: snapshot.value!["timeStamp"] as! Double, drawingId: drawingId)
+                let drawing = Drawing(artist: artist, timeStamp: value["timeStamp"] as! Double, drawingId: drawingId)
                 
-                if let urlString = snapshot.value!["url"] as?  String {
-                    drawing.url = NSURL(string: urlString)
+                if let urlString = value["url"] as?  String {
+                    drawing.url = URL(string: urlString)
                 } else {
                     self.setDrawingURL(drawingId, callback: { url in
                         drawing.url = url
                     })
                 }
                 
-                self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.myRootRef.child("drawings/\(drawingId)/likes").observe(.childAdded, with: {snapshot in
                     self.getUser(snapshot.key, callback: { (liker: User) -> () in
                         drawing.like(liker)
                     })
                 })
                 
-                self.myRootRef.child("drawings/\(drawingId)/likes").observeEventType(.ChildRemoved, withBlock: {snapshot in
+                self.myRootRef.child("drawings/\(drawingId)/likes").observe(.childRemoved, with: {snapshot in
                     self.getUser(snapshot.key, callback: { (unliker: User) -> () in
                         drawing.unlike(unliker)
                     })
                 })
                 
-                self.myRootRef.child("drawings/\(drawingId)/comments").observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.myRootRef.child("drawings/\(drawingId)/comments").observe(.childAdded, with: {snapshot in
                     self.getComment(snapshot.key, callback: { (comment: Comment) -> () in
                         drawing.addComment(comment)
                     })
@@ -96,33 +98,37 @@ class API {
         }
     }
     
-    private func getComment(commentId: String, callback: (Comment) -> ()) {
-        self.myRootRef.child("comments/\(commentId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+    fileprivate func getComment(_ commentId: String, callback: @escaping (Comment) -> ()) {
+        self.myRootRef.child("comments/\(commentId)").observeSingleEvent(of: .value, with: {snapshot in
             if (!snapshot.exists()) { return }
             
-            let text = snapshot.value!["text"] as! String
-            let timeStamp = snapshot.value!["timeStamp"] as! Double
+            guard let value = snapshot.value as? [String : AnyObject] else { return }
             
-            self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
+            let text = value["text"] as! String
+            let timeStamp = value["timeStamp"] as! Double
+            
+            self.getUser(value["user"] as! String, callback: { (user: User) -> () in
                 callback(Comment(commentId: commentId, user: user, timeStamp: timeStamp, text: text))
             })
         })
     }
     
-    private func getUser(userId: String, callback: (User) -> ()) {
+    fileprivate func getUser(_ userId: String, callback: @escaping (User) -> ()) {
         if let user = self.userDict[userId] {
             callback(user)
         } else {
-            self.myRootRef.child("users/\(userId)").observeSingleEventOfType(.Value, withBlock: {snapshot in
+            self.myRootRef.child("users/\(userId)").observeSingleEvent(of: .value, with: {snapshot in
                 if (!snapshot.exists()) { return }
             
-                let username = snapshot.value!["username"] as! String
-                let email = snapshot.value!["email"] as! String
-                let fullname = snapshot.value!["fullName"] as! String
+                guard let value = snapshot.value as? [String : AnyObject] else { return }
+                
+                let username = value["username"] as! String
+                let email = value["email"] as! String
+                let fullname = value["fullName"] as! String
             
-                let newUser = User(userId: userId, username: username, fullname: fullname, email: email)
+                let newUser = User(userId: userId, email: email, username: username, fullname: fullname)
             
-                if let profileDrawing = snapshot.value!["photoURL"] as? String {
+                if let profileDrawing = value["photoURL"] as? String {
                     self.downloadImage(profileDrawing, progressCallback: nil, finishedCallback: { image in
                         newUser.profileImage = image
                     })
@@ -134,39 +140,39 @@ class API {
         }
     }
     
-    func getFullActiveUser(user: User) {
+    func getFullActiveUser(_ user: User) {
         if !user.getfullUserLoaded() {
-            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/following").observe(.childAdded, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (follow: User) -> () in
                     user.follow(follow)
-                    self.myRootRef.child("users/\(follow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                    self.myRootRef.child("users/\(follow.userId)/drawings").observe(.childAdded, with: {snapshot in
                         self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").setValue(snapshot.value)
                     })
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/following").observe(.childRemoved, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
                     user.unfollow(unfollow)
-                    self.myRootRef.child("users/\(unfollow.userId)/drawings").observeEventType(.ChildAdded, withBlock: {snapshot in
+                    self.myRootRef.child("users/\(unfollow.userId)/drawings").observe(.childAdded, with: {snapshot in
                         self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(snapshot.key)").removeValue()
                     })
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/followers").observe(.childAdded, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (follower: User) -> () in
                     user.addFollower(follower)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/followers").observe(.childRemoved, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
                     user.removeFollower(unfollower)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.addDrawing(drawing)
                 })
@@ -176,39 +182,39 @@ class API {
     }
     
     
-    func loadFulUser(user: User) {
+    func loadFulUser(_ user: User) {
         if !user.getfullUserLoaded() {
-            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/following").observe(.childAdded, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (follow: User) -> () in
                     user.follow(follow)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/following").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/following").observe(.childRemoved, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (unfollow: User) -> () in
                     user.unfollow(unfollow)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/followers").observe(.childAdded, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (follower: User) -> () in
                     user.addFollower(follower)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/followers").observe(.childRemoved, with: {snapshot in
                 self.getUser(snapshot.key, callback: { (unfollower: User) -> () in
                     user.removeFollower(unfollower)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.addDrawing(drawing)
                 })
             })
             
-            self.myRootRef.child("users/\(user.userId)/followers").observeEventType(.ChildRemoved, withBlock: {snapshot in
+            self.myRootRef.child("users/\(user.userId)/followers").observe(.childRemoved, with: {snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.removeDrawing(drawing)
                 })
@@ -219,7 +225,7 @@ class API {
     
     // MARK: User Action Methods
     
-    func postDrawing(drawing: Drawing, progressCallback: (Float) -> (), prompt: Prompt?, finishedCallback: (Bool) -> ()) {
+    func postDrawing(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), prompt: Prompt?, finishedCallback: @escaping (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
 
@@ -241,14 +247,14 @@ class API {
         })
     }
     
-    func deleteDrawing(drawing: Drawing) {
+    func deleteDrawing(_ drawing: Drawing) {
         myRootRef.child("drawings/\(drawing.getDrawingId())").removeValue()
         myRootRef.child("users/\(activeUser!.userId)/drawings/\(drawing.getDrawingId())").removeValue()
         myRootRef.child("users/\(activeUser!.userId)/wall/\(drawing.getDrawingId())").removeValue()
         
         let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
         
-        desertRef.deleteWithCompletion { (error) -> Void in
+        desertRef.delete { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")
             } else {
@@ -257,25 +263,25 @@ class API {
         }
     }
     
-    func makeProfilePic(drawing: Drawing) {
+    func makeProfilePic(_ drawing: Drawing) {
         self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(drawing.getDrawingId())
         self.getActiveUser().profileImage = drawing.getImage()
         self.delagate?.refresh()
     }
     
-    func like(drawing: Drawing) {
+    func like(_ drawing: Drawing) {
         drawing.like(self.activeUser!)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
         
         sendPushNotification("\(activeUser!.username) liked your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
-    func unlike(drawing: Drawing) {
+    func unlike(_ drawing: Drawing) {
         drawing.unlike(self.activeUser!)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").removeValue()
     }
     
-    func addComment(drawing: Drawing, text: String) {
+    func addComment(_ drawing: Drawing, text: String) {
         guard let activeUser = activeUser else { return }
 
         let comment = Comment(user: self.activeUser!, text: text)
@@ -289,7 +295,7 @@ class API {
         sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
-    func createPrompt(text: String) {
+    func createPrompt(_ text: String) {
         guard let activeUser = activeUser else { return }
 
         let prompt = Prompt(user: activeUser, text: text)
@@ -300,38 +306,38 @@ class API {
         newPrompt.setValue(prompt.toAnyObject())
     }
     
-    func deleteComment(drawing: Drawing, comment: Comment) {
+    func deleteComment(_ drawing: Drawing, comment: Comment) {
         drawing.removeComment(comment)
         myRootRef.child("comments/\(comment.getCommetId())").removeValue()
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
     }
     
-    func deletePrompt(prompt: Prompt) {
+    func deletePrompt(_ prompt: Prompt) {
         prompts.remove(prompt)
         myRootRef.child("prompts/\(prompt.getPromptId())").removeValue()
     }
     
-    func follow(user: User) {
+    func follow(_ user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
         sendPushNotification("\(activeUser!.username) is following you!", recipient: user.userId, badge: "+0")
     }
     
-    func unfollow(user: User) {
+    func unfollow(_ user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").removeValue()
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").removeValue()
     }
     
-    func searchUsers(search: String, callback: (User)->()) {
-        let lowercase = search.lowercaseString
+    func searchUsers(_ search: String, callback: @escaping (User)->()) {
+        let lowercase = search.lowercased()
         let searchStart = lowercase
         let searchEnd = lowercase + "z"
         myRootRef.child("userLookup/usernames").removeAllObservers()
         myRootRef.child("userLookup/usernames").queryOrderedByKey()
-            .queryStartingAtValue(searchStart)
-            .queryEndingAtValue(searchEnd)
-            .queryLimitedToFirst(16)
-            .observeEventType(.ChildAdded, withBlock: { snapshot in
+            .queryStarting(atValue: searchStart)
+            .queryEnding(atValue: searchEnd)
+            .queryLimited(toFirst: 16)
+            .observe(.childAdded, with: { snapshot in
                 let userId = snapshot.value as! String
                 self.getUser(userId, callback: { (user: User) -> () in
                     callback(user)
@@ -340,25 +346,25 @@ class API {
     }
     
     
-    func reportDrawing(drawing: Drawing) {
+    func reportDrawing(_ drawing: Drawing) {
         if let active = activeUser {
-            myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+            myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
         }
     }
     
-    func reportComment(comment: Comment) {
+    func reportComment(_ comment: Comment) {
         if let active = activeUser {
-            myRootRef.child("reported/comments/\(comment.getCommetId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+            myRootRef.child("reported/comments/\(comment.getCommetId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
         }
     }
     
-    func reportPrompt(prompt: Prompt) {
+    func reportPrompt(_ prompt: Prompt) {
         if let active = activeUser {
-            myRootRef.child("reported/prompts/\(prompt.getPromptId())/\(active.userId)").setValue(0 - NSDate().timeIntervalSince1970)
+            myRootRef.child("reported/prompts/\(prompt.getPromptId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
         }
     }
     
-    func makeDOD(drawing: Drawing) {
+    func makeDOD(_ drawing: Drawing) {
         myRootRef.child("drawingOfTheDay").setValue(drawing.getDrawingId())
     }
     
@@ -385,17 +391,17 @@ class API {
     }
     
     func getContacts() -> [Contact] {
-        return contactStore.getContacts().sort( { $0.name < $1.name } )
+        return contactStore.getContacts().sorted( by: { $0.name < $1.name } )
     }
     
     func getPrompts() -> [Prompt] {
-        return prompts.sort( { $0.timeStamp < $1.timeStamp } )
+        return prompts.sorted( by: { $0.timeStamp < $1.timeStamp } )
     }
     
     //MARK: Load Data
     
     func loadData() {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
             let userId = FIRAuth.auth()!.currentUser!.uid
             self.getUser(userId, callback: { (activeUser: User) -> () in
                 self.activeUser = activeUser
@@ -433,8 +439,8 @@ class API {
 
     // Used both for initial load and to add older drawings
     func loadWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimitedToFirst(16).queryStartingAtValue(self.oldestTimeLoaded)
-            .observeEventType(.ChildAdded, withBlock: { snapshot in
+        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimited(toFirst: 16).queryStarting(atValue: self.oldestTimeLoaded)
+            .observe(.childAdded, with: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
                         self.wall.append(drawing)
@@ -445,13 +451,13 @@ class API {
                         self.wall.append(drawing)
                     } else if drawing.timeStamp < self.newestTimeLoaded {
                         self.newestTimeLoaded = drawing.timeStamp
-                        self.wall.insert(drawing, atIndex: 0)
+                        self.wall.insert(drawing, at: 0)
                     } else {
                         if new {
                             var i = 0
                             for drawing_ in self.wall {
                                 if drawing_.timeStamp > drawing.timeStamp {
-                                    self.wall.insert(drawing, atIndex: i)
+                                    self.wall.insert(drawing, at: i)
                                     return
                                 }
                                 i += 1
@@ -463,14 +469,14 @@ class API {
         
     }
     
-    private func setDeleteWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").observeEventType(.ChildRemoved, withBlock: { snapshot in
+    fileprivate func setDeleteWall() {
+        myRootRef.child("users/\(getActiveUser().userId)/wall").observe(.childRemoved, with: { snapshot in
                 let drawingId = snapshot.key
                 var i = 0
                 self.drawingDict[drawingId] = nil
                 for drawing in self.wall {
                     if drawing.getDrawingId() == drawingId {
-                        self.wall.removeAtIndex(i)
+                        self.wall.remove(at: i)
                         return
                     }
                     i += 1
@@ -478,8 +484,8 @@ class API {
             })
         }
     
-    private func loadPrompts() {
-        myRootRef.child("prompts").observeEventType(.ChildAdded, withBlock: { snapshot in
+    fileprivate func loadPrompts() {
+        myRootRef.child("prompts").observe(.childAdded, with: { snapshot in
             let promptId = snapshot.key
             
             let text = snapshot.value!["text"] as! String
@@ -490,7 +496,7 @@ class API {
                 let prompt = Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text)
                 self.prompts.insert(prompt)
                 
-                self.myRootRef.child("prompts/\(promptId)/drawings").queryOrderedByValue().observeEventType(.ChildAdded, withBlock: {snapshot in
+                self.myRootRef.child("prompts/\(promptId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
                     
                     self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                         prompt.drawings.append(drawing)
@@ -501,12 +507,12 @@ class API {
     }
 
     func loadDrawingOfTheDay() {
-        myRootRef.child("drawingOfTheDay").observeEventType(.Value, withBlock: { snapshot in
+        myRootRef.child("drawingOfTheDay").observe(.value, with: { snapshot in
             guard snapshot.exists() else { return }
             self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.delagate!.refresh()
                 }
             })
@@ -514,9 +520,9 @@ class API {
     }
     
     func loadFacebookFriends() {
-        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], HTTPMethod: "GET")
+        let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], httpMethod: "GET")
         
-        request.startWithCompletionHandler { (connection:FBSDKGraphRequestConnection!,
+        request?.start { (connection:FBSDKGraphRequestConnection!,
             result:AnyObject!, error:NSError!) -> Void in
             
             if let error = error {
@@ -524,18 +530,18 @@ class API {
                 return
             } else {
                 let resultdict = result as! NSDictionary
-                let data : NSArray = resultdict.objectForKey("data") as! NSArray
+                let data : NSArray = resultdict.object(forKey: "data") as! NSArray
                 for i in 0 ..< data.count {
                     let valueDict : NSDictionary = data[i] as! NSDictionary
-                    let id = valueDict.objectForKey("id") as! String
+                    let id = valueDict.object(forKey: "id") as! String
                     self.loadUserByFBID(id)
                 }
             }
         }
     }
     
-    private func loadUserByFBID(FBID: String) {
-        myRootRef.child("userLookup/FacebookIDs/\(FBID)").observeEventType(.Value, withBlock: { snapshot in
+    fileprivate func loadUserByFBID(_ FBID: String) {
+        myRootRef.child("userLookup/FacebookIDs/\(FBID)").observe(.value, with: { snapshot in
             if !snapshot.exists() { return }
             let userID = snapshot.value as! String
             self.getUser(userID, callback: { (user: User) -> () in
@@ -544,12 +550,12 @@ class API {
         })
     }
     
-    func removeFBFriend(user: User) {
+    func removeFBFriend(_ user: User) {
         self.facebookFriends.remove(user)
     }
     
     func loadPopularUsers() {
-        myRootRef.child("popularUsers").observeEventType(.ChildAdded, withBlock: { snapshot in
+        myRootRef.child("popularUsers").observe(.childAdded, with: { snapshot in
             guard snapshot.exists() else { return }
             let userID = snapshot.key
             self.getUser(userID, callback: { (user: User) -> () in
@@ -558,9 +564,9 @@ class API {
         })
     }
     
-    func checkNumber(number: String) {
+    func checkNumber(_ number: String) {
 
-        myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEventOfType(.Value, withBlock: { snapshot in
+        myRootRef.child("userLookup/phoneNumbers/\(number)").observeSingleEvent(of: .value, with: { snapshot in
             guard snapshot.exists() else { return }
             
             let userID = snapshot.value as! String
@@ -572,8 +578,8 @@ class API {
     }
     
     
-    private func getAirshipKey() {
-        myRootRef.child("airshipKey").observeEventType(.Value, withBlock: { snapshot in
+    fileprivate func getAirshipKey() {
+        myRootRef.child("airshipKey").observe(.value, with: { snapshot in
             guard snapshot.exists() else { return }
             let key = snapshot.value as! String
             self.airshipKey = key
@@ -582,11 +588,11 @@ class API {
     
     // MARK: Image Upload + Download Methods
     
-    func uploadImage(drawing: Drawing, progressCallback: (Float) -> (), finishedCallback: (Bool) -> ()) {
+    func uploadImage(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), finishedCallback: @escaping (Bool) -> ()) {
         
-        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").putData(UIImagePNGRepresentation(drawing.getImage())!)
+        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").put(UIImagePNGRepresentation(drawing.getImage())!)
         
-        uploadTask.observeStatus(.Progress) { snapshot in
+        uploadTask.observe(.progress) { snapshot in
             // Upload reported progress
             if let progress = snapshot.progress {
                 let percentComplete = Float(100.0 * Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
@@ -594,23 +600,23 @@ class API {
             }
         }
         
-        uploadTask.observeStatus(.Success) { snapshot in
+        uploadTask.observe(.success) { snapshot in
             progressCallback(1.0)
             finishedCallback(true)
         }
         
-        uploadTask.observeStatus(.Failure) { snapshot in
+        uploadTask.observe(.failure) { snapshot in
             finishedCallback(false)
         }
     }
     
-    func downloadImage(imageId: String, progressCallback: ((Float) -> ())?, finishedCallback: (UIImage) -> ()) {
+    func downloadImage(_ imageId: String, progressCallback: ((Float) -> ())?, finishedCallback: @escaping (UIImage) -> ()) {
         if let image = imageDict[imageId] {
             finishedCallback(image)
         } else {
             let drawingRef = storageRef.child("drawings/\(imageId).png")
             
-            let downloadTask = drawingRef.dataWithMaxSize(1 * 1024 * 1024) { (data, error) -> Void in
+            let downloadTask = drawingRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
                 if (error != nil) {
                     // Uh-oh, an error occurred!
                     print(error)
@@ -626,7 +632,7 @@ class API {
                 }
             }
         
-            downloadTask.observeStatus(.Progress) { (snapshot) -> Void in
+            downloadTask.observe(.progress) { (snapshot) -> Void in
                 if let progress = snapshot.progress {
                     let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
                     progressCallback?(percentComplete)
@@ -635,10 +641,10 @@ class API {
         }
     }
     
-    func setDrawingURL(drawingId: String, callback: ((NSURL?)->())) {
+    func setDrawingURL(_ drawingId: String, callback: @escaping ((URL?)->())) {
         let drawingRef = storageRef.child("drawings/\(drawingId).png")
         
-        drawingRef.downloadURLWithCompletion { (URL, error) -> Void in
+        drawingRef.downloadURL { (URL, error) -> Void in
             guard error == nil else { return }
             self.myRootRef.child("drawings/\(drawingId)/url").setValue(URL?.absoluteString)
             callback(URL)
@@ -647,7 +653,7 @@ class API {
     
     
     // MARK: Push Notifications
-    func sendPushNotification(message: String, recipient: String, badge: String) {
+    func sendPushNotification(_ message: String, recipient: String, badge: String) {
     
         let iosData: NSDictionary = ["alert": message] //, "sound": "default", "badge": badge
         let notificationData: NSDictionary = ["ios": iosData]
@@ -660,9 +666,9 @@ class API {
                 "Accept" : "application/vnd.urbanairship+json; version=3",
                 "Drawing-Type" : "application/json"],
             parameters: ["audience":namedUser, "notification":notificationData, "device_types":["ios"]],
-            encoding: .JSON)
+            encoding: .json)
             .response { request, response, data, error in
-                let dataString = NSString(data: data!, encoding:NSUTF8StringEncoding)
+                let dataString = NSString(data: data!, encoding:String.Encoding.utf8)
                 print(dataString!)
             }
     }

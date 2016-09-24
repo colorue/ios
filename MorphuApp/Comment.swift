@@ -12,18 +12,18 @@ class Comment {
     let user: User
     let timeStamp: Double
     let text: String
-    private var commentId: String
+    fileprivate var commentId: String
     
     let api = API.sharedInstance
     
-    init(commentId: String = "", user: User = User(), timeStamp: Double = 0 - NSDate().timeIntervalSince1970, text: String = "") {
+    init(commentId: String = "", user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, text: String = "") {
         self.commentId = commentId
         self.user = user
         self.timeStamp = timeStamp
         self.text = text
     }
     
-    func setCommentId(commentId: String) {
+    func setCommentId(_ commentId: String) {
         self.commentId = commentId
     }
     
@@ -32,7 +32,7 @@ class Comment {
     }
     
     func getTimeSinceSent() -> String {
-        let secondsSince =  NSDate().timeIntervalSince1970 + self.timeStamp
+        let secondsSince =  Date().timeIntervalSince1970 + self.timeStamp
         switch(secondsSince) {
         case 0..<60:
             return "now"

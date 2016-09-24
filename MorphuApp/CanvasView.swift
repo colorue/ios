@@ -13,29 +13,29 @@ protocol CanvasDelagate {
     func getCurrentBrushSize() -> Float
     func getAlpha() -> CGFloat?
     func setAlphaHigh()
-    func setUnderfingerView(underFingerImage: UIImage)
+    func setUnderfingerView(_ underFingerImage: UIImage)
     func hideUnderFingerView()
     func showUnderFingerView()
-    func setColor(color: UIColor?)
+    func setColor(_ color: UIColor?)
     func getKeyboardState() -> KeyboardToolState
-    func setKeyboardState(state: KeyboardToolState)
+    func setKeyboardState(_ state: KeyboardToolState)
     func startPaintBucketSpinner()
     func stopPaintBucketSpinner()
 }
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
     
-    private var path: UIBezierPath = UIBezierPath()
-    var pts = [CGPoint]()
+    fileprivate var path: UIBezierPath = UIBezierPath()
+    var pts: [CGPoint] = [CGPoint]()
 
-    private var lastPoint: CGPoint?
-    private var currentStroke: UIImage?
-    private var undoStack = [UIImage]()
-    private var imageView = UIImageView()
-    private let positionIndicator = R.image.positionIndicator()!
-    private let resizeScale: CGFloat = 2.0
-    private var actualSize = CGSize()
-    private let prefs = NSUserDefaults.standardUserDefaults()
+    fileprivate var lastPoint: CGPoint?
+    fileprivate var currentStroke: UIImage?
+    fileprivate var undoStack = [UIImage]()
+    fileprivate var imageView = UIImageView()
+    fileprivate let positionIndicator = R.image.positionIndicator()!
+    fileprivate let resizeScale: CGFloat = 2.0
+    fileprivate var actualSize = CGSize()
+    fileprivate let prefs = UserDefaults.standard
     
     var baseDrawing: UIImage? {
         didSet {
@@ -64,7 +64,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         displayCanvas()
     }
     
-    private func displayCanvas() {
+    fileprivate func displayCanvas() {
         actualSize = CGSize(width: frame.width * resizeScale, height: frame.height * resizeScale)
         imageView.frame = CGRect(origin: CGPoint.zero, size: frame.size)
         addSubview(imageView)
@@ -78,10 +78,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     // MARK: Controll Methods
     
-    @objc private func handleDrag(sender: UILongPressGestureRecognizer) {
+    @objc fileprivate func handleDrag(_ sender: UILongPressGestureRecognizer) {
         guard let delagate = delagate else { return }
         
-        let actualPosition = CGPoint(x: sender.locationInView(imageView).x * resizeScale, y: sender.locationInView(imageView).y * resizeScale)
+        let actualPosition = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
         mergeCurrentStroke(true)
         
         switch (delagate.getKeyboardState()) {
@@ -96,27 +96,26 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func paintBucket(position: CGPoint, state: UIGestureRecognizerState) {
+    fileprivate func paintBucket(_ position: CGPoint, state: UIGestureRecognizerState) {
         guard let delagate = delagate else { return }
         
-        if state == .Began {
+        if state == .began {
             delagate.showUnderFingerView()
             drawDropperIndicator(position)
             setUnderFingerView(position, dropper: true)
-        } else if state == .Changed {
+        } else if state == .changed {
             drawDropperIndicator(position)
             setUnderFingerView(position, dropper: true)
-        } else if state == .Ended {
+        } else if state == .ended {
             currentStroke = nil
-//            delagate.setKeyboardState(.none)
             delagate.startPaintBucketSpinner()
             delagate.hideUnderFingerView()
             mergeCurrentStroke(false)
 
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
                 let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: delagate.getCurrentColor(), tolerance: 5)
                 self.addToUndoStack(filledImage)
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.mergeCurrentStroke(false)
                     delagate.stopPaintBucketSpinner()
                 }
@@ -124,23 +123,23 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func dropperTouch(position: CGPoint, state: UIGestureRecognizerState) {
+    fileprivate func dropperTouch(_ position: CGPoint, state: UIGestureRecognizerState) {
         guard let delagate = delagate else { return }
 
-        if state == .Began {
-            delagate.setColor(imageView.image!.colorAtPosition(position))
+        if state == .began {
+            delagate.setColor(imageView.image!.color(atPosition: position))
             delagate.showUnderFingerView()
             delagate.setAlphaHigh()
             drawDropperIndicator(position)
             setUnderFingerView(position, dropper: true)
-        } else if state == .Changed {
-            let dropperColor = imageView.image!.colorAtPosition(position)
+        } else if state == .changed {
+            let dropperColor = imageView.image!.color(atPosition: position)
             if let color = dropperColor {
                 delagate.setColor(color)
             }
             drawDropperIndicator(position)
             setUnderFingerView(position, dropper: true)
-        } else if state == .Ended {
+        } else if state == .ended {
             delagate.setKeyboardState(.none)
             delagate.hideUnderFingerView()
             currentStroke = nil
@@ -148,33 +147,33 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func curveTouch(position: CGPoint, state: UIGestureRecognizerState) {
+    fileprivate func curveTouch(_ position: CGPoint, state: UIGestureRecognizerState) {
         guard let delagate = delagate else { return }
 
-        if state == .Began {
+        if state == .began {
             pts.removeAll()
             pts.append(position)
             finishStroke()
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
-        } else if state == .Changed {
+        } else if state == .changed {
             pts.append(position)
             if pts.count == 5 {
-                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0)
-                path.moveToPoint(pts[0])
-                path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+                pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
+                path.move(to: pts[0])
+                path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
                 self.drawCurve()
                 pts[0] = pts[3]
                 pts[1] = pts[4]
                 pts.removeLast(3)
             }
             setUnderFingerView(position, dropper: false)
-        } else if state == .Ended {
+        } else if state == .ended {
             pts.append(position)
             if pts.count >= 5 {
-                pts[3] = CGPointMake((pts[2].x + pts[4].x)/2.0, (pts[2].y + pts[4].y)/2.0)
-                path.moveToPoint(pts[0])
-                path.addCurveToPoint(pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+                pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
+                path.move(to: pts[0])
+                path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
                 self.drawCurve()
                 pts[0] = pts[3]
                 pts[1] = pts[4]
@@ -190,18 +189,18 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func bullsEye(position: CGPoint, state: UIGestureRecognizerState) {
+    fileprivate func bullsEye(_ position: CGPoint, state: UIGestureRecognizerState) {
         guard let delagate = delagate else { return }
         
-        if state == .Began {
+        if state == .began {
             drawDot(position)
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
-        } else if state == .Changed {
+        } else if state == .changed {
             drawDot(position)
             delagate.showUnderFingerView()
             setUnderFingerView(position, dropper: false)
-        } else if state == .Ended {
+        } else if state == .ended {
             addToUndoStack(imageView.image)
             currentStroke = nil
             mergeCurrentStroke(false)
@@ -209,7 +208,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    private func drawDot(position: CGPoint) {
+    fileprivate func drawDot(_ position: CGPoint) {
         
         guard let delagate = delagate else { return }
 
@@ -217,20 +216,20 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         
         let color = delagate.getCurrentColor()
         
-        CGContextMoveToPoint(UIGraphicsGetCurrentContext(), position.x, position.y)
-        CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), position.x, position.y)
+        UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: position.x, y: position.y))
+        UIGraphicsGetCurrentContext()?.addLine(to: CGPoint(x: position.x, y: position.y))
         
-        CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
-        CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
-        CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
+        UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
+        UIGraphicsGetCurrentContext()?.setLineWidth(CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+        UIGraphicsGetCurrentContext()?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
         
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        CGContextFlush(UIGraphicsGetCurrentContext())
+        UIGraphicsGetCurrentContext()?.strokePath()
+        UIGraphicsGetCurrentContext()?.flush()
         currentStroke = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
-    private func setUnderFingerView(position: CGPoint, dropper: Bool) {
+    fileprivate func setUnderFingerView(_ position: CGPoint, dropper: Bool) {
         guard let delagate = delagate else { return }
 
         let underFingerSize: CGSize
@@ -261,81 +260,83 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     // MARK: Drawing Methods
     
-    private func finishStroke() {
+    fileprivate func finishStroke() {
         
         guard let delagate = delagate else { return }
         
         if !pts.isEmpty {
             UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-            currentStroke?.drawAtPoint(CGPoint.zero)
+            currentStroke?.draw(at: CGPoint.zero)
+            
+            let context = UIGraphicsGetCurrentContext()
 
             let color = delagate.getCurrentColor()
             
             if pts.count <= 2 {
-                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts.first!.x, pts.first!.y)
-                CGContextAddLineToPoint(UIGraphicsGetCurrentContext(), pts.last!.x, pts.last!.y)
+                context?.move(to: CGPoint(x: pts.first!.x, y: pts.first!.y))
+                context?.addLine(to: CGPoint(x: pts.last!.x, y: pts.last!.y))
             } else if pts.count == 3 {
-                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
-                CGContextAddQuadCurveToPoint(UIGraphicsGetCurrentContext(), pts[1].x, pts[1].y, pts[2].x, pts[2].y)
+                UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
+                context?.addQuadCurve(to: CGPoint(x: pts[1].x, y: pts[1].y), control: CGPoint(x: pts[2].x, y: pts[2].y))
             }
             else if pts.count == 4 {
-                CGContextMoveToPoint(UIGraphicsGetCurrentContext(), pts[0].x, pts[0].y)
-                CGContextAddQuadCurveToPoint(UIGraphicsGetCurrentContext(), pts[1].x, pts[1].y, pts[3].x, pts[3].y)
+                UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
+                context?.addQuadCurve(to: CGPoint(x: pts[1].x, y: pts[1].y), control: CGPoint(x: pts[3].x, y: pts[3].y))
             }
             
-            CGContextSetLineCap(UIGraphicsGetCurrentContext(), CGLineCap.Round)
-            CGContextSetLineWidth(UIGraphicsGetCurrentContext(), CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
-            CGContextSetRGBStrokeColor(UIGraphicsGetCurrentContext(), color.coreImageColor!.red, color.coreImageColor!.green, color.coreImageColor!.blue, 1.0)
+            UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
+            UIGraphicsGetCurrentContext()?.setLineWidth(CGFloat(delagate.getCurrentBrushSize()) * resizeScale)
+            UIGraphicsGetCurrentContext()?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
             
-            CGContextStrokePath(UIGraphicsGetCurrentContext())
-            CGContextFlush(UIGraphicsGetCurrentContext())
+            UIGraphicsGetCurrentContext()?.strokePath()
+            UIGraphicsGetCurrentContext()?.flush()
             currentStroke = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
         }
     }
     
-    private func drawCurve() {
+    fileprivate func drawCurve() {
         guard let delagate = delagate else { return }
         
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-        currentStroke?.drawAtPoint(CGPoint.zero)
+        currentStroke?.draw(at: CGPoint.zero)
         delagate.getCurrentColor().setStroke()
         path.lineWidth = CGFloat(delagate.getCurrentBrushSize()) * resizeScale
-        path.lineCapStyle = CGLineCap.Round
+        path.lineCapStyle = CGLineCap.round
         path.stroke()
         currentStroke = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
 
-    private func drawDropperIndicator(point: CGPoint) {
+    fileprivate func drawDropperIndicator(_ point: CGPoint) {
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-        positionIndicator.drawAtPoint(CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
-        CGContextStrokePath(UIGraphicsGetCurrentContext())
-        CGContextFlush(UIGraphicsGetCurrentContext())
+        positionIndicator.draw(at: CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
+        UIGraphicsGetCurrentContext()?.strokePath()
+        UIGraphicsGetCurrentContext()?.flush()
         currentStroke = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
     
-    private func mergeCurrentStroke(alpha: Bool) {
+    fileprivate func mergeCurrentStroke(_ alpha: Bool) {
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-        undoStack.last?.drawAtPoint(CGPoint.zero)
+        undoStack.last?.draw(at: CGPoint.zero)
 
         if alpha {
-            currentStroke?.drawAtPoint(CGPoint.zero, blendMode: .Normal, alpha: delagate?.getAlpha() ?? 1.0)
+            currentStroke?.draw(at: CGPoint.zero, blendMode: .normal, alpha: delagate?.getAlpha() ?? 1.0)
         } else {
-            currentStroke?.drawAtPoint(CGPoint.zero)
+            currentStroke?.draw(at: CGPoint.zero)
         }
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
     }
     
-    private func addToUndoStack(image: UIImage?) {
+    fileprivate func addToUndoStack(_ image: UIImage?) {
         if let image = image {
             if undoStack.count <= 20 {
                 undoStack.append(image)
             } else {
-                undoStack.removeAtIndex(0)
+                undoStack.remove(at: 0)
                 undoStack.append(image)
             }
         }
@@ -351,7 +352,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func trash() {
-        currentStroke = (UIImage.getImageWithColor(UIColor.whiteColor(), size: actualSize))
+        currentStroke = (UIImage.getImageWithColor(UIColor.white, size: actualSize))
         mergeCurrentStroke(false)
         addToUndoStack(imageView.image)
         currentStroke = nil
@@ -361,7 +362,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         if let drawing = imageView.image {
             return drawing
         } else {
-            return UIImage.getImageWithColor(UIColor.whiteColor(), size: actualSize)
+            return UIImage.getImageWithColor(UIColor.white, size: actualSize)
         }
     }
 }

@@ -19,8 +19,8 @@ enum AnalyticsEvents: String {
 }
 
 struct Analytics {
-    static func logEvent(event: AnalyticsEvents, parameters: [String : NSObject] = [:]) {
-        FIRAnalytics.logEventWithName(event.rawValue, parameters: parameters)
+    static func logEvent(_ event: AnalyticsEvents, parameters: [String : NSObject] = [:]) {
+        FIRAnalytics.logEvent(withName: event.rawValue, parameters: parameters)
     }
 }
 

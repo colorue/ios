@@ -8,6 +8,26 @@
 
 import UIKit
 import FBSDKShareKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate, UIPopoverPresentationControllerDelegate {
     
@@ -15,14 +35,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var prompt: Prompt?
 
     let api = API.sharedInstance
-    let prefs = NSUserDefaults.standardUserDefaults()
+    let prefs = UserDefaults.standard
 
     var colorKeyboard: ColorKeyboardView?
     var canvas: CanvasView?
     var underFingerView = UIImageView()
     var keyboardCover = UIView()
     
-    let backButton = UIButton(type: UIButtonType.Custom)
+    let backButton = UIButton(type: UIButtonType.custom)
 
     @IBOutlet weak var postButton: UIBarButtonItem!
     
@@ -35,13 +55,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         imageView.tintColor = blackColor
         self.navigationItem.titleView = imageView
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(appMovedToBackground), name: UIApplicationWillResignActiveNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
         let chevron = R.image.chevronDown()
         backButton.tintColor = blackColor
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
-        backButton.setImage(chevron, forState: UIControlState.Normal)
-        backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+        backButton.setImage(chevron, for: UIControlState())
+        backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), for: UIControlEvents.touchUpInside)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         let keyboardHeight = self.view.frame.height / 5.55833333333333
@@ -50,9 +70,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 0, width: canvasHeight/1.3, height: canvasHeight)
         
         
-        if prefs.boolForKey(Prefs.saved) {
+        if prefs.bool(forKey: Prefs.saved) {
             if baseImage == nil {
-                if let savedDrawing = prefs.stringForKey(Prefs.savedDrawing) {
+                if let savedDrawing = prefs.string(forKey: Prefs.savedDrawing) {
                     baseImage = UIImage.fromBase64(savedDrawing)
                 }
             }
@@ -65,7 +85,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.view.addSubview(canvas)
         self.canvas = canvas
         
-        let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: CGRectGetMaxY(canvas.frame), width: self.view.frame.width, height: keyboardHeight)
+        let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: canvas.frame.maxY, width: self.view.frame.width, height: keyboardHeight)
         let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame)
         colorKeyboard.delagate = self
         
@@ -73,25 +93,25 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.colorKeyboard = colorKeyboard
         
         self.keyboardCover.frame = colorKeyboardFrame
-        keyboardCover.backgroundColor = UIColor.blackColor()
+        keyboardCover.backgroundColor = UIColor.black
         self.keyboardCover.alpha = 0.0
         self.view.addSubview(keyboardCover)
         
 
-        self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: CGRectGetMaxY(canvas.frame) + 0.5, width: keyboardHeight, height: keyboardHeight)
-        underFingerView.backgroundColor = UIColor.whiteColor()
+        self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
+        underFingerView.backgroundColor = UIColor.white
         self.underFingerView.alpha = 0.0
         self.view.addSubview(underFingerView)
         
         prefs.setValue(true, forKey: "saved")
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (!prefs.boolForKey("drawingHowTo")) {
-            let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertControllerStyle.Alert)
-            drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(drawingHowTo, animated: true, completion: nil)
+        if (!prefs.bool(forKey: "drawingHowTo")) {
+            let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertControllerStyle.alert)
+            drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(drawingHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "drawingHowTo")
         }
     }
@@ -118,70 +138,70 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     func trash() {
         
-        let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.Alert)
+        let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
         
-        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .Destructive, handler: { (action: UIAlertAction!) in
+        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
             self.canvas!.trash()
         }))
         
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil ))
-        self.presentViewController(deleteAlert, animated: true, completion: nil)
+        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+        self.present(deleteAlert, animated: true, completion: nil)
     }
     
-    func setUnderfingerView(underFingerImage: UIImage) {
-        self.colorKeyboard?.userInteractionEnabled = false
-        if underFingerView.hidden {
-            underFingerView.hidden = false
+    func setUnderfingerView(_ underFingerImage: UIImage) {
+        self.colorKeyboard?.isUserInteractionEnabled = false
+        if underFingerView.isHidden {
+            underFingerView.isHidden = false
         }
         underFingerView.image = underFingerImage
     }
     
     func hideUnderFingerView() {
-        self.colorKeyboard?.userInteractionEnabled = true
-        UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        self.colorKeyboard?.isUserInteractionEnabled = true
+        UIView.animate(withDuration: 0.5,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
             self.underFingerView.alpha = 0.0
             self.keyboardCover.alpha = 0.0
             }, completion: nil)
     }
     
     func showUnderFingerView() {
-        self.colorKeyboard?.userInteractionEnabled = false
-        UIView.animateWithDuration(0.5,delay: 0.0, options: UIViewAnimationOptions.BeginFromCurrentState, animations: {
+        self.colorKeyboard?.isUserInteractionEnabled = false
+        UIView.animate(withDuration: 0.5,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
             self.underFingerView.alpha = 1.0
             self.keyboardCover.alpha = 0.5
         }, completion: nil)
     }
     
-    func setColor(color: UIColor?) {
+    func setColor(_ color: UIColor?) {
         guard let color = color else { return }
         self.colorKeyboard!.setColor(color)
     }
     
     func startPaintBucketSpinner() {
-        colorKeyboard?.paintBucketButton.hidden = true
+        colorKeyboard?.paintBucketButton.isHidden = true
         colorKeyboard?.paintBucketSpinner.startAnimating()
     }
     
     func stopPaintBucketSpinner() {
         colorKeyboard?.paintBucketSpinner.stopAnimating()
-        colorKeyboard?.paintBucketButton.hidden = false
+        colorKeyboard?.paintBucketButton.isHidden = false
     }
     
     func getKeyboardState() -> KeyboardToolState {
         return self.colorKeyboard?.state ?? .none
     }
     
-    func setKeyboardState(state: KeyboardToolState) {
+    func setKeyboardState(_ state: KeyboardToolState) {
         colorKeyboard?.state = state
         colorKeyboard?.updateButtonColor()
     }
     
-    func setDropperActive(active: Bool) {
+    func setDropperActive(_ active: Bool) {
         if active {
-            if (!prefs.boolForKey("dropperHowTo")) {
-                let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.Alert)
-                dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(dropperHowTo, animated: true, completion: nil)
+            if (!prefs.bool(forKey: "dropperHowTo")) {
+                let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.alert)
+                dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+                self.present(dropperHowTo, animated: true, completion: nil)
                 prefs.setValue(true, forKey: "dropperHowTo")
             }
         }
@@ -190,19 +210,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     }
     
     func switchAlphaHowTo() {
-        if (!prefs.boolForKey("alphaHowTo")) {
-            let alphaHowTo = UIAlertController(title: "Opacity Rotator", message: "Tap this button to rotate through solid, sorta transparent, and mostly transparent lines.", preferredStyle: UIAlertControllerStyle.Alert)
-            alphaHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alphaHowTo, animated: true, completion: nil)
+        if (!prefs.bool(forKey: "alphaHowTo")) {
+            let alphaHowTo = UIAlertController(title: "Opacity Rotator", message: "Tap this button to rotate through solid, sorta transparent, and mostly transparent lines.", preferredStyle: UIAlertControllerStyle.alert)
+            alphaHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alphaHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "alphaHowTo")
         }
     }
     
     func postDrawing() {
         self.baseImage = nil
-        self.postButton.enabled = false
+        self.postButton.isEnabled = false
         self.colorKeyboard!.uploading(0)
-        self.view.userInteractionEnabled = false
+        self.view.isUserInteractionEnabled = false
         
         let newDrawing = Drawing(artist: User(), drawingId: "")
         newDrawing.setImage((canvas?.getDrawing())!)
@@ -211,47 +231,47 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 
     }
     
-    func postCallback(uploaded: Bool) {
+    func postCallback(_ uploaded: Bool) {
         if uploaded {
             prefs.setValue(false, forKey: Prefs.saved)
 
-            NSNotificationCenter.defaultCenter().removeObserver(self)
-            self.performSegueWithIdentifier(R.segue.drawingViewController.saveToHome, sender: self)
+            NotificationCenter.default.removeObserver(self)
+            self.performSegue(withIdentifier: R.segue.drawingViewController.saveToHome, sender: self)
         } else {
             self.colorKeyboard!.uploadingFailed()
-            self.view.userInteractionEnabled = true
-            self.postButton.enabled = true
+            self.view.isUserInteractionEnabled = true
+            self.postButton.isEnabled = true
         }
     }
     
-    func unwind(sender: UIBarButtonItem) {
+    func unwind(_ sender: UIBarButtonItem) {
         self.save()
 
-        if (!prefs.boolForKey("firstCloseCanvas")) {
-            let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.Alert)
-            firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: { alert in
-                NSNotificationCenter.defaultCenter().removeObserver(self)
-                self.performSegueWithIdentifier(R.segue.drawingViewController.backToHome, sender: self)
+        if (!prefs.bool(forKey: "firstCloseCanvas")) {
+            let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.alert)
+            firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alert in
+                NotificationCenter.default.removeObserver(self)
+                self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
             }))
-            firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+            firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
 
-            self.presentViewController(firstCloseCanvas, animated: true, completion: nil)
+            self.present(firstCloseCanvas, animated: true, completion: nil)
             prefs.setValue(true, forKey: "firstCloseCanvas")
         } else {
-            NSNotificationCenter.defaultCenter().removeObserver(self)
-            self.performSegueWithIdentifier(R.segue.drawingViewController.backToHome, sender: self)
+            NotificationCenter.default.removeObserver(self)
+            self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         
         if segue.identifier == "saveToHome" {
-            let targetController = segue.destinationViewController as? WallViewController
-            if targetController?.tableView.numberOfRowsInSection(1) > 0 {
-                targetController?.tableView.scrollToRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+            let targetController = segue.destination as? WallViewController
+            if targetController?.tableView.numberOfRows(inSection: 1) > 0 {
+                targetController?.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
             }
-        } else if let dvc = segue.destinationViewController as? SharingViewController {
+        } else if let dvc = segue.destination as? SharingViewController {
             
             let controller = dvc.popoverPresentationController
             if let controller = controller {
@@ -267,11 +287,11 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.save()
 
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     func appMovedToBackground() {
@@ -279,7 +299,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.hideUnderFingerView()
     }
     
-    private func save() {
+    fileprivate func save() {
         let color = self.colorKeyboard?.getCurrentColor()
         prefs.setValue(color?.coreImageColor!.red, forKey: Prefs.colorRed)
         prefs.setValue(color?.coreImageColor!.green, forKey: Prefs.colorGreen)
@@ -289,12 +309,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
     }
     
-    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
-        return .None
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
-    func popoverPresentationControllerShouldDismissPopover(popoverController: UIPopoverPresentationController) -> Bool  {
-        UIView.animateWithDuration(0.3, animations: {
+    func popoverPresentationControllerShouldDismissPopover(_ popoverController: UIPopoverPresentationController) -> Bool  {
+        UIView.animate(withDuration: 0.3, animations: {
             self.view.alpha = 1.0
             self.navigationController?.navigationBar.alpha = 1.0
         })

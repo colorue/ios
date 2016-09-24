@@ -11,7 +11,7 @@ class FriendsViewController: UserListViewController {
     // MARK: - Properties
     
     var searchController = UISearchController(searchResultsController: nil)
-    var userSearchSource = API.sharedInstance.getActiveUser().getFollowers().intersect(API.sharedInstance.getActiveUser().getFollowing())
+    var userSearchSource = API.sharedInstance.getActiveUser().getFollowers().intersection(API.sharedInstance.getActiveUser().getFollowing())
     var filteredUsers = [User]()
     
     
@@ -22,20 +22,20 @@ class FriendsViewController: UserListViewController {
         self.setUpSearchController()
         
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Invite ", style: .Plain,
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Invite ", style: .plain,
                                                                        target: self, action: #selector(FriendsViewController.invite(_:)))
         super.viewDidLoad()
     }
     
     
-    @objc private func invite(sender: UIBarButtonItem) {
-        self.controller!.performSegueWithIdentifier("toInvite", sender: self)
+    @objc fileprivate func invite(_ sender: UIBarButtonItem) {
+        self.controller!.performSegue(withIdentifier: "toInvite", sender: self)
     }
 }
 
 extension FriendsViewController: UISearchResultsUpdating {
     
-    private func setUpSearchController() {
+    fileprivate func setUpSearchController() {
         guard let userListController = R.storyboard.users.users() else { return }
         
 //        userListController.tintColor = self.tintColor!
@@ -45,7 +45,7 @@ extension FriendsViewController: UISearchResultsUpdating {
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.tintColor = self.tintColor
         self.searchController.searchBar.barTintColor = whiteColor
-        self.searchController.searchBar.searchBarStyle = .Prominent
+        self.searchController.searchBar.searchBarStyle = .prominent
         self.searchController.searchBar.placeholder = "Search users"
         self.searchController.searchResultsUpdater = self
         self.searchController.hidesNavigationBarDuringPresentation = false
@@ -54,7 +54,7 @@ extension FriendsViewController: UISearchResultsUpdating {
         self.navigationItem.titleView = searchController.searchBar
         self.definesPresentationContext = true
         
-        let textField = searchController.searchBar.valueForKey("searchField") as! UITextField
+        let textField = searchController.searchBar.value(forKey: "searchField") as! UITextField
         textField.backgroundColor = UIColor(red: 245.0/255.0, green: 245.0/255.0, blue: 245.0/255.0, alpha: 1.0)
         
     }
@@ -62,7 +62,7 @@ extension FriendsViewController: UISearchResultsUpdating {
     
     // MARK: UISearchResultsUpdating Methods
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let userListController = searchController.searchResultsController as! UserListViewController
         
         filterContentForSearchText(searchController.searchBar.text!)
@@ -71,28 +71,28 @@ extension FriendsViewController: UISearchResultsUpdating {
         userListController.refresh()
     }
     
-    private func filterContentForSearchText(searchText: String) {
+    fileprivate func filterContentForSearchText(_ searchText: String) {
         filteredUsers = userSearchSource.filter({( user : User) -> Bool in
-            return (user.username.lowercaseString.containsString(searchText.lowercaseString) || user.fullname.lowercaseString.containsString(searchText.lowercaseString))
+            return (user.username.lowercased().contains(searchText.lowercased()) || user.fullname.lowercased().contains(searchText.lowercased()))
         })
         
         api.searchUsers(searchText, callback: addToSearch)
     }
     
-    private func addToSearch(user: User) {
+    fileprivate func addToSearch(_ user: User) {
         userSearchSource.insert(user)
     }
     
     
     // MARK: Segue
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        super.prepareForSegue(segue, sender: sender)
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
         
-        if searchController.active {
+        if searchController.isActive {
             let userListController = searchController.searchResultsController as! UserListViewController
-            if let targetController = segue.destinationViewController as? ProfileViewController {
-                if let row = userListController.tableView.indexPathForSelectedRow?.row {
+            if let targetController = segue.destination as? ProfileViewController {
+                if let row = (userListController.tableView.indexPathForSelectedRow as NSIndexPath?)?.row {
                     targetController.tintColor = tintColor
                     targetController.navigationItem.title = filteredUsers[row].username
                     targetController.userInstance = filteredUsers[row]

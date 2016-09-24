@@ -15,12 +15,12 @@ class User {
     let fullname: String
     let email: String
     var profileImage: UIImage?  //make getter and setter
-    private var following = Set<User>()
-    private var followers = Set<User>()
-    private var drawings = [Drawing]()
+    fileprivate var following = Set<User>()
+    fileprivate var followers = Set<User>()
+    fileprivate var drawings = [Drawing]()
     
-    private var newestDrawing: Double = 0
-    private var fullUserLoaded = false
+    fileprivate var newestDrawing: Double = 0
+    fileprivate var fullUserLoaded = false
     
     
     func setfullUserLoaded() {
@@ -43,15 +43,15 @@ class User {
         return self.following
     }
     
-    func follow(user: User) {
+    func follow(_ user: User) {
         following.insert(user)
     }
     
-    func unfollow(user: User) {
+    func unfollow(_ user: User) {
         following.remove(user)
     }
     
-    func isFollowing(user: User?) -> Bool {
+    func isFollowing(_ user: User?) -> Bool {
         guard let user = user else { return false }
         
         for followee in self.following {
@@ -62,11 +62,11 @@ class User {
         return false
     }
     
-    func addFollower(user: User) {
+    func addFollower(_ user: User) {
         followers.insert(user)
     }
     
-    func removeFollower(user: User) {
+    func removeFollower(_ user: User) {
         followers.remove(user)
     }
     
@@ -74,20 +74,20 @@ class User {
         return self.followers
     }
     
-    func addDrawing(drawing: Drawing) {
+    func addDrawing(_ drawing: Drawing) {
         if drawing.timeStamp < newestDrawing {
             self.newestDrawing = drawing.timeStamp
-            self.drawings.insert(drawing, atIndex: 0)
+            self.drawings.insert(drawing, at: 0)
         } else {
             self.drawings.append(drawing)
         }
     }
     
-    func removeDrawing(drawing: Drawing) {
+    func removeDrawing(_ drawing: Drawing) {
         var i = 0
         for drawing_ in self.drawings {
             if drawing_.getDrawingId() == drawing.getDrawingId() {
-                self.drawings.removeAtIndex(i)
+                self.drawings.remove(at: i)
                 return
             }
             i += 1
