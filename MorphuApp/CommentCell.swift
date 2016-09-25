@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import ActiveLabel
 
 class CommentCell: UITableViewCell {
     
     static let commentFont = UIFont(resource: R.font.openSans, size: 14.0)!
+    
+    var delegate: ActiveLabelDelegate? {
+        didSet {
+            commentText?.delegate = delegate
+        }
+    }
     
     var comment: Comment? {
         didSet {
@@ -29,12 +36,22 @@ class CommentCell: UITableViewCell {
         }
     }
     
+    var tint: UIColor? {
+        didSet {
+            guard let tint = tint  else { return }
+            commentText?.hashtagColor = tint
+            commentText?.mentionColor = tint
+        }
+    }
+    
     @IBOutlet weak var profileImage: UIImageView?
     @IBOutlet weak var username: UILabel?
     @IBOutlet weak var timeStamp: UILabel?
-    @IBOutlet weak var commentText: UILabel? {
+    
+    @IBOutlet weak var commentText: ActiveLabel? {
         didSet {
             commentText?.font = CommentCell.commentFont
+            commentText?.enabledTypes = [.mention, .hashtag]
         }
     }
     @IBOutlet weak var userButton: UIButton?

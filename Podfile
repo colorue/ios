@@ -28,6 +28,8 @@ target 'Colorue' do
     
     pod 'TTTAttributedLabel'
     pod 'SlackTextViewController'
+    
+    pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :branch => 'swift-3'
 end
 
 post_install do |installer|

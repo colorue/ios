@@ -1,4 +1,5 @@
 PODS:
+  - ActiveLabel (0.6.2)
   - Alamofire (4.0.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -80,6 +81,7 @@ PODS:
   - UrbanAirship-iOS-SDK (8.0.1)
 
 DEPENDENCIES:
+  - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift.git`, branch `swift-3`)
   - Alamofire
   - CCBottomRefreshControl
   - FBSDKCoreKit
@@ -97,7 +99,18 @@ DEPENDENCIES:
   - TTTAttributedLabel
   - UrbanAirship-iOS-SDK
 
+EXTERNAL SOURCES:
+  ActiveLabel:
+    :branch: swift-3
+    :git: https://github.com/optonaut/ActiveLabel.swift.git
+
+CHECKOUT OPTIONS:
+  ActiveLabel:
+    :commit: 80fae948262087ebf9006d5d7c454c969aa88427
+    :git: https://github.com/optonaut/ActiveLabel.swift.git
+
 SPEC CHECKSUMS:
+  ActiveLabel: f1670bbd4d6bba563ffeec423120f6d708c4784f
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
@@ -125,6 +138,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: 544cc5f43df3c2561c3ed7d4dc96e92c1a9896c3
+PODFILE CHECKSUM: 77b233439a260ae0d3297334babd238b4f2f8c54
 
 COCOAPODS: 1.0.0

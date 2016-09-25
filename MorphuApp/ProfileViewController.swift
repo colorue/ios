@@ -10,12 +10,22 @@ import Firebase
 
 class ProfileViewController: DrawingListViewController {
     
-    var userInstance: User?
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.drawingSource = userInstance!.getDrawings
-        API.sharedInstance.loadFulUser(userInstance!)
+    var username: String? {
+        didSet {
+            guard let username = username else { return }
+            API.sharedInstance.searchUsers(username) { [weak self] user in
+                self?.userInstance = user
+            }
+        }
+    }
+    
+    var userInstance: User? {
+        didSet {
+            guard let userInstance = userInstance else { return }
+            API.sharedInstance.loadFulUser(userInstance)
+            self.drawingSource = userInstance.getDrawings
+            self.tableView.reloadData()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -41,7 +51,7 @@ extension ProfileViewController {
         if section == 0 {
             return 1
         } else {
-            return userInstance!.getDrawings().count
+            return userInstance?.getDrawings().count ?? 0
         }
     }
     
@@ -69,14 +79,15 @@ extension ProfileViewController {
 
 extension ProfileViewController: ProfileCellDelagate {
     func followAction(_ sender: UIButton) {
+        guard let userInstance = userInstance else { return }
         
         if !sender.isSelected {
             sender.isSelected = true
-            api.getActiveUser().follow(userInstance!)
-            api.follow(userInstance!)
+            api.getActiveUser().follow(userInstance)
+            api.follow(userInstance)
             FIRAnalytics.logEvent(withName: "followedUser", parameters: [:])
         } else {
-            let actionSelector = UIAlertController(title: "Unfollow \(userInstance!.username)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+            let actionSelector = UIAlertController(title: "Unfollow \(userInstance.username)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
             actionSelector.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             actionSelector.addAction(UIAlertAction(title: "Unfollow", style: UIAlertActionStyle.destructive,
                 handler: {(alert: UIAlertAction!) in self.unfollow(sender)}))
@@ -86,9 +97,11 @@ extension ProfileViewController: ProfileCellDelagate {
     }
     
     fileprivate func unfollow(_ sender: UIButton) {
+        guard let userInstance = userInstance else { return }
+
         sender.isSelected = false
-        api.getActiveUser().unfollow(userInstance!)
-        api.unfollow(userInstance!)
+        api.getActiveUser().unfollow(userInstance)
+        api.unfollow(userInstance)
         FIRAnalytics.logEvent(withName: "unfollowedUser", parameters: [:])
     }
 }
@@ -98,16 +111,19 @@ extension ProfileViewController: ProfileCellDelagate {
 
 extension ProfileViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let userInstance = userInstance else { return }
+
+        
         if segue.identifier == "showFollowers" {
             let targetController = segue.destination as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Followers"
-            targetController.userSource = { return Array(self.userInstance!.getFollowers()) }
+            targetController.userSource = { return Array(userInstance.getFollowers()) }
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destination as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Following"
-            targetController.userSource = { return Array(self.userInstance!.getFollowing()) }
+            targetController.userSource = { return Array(userInstance.getFollowing()) }
         } else if let targetController = segue.destination as? UserListViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"

@@ -17,7 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ocg-Js-m6d" id="GfO-ry-Zv4">
-                <frame key="frameInset" width="375" height="81"/>
+                <frame key="frameInset" width="375" height="81.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju6-sF-b1p">
@@ -56,7 +56,7 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCH-EO-It7">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCH-EO-It7" customClass="ActiveLabel" customModule="ActiveLabel">
                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -94,7 +94,7 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="commentText" destination="kCH-EO-It7" id="La8-3t-fjK"/>
+                <outlet property="commentText" destination="kCH-EO-It7" id="1WR-dZ-2eK"/>
                 <outlet property="profileImage" destination="8zZ-WT-Rcy" id="l5n-jB-P0p"/>
                 <outlet property="timeStamp" destination="Ju6-sF-b1p" id="d11-17-eqB"/>
                 <outlet property="userButton" destination="4hZ-kR-Bze" id="9Qu-dw-nLB"/>

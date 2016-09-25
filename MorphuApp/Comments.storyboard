@@ -9,7 +9,7 @@
         <scene sceneID="vUi-1k-bUh">
             <objects>
                 <navigationController id="na4-Ub-R4y" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="NKa-Zu-Pm0">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NKa-Zu-Pm0">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -42,7 +42,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Comments" id="cST-Yr-cW3"/>
+                    <navigationItem key="navigationItem" title="Comments" id="cST-Yr-cW3">
+                        <barButtonItem key="backBarButtonItem" title=" " id="DLe-xa-DEk"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A6P-9Y-Eea" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import SlackTextViewController
 import TTTAttributedLabel
+import ActiveLabel
 
 class CommentViewController: SLKTextViewController {
     
@@ -54,7 +55,9 @@ class CommentViewController: SLKTextViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.commentCell)!
         cell.comment = drawingInstance?.getComments()[(indexPath as NSIndexPath).row]
+        cell.delegate = self
         cell.buttonTag = (indexPath as NSIndexPath).row
+        cell.tint = tintColor
         return cell
     }
     
@@ -142,5 +145,25 @@ class CommentViewController: SLKTextViewController {
         textInputbar.textView.text = ""
         Analytics.logEvent(.wroteComment)
         tableView?.reloadData()
+    }
+}
+
+extension CommentViewController: ActiveLabelDelegate {
+    func didSelect(_ text: String, type: ActiveType) {
+        print(text, type)
+        switch(type) {
+        case .hashtag:
+            let hashtagAlert = UIAlertController(title: "#\(text)", message: "Hashtags coming soon!" , preferredStyle: UIAlertControllerStyle.alert)
+            hashtagAlert.addAction(UIAlertAction(title: "Cool", style: UIAlertActionStyle.default, handler: nil))
+            present(hashtagAlert, animated: true, completion: nil)
+        case .mention:
+            if let profileController = R.storyboard.profile.profile() {
+                profileController.username = text
+                profileController.tintColor = tintColor
+                navigationController?.pushViewController(profileController, animated: true)
+            }
+        default:
+            break
+        }
     }
 }
