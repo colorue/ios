@@ -18,8 +18,8 @@ target 'Colorue' do
     pod 'Firebase/Crash'
 
     pod 'CCBottomRefreshControl'
-    pod 'SinchVerification-Swift'
-    
+#    pod 'SinchVerification-Swift'
+
     pod 'UrbanAirship-iOS-SDK'
     pod 'Alamofire'
     

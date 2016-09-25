@@ -524,11 +524,11 @@ class API {
     func loadFacebookFriends() {
         let request = FBSDKGraphRequest(graphPath: "/me/friends", parameters: ["fields": "friends"], httpMethod: "GET")
         
-        request?.start { (connection:FBSDKGraphRequestConnection!,
-            result:AnyObject!, error:NSError!) -> Void in
+        
+        request?.start(completionHandler: { (connection, result, error) -> Void in
             
             if let error = error {
-                print(error.description)
+                print(error.localizedDescription)
                 return
             } else {
                 let resultdict = result as! NSDictionary
@@ -539,7 +539,7 @@ class API {
                     self.loadUserByFBID(id)
                 }
             }
-        }
+        })
     }
     
     fileprivate func loadUserByFBID(_ FBID: String) {
@@ -661,19 +661,12 @@ class API {
         let notificationData: NSDictionary = ["ios": iosData]
         let namedUser: NSDictionary = ["named_user": recipient]
         let parameters: [String : Any] = ["audience":namedUser, "notification":notificationData, "device_types":["ios"]]
-
+        let headers: HTTPHeaders = ["Authorization" : self.airshipKey,
+        "Accept" : "application/vnd.urbanairship+json; version=3",
+        "Drawing-Type" : "application/json"]
         
-        Alamofire.request("https://go.urbanairship.com/api/push".url,
-                          method: .post,
-                          headers: ["Authorization" : self.airshipKey,
-                                    "Accept" : "application/vnd.urbanairship+json; version=3",
-                                    "Drawing-Type" : "application/json"],
-                          parameters: parameters,
-                          encoding: .json)
-            .response { request, response, data, error in
-                let dataString = NSString(data: data!, encoding:String.Encoding.utf8)
-                print(dataString!)
-            }
+        Alamofire.request("https://go.urbanairship.com/api/push", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
+            debugPrint(response)
+        }
     }
-    
  }

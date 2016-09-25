@@ -75,7 +75,6 @@ PODS:
   - R.swift (3.0.0):
     - R.swift.Library (~> 3.0.0)
   - R.swift.Library (3.0.1)
-  - SinchVerification-Swift (1.4.7)
   - UrbanAirship-iOS-SDK (8.0.1)
 
 DEPENDENCIES:
@@ -92,7 +91,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - Kingfisher
   - R.swift
-  - SinchVerification-Swift
   - UrbanAirship-iOS-SDK
 
 SPEC CHECKSUMS:
@@ -119,9 +117,8 @@ SPEC CHECKSUMS:
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
-  SinchVerification-Swift: b22f50bebfa9d685655781bb6d8244560c64e1a5
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: c21b846786259ef420ce379a9f5ce739515da373
+PODFILE CHECKSUM: 76c667c61a565938ea46d206597c96c96e102a20
 
 COCOAPODS: 1.0.0
