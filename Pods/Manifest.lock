@@ -75,6 +75,8 @@ PODS:
   - R.swift (3.0.0):
     - R.swift.Library (~> 3.0.0)
   - R.swift.Library (3.0.1)
+  - SlackTextViewController (1.9.4)
+  - TTTAttributedLabel (2.0.0)
   - UrbanAirship-iOS-SDK (8.0.1)
 
 DEPENDENCIES:
@@ -91,6 +93,8 @@ DEPENDENCIES:
   - Firebase/Storage
   - Kingfisher
   - R.swift
+  - SlackTextViewController
+  - TTTAttributedLabel
   - UrbanAirship-iOS-SDK
 
 SPEC CHECKSUMS:
@@ -117,8 +121,10 @@ SPEC CHECKSUMS:
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
+  SlackTextViewController: d490f354dba963bc469a6b9ce3213978eaed67a5
+  TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: 51447a9125c0c25d4570b8a9ba2e8a9f37ec186f
+PODFILE CHECKSUM: 544cc5f43df3c2561c3ed7d4dc96e92c1a9896c3
 
 COCOAPODS: 1.0.0

@@ -8,26 +8,36 @@
 
 import UIKit
 import Firebase
+import SlackTextViewController
 
-class CommentViewController: UITableViewController {
+class CommentViewController: SLKTextViewController {
     
     let api = API.sharedInstance
-    var drawingInstance: Drawing?
     
-    var tintColor = redColor
+    public var drawingInstance: Drawing? {
+        didSet {
+            tableView?.reloadData()
+        }
+    }
     
-    fileprivate var writeCommentCell: TextInputCell?
-    
-    func setDrawingInstance(_ drawing: Drawing) {
-        self.drawingInstance = drawing
-        self.tableView.reloadData()
+    var tintColor = redColor {
+        didSet {
+            textInputbar.tintColor = tintColor
+            rightButton.tintColor = tintColor
+        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        tableView.tableFooterView = UIView()
-        tableView.backgroundColor = backgroundColor
+        
+        isInverted = false
+        textInputbar.autoHideRightButton = false
+        textView.placeholder = "Write comment..."
+        
+        tableView?.tableFooterView = UIView()
+        tableView?.backgroundColor = backgroundColor
+        tableView?.register(UINib(nibName: R.nib.commentCell.identifier, bundle: nil), forCellReuseIdentifier: R.nib.commentCell.identifier)
+        
     }
     
     // MARK: - Table view data source
@@ -40,26 +50,9 @@ class CommentViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.commentCell)!
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.commentCell)!
         cell.comment = drawingInstance?.getComments()[(indexPath as NSIndexPath).row]
         cell.buttonTag = (indexPath as NSIndexPath).row
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.writeCommentCell)!
-        cell.delagate = self
-        
-        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 0.5))
-        separatorU.backgroundColor = UIColor.lightGray
-        cell.addSubview(separatorU)
-        
-        cell.textField?.tintColor = self.tintColor
-        cell.submitButton?.setTitleColor(self.tintColor, for: UIControlState())
-        
-        cell.textField?.delegate = cell
-        cell.textField?.placeholder = "Write comment..."
-        self.writeCommentCell = cell
         return cell
     }
     
@@ -83,7 +76,7 @@ class CommentViewController: UITableViewController {
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[(editActionsForRowAtIndexPath as NSIndexPath).row])!)
                     Analytics.logEvent(.deletedComment)
-                    self.tableView.reloadData()
+                    self.tableView?.reloadData()
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
                 self.present(deleteAlert, animated: true, completion: nil)
@@ -108,21 +101,19 @@ class CommentViewController: UITableViewController {
         return true
     }
     
-    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 40
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 82.0
     }
     
     @IBAction func pullRefresh(_ sender: UIRefreshControl) {
-        self.tableView.reloadData()
-        self.refreshControl?.endRefreshing()
+        tableView?.reloadData()
+//        self.refreshControl?.endRefreshing()
     }
-}
-
-extension CommentViewController: TextInputCellDelagate {
-    func submit(_ text: String) {
-        API.sharedInstance.addComment(drawingInstance!, text: text)
-        self.writeCommentCell?.textField?.text = ""
+    
+    override func didPressRightButton(_ sender: Any?) {
+        API.sharedInstance.addComment(drawingInstance!, text: textInputbar.textView.text)
+        textInputbar.textView.text = ""
         Analytics.logEvent(.wroteComment)
-        self.tableView.reloadData()
+        tableView?.reloadData()
     }
 }

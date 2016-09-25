@@ -25,6 +25,9 @@ target 'Colorue' do
     
     pod 'Kingfisher'
     pod 'R.swift'
+    
+    pod 'TTTAttributedLabel'
+    pod 'SlackTextViewController'
 end
 
 post_install do |installer|

@@ -54,6 +54,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SlackTextViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TTTAttributedLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>UrbanAirship-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,12 +72,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>048F4F489334AEDE0A7B36861F911EB1</key>
+		<key>1657930304B84232F19A0D421D9E1A8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1657930304B84232F19A0D421D9E1A8A</key>
+		<key>19F8E019EC79C0FD00AFFCA65C64E0D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -87,16 +97,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4999443A2379DAEFCBA4858B062A3939</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>686B20F29341DAAE0F3A1CA3BB5344FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
 		<dict>
 			<key>primary</key>
@@ -112,7 +112,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C321BC63E19786D8EC15F423436C5BE3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CB338C492E3CA8CEC8D7243E342E2AC7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DD1559592F5FECF5E008347EC681DF67</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E3CC516CB45CBA5533BD4860CF0F9D55</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E4E7C88DAE388A22F6D8D53CB56325BA</key>
 		<dict>
 			<key>primary</key>
 			<true/>

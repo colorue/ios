@@ -191,8 +191,6 @@ extension DrawingListViewController: DrawingCellDelagate {
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
                     self.api.deleteDrawing(drawing)
                     FIRAnalytics.logEvent(withName: "drawingDeleted", parameters: [:])
-
-                    //tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: sender.tag, inSection: 1)], withRowAnimation: .Fade)
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
                 self.present(deleteAlert, animated: true, completion: nil)

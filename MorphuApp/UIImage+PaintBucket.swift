@@ -15,6 +15,9 @@ public extension UIImage {
         let imageBuffer = ImageBuffer(image: self.cgImage!)
         let pixel = imageBuffer[imageBuffer.indexFrom(point: point)]
         let replacementPixel = Pixel(color: withColor)
+        
+        guard pixel.color != withColor else { return self }
+        
         imageBuffer.scanline_replaceColor(pixel, startingAtPoint: point, withColor: replacementPixel, tolerance: tolerance)
         
         return UIImage(cgImage: imageBuffer.image, scale: self.scale, orientation: UIImageOrientation.up)

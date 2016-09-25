@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CommentCell" rowHeight="82" id="Ocg-Js-m6d" customClass="CommentCell" customModule="Colorue" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="82"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Ocg-Js-m6d" id="GfO-ry-Zv4">
+                <frame key="frameInset" width="375" height="81"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ju6-sF-b1p">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="LoR-J3-nTC">
+                                <variation key="heightClass=regular-widthClass=compact" constant="30"/>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="14" id="toM-et-OWv">
+                                <variation key="heightClass=regular-widthClass=compact" constant="12"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                        <color key="textColor" red="0.66666666669999997" green="0.66666666669999997" blue="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8zZ-WT-Rcy">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="1rg-gz-ZxM">
+                                <variation key="heightClass=regular-widthClass=compact" constant="12"/>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="15" id="HSm-7g-bvY">
+                                <variation key="heightClass=regular-widthClass=compact" constant="12"/>
+                            </constraint>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LK2-Bl-dmI">
+                        <constraints>
+                            <constraint firstAttribute="width" constant="100" id="5u4-DO-EC9">
+                                <variation key="heightClass=regular-widthClass=compact" constant="200"/>
+                            </constraint>
+                            <constraint firstAttribute="height" constant="14" id="wxG-Uu-ssA">
+                                <variation key="heightClass=regular-widthClass=compact" constant="12"/>
+                            </constraint>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kCH-EO-It7">
+                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4hZ-kR-Bze"/>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ju6-sF-b1p" firstAttribute="top" secondItem="GfO-ry-Zv4" secondAttribute="topMargin" constant="8" id="4sI-pi-wo0">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="4hZ-kR-Bze" firstAttribute="bottom" secondItem="LK2-Bl-dmI" secondAttribute="bottom" id="4yk-x4-bVT"/>
+                    <constraint firstItem="4hZ-kR-Bze" firstAttribute="leading" secondItem="8zZ-WT-Rcy" secondAttribute="leading" id="CWv-PS-J4N"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="kCH-EO-It7" secondAttribute="trailing" id="Fo9-gv-m84">
+                        <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                    </constraint>
+                    <constraint firstItem="LK2-Bl-dmI" firstAttribute="leading" secondItem="8zZ-WT-Rcy" secondAttribute="trailing" constant="8" id="KcQ-wR-unf">
+                        <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                    </constraint>
+                    <constraint firstItem="kCH-EO-It7" firstAttribute="top" secondItem="LK2-Bl-dmI" secondAttribute="bottom" constant="8" id="S9W-IB-KkP">
+                        <variation key="heightClass=regular-widthClass=compact" constant="8"/>
+                    </constraint>
+                    <constraint firstItem="8zZ-WT-Rcy" firstAttribute="top" secondItem="GfO-ry-Zv4" secondAttribute="topMargin" id="SeS-qN-ACf"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="Ju6-sF-b1p" secondAttribute="trailing" id="UK7-Hp-oLC"/>
+                    <constraint firstItem="Ju6-sF-b1p" firstAttribute="top" secondItem="8zZ-WT-Rcy" secondAttribute="top" id="Wt9-ma-eqN"/>
+                    <constraint firstItem="kCH-EO-It7" firstAttribute="leading" secondItem="GfO-ry-Zv4" secondAttribute="leadingMargin" id="ZZU-a6-b4X">
+                        <variation key="heightClass=regular-widthClass=compact" constant="4"/>
+                    </constraint>
+                    <constraint firstItem="8zZ-WT-Rcy" firstAttribute="leading" secondItem="GfO-ry-Zv4" secondAttribute="leadingMargin" id="c4K-Db-j8P"/>
+                    <constraint firstItem="4hZ-kR-Bze" firstAttribute="trailing" secondItem="LK2-Bl-dmI" secondAttribute="trailing" id="kE1-Bd-3HB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="kCH-EO-It7" secondAttribute="bottom" constant="4" id="kz1-gF-KLG">
+                        <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
+                    </constraint>
+                    <constraint firstItem="4hZ-kR-Bze" firstAttribute="top" secondItem="LK2-Bl-dmI" secondAttribute="top" id="oND-SW-D0r"/>
+                    <constraint firstItem="LK2-Bl-dmI" firstAttribute="top" secondItem="8zZ-WT-Rcy" secondAttribute="top" id="xZN-9Y-o7S"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="commentText" destination="kCH-EO-It7" id="La8-3t-fjK"/>
+                <outlet property="profileImage" destination="8zZ-WT-Rcy" id="l5n-jB-P0p"/>
+                <outlet property="timeStamp" destination="Ju6-sF-b1p" id="d11-17-eqB"/>
+                <outlet property="userButton" destination="4hZ-kR-Bze" id="9Qu-dw-nLB"/>
+                <outlet property="username" destination="LK2-Bl-dmI" id="Rgf-f0-lLN"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>
