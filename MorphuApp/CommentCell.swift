@@ -9,6 +9,9 @@
 import UIKit
 
 class CommentCell: UITableViewCell {
+    
+    static let commentFont = UIFont(resource: R.font.openSans, size: 14.0)!
+    
     var comment: Comment? {
         didSet {
             guard let comment = comment else { return }
@@ -29,6 +32,10 @@ class CommentCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView?
     @IBOutlet weak var username: UILabel?
     @IBOutlet weak var timeStamp: UILabel?
-    @IBOutlet weak var commentText: UILabel?
+    @IBOutlet weak var commentText: UILabel? {
+        didSet {
+            commentText?.font = CommentCell.commentFont
+        }
+    }
     @IBOutlet weak var userButton: UIButton?
 }

@@ -16,7 +16,7 @@ class PromptsViewController: UITableViewController {
     
     var tintColor = orangeColor
     
-    fileprivate var textInputCell: TextInputCell?
+//    fileprivate var textInputCell: TextInputCell?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,23 +45,23 @@ class PromptsViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WriteCommentCell")! as! TextInputCell
-        cell.delagate = self
-        
-        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
-        separatorU.backgroundColor = UIColor.lightGray
-        cell.addSubview(separatorU)
-        
-        cell.textField?.tintColor = self.tintColor
-        cell.submitButton?.setTitleColor(self.tintColor, for: UIControlState())
-        
-        cell.textField?.delegate = cell
-        cell.textField?.placeholder = "Create prompt..."
-
-        self.textInputCell = cell
-        return cell
-    }
+//    override func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "WriteCommentCell")! as! TextInputCell
+//        cell.delagate = self
+//        
+//        let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
+//        separatorU.backgroundColor = UIColor.lightGray
+//        cell.addSubview(separatorU)
+//        
+//        cell.textField?.tintColor = self.tintColor
+//        cell.submitButton?.setTitleColor(self.tintColor, for: UIControlState())
+//        
+//        cell.textField?.delegate = cell
+//        cell.textField?.placeholder = "Create prompt..."
+//
+//        self.textInputCell = cell
+//        return cell
+//    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? PromptViewController,
@@ -81,14 +81,14 @@ class PromptsViewController: UITableViewController {
     }
 }
 
-extension PromptsViewController: TextInputCellDelagate {
-    func submit(_ text: String) {
-        api.createPrompt(text)
-        self.textInputCell?.textField?.text = ""
-        FIRAnalytics.logEvent(withName: "submitPrompt", parameters: [:])
-        self.tableView.reloadData()
-    }
-}
+//extension PromptsViewController: TextInputCellDelagate {
+//    func submit(_ text: String) {
+//        api.createPrompt(text)
+//        self.textInputCell?.textField?.text = ""
+//        FIRAnalytics.logEvent(withName: "submitPrompt", parameters: [:])
+//        self.tableView.reloadData()
+//    }
+//}
 
 
 // MARK: Edit Cells

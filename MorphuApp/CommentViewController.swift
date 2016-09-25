@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import SlackTextViewController
+import TTTAttributedLabel
 
 class CommentViewController: SLKTextViewController {
     
@@ -34,10 +35,11 @@ class CommentViewController: SLKTextViewController {
         textInputbar.autoHideRightButton = false
         textView.placeholder = "Write comment..."
         
+        tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.tableFooterView = UIView()
         tableView?.backgroundColor = backgroundColor
         tableView?.register(UINib(nibName: R.nib.commentCell.identifier, bundle: nil), forCellReuseIdentifier: R.nib.commentCell.identifier)
-        
+        tableView?.allowsSelection = false
     }
     
     // MARK: - Table view data source
@@ -102,12 +104,37 @@ class CommentViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 82.0
+
+        guard let comment = drawingInstance?.getComments()[indexPath.row] else { return CGFloat.leastNormalMagnitude }
+        
+        let font = CommentCell.commentFont
+        
+        let insets = UIEdgeInsets(top: 28.0, left: 12.0, bottom: 8.0, right: 12.0)
+
+        let width = UIScreen.main.bounds.width - insets.left - insets.right
+        
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 2.0
+        style.minimumLineHeight = font.lineHeight
+        style.maximumLineHeight = font.lineHeight
+        
+        let attrString = NSAttributedString(string: comment.text, attributes: [
+            NSFontAttributeName: font,
+            NSParagraphStyleAttributeName: style
+            ])
+        
+        let size = TTTAttributedLabel.sizeThatFitsAttributedString(
+            attrString,
+            withConstraints: CGSize(width: width, height: 0.0),
+            limitedToNumberOfLines: 0)
+        
+        return size.height + insets.top + insets.bottom
     }
     
     @IBAction func pullRefresh(_ sender: UIRefreshControl) {
+        // TODO: implement pull to refresh
         tableView?.reloadData()
-//        self.refreshControl?.endRefreshing()
+//        tableView?.refreshControl?.endRefreshing()
     }
     
     override func didPressRightButton(_ sender: Any?) {
