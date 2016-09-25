@@ -37,14 +37,14 @@ class WallViewController: DrawingListViewController {
             pushAsk1.addAction(UIAlertAction(title: "Nope", style: UIAlertActionStyle.default, handler: nil))
             pushAsk1.addAction(UIAlertAction(title: "Yes", style: UIAlertActionStyle.default, handler: { alert in
                 UAirship.push().userPushNotificationsEnabled = true
-                UAirship.push().namedUser.identifier = self.api.getActiveUser().userId
+                UAirship.namedUser().identifier = self.api.getActiveUser().userId
             }))
             self.present(pushAsk1, animated: true, completion: nil)
             prefs.setValue(true, forKey: "pushAsk1")
         } else if !UAirship.push().userPushNotificationsEnabled
             && api.getActiveUser().getFollowers().count > 2 {
             UAirship.push().userPushNotificationsEnabled = true
-            UAirship.push().namedUser.identifier = self.api.getActiveUser().userId
+            UAirship.namedUser().identifier = self.api.getActiveUser().userId
         }
     }
     

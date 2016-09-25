@@ -103,14 +103,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         let buttonSize = selectorWidth
         
         undoButton.setImage(R.image.undoIcon(), for: UIControlState())
-        undoButton.tintColor = .white()
+        undoButton.tintColor = .white
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
         undoButton.frame = CGRect(x: frame.minX + buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
         addSubview(undoButton)
         
         trashButton.setImage(R.image.trashIcon(), for: UIControlState())
-        trashButton.tintColor = .white()
+        trashButton.tintColor = .white
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
         trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         trashButton.showsTouchWhenHighlighted = true
@@ -118,7 +118,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
         paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
-        paintBucketButton.tintColor = .white()
+        paintBucketButton.tintColor = .white
         paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
         paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         paintBucketButton.showsTouchWhenHighlighted = true
@@ -126,12 +126,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         paintBucketSpinner.hidesWhenStopped = true
         paintBucketSpinner.center = paintBucketButton.center
-        paintBucketSpinner.color = .white()
+        paintBucketSpinner.color = .white
         addSubview(paintBucketSpinner)
         
         dropperButton.setImage(R.image.dropper(), for: UIControlState())
         dropperButton.setImage(R.image.dropperActive(), for: .selected)
-        dropperButton.tintColor = .white()
+        dropperButton.tintColor = .white
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
         dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
@@ -139,13 +139,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         
         bullsEyeButton.setImage(R.image.bullsEye(), for: UIControlState())
         bullsEyeButton.setImage(R.image.bullsEyeActive(), for: .selected)
-        bullsEyeButton.tintColor = .white()
+        bullsEyeButton.tintColor = .white
         bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
         bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         bullsEyeButton.showsTouchWhenHighlighted = true
         addSubview(bullsEyeButton)
         
-        alphaButton.tintColor = .white()
+        alphaButton.tintColor = .white
         alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), for: .touchUpInside)
         alphaButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         alphaButton.showsTouchWhenHighlighted = true
@@ -203,7 +203,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     @objc fileprivate func undo(_ sender: UIButton) {
         delagate?.undo()
-//        state = .none
     }
     
     @objc fileprivate func trash(_ sender: UIButton) {
@@ -249,7 +248,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
         currentColorView.backgroundColor = colors[sender.view!.tag]
         updateButtonColor()
-//        state = .none
     }
     
     @objc fileprivate func buttonTapped(_ sender: UIButton) {
@@ -257,7 +255,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
 
         updateButtonColor()
-//        state = .none
     }
     
     fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
@@ -318,23 +315,23 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         }
         
         if (colorDarkness < 1.87) {
-            undoButton.tintColor = .white()
-            trashButton.tintColor = .white()
-            dropperButton.tintColor = .white()
-            paintBucketButton.tintColor = .white()
-            alphaButton.tintColor = .white()
-            eraserButton.tintColor = .white()
-            bullsEyeButton.tintColor = .white()
-            paintBucketSpinner.color = .white()
+            undoButton.tintColor = .white
+            trashButton.tintColor = .white
+            dropperButton.tintColor = .white
+            paintBucketButton.tintColor = .white
+            alphaButton.tintColor = .white
+            eraserButton.tintColor = .white
+            bullsEyeButton.tintColor = .white
+            paintBucketSpinner.color = .white
         } else {
-            undoButton.tintColor = .black()
-            trashButton.tintColor = .black()
-            dropperButton.tintColor = .black()
-            paintBucketButton.tintColor = .black()
-            alphaButton.tintColor = .black()
-            eraserButton.tintColor = .black()
-            bullsEyeButton.tintColor = .black()
-            paintBucketSpinner.color = .black()
+            undoButton.tintColor = .black
+            trashButton.tintColor = .black
+            dropperButton.tintColor = .black
+            paintBucketButton.tintColor = .black
+            alphaButton.tintColor = .black
+            eraserButton.tintColor = .black
+            bullsEyeButton.tintColor = .black
+            paintBucketSpinner.color = .black
         }
     }
     

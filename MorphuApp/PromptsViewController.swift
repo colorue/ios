@@ -100,7 +100,7 @@ extension PromptsViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt editActionsForRowAtIndexPath: IndexPath) -> [UITableViewRowAction] {
         if api.getPrompts()[(editActionsForRowAtIndexPath as NSIndexPath).row].user.userId == api.getActiveUser().userId {
-            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle(), title: "Delete", handler: { action, indexPath in
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: { action, indexPath in
                 self.setEditing(false, animated: true)
                 let deleteAlert = UIAlertController(title: "Delete prompt?", message: "This prompt will be deleted permanently, but its drawings will still exist.", preferredStyle: UIAlertControllerStyle.alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
@@ -113,7 +113,7 @@ extension PromptsViewController {
             })
             return [deleteAction]
         } else {
-            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle(), title: "Report", handler: { action, indexPath in
+            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Report", handler: { action, indexPath in
                 let deleteAlert = UIAlertController(title: "Report prompt?", message: "Please report any prompts that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
                     self.api.reportPrompt(self.api.getPrompts()[(editActionsForRowAtIndexPath as NSIndexPath).row])

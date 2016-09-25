@@ -22,15 +22,15 @@ class ImageBuffer {
         self.context = CGContext(data: nil, width: imageWidth, height: imageHeight, bitsPerComponent: 8, bytesPerRow: imageWidth * 4, space: colorSpace, bitmapInfo: CGBitmapInfo.byteOrder32Little.rawValue | CGImageAlphaInfo.premultipliedFirst.rawValue)!
         self.context.draw(image, in: CGRect(x: 0, y: 0, width: CGFloat(imageWidth), height: CGFloat(imageHeight)))
         
-        self.pixelBuffer = UnsafeMutablePointer<UInt32>(self.context.data)
+        self.pixelBuffer = UnsafeMutablePointer<UInt32>((context.data?.assumingMemoryBound(to: UInt32.self))!)
     }
     
-    func indexFrom(_ x: Int, _ y: Int) -> Int {
-        return x + (self.imageWidth * y)
+    func indexFrom(point: CGPoint) -> Int {
+        return Int(point.x) + (self.imageWidth * Int(point.y))
     }
     
     func differenceAtPoint(_ x: Int, _ y: Int, toPixel pixel: Pixel) -> Int {
-        let index = indexFrom(x, y)
+        let index = indexFrom(point: CGPoint(x: x, y:y))
         let newPixel = self[index]
         return pixel.diff(newPixel)
     }
@@ -40,15 +40,15 @@ class ImageBuffer {
         return pixel.diff(newPixel)
     }
     
-    func scanline_replaceColor(_ colorPixel: Pixel, startingAtPoint startingPoint: (Int, Int), withColor replacementPixel: Pixel, tolerance: Int) {
+    func scanline_replaceColor(_ colorPixel: Pixel, startingAtPoint: CGPoint, withColor replacementPixel: Pixel, tolerance: Int) {
         
         func testPixelAtPoint(_ x: Int, _ y: Int) -> Bool {
             return differenceAtPoint(x, y, toPixel: colorPixel) <= tolerance
         }
         
-        let indices = NSMutableIndexSet(integer: indexFrom(startingPoint))
+        let indices = NSMutableIndexSet(index: indexFrom(point: startingAtPoint))
         while indices.count > 0 {
-            let index = indices.first
+            let index = indices.firstIndex
             indices.remove(index)
             
             if differenceAtIndex(index, toPixel: colorPixel) > tolerance {
@@ -67,33 +67,33 @@ class ImageBuffer {
             var maxX = pointX + 1
             
             while minX >= 0 && testPixelAtPoint(minX, y) {
-                let index = indexFrom(minX, y)
+                let index = indexFrom(point: CGPoint(x: minX, y: y))
                 self[index] = replacementPixel
                 minX -= 1
             }
-            self[indexFrom(minX, y)] = replacementPixel
+            self[indexFrom(point: CGPoint(x: minX, y: y))] = replacementPixel
 
-            while maxX <= imageWidth && testPixelAtPoint(maxX, y) {
-                let index = indexFrom(maxX, y)
-                self[index] = replacementPixel
-                maxX += 1
+                while maxX <= imageWidth && testPixelAtPoint(maxX, y) {
+                    let index = indexFrom(point: CGPoint(x: maxX, y: y))
+                    self[index] = replacementPixel
+                    maxX += 1
             }
-            self[indexFrom(maxX, y)] = replacementPixel
+            self[indexFrom(point: CGPoint(x: maxX, y: y))] = replacementPixel
             
             
             for x in ((minX + 1)...(maxX - 1)) {
                 if y < imageHeight - 1 {
                     if testPixelAtPoint(x, y + 1) {
-                        indices.add(indexFrom(x, y + 1))
+                        indices.add(indexFrom(point: CGPoint(x: x, y: y + 1)))
                     } else {
-                        self[indexFrom(x, y + 1)] = replacementPixel
+                        self[indexFrom(point: CGPoint(x: x, y: y + 1))] = replacementPixel
                     }
                 }
                 if y > 0 {
                     if testPixelAtPoint(x, y - 1) {
-                        indices.add(indexFrom(x, y - 1))
+                        indices.add(indexFrom(point: CGPoint(x: x, y: y - 1)))
                     } else {
-                        self[indexFrom(x, y - 1)] = replacementPixel
+                        self[indexFrom(point: CGPoint(x: x, y: y - 1))] = replacementPixel
                     }
                 }
             }

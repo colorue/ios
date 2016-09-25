@@ -488,10 +488,12 @@ class API {
         myRootRef.child("prompts").observe(.childAdded, with: { snapshot in
             let promptId = snapshot.key
             
-            let text = snapshot.value!["text"] as! String
-            let timeStamp = snapshot.value!["timeStamp"] as! Double
+            guard let value = snapshot.value as? [String:AnyObject] else { return }
             
-            self.getUser(snapshot.value!["user"] as! String, callback: { (user: User) -> () in
+            let text = value["text"] as! String
+            let timeStamp = value["timeStamp"] as! Double
+            
+            self.getUser(value["user"] as! String, callback: { (user: User) -> () in
                 
                 let prompt = Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text)
                 self.prompts.insert(prompt)
@@ -655,18 +657,19 @@ class API {
     // MARK: Push Notifications
     func sendPushNotification(_ message: String, recipient: String, badge: String) {
     
-        let iosData: NSDictionary = ["alert": message] //, "sound": "default", "badge": badge
+        let iosData: NSDictionary = ["alert": message]
         let notificationData: NSDictionary = ["ios": iosData]
         let namedUser: NSDictionary = ["named_user": recipient]
+        let parameters: [String : Any] = ["audience":namedUser, "notification":notificationData, "device_types":["ios"]]
+
         
-        //let audienceData: NSDictionary = ["OR": [iPhone6]]
-        
-        Alamofire.request(.POST, "https://go.urbanairship.com/api/push",
-            headers:   ["Authorization" : self.airshipKey,
-                "Accept" : "application/vnd.urbanairship+json; version=3",
-                "Drawing-Type" : "application/json"],
-            parameters: ["audience":namedUser, "notification":notificationData, "device_types":["ios"]],
-            encoding: .json)
+        Alamofire.request("https://go.urbanairship.com/api/push".url,
+                          method: .post,
+                          headers: ["Authorization" : self.airshipKey,
+                                    "Accept" : "application/vnd.urbanairship+json; version=3",
+                                    "Drawing-Type" : "application/json"],
+                          parameters: parameters,
+                          encoding: .json)
             .response { request, response, data, error in
                 let dataString = NSString(data: data!, encoding:String.Encoding.utf8)
                 print(dataString!)
