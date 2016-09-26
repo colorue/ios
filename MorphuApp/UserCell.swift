@@ -30,7 +30,7 @@ class UserCell: UITableViewCell {
         }
     }
     
-    var color: UIColor = redColor {
+    var color: UIColor? {
         didSet {
             followButton?.tintColor = color
         }

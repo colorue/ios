@@ -90,11 +90,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 return false
             }
         
-        } else if let search = targetController as? PromptsViewController {
+        } else if let search = targetController as? ExploreViewController {
             let nav = search.navigationController as! NavigationController
             nav.setColors(orangeColor)
+            search.tintColor = orangeColor
             if previousController == viewController {
-//                search.scrollToTop()
+                search.scrollToTop()
             }
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController

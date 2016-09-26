@@ -39,6 +39,8 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         
         bottomRefreshControl.triggerVerticalOffset = 50.0
         bottomRefreshControl.addTarget(self, action: #selector(DrawingListViewController.refresh), for: .valueChanged)
+        
+        tableView.register(UINib(nibName: R.nib.drawingCell.identifier, bundle: nil), forCellReuseIdentifier: R.nib.drawingCell.identifier)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -148,6 +150,32 @@ class DrawingListViewController: UITableViewController, APIDelagate {
 
 
 extension DrawingListViewController: DrawingCellDelagate {
+    
+    func userButtonPressed(_ drawing: Drawing) {
+        if let profileController = R.storyboard.profile.profile() {
+            profileController.userInstance = drawing.getArtist()
+            profileController.tintColor = tintColor
+            navigationController?.pushViewController(profileController, animated: true)
+        }
+    }
+    
+    func likesButtonPressed(_ drawing: Drawing) {
+        if let likesController = R.storyboard.users.users() {
+            likesController.userSource = drawing.getLikes
+            likesController.title = "Likes"
+            likesController.tintColor = tintColor
+            navigationController?.pushViewController(likesController, animated: true)
+        }
+    }
+    
+    func commentsButtonPressed(_ drawing: Drawing) {
+        if let commentsController = R.storyboard.comments.comments() {
+            commentsController.drawingInstance = drawing
+            commentsController.title = "Comments"
+            commentsController.tintColor = tintColor
+            navigationController?.pushViewController(commentsController, animated: true)
+        }
+    }
     
     func likeButtonPressed(_ drawing: Drawing) {
         if !(drawing.liked(api.getActiveUser())) {

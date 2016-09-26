@@ -22,7 +22,7 @@ class CommentViewController: SLKTextViewController {
         }
     }
     
-    var tintColor = redColor {
+    var tintColor: UIColor? {
         didSet {
             textInputbar.tintColor = tintColor
             rightButton.tintColor = tintColor

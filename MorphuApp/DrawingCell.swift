@@ -11,6 +11,9 @@ import UIKit
 protocol DrawingCellDelagate {
     func presentDrawingActions(_ drawing: Drawing)
     func likeButtonPressed(_ drawing: Drawing)
+    func userButtonPressed(_ drawing: Drawing)
+    func likesButtonPressed(_ drawing: Drawing)
+    func commentsButtonPressed(_ drawing: Drawing)
 }
 
 class DrawingCell: UITableViewCell {
@@ -52,9 +55,12 @@ class DrawingCell: UITableViewCell {
     
     var delagate: DrawingCellDelagate? {
         didSet {
-            // TODO: move to init
             uploadButton?.addTarget(self, action: #selector(DrawingCell.presentDrawingActions(_:)), for: .touchUpInside)
             likeButton?.addTarget(self, action: #selector(DrawingCell.likeButtonPressed(_:)), for: .touchUpInside)
+            userButton?.addTarget(self, action: #selector(DrawingCell.userButtonPressed(_:)), for: .touchUpInside)
+            likesButton?.addTarget(self, action: #selector(DrawingCell.likesButtonPressed(_:)), for: .touchUpInside)
+            commentsButton?.addTarget(self, action: #selector(DrawingCell.commentsButtonPressed(_:)), for: .touchUpInside)
+
         }
     }
     
@@ -85,6 +91,21 @@ class DrawingCell: UITableViewCell {
     @objc fileprivate func presentDrawingActions(_ sender: UIButton) {
         guard let drawing = drawing else { return }
         delagate?.presentDrawingActions(drawing)
+    }
+    
+    @objc fileprivate func userButtonPressed(_ sender: UIButton) {
+        guard let drawing = drawing else { return }
+        delagate?.userButtonPressed(drawing)
+    }
+    
+    @objc fileprivate func likesButtonPressed(_ sender: UIButton) {
+        guard let drawing = drawing else { return }
+        delagate?.likesButtonPressed(drawing)
+    }
+    
+    @objc fileprivate func commentsButtonPressed(_ sender: UIButton) {
+        guard let drawing = drawing else { return }
+        delagate?.commentsButtonPressed(drawing)
     }
     
     @objc fileprivate func likeButtonPressed(_ sender: UIButton) {

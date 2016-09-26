@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="r7R-0e-m92">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="pAL-mw-SmE">
+            <objects>
+                <navigationController id="r7R-0e-m92" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DYV-x6-Hcq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="4A6-wq-mRM" kind="relationship" relationship="rootViewController" id="D7v-RN-Kz9"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wiA-q2-DF7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="460" y="18"/>
+        </scene>
+        <!--HashTag-->
+        <scene sceneID="6nF-8f-Lsz">
+            <objects>
+                <tableViewController storyboardIdentifier="Prompt" id="4A6-wq-mRM" customClass="HashTagViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="mgT-VX-P3p">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <sections/>
+                        <connections>
+                            <outlet property="dataSource" destination="4A6-wq-mRM" id="eNw-kD-IX3"/>
+                            <outlet property="delegate" destination="4A6-wq-mRM" id="Kby-D1-GjC"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="HashTag" id="kaX-J2-03k">
+                        <barButtonItem key="backBarButtonItem" title=" " id="6HN-jB-Ip0"/>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ohu-q8-x9V">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshPulled:" destination="4A6-wq-mRM" eventType="valueChanged" id="hyi-hP-IQQ"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uRV-4x-N4g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1209" y="18"/>
+        </scene>
+        <!--Comments-->
+        <scene sceneID="HrV-R6-r8L">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Comments" referencedIdentifier="Comments" id="Z6b-K2-D9t" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jiw-Cs-AHw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1700" y="-36"/>
+        </scene>
+        <!--Users-->
+        <scene sceneID="SDE-5M-z0m">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Users" referencedIdentifier="Users" id="xPi-7V-kuw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3MG-sc-sSk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="18"/>
+        </scene>
+        <!--Profile-->
+        <scene sceneID="T6q-XW-CD0">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="Profile" id="f8q-4b-VVu" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xu0-5L-6Lc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1687" y="71"/>
+        </scene>
+    </scenes>
+</document>

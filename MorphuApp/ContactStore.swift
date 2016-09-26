@@ -29,7 +29,6 @@ class ContactStore {
             print("Error fetching containers")
         }
         
-        
         // Loop the containers
         for container in allContainers {
             let fetchPredicate = CNContact.predicateForContactsInContainer(withIdentifier: container.identifier)
@@ -41,11 +40,13 @@ class ContactStore {
                     let contact = Contact(name: result.givenName + " " + result.familyName)
                     
                     for phoneNumber:CNLabeledValue in result.phoneNumbers {
-                        let number = phoneNumber.value 
-                        if let phoneType = phoneType(rawValue: phoneNumber.label!) {
-                            contact.addPhoneNumber(number.stringValue, type: phoneType)
-                        } else {
-                            print(phoneNumber.label, contact.name)
+                        let number = phoneNumber.value
+                        if let phoneLabel = phoneNumber.label {
+                            if let phoneType = phoneType(rawValue: phoneLabel) {
+                                contact.addPhoneNumber(number.stringValue, type: phoneType)
+                            } else {
+                                print(phoneNumber.label, contact.name)
+                            }
                         }
                     }
                     

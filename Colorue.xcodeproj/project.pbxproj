@@ -35,11 +35,11 @@
 		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
 		8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */; };
 		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
-		876614BA1D034F1200DF4590 /* PromptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876614B91D034F1200DF4590 /* PromptViewController.swift */; };
+		876614BA1D034F1200DF4590 /* HashTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 876614B91D034F1200DF4590 /* HashTagViewController.swift */; };
+		877094FF1D98B0FB00F07700 /* DrawingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 877094FE1D98B0FB00F07700 /* DrawingCell.xib */; };
 		8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA461CFF823B00B26931 /* ProfileCell.swift */; };
 		8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8774BA481CFFA08C00B26931 /* ProfileViewController.swift */; };
 		877FA9A31D26D45700830980 /* SharingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 877FA9A21D26D45700830980 /* SharingViewController.swift */; };
-		8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8786D63A1D56B40600AD3362 /* PromptCell.swift */; };
 		8786D6511D56BD6E00AD3362 /* Root.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6501D56BD6E00AD3362 /* Root.storyboard */; };
 		8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6521D56C14400AD3362 /* Welcome.storyboard */; };
 		8786D6551D56CD2C00AD3362 /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6541D56CD2C00AD3362 /* SignIn.storyboard */; };
@@ -58,8 +58,8 @@
 		87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */; };
 		87AFB24E1D1C58CC0016FC59 /* DrawingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */; };
 		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
-		87DB18E21D56326400C838DD /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E11D56326400C838DD /* Prompt.swift */; };
-		87DB18E51D5634BF00C838DD /* PromptsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E41D5634BF00C838DD /* PromptsViewController.swift */; };
+		87DB18E21D56326400C838DD /* HashTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E11D56326400C838DD /* HashTag.swift */; };
+		87DB18E51D5634BF00C838DD /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DB18E41D5634BF00C838DD /* ExploreViewController.swift */; };
 		87DB18E71D56776800C838DD /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87DB18E61D56776800C838DD /* GoogleService-Info.plist */; };
 		87DEFB231D0CEDBD00924FDC /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */; };
 		87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */; };
@@ -72,8 +72,8 @@
 		87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D41D57A53C005B8FB3 /* Comments.storyboard */; };
 		87EE53D81D57A96B005B8FB3 /* Users.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D71D57A96B005B8FB3 /* Users.storyboard */; };
 		87EE53DA1D57AE6A005B8FB3 /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */; };
-		87EE53DC1D57B4A7005B8FB3 /* Prompts.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */; };
-		87EE53DE1D57B643005B8FB3 /* Prompt.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */; };
+		87EE53DC1D57B4A7005B8FB3 /* Explore.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DB1D57B4A7005B8FB3 /* Explore.storyboard */; };
+		87EE53DE1D57B643005B8FB3 /* HashTag.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53DD1D57B643005B8FB3 /* HashTag.storyboard */; };
 		87EE53E11D57BAF2005B8FB3 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */; };
 		87EE53E61D57C859005B8FB3 /* Analytics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E51D57C859005B8FB3 /* Analytics.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
@@ -118,11 +118,11 @@
 		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		876614B91D034F1200DF4590 /* PromptViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PromptViewController.swift; path = ../PromptViewController.swift; sourceTree = "<group>"; };
+		876614B91D034F1200DF4590 /* HashTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HashTagViewController.swift; path = ../HashTagViewController.swift; sourceTree = "<group>"; };
+		877094FE1D98B0FB00F07700 /* DrawingCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DrawingCell.xib; sourceTree = "<group>"; };
 		8774BA461CFF823B00B26931 /* ProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		8774BA481CFFA08C00B26931 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		877FA9A21D26D45700830980 /* SharingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharingViewController.swift; sourceTree = "<group>"; };
-		8786D63A1D56B40600AD3362 /* PromptCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptCell.swift; sourceTree = "<group>"; };
 		8786D6501D56BD6E00AD3362 /* Root.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Root.storyboard; sourceTree = "<group>"; };
 		8786D6521D56C14400AD3362 /* Welcome.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Welcome.storyboard; sourceTree = "<group>"; };
 		8786D6541D56CD2C00AD3362 /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -141,8 +141,8 @@
 		87AFB24A1D1C43DC0016FC59 /* FriendsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
 		87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingListViewController.swift; sourceTree = "<group>"; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
-		87DB18E11D56326400C838DD /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
-		87DB18E41D5634BF00C838DD /* PromptsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PromptsViewController.swift; sourceTree = "<group>"; };
+		87DB18E11D56326400C838DD /* HashTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTag.swift; sourceTree = "<group>"; };
+		87DB18E41D5634BF00C838DD /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		87DB18E61D56776800C838DD /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		87DEFB221D0CEDBD00924FDC /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		87DF2BCC1D0C88BC006ED9AF /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
@@ -155,8 +155,8 @@
 		87EE53D41D57A53C005B8FB3 /* Comments.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Comments.storyboard; sourceTree = "<group>"; };
 		87EE53D71D57A96B005B8FB3 /* Users.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Users.storyboard; sourceTree = "<group>"; };
 		87EE53D91D57AE6A005B8FB3 /* Feed.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompts.storyboard; sourceTree = "<group>"; };
-		87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Prompt.storyboard; sourceTree = "<group>"; };
+		87EE53DB1D57B4A7005B8FB3 /* Explore.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Explore.storyboard; sourceTree = "<group>"; };
+		87EE53DD1D57B643005B8FB3 /* HashTag.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = HashTag.storyboard; sourceTree = "<group>"; };
 		87EE53E01D57BAF2005B8FB3 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		87EE53E51D57C859005B8FB3 /* Analytics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Analytics.swift; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
@@ -248,8 +248,8 @@
 				879BCC971CF4137F00CD95E7 /* Comment.swift */,
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 				87E7ADE71CF38BEB00DC226A /* Drawing.swift */,
+				87DB18E11D56326400C838DD /* HashTag.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
-				87DB18E11D56326400C838DD /* Prompt.swift */,
 				8763D2EE1CEE229C00E3D528 /* User.swift */,
 			);
 			name = Model;
@@ -294,10 +294,18 @@
 			name = Onboarding;
 			sourceTree = "<group>";
 		};
+		877094FD1D98B0DC00F07700 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
+				877094FE1D98B0FB00F07700 /* DrawingCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8786D61D1D56AE6F00AD3362 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				8786D6311D56B0E100AD3362 /* Cells */,
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 			);
 			name = Feed;
@@ -311,21 +319,20 @@
 			name = Root;
 			sourceTree = "<group>";
 		};
-		8786D61F1D56AE8600AD3362 /* Prompts */ = {
+		8786D61F1D56AE8600AD3362 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				8786D6391D56B3EC00AD3362 /* Cells */,
-				87DB18E41D5634BF00C838DD /* PromptsViewController.swift */,
+				87DB18E41D5634BF00C838DD /* ExploreViewController.swift */,
 			);
-			name = Prompts;
+			name = Explore;
 			sourceTree = "<group>";
 		};
-		8786D6201D56AE9200AD3362 /* Prompt */ = {
+		8786D6201D56AE9200AD3362 /* HashTag */ = {
 			isa = PBXGroup;
 			children = (
-				876614B91D034F1200DF4590 /* PromptViewController.swift */,
+				876614B91D034F1200DF4590 /* HashTagViewController.swift */,
 			);
-			name = Prompt;
+			name = HashTag;
 			sourceTree = "<group>";
 		};
 		8786D6211D56AEAD00AD3362 /* Drawing */ = {
@@ -440,8 +447,8 @@
 				8786D6251D56AEF600AD3362 /* Invite */,
 				8786D6241D56AEEB00AD3362 /* Sharing */,
 				8786D6231D56AEDE00AD3362 /* Profile */,
-				8786D6201D56AE9200AD3362 /* Prompt */,
-				8786D61F1D56AE8600AD3362 /* Prompts */,
+				8786D6201D56AE9200AD3362 /* HashTag */,
+				8786D61F1D56AE8600AD3362 /* Explore */,
 				87EE53E31D57C44A005B8FB3 /* Tab Bar */,
 				87EE53E41D57C465005B8FB3 /* Users */,
 			);
@@ -468,14 +475,6 @@
 			isa = PBXGroup;
 			children = (
 				8763D2E61CEE229C00E3D528 /* UserCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		8786D6311D56B0E100AD3362 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2E71CEE229C00E3D528 /* DrawingCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -525,14 +524,6 @@
 			name = SDK;
 			sourceTree = "<group>";
 		};
-		8786D6391D56B3EC00AD3362 /* Cells */ = {
-			isa = PBXGroup;
-			children = (
-				8786D63A1D56B40600AD3362 /* PromptCell.swift */,
-			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
 		8786D63C1D56BA2C00AD3362 /* Main */ = {
 			isa = PBXGroup;
 			children = (
@@ -543,8 +534,8 @@
 				8786D6441D56BA8200AD3362 /* Invite */,
 				8786D6431D56BA7D00AD3362 /* Sharing */,
 				87EE53DF1D57BA0A005B8FB3 /* Profile */,
-				8786D6421D56BA7900AD3362 /* Prompt */,
-				8786D6411D56BA7300AD3362 /* Prompts */,
+				8786D6421D56BA7900AD3362 /* HashTag */,
+				8786D6411D56BA7300AD3362 /* Explore */,
 				87EE53E21D57BE69005B8FB3 /* Tab Bar */,
 				87EE53D61D57A957005B8FB3 /* Users */,
 			);
@@ -581,20 +572,20 @@
 			name = Feed;
 			sourceTree = "<group>";
 		};
-		8786D6411D56BA7300AD3362 /* Prompts */ = {
+		8786D6411D56BA7300AD3362 /* Explore */ = {
 			isa = PBXGroup;
 			children = (
-				87EE53DB1D57B4A7005B8FB3 /* Prompts.storyboard */,
+				87EE53DB1D57B4A7005B8FB3 /* Explore.storyboard */,
 			);
-			name = Prompts;
+			name = Explore;
 			sourceTree = "<group>";
 		};
-		8786D6421D56BA7900AD3362 /* Prompt */ = {
+		8786D6421D56BA7900AD3362 /* HashTag */ = {
 			isa = PBXGroup;
 			children = (
-				87EE53DD1D57B643005B8FB3 /* Prompt.storyboard */,
+				87EE53DD1D57B643005B8FB3 /* HashTag.storyboard */,
 			);
-			name = Prompt;
+			name = HashTag;
 			sourceTree = "<group>";
 		};
 		8786D6431D56BA7D00AD3362 /* Sharing */ = {
@@ -700,8 +691,9 @@
 		87AFB24C1D1C58B40016FC59 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2CD1CEE226700E3D528 /* NavigationController.swift */,
+				877094FD1D98B0DC00F07700 /* Cells */,
 				87AFB24D1D1C58CC0016FC59 /* DrawingListViewController.swift */,
+				8763D2CD1CEE226700E3D528 /* NavigationController.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -853,8 +845,9 @@
 				8786D6571D56CED100AD3362 /* SignUp.storyboard in Resources */,
 				8763D30B1CEE229C00E3D528 /* OpenSans-Regular.ttf in Resources */,
 				87AA5CFB1D088CAC00D2E7B5 /* playtime.ttf in Resources */,
+				877094FF1D98B0FB00F07700 /* DrawingCell.xib in Resources */,
 				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
-				87EE53DC1D57B4A7005B8FB3 /* Prompts.storyboard in Resources */,
+				87EE53DC1D57B4A7005B8FB3 /* Explore.storyboard in Resources */,
 				87EE53D11D579EBB005B8FB3 /* Invite.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8786D6531D56C14400AD3362 /* Welcome.storyboard in Resources */,
@@ -865,7 +858,7 @@
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
 				87EE53E11D57BAF2005B8FB3 /* Profile.storyboard in Resources */,
 				8763D2B91CEE21BC00E3D528 /* TabBar.storyboard in Resources */,
-				87EE53DE1D57B643005B8FB3 /* Prompt.storyboard in Resources */,
+				87EE53DE1D57B643005B8FB3 /* HashTag.storyboard in Resources */,
 				87EE53D51D57A53C005B8FB3 /* Comments.storyboard in Resources */,
 				8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */,
 				872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */,
@@ -969,7 +962,6 @@
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
-				8786D63B1D56B40600AD3362 /* PromptCell.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
@@ -984,16 +976,16 @@
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				87AFB24E1D1C58CC0016FC59 /* DrawingListViewController.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
-				87DB18E51D5634BF00C838DD /* PromptsViewController.swift in Sources */,
+				87DB18E51D5634BF00C838DD /* ExploreViewController.swift in Sources */,
 				879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */,
-				876614BA1D034F1200DF4590 /* PromptViewController.swift in Sources */,
+				876614BA1D034F1200DF4590 /* HashTagViewController.swift in Sources */,
 				875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */,
-				87DB18E21D56326400C838DD /* Prompt.swift in Sources */,
+				87DB18E21D56326400C838DD /* HashTag.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 				875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */,
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,

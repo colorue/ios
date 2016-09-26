@@ -15,7 +15,7 @@ class UserListViewController: UITableViewController {
     
     let api = API.sharedInstance
     
-    var tintColor = blueColor
+    var tintColor: UIColor? = blueColor
     
     var controller: UIViewController?
 
@@ -47,7 +47,7 @@ class UserListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell")! as! UserCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.userCell)!
         cell.delagate = self
         cell.color = self.tintColor
         return cell

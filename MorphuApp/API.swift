@@ -32,7 +32,6 @@ class API {
     fileprivate var facebookFriends = Set<User>()
     fileprivate var contacts = Set<User>()
     fileprivate var popularUsers = Set<User>()
-    fileprivate var prompts = Set<Prompt>()
 
     fileprivate var activeUser: User?
     
@@ -225,7 +224,7 @@ class API {
     
     // MARK: User Action Methods
     
-    func postDrawing(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), prompt: Prompt?, finishedCallback: @escaping (Bool) -> ()) {
+    func postDrawing(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), finishedCallback: @escaping (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
         drawing.setDrawingId(newDrawing.key)
 
@@ -238,9 +237,9 @@ class API {
                     self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
                     self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
                     
-                    if let prompt = prompt {
-                        self.myRootRef.child("prompts/\(prompt.getPromptId())/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
-                    }
+//                    if let prompt = prompt {
+//                        self.myRootRef.child("prompts/\(prompt.getPromptId())/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
+//                    }
                 })
             }
             finishedCallback(uploaded)
@@ -295,26 +294,10 @@ class API {
         sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
     }
     
-    func createPrompt(_ text: String) {
-        guard let activeUser = activeUser else { return }
-
-        let prompt = Prompt(user: activeUser, text: text)
-        let newPrompt = myRootRef.child("prompts").childByAutoId()
-        
-        prompt.setPromptId(newPrompt.key)
-        prompts.insert(prompt)
-        newPrompt.setValue(prompt.toAnyObject())
-    }
-    
     func deleteComment(_ drawing: Drawing, comment: Comment) {
         drawing.removeComment(comment)
         myRootRef.child("comments/\(comment.getCommetId())").removeValue()
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
-    }
-    
-    func deletePrompt(_ prompt: Prompt) {
-        prompts.remove(prompt)
-        myRootRef.child("prompts/\(prompt.getPromptId())").removeValue()
     }
     
     func follow(_ user: User) {
@@ -358,12 +341,6 @@ class API {
         }
     }
     
-    func reportPrompt(_ prompt: Prompt) {
-        if let active = activeUser {
-            myRootRef.child("reported/prompts/\(prompt.getPromptId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
-        }
-    }
-    
     func makeDOD(_ drawing: Drawing) {
         myRootRef.child("drawingOfTheDay").setValue(drawing.getDrawingId())
     }
@@ -394,10 +371,6 @@ class API {
         return contactStore.getContacts().sorted( by: { $0.name < $1.name } )
     }
     
-    func getPrompts() -> [Prompt] {
-        return prompts.sorted( by: { $0.timeStamp < $1.timeStamp } )
-    }
-    
     //MARK: Load Data
     
     func loadData() {
@@ -409,7 +382,6 @@ class API {
                 self.loadDrawingOfTheDay()
                 self.loadWall()
                 self.setDeleteWall()
-                self.loadPrompts()
                 self.loadFacebookFriends()
                 self.getAirshipKey()
             })
@@ -484,30 +456,6 @@ class API {
             })
         }
     
-    fileprivate func loadPrompts() {
-        myRootRef.child("prompts").observe(.childAdded, with: { snapshot in
-            let promptId = snapshot.key
-            
-            guard let value = snapshot.value as? [String:AnyObject] else { return }
-            
-            let text = value["text"] as! String
-            let timeStamp = value["timeStamp"] as! Double
-            
-            self.getUser(value["user"] as! String, callback: { (user: User) -> () in
-                
-                let prompt = Prompt(promptId: promptId, user: user, timeStamp: timeStamp, text: text)
-                self.prompts.insert(prompt)
-                
-                self.myRootRef.child("prompts/\(promptId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
-                    
-                    self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
-                        prompt.drawings.append(drawing)
-                    })
-                })
-            })
-        })
-    }
-
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observe(.value, with: { snapshot in
             guard snapshot.exists() else { return }
