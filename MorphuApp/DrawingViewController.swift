@@ -42,6 +42,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     var underFingerView = UIImageView()
     var keyboardCover = UIView()
     
+    let backButton = UIButton(type: UIButtonType.custom)
+
     @IBOutlet weak var postButton: UIBarButtonItem!
     
     //MARK: Life Cycle
@@ -55,8 +57,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(unwind(_:)))
-        self.navigationItem.leftBarButtonItem?.tintColor = .black
+        let chevron = R.image.chevronDown()
+        backButton.tintColor = blackColor
+        backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
+        backButton.setImage(chevron, for: UIControlState())
+        backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), for: UIControlEvents.touchUpInside)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         let keyboardHeight = self.view.frame.height / 5.55833333333333
         let canvasHeight = self.view.frame.height - keyboardHeight - 60
