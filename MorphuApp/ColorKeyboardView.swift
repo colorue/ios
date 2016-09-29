@@ -181,6 +181,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
+            currentAlpha = .high
         }
         
         updateButtonColor()

@@ -6,26 +6,20 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import Foundation
+import ObjectMapper
 
-class HashTag {
-    let text: String
+class HashTag: APIObject {
+    
+    public dynamic var text: String?
     var drawings = [Drawing]()
     
-    let api = API.sharedInstance
     
-    init(text: String) {
-        self.text = text
+    override class func primaryKey() -> String? {
+        return "text"
+    }
+    
+    public override func mapping(map: Map) {
+        text <- map["text"]
     }
 }
 
-extension HashTag: Hashable {
-    var hashValue: Int {
-        return text.hashValue
-    }
-}
-
-// MARK: Equatable
-func == (lhs: HashTag, rhs: HashTag) -> Bool {
-    return lhs.text == rhs.text
-}

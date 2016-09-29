@@ -29,6 +29,11 @@ target 'Colorue' do
     pod 'TTTAttributedLabel'
     pod 'SlackTextViewController'
     
+    pod 'SwiftyJSON'
+    pod 'ObjectMapper'
+    
+    pod 'RealmSwift'
+    
     pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :branch => 'swift-3'
 end
 

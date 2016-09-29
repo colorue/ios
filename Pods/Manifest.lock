@@ -73,10 +73,17 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
   - Kingfisher (3.1.0)
   - Masonry (0.6.4)
+  - ObjectMapper (2.0.0)
   - R.swift (3.0.0):
     - R.swift.Library (~> 3.0.0)
   - R.swift.Library (3.0.1)
+  - Realm (1.1.0):
+    - Realm/Headers (= 1.1.0)
+  - Realm/Headers (1.1.0)
+  - RealmSwift (1.1.0):
+    - Realm (= 1.1.0)
   - SlackTextViewController (1.9.4)
+  - SwiftyJSON (3.0.0)
   - TTTAttributedLabel (2.0.0)
   - UrbanAirship-iOS-SDK (8.0.1)
 
@@ -94,8 +101,11 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
+  - ObjectMapper
   - R.swift
+  - RealmSwift
   - SlackTextViewController
+  - SwiftyJSON
   - TTTAttributedLabel
   - UrbanAirship-iOS-SDK
 
@@ -132,12 +142,16 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Kingfisher: 7779f22e977393e9533a89a9685beb8f679d3767
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
+  ObjectMapper: aed2570edabbd3c9b26c939e1cabdb6558f933e0
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
+  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
+  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SlackTextViewController: d490f354dba963bc469a6b9ce3213978eaed67a5
+  SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: 77b233439a260ae0d3297334babd238b4f2f8c54
+PODFILE CHECKSUM: 82bcb86442ed3c6fd29df395ef32157af12303e4
 
 COCOAPODS: 1.0.0

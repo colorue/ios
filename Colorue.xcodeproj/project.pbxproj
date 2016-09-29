@@ -15,6 +15,7 @@
 		875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactStore.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
 		87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87619AE71D0786FF000BBCC5 /* InviteViewController.swift */; };
+		8762ED5C1D9A055100523E6A /* APIObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762ED5B1D9A055100523E6A /* APIObject.swift */; };
 		8763D2B91CEE21BC00E3D528 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
@@ -49,6 +50,7 @@
 		8786D65D1D56D67B00AD3362 /* PeopleToFollow.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */; };
 		8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65E1D56DC3900AD3362 /* Drawing.storyboard */; };
 		8786D6611D56DC5A00AD3362 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6601D56DC5A00AD3362 /* Sharing.storyboard */; };
+		878FFDE81D99DB7A007B6DD9 /* HashTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
 		879BCC9A1CF41A7900CD95E7 /* CommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC991CF41A7900CD95E7 /* CommentViewController.swift */; };
@@ -98,6 +100,7 @@
 		875B4E0A1D15E443004F4CD2 /* ContactStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		87619AE71D0786FF000BBCC5 /* InviteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteViewController.swift; sourceTree = "<group>"; };
+		8762ED5B1D9A055100523E6A /* APIObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIObject.swift; sourceTree = "<group>"; };
 		8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -132,6 +135,7 @@
 		8786D65C1D56D67B00AD3362 /* PeopleToFollow.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = PeopleToFollow.storyboard; sourceTree = "<group>"; };
 		8786D65E1D56DC3900AD3362 /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
 		8786D6601D56DC5A00AD3362 /* Sharing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
+		878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagService.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		879BCC991CF41A7900CD95E7 /* CommentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +227,14 @@
 			name = "Objective-C";
 			sourceTree = "<group>";
 		};
+		8762ED5A1D9A054100523E6A /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8762ED5B1D9A055100523E6A /* APIObject.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		8763D3161CEE241000E3D528 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -245,10 +257,11 @@
 		8763D3191CEE243B00E3D528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8762ED5A1D9A054100523E6A /* Common */,
+				878FFDE61D99DB64007B6DD9 /* HashTag */,
 				879BCC971CF4137F00CD95E7 /* Comment.swift */,
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 				87E7ADE71CF38BEB00DC226A /* Drawing.swift */,
-				87DB18E11D56326400C838DD /* HashTag.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
 				8763D2EE1CEE229C00E3D528 /* User.swift */,
 			);
@@ -688,6 +701,15 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		878FFDE61D99DB64007B6DD9 /* HashTag */ = {
+			isa = PBXGroup;
+			children = (
+				87DB18E11D56326400C838DD /* HashTag.swift */,
+				878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */,
+			);
+			name = HashTag;
+			sourceTree = "<group>";
+		};
 		87AFB24C1D1C58B40016FC59 /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -949,6 +971,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				878FFDE81D99DB7A007B6DD9 /* HashTagService.swift in Sources */,
 				87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */,
 				8774BA471CFF823C00B26931 /* ProfileCell.swift in Sources */,
 				87EE53E61D57C859005B8FB3 /* Analytics.swift in Sources */,
@@ -959,6 +982,7 @@
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				87F754F01D187184005B4A14 /* InviteCell.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
+				8762ED5C1D9A055100523E6A /* APIObject.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
@@ -1106,7 +1130,7 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Beiab";
 				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
@@ -1129,7 +1153,7 @@
 				INFOPLIST_FILE = MorphuApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
+				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Beiab";
 				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";

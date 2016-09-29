@@ -49,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ObjectMapper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Colorue.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -59,7 +64,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Realm.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>RealmSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SlackTextViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -77,12 +97,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>06056A595E3A214D80A8DCEC5151F2D1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>080781ECDB03974504AC7F56B1E46990</key>
+		<key>0538B242D1F0DC631CFD4DDDE2FCFBEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -97,7 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2922B171100062604B8554040F6D4246</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2E303C3CE7513908EE880D9CA833AFAE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>30BB0BFBCBDCC5FFA90676521CB2358E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,7 +132,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4674F69C53F2EF10CAB5A6A93B060576</key>
+		<key>3D2454484C6D032DF7F8385691F3DA54</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>463917F0257B14219FD0D8AF733EEEDE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>475B3D3948E766F3882379AF6B06830F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>682C9C76F98286E375E752ACDB131AB1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,6 +162,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7C66BA1878C6CA9B921C1BB76D83C638</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>88704C02B695D10F0FFD6C4088DE7BC9</key>
 		<dict>
 			<key>primary</key>
@@ -132,17 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>C49518CEC1F3C4003F4CCDFD58AE4667</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>DD1559592F5FECF5E008347EC681DF67</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EC978D185B0E3A0DA57A60BF5685DC7E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FD0941EBFE07691A5F2A023F4FB6A033</key>
 		<dict>
 			<key>primary</key>
 			<true/>

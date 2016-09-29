@@ -29,8 +29,8 @@ class WallViewController: DrawingListViewController {
         
         if (!prefs.bool(forKey: "firstOpen")) {
             prefs.setValue(true, forKey: "firstOpen")
-            if let newVC = self.tabBarController!.storyboard?.instantiateViewController(withIdentifier: "DrawingViewController") {
-                self.tabBarController!.present(newVC, animated: true, completion: nil)
+            if let drawingViewController = R.storyboard.drawing.drawingViewController() {
+                self.tabBarController!.present(drawingViewController, animated: true, completion: nil)
             }
         } else if !prefs.bool(forKey: "pushAsk1") {
             let pushAsk1 = UIAlertController(title: "Notifications", message: "Want to know if someone follows you or comments on your drawings?", preferredStyle: UIAlertControllerStyle.alert)

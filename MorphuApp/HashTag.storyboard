@@ -9,7 +9,7 @@
         <scene sceneID="pAL-mw-SmE">
             <objects>
                 <navigationController id="r7R-0e-m92" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="DYV-x6-Hcq">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="DYV-x6-Hcq">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -24,7 +24,7 @@
         <!--HashTag-->
         <scene sceneID="6nF-8f-Lsz">
             <objects>
-                <tableViewController storyboardIdentifier="Prompt" id="4A6-wq-mRM" customClass="HashTagViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HashTag" id="4A6-wq-mRM" customClass="HashTagViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="52" sectionHeaderHeight="28" sectionFooterHeight="28" id="mgT-VX-P3p">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -39,6 +39,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="6HN-jB-Ip0"/>
                     </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ohu-q8-x9V">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <connections>
                             <action selector="refreshPulled:" destination="4A6-wq-mRM" eventType="valueChanged" id="hyi-hP-IQQ"/>

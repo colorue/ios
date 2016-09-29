@@ -66,7 +66,6 @@ class DrawingCell: UITableViewCell {
     
     var drawing: Drawing? {
         didSet {
-            
             if let url = drawing?.url {
                 drawingImage?.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.2))],
                                                  completionHandler: { (image, error, cacheType, imageURL) -> () in

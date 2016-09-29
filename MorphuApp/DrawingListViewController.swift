@@ -243,6 +243,15 @@ extension DrawingListViewController: DrawingCellDelagate {
             drawingActions.addAction(UIAlertAction(title: "Make DOD!", style: .default, handler:  { (action: UIAlertAction!) in
                 self.api.makeDOD(drawing)
             }))
+            
+            drawingActions.addAction(UIAlertAction(title: "Edit Other", style: .default, handler: { (action: UIAlertAction!) in
+                let activity = R.storyboard.drawing.drawingViewController()!
+                if let drawingViewController = activity.topViewController as? DrawingViewController {
+                    drawingViewController.baseImage = drawing.getImage()
+                    FIRAnalytics.logEvent(withName: "editDrawing", parameters: [:])
+                    self.present(activity, animated: true, completion: nil)
+                }
+            }))
         }
         
         drawingActions.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
