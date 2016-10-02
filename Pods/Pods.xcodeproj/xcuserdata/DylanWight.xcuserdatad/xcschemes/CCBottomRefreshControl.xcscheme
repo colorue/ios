@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '1657930304B84232F19A0D421D9E1A8A'
+               BlueprintIdentifier = 'D9A7298F02784BF6847066740261C83E'
                BlueprintName = 'CCBottomRefreshControl'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'CCBottomRefreshControl.framework'>

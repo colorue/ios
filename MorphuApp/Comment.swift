@@ -6,48 +6,61 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import Foundation
+import ObjectMapper
 
-class Comment {
-    let user: User
-    let timeStamp: Double
-    let text: String
-    fileprivate var commentId: String
+//class Comment {
+//    let user: User
+//    let timeStamp: TimeStamp
+//    let text: String
+//    fileprivate var commentId: String
+//    
+//    let api = API.sharedInstance
+//    
+//    init(commentId: String = "", user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, text: String = "") {
+//        self.commentId = commentId
+//        self.user = user
+//        self.timeStamp = timeStamp
+//        self.text = text
+//    }
+//    
+//    func setCommentId(_ commentId: String) {
+//        self.commentId = commentId
+//    }
+//    
+//    func getCommetId() -> String {
+//        return self.commentId
+//    }
+//    
+//    func toAnyObject()-> NSDictionary {
+//        return ["user" : self.user.userId,
+//                "text" : self.text,
+//                "timeStamp" : self.timeStamp]
+//    }
+//}
+
+class Comment: APIObject {
     
-    let api = API.sharedInstance
+    public dynamic var id: String? = ""
+    public dynamic var text: String? = ""
+    public dynamic var user: String? = ""
+    public dynamic var timeStamp: Double = 0
     
-    init(commentId: String = "", user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, text: String = "") {
-        self.commentId = commentId
-        self.user = user
+    convenience init(id: String, text: String, user: User, timeStamp: Double = -Date().timeIntervalSince1970) {
+        self.init()
+        self.id = id
+        self.user = user.userId
         self.timeStamp = timeStamp
         self.text = text
     }
     
-    func setCommentId(_ commentId: String) {
-        self.commentId = commentId
+    override class func primaryKey() -> String? {
+        return "id"
     }
     
-    func getCommetId() -> String {
-        return self.commentId
-    }
-    
-    func getTimeSinceSent() -> String {
-        let secondsSince =  Date().timeIntervalSince1970 + self.timeStamp
-        switch(secondsSince) {
-        case 0..<60:
-            return "now"
-        case 60..<3600:
-            return String(Int(secondsSince/60))  + "m"
-        case 3600..<3600*24:
-            return String(Int(secondsSince/3600)) + "h"
-        default:
-            return String(Int(secondsSince/(3600 * 24))) + "d"
-        }
-    }
-    
-    func toAnyObject()-> NSDictionary {
-        return ["user" : self.user.userId,
-                "text" : self.text,
-                "timeStamp" : self.timeStamp]
+    public override func mapping(map: Map) {
+        id <- map["id"]
+        text <- map["text"]
+        user <- map["user"]
+        timeStamp <- map["timeStamp"]
     }
 }

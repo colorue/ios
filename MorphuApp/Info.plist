@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Give access to save dawings to photos</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
-	<key>CFBundleDisplayName</key>
-	<string>Beiab</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -34,20 +30,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>42</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>6e3362ad60bc62677eb92c8d480ed82efc7c4890</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict/>
-				<key>KitName</key>
-				<string>Crashlytics</string>
-			</dict>
-		</array>
-	</dict>
 	<key>FacebookAppID</key>
 	<string>1213218985375111</string>
 	<key>FacebookDisplayName</key>
@@ -65,6 +47,8 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Give Colorue access to save drawings to photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>playtime.ttf</string>
@@ -90,5 +74,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSContactsUsageDescription</key>
+	<string>Used to find contacts using Colorue</string>
 </dict>
 </plist>

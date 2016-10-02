@@ -22,11 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        if dev {
-//            FIRApp.configureWithOptions(FIROptions(googleAppID: "1:150640015777:ios:d62930c5fb1f8d6f", bundleID: "Wight-Dylan.Colorue", GCMSenderID: "150640015777", APIKey: "AIzaSyD7NrfnBoVFGbaGtjJfdE4Xo9C0e6AjQfQ", clientID: "150640015777-ne2252fp6vf1bq29484dlv1hp2mtir7h.apps.googleusercontent.com", trackingID: "", androidClientID: "", databaseURL: "https://coloruedev.firebaseio.com", storageBucket: "coloruedev.appspot.com", deepLinkURLScheme: ""))
-//        } else {
+        let bundle = Bundle.main.infoDictionary!
+        
+
+        if bundle["CFBundleIdentifier"] as! String == "Wight-Dylan.Colorue.dev" {
+            let options = FIROptions(contentsOfFile: R.file.googleServiceInfoDevPlist.path())!
+            FIRApp.configure(with: options)
+        } else {
             FIRApp.configure()
-//        }
+        }
         
         FIRDatabase.database().persistenceEnabled = true
         
@@ -35,7 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         config.developmentLogLevel = UALogLevel.warn
         UAirship.takeOff(config)
         
-        return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        let facebook = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+        
+        print(facebook)
+        
+        return facebook
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

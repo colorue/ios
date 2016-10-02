@@ -10,28 +10,21 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 
-class LoadingViewController: UIViewController, APIDelagate {
-    let prefs = UserDefaults.standard
-    
-    
+class LoadingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
-//        AuthAPI.sharedInstance.logout()
         AuthAPI.sharedInstance.checkLoggedIn(loginCallback)
     }
     
     fileprivate func loginCallback(_ loggedIn: Bool) {
         let api = API.sharedInstance
         if loggedIn {
-            api.delagate = self
             api.loadData()
+            performSegue(withIdentifier: R.segue.loadingViewController.toMainController, sender: self)
+
         } else {
             api.clearData()
             AuthAPI.sharedInstance.logout()
-            self.performSegue(withIdentifier: "toLoginController", sender: self)
+            performSegue(withIdentifier: R.segue.loadingViewController.toLoginController, sender: self)
         }
-    }
-    
-    func refresh() {
-        self.performSegue(withIdentifier: "toMainController", sender: self)
     }
 }

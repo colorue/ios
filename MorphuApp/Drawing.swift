@@ -10,7 +10,7 @@ import UIKit
 
 class Drawing {
     
-    let timeStamp: Double
+    let timeStamp: TimeStamp
     fileprivate var drawingId: String
     fileprivate var artist: User
     fileprivate var likes = [User]()
@@ -87,7 +87,7 @@ class Drawing {
     
     func addComment(_ comment: Comment) {
         for comment_ in self.comments {
-            if comment_.getCommetId() == comment.getCommetId() {
+            if comment_.id == comment.id {
                 return
             }
         }
@@ -97,7 +97,7 @@ class Drawing {
     func removeComment(_ comment: Comment) {
         var i = 0
         for comment_ in self.comments {
-            if comment_.getCommetId() == comment.getCommetId() {
+            if comment_.id == comment.id {
                 self.comments.remove(at: i)
                 break
             }
@@ -107,20 +107,6 @@ class Drawing {
     
     func getComments() -> [Comment] {
         return self.comments
-    }
-    
-    func getTimeSinceSent() -> String {
-        let secondsSince =  Date().timeIntervalSince1970 + self.timeStamp
-        switch(secondsSince) {
-        case 0..<60:
-            return "now"
-        case 60..<3600:
-            return String(Int(secondsSince/60))  + "m"
-        case 3600..<3600*24:
-            return String(Int(secondsSince/3600)) + "h"
-        default:
-            return String(Int(secondsSince/(3600 * 24))) + "d"
-        }
     }
     
     func toAnyObject()-> NSDictionary {

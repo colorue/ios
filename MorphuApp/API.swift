@@ -33,7 +33,7 @@ class API {
     fileprivate var contacts = Set<User>()
     fileprivate var popularUsers = Set<User>()
 
-    fileprivate var activeUser: User?
+    public var activeUser: User?
     
     fileprivate var userDict = [String: User]()
     fileprivate var drawingDict = [String: Drawing]()
@@ -107,7 +107,7 @@ class API {
             let timeStamp = value["timeStamp"] as! Double
             
             self.getUser(value["user"] as! String, callback: { (user: User) -> () in
-                callback(Comment(commentId: commentId, user: user, timeStamp: timeStamp, text: text))
+                callback(Comment(id: commentId, text: text, user: user, timeStamp: timeStamp))
             })
         })
     }
@@ -263,9 +263,11 @@ class API {
     }
     
     func makeProfilePic(_ drawing: Drawing) {
-        self.myRootRef.child("users/\(self.getActiveUser().userId)/photoURL").setValue(drawing.getDrawingId())
-        self.getActiveUser().profileImage = drawing.getImage()
-        self.delagate?.refresh()
+        guard let activeUser = activeUser else { return }
+        
+        myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.getDrawingId())
+        activeUser.profileImage = drawing.getImage()
+        delagate?.refresh()
     }
     
     func like(_ drawing: Drawing) {
@@ -280,25 +282,25 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").removeValue()
     }
     
-    func addComment(_ drawing: Drawing, text: String) {
-        guard let activeUser = activeUser else { return }
-
-        let comment = Comment(user: self.activeUser!, text: text)
-        let newComment = myRootRef.child("comments").childByAutoId()
-
-        comment.setCommentId(newComment.key)
-        drawing.addComment(comment)
-        newComment.setValue(comment.toAnyObject())
-        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
-        
-        sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
-    }
-    
-    func deleteComment(_ drawing: Drawing, comment: Comment) {
-        drawing.removeComment(comment)
-        myRootRef.child("comments/\(comment.getCommetId())").removeValue()
-        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
-    }
+//    func addComment(_ drawing: Drawing, text: String) {
+//        guard let activeUser = activeUser else { return }
+//
+//        let comment = Comment(user: self.activeUser!, text: text)
+//        let newComment = myRootRef.child("comments").childByAutoId()
+//
+//        comment.setCommentId(newComment.key)
+//        drawing.addComment(comment)
+//        newComment.setValue(comment.toAnyObject())
+//        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
+//        
+//        sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
+//    }
+//    
+//    func deleteComment(_ drawing: Drawing, comment: Comment) {
+//        drawing.removeComment(comment)
+//        myRootRef.child("comments/\(comment.getCommetId())").removeValue()
+//        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
+//    }
     
     func follow(_ user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
@@ -348,7 +350,7 @@ class API {
     // MARK: Get Methods
     
     func getActiveUser() -> User {
-        return self.activeUser!
+        return self.activeUser ?? User()
     }
     
     func getDrawingOfTheDay() -> [Drawing] {
@@ -384,6 +386,7 @@ class API {
                 self.setDeleteWall()
                 self.loadFacebookFriends()
                 self.getAirshipKey()
+                self.delagate?.refresh()
             })
         })
     }
@@ -411,7 +414,9 @@ class API {
 
     // Used both for initial load and to add older drawings
     func loadWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").queryOrderedByValue().queryLimited(toFirst: 16).queryStarting(atValue: self.oldestTimeLoaded)
+        guard let activeUser = activeUser else { return }
+
+        myRootRef.child("users/\(activeUser.userId)/wall").queryOrderedByValue().queryLimited(toFirst: 16).queryStarting(atValue: self.oldestTimeLoaded)
             .observe(.childAdded, with: { snapshot in
                 self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
@@ -442,7 +447,9 @@ class API {
     }
     
     fileprivate func setDeleteWall() {
-        myRootRef.child("users/\(getActiveUser().userId)/wall").observe(.childRemoved, with: { snapshot in
+        guard let activeUser = activeUser else { return }
+
+        myRootRef.child("users/\(activeUser.userId)/wall").observe(.childRemoved, with: { snapshot in
                 let drawingId = snapshot.key
                 var i = 0
                 self.drawingDict[drawingId] = nil
@@ -463,7 +470,7 @@ class API {
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
                 DispatchQueue.main.async {
-                    self.delagate!.refresh()
+                    self.delagate?.refresh()
                 }
             })
         })

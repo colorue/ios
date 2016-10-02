@@ -32,7 +32,6 @@ class AuthAPI {
     // MARK: Login/Registration Methods
     
     func checkLoggedIn(_ callback: @escaping (Bool) -> ()) {
-                
         if let userID = FIRAuth.auth()?.currentUser?.uid {
             self.myRootRef.child("users/\(userID)").observe(.value, with: { snapshot in
                 

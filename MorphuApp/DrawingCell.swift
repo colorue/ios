@@ -75,7 +75,7 @@ class DrawingCell: UITableViewCell {
             
             profileImage?.image = drawing?.getArtist().profileImage
             creator?.text = drawing?.getArtist().username
-            timeCreated?.text = drawing?.getTimeSinceSent()
+            timeCreated?.text = drawing?.timeStamp.timeSince
             likeButton?.isSelected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false
             
             if drawing?.getComments().count == 1 {

@@ -23,9 +23,10 @@ class CommentCell: UITableViewCell {
         didSet {
             guard let comment = comment else { return }
             
-            username?.text = comment.user.username
-            profileImage?.image = comment.user.profileImage
-            timeStamp?.text = comment.getTimeSinceSent()
+            // TODO: - add user back to comments
+//            username?.text = comment.user.username
+//            profileImage?.image = comment.user.profileImage
+            timeStamp?.text = comment.timeStamp.timeSince
             commentText?.text = comment.text
         }
     }
