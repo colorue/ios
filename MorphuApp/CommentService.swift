@@ -11,47 +11,42 @@ import Firebase
 import RealmSwift
 import Realm
 
-class CommentService {
-    fileprivate let myRootRef = FIRDatabase.database().reference()
+struct CommentService {
+    let myRootRef = FIRDatabase.database().reference()
     let realm = try! Realm()
+    let basePath = "comments"
     
-    let basePath = "commments"
-    
-    func add(comment: Comment, to drawing: Drawing) {
-        myRootRef.child("\(basePath)/\(comment.id)/\(drawing.getDrawingId())").setValue(true)
-    }
-    
-    func get(commentId: String, callback: @escaping (Comment?) -> ()) {
-        myRootRef.child("\(basePath)/\(commentId)").observeSingleEvent(of: .value, with: { snapshot in
-            
-            if let json = snapshot.value as? [String: Any] {
-                if let comment = Comment(JSON: json) {
-                    try! self.realm.write() {
-                        self.realm.add(comment, update: true)
-                    }
-                    callback(comment)
+    func get(id: String, callback: @escaping (Comment?) -> ()) {
+        myRootRef.child("\(basePath)/\(id)").observeSingleEvent(of: .value, with: { snapshot in
+            guard let json = snapshot.value as? [String: Any] else { return }
+            if let comment = Comment(JSON: json) {
+                try! self.realm.write() {
+                    self.realm.add(comment, update: true)
                 }
+                callback(comment)
             }
         })
     }
     
-    func addComment(_ drawing: Drawing, text: String) {
+    func add(commentText: String, to drawing: Drawing) {
         guard let activeUser = API.sharedInstance.activeUser else { return }
         
         let newComment = myRootRef.child("comments").childByAutoId()
-        
-        let comment = Comment(id: newComment.key, text: text, user: activeUser)
-
-        drawing.addComment(comment)
+        let comment = Comment(id: newComment.key, text: commentText, user: activeUser)
+        drawing.add(comment: comment)
         newComment.setValue(comment.toJSON())
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
-        
-        API.sharedInstance.sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
+        PushService().send(message: "\(activeUser.username) commented on your drawing", to: drawing.getArtist())
     }
     
-    func deleteComment(_ drawing: Drawing, comment: Comment) {
-        drawing.removeComment(comment)
+    func delete(comment: Comment, from drawing: Drawing) {
+        drawing.remove(comment: comment)
         myRootRef.child("comments/\(comment.id)").removeValue()
         myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.id)").removeValue()
+    }
+    
+    func report(comment: Comment) {
+        guard let activeUser = API.sharedInstance.activeUser else { return }
+        myRootRef.child("reported/comments/\(comment.id)/\(activeUser.userId)").setValue(0 - Date().timeIntervalSince1970)
     }
 }

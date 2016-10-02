@@ -85,7 +85,9 @@ class Drawing {
         return self.likes
     }
     
-    func addComment(_ comment: Comment) {
+    func add(comment: Comment?) {
+        guard let comment = comment else { return }
+        
         for comment_ in self.comments {
             if comment_.id == comment.id {
                 return
@@ -94,7 +96,7 @@ class Drawing {
         self.comments.append(comment)
     }
     
-    func removeComment(_ comment: Comment) {
+    func remove(comment: Comment) {
         var i = 0
         for comment_ in self.comments {
             if comment_.id == comment.id {
@@ -115,3 +117,30 @@ class Drawing {
                 "url": self.url!.absoluteString]
     }
 }
+//
+//class Drawing: APIObject {
+//    
+//    public dynamic var id: String? = ""
+//    public dynamic var text: String? = ""
+//    public dynamic var user: String? = ""
+//    public dynamic var timeStamp: Double = 0
+//    
+//    convenience init(id: String, text: String, user: User, timeStamp: Double = -Date().timeIntervalSince1970) {
+//        self.init()
+//        self.id = id
+//        self.user = user.userId
+//        self.timeStamp = timeStamp
+//        self.text = text
+//    }
+//    
+//    override class func primaryKey() -> String? {
+//        return "id"
+//    }
+//    
+//    public override func mapping(map: Map) {
+//        id <- map["id"]
+//        text <- map["text"]
+//        user <- map["user"]
+//        timeStamp <- map["timeStamp"]
+//    }
+//}

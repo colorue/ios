@@ -53,6 +53,8 @@
 		8786D6611D56DC5A00AD3362 /* Sharing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D6601D56DC5A00AD3362 /* Sharing.storyboard */; };
 		878F02B11DA194C00097DB5C /* GoogleService-Info-Dev.plist in Resources */ = {isa = PBXBuildFile; fileRef = 878F02B01DA194C00097DB5C /* GoogleService-Info-Dev.plist */; };
 		878F02B71DA1AF7C0097DB5C /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B61DA1AF7C0097DB5C /* Timestamp.swift */; };
+		878F02B91DA1C4110097DB5C /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B81DA1C4110097DB5C /* DrawingService.swift */; };
+		878F02BB1DA1CBE60097DB5C /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BA1DA1CBE60097DB5C /* PushService.swift */; };
 		878FFDE81D99DB7A007B6DD9 /* HashTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
@@ -143,6 +145,8 @@
 		8786D6601D56DC5A00AD3362 /* Sharing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Sharing.storyboard; sourceTree = "<group>"; };
 		878F02B01DA194C00097DB5C /* GoogleService-Info-Dev.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-Dev.plist"; path = "../GoogleService-Info-Dev.plist"; sourceTree = "<group>"; };
 		878F02B61DA1AF7C0097DB5C /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
+		878F02B81DA1C4110097DB5C /* DrawingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
+		878F02BA1DA1CBE60097DB5C /* PushService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
 		878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagService.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
 				8763D2EE1CEE229C00E3D528 /* User.swift */,
+				878F02BA1DA1CBE60097DB5C /* PushService.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -707,6 +712,7 @@
 			isa = PBXGroup;
 			children = (
 				87E7ADE71CF38BEB00DC226A /* Drawing.swift */,
+				878F02B81DA1C4110097DB5C /* DrawingService.swift */,
 			);
 			name = Drawing;
 			sourceTree = "<group>";
@@ -1032,6 +1038,7 @@
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
+				878F02BB1DA1CBE60097DB5C /* PushService.swift in Sources */,
 				87DF2BD11D0CA035006ED9AF /* BeFoundViewController.swift in Sources */,
 				87E7ADE81CF38BEB00DC226A /* Drawing.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
@@ -1056,6 +1063,7 @@
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */,
+				878F02B91DA1C4110097DB5C /* DrawingService.swift in Sources */,
 				87DB18E21D56326400C838DD /* HashTag.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 				875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */,

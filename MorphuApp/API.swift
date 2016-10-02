@@ -21,12 +21,10 @@ class API {
     
     static let sharedInstance = API()
 
-    fileprivate let myRootRef = FIRDatabase.database().reference()
+    let myRootRef = FIRDatabase.database().reference()
     
     let storageRef = FIRStorage.storage().reference()
     
-    var airshipKey = ""
-
     fileprivate var drawingOfTheDay = [Drawing]()
     fileprivate var wall = [Drawing]()
     fileprivate var facebookFriends = Set<User>()
@@ -54,7 +52,9 @@ class API {
             callback(drawing, false)
         } else {
         
-        self.myRootRef.child("drawings/\(drawingId)").observeSingleEvent(of: .value, with: {snapshot in
+            let path = "drawings/\(drawingId)"
+            print(path)
+        self.myRootRef.child(path).observeSingleEvent(of: .value, with: {snapshot in
             if (!snapshot.exists()) { return }
             
             guard let value = snapshot.value as? [String:AnyObject] else { return }
@@ -84,8 +84,8 @@ class API {
                 })
                 
                 self.myRootRef.child("drawings/\(drawingId)/comments").observe(.childAdded, with: {snapshot in
-                    self.getComment(snapshot.key, callback: { (comment: Comment) -> () in
-                        drawing.addComment(comment)
+                    CommentService().get(id: snapshot.key, callback: { comment in
+                        drawing.add(comment: comment)
                     })
                 })
                 
@@ -95,21 +95,6 @@ class API {
             })
         })
         }
-    }
-    
-    fileprivate func getComment(_ commentId: String, callback: @escaping (Comment) -> ()) {
-        self.myRootRef.child("comments/\(commentId)").observeSingleEvent(of: .value, with: {snapshot in
-            if (!snapshot.exists()) { return }
-            
-            guard let value = snapshot.value as? [String : AnyObject] else { return }
-            
-            let text = value["text"] as! String
-            let timeStamp = value["timeStamp"] as! Double
-            
-            self.getUser(value["user"] as! String, callback: { (user: User) -> () in
-                callback(Comment(id: commentId, text: text, user: user, timeStamp: timeStamp))
-            })
-        })
     }
     
     fileprivate func getUser(_ userId: String, callback: @escaping (User) -> ()) {
@@ -179,7 +164,6 @@ class API {
             user.setfullUserLoaded()
         }
     }
-    
     
     func loadFulUser(_ user: User) {
         if !user.getfullUserLoaded() {
@@ -273,8 +257,7 @@ class API {
     func like(_ drawing: Drawing) {
         drawing.like(self.activeUser!)
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
-        
-        sendPushNotification("\(activeUser!.username) liked your drawing", recipient: drawing.getArtist().userId, badge: "+0")
+        PushService().send(message: "\(activeUser!.username) liked your drawing", to: drawing.getArtist())
     }
     
     func unlike(_ drawing: Drawing) {
@@ -282,30 +265,10 @@ class API {
         myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").removeValue()
     }
     
-//    func addComment(_ drawing: Drawing, text: String) {
-//        guard let activeUser = activeUser else { return }
-//
-//        let comment = Comment(user: self.activeUser!, text: text)
-//        let newComment = myRootRef.child("comments").childByAutoId()
-//
-//        comment.setCommentId(newComment.key)
-//        drawing.addComment(comment)
-//        newComment.setValue(comment.toAnyObject())
-//        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(newComment.key)").setValue(true)
-//        
-//        sendPushNotification("\(activeUser.username) commented on your drawing", recipient: drawing.getArtist().userId, badge: "+0")
-//    }
-//    
-//    func deleteComment(_ drawing: Drawing, comment: Comment) {
-//        drawing.removeComment(comment)
-//        myRootRef.child("comments/\(comment.getCommetId())").removeValue()
-//        myRootRef.child("drawings/\(drawing.getDrawingId())/comments/\(comment.getCommetId())").removeValue()
-//    }
-    
     func follow(_ user: User) {
         myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
         myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
-        sendPushNotification("\(activeUser!.username) is following you!", recipient: user.userId, badge: "+0")
+        PushService().send(message: "\(activeUser!.username) is following you", to: user)
     }
     
     func unfollow(_ user: User) {
@@ -334,12 +297,6 @@ class API {
     func reportDrawing(_ drawing: Drawing) {
         if let active = activeUser {
             myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
-        }
-    }
-    
-    func reportComment(_ comment: Comment) {
-        if let active = activeUser {
-            myRootRef.child("reported/comments/\(comment.getCommetId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
         }
     }
     
@@ -385,7 +342,6 @@ class API {
                 self.loadWall()
                 self.setDeleteWall()
                 self.loadFacebookFriends()
-                self.getAirshipKey()
                 self.delagate?.refresh()
             })
         })
@@ -534,14 +490,7 @@ class API {
         })
     }
     
-    
-    fileprivate func getAirshipKey() {
-        myRootRef.child("airshipKey").observe(.value, with: { snapshot in
-            guard snapshot.exists() else { return }
-            let key = snapshot.value as! String
-            self.airshipKey = key
-        })
-    }
+
     
     // MARK: Image Upload + Download Methods
     
@@ -607,21 +556,4 @@ class API {
             callback(URL)
         }
     }
-    
-    
-    // MARK: Push Notifications
-    func sendPushNotification(_ message: String, recipient: String, badge: String) {
-    
-        let iosData: NSDictionary = ["alert": message]
-        let notificationData: NSDictionary = ["ios": iosData]
-        let namedUser: NSDictionary = ["named_user": recipient]
-        let parameters: [String : Any] = ["audience":namedUser, "notification":notificationData, "device_types":["ios"]]
-        let headers: HTTPHeaders = ["Authorization" : self.airshipKey,
-        "Accept" : "application/vnd.urbanairship+json; version=3",
-        "Drawing-Type" : "application/json"]
-        
-        Alamofire.request("https://go.urbanairship.com/api/push", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers).responseJSON { response in
-            debugPrint(response)
-        }
-    }
- }
+}
