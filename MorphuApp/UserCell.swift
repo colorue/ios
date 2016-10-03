@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol UserCellDelagate {
     func followAction(_ userCell: UserCell)
@@ -17,11 +18,13 @@ class UserCell: UITableViewCell {
     var delagate: UserCellDelagate?
     var user: User? {
         didSet {
-            username?.text = user?.username
-            fullName?.text = user?.fullname
-            profileImage?.image = user?.profileImage
+            guard let user = user else { return }
             
-            if user?.userId == API.sharedInstance.getActiveUser().userId {
+            username?.text = user.username
+            fullName?.text = user.fullname
+            profileImage?.kf.setImage(with: user.profileURL)
+            
+            if user.userId == API.sharedInstance.getActiveUser().userId {
                 followButton?.isHidden = true
             } else {
                 followButton?.isSelected = API.sharedInstance.getActiveUser().isFollowing(user)

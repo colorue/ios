@@ -14,7 +14,7 @@ class User {
     let username: String
     let fullname: String
     let email: String
-    var profileImage: UIImage?  //make getter and setter
+    var profileURL: URL?
     fileprivate var following = Set<User>()
     fileprivate var followers = Set<User>()
     fileprivate var drawings = [Drawing]()
@@ -31,12 +31,12 @@ class User {
         return self.fullUserLoaded
     }
     
-    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileImage: UIImage? = nil) {
+    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileURL: URL? = nil) {
         self.userId = userId
         self.username = username
         self.fullname = fullname
         self.email = email
-        self.profileImage = profileImage
+        self.profileURL = profileURL
     }
     
     func getFollowing() -> Set<User> {

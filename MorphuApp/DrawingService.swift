@@ -32,7 +32,7 @@ struct DrawingService {
 
             guard let value = snapshot.value as? [String:AnyObject] else { return }
 
-            API.sharedInstance.getUser(value["artist"] as! String, callback: { (artist: User) -> () in
+            UserService().get(userId: value["artist"] as! String, callback: { (artist: User) -> () in
 
                 let drawing = Drawing(user: artist, timeStamp: value["timeStamp"] as! Double, id: id)
 
@@ -45,13 +45,13 @@ struct DrawingService {
                 }
 
                 self.myRootRef.child("drawings/\(id)/likes").observe(.childAdded, with: {snapshot in
-                    API.sharedInstance.getUser(snapshot.key, callback: { (liker: User) -> () in
+                    UserService().get(userId: snapshot.key, callback: { (liker: User) -> () in
                         drawing.like(liker)
                     })
                 })
 
                 self.myRootRef.child("drawings/\(id)/likes").observe(.childRemoved, with: {snapshot in
-                    API.sharedInstance.getUser(snapshot.key, callback: { (unliker: User) -> () in
+                    UserService().get(userId: snapshot.key, callback: { (unliker: User) -> () in
                         drawing.unlike(unliker)
                     })
                 })
@@ -103,7 +103,7 @@ struct DrawingService {
     
     func makeProfilePic(_ drawing: Drawing) {
         myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.id)
-        activeUser.profileImage = drawing.image
+        activeUser.profileURL = drawing.imageUrl
         delagate?.refresh()
     }
     

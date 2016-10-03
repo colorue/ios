@@ -140,11 +140,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             targetController.userInstance = drawing.user
         }
     }
-    
-    override func didReceiveMemoryWarning() {
-        api.releaseMemory()
-        super.didReceiveMemoryWarning()
-    }
 }
 
 

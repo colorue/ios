@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		87005D8C1DA1F1C50093F7EA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87005D8B1DA1F1C50093F7EA /* UserService.swift */; };
 		871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871FBDD31DA089930070BBB3 /* CommentService.swift */; };
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
@@ -55,7 +56,6 @@
 		878F02B71DA1AF7C0097DB5C /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B61DA1AF7C0097DB5C /* Timestamp.swift */; };
 		878F02B91DA1C4110097DB5C /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B81DA1C4110097DB5C /* DrawingService.swift */; };
 		878F02BB1DA1CBE60097DB5C /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BA1DA1CBE60097DB5C /* PushService.swift */; };
-		878F02BE1DA1D1D50097DB5C /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BD1DA1D1D50097DB5C /* UserRealm.swift */; };
 		878FFDE81D99DB7A007B6DD9 /* HashTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
@@ -96,6 +96,7 @@
 		00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.dev.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.dev.xcconfig"; sourceTree = "<group>"; };
 		129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.prod.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.prod.xcconfig"; sourceTree = "<group>"; };
 		16C591373F34C788F4677031 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		87005D8B1DA1F1C50093F7EA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		871FBDD31DA089930070BBB3 /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AirshipConfig.plist; path = ../AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -148,7 +149,6 @@
 		878F02B61DA1AF7C0097DB5C /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
 		878F02B81DA1C4110097DB5C /* DrawingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		878F02BA1DA1CBE60097DB5C /* PushService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
-		878F02BD1DA1D1D50097DB5C /* UserRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRealm.swift; sourceTree = "<group>"; };
 		878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagService.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -279,11 +279,11 @@
 		8763D3191CEE243B00E3D528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				878F02BC1DA1D1CA0097DB5C /* User */,
 				871FBDD21DA083040070BBB3 /* Comment */,
 				8762ED5A1D9A054100523E6A /* Common */,
 				878F02B21DA1AD340097DB5C /* Drawing */,
 				878FFDE61D99DB64007B6DD9 /* HashTag */,
+				878F02BC1DA1D1CA0097DB5C /* User */,
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
 				878F02BA1DA1CBE60097DB5C /* PushService.swift */,
@@ -757,7 +757,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2EE1CEE229C00E3D528 /* User.swift */,
-				878F02BD1DA1D1D50097DB5C /* UserRealm.swift */,
+				87005D8B1DA1F1C50093F7EA /* UserService.swift */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -1039,6 +1039,7 @@
 				87EE53E61D57C859005B8FB3 /* Analytics.swift in Sources */,
 				8774BA491CFFA08C00B26931 /* ProfileViewController.swift in Sources */,
 				8763D2DE1CEE226700E3D528 /* TabBarController.swift in Sources */,
+				87005D8C1DA1F1C50093F7EA /* UserService.swift in Sources */,
 				8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */,
 				87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
@@ -1081,7 +1082,6 @@
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* WelcomeViewController.swift in Sources */,
 				87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */,
-				878F02BE1DA1D1D50097DB5C /* UserRealm.swift in Sources */,
 				87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
 				87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */,

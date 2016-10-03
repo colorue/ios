@@ -63,9 +63,6 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
             controller.body = "\(api.getActiveUser().username) invited you to join to Colorue. It's an app for drawing on your iPhone and sharing your creations\nwww.facebook.com/colorueApp/"
 
             controller.recipients = [contact.getPhoneNumber()!]
-            if let image = self.api.getActiveUser().profileImage {
-                controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "\(self.api.getActiveUser().username)'s profile.png")
-            }
             controller.messageComposeDelegate = self
             self.resignFirstResponder()
 

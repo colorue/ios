@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol DrawingCellDelagate {
     func presentDrawingActions(_ drawing: Drawing)
@@ -73,7 +74,7 @@ class DrawingCell: UITableViewCell {
                 })
             }
             
-            profileImage?.image = drawing?.user.profileImage
+            profileImage?.kf.setImage(with: drawing?.user.profileURL)
             creator?.text = drawing?.user.username
             timeCreated?.text = drawing?.timeStamp.timeSince
             likeButton?.isSelected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false

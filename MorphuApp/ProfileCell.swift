@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol ProfileCellDelagate {
     func followAction(_ sender: UIButton) -> ()
@@ -27,7 +28,7 @@ class ProfileCell: UITableViewCell {
     var user: User? {
         didSet {
             fullName?.text = user?.fullname
-            profileImage?.image = user?.profileImage
+            profileImage?.kf.setImage(with: user?.profileURL)
             drawingsCount?.text = String(user?.getDrawings().count ?? 0)
             followersCount?.text = String(user?.getFollowers().count ?? 0)
             followingCount?.text = String(user?.getFollowing().count ?? 0)

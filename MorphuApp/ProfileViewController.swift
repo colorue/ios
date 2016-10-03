@@ -22,7 +22,7 @@ class ProfileViewController: DrawingListViewController {
     var userInstance: User? {
         didSet {
             guard let userInstance = userInstance else { return }
-            API.sharedInstance.loadFulUser(userInstance)
+            UserService().getFull(user: userInstance)
             self.drawingSource = userInstance.getDrawings
             self.tableView.reloadData()
         }
