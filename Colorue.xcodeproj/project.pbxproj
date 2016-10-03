@@ -55,6 +55,9 @@
 		878F02B71DA1AF7C0097DB5C /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B61DA1AF7C0097DB5C /* Timestamp.swift */; };
 		878F02B91DA1C4110097DB5C /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02B81DA1C4110097DB5C /* DrawingService.swift */; };
 		878F02BB1DA1CBE60097DB5C /* PushService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BA1DA1CBE60097DB5C /* PushService.swift */; };
+		878F02BE1DA1D1D50097DB5C /* UserRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BD1DA1D1D50097DB5C /* UserRealm.swift */; };
+		878F02C01DA1D28F0097DB5C /* ListTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02BF1DA1D28F0097DB5C /* ListTransform.swift */; };
+		878F02C21DA1D3450097DB5C /* ObjectTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878F02C11DA1D3450097DB5C /* ObjectTransform.swift */; };
 		878FFDE81D99DB7A007B6DD9 /* HashTagService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */; };
 		879BCC961CF3F04F00CD95E7 /* UserListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */; };
 		879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879BCC971CF4137F00CD95E7 /* Comment.swift */; };
@@ -147,6 +150,9 @@
 		878F02B61DA1AF7C0097DB5C /* Timestamp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
 		878F02B81DA1C4110097DB5C /* DrawingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		878F02BA1DA1CBE60097DB5C /* PushService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushService.swift; sourceTree = "<group>"; };
+		878F02BD1DA1D1D50097DB5C /* UserRealm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRealm.swift; sourceTree = "<group>"; };
+		878F02BF1DA1D28F0097DB5C /* ListTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListTransform.swift; sourceTree = "<group>"; };
+		878F02C11DA1D3450097DB5C /* ObjectTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectTransform.swift; sourceTree = "<group>"; };
 		878FFDE71D99DB7A007B6DD9 /* HashTagService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagService.swift; sourceTree = "<group>"; };
 		879BCC951CF3F04F00CD95E7 /* UserListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserListViewController.swift; sourceTree = "<group>"; };
 		879BCC971CF4137F00CD95E7 /* Comment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -251,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				8762ED5B1D9A055100523E6A /* APIObject.swift */,
+				878F02BF1DA1D28F0097DB5C /* ListTransform.swift */,
+				878F02C11DA1D3450097DB5C /* ObjectTransform.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -277,13 +285,13 @@
 		8763D3191CEE243B00E3D528 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				878F02BC1DA1D1CA0097DB5C /* User */,
 				871FBDD21DA083040070BBB3 /* Comment */,
 				8762ED5A1D9A054100523E6A /* Common */,
 				878F02B21DA1AD340097DB5C /* Drawing */,
 				878FFDE61D99DB64007B6DD9 /* HashTag */,
 				875B4E0C1D15E5F8004F4CD2 /* Contact.swift */,
 				87DF2BD21D0CA731006ED9AF /* NewUser.swift */,
-				8763D2EE1CEE229C00E3D528 /* User.swift */,
 				878F02BA1DA1CBE60097DB5C /* PushService.swift */,
 			);
 			name = Model;
@@ -751,6 +759,15 @@
 			name = Lib;
 			sourceTree = "<group>";
 		};
+		878F02BC1DA1D1CA0097DB5C /* User */ = {
+			isa = PBXGroup;
+			children = (
+				8763D2EE1CEE229C00E3D528 /* User.swift */,
+				878F02BD1DA1D1D50097DB5C /* UserRealm.swift */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		878FFDE61D99DB64007B6DD9 /* HashTag */ = {
 			isa = PBXGroup;
 			children = (
@@ -1060,16 +1077,19 @@
 				871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
+				878F02C01DA1D28F0097DB5C /* ListTransform.swift in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */,
 				878F02B91DA1C4110097DB5C /* DrawingService.swift in Sources */,
+				878F02C21DA1D3450097DB5C /* ObjectTransform.swift in Sources */,
 				87DB18E21D56326400C838DD /* HashTag.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 				875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */,
 				879BCC981CF4137F00CD95E7 /* Comment.swift in Sources */,
 				8763D2DA1CEE226700E3D528 /* WelcomeViewController.swift in Sources */,
 				87DF2BCD1D0C88BC006ED9AF /* SignUpViewController.swift in Sources */,
+				878F02BE1DA1D1D50097DB5C /* UserRealm.swift in Sources */,
 				87DF2BD31D0CA731006ED9AF /* NewUser.swift in Sources */,
 				8763D2D01CEE226700E3D528 /* WallViewController.swift in Sources */,
 				87619AE81D0786FF000BBCC5 /* InviteViewController.swift in Sources */,

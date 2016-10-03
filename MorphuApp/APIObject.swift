@@ -11,7 +11,7 @@ import ObjectMapper
 import RealmSwift
 import Realm
 
-class APIObject: Object, Mappable {
+public class APIObject: Object, Mappable {
     
     /**
      Applies the given JSON onto this object
@@ -53,7 +53,7 @@ class APIObject: Object, Mappable {
     /**
      Initialization
      */
-    required init(value: Any, schema: RLMSchema) {
+    required public init(value: Any, schema: RLMSchema) {
         super.init(value: value, schema: schema)
     }
     

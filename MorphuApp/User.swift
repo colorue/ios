@@ -86,7 +86,7 @@ class User {
     func removeDrawing(_ drawing: Drawing) {
         var i = 0
         for drawing_ in self.drawings {
-            if drawing_.getDrawingId() == drawing.getDrawingId() {
+            if drawing_.id == drawing.id {
                 self.drawings.remove(at: i)
                 return
             }

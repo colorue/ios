@@ -19,7 +19,7 @@ struct HashTagService {
     let basePath = "hashTag"
     
     func add(hashtag: HashTag, to drawing: Drawing) {
-        myRootRef.child("\(basePath)/\(hashtag.text)/\(drawing.getDrawingId())").setValue(true)
+        myRootRef.child("\(basePath)/\(hashtag.text)/\(drawing.id)").setValue(true)
     }
     
     func get(tag: String, callback: @escaping (HashTag?) -> ()) {

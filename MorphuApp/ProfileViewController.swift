@@ -128,16 +128,16 @@ extension ProfileViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = { return drawing.getLikes() }
+            targetController.userSource = { return drawing.likes }
         } else if let targetController = segue.destination as? CommentViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawing
         } else if let targetController = segue.destination as? ProfileViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
-            targetController.navigationItem.title = drawing.getArtist().username
+            targetController.navigationItem.title = drawing.user //drawing.user.username
             targetController.tintColor = self.tintColor!
-            targetController.userInstance = drawing.getArtist()
+            targetController.userInstance = drawing.user
         }
     }
     

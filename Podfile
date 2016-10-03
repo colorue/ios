@@ -31,7 +31,8 @@ target 'Colorue' do
     
     pod 'SwiftyJSON'
     pod 'ObjectMapper'
-    
+#    pod 'ObjectMapper+Realm'
+
     pod 'RealmSwift'
     
     pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :branch => 'swift-3'

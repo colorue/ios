@@ -6,7 +6,8 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
+import RealmSwift
 
 class Drawing {
     
@@ -117,20 +118,26 @@ class Drawing {
                 "url": self.url!.absoluteString]
     }
 }
-//
+
 //class Drawing: APIObject {
 //    
 //    public dynamic var id: String? = ""
 //    public dynamic var text: String? = ""
 //    public dynamic var user: String? = ""
 //    public dynamic var timeStamp: Double = 0
+//    public dynamic var imageUrl: String? = ""
 //    
-//    convenience init(id: String, text: String, user: User, timeStamp: Double = -Date().timeIntervalSince1970) {
+//    
+////    public var likes: List<UserRealm> = List()
+//    public var comments: List<Comment> = List()
+//
+//    
+//    convenience init(user: User = User(), timeStamp: Double = -Date().timeIntervalSince1970, id: String = "") {
 //        self.init()
-//        self.id = id
-//        self.user = user.userId
+//
+//        self.artist = artist
 //        self.timeStamp = timeStamp
-//        self.text = text
+//        self.id = id
 //    }
 //    
 //    override class func primaryKey() -> String? {
@@ -142,5 +149,9 @@ class Drawing {
 //        text <- map["text"]
 //        user <- map["user"]
 //        timeStamp <- map["timeStamp"]
+//        imageUrl <- map["imageUrl"]
+//
+////        likes <- map["likes"]
+////        comments <- (map["comments"], ListTransform<Comment>())
 //    }
 //}
