@@ -135,7 +135,7 @@ extension ProfileViewController {
             targetController.drawingInstance = drawing
         } else if let targetController = segue.destination as? ProfileViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
-            targetController.navigationItem.title = drawing.user //drawing.user.username
+            targetController.navigationItem.title = drawing.user.username
             targetController.tintColor = self.tintColor!
             targetController.userInstance = drawing.user
         }

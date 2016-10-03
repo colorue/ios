@@ -69,19 +69,19 @@ class DrawingCell: UITableViewCell {
             if let url = drawing?.imageUrl {
                 drawingImage?.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.2))],
                                                  completionHandler: { (image, error, cacheType, imageURL) -> () in
-                    self.drawing?.setImage(image)
+                    self.drawing?.image = image ?? UIImage()
                 })
             }
             
-            profileImage?.image = drawing?.getArtist().profileImage
-            creator?.text = drawing?.getArtist().username
+            profileImage?.image = drawing?.user.profileImage
+            creator?.text = drawing?.user.username
             timeCreated?.text = drawing?.timeStamp.timeSince
             likeButton?.isSelected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false
             
-            if drawing?.getComments().count == 1 {
+            if drawing?.comments.count == 1 {
                 commentCount?.text = "1 comment"
             } else {
-                commentCount?.text = String(drawing?.getComments().count ?? 0) + " comments"
+                commentCount?.text = String(drawing?.comments.count ?? 0) + " comments"
             }
             setLikes()
         }
@@ -116,7 +116,7 @@ class DrawingCell: UITableViewCell {
     }
         
     fileprivate func setLikes() {
-        let likeCount = drawing?.getLikes().count ?? 0
+        let likeCount = drawing?.likes.count ?? 0
         if likeCount == 0 {
             likes?.text = ""
             likesButton?.isEnabled = false

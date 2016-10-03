@@ -224,10 +224,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.colorKeyboard!.uploading(0)
         self.view.isUserInteractionEnabled = false
         
-        let newDrawing = Drawing(artist: User(), drawingId: "")
-        newDrawing.setImage((canvas?.getDrawing())!)
+        let newDrawing = Drawing(user: User(), id: "")
+        newDrawing.image = (canvas?.getDrawing() ?? UIImage())
         
-        api.postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+        DrawingService().postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
     }
     
     func postCallback(_ uploaded: Bool) {

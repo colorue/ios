@@ -49,12 +49,12 @@ class CommentViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return drawingInstance?.getComments().count ?? 0
+        return drawingInstance?.comments.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.commentCell)!
-        cell.comment = drawingInstance?.getComments()[(indexPath as NSIndexPath).row]
+        cell.comment = drawingInstance?.comments[(indexPath as NSIndexPath).row]
         cell.delegate = self
         cell.buttonTag = (indexPath as NSIndexPath).row
         cell.tint = tintColor
@@ -62,10 +62,10 @@ class CommentViewController: SLKTextViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let targetController = segue.destination as? ProfileViewController {
-//            targetController.tintColor = self.tintColor
-//            targetController.navigationItem.title = drawingInstance!.getComments()[(sender! as AnyObject).tag].user.username
-//            targetController.userInstance = drawingInstance!.getComments()[(sender! as AnyObject).tag].user
+        if let targetController = segue.destination as? ProfileViewController, let tag = (sender! as AnyObject).tag {
+            targetController.tintColor = self.tintColor
+//            targetController.navigationItem.title = drawingInstance!.comments[tag].user.username
+//            targetController.userInstance = drawingInstance!.comments[tag].user
         }
     }
 
@@ -74,12 +74,12 @@ class CommentViewController: SLKTextViewController {
     }
     
 //    override func tableView(_ tableView: UITableView, editActionsForRowAt editActionsForRowAtIndexPath: IndexPath) -> [UITableViewRowAction] {
-//        if drawingInstance?.getComments()[(editActionsForRowAtIndexPath as NSIndexPath).row].user.userId == api.getActiveUser().userId {
+//        if drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row].user.userId == api.getActiveUser().userId {
 //            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: { action, indexPath in
 //                self.setEditing(false, animated: true)
 //                let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.alert)
 //                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-//                    self.api.deleteComment(self.drawingInstance!, comment: (self.drawingInstance?.getComments()[(editActionsForRowAtIndexPath as NSIndexPath).row])!)
+//                    CommentService().delete(comment: (self.drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row])!, from: self.drawingInstance!)
 //                    Analytics.logEvent(.deletedComment)
 //                    self.tableView?.reloadData()
 //                }))
@@ -91,7 +91,7 @@ class CommentViewController: SLKTextViewController {
 //            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Report", handler: { action, indexPath in
 //                let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
 //                deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
-//                    self.api.reportComment((self.drawingInstance?.getComments()[(editActionsForRowAtIndexPath as NSIndexPath).row])!)
+//                    CommentService().report(comment: self.drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row])
 //                    Analytics.logEvent(.reportedComment)
 //                }))
 //                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
@@ -108,7 +108,7 @@ class CommentViewController: SLKTextViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        guard let comment = drawingInstance?.getComments()[indexPath.row], let commentText = comment.text else { return CGFloat.leastNormalMagnitude }
+        guard let comment = drawingInstance?.comments[indexPath.row], let commentText = comment.text else { return CGFloat.leastNormalMagnitude }
         
         let font = CommentCell.commentFont
         

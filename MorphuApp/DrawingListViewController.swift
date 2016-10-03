@@ -128,16 +128,16 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = { return drawing.getLikes() }
+            targetController.userSource = { return drawing.likes }
         } else if let targetController = segue.destination as? CommentViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.tintColor = self.tintColor!
             targetController.drawingInstance = drawing
         } else if let targetController = segue.destination as? ProfileViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
-            targetController.navigationItem.title = drawing.getArtist().username
+            targetController.navigationItem.title = drawing.user.username
             targetController.tintColor = self.tintColor!
-            targetController.userInstance = drawing.getArtist()
+            targetController.userInstance = drawing.user
         }
     }
     
@@ -153,7 +153,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     
     func userButtonPressed(_ drawing: Drawing) {
         if let profileController = R.storyboard.profile.profile() {
-            profileController.userInstance = drawing.getArtist()
+            profileController.userInstance = drawing.user
             profileController.tintColor = tintColor
             navigationController?.pushViewController(profileController, animated: true)
         }
@@ -161,7 +161,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     
     func likesButtonPressed(_ drawing: Drawing) {
         if let likesController = R.storyboard.users.users() {
-            likesController.userSource = drawing.getLikes
+            likesController.userSource = { return drawing.likes }
             likesController.title = "Likes"
             likesController.tintColor = tintColor
             navigationController?.pushViewController(likesController, animated: true)
@@ -179,10 +179,10 @@ extension DrawingListViewController: DrawingCellDelagate {
     
     func likeButtonPressed(_ drawing: Drawing) {
         if !(drawing.liked(api.getActiveUser())) {
-            api.like(drawing)
+            DrawingService().like(drawing)
             Analytics.logEvent(.likedDrawing)
         } else {
-            api.unlike(drawing)
+            DrawingService().unlike(drawing)
             Analytics.logEvent(.unlikedDrawing)
         }
     }
@@ -191,9 +191,9 @@ extension DrawingListViewController: DrawingCellDelagate {
         
         let drawingActions = UIAlertController(title: nil, message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
         
-        if (drawing.getArtist().userId == api.getActiveUser().userId) {
+        if (drawing.user.userId == api.getActiveUser().userId) {
             drawingActions.addAction(UIAlertAction(title: "Set as Profile Drawing", style: .default, handler: { (action: UIAlertAction!) in
-                self.api.makeProfilePic(drawing)
+                DrawingService().makeProfilePic(drawing)
                 FIRAnalytics.logEvent(withName: "setProfileDrawing", parameters: [:])
             }))
             drawingActions.addAction(UIAlertAction(title: "Share to Facebook", style: .default, handler: { (action: UIAlertAction!) in
@@ -203,13 +203,13 @@ extension DrawingListViewController: DrawingCellDelagate {
                 self.sendDrawing(drawing)
             }))
             drawingActions.addAction(UIAlertAction(title: "Save", style: .default, handler:  { (action: UIAlertAction!) in
-                UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+                UIImageWriteToSavedPhotosAlbum(drawing.image, self, nil, nil)
                 FIRAnalytics.logEvent(withName: "ownDrawingSavedFeed", parameters: [:])
             }))
             drawingActions.addAction(UIAlertAction(title: "Edit", style: .default, handler: { (action: UIAlertAction!) in
                 let activity = R.storyboard.drawing.drawingViewController()!
                 if let drawingViewController = activity.topViewController as? DrawingViewController {
-                    drawingViewController.baseImage = drawing.getImage()
+                    drawingViewController.baseImage = drawing.image
                     FIRAnalytics.logEvent(withName: "editDrawing", parameters: [:])
                     self.present(activity, animated: true, completion: nil)
                 }
@@ -217,7 +217,7 @@ extension DrawingListViewController: DrawingCellDelagate {
             drawingActions.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Delete drawing?", message: "This drawing will be deleted permanently", preferredStyle: UIAlertControllerStyle.alert)
                 deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-                    self.api.deleteDrawing(drawing)
+                    DrawingService().deleteDrawing(drawing)
                     FIRAnalytics.logEvent(withName: "drawingDeleted", parameters: [:])
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
@@ -227,27 +227,27 @@ extension DrawingListViewController: DrawingCellDelagate {
             drawingActions.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
                 let deleteAlert = UIAlertController(title: "Report drawing?", message: "Please report any drawings that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
                 deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
-                    self.api.reportDrawing(drawing)
+                    DrawingService().reportDrawing(drawing)
                     FIRAnalytics.logEvent(withName: "drawingReported", parameters: [:])
                 }))
                 deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
                 self.present(deleteAlert, animated: true, completion: nil)
             }))
             drawingActions.addAction(UIAlertAction(title: "Save", style: .default, handler:  { (action: UIAlertAction!) in
-                UIImageWriteToSavedPhotosAlbum(drawing.getImage(), self, nil, nil)
+                UIImageWriteToSavedPhotosAlbum(drawing.image, self, nil, nil)
                 FIRAnalytics.logEvent(withName: "friendDrawingSavedFeed", parameters: [:])
             }))
         }
         
         if api.getActiveUser().userId == "5Apylh3iA6bDpkDDGwcG3G8BWZ42" {
             drawingActions.addAction(UIAlertAction(title: "Make DOD!", style: .default, handler:  { (action: UIAlertAction!) in
-                self.api.makeDOD(drawing)
+                DrawingService().makeDOD(drawing)
             }))
             
             drawingActions.addAction(UIAlertAction(title: "Edit Other", style: .default, handler: { (action: UIAlertAction!) in
                 let activity = R.storyboard.drawing.drawingViewController()!
                 if let drawingViewController = activity.topViewController as? DrawingViewController {
-                    drawingViewController.baseImage = drawing.getImage()
+                    drawingViewController.baseImage = drawing.image
                     FIRAnalytics.logEvent(withName: "editDrawing", parameters: [:])
                     self.present(activity, animated: true, completion: nil)
                 }
@@ -263,7 +263,7 @@ extension DrawingListViewController: DrawingCellDelagate {
         Analytics.logEvent(.sendDrawing, parameters: ["feed": true as NSObject])
 
         if (MFMessageComposeViewController.canSendText()) {
-            controller.addAttachmentData(UIImagePNGRepresentation(drawing.getImage())!, typeIdentifier: "public.data", filename: "colorue.png")
+            controller.addAttachmentData(UIImagePNGRepresentation(drawing.image)!, typeIdentifier: "public.data", filename: "colorue.png")
             controller.messageComposeDelegate = self
             controller.resignFirstResponder()
             
@@ -274,7 +274,7 @@ extension DrawingListViewController: DrawingCellDelagate {
     fileprivate func shareToFacebook(_ drawing: Drawing) {
         Analytics.logEvent(.postToFacebook, parameters: ["feed": true as NSObject])
         let content = FBSDKSharePhotoContent()
-        let photo = FBSDKSharePhoto(image: drawing.getImage(), userGenerated: true)
+        let photo = FBSDKSharePhoto(image: drawing.image, userGenerated: true)
         content.photos  = [photo]
         
         let dialog = FBSDKShareDialog()

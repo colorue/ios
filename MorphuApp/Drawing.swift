@@ -11,47 +11,19 @@ import RealmSwift
 
 class Drawing {
     
-    let timeStamp: TimeStamp
-    fileprivate var drawingId: String
-    fileprivate var artist: User
-    fileprivate var likes = [User]()
-    fileprivate var comments = [Comment]()
-    fileprivate var image: UIImage?
+    var id: String
+    var timeStamp: TimeStamp
+    var user: User
+    var likes = [User]()
+    var comments = [Comment]()
+    var image = UIImage()
     var drawingOfTheDay = false
-    var url: URL?
+    var imageUrl: URL?
     
-    init(artist: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, drawingId: String = "") {
-        self.artist = artist
+    init(user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, id: String = "") {
+        self.user = user
         self.timeStamp = timeStamp
-        self.drawingId = drawingId
-    }
-    
-    func setDrawingId(_ drawingId: String) {
-        self.drawingId = drawingId
-    }
-    
-    func getDrawingId() -> String {
-        return self.drawingId
-    }
-    
-    func setImage(_ image: UIImage?) {
-        self.image = image
-    }
-    
-    func getImage() -> UIImage {
-        if let image = self.image {
-            return image
-        } else {
-            return UIImage()
-        }
-    }
-    
-    func setArtist(_ artist: User) {
-        self.artist = artist
-    }
-    
-    func getArtist() -> User {
-        return self.artist
+        self.id = id
     }
     
     func like(_ user: User) {
@@ -82,10 +54,6 @@ class Drawing {
         return false
     }
     
-    func getLikes() -> [User] {
-        return self.likes
-    }
-    
     func add(comment: Comment?) {
         guard let comment = comment else { return }
         
@@ -108,14 +76,10 @@ class Drawing {
         }
     }
     
-    func getComments() -> [Comment] {
-        return self.comments
-    }
-    
     func toAnyObject()-> NSDictionary {
-        return ["artist": self.artist.userId,
+        return ["artist": self.user.userId,
                 "timeStamp": self.timeStamp,
-                "url": self.url!.absoluteString]
+                "url": self.imageUrl!.absoluteString]
     }
 }
 

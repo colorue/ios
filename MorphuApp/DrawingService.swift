@@ -14,49 +14,53 @@ import Realm
 struct DrawingService {
     let myRootRef = FIRDatabase.database().reference()
     let storageRef = FIRStorage.storage().reference()
+    
+    var activeUser: User {
+        return API.sharedInstance.getActiveUser()
+    }
+    
+    var delagate: APIDelagate?
 
     let realm = try! Realm()
     
     let basePath = "drawings"
 
-    func getDrawing(_ drawingId: String, callback: @escaping (Drawing, Bool) -> ()) {
+    func get(id: String, callback: @escaping (Drawing, Bool) -> ()) {
 
-        self.myRootRef.child("drawings/\(drawingId)").observeSingleEvent(of: .value, with: {snapshot in
+        self.myRootRef.child("drawings/\(id)").observeSingleEvent(of: .value, with: {snapshot in
             if (!snapshot.exists()) { return }
 
             guard let value = snapshot.value as? [String:AnyObject] else { return }
 
             API.sharedInstance.getUser(value["artist"] as! String, callback: { (artist: User) -> () in
 
-                let drawing = Drawing(artist: artist, timeStamp: value["timeStamp"] as! Double, drawingId: drawingId)
+                let drawing = Drawing(user: artist, timeStamp: value["timeStamp"] as! Double, id: id)
 
                 if let urlString = value["url"] as?  String {
-                    drawing.url = URL(string: urlString)
+                    drawing.imageUrl = URL(string: urlString)
                 } else {
-                    self.setDrawingURL(drawingId, callback: { url in
-                        drawing.url = url
+                    API.sharedInstance.setDrawingURL(id, callback: { imageUrl in
+                        drawing.imageUrl = imageUrl
                     })
                 }
 
-                self.myRootRef.child("drawings/\(drawingId)/likes").observe(.childAdded, with: {snapshot in
-                    self.getUser(snapshot.key, callback: { (liker: User) -> () in
+                self.myRootRef.child("drawings/\(id)/likes").observe(.childAdded, with: {snapshot in
+                    API.sharedInstance.getUser(snapshot.key, callback: { (liker: User) -> () in
                         drawing.like(liker)
                     })
                 })
 
-                self.myRootRef.child("drawings/\(drawingId)/likes").observe(.childRemoved, with: {snapshot in
-                    self.getUser(snapshot.key, callback: { (unliker: User) -> () in
+                self.myRootRef.child("drawings/\(id)/likes").observe(.childRemoved, with: {snapshot in
+                    API.sharedInstance.getUser(snapshot.key, callback: { (unliker: User) -> () in
                         drawing.unlike(unliker)
                     })
                 })
 
-                self.myRootRef.child("drawings/\(drawingId)/comments").observe(.childAdded, with: {snapshot in
+                self.myRootRef.child("drawings/\(id)/comments").observe(.childAdded, with: {snapshot in
                     CommentService().get(id: snapshot.key, callback: { comment in
                         drawing.add(comment: comment)
                     })
                 })
-
-                self.drawingDict[drawingId] = drawing
                 
                 callback(drawing, true)
             })
@@ -65,17 +69,16 @@ struct DrawingService {
 
     func postDrawing(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), finishedCallback: @escaping (Bool) -> ()) {
         let newDrawing = myRootRef.child("drawings").childByAutoId()
-        drawing.setDrawingId(newDrawing.key)
+        drawing.id = newDrawing.key
         
-        self.uploadImage(drawing, progressCallback: progressCallback, finishedCallback:  { uploaded in
+        API.sharedInstance.uploadImage(drawing, progressCallback: progressCallback, finishedCallback:  { uploaded in
             if uploaded {
-                drawing.setArtist(self.activeUser!)
-                self.setDrawingURL(drawing.getDrawingId(), callback: { url in
-                    drawing.url = url
+                drawing.user = self.activeUser
+                API.sharedInstance.setDrawingURL(drawing.id, callback: { imageUrl in
+                    drawing.imageUrl = imageUrl
                     newDrawing.setValue(drawing.toAnyObject())
-                    self.myRootRef.child("users/\(self.activeUser!.userId)/drawings/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
-                    self.myRootRef.child("users/\(self.activeUser!.userId)/wall/\(drawing.getDrawingId())").setValue(drawing.timeStamp)
-
+                    self.myRootRef.child("users/\(self.activeUser.userId)/drawings/\(drawing.id)").setValue(drawing.timeStamp)
+                    self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(drawing.id)").setValue(drawing.timeStamp)
                 })
             }
             finishedCallback(uploaded)
@@ -83,13 +86,13 @@ struct DrawingService {
     }
     
     func deleteDrawing(_ drawing: Drawing) {
-        myRootRef.child("drawings/\(drawing.getDrawingId())").removeValue()
-        myRootRef.child("users/\(activeUser!.userId)/drawings/\(drawing.getDrawingId())").removeValue()
-        myRootRef.child("users/\(activeUser!.userId)/wall/\(drawing.getDrawingId())").removeValue()
+        myRootRef.child("drawings/\(drawing.id)").removeValue()
+        myRootRef.child("users/\(activeUser.userId)/drawings/\(drawing.id)").removeValue()
+        myRootRef.child("users/\(activeUser.userId)/wall/\(drawing.id)").removeValue()
         
-        let desertRef = storageRef.child("drawings/\(drawing.getDrawingId()).png")
+        let drawingRef = storageRef.child("drawings/\(drawing.id).png")
         
-        desertRef.delete { (error) -> Void in
+        drawingRef.delete { (error) -> Void in
             if (error != nil) {
                 print("File deletion error")
             } else {
@@ -99,21 +102,28 @@ struct DrawingService {
     }
     
     func makeProfilePic(_ drawing: Drawing) {
-        guard let activeUser = activeUser else { return }
-        
-        myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.getDrawingId())
-        activeUser.profileImage = drawing.getImage()
+        myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.id)
+        activeUser.profileImage = drawing.image
         delagate?.refresh()
     }
     
     func like(_ drawing: Drawing) {
-        drawing.like(self.activeUser!)
-        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").setValue(true)
-        PushService().send(message: "\(activeUser!.username) liked your drawing", to: drawing.getArtist())
+        drawing.like(activeUser)
+        myRootRef.child("drawings/\(drawing.id)/likes/\(activeUser.userId)").setValue(true)
+        PushService().send(message: "\(activeUser.username) liked your drawing", to: drawing.user)
     }
     
     func unlike(_ drawing: Drawing) {
-        drawing.unlike(self.activeUser!)
-        myRootRef.child("drawings/\(drawing.getDrawingId())/likes/\(self.activeUser!.userId)").removeValue()
+        drawing.unlike(activeUser)
+        myRootRef.child("drawings/\(drawing.id)/likes/\(activeUser.userId)").removeValue()
     }
+    
+    func reportDrawing(_ drawing: Drawing) {
+        myRootRef.child("reported/drawings/\(drawing.id)/\(activeUser.userId)").setValue(0 - Date().timeIntervalSince1970)
+    }
+
+    func makeDOD(_ drawing: Drawing) {
+        myRootRef.child("drawingOfTheDay").setValue(drawing.id)
+    }
+
 }

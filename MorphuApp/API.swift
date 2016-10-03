@@ -157,7 +157,7 @@ class API {
             })
             
             self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
-                DrawingService().get(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                DrawingService().get(id: snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.addDrawing(drawing)
                 })
             })
@@ -192,13 +192,13 @@ class API {
             })
             
             self.myRootRef.child("users/\(user.userId)/drawings").queryOrderedByValue().observe(.childAdded, with: {snapshot in
-                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                DrawingService().get(id: snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.addDrawing(drawing)
                 })
             })
             
             self.myRootRef.child("users/\(user.userId)/followers").observe(.childRemoved, with: {snapshot in
-                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                DrawingService().get(id: snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     user.removeDrawing(drawing)
                 })
             })
@@ -293,17 +293,17 @@ class API {
             })
     }
     
-    
-    func reportDrawing(_ drawing: Drawing) {
-        if let active = activeUser {
-            myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
-        }
-    }
-    
-    func makeDOD(_ drawing: Drawing) {
-        myRootRef.child("drawingOfTheDay").setValue(drawing.getDrawingId())
-    }
-    
+//    
+//    func reportDrawing(_ drawing: Drawing) {
+//        if let active = activeUser {
+//            myRootRef.child("reported/drawings/\(drawing.getDrawingId())/\(active.userId)").setValue(0 - Date().timeIntervalSince1970)
+//        }
+//    }
+//    
+//    func makeDOD(_ drawing: Drawing) {
+//        myRootRef.child("drawingOfTheDay").setValue(drawing.getDrawingId())
+//    }
+//    
     // MARK: Get Methods
     
     func getActiveUser() -> User {
@@ -360,9 +360,6 @@ class API {
     }
     
     func releaseMemory() {
-        for drawing in wall {
-            drawing.setImage(nil)
-        }
         self.userDict.removeAll()
         self.drawingDict.removeAll()
         self.imageDict.removeAll()
@@ -374,7 +371,7 @@ class API {
 
         myRootRef.child("users/\(activeUser.userId)/wall").queryOrderedByValue().queryLimited(toFirst: 16).queryStarting(atValue: self.oldestTimeLoaded)
             .observe(.childAdded, with: { snapshot in
-                self.getDrawing(snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
+                DrawingService().get(id: snapshot.key, callback: { (drawing: Drawing, new: Bool) -> () in
                     if self.wall.count == 0 {
                         self.wall.append(drawing)
                         self.oldestTimeLoaded = drawing.timeStamp
@@ -410,7 +407,7 @@ class API {
                 var i = 0
                 self.drawingDict[drawingId] = nil
                 for drawing in self.wall {
-                    if drawing.getDrawingId() == drawingId {
+                    if drawing.id == drawingId {
                         self.wall.remove(at: i)
                         return
                     }
@@ -422,7 +419,7 @@ class API {
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observe(.value, with: { snapshot in
             guard snapshot.exists() else { return }
-            self.getDrawing(snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
+            DrawingService().get(id: snapshot.value as! String, callback: { (drawing: Drawing, new: Bool) -> () in
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
                 DispatchQueue.main.async {
@@ -496,7 +493,7 @@ class API {
     
     func uploadImage(_ drawing: Drawing, progressCallback: @escaping (Float) -> (), finishedCallback: @escaping (Bool) -> ()) {
         
-        let uploadTask = storageRef.child("drawings/\(drawing.getDrawingId()).png").put(UIImagePNGRepresentation(drawing.getImage())!)
+        let uploadTask = storageRef.child("drawings/\(drawing.id).png").put(UIImagePNGRepresentation(drawing.image)!)
         
         uploadTask.observe(.progress) { snapshot in
             // Upload reported progress
