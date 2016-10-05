@@ -6,15 +6,16 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import UIKit
+import ObjectMapper
 
-class User {
+class User: APIObject {
     
-    let userId: String
-    let username: String
-    let fullname: String
-    let email: String
-    var profileURL: URL?
+    public dynamic var  userId: String = ""
+    public dynamic var  username: String = ""
+    public dynamic var  fullname: String = ""
+    public dynamic var  email: String = ""
+    public dynamic var  profileURL: String = ""
+    
     fileprivate var following = Set<User>()
     fileprivate var followers = Set<User>()
     fileprivate var drawings = [Drawing]()
@@ -31,12 +32,21 @@ class User {
         return self.fullUserLoaded
     }
     
-    init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileURL: URL? = nil) {
+    convenience init(userId: String = "", email: String = "", username: String = "", fullname: String = "", profileURL: String = "") {
+        self.init()
         self.userId = userId
         self.username = username
         self.fullname = fullname
         self.email = email
         self.profileURL = profileURL
+    }
+    
+    override func mapping(map: Map) {
+        userId <- map["userId"]
+        username <- map["username"]
+        email <- map["email"]
+        fullname <- map["fullname"]
+        profileURL <- map["profileURL"]
     }
     
     func getFollowing() -> Set<User> {
@@ -99,13 +109,13 @@ class User {
     }
 }
 
-extension User: Hashable {
-    var hashValue: Int {
-        return userId.hashValue
-    }
-}
-
-// MARK: Equatable
-func == (lhs: User, rhs: User) -> Bool {
-    return lhs.userId == rhs.userId
-}
+//extension User: Hashable {
+//    var hashValue: Int {
+//        return userId.hashValue
+//    }
+//}
+//
+//// MARK: Equatable
+//func == (lhs: User, rhs: User) -> Bool {
+//    return lhs.userId == rhs.userId
+//}

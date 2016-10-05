@@ -27,7 +27,7 @@ struct UserService {
             let profileURLString = value["photoURL"] as? String ?? ""
             
             print(profileURLString)
-            let newUser = User(userId: userId, email: email, username: username, fullname: fullname, profileURL: URL(string: profileURLString))
+            let newUser = User(userId: userId, email: email, username: username, fullname: fullname, profileURL: profileURLString)
 
             callback(newUser)
         })

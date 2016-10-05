@@ -22,7 +22,7 @@ class UserCell: UITableViewCell {
             
             username?.text = user.username
             fullName?.text = user.fullname
-            profileImage?.kf.setImage(with: user.profileURL)
+            profileImage?.kf.setImage(with: URL(string: user.profileURL))
             
             if user.userId == API.sharedInstance.getActiveUser().userId {
                 followButton?.isHidden = true

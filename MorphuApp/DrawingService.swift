@@ -103,7 +103,7 @@ struct DrawingService {
     
     func makeProfilePic(_ drawing: Drawing) {
         myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.id)
-        activeUser.profileURL = drawing.imageUrl
+        activeUser.profileURL = drawing.imageUrl?.absoluteString ?? ""
         delagate?.refresh()
     }
     

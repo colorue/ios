@@ -42,13 +42,13 @@ class Comment: APIObject {
     
     public dynamic var id: String? = ""
     public dynamic var text: String? = ""
-    public dynamic var user: String? = ""
     public dynamic var timeStamp: Double = 0
+    public dynamic var user: User?
     
     convenience init(id: String, text: String, user: User, timeStamp: Double = -Date().timeIntervalSince1970) {
         self.init()
         self.id = id
-        self.user = user.userId
+        self.user = user
         self.timeStamp = timeStamp
         self.text = text
     }
@@ -60,7 +60,7 @@ class Comment: APIObject {
     public override func mapping(map: Map) {
         id <- map["id"]
         text <- map["text"]
-        user <- map["user"]
         timeStamp <- map["timeStamp"]
+        user <- map["user"]
     }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		87005D8C1DA1F1C50093F7EA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87005D8B1DA1F1C50093F7EA /* UserService.swift */; };
+		87005D8E1DA208020093F7EA /* ObjectTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87005D8D1DA208020093F7EA /* ObjectTransform.swift */; };
 		871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871FBDD31DA089930070BBB3 /* CommentService.swift */; };
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
@@ -97,6 +98,7 @@
 		129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.prod.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.prod.xcconfig"; sourceTree = "<group>"; };
 		16C591373F34C788F4677031 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		87005D8B1DA1F1C50093F7EA /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		87005D8D1DA208020093F7EA /* ObjectTransform.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectTransform.swift; sourceTree = "<group>"; };
 		871FBDD31DA089930070BBB3 /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AirshipConfig.plist; path = ../AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -253,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				8762ED5B1D9A055100523E6A /* APIObject.swift */,
+				87005D8D1DA208020093F7EA /* ObjectTransform.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1070,6 +1073,7 @@
 				876614BA1D034F1200DF4590 /* HashTagViewController.swift in Sources */,
 				875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */,
 				871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */,
+				87005D8E1DA208020093F7EA /* ObjectTransform.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,

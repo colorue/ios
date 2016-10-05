@@ -67,22 +67,24 @@ class DrawingCell: UITableViewCell {
     
     var drawing: Drawing? {
         didSet {
-            if let url = drawing?.imageUrl {
+            guard let drawing = drawing else { return }
+            
+            if let url = drawing.imageUrl {
                 drawingImage?.kf.setImage(with: url, placeholder: nil, options: [.transition(.fade(0.2))],
                                                  completionHandler: { (image, error, cacheType, imageURL) -> () in
                     self.drawing?.image = image ?? UIImage()
                 })
             }
             
-            profileImage?.kf.setImage(with: drawing?.user.profileURL)
-            creator?.text = drawing?.user.username
-            timeCreated?.text = drawing?.timeStamp.timeSince
-            likeButton?.isSelected = drawing?.liked(API.sharedInstance.getActiveUser()) ?? false
+            profileImage?.kf.setImage(with: URL(string: drawing.user.profileURL))
+            creator?.text = drawing.user.username
+            timeCreated?.text = drawing.timeStamp.timeSince
+            likeButton?.isSelected = drawing.liked(API.sharedInstance.getActiveUser()) ?? false
             
-            if drawing?.comments.count == 1 {
+            if drawing.comments.count == 1 {
                 commentCount?.text = "1 comment"
             } else {
-                commentCount?.text = String(drawing?.comments.count ?? 0) + " comments"
+                commentCount?.text = String(drawing.comments.count) + " comments"
             }
             setLikes()
         }

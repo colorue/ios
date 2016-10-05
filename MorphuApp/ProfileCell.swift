@@ -27,13 +27,15 @@ class ProfileCell: UITableViewCell {
     
     var user: User? {
         didSet {
-            fullName?.text = user?.fullname
-            profileImage?.kf.setImage(with: user?.profileURL)
-            drawingsCount?.text = String(user?.getDrawings().count ?? 0)
-            followersCount?.text = String(user?.getFollowers().count ?? 0)
-            followingCount?.text = String(user?.getFollowing().count ?? 0)
+            guard let user = user else { return }
             
-            if user?.userId == API.sharedInstance.getActiveUser().userId {
+            fullName?.text = user.fullname
+            profileImage?.kf.setImage(with: URL(string: user.profileURL))
+            drawingsCount?.text = String(user.getDrawings().count)
+            followersCount?.text = String(user.getFollowers().count)
+            followingCount?.text = String(user.getFollowing().count)
+            
+            if user.userId == API.sharedInstance.getActiveUser().userId {
                 followButton?.setImage(nil, for: UIControlState())
                 followButton?.isEnabled = false
             } else {
