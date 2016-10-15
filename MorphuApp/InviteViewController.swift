@@ -57,9 +57,7 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
 
-            
-
-            controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test\nwww.facebook.com/colorueApp/"
+            controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test\nhttps://colorue.herokuapp.com/?token=DrawingT1me"
 
             controller.recipients = [contact.getPhoneNumber()!]
             controller.messageComposeDelegate = self

@@ -6,6 +6,9 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
+import MessageUI
+import Firebase
+
 class FriendsViewController: UserListViewController {
     
     // MARK: - View Setup
@@ -17,8 +20,34 @@ class FriendsViewController: UserListViewController {
                             action: #selector(FriendsViewController.invite(_:)))
     }
     
-    
     @objc fileprivate func invite(_ sender: UIBarButtonItem) {
-        self.controller!.performSegue(withIdentifier: "toInvite", sender: self)
+        sendInvite()
+    }
+    
+    fileprivate func sendInvite() {
+        
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            
+            controller.body = "\(api.getActiveUser().username) invited you to the Colorue beta test\nhttps://colorue.herokuapp.com/?token=DrawingT1me"
+            controller.messageComposeDelegate = self
+            resignFirstResponder()
+            present(controller, animated: true, completion: nil)
+        }
+    }
+}
+
+// MARK: Message Delegate
+
+extension FriendsViewController: MFMessageComposeViewControllerDelegate {
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
+        switch result {
+        case .sent:
+            FIRAnalytics.logEvent(withName: "inviteSent", parameters: [:])
+        default:
+            break
+        }
     }
 }
