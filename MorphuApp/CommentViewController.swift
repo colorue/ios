@@ -108,7 +108,7 @@ class CommentViewController: SLKTextViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 
-        guard let comment = drawingInstance?.comments[indexPath.row], let commentText = comment.text else { return CGFloat.leastNormalMagnitude }
+        guard let comment = drawingInstance?.comments[indexPath.row] else { return CGFloat.leastNormalMagnitude }
         
         let font = CommentCell.commentFont
         
@@ -121,7 +121,7 @@ class CommentViewController: SLKTextViewController {
         style.minimumLineHeight = font.lineHeight
         style.maximumLineHeight = font.lineHeight
         
-        let attrString = NSAttributedString(string: commentText, attributes: [
+        let attrString = NSAttributedString(string: comment.text , attributes: [
             NSFontAttributeName: font,
             NSParagraphStyleAttributeName: style
             ])

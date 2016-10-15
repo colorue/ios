@@ -18,13 +18,16 @@ struct CommentService {
     
     func get(id: String, callback: @escaping (Comment?) -> ()) {
         myRootRef.child("\(basePath)/\(id)").observeSingleEvent(of: .value, with: { snapshot in
-            guard let json = snapshot.value as? [String: Any] else { return }
-            if let comment = Comment(JSON: json) {
-                try! self.realm.write() {
-                    self.realm.add(comment, update: true)
-                }
-                callback(comment)
-            }
+            if (!snapshot.exists()) { return }
+            
+            guard let value = snapshot.value as? [String : AnyObject] else { return }
+            
+            let text = value["text"] as! String
+            let timeStamp = value["timeStamp"] as! Double
+            
+            UserService().get(userId: value["user"] as! String, callback: { (user: User) -> () in
+                callback(Comment(id: id, user: user, timeStamp: timeStamp, text: text))
+            })
         })
     }
     
@@ -32,9 +35,9 @@ struct CommentService {
         guard let activeUser = API.sharedInstance.activeUser else { return }
         
         let newComment = myRootRef.child("comments").childByAutoId()
-        let comment = Comment(id: newComment.key, text: commentText, user: activeUser)
+        let comment = Comment(id: newComment.key, user: activeUser, text: commentText)
         drawing.add(comment: comment)
-        newComment.setValue(comment.toJSON())
+        newComment.setValue(comment.toAnyObject())
         myRootRef.child("drawings/\(drawing.id)/comments/\(newComment.key)").setValue(true)
         PushService().send(message: "\(activeUser.username) commented on your drawing", to: drawing.user)
     }

@@ -30,12 +30,8 @@ target 'Colorue' do
     pod 'SlackTextViewController'
     
     pod 'SwiftyJSON'
-    pod 'ObjectMapper'
-#    pod 'ObjectMapper+Realm'
-
-    pod 'RealmSwift'
-    
-    pod 'ActiveLabel', :git => 'https://github.com/optonaut/ActiveLabel.swift.git', :branch => 'swift-3'
+#    pod 'ObjectMapper'
+    pod 'ActiveLabel'
 end
 
 post_install do |installer|
