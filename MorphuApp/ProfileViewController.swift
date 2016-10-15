@@ -13,7 +13,7 @@ class ProfileViewController: DrawingListViewController {
     var username: String? {
         didSet {
             guard let username = username else { return }
-            API.sharedInstance.searchUsers(username) { [weak self] user in
+            UserService().search(for: username) { [weak self] user in
                 self?.userInstance = user
             }
         }
@@ -84,7 +84,7 @@ extension ProfileViewController: ProfileCellDelagate {
         if !sender.isSelected {
             sender.isSelected = true
             api.getActiveUser().follow(userInstance)
-            api.follow(userInstance)
+            UserService().follow(userInstance)
             FIRAnalytics.logEvent(withName: "followedUser", parameters: [:])
         } else {
             let actionSelector = UIAlertController(title: "Unfollow \(userInstance.username)?", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
@@ -101,7 +101,7 @@ extension ProfileViewController: ProfileCellDelagate {
 
         sender.isSelected = false
         api.getActiveUser().unfollow(userInstance)
-        api.unfollow(userInstance)
+        UserService().unfollow(userInstance)
         FIRAnalytics.logEvent(withName: "unfollowedUser", parameters: [:])
     }
 }

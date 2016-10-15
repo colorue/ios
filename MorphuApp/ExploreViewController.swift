@@ -66,7 +66,7 @@ extension ExploreViewController: UISearchResultsUpdating {
             return (user.username.lowercased().contains(searchText.lowercased()) || user.fullname.lowercased().contains(searchText.lowercased()))
         })
         
-        api.searchUsers(searchText, callback: addToSearch)
+        UserService().search(for: searchText, callback: addToSearch)
     }
     
     fileprivate func addToSearch(_ user: User) {

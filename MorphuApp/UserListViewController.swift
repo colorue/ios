@@ -53,10 +53,9 @@ class UserListViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
-                            forRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let userCell = cell as? UserCell {
-            userCell.user = userSource()[(indexPath as NSIndexPath).row]
+            userCell.user = userSource()[indexPath.row]
         }
     }
     
@@ -82,7 +81,7 @@ extension UserListViewController: UserCellDelagate {
         userCell.followButton?.isSelected = true
         
         api.getActiveUser().follow(userCell.user!)
-        api.follow(userCell.user!)
+        UserService().follow(userCell.user!)
         FIRAnalytics.logEvent(withName: "followedUser", parameters: [:])
     }
     
@@ -100,7 +99,7 @@ extension UserListViewController: UserCellDelagate {
     fileprivate func unfollow(_ userCell: UserCell) {
         userCell.followButton?.isSelected = false
         api.getActiveUser().unfollow(userCell.user!)
-        api.unfollow(userCell.user!)
+        UserService().unfollow(userCell.user!)
         FIRAnalytics.logEvent(withName: "unfollowedUser", parameters: [:])
     }
 }

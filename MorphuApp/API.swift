@@ -40,34 +40,6 @@ class API {
     fileprivate lazy var contactStore = ContactStore()
     
     var delagate: APIDelagate?
-    
-    func follow(_ user: User) {
-        myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").setValue(true)
-        myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").setValue(true)
-        PushService().send(message: "\(activeUser!.username) is following you", to: user)
-    }
-    
-    func unfollow(_ user: User) {
-        myRootRef.child("users/\(activeUser!.userId)/following/\(user.userId)").removeValue()
-        myRootRef.child("users/\(user.userId)/followers/\(activeUser!.userId)").removeValue()
-    }
-    
-    func searchUsers(_ search: String, callback: @escaping (User)->()) {
-        let lowercase = search.lowercased()
-        let searchStart = lowercase
-        let searchEnd = lowercase + "z"
-        myRootRef.child("userLookup/usernames").removeAllObservers()
-        myRootRef.child("userLookup/usernames").queryOrderedByKey()
-            .queryStarting(atValue: searchStart)
-            .queryEnding(atValue: searchEnd)
-            .queryLimited(toFirst: 16)
-            .observe(.childAdded, with: { snapshot in
-                let userId = snapshot.value as! String
-                UserService().get(userId: userId, callback: { (user: User) -> () in
-                    callback(user)
-                })
-            })
-    }
   
     // MARK: Get Methods
     

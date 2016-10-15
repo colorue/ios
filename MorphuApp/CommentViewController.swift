@@ -41,7 +41,41 @@ class CommentViewController: SLKTextViewController {
         tableView?.backgroundColor = backgroundColor
         tableView?.register(UINib(nibName: R.nib.commentCell.identifier, bundle: nil), forCellReuseIdentifier: R.nib.commentCell.identifier)
         tableView?.allowsSelection = false
+        
+//        registerPrefixes(forAutoCompletion: ["@", "#"])
     }
+//    
+//    // MARK: - Autocomplete
+//    
+//    var searchResult = [String]()
+//    
+//    override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
+//        
+//        let array: NSArray = ["Pete", "Kit", "Dylan"]
+//        
+//        if prefix == "#" && word.characters.count > 0 {
+//            self.searchResult = array.filtered(using: NSPredicate(format: "self BEGINSWITH[c] %@", word)) as! [String]
+//        }
+//        
+//        let show = (searchResult.count > 0)
+//        
+//        showAutoCompletionView(show)
+//    }
+//    
+//    override func heightForAutoCompletionView() -> CGFloat {
+//        let cellHeight:CGFloat = 34
+//        return cellHeight * CGFloat(self.searchResult.count)
+//    }
+//    
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        
+//        if tableView.isEqual(tableView) {
+//            var item = self.searchResult[indexPath.row]
+//            item += " "  // Adding a space helps dismissing the auto-completion view
+//            
+//            acceptAutoCompletion(with: item)
+//        }
+//    }
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -54,9 +88,9 @@ class CommentViewController: SLKTextViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.nib.commentCell)!
-        cell.comment = drawingInstance?.comments[(indexPath as NSIndexPath).row]
+        cell.comment = drawingInstance?.comments[indexPath.row]
         cell.delegate = self
-        cell.buttonTag = (indexPath as NSIndexPath).row
+        cell.buttonTag = indexPath.row
         cell.tint = tintColor
         return cell
     }
@@ -64,8 +98,8 @@ class CommentViewController: SLKTextViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let targetController = segue.destination as? ProfileViewController, let tag = (sender! as AnyObject).tag {
             targetController.tintColor = self.tintColor
-//            targetController.navigationItem.title = drawingInstance!.comments[tag].user.username
-//            targetController.userInstance = drawingInstance!.comments[tag].user
+            targetController.navigationItem.title = drawingInstance!.comments[tag].user.username
+            targetController.userInstance = drawingInstance!.comments[tag].user
         }
     }
 
@@ -73,34 +107,34 @@ class CommentViewController: SLKTextViewController {
         return  UITableViewCellEditingStyle.delete
     }
     
-//    override func tableView(_ tableView: UITableView, editActionsForRowAt editActionsForRowAtIndexPath: IndexPath) -> [UITableViewRowAction] {
-//        if drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row].user.userId == api.getActiveUser().userId {
-//            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: { action, indexPath in
-//                self.setEditing(false, animated: true)
-//                let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.alert)
-//                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-//                    CommentService().delete(comment: (self.drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row])!, from: self.drawingInstance!)
-//                    Analytics.logEvent(.deletedComment)
-//                    self.tableView?.reloadData()
-//                }))
-//                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
-//                self.present(deleteAlert, animated: true, completion: nil)
-//            })
-//            return [deleteAction]
-//        } else {
-//            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Report", handler: { action, indexPath in
-//                let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
-//                deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
-//                    CommentService().report(comment: self.drawingInstance?.comments[(editActionsForRowAtIndexPath as NSIndexPath).row])
-//                    Analytics.logEvent(.reportedComment)
-//                }))
-//                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
-//                self.present(deleteAlert, animated: true, completion: nil)
-//                self.setEditing(false, animated: true)
-//            })
-//            return [reportAction]
-//        }
-//    }
+    override func tableView(_ tableView: UITableView, editActionsForRowAt editActionsForRowAtIndexPath: IndexPath) -> [UITableViewRowAction] {
+        if drawingInstance?.comments[editActionsForRowAtIndexPath.row].user.userId == api.getActiveUser().userId {
+            let deleteAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler: { action, indexPath in
+                self.setEditing(false, animated: true)
+                let deleteAlert = UIAlertController(title: "Delete comment?", message: "This comment will be deleted permanently", preferredStyle: UIAlertControllerStyle.alert)
+                deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+                    CommentService().delete(comment: (self.drawingInstance?.comments[editActionsForRowAtIndexPath.row])!, from: self.drawingInstance!)
+                    Analytics.logEvent(.deletedComment)
+                    self.tableView?.reloadData()
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+                self.present(deleteAlert, animated: true, completion: nil)
+            })
+            return [deleteAction]
+        } else {
+            let reportAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Report", handler: { action, indexPath in
+                let deleteAlert = UIAlertController(title: "Report comment?", message: "Please report any comments that are overtly sexual, promote violence, or are intentionally mean-spirited.", preferredStyle: UIAlertControllerStyle.alert)
+                deleteAlert.addAction(UIAlertAction(title: "Report", style: .destructive, handler: { (action: UIAlertAction!) in
+                    CommentService().report(comment: self.drawingInstance?.comments[editActionsForRowAtIndexPath.row])
+                    Analytics.logEvent(.reportedComment)
+                }))
+                deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+                self.present(deleteAlert, animated: true, completion: nil)
+                self.setEditing(false, animated: true)
+            })
+            return [reportAction]
+        }
+    }
 
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
