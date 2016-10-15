@@ -6,9 +6,6 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import ObjectMapper
-import RealmSwift
-
 class Drawing {
     
     var id: String

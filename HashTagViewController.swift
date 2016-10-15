@@ -8,8 +8,6 @@
 
 import UIKit
 import Firebase
-import RealmSwift
-import Realm
 
 class HashTagViewController: DrawingListViewController {
     
@@ -28,12 +26,7 @@ class HashTagViewController: DrawingListViewController {
             HashTagService().get(tag: text, callback: { hashTag in
                 self.hashTag = hashTag
                 
-                
-                
-                do {
-                    let hashtags = try Realm().objects(HashTag.self).sorted(byProperty: "text", ascending: true)
-                    print(hashtags.count)
-                } catch { return }
+
                 
             })
         }

@@ -8,8 +8,6 @@
 
 import Foundation
 import Firebase
-import RealmSwift
-import Realm
 
 struct DrawingService {
     let myRootRef = FIRDatabase.database().reference()
@@ -20,8 +18,6 @@ struct DrawingService {
     }
     
     var delagate: APIDelagate?
-
-    let realm = try! Realm()
     
     let basePath = "drawings"
 

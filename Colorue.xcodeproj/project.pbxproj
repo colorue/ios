@@ -10,14 +10,12 @@
 		87005D8C1DA1F1C50093F7EA /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87005D8B1DA1F1C50093F7EA /* UserService.swift */; };
 		871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871FBDD31DA089930070BBB3 /* CommentService.swift */; };
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
-		872E998F1DA7399900ACE3A6 /* ObjectManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872E998E1DA7399900ACE3A6 /* ObjectManager.swift */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
 		8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746362B1D56E3D5000BD73E /* R.generated.swift */; };
 		87534F511D985C520047FFCF /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87534F501D985C520047FFCF /* CommentCell.xib */; };
 		875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */; };
 		875B4E0B1D15E443004F4CD2 /* ContactStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0A1D15E443004F4CD2 /* ContactStore.swift */; };
 		875B4E0D1D15E5F8004F4CD2 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E0C1D15E5F8004F4CD2 /* Contact.swift */; };
-		8762ED5C1D9A055100523E6A /* APIObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8762ED5B1D9A055100523E6A /* APIObject.swift */; };
 		8763D2B91CEE21BC00E3D528 /* TabBar.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
@@ -98,7 +96,6 @@
 		871FBDD31DA089930070BBB3 /* CommentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AirshipConfig.plist; path = ../AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		872E998E1DA7399900ACE3A6 /* ObjectManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ObjectManager.swift; sourceTree = "<group>"; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Colorue-da64083b8488.json"; path = "../Colorue-da64083b8488.json"; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8746362B1D56E3D5000BD73E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
@@ -108,7 +105,6 @@
 		875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		875B4E0A1D15E443004F4CD2 /* ContactStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactStore.swift; sourceTree = "<group>"; };
 		875B4E0C1D15E5F8004F4CD2 /* Contact.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
-		8762ED5B1D9A055100523E6A /* APIObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIObject.swift; sourceTree = "<group>"; };
 		8763D2B81CEE21BC00E3D528 /* TabBar.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TabBar.storyboard; sourceTree = "<group>"; };
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -214,14 +210,6 @@
 			name = Comment;
 			sourceTree = "<group>";
 		};
-		872E998D1DA7398500ACE3A6 /* Object Manager */ = {
-			isa = PBXGroup;
-			children = (
-				872E998E1DA7399900ACE3A6 /* ObjectManager.swift */,
-			);
-			name = "Object Manager";
-			sourceTree = "<group>";
-		};
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
@@ -253,14 +241,6 @@
 			name = "Objective-C";
 			sourceTree = "<group>";
 		};
-		8762ED5A1D9A054100523E6A /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				8762ED5B1D9A055100523E6A /* APIObject.swift */,
-			);
-			name = Common;
-			sourceTree = "<group>";
-		};
 		8763D3161CEE241000E3D528 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -284,7 +264,6 @@
 			isa = PBXGroup;
 			children = (
 				871FBDD21DA083040070BBB3 /* Comment */,
-				8762ED5A1D9A054100523E6A /* Common */,
 				878F02B21DA1AD340097DB5C /* Drawing */,
 				878FFDE61D99DB64007B6DD9 /* HashTag */,
 				878F02BC1DA1D1CA0097DB5C /* User */,
@@ -538,7 +517,6 @@
 		8786D6381D56B1C700AD3362 /* SDK */ = {
 			isa = PBXGroup;
 			children = (
-				872E998D1DA7398500ACE3A6 /* Object Manager */,
 				8763D3191CEE243B00E3D528 /* Model */,
 				8763D31A1CEE244500E3D528 /* API */,
 			);
@@ -1021,7 +999,6 @@
 				87AFB24B1D1C43DC0016FC59 /* FriendsViewController.swift in Sources */,
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
-				8762ED5C1D9A055100523E6A /* APIObject.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
@@ -1046,7 +1023,6 @@
 				876614BA1D034F1200DF4590 /* HashTagViewController.swift in Sources */,
 				875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */,
 				871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */,
-				872E998F1DA7399900ACE3A6 /* ObjectManager.swift in Sources */,
 				8763D3091CEE229C00E3D528 /* API.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,

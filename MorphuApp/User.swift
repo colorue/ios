@@ -6,9 +6,7 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
-import ObjectMapper
-
-class User: APIObject {
+class User {
     
     public dynamic var  userId: String = ""
     public dynamic var  username: String = ""
@@ -40,15 +38,7 @@ class User: APIObject {
         self.email = email
         self.profileURL = profileURL
     }
-    
-    override func mapping(map: Map) {
-        userId <- map["userId"]
-        username <- map["username"]
-        email <- map["email"]
-        fullname <- map["fullname"]
-        profileURL <- map["profileURL"]
-    }
-    
+   
     func getFollowing() -> Set<User> {
         return self.following
     }
@@ -109,43 +99,13 @@ class User: APIObject {
     }
 }
 
-
-struct UserTransform: TransformType {
-    
-    public typealias JSON = [String : Any]
-    
-    public typealias Object = User
-    
-    public func transformFromJSON(_ value: Any?) -> Object? {
-        switch value {
-        case let value as [String: AnyObject]:
-            return Object(JSON: value)
-        case .some(let value):
-            let json = ["value": value]
-            return Object(JSON: json)
-        default:
-            return nil
-        }
-    }
-    
-    /**
-     Map to JSON
-     */
-    public func transformToJSON(_ value: Object?) -> JSON? {
-        guard let value = value else { return nil }
-        return value.toJSON()
+extension User: Hashable {
+    var hashValue: Int {
+        return userId.hashValue
     }
 }
 
-
-
-//extension User: Hashable {
-//    var hashValue: Int {
-//        return userId.hashValue
-//    }
-//}
-//
-//// MARK: Equatable
-//func == (lhs: User, rhs: User) -> Bool {
-//    return lhs.userId == rhs.userId
-//}
+// MARK: Equatable
+func == (lhs: User, rhs: User) -> Bool {
+    return lhs.userId == rhs.userId
+}

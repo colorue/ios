@@ -8,12 +8,9 @@
 
 import Foundation
 import Firebase
-import RealmSwift
-import Realm
 
 struct CommentService {
     let myRootRef = FIRDatabase.database().reference()
-    let realm = try! Realm()
     let basePath = "comments"
     
     func get(id: String, callback: @escaping (Comment?) -> ()) {

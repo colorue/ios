@@ -8,8 +8,6 @@
 
 import Foundation
 import Firebase
-import RealmSwift
-import Realm
 
 struct HashTagService {
     
@@ -25,9 +23,9 @@ struct HashTagService {
         myRootRef.child("\(basePath)/\(tag)").observeSingleEvent(of: .value, with: { snapshot in
             
             if let json = snapshot.value as? [String: Any] {
-                if let hashtag = HashTag(JSON: json) {
-                    callback(hashtag)
-                }
+//                if let hashtag = HashTag(JSON: json) {
+//                    callback(hashtag)
+//                }
             }
         })
     }
