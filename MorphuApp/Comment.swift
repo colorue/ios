@@ -61,6 +61,6 @@ class Comment: APIObject {
         id <- map["id"]
         text <- map["text"]
         timeStamp <- map["timeStamp"]
-        user <- map["user"]
+        user <- (map["user"], UserTransform())
     }
 }

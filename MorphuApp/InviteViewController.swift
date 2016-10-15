@@ -17,8 +17,6 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     
     let tintColor = blueColor
     
-    var controller = MFMessageComposeViewController()
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,10 +55,11 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     fileprivate func sendInvite(_ contact: Contact) {
 
         if (MFMessageComposeViewController.canSendText()) {
-            
-            FIRAnalytics.logEvent(withName: "inviteTextOpened", parameters: [:])
+            let controller = MFMessageComposeViewController()
 
-            controller.body = "\(api.getActiveUser().username) invited you to join to Colorue. It's an app for drawing on your iPhone and sharing your creations\nwww.facebook.com/colorueApp/"
+            
+
+            controller.body = "\(api.getActiveUser().username) invited you to join the Colorue beta test\nwww.facebook.com/colorueApp/"
 
             controller.recipients = [contact.getPhoneNumber()!]
             controller.messageComposeDelegate = self
@@ -80,7 +79,12 @@ class InviteViewController: UITableViewController, MFMessageComposeViewControlle
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
-        self.controller = MFMessageComposeViewController()
+        switch result {
+        case .sent:
+            FIRAnalytics.logEvent(withName: "inviteSent", parameters: [:])
+        default:
+            break
+        }
     }
     
     // MARK: APIDelagate Methods

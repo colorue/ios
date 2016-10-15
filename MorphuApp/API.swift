@@ -264,37 +264,6 @@ class API {
         }
     }
     
-//    func downloadImage(_ imageId: String, progressCallback: ((Float) -> ())?, finishedCallback: @escaping (UIImage) -> ()) {
-//        if let image = imageDict[imageId] {
-//            finishedCallback(image)
-//        } else {
-//            let drawingRef = storageRef.child("drawings/\(imageId).png")
-//            
-//            let downloadTask = drawingRef.data(withMaxSize: 1 * 1024 * 1024) { (data, error) -> Void in
-//                if (error != nil) {
-//                    // Uh-oh, an error occurred!
-//                    print(error)
-//                    } else {
-//                    if let imageData = data {
-//                        progressCallback?(1.0)
-//                        let image = UIImage(data: imageData)!
-//                        self.imageDict[imageId] = image
-//                        finishedCallback(image)
-//                    } else {
-//                        print("data error")
-//                    }
-//                }
-//            }
-//        
-//            downloadTask.observe(.progress) { (snapshot) -> Void in
-//                if let progress = snapshot.progress {
-//                    let percentComplete = 100.0 * Float(Double(progress.completedUnitCount) / Double(progress.totalUnitCount))
-//                    progressCallback?(percentComplete)
-//                }
-//            }
-//        }
-//    }
-    
     func setDrawingURL(_ drawingId: String, callback: @escaping ((URL?)->())) {
         let drawingRef = storageRef.child("drawings/\(drawingId).png")
         

@@ -20,8 +20,6 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     let bottomRefreshControl = UIRefreshControl()
     var drawingSource = API.sharedInstance.getWall
     
-    var controller = MFMessageComposeViewController()
-
     var tintColor: UIColor?
     
     var loadMoreDrawings: (()->())?
@@ -258,6 +256,8 @@ extension DrawingListViewController: DrawingCellDelagate {
         Analytics.logEvent(.sendDrawing, parameters: ["feed": true as NSObject])
 
         if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+
             controller.addAttachmentData(UIImagePNGRepresentation(drawing.image)!, typeIdentifier: "public.data", filename: "colorue.png")
             controller.messageComposeDelegate = self
             controller.resignFirstResponder()
@@ -287,6 +287,5 @@ extension DrawingListViewController: MFMessageComposeViewControllerDelegate {
     func messageComposeViewController(_ controller: MFMessageComposeViewController,
                                       didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
-        self.controller = MFMessageComposeViewController()
     }
 }

@@ -15,8 +15,6 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     
     let cornerRadius: CGFloat = 4.0
     
-    var controller = MFMessageComposeViewController()
-    
     var drawing: UIImage?
     var popoverController: DrawingViewController?
     
@@ -92,6 +90,9 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     
     @objc fileprivate func sendDrawing(_ sender: UIButton) {
         if (MFMessageComposeViewController.canSendText()) {
+            
+            let controller = MFMessageComposeViewController()
+
             if let image = drawing {
                 controller.addAttachmentData(UIImagePNGRepresentation(image)!, typeIdentifier: "public.data", filename: "colorue.png")
             }
@@ -121,6 +122,5 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
-        self.controller = MFMessageComposeViewController()
     }
 }

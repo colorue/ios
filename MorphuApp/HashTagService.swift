@@ -14,7 +14,6 @@ import Realm
 struct HashTagService {
     
     fileprivate let myRootRef = FIRDatabase.database().reference()
-    let realm = try! Realm()
     
     let basePath = "hashTag"
     
@@ -27,10 +26,6 @@ struct HashTagService {
             
             if let json = snapshot.value as? [String: Any] {
                 if let hashtag = HashTag(JSON: json) {
-                    try! self.realm.write() {
-                        self.realm.add(hashtag, update: true)
-//                        self.realm.create(HashTag.self)
-                    }
                     callback(hashtag)
                 }
             }

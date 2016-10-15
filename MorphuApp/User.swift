@@ -109,6 +109,36 @@ class User: APIObject {
     }
 }
 
+
+struct UserTransform: TransformType {
+    
+    public typealias JSON = [String : Any]
+    
+    public typealias Object = User
+    
+    public func transformFromJSON(_ value: Any?) -> Object? {
+        switch value {
+        case let value as [String: AnyObject]:
+            return Object(JSON: value)
+        case .some(let value):
+            let json = ["value": value]
+            return Object(JSON: json)
+        default:
+            return nil
+        }
+    }
+    
+    /**
+     Map to JSON
+     */
+    public func transformToJSON(_ value: Object?) -> JSON? {
+        guard let value = value else { return nil }
+        return value.toJSON()
+    }
+}
+
+
+
 //extension User: Hashable {
 //    var hashValue: Int {
 //        return userId.hashValue

@@ -9,7 +9,7 @@
 import ObjectMapper
 
 class HashTag: APIObject {
-    
+        
     public dynamic var text: String?
     var drawings = [Drawing]()
     

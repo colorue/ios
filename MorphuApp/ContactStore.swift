@@ -10,7 +10,7 @@ import Foundation
 import Contacts
 
 
-class ContactStore {
+struct ContactStore {
     
     fileprivate var contacts = Set<Contact>()
     
