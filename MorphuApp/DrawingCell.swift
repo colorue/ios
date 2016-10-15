@@ -76,10 +76,10 @@ class DrawingCell: UITableViewCell {
                 })
             }
             
-            profileImage?.kf.setImage(with: URL(string: drawing.user.profileURL))
+            profileImage?.kf.setImage(with: URL(string: drawing.user.profileURL), placeholder: nil, options: [.transition(.fade(0.2))], completionHandler: nil)
             creator?.text = drawing.user.username
             timeCreated?.text = drawing.timeStamp.timeSince
-            likeButton?.isSelected = drawing.liked(API.sharedInstance.getActiveUser()) ?? false
+            likeButton?.isSelected = drawing.liked(API.sharedInstance.getActiveUser())
             
             if drawing.comments.count == 1 {
                 commentCount?.text = "1 comment"

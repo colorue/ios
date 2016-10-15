@@ -8,6 +8,7 @@
 
 import UIKit
 import ActiveLabel
+import Kingfisher
 
 class CommentCell: UITableViewCell {
     
@@ -22,12 +23,12 @@ class CommentCell: UITableViewCell {
     var comment: Comment? {
         didSet {
             guard let comment = comment else { return }
-            
-            // TODO: - add user back to comments
-//            username?.text = comment.user.username
-//            profileImage?.image = comment.user.profileImage
+        
+            username?.text = comment.user.username
             timeStamp?.text = comment.timeStamp.timeSince
             commentText?.text = comment.text
+            
+            profileImage?.kf.setImage(with: URL(string: comment.user.profileURL), placeholder: nil, options: [.transition(.fade(0.2))], completionHandler: nil)
         }
     }
     

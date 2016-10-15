@@ -98,7 +98,7 @@ struct DrawingService {
     }
     
     func makeProfilePic(_ drawing: Drawing) {
-        myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.id)
+        myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.imageUrl?.absoluteString)
         activeUser.profileURL = drawing.imageUrl?.absoluteString ?? ""
         delagate?.refresh()
     }

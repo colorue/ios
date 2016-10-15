@@ -33,6 +33,10 @@ class FriendsViewController: UserListViewController {
             controller.messageComposeDelegate = self
             resignFirstResponder()
             present(controller, animated: true, completion: nil)
+        } else {
+            let messagingAlert = UIAlertController(title: "Messaging not avaliable", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+            messagingAlert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+            present(messagingAlert, animated: true, completion: nil)
         }
     }
 }
