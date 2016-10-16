@@ -8,12 +8,33 @@
 
 class HashTag {
         
-    public dynamic var text: String?
-    var drawings = [Drawing]()
+    let text: String
+    let timeStamp: Double
+    private var drawingSet = Set<Drawing>()
     
+    var drawings: [Drawing] {
+        return drawingSet.sorted(by: { $0.timeStamp > $1.timeStamp })
+    }
     
-    class func primaryKey() -> String? {
-        return "text"
+    var displayText: String {
+        return "#\(text)"
+    }
+    
+    init(text: String = "", timeStamp: Double = 0 - Date().timeIntervalSince1970) {
+        self.text = text
+        self.timeStamp = timeStamp
+    }
+    
+    func add(drawing: Drawing) {
+        drawingSet.insert(drawing)
+    }
+    
+    func remove(drawing: Drawing) {
+        drawingSet.remove(drawing)
+    }
+    
+    func toAnyObject() -> NSDictionary {
+        return ["text": self.text,
+                "timeStamp": self.timeStamp]
     }
 }
-

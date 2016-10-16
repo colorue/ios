@@ -12,8 +12,6 @@ class Comment {
     let text: String
     var id: String
     
-    let api = API.sharedInstance
-    
     init(id: String = "", user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, text: String = "") {
         self.id = id
         self.user = user

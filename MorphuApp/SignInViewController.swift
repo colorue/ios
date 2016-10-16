@@ -30,7 +30,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let color = orangeColor
+        let color = Theme.orange
         self.navigationController!.navigationBar.tintColor = color
         doneButton.tintColor = color
         emailInput.tintColor = color

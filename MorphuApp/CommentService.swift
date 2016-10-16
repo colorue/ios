@@ -15,9 +15,8 @@ struct CommentService {
     
     func get(id: String, callback: @escaping (Comment?) -> ()) {
         myRootRef.child("\(basePath)/\(id)").observeSingleEvent(of: .value, with: { snapshot in
-            if (!snapshot.exists()) { return }
             
-            guard let value = snapshot.value as? [String : AnyObject] else { return }
+            guard let value = snapshot.value as? [String : AnyObject] , snapshot.exists() else { return }
             
             let text = value["text"] as! String
             let timeStamp = value["timeStamp"] as! Double
@@ -30,6 +29,8 @@ struct CommentService {
     
     func add(commentText: String, to drawing: Drawing) {
         guard let activeUser = API.sharedInstance.activeUser else { return }
+        
+        parse(commentText, drawing: drawing)
         
         let newComment = myRootRef.child("comments").childByAutoId()
         let comment = Comment(id: newComment.key, user: activeUser, text: commentText)
@@ -51,5 +52,24 @@ struct CommentService {
         guard let comment = comment, let activeUser = API.sharedInstance.activeUser else { return }
 
         myRootRef.child("reported/comments/\(comment.id)/\(activeUser.userId)").setValue(0 - Date().timeIntervalSince1970)
+    }
+    
+    private func parse(_ comment: String, drawing: Drawing) {
+        let words = comment.components(separatedBy: " ")
+        
+        for word in words {
+            if word.hasPrefix("#") {
+                var hashTag = word
+                hashTag.remove(at: word.startIndex)
+                HashTagService().add(hashtag: HashTag(text: hashTag), to: drawing)
+            } else if word.hasPrefix("@") {
+                var username = word
+                username.remove(at: word.startIndex)
+                UserService().search(for: username, callback: { user in
+                    let message = "\(API.sharedInstance.getActiveUser().username) mentioned you in a comment"
+                    PushService().send(message: message, to: user)
+                })
+            }
+        }
     }
 }

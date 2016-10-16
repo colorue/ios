@@ -30,6 +30,7 @@ class API {
     fileprivate var facebookFriends = Set<User>()
     fileprivate var contacts = Set<User>()
     fileprivate var popularUsers = Set<User>()
+    var hashTags = [HashTag]()
 
     public var activeUser: User?
     
@@ -79,6 +80,7 @@ class API {
                 self.loadWall()
                 self.setDeleteWall()
                 self.loadFacebookFriends()
+                self.loadHashTags()
                 self.delagate?.refresh()
             })
         })
@@ -153,6 +155,16 @@ class API {
                 }
             })
         })
+    }
+    
+    func loadHashTags() {
+        myRootRef.child("hashTags").queryOrderedByValue().queryLimited(toFirst: 8)
+            .observe(.childAdded, with: { snapshot in
+                guard snapshot.exists() else { return }
+                HashTagService().get(tag:  snapshot.key, callback: { hashTag in
+                    self.hashTags.append(hashTag)
+                })
+            })
     }
     
     func loadFacebookFriends() {

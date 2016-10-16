@@ -69,7 +69,7 @@ extension ProfileViewController {
         if (indexPath as NSIndexPath).section == 0 {
             let profileCell = cell as! ProfileCell
             profileCell.user = userInstance
-            profileCell.color = tintColor ?? redColor
+            profileCell.color = tintColor ?? Theme.red
             profileCell.followButton?.addTarget(self, action: #selector(ProfileViewController.followAction(_:)), for: .touchUpInside)
         } else {
             super.tableView(tableView, willDisplay: cell, forRowAt: indexPath)

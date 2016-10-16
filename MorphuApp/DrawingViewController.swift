@@ -52,13 +52,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         let logo = R.image.logoInactive()
         let imageView = UIImageView(image:logo)
-        imageView.tintColor = blackColor
+        imageView.tintColor = Theme.black
         self.navigationItem.titleView = imageView
 
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
         
         let chevron = R.image.chevronDown()
-        backButton.tintColor = blackColor
+        backButton.tintColor = Theme.black
         backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
         backButton.setImage(chevron, for: UIControlState())
         backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), for: UIControlEvents.touchUpInside)

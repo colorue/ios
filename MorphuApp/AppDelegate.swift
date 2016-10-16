@@ -75,9 +75,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         if let profileView = targetController as? ProfileViewController {
             let nav = profileView.navigationController as! NavigationController
-            nav.setColors(purpleColor)
+            nav.setColors(Theme.purple)
             if profileView.userInstance == nil {
-                profileView.tintColor = purpleColor
+                profileView.tintColor = Theme.purple
                 profileView.navigationItem.title = api.getActiveUser().username
                 profileView.userInstance = api.getActiveUser()
                 profileView.addLogoutButton()
@@ -87,8 +87,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
         } else if let friendsList = targetController as? FriendsViewController {
             let nav = friendsList.navigationController as! NavigationController
-            nav.setColors(blueColor)
-            tabBarController.tabBar.tintColor = blueColor
+            nav.setColors(Theme.blue)
+            tabBarController.tabBar.tintColor = Theme.blue
             
             
             
@@ -101,14 +101,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         } else if let search = targetController as? ExploreViewController {
             let nav = search.navigationController as! NavigationController
-            nav.setColors(orangeColor)
-            search.tintColor = orangeColor
+            nav.setColors(Theme.orange)
+            search.tintColor = Theme.orange
             if previousController == viewController {
                 search.scrollToTop()
             }
         } else if let wall = targetController as? WallViewController {
             let nav = wall.navigationController as! NavigationController
-            nav.setColors(redColor)
+            nav.setColors(Theme.red)
             if previousController == viewController {
                 wall.scrollToTop()
             }

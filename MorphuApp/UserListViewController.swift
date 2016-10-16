@@ -15,7 +15,7 @@ class UserListViewController: UITableViewController {
     
     let api = API.sharedInstance
     
-    var tintColor: UIColor? = blueColor
+    var tintColor: UIColor? = Theme.blue
     
     var controller: UIViewController?
 
@@ -27,7 +27,7 @@ class UserListViewController: UITableViewController {
         }
         
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = backgroundColor
+        tableView.backgroundColor = Theme.background
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -35,7 +35,7 @@ extension ExploreViewController: UISearchResultsUpdating {
         self.searchController = UISearchController(searchResultsController: userListController)
         self.searchController.searchResultsUpdater = self
         self.searchController.searchBar.tintColor = self.tintColor
-        self.searchController.searchBar.barTintColor = whiteColor
+        self.searchController.searchBar.barTintColor = Theme.white
         self.searchController.searchBar.searchBarStyle = .prominent
         self.searchController.searchBar.placeholder = "Search"
         self.searchController.searchResultsUpdater = self

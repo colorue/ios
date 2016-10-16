@@ -13,7 +13,7 @@ class NavigationController: UINavigationController, UINavigationBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         if let font = R.font.playtimeWithHotToddies(size: 22) {
-            navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: blackColor]
+            navigationBar.titleTextAttributes = [NSFontAttributeName : font, NSForegroundColorAttributeName: Theme.black]
         }
         navigationBar.barTintColor = UIColor.white
         navigationBar.isTranslucent = false

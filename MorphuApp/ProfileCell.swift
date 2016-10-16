@@ -44,14 +44,14 @@ class ProfileCell: UITableViewCell {
         }
     }
     
-    var color: UIColor = redColor {
+    var color: UIColor = Theme.red {
         didSet {
             followButton?.tintColor = color
-            if color == redColor {
+            if color == Theme.red {
                 followButton?.setImage(UIImage(named: "Followed Red"), for: .selected)
-            } else if color == orangeColor {
+            } else if color == Theme.orange {
                 followButton?.setImage(UIImage(named: "Followed Orange"), for: .selected)
-            } else if color == blueColor {
+            } else if color == Theme.blue {
                 followButton?.setImage(UIImage(named: "Followed Blue"), for: .selected)
             } else {
                 followButton?.setImage(UIImage(named: "Followed Purple"), for: .selected)

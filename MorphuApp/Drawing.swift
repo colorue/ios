@@ -79,3 +79,14 @@ class Drawing {
                 "url": self.imageUrl!.absoluteString]
     }
 }
+
+extension Drawing: Hashable {
+    var hashValue: Int {
+        return id.hashValue
+    }
+}
+
+// MARK: Equatable
+func == (lhs: Drawing, rhs: Drawing) -> Bool {
+    return lhs.id == rhs.id
+}

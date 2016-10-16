@@ -28,7 +28,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let color = blueColor
+        let color = Theme.blue
         self.navigationController!.navigationBar.tintColor = color
         nextButton.tintColor = color
         usernameInput.tintColor = color
@@ -56,7 +56,7 @@ class ChooseUsernameViewController: UIViewController, UITextFieldDelegate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController?.isNavigationBarHidden = false
-        self.navigationController!.navigationBar.tintColor = blueColor
+        self.navigationController!.navigationBar.tintColor = Theme.blue
         
         usernameInput.becomeFirstResponder()
         FIRAnalytics.logEvent(withName: "ChooseUsernameViewController", parameters: [:])

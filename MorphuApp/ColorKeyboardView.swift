@@ -83,7 +83,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         let selectorWidth = frame.width/10
         
         for tag in 0...9 {
-            addSubview(colorButton(withColor: colors[tag], tag: tag, selectorWidth: selectorWidth))
+            addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
         }
         
         currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: selectorWidth)
@@ -180,7 +180,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-            currentColorView.backgroundColor = colors[Int(arc4random_uniform(8) + 1)]
+            currentColorView.backgroundColor = Theme.colors[Int(arc4random_uniform(8) + 1)]
             currentAlpha = .high
         }
         
@@ -247,13 +247,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
-        currentColorView.backgroundColor = colors[sender.view!.tag]
+        currentColorView.backgroundColor = Theme.colors[sender.view!.tag]
         updateButtonColor()
     }
     
     @objc fileprivate func buttonTapped(_ sender: UIButton) {
         let percentMix: CGFloat = 0.1
-        currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: colors[sender.tag], percentMix: percentMix)
+        currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix)
 
         updateButtonColor()
     }

@@ -23,11 +23,11 @@ class WelcomeViewController: UIViewController, APIDelagate {
         
         signUpButton.layer.cornerRadius = 4
         signUpButton.layer.borderWidth = 1
-        signUpButton.layer.borderColor = blackColor.cgColor
+        signUpButton.layer.borderColor = Theme.black.cgColor
         
         logginButton.layer.cornerRadius = 4
         logginButton.layer.borderWidth = 1
-        logginButton.layer.borderColor = blackColor.cgColor
+        logginButton.layer.borderColor = Theme.black.cgColor
         
         API.sharedInstance.loadPopularUsers()
     }

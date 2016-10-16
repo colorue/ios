@@ -13,20 +13,32 @@ struct HashTagService {
     
     fileprivate let myRootRef = FIRDatabase.database().reference()
     
-    let basePath = "hashTag"
+    let basePath = "hashTags"
     
     func add(hashtag: HashTag, to drawing: Drawing) {
-        myRootRef.child("\(basePath)/\(hashtag.text)/\(drawing.id)").setValue(true)
+        let ref = myRootRef.child("\(basePath)/\(hashtag.text)")
+        ref.setValue(hashtag.toAnyObject())
+        ref.child("drawings/\(drawing.id)").setValue(true)
     }
     
-    func get(tag: String, callback: @escaping (HashTag?) -> ()) {
-        myRootRef.child("\(basePath)/\(tag)").observeSingleEvent(of: .value, with: { snapshot in
+    func get(tag: String, callback: @escaping (HashTag) -> ()) {
+        let ref = myRootRef.child("\(basePath)/\(tag)")
+
+        ref.observeSingleEvent(of: .value, with: { snapshot in
             
-            if let json = snapshot.value as? [String: Any] {
-//                if let hashtag = HashTag(JSON: json) {
-//                    callback(hashtag)
-//                }
-            }
+            guard let value = snapshot.value as? [String : AnyObject] , snapshot.exists(), let text = value["text"] as? String else { return }
+            
+            
+            
+            let hashTag = HashTag(text: text)
+            
+            ref.child("drawings").observe(.childAdded, with: {snapshot in
+                DrawingService().get(id: snapshot.key, callback: { (drawing, _) in
+                    hashTag.add(drawing: drawing)
+                })
+            })
+            
+            callback(hashTag)
         })
     }
 }

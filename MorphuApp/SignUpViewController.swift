@@ -54,7 +54,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let color = redColor
+        let color = Theme.red
         self.navigationController!.navigationBar.tintColor = color
         nextButton.tintColor = color
         emailInput.tintColor = color
@@ -101,7 +101,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController!.navigationBar.tintColor = redColor
+        self.navigationController!.navigationBar.tintColor = Theme.red
         emailInput.becomeFirstResponder()
         FIRAnalytics.logEvent(withName: "SignUpViewController", parameters: [:])
     }

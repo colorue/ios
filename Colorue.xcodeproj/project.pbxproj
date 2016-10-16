@@ -11,6 +11,7 @@
 		871FBDD41DA089930070BBB3 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 871FBDD31DA089930070BBB3 /* CommentService.swift */; };
 		871FFCCF1D2564E80098B428 /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 871FFCCE1D2564E80098B428 /* AirshipConfig.plist */; };
 		872FDF121D22F82900FD277A /* Colorue-da64083b8488.json in Resources */ = {isa = PBXBuildFile; fileRef = 872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */; };
+		8731931B1DB402FB007E6AD2 /* HashTagCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8731931A1DB402FB007E6AD2 /* HashTagCell.swift */; };
 		8746362C1D56E3D5000BD73E /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8746362B1D56E3D5000BD73E /* R.generated.swift */; };
 		87534F511D985C520047FFCF /* CommentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 87534F501D985C520047FFCF /* CommentCell.xib */; };
 		875B4E091D15ACFD004F4CD2 /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B4E081D15ACFD004F4CD2 /* AuthAPI.swift */; };
@@ -97,6 +98,7 @@
 		871FFCCE1D2564E80098B428 /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AirshipConfig.plist; path = ../AirshipConfig.plist; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		872FDF111D22F82900FD277A /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = "Colorue-da64083b8488.json"; path = "../Colorue-da64083b8488.json"; sourceTree = "<group>"; };
+		8731931A1DB402FB007E6AD2 /* HashTagCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HashTagCell.swift; sourceTree = "<group>"; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8746362B1D56E3D5000BD73E /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -208,6 +210,14 @@
 				871FBDD31DA089930070BBB3 /* CommentService.swift */,
 			);
 			name = Comment;
+			sourceTree = "<group>";
+		};
+		873193191DB402E7007E6AD2 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				8731931A1DB402FB007E6AD2 /* HashTagCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		873AFA041CED7697006FD34A = {
@@ -322,6 +332,7 @@
 		8786D61D1D56AE6F00AD3362 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				873193191DB402E7007E6AD2 /* Cell */,
 				8763D2C01CEE226700E3D528 /* WallViewController.swift */,
 			);
 			name = Feed;
@@ -1000,6 +1011,7 @@
 				8763D3011CEE229C00E3D528 /* DrawingCell.swift in Sources */,
 				8763D3081CEE229C00E3D528 /* User.swift in Sources */,
 				8763D2DF1CEE226700E3D528 /* LoadingViewController.swift in Sources */,
+				8731931B1DB402FB007E6AD2 /* HashTagCell.swift in Sources */,
 				8763D3001CEE229C00E3D528 /* UserCell.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,

@@ -37,7 +37,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let color = purpleColor
+        let color = Theme.purple
         self.navigationController!.navigationBar.tintColor = color
         joinButton.tintColor = color
         nameInput.tintColor = color
@@ -68,7 +68,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController!.navigationBar.tintColor = purpleColor
+        self.navigationController!.navigationBar.tintColor = Theme.purple
         nameInput.becomeFirstResponder()
     }
     

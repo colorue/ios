@@ -31,7 +31,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 586.0
         tableView.tableFooterView = UIView()
-        tableView.backgroundColor = backgroundColor
+        tableView.backgroundColor = Theme.background
         
         self.navigationController?.navigationBar.tintColor = self.tintColor
         
@@ -79,25 +79,26 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell,
                             forRowAt indexPath: IndexPath) {
-        let drawingCell = cell as! DrawingCell
-        let drawing: Drawing
-        let tag: Int
+        if let drawingCell = cell as? DrawingCell {
+            let drawing: Drawing
+            let tag: Int
 
-        if (indexPath as NSIndexPath).section == 0 {
-            drawing = api.getDrawingOfTheDay()[0]
-            tag = -1
-        } else {
-            drawing = drawingSource()[(indexPath as NSIndexPath).row]
-            tag = (indexPath as NSIndexPath).row
-        }
-        
-        drawingCell.drawing = drawing
-        drawingCell.color = tintColor
-        drawingCell.delagate = self
-        drawingCell.cellTag = tag
-        
-        if ((indexPath as NSIndexPath).row + 1 >= drawingSource().count) {
-            self.loadMoreDrawings?()
+            if indexPath.section == 0 {
+                drawing = api.getDrawingOfTheDay()[0]
+                tag = -1
+            } else {
+                drawing = drawingSource()[indexPath.row]
+                tag = (indexPath as NSIndexPath).row
+            }
+            
+            drawingCell.drawing = drawing
+            drawingCell.color = tintColor
+            drawingCell.delagate = self
+            drawingCell.cellTag = tag
+            
+            if ((indexPath as NSIndexPath).row + 1 >= drawingSource().count) {
+                self.loadMoreDrawings?()
+            }
         }
     }
     

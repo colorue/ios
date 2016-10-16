@@ -38,7 +38,7 @@ class CommentViewController: SLKTextViewController {
         
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.tableFooterView = UIView()
-        tableView?.backgroundColor = backgroundColor
+        tableView?.backgroundColor = Theme.background
         tableView?.register(UINib(nibName: R.nib.commentCell.identifier, bundle: nil), forCellReuseIdentifier: R.nib.commentCell.identifier)
         tableView?.allowsSelection = false
         
@@ -179,6 +179,7 @@ class CommentViewController: SLKTextViewController {
         textInputbar.textView.text = ""
         Analytics.logEvent(.wroteComment)
         tableView?.reloadData()
+        super.didPressRightButton(sender)
     }
 }
 
