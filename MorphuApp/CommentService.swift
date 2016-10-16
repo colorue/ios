@@ -54,6 +54,8 @@ struct CommentService {
         myRootRef.child("reported/comments/\(comment.id)/\(activeUser.userId)").setValue(0 - Date().timeIntervalSince1970)
     }
     
+    // MARK: - Helper functions
+    
     private func parse(_ comment: String, drawing: Drawing) {
         let words = comment.components(separatedBy: " ")
         

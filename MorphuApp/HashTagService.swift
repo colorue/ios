@@ -17,7 +17,8 @@ struct HashTagService {
     
     func add(hashtag: HashTag, to drawing: Drawing) {
         let ref = myRootRef.child("\(basePath)/\(hashtag.text)")
-        ref.setValue(hashtag.toAnyObject())
+        ref.child("text").setValue(hashtag.text)
+        ref.child("timeStamp").setValue(hashtag.timeStamp)
         ref.child("drawings/\(drawing.id)").setValue(true)
     }
     
@@ -27,8 +28,6 @@ struct HashTagService {
         ref.observeSingleEvent(of: .value, with: { snapshot in
             
             guard let value = snapshot.value as? [String : AnyObject] , snapshot.exists(), let text = value["text"] as? String else { return }
-            
-            
             
             let hashTag = HashTag(text: text)
             
