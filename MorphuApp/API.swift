@@ -26,7 +26,9 @@ class API {
     let storageRef = FIRStorage.storage().reference()
     
     fileprivate var drawingOfTheDay = [Drawing]()
-    fileprivate var wall = [Drawing]()
+    public var wall = [Drawing]()
+    public var explore = [Drawing]()
+
     fileprivate var facebookFriends = Set<User>()
     fileprivate var contacts = Set<User>()
     fileprivate var popularUsers = Set<User>()
@@ -37,7 +39,7 @@ class API {
     fileprivate var oldestTimeLoaded: Double = -99999999999999
     fileprivate var oldestExploreLoaded: Double = -99999999999999
     fileprivate var newestTimeLoaded: Double = 0
-    
+
     fileprivate lazy var contactStore = ContactStore()
     
     var delagate: APIDelagate?
@@ -50,10 +52,6 @@ class API {
     
     func getDrawingOfTheDay() -> [Drawing] {
         return self.drawingOfTheDay
-    }
-    
-    func getWall() -> [Drawing] {
-        return self.wall
     }
     
     func getSuggustedUsers() -> [User] {
@@ -79,6 +77,8 @@ class API {
                 self.loadDrawingOfTheDay()
                 self.loadWall()
                 self.setDeleteWall()
+                self.loadExplore()
+                self.setDeleteExplore()
                 self.loadFacebookFriends()
                 self.loadHashTags()
                 self.delagate?.refresh()
@@ -143,6 +143,31 @@ class API {
                 }
             })
         }
+    
+    func loadExplore() {
+        myRootRef.child("drawings").queryOrdered(byChild: "timeStamp").queryLimited(toFirst: 8)
+            .queryStarting(atValue: self.oldestExploreLoaded).observe(.childAdded, with: { snapshot in
+                let drawingId = snapshot.key
+                DrawingService().get(id: drawingId, callback: { (drawing: Drawing, new: Bool) -> () in
+                    self.oldestExploreLoaded = drawing.timeStamp + 1
+                    self.explore.append(drawing)
+                })
+            })
+    }
+    
+    private func setDeleteExplore() {
+        myRootRef.child("drawings").observe(.childRemoved, with: { snapshot in
+            let drawingId = snapshot.key
+            var i = 0
+            for drawing in self.explore {
+                if drawing.id == drawingId {
+                    self.explore.remove(at: i)
+                    return
+                }
+                i += 1
+            }
+        })
+    }
     
     func loadDrawingOfTheDay() {
         myRootRef.child("drawingOfTheDay").observe(.value, with: { snapshot in

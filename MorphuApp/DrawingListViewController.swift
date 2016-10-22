@@ -18,7 +18,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     // MARK: Properties
     let api = API.sharedInstance
     let bottomRefreshControl = UIRefreshControl()
-    var drawingSource = API.sharedInstance.getWall
+    var drawingSource = { return API.sharedInstance.wall }
     
     var tintColor: UIColor?
     

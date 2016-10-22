@@ -11,12 +11,6 @@ import CCBottomRefreshControl
 import AirshipKit
 
 class WallViewController: DrawingListViewController {
-    
-//    enum Section: Int {
-//        case hashTags = 0
-//        case drawingOfTheDay = 1
-//        case drawings = 2
-//    }
 
     let prefs = UserDefaults.standard
 
@@ -65,11 +59,14 @@ class WallViewController: DrawingListViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if indexPath.section == 0  {
-            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.hashTagsCell, for: indexPath)!
-            cell.hashTags = API.sharedInstance.hashTags
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.drawingCell, for: indexPath)!
+            cell.drawing = api.getDrawingOfTheDay().first
+            cell.drawingOfTheDayLabel?.isHidden = false
             return cell
         } else {
-            return tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.drawingCell, for: indexPath)!
+            let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.drawingCell, for: indexPath)!
+            cell.drawingOfTheDayLabel?.isHidden = true
+            return cell
         }
     }
     

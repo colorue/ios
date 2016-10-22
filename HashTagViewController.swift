@@ -15,8 +15,8 @@ class HashTagViewController: DrawingListViewController {
     var hashTag: HashTag? {
         didSet {
             guard let hashTag = hashTag else { return }
-            drawingSource = { return [Drawing]() }
-            navigationItem.title = "#\(hashTag.text ?? "")"
+            drawingSource = { return hashTag.drawings }
+            navigationItem.title = "#\(hashTag.text)"
         }
     }
     

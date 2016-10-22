@@ -17,10 +17,14 @@ class ExploreViewController: DrawingListViewController {
     var userSearchSource = API.sharedInstance.getActiveUser().getFollowers().intersection(API.sharedInstance.getActiveUser().getFollowing())
     var filteredUsers = [User]()
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setUpSearchController()
+        
+        drawingSource = { return self.api.explore }
+        
+        loadMoreDrawings = self.api.loadExplore
     }
 }
 
@@ -37,7 +41,7 @@ extension ExploreViewController: UISearchResultsUpdating {
         self.searchController.searchBar.tintColor = self.tintColor
         self.searchController.searchBar.barTintColor = Theme.white
         self.searchController.searchBar.searchBarStyle = .prominent
-        self.searchController.searchBar.placeholder = "Search"
+        self.searchController.searchBar.placeholder = "Search users..."
         self.searchController.searchResultsUpdater = self
         self.searchController.hidesNavigationBarDuringPresentation = false
         self.searchController.dimsBackgroundDuringPresentation = false
