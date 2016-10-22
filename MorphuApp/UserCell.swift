@@ -9,13 +9,13 @@
 import UIKit
 import Kingfisher
 
-protocol UserCellDelagate {
+protocol UserCellDelegate {
     func followAction(_ userCell: UserCell)
     func unfollowAction(_ userCell: UserCell)
 }
 
 class UserCell: UITableViewCell {
-    var delagate: UserCellDelagate?
+    var delegate: UserCellDelegate?
     var user: User? {
         didSet {
             guard let user = user else { return }
@@ -47,9 +47,9 @@ class UserCell: UITableViewCell {
     @IBAction func followAction(_ sender: UIButton) {
 
         if !(sender.isSelected) {
-            delagate?.followAction(self)
+            delegate?.followAction(self)
         } else {
-            delagate?.unfollowAction(self)
+            delegate?.unfollowAction(self)
         }
     }
 }

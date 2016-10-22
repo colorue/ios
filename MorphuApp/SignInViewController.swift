@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
+class SignInViewController: UIViewController, UITextFieldDelegate, APIDelegate {
     
     
     @IBOutlet weak var drawing: UIImageView!
@@ -117,7 +117,7 @@ class SignInViewController: UIViewController, UITextFieldDelegate, APIDelagate {
         AuthAPI.sharedInstance.checkLoggedIn({ loggedIn in
             if loggedIn {
                 FIRAnalytics.logEvent(withName: "signedInWithEmail", parameters: [:])
-                API.sharedInstance.delagate = self
+                API.sharedInstance.delegate = self
                 API.sharedInstance.loadData()
                 self.prefs.setValue(self.emailInput.text, forKey: "email")
                 self.prefs.setValue(self.passwordInput.text, forKey: "password")

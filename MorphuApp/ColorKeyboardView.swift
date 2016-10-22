@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-protocol ColorKeyboardDelagate {
+protocol ColorKeyboardDelegate {
     func undo()
     func trash()
     func switchAlphaHowTo()
@@ -67,7 +67,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         case low = 0.3
     }
 
-    var delagate: ColorKeyboardDelagate?
+    var delegate: ColorKeyboardDelegate?
     
     override init (frame: CGRect) {
         super.init(frame : frame)
@@ -203,11 +203,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc fileprivate func undo(_ sender: UIButton) {
-        delagate?.undo()
+        delegate?.undo()
     }
     
     @objc fileprivate func trash(_ sender: UIButton) {
-        delagate?.trash()
+        delegate?.trash()
         state = .none
     }
     
@@ -224,7 +224,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         if (!prefs.bool(forKey: "bullsEyeHowTo")) {
             let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
             dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            delagate?.presentViewController(dropperHowTo, animated: true, completion: nil)
+            delegate?.presentViewController(dropperHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "bullsEyeHowTo")
         }
         state = state == .bullsEye ? .none : .bullsEye
@@ -243,7 +243,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         case .low:
             currentAlpha = .high
         }
-        delagate?.switchAlphaHowTo()
+        delegate?.switchAlphaHowTo()
     }
     
     @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {

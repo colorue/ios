@@ -17,7 +17,7 @@ struct DrawingService {
         return API.sharedInstance.getActiveUser()
     }
     
-    var delagate: APIDelagate?
+    var delegate: APIDelegate?
     
     let basePath = "drawings"
 
@@ -30,7 +30,8 @@ struct DrawingService {
 
             UserService().get(userId: value["artist"] as! String, callback: { (artist: User) -> () in
 
-                let drawing = Drawing(user: artist, timeStamp: value["timeStamp"] as! Double, id: id)
+                
+                let drawing = Drawing(user: artist, timeStamp: value["timeStamp"] as! Double, id: id, caption: value["caption"] as? String ?? "")
 
                 if let urlString = value["url"] as?  String {
                     drawing.imageUrl = URL(string: urlString)
@@ -92,7 +93,7 @@ struct DrawingService {
             if (error != nil) {
                 print("File deletion error")
             } else {
-                self.delagate?.refresh()
+                self.delegate?.refresh()
             }
         }
     }
@@ -100,7 +101,7 @@ struct DrawingService {
     func makeProfilePic(_ drawing: Drawing) {
         myRootRef.child("users/\(activeUser.userId)/photoURL").setValue(drawing.imageUrl?.absoluteString)
         activeUser.profileURL = drawing.imageUrl?.absoluteString ?? ""
-        delagate?.refresh()
+        delegate?.refresh()
     }
     
     func like(_ drawing: Drawing) {

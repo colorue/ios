@@ -78,14 +78,14 @@
                                 <state key="normal" title="Button" image="Upload"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="yrw-l3-pbQ"/>
                                         <exclude reference="hc4-FA-4uU"/>
+                                        <exclude reference="yrw-l3-pbQ"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=compact">
                                     <mask key="constraints">
-                                        <include reference="yrw-l3-pbQ"/>
                                         <include reference="hc4-FA-4uU"/>
+                                        <include reference="yrw-l3-pbQ"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -167,6 +167,11 @@
                         <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwJ-PH-SBJ" customClass="ActiveLabel" customModule="ActiveLabel">
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="Wph-9y-HG2" firstAttribute="leading" secondItem="cGa-Ce-aV8" secondAttribute="leadingMargin" constant="8" id="2XN-EI-44l">
@@ -175,6 +180,7 @@
                     <constraint firstAttribute="trailingMargin" secondItem="US7-XJ-DUL" secondAttribute="trailing" constant="8" id="80y-Jz-9Ic"/>
                     <constraint firstItem="xBU-Cm-U1t" firstAttribute="centerX" secondItem="cGa-Ce-aV8" secondAttribute="centerX" id="8Tr-PA-Vkz"/>
                     <constraint firstItem="US7-XJ-DUL" firstAttribute="top" secondItem="cGa-Ce-aV8" secondAttribute="topMargin" constant="8" id="8nc-Ar-LNs"/>
+                    <constraint firstItem="t7j-nt-C1K" firstAttribute="top" secondItem="mwJ-PH-SBJ" secondAttribute="bottom" constant="9" id="AKQ-vC-ICk"/>
                     <constraint firstItem="VHJ-Cu-w20" firstAttribute="leading" secondItem="uD7-ZH-Oyl" secondAttribute="leading" id="BhK-st-P5b"/>
                     <constraint firstItem="c7k-m0-5sn" firstAttribute="leading" secondItem="cGa-Ce-aV8" secondAttribute="leadingMargin" constant="8" id="CyE-sp-TBC"/>
                     <constraint firstItem="BLL-hK-faj" firstAttribute="bottom" secondItem="iJH-xd-BUR" secondAttribute="bottom" id="DeP-qJ-5D1"/>
@@ -184,9 +190,11 @@
                     <constraint firstAttribute="trailingMargin" secondItem="xBU-Cm-U1t" secondAttribute="trailing" constant="-8" id="Lg7-kC-s9G">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
+                    <constraint firstItem="mwJ-PH-SBJ" firstAttribute="top" secondItem="xBU-Cm-U1t" secondAttribute="bottom" constant="11" id="MHl-0I-K3K"/>
+                    <constraint firstItem="mwJ-PH-SBJ" firstAttribute="trailing" secondItem="5y1-Pn-Wdu" secondAttribute="trailing" id="MIe-H3-bbt"/>
                     <constraint firstItem="VHJ-Cu-w20" firstAttribute="top" secondItem="uD7-ZH-Oyl" secondAttribute="top" id="Nqv-7Y-hdg"/>
                     <constraint firstItem="HJV-xh-r3e" firstAttribute="top" secondItem="Wph-9y-HG2" secondAttribute="bottom" constant="4" id="PcX-KN-Jd3"/>
-                    <constraint firstItem="HJV-xh-r3e" firstAttribute="top" secondItem="xBU-Cm-U1t" secondAttribute="bottom" constant="33" id="RcY-xd-INO"/>
+                    <constraint firstItem="HJV-xh-r3e" firstAttribute="top" secondItem="xBU-Cm-U1t" secondAttribute="bottom" constant="66" id="RcY-xd-INO"/>
                     <constraint firstAttribute="trailingMargin" secondItem="HJV-xh-r3e" secondAttribute="trailing" constant="-8" id="SwQ-Cj-utc">
                         <variation key="heightClass=regular-widthClass=compact" constant="0.0"/>
                     </constraint>
@@ -196,6 +204,7 @@
                     <constraint firstItem="5y1-Pn-Wdu" firstAttribute="top" secondItem="Wph-9y-HG2" secondAttribute="top" id="XT6-E7-hod"/>
                     <constraint firstItem="US7-XJ-DUL" firstAttribute="bottom" secondItem="ONz-V6-4ou" secondAttribute="bottom" id="XeM-Pt-bOa"/>
                     <constraint firstItem="5y1-Pn-Wdu" firstAttribute="bottom" secondItem="Wph-9y-HG2" secondAttribute="bottom" id="YRh-cn-R5i"/>
+                    <constraint firstItem="mwJ-PH-SBJ" firstAttribute="leading" secondItem="t7j-nt-C1K" secondAttribute="leading" id="Z39-b9-FLK"/>
                     <constraint firstItem="iJH-xd-BUR" firstAttribute="top" secondItem="cGa-Ce-aV8" secondAttribute="topMargin" constant="8" id="cjc-LN-ZdV"/>
                     <constraint firstItem="iJH-xd-BUR" firstAttribute="leading" secondItem="c7k-m0-5sn" secondAttribute="trailing" constant="4" id="fCU-iJ-hT6"/>
                     <constraint firstItem="xBU-Cm-U1t" firstAttribute="leading" secondItem="cGa-Ce-aV8" secondAttribute="leadingMargin" constant="-8" id="gKP-jm-aAU">
@@ -219,6 +228,7 @@
                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
             </tableViewCellContentView>
             <connections>
+                <outlet property="captionLabel" destination="mwJ-PH-SBJ" id="Prz-eq-Og2"/>
                 <outlet property="commentCount" destination="sVC-O8-yJP" id="da9-K9-daT"/>
                 <outlet property="commentsButton" destination="5y1-Pn-Wdu" id="eyN-dW-0et"/>
                 <outlet property="creator" destination="iJH-xd-BUR" id="XOP-Y3-TqN"/>

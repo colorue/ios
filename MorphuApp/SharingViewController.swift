@@ -58,6 +58,14 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
         popoverController!.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var textField: UITextField? {
+        didSet {
+            textField?.delegate = self
+            textField?.font = R.font.openSans(size: 12.0)
+            textField?.returnKeyType = .done
+            textField?.autocapitalizationType = .sentences
+        }
+    }
     
     override func viewDidLoad() {
         self.drawingImage.image = drawing
@@ -109,12 +117,12 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
         FIRAnalytics.logEvent(withName: "postDrawing", parameters: [:])
 
         UIView.animate(withDuration: 0.3, animations: {
-            self.popoverController!.view.alpha = 1.0
-            self.popoverController!.navigationController?.navigationBar.alpha = 1.0
-       })
+            self.popoverController?.view.alpha = 1.0
+            self.popoverController?.navigationController?.navigationBar.alpha = 1.0
+        })
         
-        popoverController!.dismiss(animated: true, completion: nil)
-        popoverController!.postDrawing()
+        popoverController?.dismiss(animated: true, completion: nil)
+        popoverController?.postDrawing(caption: textField?.text ?? "")
     }
     
     
@@ -122,5 +130,13 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
         self.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension SharingViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

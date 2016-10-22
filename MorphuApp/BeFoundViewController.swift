@@ -10,7 +10,7 @@
 import UIKit
 import Firebase
 
-class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate {
+class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelegate {
     
     let api = AuthAPI.sharedInstance
     let prefs = UserDefaults.standard
@@ -141,7 +141,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
         
         if newUser.FacebookSignUp {
             api.addNewUserToDatabase(newUser)
-            API.sharedInstance.delagate = self
+            API.sharedInstance.delegate = self
             API.sharedInstance.loadData()
         } else {
             api.createEmailAccount(newUser, callback: createEmailAccountCallback)
@@ -159,7 +159,7 @@ class BeFoundViewController: UIViewController, UITextFieldDelegate, APIDelagate 
                 prefs.setValue(newUser.email, forKey: "email")
                 prefs.setValue(newUser.password, forKey: "password")
             }
-            API.sharedInstance.delagate = self
+            API.sharedInstance.delegate = self
             API.sharedInstance.loadData()
         } else {
             print("login failed")

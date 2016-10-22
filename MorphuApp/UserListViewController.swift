@@ -34,7 +34,7 @@ class UserListViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         self.tableView.reloadData()
-        api.delagate = self
+        api.delegate = self
     }
     
     // MARK: - Table view data source
@@ -48,7 +48,7 @@ class UserListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.userCell)!
-        cell.delagate = self
+        cell.delegate = self
         cell.color = self.tintColor
         return cell
     }
@@ -69,13 +69,13 @@ class UserListViewController: UITableViewController {
     }
 }
 
-extension UserListViewController: APIDelagate {
+extension UserListViewController: APIDelegate {
     func refresh() {
         self.tableView.reloadData()
     }
 }
 
-extension UserListViewController: UserCellDelagate {
+extension UserListViewController: UserCellDelegate {
     
     func followAction(_ userCell: UserCell) {
         userCell.followButton?.isSelected = true

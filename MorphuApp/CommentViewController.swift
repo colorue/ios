@@ -185,7 +185,6 @@ class CommentViewController: SLKTextViewController {
 
 extension CommentViewController: ActiveLabelDelegate {
     func didSelect(_ text: String, type: ActiveType) {
-        print(text, type)
         switch(type) {
         case .hashtag:
             let hashtagAlert = UIAlertController(title: "#\(text)", message: "Hashtags coming soon!" , preferredStyle: UIAlertControllerStyle.alert)

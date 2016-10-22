@@ -12,8 +12,9 @@ import Kingfisher
 import FBSDKShareKit
 import MessageUI
 import Firebase
+import ActiveLabel
 
-class DrawingListViewController: UITableViewController, APIDelagate {
+class DrawingListViewController: UITableViewController, APIDelegate {
     
     // MARK: Properties
     let api = API.sharedInstance
@@ -44,7 +45,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        api.delagate = self
+        api.delegate = self
         self.refresh()
         
         // bottomRefreshControl needs to be set in viewDidApear
@@ -93,7 +94,7 @@ class DrawingListViewController: UITableViewController, APIDelagate {
             
             drawingCell.drawing = drawing
             drawingCell.color = tintColor
-            drawingCell.delagate = self
+            drawingCell.delegate = self
             drawingCell.cellTag = tag
             
             if ((indexPath as NSIndexPath).row + 1 >= drawingSource().count) {
@@ -143,7 +144,32 @@ class DrawingListViewController: UITableViewController, APIDelagate {
 
 
 
-extension DrawingListViewController: DrawingCellDelagate {
+extension DrawingListViewController: DrawingCellDelegate {
+    
+    // MARK: - ActiveLabelDelegate
+    
+    func didSelect(_ text: String, type: ActiveType) {
+        switch(type) {
+        case .hashtag:
+            let hashtagAlert = UIAlertController(title: "#\(text)", message: "Hashtags coming soon!" , preferredStyle: UIAlertControllerStyle.alert)
+            hashtagAlert.addAction(UIAlertAction(title: "Cool", style: UIAlertActionStyle.default, handler: nil))
+            present(hashtagAlert, animated: true, completion: nil)
+            //
+            //            if let hashTagController = R.storyboard.hashTag.hashTag() {
+            //                hashTagController.text = text
+            //                hashTagController.tintColor = tintColor
+            //                navigationController?.pushViewController(hashTagController, animated: true)
+        //            }
+        case .mention:
+            if let profileController = R.storyboard.profile.profile() {
+                profileController.username = text
+                profileController.tintColor = tintColor
+                navigationController?.pushViewController(profileController, animated: true)
+            }
+        default:
+            break
+        }
+    }
     
     func userButtonPressed(_ drawing: Drawing) {
         if let profileController = R.storyboard.profile.profile() {

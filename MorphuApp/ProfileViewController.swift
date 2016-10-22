@@ -77,7 +77,7 @@ extension ProfileViewController {
     }
 }
 
-extension ProfileViewController: ProfileCellDelagate {
+extension ProfileViewController: ProfileCellDelegate {
     func followAction(_ sender: UIButton) {
         guard let userInstance = userInstance else { return }
         

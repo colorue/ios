@@ -8,8 +8,9 @@
 
 import UIKit
 import Kingfisher
+import ActiveLabel
 
-protocol DrawingCellDelagate {
+protocol DrawingCellDelegate: class, ActiveLabelDelegate {
     func presentDrawingActions(_ drawing: Drawing)
     func likeButtonPressed(_ drawing: Drawing)
     func userButtonPressed(_ drawing: Drawing)
@@ -31,8 +32,14 @@ class DrawingCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton?
     @IBOutlet weak var likesButton: UIButton?
     @IBOutlet weak var commentsButton: UIButton?
-    
     @IBOutlet weak var drawingOfTheDayLabel: UILabel?
+    
+    @IBOutlet weak var captionLabel: ActiveLabel? {
+        didSet {
+            captionLabel?.font = R.font.openSans(size: 12.0)
+            captionLabel?.textColor = Theme.infoText
+        }
+    }
     
     
     var cellTag: Int? {
@@ -47,21 +54,26 @@ class DrawingCell: UITableViewCell {
     
     var color: UIColor? {
         didSet {
+            guard let color = color else { return }
+            
             uploadButton?.tintColor = color
             likeButton?.tintColor = color
             likes?.textColor = color
             commentCount?.textColor = color
+            captionLabel?.hashtagColor = color
+            captionLabel?.mentionColor = color
         }
     }
     
-    var delagate: DrawingCellDelagate? {
+    var delegate: DrawingCellDelegate? {
         didSet {
             uploadButton?.addTarget(self, action: #selector(DrawingCell.presentDrawingActions(_:)), for: .touchUpInside)
             likeButton?.addTarget(self, action: #selector(DrawingCell.likeButtonPressed(_:)), for: .touchUpInside)
             userButton?.addTarget(self, action: #selector(DrawingCell.userButtonPressed(_:)), for: .touchUpInside)
             likesButton?.addTarget(self, action: #selector(DrawingCell.likesButtonPressed(_:)), for: .touchUpInside)
             commentsButton?.addTarget(self, action: #selector(DrawingCell.commentsButtonPressed(_:)), for: .touchUpInside)
-
+            
+            captionLabel?.delegate = delegate
         }
     }
     
@@ -80,6 +92,7 @@ class DrawingCell: UITableViewCell {
             creator?.text = drawing.user.username
             timeCreated?.text = drawing.timeStamp.timeSince
             likeButton?.isSelected = drawing.liked(API.sharedInstance.getActiveUser())
+            captionLabel?.text = drawing.caption
             
             if drawing.comments.count == 1 {
                 commentCount?.text = "1 comment"
@@ -92,29 +105,29 @@ class DrawingCell: UITableViewCell {
     
     @objc fileprivate func presentDrawingActions(_ sender: UIButton) {
         guard let drawing = drawing else { return }
-        delagate?.presentDrawingActions(drawing)
+        delegate?.presentDrawingActions(drawing)
     }
     
     @objc fileprivate func userButtonPressed(_ sender: UIButton) {
         guard let drawing = drawing else { return }
-        delagate?.userButtonPressed(drawing)
+        delegate?.userButtonPressed(drawing)
     }
     
     @objc fileprivate func likesButtonPressed(_ sender: UIButton) {
         guard let drawing = drawing else { return }
-        delagate?.likesButtonPressed(drawing)
+        delegate?.likesButtonPressed(drawing)
     }
     
     @objc fileprivate func commentsButtonPressed(_ sender: UIButton) {
         guard let drawing = drawing else { return }
-        delagate?.commentsButtonPressed(drawing)
+        delegate?.commentsButtonPressed(drawing)
     }
     
     @objc fileprivate func likeButtonPressed(_ sender: UIButton) {
         guard let drawing = drawing else { return }
         
         sender.isSelected = !sender.isSelected
-        delagate?.likeButtonPressed(drawing)
+        delegate?.likeButtonPressed(drawing)
         setLikes()
     }
         

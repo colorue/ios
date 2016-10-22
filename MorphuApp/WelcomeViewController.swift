@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class WelcomeViewController: UIViewController, APIDelagate {
+class WelcomeViewController: UIViewController, APIDelegate {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var facebookButton: UIButton!
@@ -50,7 +50,7 @@ class WelcomeViewController: UIViewController, APIDelagate {
             self.performSegue(withIdentifier: "facebookRegister", sender: self)
         case .loggedIn:
             FIRAnalytics.logEvent(withName: "loggedInWithFacebook", parameters: [:])
-            API.sharedInstance.delagate = self
+            API.sharedInstance.delegate = self
             API.sharedInstance.loadData()
         }
     }

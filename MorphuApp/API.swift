@@ -13,7 +13,7 @@ import FBSDKLoginKit
 //import SinchVerification
 import Alamofire
 
-protocol APIDelagate {
+protocol APIDelegate {
     func refresh()
 }
 
@@ -42,7 +42,7 @@ class API {
 
     fileprivate lazy var contactStore = ContactStore()
     
-    var delagate: APIDelagate?
+    var delegate: APIDelegate?
   
     // MARK: Get Methods
     
@@ -81,7 +81,7 @@ class API {
                 self.setDeleteExplore()
                 self.loadFacebookFriends()
                 self.loadHashTags()
-                self.delagate?.refresh()
+                self.delegate?.refresh()
             })
         })
     }
@@ -176,7 +176,7 @@ class API {
                 self.drawingOfTheDay.removeAll()
                 self.drawingOfTheDay.append(drawing)
                 DispatchQueue.main.async {
-                    self.delagate?.refresh()
+                    self.delegate?.refresh()
                 }
             })
         })
@@ -244,7 +244,7 @@ class API {
             let userID = snapshot.value as! String
             UserService().get(userId: userID, callback: { (user: User) -> () in
                 self.contacts.insert(user)
-                self.delagate?.refresh()
+                self.delegate?.refresh()
             })
         })
     }

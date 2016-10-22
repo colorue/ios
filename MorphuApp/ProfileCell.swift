@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-protocol ProfileCellDelagate {
+protocol ProfileCellDelegate {
     func followAction(_ sender: UIButton) -> ()
 }
 

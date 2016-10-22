@@ -30,7 +30,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelagate, CanvasDelagate, UIPopoverPresentationControllerDelegate {
+class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
     
     var baseImage: UIImage?
 
@@ -79,7 +79,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
         
         let canvas = CanvasView(frame: canvasFrame)
-        canvas.delagate = self
+        canvas.delegate = self
         canvas.baseDrawing = baseImage
         
         self.view.addSubview(canvas)
@@ -87,7 +87,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: canvas.frame.maxY, width: self.view.frame.width, height: keyboardHeight)
         let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame)
-        colorKeyboard.delagate = self
+        colorKeyboard.delegate = self
         
         self.view.addSubview(colorKeyboard)
         self.colorKeyboard = colorKeyboard
@@ -218,13 +218,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    func postDrawing() {
+    func postDrawing(caption: String) {
         self.baseImage = nil
         self.postButton.isEnabled = false
         self.colorKeyboard!.uploading(0)
         self.view.isUserInteractionEnabled = false
         
-        let newDrawing = Drawing(user: User(), id: "")
+        let newDrawing = Drawing(user: User(), id: "", caption: caption)
         newDrawing.image = (canvas?.getDrawing() ?? UIImage())
         
         DrawingService().postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
@@ -279,7 +279,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             dvc.drawing = canvas?.getDrawing()
             dvc.popoverController = self
             
-            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.width - 75.0))
+            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.width - 35.0))
             
             self.view.alpha = 0.4
             self.navigationController?.navigationBar.alpha = 0.4

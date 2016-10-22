@@ -16,11 +16,13 @@ class Drawing {
     var image = UIImage()
     var drawingOfTheDay = false
     var imageUrl: URL?
+    let caption: String
     
-    init(user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, id: String = "") {
+    init(user: User = User(), timeStamp: Double = 0 - Date().timeIntervalSince1970, id: String = "", caption: String = "") {
         self.user = user
         self.timeStamp = timeStamp
         self.id = id
+        self.caption = caption
     }
     
     func like(_ user: User) {
@@ -76,7 +78,8 @@ class Drawing {
     func toAnyObject()-> NSDictionary {
         return ["artist": self.user.userId,
                 "timeStamp": self.timeStamp,
-                "url": self.imageUrl!.absoluteString]
+                "url": self.imageUrl?.absoluteString ?? "",
+                "caption": self.caption]
     }
 }
 
