@@ -76,6 +76,10 @@ struct DrawingService {
                     newDrawing.setValue(drawing.toAnyObject())
                     self.myRootRef.child("users/\(self.activeUser.userId)/drawings/\(drawing.id)").setValue(drawing.timeStamp)
                     self.myRootRef.child("users/\(self.activeUser.userId)/wall/\(drawing.id)").setValue(drawing.timeStamp)
+                    
+                    if drawing.caption != "" {
+                        CommentService().add(commentText: drawing.caption, to: drawing)
+                    }
                 })
             }
             finishedCallback(uploaded)

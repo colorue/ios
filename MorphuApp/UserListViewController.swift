@@ -11,7 +11,7 @@ import Firebase
 
 class UserListViewController: UITableViewController {
     
-    var userSource: () -> [User] = API.sharedInstance.getFriends
+    var users = API.sharedInstance.getFriends()
     
     let api = API.sharedInstance
     
@@ -43,7 +43,7 @@ class UserListViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return userSource().count
+        return users.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,7 +55,7 @@ class UserListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if let userCell = cell as? UserCell {
-            userCell.user = userSource()[indexPath.row]
+            userCell.user = users[indexPath.row]
         }
     }
     
@@ -66,6 +66,23 @@ class UserListViewController: UITableViewController {
     @IBAction func pullRefresh(_ sender: UIRefreshControl) {
         self.tableView.reloadData()
         self.refreshControl?.endRefreshing()
+    }
+    
+    // MARK: Segue Methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.controller!.performSegue(withIdentifier: "showUser", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showUser" {
+            let targetController = segue.destination as! ProfileViewController
+            if let row = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row {
+                targetController.tintColor = self.tintColor
+                targetController.navigationItem.title = users[row].username
+                targetController.userInstance = users[row]
+            }
+        }
     }
 }
 
@@ -101,25 +118,5 @@ extension UserListViewController: UserCellDelegate {
         api.getActiveUser().unfollow(userCell.user!)
         UserService().unfollow(userCell.user!)
         FIRAnalytics.logEvent(withName: "unfollowedUser", parameters: [:])
-    }
-}
-
-extension UserListViewController {
-    
-    // MARK: Segue Methods
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.controller!.performSegue(withIdentifier: "showUser", sender: self)
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showUser" {
-            let targetController = segue.destination as! ProfileViewController
-            if let row = (tableView.indexPathForSelectedRow as NSIndexPath?)?.row {
-                targetController.tintColor = self.tintColor
-                targetController.navigationItem.title = userSource()[row].username
-                targetController.userInstance = userSource()[row]
-            }
-        }
     }
 }

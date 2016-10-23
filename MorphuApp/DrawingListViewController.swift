@@ -128,7 +128,7 @@ class DrawingListViewController: UITableViewController, APIDelegate {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = { return drawing.likes }
+            targetController.users = drawing.likes
         } else if let targetController = segue.destination as? CommentViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.tintColor = self.tintColor!
@@ -151,15 +151,12 @@ extension DrawingListViewController: DrawingCellDelegate {
     func didSelect(_ text: String, type: ActiveType) {
         switch(type) {
         case .hashtag:
-            let hashtagAlert = UIAlertController(title: "#\(text)", message: "Hashtags coming soon!" , preferredStyle: UIAlertControllerStyle.alert)
-            hashtagAlert.addAction(UIAlertAction(title: "Cool", style: UIAlertActionStyle.default, handler: nil))
-            present(hashtagAlert, animated: true, completion: nil)
-            //
-            //            if let hashTagController = R.storyboard.hashTag.hashTag() {
-            //                hashTagController.text = text
-            //                hashTagController.tintColor = tintColor
-            //                navigationController?.pushViewController(hashTagController, animated: true)
-        //            }
+            if let hashTagController = R.storyboard.hashTag.hashTag() {
+                hashTagController.navigationItem.title = "#\(text)"
+                hashTagController.text = text
+                hashTagController.tintColor = tintColor
+                navigationController?.pushViewController(hashTagController, animated: true)
+            }
         case .mention:
             if let profileController = R.storyboard.profile.profile() {
                 profileController.username = text
@@ -181,7 +178,7 @@ extension DrawingListViewController: DrawingCellDelegate {
     
     func likesButtonPressed(_ drawing: Drawing) {
         if let likesController = R.storyboard.users.users() {
-            likesController.userSource = { return drawing.likes }
+            likesController.users = drawing.likes
             likesController.title = "Likes"
             likesController.tintColor = tintColor
             navigationController?.pushViewController(likesController, animated: true)

@@ -20,6 +20,8 @@ protocol DrawingCellDelegate: class, ActiveLabelDelegate {
 
 class DrawingCell: UITableViewCell {
     
+    static let captionFont = UIFont(resource: R.font.openSans, size: 12.0)!
+    
     @IBOutlet weak var profileImage: UIImageView?
     @IBOutlet weak var creator: UILabel?
     @IBOutlet weak var drawingImage: UIImageView?
@@ -36,7 +38,7 @@ class DrawingCell: UITableViewCell {
     
     @IBOutlet weak var captionLabel: ActiveLabel? {
         didSet {
-            captionLabel?.font = R.font.openSans(size: 12.0)
+            captionLabel?.font = DrawingCell.captionFont
             captionLabel?.textColor = Theme.infoText
         }
     }
@@ -89,6 +91,7 @@ class DrawingCell: UITableViewCell {
             }
             
             profileImage?.kf.setImage(with: URL(string: drawing.user.profileURL), placeholder: nil, options: [.transition(.fade(0.2))], completionHandler: nil)
+            
             creator?.text = drawing.user.username
             timeCreated?.text = drawing.timeStamp.timeSince
             likeButton?.isSelected = drawing.liked(API.sharedInstance.getActiveUser())

@@ -16,7 +16,6 @@ class HashTagViewController: DrawingListViewController {
         didSet {
             guard let hashTag = hashTag else { return }
             drawingSource = { return hashTag.drawings }
-            navigationItem.title = "#\(hashTag.text)"
         }
     }
     
@@ -25,9 +24,6 @@ class HashTagViewController: DrawingListViewController {
             guard let text = text else { return }
             HashTagService().get(tag: text, callback: { hashTag in
                 self.hashTag = hashTag
-                
-
-                
             })
         }
     }
@@ -35,6 +31,7 @@ class HashTagViewController: DrawingListViewController {
     // MARK: - View Setup
     
     override func viewDidLoad() {
+        drawingSource = { return [] }
         bottomRefreshControl.addTarget(self, action: #selector(HashTagViewController.refresh), for: .valueChanged)
         super.viewDidLoad()
     }

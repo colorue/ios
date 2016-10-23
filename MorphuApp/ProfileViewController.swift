@@ -13,6 +13,7 @@ class ProfileViewController: DrawingListViewController {
     var username: String? {
         didSet {
             guard let username = username else { return }
+            navigationItem.title = username
             UserService().search(for: username) { [weak self] user in
                 self?.userInstance = user
             }
@@ -24,6 +25,7 @@ class ProfileViewController: DrawingListViewController {
             guard let userInstance = userInstance else { return }
             UserService().getFull(user: userInstance)
             drawingSource = userInstance.getDrawings
+            navigationItem.title = userInstance.username
             tableView.reloadData()
         }
     }
@@ -113,22 +115,21 @@ extension ProfileViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let userInstance = userInstance else { return }
 
-        
         if segue.identifier == "showFollowers" {
             let targetController = segue.destination as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Followers"
-            targetController.userSource = { return Array(userInstance.getFollowers()) }
+            targetController.users = Array(userInstance.getFollowers())
         } else if segue.identifier == "showFollowing" {
             let targetController = segue.destination as! UserListViewController
             targetController.tintColor = self.tintColor!
             targetController.navigationItem.title = "Following"
-            targetController.userSource = { return Array(userInstance.getFollowing()) }
+            targetController.users = Array(userInstance.getFollowing())
         } else if let targetController = segue.destination as? UserListViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.navigationItem.title = "Likes"
             targetController.tintColor = self.tintColor!
-            targetController.userSource = { return drawing.likes }
+            targetController.users = drawing.likes
         } else if let targetController = segue.destination as? CommentViewController {
             let drawing = getClickedDrawing(sender! as AnyObject)
             targetController.tintColor = self.tintColor!

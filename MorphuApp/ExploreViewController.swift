@@ -61,7 +61,8 @@ extension ExploreViewController: UISearchResultsUpdating {
         
         filterContentForSearchText(searchController.searchBar.text!)
         
-        userListController.userSource = { return self.filteredUsers }
+        userListController.tintColor = tintColor
+        userListController.users = filteredUsers
         userListController.refresh()
     }
     

@@ -187,15 +187,12 @@ extension CommentViewController: ActiveLabelDelegate {
     func didSelect(_ text: String, type: ActiveType) {
         switch(type) {
         case .hashtag:
-            let hashtagAlert = UIAlertController(title: "#\(text)", message: "Hashtags coming soon!" , preferredStyle: UIAlertControllerStyle.alert)
-            hashtagAlert.addAction(UIAlertAction(title: "Cool", style: UIAlertActionStyle.default, handler: nil))
-            present(hashtagAlert, animated: true, completion: nil)
-//            
-//            if let hashTagController = R.storyboard.hashTag.hashTag() {
-//                hashTagController.text = text
-//                hashTagController.tintColor = tintColor
-//                navigationController?.pushViewController(hashTagController, animated: true)
-//            }
+            if let hashTagController = R.storyboard.hashTag.hashTag() {
+                hashTagController.navigationItem.title = "#\(text)"
+                hashTagController.text = text
+                hashTagController.tintColor = tintColor
+                navigationController?.pushViewController(hashTagController, animated: true)
+            }
         case .mention:
             if let profileController = R.storyboard.profile.profile() {
                 profileController.username = text
