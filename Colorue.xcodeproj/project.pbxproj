@@ -603,6 +603,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = DEVELOPMENT;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = RQ5HD8UR84;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -611,6 +612,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue.dev";
 				PRODUCT_MODULE_NAME = Colorue;
 				PRODUCT_NAME = "Colorue α";
@@ -632,6 +634,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = PRODUCTION;
+				CURRENT_PROJECT_VERSION = 46;
 				DEVELOPMENT_TEAM = RQ5HD8UR84;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -640,6 +643,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Wight-Dylan.Colorue";
 				PRODUCT_MODULE_NAME = Colorue;
 				PRODUCT_NAME = Colorue;

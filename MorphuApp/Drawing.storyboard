@@ -21,8 +21,8 @@
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="PqF-xI-acO">
-                        <barButtonItem key="rightBarButtonItem" title="Next" id="OVE-88-MqG">
-                            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="OVE-88-MqG">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="done:" destination="CdS-6r-7bw" id="U22-Ix-hx3"/>
                                 <segue destination="EbA-vr-Nzx" kind="popoverPresentation" identifier="toShare" popoverAnchorBarButtonItem="OVE-88-MqG" id="MtZ-6h-KgH">
