@@ -1,20 +1,18 @@
 PODS:
   - ActiveLabel (1.0.1)
   - Alamofire (4.0.0)
-  - Bolts (1.8.4):
-    - Bolts/AppLinks (= 1.8.4)
-    - Bolts/Tasks (= 1.8.4)
-  - Bolts/AppLinks (1.8.4):
-    - Bolts/Tasks
-  - Bolts/Tasks (1.8.4)
   - CCBottomRefreshControl (0.5.1):
     - Masonry (~> 0.6.2)
-  - FBSDKCoreKit (4.15.1):
-    - Bolts (~> 1.7)
-  - FBSDKLoginKit (4.15.1):
-    - FBSDKCoreKit
-  - FBSDKShareKit (4.15.1):
-    - FBSDKCoreKit
+  - FBAEMKit (12.0.2):
+    - FBSDKCoreKit_Basics (= 12.0.2)
+  - FBSDKCoreKit (12.0.2):
+    - FBAEMKit (= 12.0.2)
+    - FBSDKCoreKit_Basics (= 12.0.2)
+  - FBSDKCoreKit_Basics (12.0.2)
+  - FBSDKLoginKit (12.0.2):
+    - FBSDKCoreKit (= 12.0.2)
+  - FBSDKShareKit (12.0.2):
+    - FBSDKCoreKit (= 12.0.2)
   - Firebase/Analytics (3.6.0):
     - FirebaseAnalytics (= 3.4.2)
   - Firebase/Auth (3.6.0):
@@ -71,7 +69,7 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - Kingfisher (3.1.0)
+  - Kingfisher (4.10.1)
   - Masonry (0.6.4)
   - R.swift (3.0.0):
     - R.swift.Library (~> 3.0.0)
@@ -105,9 +103,10 @@ SPEC REPOS:
   https://cdn.cocoapods.org/:
     - ActiveLabel
     - Alamofire
-    - Bolts
     - CCBottomRefreshControl
+    - FBAEMKit
     - FBSDKCoreKit
+    - FBSDKCoreKit_Basics
     - FBSDKLoginKit
     - FBSDKShareKit
     - Firebase
@@ -135,11 +134,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
-  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
-  FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
-  FBSDKLoginKit: 073f79b3b2e762fc6f54a283fe15f45372d59f5f
-  FBSDKShareKit: 11cbb5a4d7b5fda8143cc95b76188147e6725736
+  FBAEMKit: c6b8ddf8371640fcd1a3b844d0f8884c8f334cea
+  FBSDKCoreKit: 506c0fd1c09a3075f62be8fa36bdd921c563daa9
+  FBSDKCoreKit_Basics: c0701d1634c944d60dd3c6361d66dbd0e707a456
+  FBSDKLoginKit: d7c9f6ddff20d7b04c94d1f1f065dc7a441d44a0
+  FBSDKShareKit: 4598ab1ded1a83635746f8cd681948f97ad29560
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseAuth: 75a062bbf2d3c97d1e6e55bbc110e13a6853e25d
@@ -153,7 +153,7 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
-  Kingfisher: 7779f22e977393e9533a89a9685beb8f679d3767
+  Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
@@ -162,6 +162,6 @@ SPEC CHECKSUMS:
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: 6704d534cf9b4f3eefdbe1804670ecf4724cd731
+PODFILE CHECKSUM: 24b8308d771bb3d6781808f5816b9b539d7d0f73
 
 COCOAPODS: 1.9.3
