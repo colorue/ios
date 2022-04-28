@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import FBSDKShareKit
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -34,7 +33,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     
     var baseImage: UIImage?
 
-    let api = API.sharedInstance
+//    let api = API.sharedInstance
     let prefs = UserDefaults.standard
 
     var colorKeyboard: ColorKeyboardView?
@@ -224,10 +223,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.colorKeyboard!.uploading(0)
         self.view.isUserInteractionEnabled = false
         
-        let newDrawing = Drawing(user: User(), id: "", caption: caption)
-        newDrawing.image = (canvas?.getDrawing() ?? UIImage())
+//        let newDrawing = Drawing(user: User(), id: "", caption: caption)
+//        newDrawing.image = (canvas?.getDrawing() ?? UIImage())
         
-        DrawingService().postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
+//        DrawingService().postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
     }
     
     func postCallback(_ uploaded: Bool) {
@@ -243,7 +242,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
     }
     
-    func unwind(_ sender: UIBarButtonItem) {
+  @objc func unwind(_ sender: UIBarButtonItem) {
         self.save()
 
         if (!prefs.bool(forKey: "firstCloseCanvas")) {
@@ -266,10 +265,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         
         
         if segue.identifier == "saveToHome" {
-            let targetController = segue.destination as? WallViewController
-            if targetController?.tableView.numberOfRows(inSection: 1) > 0 {
-                targetController?.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
-            }
+//            let targetController = segue.destination as? WallViewController
+//            if targetController?.tableView.numberOfRows(inSection: 1) > 0 {
+//                targetController?.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
+//            }
         } else if let dvc = segue.destination as? SharingViewController {
             
             let controller = dvc.popoverPresentationController
@@ -293,7 +292,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         NotificationCenter.default.removeObserver(self)
     }
     
-    func appMovedToBackground() {
+  @objc func appMovedToBackground() {
         self.save()
         self.hideUnderFingerView()
     }

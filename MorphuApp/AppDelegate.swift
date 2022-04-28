@@ -7,10 +7,6 @@
 //
 
 import UIKit
-import FBSDKCoreKit
-import Firebase
-import AirshipKit
-
 
 let dev = false
 
@@ -25,36 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let bundle = Bundle.main.infoDictionary!
         
 
-        if bundle["CFBundleIdentifier"] as! String == "Wight-Dylan.Colorue.dev" {
-            let options = FIROptions(contentsOfFile: R.file.googleServiceInfoDevPlist.path())!
-            FIRApp.configure(with: options)
-        } else {
-            FIRApp.configure()
-        }
-        
-        FIRDatabase.database().persistenceEnabled = true
-        
-        let config = UAConfig.default()
-        config.isAnalyticsEnabled = false
-        config.developmentLogLevel = UALogLevel.warn
-        UAirship.takeOff(config)
-        
-        
-        let facebook = FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        
-        print(facebook)
-        
-        return facebook
+
+
+
+        return true
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        FBSDKAppEvents.activateApp()
     }
-    
-    func application(_ application: UIApplication, open url: URL,
-                     sourceApplication: String?, annotation: Any) -> Bool {
-        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-    }
+
     
     func applicationWillResignActive(_ application: UIApplication) {
         let notificationCenter = NotificationCenter.default
@@ -68,54 +43,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     
     // MARK: TabBarControllerDelegate Methods
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        let api = API.sharedInstance
-        
-        let destinationNavigationController = viewController as? UINavigationController
-        let targetController = destinationNavigationController?.topViewController
-        
-        if let profileView = targetController as? ProfileViewController {
-            let nav = profileView.navigationController as! NavigationController
-            nav.setColors(Theme.purple)
-            if profileView.userInstance == nil {
-                profileView.tintColor = Theme.purple
-                profileView.navigationItem.title = api.getActiveUser().username
-                profileView.userInstance = api.getActiveUser()
-                profileView.addLogoutButton()
-            }
-            if previousController == viewController {
-                profileView.scrollToTop()
-            }
-        } else if let friendsList = targetController as? FriendsViewController {
-            let nav = friendsList.navigationController as! NavigationController
-            nav.setColors(Theme.blue)
-            tabBarController.tabBar.tintColor = Theme.blue
-            
-            
-            
-        } else if targetController is DrawingViewController {
-            
-            if let drawingController = R.storyboard.drawing.drawingViewController() {
-                tabBarController.present(drawingController, animated: true, completion: nil)
-                return false
-            }
-        
-        } else if let search = targetController as? ExploreViewController {
-            let nav = search.navigationController as! NavigationController
-            nav.setColors(Theme.orange)
-            search.tintColor = Theme.orange
-            if previousController == viewController {
-                search.scrollToTop()
-            }
-        } else if let wall = targetController as? WallViewController {
-            let nav = wall.navigationController as! NavigationController
-            nav.setColors(Theme.red)
-            if previousController == viewController {
-                wall.scrollToTop()
-            }
-        }
-        
-        self.previousController = viewController
-
         return true
     }
 

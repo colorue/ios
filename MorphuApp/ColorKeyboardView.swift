@@ -13,7 +13,7 @@ protocol ColorKeyboardDelegate {
     func undo()
     func trash()
     func switchAlphaHowTo()
-    func presentViewController(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
+    func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
 enum KeyboardToolState: Int {
@@ -224,7 +224,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         if (!prefs.bool(forKey: "bullsEyeHowTo")) {
             let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
             dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            delegate?.presentViewController(dropperHowTo, animated: true, completion: nil)
+            delegate?.present(dropperHowTo, animated: true, completion: nil)
             prefs.setValue(true, forKey: "bullsEyeHowTo")
         }
         state = state == .bullsEye ? .none : .bullsEye

@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import FBSDKShareKit
 import MessageUI
-import Firebase
 
 class SharingViewController: UIViewController, MFMessageComposeViewControllerDelegate {
     
@@ -72,26 +70,25 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
     }
     
     @objc fileprivate func shareToFacebook(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "shareToFacebookClickedSharing", parameters: [:])
-
-        let content = FBSDKSharePhotoContent()
-        let photo = FBSDKSharePhoto(image: drawing, userGenerated: true)
-        content.photos  = [photo]
-        
-        let dialog = FBSDKShareDialog()
-        dialog.fromViewController = self
-        dialog.shareContent = content
-        dialog.mode = FBSDKShareDialogMode.native
-        if !dialog.show() {
-            dialog.mode = FBSDKShareDialogMode.automatic
-            dialog.show()
-        }
+//        FIRAnalytics.logEvent(withName: "shareToFacebookClickedSharing", parameters: [:])
+//
+//        let content = FBSDKSharePhotoContent()
+//        let photo = FBSDKSharePhoto(image: drawing, userGenerated: true)
+//        content.photos  = [photo]
+//
+//        let dialog = FBSDKShareDialog()
+//        dialog.fromViewController = self
+//        dialog.shareContent = content
+//        dialog.mode = FBSDKShareDialogMode.native
+//        if !dialog.show() {
+//            dialog.mode = FBSDKShareDialogMode.automatic
+//            dialog.show()
+//        }
     }
     
     @objc fileprivate func saveDrawing(_ sender: UIButton) {
         if let drawing = drawing {
             UIImageWriteToSavedPhotosAlbum(drawing, self, nil, nil)
-            FIRAnalytics.logEvent(withName: "savedDrawingFromSharing", parameters: [:])
             sender.isEnabled = false
         }
     }
@@ -106,16 +103,11 @@ class SharingViewController: UIViewController, MFMessageComposeViewControllerDel
             }
             controller.messageComposeDelegate = self
             self.resignFirstResponder()
-            
-            FIRAnalytics.logEvent(withName: "sendDrawingClickedSharing", parameters: [:])
-
             self.present(controller, animated: true, completion: nil)
         }
     }
     
-    func postDrawing(_ sender: UIButton) {
-        FIRAnalytics.logEvent(withName: "postDrawing", parameters: [:])
-
+  @objc func postDrawing(_ sender: UIButton) {
         UIView.animate(withDuration: 0.3, animations: {
             self.popoverController?.view.alpha = 1.0
             self.popoverController?.navigationController?.navigationBar.alpha = 1.0

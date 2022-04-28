@@ -6,32 +6,32 @@ target 'Colorue' do
   use_frameworks!
 
   # Pods for Colorue
-    pod 'FBSDKCoreKit'
-    pod 'FBSDKShareKit'
-    pod 'FBSDKLoginKit'
-
-    pod 'Firebase/Core'
-    pod 'Firebase/Database'
-    pod 'Firebase/Auth'
-    pod 'Firebase/Messaging'
-    pod 'Firebase/Storage'
-    pod 'Firebase/Crash'
-
-    pod 'CCBottomRefreshControl'
-#    pod 'SinchVerification-Swift'
-
-    pod 'UrbanAirship-iOS-SDK'
-    pod 'Alamofire'
-
-    pod 'Kingfisher'
+#    pod 'FBSDKCoreKit'
+#    pod 'FBSDKShareKit'
+#    pod 'FBSDKLoginKit'
+#
+#    pod 'Firebase/Core'
+#    pod 'Firebase/Database'
+#    pod 'Firebase/Auth'
+#    pod 'Firebase/Messaging'
+#    pod 'Firebase/Storage'
+#    pod 'Firebase/Crash'
+#
+#    pod 'CCBottomRefreshControl'
+##    pod 'SinchVerification-Swift'
+#
+#    pod 'UrbanAirship-iOS-SDK'
+#    pod 'Alamofire'
+#
+#    pod 'Kingfisher'
     pod 'R.swift'
-    
-    pod 'TTTAttributedLabel'
-    pod 'SlackTextViewController'
-    
-    pod 'SwiftyJSON'
-#    pod 'ObjectMapper'
-    pod 'ActiveLabel'
+#
+#    pod 'TTTAttributedLabel'
+#    pod 'SlackTextViewController'
+#
+#    pod 'SwiftyJSON'
+##    pod 'ObjectMapper'
+#    pod 'ActiveLabel'
 end
 
 post_install do |installer|
