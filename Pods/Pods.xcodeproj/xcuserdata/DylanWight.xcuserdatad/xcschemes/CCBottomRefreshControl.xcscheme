@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -13,11 +13,11 @@
             buildForProfiling = "YES"
             buildForArchiving = "YES">
             <BuildableReference
-               BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D9A7298F02784BF6847066740261C83E'
-               BlueprintName = 'CCBottomRefreshControl'
-               ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'CCBottomRefreshControl.framework'>
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "41E250CA7FC71214C3FFAC283CEBC211"
+               BuildableName = "CCBottomRefreshControl.framework"
+               BlueprintName = "CCBottomRefreshControl"
+               ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

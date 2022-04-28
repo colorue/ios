@@ -1,5 +1,5 @@
 PODS:
-  - ActiveLabel (0.6.2)
+  - ActiveLabel (1.0.1)
   - Alamofire (4.0.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -73,22 +73,16 @@ PODS:
     - GoogleSymbolUtilities (~> 1.0)
   - Kingfisher (3.1.0)
   - Masonry (0.6.4)
-  - ObjectMapper (2.0.0)
   - R.swift (3.0.0):
     - R.swift.Library (~> 3.0.0)
   - R.swift.Library (3.0.1)
-  - Realm (1.1.0):
-    - Realm/Headers (= 1.1.0)
-  - Realm/Headers (1.1.0)
-  - RealmSwift (1.1.0):
-    - Realm (= 1.1.0)
   - SlackTextViewController (1.9.4)
   - SwiftyJSON (3.0.0)
   - TTTAttributedLabel (2.0.0)
   - UrbanAirship-iOS-SDK (8.0.1)
 
 DEPENDENCIES:
-  - ActiveLabel (from `https://github.com/optonaut/ActiveLabel.swift.git`, branch `swift-3`)
+  - ActiveLabel
   - Alamofire
   - CCBottomRefreshControl
   - FBSDKCoreKit
@@ -101,26 +95,45 @@ DEPENDENCIES:
   - Firebase/Messaging
   - Firebase/Storage
   - Kingfisher
-  - ObjectMapper
   - R.swift
-  - RealmSwift
   - SlackTextViewController
   - SwiftyJSON
   - TTTAttributedLabel
   - UrbanAirship-iOS-SDK
 
-EXTERNAL SOURCES:
-  ActiveLabel:
-    :branch: swift-3
-    :git: https://github.com/optonaut/ActiveLabel.swift.git
-
-CHECKOUT OPTIONS:
-  ActiveLabel:
-    :commit: 80fae948262087ebf9006d5d7c454c969aa88427
-    :git: https://github.com/optonaut/ActiveLabel.swift.git
+SPEC REPOS:
+  https://cdn.cocoapods.org/:
+    - ActiveLabel
+    - Alamofire
+    - Bolts
+    - CCBottomRefreshControl
+    - FBSDKCoreKit
+    - FBSDKLoginKit
+    - FBSDKShareKit
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseAuth
+    - FirebaseCrash
+    - FirebaseDatabase
+    - FirebaseInstanceID
+    - FirebaseMessaging
+    - FirebaseStorage
+    - GoogleInterchangeUtilities
+    - GoogleIPhoneUtilities
+    - GoogleNetworkingUtilities
+    - GoogleSymbolUtilities
+    - GoogleUtilities
+    - Kingfisher
+    - Masonry
+    - R.swift
+    - R.swift.Library
+    - SlackTextViewController
+    - SwiftyJSON
+    - TTTAttributedLabel
+    - UrbanAirship-iOS-SDK
 
 SPEC CHECKSUMS:
-  ActiveLabel: f1670bbd4d6bba563ffeec423120f6d708c4784f
+  ActiveLabel: b8b2396fe25308d563601437d6605bf691c3b5db
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   CCBottomRefreshControl: 57a596348855260f627ffc2b311328ed15b94877
@@ -130,7 +143,7 @@ SPEC CHECKSUMS:
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseAuth: 75a062bbf2d3c97d1e6e55bbc110e13a6853e25d
-  FirebaseCrash: 2efeb3715b76ac843b841529ce413efb67e5fd4d
+  FirebaseCrash: 6da801151873302587122163393c99e57d1fd2fc
   FirebaseDatabase: 750a4a0fe18ef114318876fd654b2d9c671e0992
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   FirebaseMessaging: 789d23fd796594dfb55dcf36cd325541df887c22
@@ -142,16 +155,13 @@ SPEC CHECKSUMS:
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   Kingfisher: 7779f22e977393e9533a89a9685beb8f679d3767
   Masonry: 281802d04d787ea2973179ee8bcb50500579ede2
-  ObjectMapper: aed2570edabbd3c9b26c939e1cabdb6558f933e0
   R.swift: 5a8b4a4ea565b0f20c39d8ce1445f3d3a9064768
   R.swift.Library: 0869d8d546517aa79db078fd8262724391a38db8
-  Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
-  RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SlackTextViewController: d490f354dba963bc469a6b9ce3213978eaed67a5
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
   TTTAttributedLabel: 8cffe8e127e4e82ff3af1e5386d4cd0ad000b656
   UrbanAirship-iOS-SDK: a4ff01ef90d5b32508818da5b8385828513702f9
 
-PODFILE CHECKSUM: 76ed79bc26cf663b62e29586c1b50f9c9835f36d
+PODFILE CHECKSUM: 6704d534cf9b4f3eefdbe1804670ecf4724cd731
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.9.3
