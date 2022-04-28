@@ -21,15 +21,23 @@
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="PqF-xI-acO">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="OVE-88-MqG">
+                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="stop" id="sA5-gx-4kd">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="done:" destination="CdS-6r-7bw" id="U22-Ix-hx3"/>
-                                <segue destination="EbA-vr-Nzx" kind="popoverPresentation" identifier="toShare" popoverAnchorBarButtonItem="OVE-88-MqG" id="MtZ-6h-KgH">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
                         </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="done" systemItem="save" id="Jd8-nK-ylc">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="saveDrawing:" destination="CdS-6r-7bw" id="2o8-sV-0bI"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="action" id="OVE-88-MqG">
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="shareDrawing:" destination="CdS-6r-7bw" id="bPu-UJ-ZIe"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="OVE-88-MqG" id="7eP-6M-WmE"/>
@@ -41,14 +49,6 @@
                 <exit id="2lo-qD-s5v" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="125" y="-701"/>
-        </scene>
-        <!--Sharing-->
-        <scene sceneID="fwd-ft-Z6m">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Sharing" referencedIdentifier="Sharing" id="EbA-vr-Nzx" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8Tv-ua-1it" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="674.5" y="-701"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="RR7-zk-sry">

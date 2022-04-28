@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Toast_Swift
+import MessageUI
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -30,7 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
-    
+
     var baseImage: UIImage?
 
 //    let api = API.sharedInstance
@@ -55,13 +57,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         self.navigationItem.titleView = imageView
 
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
-        
-        let chevron = R.image.chevronDown()
-        backButton.tintColor = Theme.black
-        backButton.frame = CGRect(x: 0.0, y: 0.0, width: 22, height: 22)
-        backButton.setImage(chevron, for: UIControlState())
-        backButton.addTarget(self, action: #selector(DrawingViewController.unwind(_:)), for: UIControlEvents.touchUpInside)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
 
         let keyboardHeight = self.view.frame.height / 5.55833333333333
         let canvasHeight = self.view.frame.height - keyboardHeight - 60
@@ -114,6 +109,60 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
             prefs.setValue(true, forKey: "drawingHowTo")
         }
     }
+
+  @IBAction func saveDrawing(_ sender: UIButton) {
+      if let drawing = canvas?.getDrawing() {
+          UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(savedImage), nil)
+//        sender.isEnabled = false
+//        self.view.makeToastActivity(.center)
+      }
+    }
+
+  @IBAction func shareDrawing (_ sender: UIButton) {
+
+    guard let drawing = canvas?.getDrawing() else { return }
+
+
+    let activityViewController : UIActivityViewController = UIActivityViewController(
+        activityItems: [drawing], applicationActivities: nil)
+
+    // This lines is for the popover you need to show in iPad
+    activityViewController.popoverPresentationController?.sourceView = sender
+
+    // This line remove the arrow of the popover to show in iPad
+    activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+    activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+
+    // Pre-configuring activity items
+    activityViewController.activityItemsConfiguration = [
+      UIActivity.ActivityType.message,
+      UIActivity.ActivityType.postToFacebook,
+      UIActivity.ActivityType.postToTwitter,
+    ] as? UIActivityItemsConfigurationReading
+
+    // Anything you want to exclude
+    activityViewController.excludedActivityTypes = [
+        UIActivity.ActivityType.postToWeibo,
+        UIActivity.ActivityType.print,
+        UIActivity.ActivityType.assignToContact,
+        UIActivity.ActivityType.addToReadingList,
+        UIActivity.ActivityType.postToFlickr,
+        UIActivity.ActivityType.postToVimeo,
+        UIActivity.ActivityType.postToTencentWeibo,
+    ]
+
+    activityViewController.isModalInPresentation = true
+    self.present(activityViewController, animated: true, completion: nil)
+  }
+
+  @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
+      if let err = error {
+        view.makeToast("Error saving drawing", position: .center)
+          print(err)
+          return
+      }
+    view.makeToast("Saved!", position: .center)
+  }
     
     func getCurrentColor() -> UIColor {
         return colorKeyboard!.getCurrentColor()
@@ -134,6 +183,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func undo() {
         self.canvas!.undo()
     }
+  
     
     func trash() {
         
@@ -318,4 +368,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         })
         return true
    }
+}
+
+
+// MARK: MFMessageComposeViewControllerDelegate Methods
+
+extension DrawingViewController: MFMessageComposeViewControllerDelegate {
+
+  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+      self.dismiss(animated: true, completion: nil)
+  }
 }

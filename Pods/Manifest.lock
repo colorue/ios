@@ -2,19 +2,23 @@ PODS:
   - R.swift (5.2.2):
     - R.swift.Library (~> 5.2.0)
   - R.swift.Library (5.2.0)
+  - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
   - R.swift
+  - Toast-Swift (~> 5.0.1)
 
 SPEC REPOS:
   https://cdn.cocoapods.org/:
     - R.swift
     - R.swift.Library
+    - Toast-Swift
 
 SPEC CHECKSUMS:
   R.swift: 7c52cdc57a66840ffe6cbd8a823d732059d42a32
   R.swift.Library: 5ba4f1631300caf9a4d890186930da85d540769d
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 6d782965218bde5808a639640129b8009410426b
+PODFILE CHECKSUM: ba9a75b91e091d19ce01d196cf815d9809eb2207
 
 COCOAPODS: 1.9.3
