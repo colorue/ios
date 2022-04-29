@@ -123,15 +123,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 
     guard let drawing = canvas?.getDrawing() else { return }
 
-
     let activityViewController : UIActivityViewController = UIActivityViewController(
         activityItems: [drawing], applicationActivities: nil)
 
     // This lines is for the popover you need to show in iPad
-    activityViewController.popoverPresentationController?.sourceView = sender
+    activityViewController.popoverPresentationController?.barButtonItem = postButton
+    activityViewController.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
 
     // This line remove the arrow of the popover to show in iPad
-    activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.down
+    activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
     activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
 
     // Pre-configuring activity items
@@ -152,6 +152,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         UIActivity.ActivityType.postToTencentWeibo,
     ]
 
+    print("activityViewController")
     activityViewController.isModalInPresentation = true
     self.present(activityViewController, animated: true, completion: nil)
   }
