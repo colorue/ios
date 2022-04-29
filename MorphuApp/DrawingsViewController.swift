@@ -10,7 +10,7 @@ import Foundation
 
 final class DrawingsViewController: UICollectionViewController {
   // MARK: - Properties
-  private let drawings = [UIImage(named: "Onboarding1"), UIImage(named: "Onboarding2"), UIImage(named: "Onboarding3"), UIImage(named: "Onboarding4"), , UIImage(named: "Onboarding5")]
+  private let drawings = [UIImage(named: "Onboarding1"), UIImage(named: "Onboarding2"), UIImage(named: "Onboarding3"), UIImage(named: "Onboarding4"), UIImage(named: "Onboarding5")]
   private let reuseIdentifier = "drawingCell"
   private let sectionInsets = UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0)
   private let itemsPerRow: CGFloat = 3

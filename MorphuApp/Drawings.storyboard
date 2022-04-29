@@ -13,7 +13,7 @@
         <scene sceneID="CHb-ea-M7J">
             <objects>
                 <collectionViewController id="8Gn-zs-Gii" customClass="DrawingsViewController" customModule="Colorue" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="JFq-g9-W28">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="JFq-g9-W28">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -99,7 +99,7 @@
         <segue reference="Thc-Lg-F41"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="Onboarding4" width="375" height="468.5"/>
+        <image name="Onboarding4" width="750" height="937"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
