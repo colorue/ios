@@ -1,12 +1,12 @@
 {
   "images" : [
     {
+      "filename" : "IMG_0703.PNG",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "IMG_0703.PNG",
       "scale" : "2x"
     },
     {
@@ -15,7 +15,7 @@
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

@@ -152,7 +152,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         addSubview(alphaButton)
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
-        separatorU.backgroundColor = UIColor.lightGray
+        separatorU.backgroundColor = Theme.divider
         addSubview(separatorU)
         
         progressBar.frame = CGRect(x: 0, y: 0, width: frame.width/2, height: 0)

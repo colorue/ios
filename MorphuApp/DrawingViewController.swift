@@ -8,7 +8,6 @@
 
 import UIKit
 import Toast_Swift
-import MessageUI
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -35,7 +34,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 
     var baseImage: UIImage?
 
-//    let api = API.sharedInstance
     let prefs = UserDefaults.standard
 
     var colorKeyboard: ColorKeyboardView?
@@ -54,7 +52,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         let logo = R.image.logoInactive()
         let imageView = UIImageView(image:logo)
         imageView.tintColor = Theme.black
-        self.navigationItem.titleView = imageView
+//        self.navigationItem.titleView = imageView
+        self.navigationController?.navigationBar.backgroundColor = .white
+      navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
+
 
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
 
@@ -319,19 +320,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 //            if targetController?.tableView.numberOfRows(inSection: 1) > 0 {
 //                targetController?.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
 //            }
-        } else if let dvc = segue.destination as? SharingViewController {
-            
-            let controller = dvc.popoverPresentationController
-            if let controller = controller {
-                controller.delegate = self
-            }
-            dvc.drawing = canvas?.getDrawing()
-            dvc.popoverController = self
-            
-            dvc.preferredContentSize = CGSize(width: self.view.frame.width, height: (self.view.frame.width - 35.0))
-            
-            self.view.alpha = 0.4
-            self.navigationController?.navigationBar.alpha = 0.4
         }
     }
     
@@ -371,11 +359,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
 }
 
 
-// MARK: MFMessageComposeViewControllerDelegate Methods
+extension UINavigationBar {
 
-extension DrawingViewController: MFMessageComposeViewControllerDelegate {
-
-  func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-      self.dismiss(animated: true, completion: nil)
-  }
+    func setBottomBorderColor(color: UIColor, height: CGFloat) {
+        let bottomBorderRect = CGRect(x: 0, y: frame.height, width: frame.width, height: height)
+        let bottomBorderView = UIView(frame: bottomBorderRect)
+        bottomBorderView.backgroundColor = color
+        addSubview(bottomBorderView)
+    }
 }
