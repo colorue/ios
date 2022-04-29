@@ -23,7 +23,7 @@ target 'Colorue' do
 #    pod 'UrbanAirship-iOS-SDK'
 #    pod 'Alamofire'
 #
-#    pod 'Kingfisher'
+    pod 'Kingfisher'
     pod 'R.swift'
     pod 'Toast-Swift', '~> 5.0.1'
 

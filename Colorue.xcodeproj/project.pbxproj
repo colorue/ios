@@ -29,6 +29,7 @@
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
 		87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87F14920281C574400FB389E /* GoogleService-Info.plist */; };
+		87F14922281C653500FB389E /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC71281C4E22000D053D /* Drawing.swift */; };
 		FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C591373F34C788F4677031 /* Pods_Colorue.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,7 +42,6 @@
 		8733CC65281B42BD000D053D /* Drawings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawings.storyboard; sourceTree = "<group>"; };
 		8733CC68281B4554000D053D /* DrawingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingsViewController.swift; sourceTree = "<group>"; };
 		8733CC6A281B5858000D053D /* DrawingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
-		8733CC6D281C4868000D053D /* DrawingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = SOURCE_ROOT; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		8733CC71281C4E22000D053D /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = SOURCE_ROOT; };
@@ -106,7 +106,6 @@
 		8733CC6C281C4859000D053D /* API */ = {
 			isa = PBXGroup;
 			children = (
-				8733CC6D281C4868000D053D /* DrawingService.swift */,
 				8733CC71281C4E22000D053D /* Drawing.swift */,
 				87F1491A281C501E00FB389E /* API.swift */,
 			);
@@ -428,6 +427,7 @@
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
+				87F14922281C653500FB389E /* Drawing.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,

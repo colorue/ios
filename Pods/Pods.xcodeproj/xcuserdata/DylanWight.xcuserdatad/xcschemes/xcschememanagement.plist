@@ -79,6 +79,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Kingfisher.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Colorue.xcscheme</key>
 		<dict>
 			<key>isShown</key>

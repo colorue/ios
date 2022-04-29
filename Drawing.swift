@@ -11,21 +11,19 @@ import Foundation
 class Drawing {
 
     var id: String
-    var timeStamp: Double
-    var userId: String
-    var image = UIImage()
-    var imageUrl: URL?
+    var url: String
+    var createdAt: Double
 
-    init(userId: String, timeStamp: Double = 0 - Date().timeIntervalSince1970, id: String = "", caption: String = "") {
-        self.userId = userId
-        self.timeStamp = timeStamp
-        self.id = id
+    init( id: String, url: String, createdAt: Double) {
+      self.id = id
+      self.url = url
+      self.createdAt = createdAt
     }
 
     func toAnyObject()-> NSDictionary {
-        return ["artist": self.userId,
-                "timeStamp": self.timeStamp,
-                "url": self.imageUrl?.absoluteString ?? ""]
+        return ["id": self.id,
+                "createdAt": self.createdAt,
+                "url": self.url]
     }
 }
 
