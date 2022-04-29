@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>930319288100-7nuomll3a9pm8pt328l8526tlckh5qtg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.930319288100-7nuomll3a9pm8pt328l8526tlckh5qtg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCt1n9BVM7vYB0tq_gJkLbfH0jg7vefFO0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>930319288100</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.colorue</string>
+	<key>PROJECT_ID</key>
+	<string>colorue-8f9ea</string>
+	<key>STORAGE_BUCKET</key>
+	<string>colorue-8f9ea.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:930319288100:ios:32e3ef5bc556a71ff3d5b1</string>
+	<key>DATABASE_URL</key>
+	<string>https://colorue-8f9ea-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

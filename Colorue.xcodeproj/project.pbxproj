@@ -11,7 +11,6 @@
 		8733CC66281B42BD000D053D /* Drawings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8733CC65281B42BD000D053D /* Drawings.storyboard */; };
 		8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC68281B4554000D053D /* DrawingsViewController.swift */; };
 		8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC6A281B5858000D053D /* DrawingCell.swift */; };
-		8733CC6E281C4868000D053D /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC6D281C4868000D053D /* DrawingService.swift */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
 		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
@@ -29,6 +28,7 @@
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
+		87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87F14920281C574400FB389E /* GoogleService-Info.plist */; };
 		FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C591373F34C788F4677031 /* Pods_Colorue.framework */; };
 /* End PBXBuildFile section */
 
@@ -44,6 +44,7 @@
 		8733CC6D281C4868000D053D /* DrawingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = SOURCE_ROOT; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
+		8733CC71281C4E22000D053D /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = SOURCE_ROOT; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
 		874D18FF1D973E7D00534AEA /* Colorue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorue.entitlements; sourceTree = SOURCE_ROOT; };
@@ -64,6 +65,8 @@
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
+		87F1491A281C501E00FB389E /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		87F14920281C574400FB389E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
 		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -104,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				8733CC6D281C4868000D053D /* DrawingService.swift */,
+				8733CC71281C4E22000D053D /* Drawing.swift */,
+				87F1491A281C501E00FB389E /* API.swift */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 		8763D31F1CEE247F00E3D528 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				87F14920281C574400FB389E /* GoogleService-Info.plist */,
 				8733CC70281C4A55000D053D /* .gitignore */,
 				8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */,
 				874D18FF1D973E7D00534AEA /* Colorue.entitlements */,
@@ -349,6 +355,7 @@
 				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
+				87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,7 +436,6 @@
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
-				8733CC6E281C4868000D053D /* DrawingService.swift in Sources */,
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
