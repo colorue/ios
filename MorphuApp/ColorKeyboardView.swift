@@ -48,24 +48,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    fileprivate var currentAlpha = AlphaType.high {
-        didSet {
-            switch(currentAlpha) {
-            case .high:
-                alphaButton.setImage(R.image.alphaHigh(), for: UIControlState())
-            case .medium:
-                alphaButton.setImage(R.image.alphaMid(), for: UIControlState())
-            case .low:
-                alphaButton.setImage(R.image.alphaLow(), for: UIControlState())
-            }
-        }
-    }
-    
-    enum AlphaType: CGFloat {
-        case high = 1.0
-        case medium = 0.7
-        case low = 0.3
-    }
+  fileprivate var currentAlpha: CGFloat = 1.0 {
+      didSet {
+        currentColorView.alpha = currentAlpha
+      }
+  }
 
     var delegate: ColorKeyboardDelegate?
     
@@ -80,9 +67,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func displayKeyboard() {
-        let selectorWidth = frame.width/10
+
+        backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
+
+        let selectorWidth = frame.width/11
         
-        for tag in 0...9 {
+        for tag in 0...10 {
             addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
         }
         
@@ -167,21 +157,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             let blue = CGFloat(prefs.float(forKey: Prefs.colorBlue))
             let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
             
-            switch (round(1000 * alpha) / 1000) {
-            case AlphaType.low.rawValue:
-                currentAlpha = .low
-            case AlphaType.medium.rawValue:
-                currentAlpha = .medium
-            default:
-                currentAlpha = .high
-            }
-
+            currentAlpha = alpha
             currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
             brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = Theme.colors[Int(arc4random_uniform(8) + 1)]
-            currentAlpha = .high
+          currentAlpha = 1.0
         }
         
         updateButtonColor()
@@ -235,30 +217,45 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     @objc fileprivate func switchAlpha(_ sender: UIButton) {
-        switch(currentAlpha) {
-        case .high:
-            currentAlpha = .medium
-        case .medium:
-            currentAlpha = .low
-        case .low:
-            currentAlpha = .high
-        }
+//        switch(currentAlpha) {
+//        case .high:
+//            currentAlpha = .medium
+//        case .medium:
+//            currentAlpha = .low
+//        case .low:
+//            currentAlpha = .high
+//        }
         delegate?.switchAlphaHowTo()
     }
     
     @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
-        currentColorView.backgroundColor = Theme.colors[sender.view!.tag]
+
+        if (sender.view!.tag == 0) {
+          currentAlpha = 0.0
+          currentColorView.backgroundColor = .white
+        } else {
+          currentAlpha = 1.0
+          currentColorView.backgroundColor = Theme.colors[sender.view!.tag]
+        }
         updateButtonColor()
     }
     
     @objc fileprivate func buttonTapped(_ sender: UIButton) {
         let percentMix: CGFloat = 0.1
-        currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix)
 
+        if (sender.tag == 0) {
+          currentAlpha = currentAlpha * (1 - percentMix)
+        } else {
+          if (currentAlpha == 0) {
+            currentColorView.backgroundColor = Theme.colors[sender.tag]
+          }
+          currentAlpha = currentAlpha * (1 - percentMix) + percentMix
+          currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix)
+        }
         updateButtonColor()
     }
     
-    fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
+  fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
         let c1 = color1.coreImageColor!
         let c2 = color2.coreImageColor!
         return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
@@ -273,11 +270,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func getAlpha() -> CGFloat? {
-        return currentAlpha.rawValue
+        return currentAlpha
     }
     
     func setAlphaHigh() {
-        currentAlpha = .high
+      currentAlpha = 1.0
     }
     
     func setColor(_ color: UIColor) {
@@ -291,9 +288,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     func updateButtonColor() {
-        let coreColor = currentColorView.backgroundColor?.coreImageColor!
-        let colorDarkness = coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
-        
+      let equivalentColor = blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
+      let coreColor = equivalentColor.coreImageColor
+      let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
+
         if (colorDarkness < 1.6) {
             brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
             brushSizeSlider.maximumTrackTintColor = UIColor.white

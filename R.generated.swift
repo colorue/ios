@@ -231,7 +231,7 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
 
-  /// This `R.image` struct is generated, and contains static references to 50 images.
+  /// This `R.image` struct is generated, and contains static references to 51 images.
   struct image {
     /// Image `Alpha High`.
     static let alphaHigh = Rswift.ImageResource(bundle: R.hostingBundle, name: "Alpha High")
@@ -247,6 +247,8 @@ struct R: Rswift.Validatable {
     static let check = Rswift.ImageResource(bundle: R.hostingBundle, name: "Check")
     /// Image `ChevronDown`.
     static let chevronDown = Rswift.ImageResource(bundle: R.hostingBundle, name: "ChevronDown")
+    /// Image `ClearPattern`.
+    static let clearPattern = Rswift.ImageResource(bundle: R.hostingBundle, name: "ClearPattern")
     /// Image `DropperActive`.
     static let dropperActive = Rswift.ImageResource(bundle: R.hostingBundle, name: "DropperActive")
     /// Image `Dropper`.
@@ -380,6 +382,13 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "ChevronDown", bundle: ..., traitCollection: ...)`
     static func chevronDown(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.chevronDown, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "ClearPattern", bundle: ..., traitCollection: ...)`
+    static func clearPattern(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.clearPattern, compatibleWith: traitCollection)
     }
     #endif
 
