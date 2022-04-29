@@ -10,12 +10,12 @@ target 'Colorue' do
 #    pod 'FBSDKShareKit'
 #    pod 'FBSDKLoginKit'
 #
-#    pod 'Firebase/Core'
-#    pod 'Firebase/Database'
-#    pod 'Firebase/Auth'
-#    pod 'Firebase/Messaging'
-#    pod 'Firebase/Storage'
-#    pod 'Firebase/Crash'
+    pod 'Firebase/Core'
+    pod 'Firebase/Database'
+    pod 'Firebase/Auth'
+    pod 'Firebase/Messaging'
+    pod 'Firebase/Storage'
+    pod 'Firebase/Crash'
 #
 #    pod 'CCBottomRefreshControl'
 ##    pod 'SinchVerification-Swift'

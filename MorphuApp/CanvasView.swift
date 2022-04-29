@@ -36,6 +36,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     fileprivate let resizeScale: CGFloat = 2.0
     fileprivate var actualSize = CGSize()
     fileprivate let prefs = UserDefaults.standard
+    fileprivate let watermark = R.image.watermark()!
+
     
     var baseDrawing: UIImage? {
         didSet {
@@ -73,6 +75,10 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         drag.minimumPressDuration = 0.0
         drag.delegate = self
         addGestureRecognizer(drag)
+
+//        let watermarkView = UIImageView(image: watermark)
+//      watermarkView.frame = CGRect(origin: CGPoint(x: imageView.frame.width - watermark.size.width, y:0), size: watermark.size)
+//        addSubview(watermarkView)
     }
     
     
