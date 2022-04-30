@@ -30,7 +30,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, ColorKeyboardDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
+class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
 
     var baseImage: UIImage?
 
@@ -180,24 +180,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
     func setAlphaHigh() {
         colorKeyboard?.setAlphaHigh()
     }
-    
-    func undo() {
-        self.canvas!.undo()
-    }
-  
-    
-    func trash() {
-        
-        let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
-        
-        deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-            self.canvas!.trash()
-        }))
-        
-        deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
-        self.present(deleteAlert, animated: true, completion: nil)
-    }
-    
+
     func setUnderfingerView(_ underFingerImage: UIImage) {
         self.colorKeyboard?.isUserInteractionEnabled = false
         if underFingerView.isHidden {
@@ -257,15 +240,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
         }
         self.colorKeyboard?.state = .colorDropper
         self.colorKeyboard!.updateButtonColor()
-    }
-    
-    func switchAlphaHowTo() {
-        if (!prefs.bool(forKey: "alphaHowTo")) {
-            let alphaHowTo = UIAlertController(title: "Opacity Rotator", message: "Tap this button to rotate through solid, sorta transparent, and mostly transparent lines.", preferredStyle: UIAlertControllerStyle.alert)
-            alphaHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-            self.present(alphaHowTo, animated: true, completion: nil)
-            prefs.setValue(true, forKey: "alphaHowTo")
-        }
     }
     
     func postDrawing(caption: String) {
@@ -358,6 +332,28 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Colo
    }
 }
 
+extension DrawingViewController: ColorKeyboardDelegate {
+
+  func trash() {
+      let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+
+      deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
+          self.canvas!.trash()
+      }))
+
+      deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+      self.present(deleteAlert, animated: true, completion: nil)
+  }
+
+  func undo() {
+      self.canvas!.undo()
+  }
+
+  func redo() {
+      self.canvas!.redo()
+  }
+}
+
 
 extension UINavigationBar {
 
@@ -368,3 +364,4 @@ extension UINavigationBar {
         addSubview(bottomBorderView)
     }
 }
+

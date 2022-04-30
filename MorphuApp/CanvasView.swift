@@ -31,6 +31,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     fileprivate var lastPoint: CGPoint?
     fileprivate var currentStroke: UIImage?
     fileprivate var undoStack = [UIImage]()
+    fileprivate var redoStack = [UIImage]()
     fileprivate var imageView = UIImageView()
     fileprivate let positionIndicator = R.image.positionIndicator()!
     fileprivate let resizeScale: CGFloat = 2.0
@@ -324,7 +325,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     
-    fileprivate func mergeCurrentStroke(_ alpha: Bool) {
+  fileprivate func mergeCurrentStroke(_ alpha: Bool) {
         UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
         undoStack.last?.draw(at: CGPoint.zero)
 
@@ -339,20 +340,28 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     
     fileprivate func addToUndoStack(_ image: UIImage?) {
         if let image = image {
-            if undoStack.count <= 20 {
+            if undoStack.count <= 128 {
                 undoStack.append(image)
             } else {
                 undoStack.remove(at: 0)
                 undoStack.append(image)
             }
+            redoStack.removeAll()
         }
     }
     
     // MARK: External Methods
     
     func undo() {
-        if undoStack.count > 1 {
-            undoStack.popLast()
+        if let undone = undoStack.popLast() {
+            redoStack.append(undone)
+            mergeCurrentStroke(false)
+        }
+    }
+
+    func redo() {
+        if let redone = redoStack.popLast() {
+            undoStack.append(redone)
             mergeCurrentStroke(false)
         }
     }

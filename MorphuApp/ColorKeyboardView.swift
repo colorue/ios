@@ -11,8 +11,8 @@ import Foundation
 
 protocol ColorKeyboardDelegate {
     func undo()
+    func redo()
     func trash()
-    func switchAlphaHowTo()
     func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
@@ -27,6 +27,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let currentColorView = UIView()
     let brushSizeSlider = UISlider()
     let undoButton = UIButton()
+    let redoButton = UIButton()
     let trashButton = UIButton()
     let dropperButton = UIButton()
     let paintBucketButton = UIButton()
@@ -34,7 +35,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let paintBucketSpinner = UIActivityIndicatorView()
     
     let eraserButton = UIButton()
-    let alphaButton = UIButton()
     let progressBar = UIProgressView()
     fileprivate let prefs = UserDefaults.standard
     
@@ -134,12 +134,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         bullsEyeButton.showsTouchWhenHighlighted = true
         addSubview(bullsEyeButton)
-        
-        alphaButton.tintColor = .white
-        alphaButton.addTarget(self, action: #selector(ColorKeyboardView.switchAlpha(_:)), for: .touchUpInside)
-        alphaButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-        alphaButton.showsTouchWhenHighlighted = true
-        addSubview(alphaButton)
+
+        redoButton.setImage(R.image.redoIcon(), for: UIControlState())
+        redoButton.tintColor = .white
+        redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
+        redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        redoButton.showsTouchWhenHighlighted = true
+        addSubview(redoButton)
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
         separatorU.backgroundColor = Theme.divider
@@ -187,6 +188,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     @objc fileprivate func undo(_ sender: UIButton) {
         delegate?.undo()
     }
+
+    @objc fileprivate func redo(_ sender: UIButton) {
+        delegate?.redo()
+    }
     
     @objc fileprivate func trash(_ sender: UIButton) {
         delegate?.trash()
@@ -214,18 +219,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     @objc fileprivate func sliderChanged(_ sender: UISlider) {
         sender.setValue(Float(lroundf(sender.value)), animated: true)
-    }
-    
-    @objc fileprivate func switchAlpha(_ sender: UIButton) {
-//        switch(currentAlpha) {
-//        case .high:
-//            currentAlpha = .medium
-//        case .medium:
-//            currentAlpha = .low
-//        case .low:
-//            currentAlpha = .high
-//        }
-        delegate?.switchAlphaHowTo()
     }
     
     @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
@@ -318,7 +311,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             trashButton.tintColor = .white
             dropperButton.tintColor = .white
             paintBucketButton.tintColor = .white
-            alphaButton.tintColor = .white
+            redoButton.tintColor = .white
             eraserButton.tintColor = .white
             bullsEyeButton.tintColor = .white
             paintBucketSpinner.color = .white
@@ -327,7 +320,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             trashButton.tintColor = .black
             dropperButton.tintColor = .black
             paintBucketButton.tintColor = .black
-            alphaButton.tintColor = .black
+            redoButton.tintColor = .black
             eraserButton.tintColor = .black
             bullsEyeButton.tintColor = .black
             paintBucketSpinner.color = .black
@@ -339,9 +332,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.isHidden = true
         dropperButton.isHidden = true
         paintBucketButton.isHidden = true
-        alphaButton.isHidden = true
-        bullsEyeButton.isHidden = true
-        brushSizeSlider.isHidden = true
+        redoButton.isHidden = true
         paintBucketSpinner.isHidden = true
         progressBar.isHidden = false
         progressBar.setProgress(progress, animated: true)
@@ -353,7 +344,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         trashButton.isHidden = false
         dropperButton.isHidden = false
         paintBucketButton.isHidden = false
-        alphaButton.isHidden = false
+        redoButton.isHidden = false
         bullsEyeButton.isHidden = false
         paintBucketSpinner.isHidden = false
         brushSizeSlider.isHidden = false
