@@ -37,18 +37,26 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="PqF-xI-acO">
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="save" id="8Hf-28-OCg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="Eji-zA-eFB">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="saveDrawing:" destination="CdS-6r-7bw" id="wEx-2E-UMy"/>
+                                <segue destination="2lo-qD-s5v" kind="unwind" unwindAction="close:" id="dDZ-MM-PWG"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="action" id="OVE-88-MqG">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="shareDrawing:" destination="CdS-6r-7bw" id="bPu-UJ-ZIe"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem style="plain" systemItem="action" id="OVE-88-MqG">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="shareDrawing:" destination="CdS-6r-7bw" id="bPu-UJ-ZIe"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem style="plain" systemItem="save" id="8Hf-28-OCg">
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="saveDrawing:" destination="CdS-6r-7bw" id="wEx-2E-UMy"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="postButton" destination="OVE-88-MqG" id="7eP-6M-WmE"/>

@@ -8,6 +8,7 @@
 
 import UIKit
 import Toast_Swift
+import RealmSwift
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -31,6 +32,14 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
+
+    var drawing: Drawing? {
+      didSet {
+        if let base64 = drawing?.base64 {
+          baseImage = UIImage.fromBase64(base64)
+        }
+      }
+    }
 
     var baseImage: UIImage?
 
@@ -65,13 +74,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 60, width: canvasHeight/1.3, height: canvasHeight)
         
         
-        if prefs.bool(forKey: Prefs.saved) {
-            if baseImage == nil {
-                if let savedDrawing = prefs.string(forKey: Prefs.savedDrawing) {
-                    baseImage = UIImage.fromBase64(savedDrawing)
-                }
-            }
-        }
+//        if prefs.bool(forKey: Prefs.saved) {
+//            if baseImage == nil {
+//                if let savedDrawing = prefs.string(forKey: Prefs.savedDrawing) {
+//                    baseImage = UIImage.fromBase64(savedDrawing)
+//                }
+//            }
+//        }
         
         let canvas = CanvasView(frame: canvasFrame)
         canvas.delegate = self
@@ -316,7 +325,26 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         prefs.setValue(color?.coreImageColor!.blue, forKey: Prefs.colorBlue)
         prefs.setValue(colorKeyboard?.getAlpha(), forKey: Prefs.colorAlpha)
         prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: Prefs.brushSize)
-        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
+//        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
+
+        print("canvas?.isEmpty ?? false", canvas?.isEmpty)
+        guard let canvas = canvas, !canvas.isEmpty else { return }
+        let realm = try! Realm()
+
+        if let drawing = drawing {
+          try! realm.write {
+            drawing.base64 = self.canvas?.getDrawing().toBase64()
+            drawing.updatedAt = Date().timeIntervalSince1970
+          }
+        } else {
+          let drawing = Drawing()
+          drawing.base64 = self.canvas?.getDrawing().toBase64()
+          try! realm.write {
+              realm.add(drawing)
+          }
+        }
+
+
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {

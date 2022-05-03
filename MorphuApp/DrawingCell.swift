@@ -16,5 +16,11 @@ class DrawingCell: UICollectionViewCell {
     }
   }
 
-  var drawingId: String?
+  var drawing: Drawing? {
+    didSet {
+      if let base64 = drawing?.base64 {
+        imageView?.image = UIImage.fromBase64(base64)
+      }
+    }
+  }
 }

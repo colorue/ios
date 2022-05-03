@@ -51,6 +51,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
             mergeCurrentStroke(false)
         }
     }
+
+  var isEmpty: Bool {
+    get {
+      return undoStack.count < 2
+    }
+  }
     
     var delegate: CanvasDelegate?
 
