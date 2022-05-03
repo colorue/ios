@@ -57,13 +57,17 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = false
+
         
         let logo = R.image.logoInactive()
         let imageView = UIImageView(image:logo)
         imageView.tintColor = Theme.black
         self.navigationItem.titleView = imageView
         self.navigationController?.navigationBar.backgroundColor = .white
-      navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
+        self.navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
 
 
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
@@ -327,7 +331,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: Prefs.brushSize)
 //        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
 
-        print("canvas?.isEmpty ?? false", canvas?.isEmpty)
         guard let canvas = canvas, !canvas.isEmpty else { return }
         let realm = try! Realm()
 
@@ -339,12 +342,11 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         } else {
           let drawing = Drawing()
           drawing.base64 = self.canvas?.getDrawing().toBase64()
+          self.drawing = drawing
           try! realm.write {
               realm.add(drawing)
           }
         }
-
-
     }
     
     func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {

@@ -34,7 +34,7 @@ final class DrawingsViewController: UICollectionViewController {
     super.viewDidLoad()
     navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
 
-    collectionView?.backgroundColor = Theme.divider
+//    collectionView?.backgroundColor = Theme.divider
 
 
     if let savedDrawing = UserDefaults.standard.string(forKey: Prefs.savedDrawing) {
@@ -79,8 +79,7 @@ final class DrawingsViewController: UICollectionViewController {
   }
 
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    guard let nav = segue.destination as? UINavigationController,
-          let drawingController = nav.topViewController as? DrawingViewController else { return }
+    guard let drawingController = segue.destination as? DrawingViewController else { return }
       if let drawingCell = sender as? DrawingCell {
         drawingController.drawing = drawingCell.drawing
       }
@@ -147,5 +146,60 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     minimumLineSpacingForSectionAt section: Int
   ) -> CGFloat {
     return sectionInsets.left
+  }
+
+
+  override func collectionView(_ collectionView: UICollectionView,
+                               contextMenuConfigurationForItemAt indexPath: IndexPath,
+                               point: CGPoint) -> UIContextMenuConfiguration? {
+      return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
+        let copyAction =
+            UIAction(title: NSLocalizedString("Copy", comment: ""),
+                     image: UIImage(systemName: "doc.on.doc")) { action in
+                self.performCopy(indexPath)
+            }
+
+        let shareAction =
+            UIAction(title: NSLocalizedString("Share", comment: ""),
+                     image: UIImage(systemName: "square.and.arrow.up")) { action in
+                self.performShare(indexPath)
+            }
+
+        let saveAction =
+            UIAction(title: NSLocalizedString("Add to Photos", comment: ""),
+                     image: UIImage(systemName: "square.and.arrow.down")) { action in
+                self.performSave(indexPath)
+            }
+        let deleteAction =
+            UIAction(title: NSLocalizedString("Delete from Colorue", comment: ""),
+                     image: UIImage(systemName: "trash"),
+                     attributes: .destructive) { action in
+                self.performDelete(indexPath)
+            }
+          return UIMenu(title: "", children: [copyAction, shareAction, saveAction, deleteAction])
+      }
+  }
+
+  private func performShare (_ indexPath: IndexPath) {
+    print("performShare", indexPath)
+  }
+
+  private func performCopy (_ indexPath: IndexPath) {
+    print("performCopy", indexPath)
+  }
+
+  private func performSave (_ indexPath: IndexPath) {
+    print("performSave", indexPath)
+  }
+
+  private func performDelete (_ indexPath: IndexPath) {
+    let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+
+    deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { (action: UIAlertAction!) in
+      print("performDelete", indexPath)
+    }))
+
+    deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+    self.present(deleteAlert, animated: true, completion: nil)
   }
 }

@@ -44,7 +44,7 @@
                                 </collectionViewCellContentView>
                                 <connections>
                                     <outlet property="imageView" destination="vgB-XP-fnI" id="YXo-jP-FbJ"/>
-                                    <segue destination="2lb-wf-t16" kind="presentation" identifier="openDrawing" modalPresentationStyle="overFullScreen" id="Thc-Lg-F41"/>
+                                    <segue destination="2lb-wf-t16" kind="show" identifier="openDrawing" id="Thc-Lg-F41"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
@@ -58,7 +58,7 @@
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Ho6-oO-ojP">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <segue destination="2lb-wf-t16" kind="presentation" modalPresentationStyle="overFullScreen" id="2gs-C3-HgV"/>
+                                <segue destination="2lb-wf-t16" kind="show" id="2gs-C3-HgV"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
