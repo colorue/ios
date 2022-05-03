@@ -11,11 +11,6 @@ import RealmSwift
 
 final class DrawingsViewController: UICollectionViewController {
   // MARK: - Properties
-//  private let drawings = [UIImage(named: "Onboarding1"), UIImage(named: "Onboarding2"), UIImage(named: "Onboarding3"), UIImage(named: "Onboarding4"), UIImage(named: "Onboarding5")]
-
-
-//  private var drawings = realm.objects(Drawing.self)
-
   private var drawings: Results<Drawing> {
     let realm = try! Realm()
     return realm.objects(Drawing.self)
@@ -34,9 +29,6 @@ final class DrawingsViewController: UICollectionViewController {
     super.viewDidLoad()
     navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
 
-//    collectionView?.backgroundColor = Theme.divider
-
-
     if let savedDrawing = UserDefaults.standard.string(forKey: Prefs.savedDrawing) {
       let realm = try! Realm()
       let drawing = Drawing()
@@ -53,26 +45,12 @@ final class DrawingsViewController: UICollectionViewController {
         case .initial:
           collectionView.reloadData()
         case .update(_, let deletions, let insertions, let modifications):
-            // Query results have changed.
-            print("Deleted indices: ", deletions)
-            print("Inserted indices: ", insertions)
-            print("Modified modifications: ", modifications)
-            collectionView.reloadData()
-
-//          tableView.performBatchUpdates({
-//              // Always apply updates in the following order: deletions, insertions, then modifications.
-//              // Handling insertions before deletions may result in unexpected behavior.
-//              tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}),
-//                                   with: .automatic)
-//              tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }),
-//                                   with: .automatic)
-//              tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }),
-//                                   with: .automatic)
-//          }, completion: { finished in
-//              // ...
-//          })
+          collectionView.performBatchUpdates({
+            collectionView.deleteItems(at: deletions.map({ IndexPath(row: $0, section: 0)}))
+            collectionView.insertItems(at: insertions.map({ IndexPath(row: $0, section: 0) }))
+            collectionView.reloadItems(at: modifications.map({ IndexPath(row: $0, section: 0) }))
+          }, completion: nil)
         case .error(let error):
-            // An error occurred while opening the Realm file on the background worker thread
             fatalError("\(error)")
         }
     }
@@ -181,22 +159,81 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
   }
 
   private func performShare (_ indexPath: IndexPath) {
-    print("performShare", indexPath)
+    let drawing = drawings[indexPath.row]
+    guard let base64 = drawing.base64 else { return }
+    let image = UIImage.fromBase64(base64)
+
+    let activityViewController : UIActivityViewController = UIActivityViewController(
+        activityItems: [image], applicationActivities: nil)
+
+    // This lines is for the popover you need to show in iPad
+    if let cell = collectionView?.cellForItem(at: indexPath) {
+      activityViewController.popoverPresentationController?.sourceRect = cell.frame
+    }
+    activityViewController.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
+
+    // This line remove the arrow of the popover to show in iPad
+    activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
+    activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
+
+    // Pre-configuring activity items
+    activityViewController.activityItemsConfiguration = [
+      UIActivity.ActivityType.message,
+      UIActivity.ActivityType.postToFacebook,
+      UIActivity.ActivityType.postToTwitter,
+    ] as? UIActivityItemsConfigurationReading
+
+    // Anything you want to exclude
+    activityViewController.excludedActivityTypes = [
+        UIActivity.ActivityType.postToWeibo,
+        UIActivity.ActivityType.print,
+        UIActivity.ActivityType.assignToContact,
+        UIActivity.ActivityType.addToReadingList,
+        UIActivity.ActivityType.postToFlickr,
+        UIActivity.ActivityType.postToVimeo,
+        UIActivity.ActivityType.postToTencentWeibo,
+    ]
+
+    activityViewController.isModalInPresentation = true
+    self.present(activityViewController, animated: true, completion: nil)
   }
 
   private func performCopy (_ indexPath: IndexPath) {
-    print("performCopy", indexPath)
+    let drawing = drawings[indexPath.row]
+    let realm = try! Realm()
+    let drawingCopy = Drawing()
+    drawingCopy.base64 = drawing.base64
+    try! realm.write {
+      realm.add(drawingCopy)
+    }
   }
 
   private func performSave (_ indexPath: IndexPath) {
-    print("performSave", indexPath)
+    let drawing = drawings[indexPath.row]
+    guard let base64 = drawing.base64 else { return }
+    let image = UIImage.fromBase64(base64)
+    UIImageWriteToSavedPhotosAlbum(image, self, #selector(savedImage), nil)
+  }
+
+  @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
+      if let err = error {
+        view.makeToast("Error saving drawing", position: .center)
+          print(err)
+          return
+      }
+    view.makeToast("Saved to Photos", position: .center)
   }
 
   private func performDelete (_ indexPath: IndexPath) {
     let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
 
-    deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { (action: UIAlertAction!) in
+    deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       print("performDelete", indexPath)
+      guard let drawing = self?.drawings[indexPath.row]  else { return }
+      let realm = try! Realm()
+      try! realm.write {
+        realm.delete(drawing)
+      }
     }))
 
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))

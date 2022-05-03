@@ -127,10 +127,17 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   @IBAction func saveDrawing(_ sender: UIButton) {
       if let drawing = canvas?.getDrawing() {
           UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(savedImage), nil)
-//        sender.isEnabled = false
-//        self.view.makeToastActivity(.center)
       }
     }
+
+  @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
+      if let err = error {
+        view.makeToast("Error saving drawing", position: .center)
+          print(err)
+          return
+      }
+    view.makeToast("Saved to Photos", position: .center)
+  }
 
   @IBAction func shareDrawing (_ sender: UIButton) {
     guard let drawing = canvas?.getDrawing() else { return }
@@ -164,18 +171,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         UIActivity.ActivityType.postToTencentWeibo,
     ]
 
-    print("activityViewController")
     activityViewController.isModalInPresentation = true
     self.present(activityViewController, animated: true, completion: nil)
-  }
-
-  @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
-      if let err = error {
-        view.makeToast("Error saving drawing", position: .center)
-          print(err)
-          return
-      }
-    view.makeToast("Saved to Photos", position: .center)
   }
     
     func getCurrentColor() -> UIColor {
@@ -255,31 +252,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         self.colorKeyboard!.updateButtonColor()
     }
     
-    func postDrawing(caption: String) {
-        self.baseImage = nil
-        self.postButton.isEnabled = false
-        self.colorKeyboard!.uploading(0)
-        self.view.isUserInteractionEnabled = false
-        
-//        let newDrawing = Drawing(user: User(), id: "", caption: caption)
-//        newDrawing.image = (canvas?.getDrawing() ?? UIImage())
-        
-//        DrawingService().postDrawing(newDrawing, progressCallback: self.colorKeyboard!.uploading, finishedCallback: postCallback)
-    }
-    
-    func postCallback(_ uploaded: Bool) {
-        if uploaded {
-            prefs.setValue(false, forKey: Prefs.saved)
-
-            NotificationCenter.default.removeObserver(self)
-            self.performSegue(withIdentifier: R.segue.drawingViewController.saveToHome, sender: self)
-        } else {
-            self.colorKeyboard!.uploadingFailed()
-            self.view.isUserInteractionEnabled = true
-            self.postButton.isEnabled = true
-        }
-    }
-    
   @objc func unwind(_ sender: UIBarButtonItem) {
         self.save()
 
@@ -299,21 +271,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        if segue.identifier == "saveToHome" {
-//            let targetController = segue.destination as? WallViewController
-//            if targetController?.tableView.numberOfRows(inSection: 1) > 0 {
-//                targetController?.tableView.scrollToRow(at: IndexPath(row: 0, section: 1), at: UITableViewScrollPosition.top, animated: true)
-//            }
-        }
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.save()
-
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -329,7 +289,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
         prefs.setValue(color?.coreImageColor!.blue, forKey: Prefs.colorBlue)
         prefs.setValue(colorKeyboard?.getAlpha(), forKey: Prefs.colorAlpha)
         prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: Prefs.brushSize)
-//        prefs.setValue(self.canvas?.getDrawing().toBase64(), forKey: Prefs.savedDrawing)
 
         guard let canvas = canvas, !canvas.isEmpty else { return }
         let realm = try! Realm()
