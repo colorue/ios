@@ -197,7 +197,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   
   func hideUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = true
-    UIView.animate(withDuration: 0.5,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
       self.underFingerView.alpha = 0.0
       self.keyboardCover.alpha = 0.0
     }, completion: nil)
@@ -205,7 +205,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   
   func showUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.5,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
       self.underFingerView.alpha = 1.0
       self.keyboardCover.alpha = 0.7
     }, completion: nil)

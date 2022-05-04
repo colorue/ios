@@ -84,7 +84,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     addGestureRecognizer(drag)
   }
 
-
   // MARK: Controll Methods
 
   @objc fileprivate func handleDrag(_ sender: UILongPressGestureRecognizer) {
