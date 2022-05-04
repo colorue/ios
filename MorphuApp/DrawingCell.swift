@@ -17,7 +17,7 @@ class DrawingCell: UICollectionViewCell {
       imageView?.layer.borderWidth = 0.5
     }
   }
-
+  
   var drawing: Drawing? {
     didSet {
       if let base64 = drawing?.base64 {
