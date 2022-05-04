@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 
 protocol ColorKeyboardDelegate {
+  func setColor(_ color: UIColor)
   func undo()
   func redo()
   func trash()
@@ -158,14 +159,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
       
       currentAlpha = alpha
-      currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+      setColor(UIColor(red: red, green: green, blue: blue, alpha: 1.0))
       brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-      currentColorView.backgroundColor = Theme.colors[Int(arc4random_uniform(8) + 1)]
+      setColor(Theme.colors[Int(arc4random_uniform(8) + 1)])
       currentAlpha = 1.0
     }
-    
+
     updateButtonColor()
   }
   
@@ -243,10 +244,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     feedbackGenerator = nil
     if (sender.view!.tag == 0) {
       currentAlpha = 0.0
-      currentColorView.backgroundColor = .white
+      setColor(.white)
     } else {
       currentAlpha = 1.0
-      currentColorView.backgroundColor = Theme.colors[sender.view!.tag]
+      setColor(Theme.colors[sender.view!.tag])
     }
     updateButtonColor()
   }
@@ -261,10 +262,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       currentAlpha = currentAlpha * (1 - percentMix)
     } else {
       if (currentAlpha == 0) {
-        currentColorView.backgroundColor = Theme.colors[sender.tag]
+        setColor(Theme.colors[sender.tag])
       }
       currentAlpha = currentAlpha * (1 - percentMix) + percentMix
-      currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix)
+      setColor(blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix))
     }
     updateButtonColor()
   }
@@ -292,7 +293,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func setColor(_ color: UIColor) {
-    setCurrentColor(color, animationTime: 0.5)
+    delegate?.setColor(color)
+    currentColorView.backgroundColor = color
+    setCurrentColor(color, animationTime: 0.3)
   }
   
   fileprivate func setCurrentColor(_ color: UIColor, animationTime: Double) {

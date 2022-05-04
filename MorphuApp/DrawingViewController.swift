@@ -94,7 +94,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     self.colorKeyboard = colorKeyboard
     
     self.keyboardCover.frame = colorKeyboardFrame
-    keyboardCover.backgroundColor = UIColor.black
     self.keyboardCover.alpha = 0.0
     self.view.addSubview(keyboardCover)
 
@@ -114,6 +113,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
     self.underFingerView.alpha = 0.0
+    underFingerView.layer.borderWidth = 0.5
+    underFingerView.layer.borderColor = Theme.divider.cgColor
     self.view.addSubview(underFingerView)
     
     prefs.setValue(true, forKey: "saved")
@@ -123,14 +124,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     let duplicateAction =
     UIAction(title: NSLocalizedString("Duplicate", comment: ""),
              image: UIImage(systemName: "doc.on.doc")) { [weak self] action in
-      print("Duplicate")
       self?.duplicateDrawing()
     }
 
     let shareAction =
     UIAction(title: NSLocalizedString("Share", comment: ""),
              image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
-      print("Share")
       self?.shareDrawing()
     }
 
@@ -146,14 +145,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     UIAction(title: NSLocalizedString("Delete", comment: ""),
              image: UIImage(systemName: "trash"),
              attributes: .destructive) { [weak self] action in
-      print("Delete")
       self?.trash()
     }
     if #available(iOS 14.0, *) {
       postButton.menu = UIMenu(title: "", children: [duplicateAction, shareAction, saveAction, deleteAction])
       postButton.primaryAction = nil
     } else {
-      // Fallback on earlier versions
+      postButton.target = self
+      postButton.action = #selector(DrawingViewController.shareDrawing)
     }
   }
 
@@ -204,7 +203,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     feedbackGenerator = nil
   }
   
-  func shareDrawing () {
+  @objc func shareDrawing () {
     guard let drawing = canvas?.getDrawing() else { return }
     
     let activityViewController: UIActivityViewController = UIActivityViewController(
@@ -322,6 +321,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 }
 
 extension DrawingViewController: ColorKeyboardDelegate {
+
+  func setColor (_ color: UIColor) {
+    keyboardCover.backgroundColor = color
+  }
   
   func trash() {
     let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
@@ -392,7 +395,7 @@ extension DrawingViewController: CanvasDelegate {
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
       self.underFingerView.alpha = 1.0
       self.drawButton.alpha = 1.0
-      self.keyboardCover.alpha = 0.7
+      self.keyboardCover.alpha = 1.0
     }, completion: nil)
   }
 

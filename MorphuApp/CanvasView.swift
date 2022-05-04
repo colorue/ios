@@ -227,6 +227,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       addToUndoStack(imageView.image)
       currentStroke = nil
       mergeCurrentStroke(false)
+      undo()
+      _ = redoStack.popLast()
       delegate.hideUnderFingerView()
     }
   }
