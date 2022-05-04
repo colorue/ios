@@ -755,6 +755,7 @@ struct _R: Rswift.Validatable {
       let name = "Drawing"
 
       static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "ellipsis.circle") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'ellipsis.circle' is used in storyboard 'Drawing', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }

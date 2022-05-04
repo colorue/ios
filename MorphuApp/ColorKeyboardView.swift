@@ -36,6 +36,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let paintBucketSpinner = UIActivityIndicatorView()
   
   var feedbackGenerator: UISelectionFeedbackGenerator? = nil
+  var pastStrokeSize:Float = 0.0
   
   let eraserButton = UIButton()
   fileprivate let prefs = UserDefaults.standard
@@ -93,6 +94,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
     brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
     brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
+    brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderMoved(_:)), for: .valueChanged)
     brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
     toolbarWrapper.addSubview(brushSizeSlider)
     
@@ -234,8 +236,20 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     state = state == .bullsEye ? .none : .bullsEye
   }
   
+  @objc fileprivate func sliderMoved(_ sender: UISlider) {
+    let newSize = Float(lroundf(sender.value))
+    if newSize != pastStrokeSize {
+      pastStrokeSize = newSize
+      feedbackGenerator = feedbackGenerator ?? UISelectionFeedbackGenerator()
+      feedbackGenerator?.selectionChanged()
+      feedbackGenerator?.prepare()
+    }
+  }
+
   @objc fileprivate func sliderChanged(_ sender: UISlider) {
-    sender.setValue(Float(lroundf(sender.value)), animated: true)
+    let newSize = Float(lroundf(sender.value))
+    sender.setValue(newSize, animated: true)
+    feedbackGenerator = nil
   }
   
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
