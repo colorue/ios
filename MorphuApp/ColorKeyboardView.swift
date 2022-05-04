@@ -73,18 +73,17 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
 
     let colorButtonWrapper = UIView()
     addSubview(colorButtonWrapper)
-    colorButtonWrapper.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height - selectorWidth)
+    colorButtonWrapper.frame = CGRect(x: 0, y: selectorWidth, width: frame.width, height: frame.height - selectorWidth)
     for tag in 0...10 {
       colorButtonWrapper.addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
     }
 
-    currentColorView.frame = CGRect(x: 0, y: frame.height - selectorWidth, width: frame.width, height: selectorWidth)
+    currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: selectorWidth)
     addSubview(currentColorView)
 
     let toolbarWrapper = UIView()
     toolbarWrapper.frame = currentColorView.frame
-    addSubview(currentColorView)
-
+    addSubview(toolbarWrapper)
 
     brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
     brushSizeSlider.maximumTrackTintColor = UIColor.white
@@ -173,7 +172,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     newButton.backgroundColor = color
     newButton.tag = tag
     newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
-    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - selectorWidth)
+    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: selectorWidth, width: selectorWidth, height: frame.height - selectorWidth)
 
     let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
     tap.minimumPressDuration = 0.15
@@ -282,7 +281,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let equivalentColor = blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
     let coreColor = equivalentColor.coreImageColor
     let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
-    print("colorDarkness", colorDarkness)
     if (colorDarkness < 1.6) {
       brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
       brushSizeSlider.maximumTrackTintColor = UIColor.white
