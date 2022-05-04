@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol ColorKeyboardDelegate {
-  func setColor(_ color: UIColor)
+  func setColor(_ color: UIColor, secondary: UIColor)
   func undo()
   func redo()
   func trash()
@@ -293,15 +293,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func setColor(_ color: UIColor) {
-    delegate?.setColor(color)
     currentColorView.backgroundColor = color
-    setCurrentColor(color, animationTime: 0.3)
-  }
-  
-  fileprivate func setCurrentColor(_ color: UIColor, animationTime: Double) {
-    UIView.animate(withDuration: animationTime,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.currentColorView.backgroundColor = color
-    }, completion: nil)
+    updateButtonColor()
+    delegate?.setColor(color, secondary: paintBucketButton.tintColor)
   }
   
   func updateButtonColor() {

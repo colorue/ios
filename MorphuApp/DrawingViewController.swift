@@ -43,7 +43,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   var baseImage: UIImage?
-  var feedbackGenerator: UINotificationFeedbackGenerator? = nil
+  var notificationFeedback: UINotificationFeedbackGenerator? = nil
+  var feedback: UISelectionFeedbackGenerator? = nil
   
   let prefs = UserDefaults.standard
   
@@ -51,7 +52,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   var canvas: CanvasView?
   var underFingerView = UIImageView()
   var keyboardCover = UIView()
-  let drawButton = UIButton(type: UIButtonType.custom)
+  let drawButtonL = UIButton(type: UIButtonType.custom)
+  let drawButtonR = UIButton(type: UIButtonType.custom)
 
   @IBOutlet weak var postButton: UIBarButtonItem!
 
@@ -95,27 +97,40 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     
     self.keyboardCover.frame = colorKeyboardFrame
     self.keyboardCover.alpha = 0.0
+    keyboardCover.backgroundColor = colorKeyboard.getCurrentColor()
     self.view.addSubview(keyboardCover)
 
+    let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
+    separatorU.backgroundColor = Theme.divider
+    keyboardCover.addSubview(separatorU)
 
-    drawButton.titleLabel?.text = "Draw"
-    drawButton.frame = CGRect(x: 0, y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
-    drawButton.backgroundColor = .red
-    drawButton.alpha = 0.0
-    view.addSubview(drawButton)
+    drawButtonL.frame = CGRect(x: keyboardHeight / 4.0, y: keyboardHeight / 4.0, width: keyboardHeight / 2.0, height: keyboardHeight / 2.0)
+    drawButtonL.layer.cornerRadius = keyboardHeight / 4.0
+    drawButtonL.backgroundColor = .white
+    drawButtonL.isHidden = true
+    keyboardCover.addSubview(drawButtonL)
 
-    let drag = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
-    drag.minimumPressDuration = 0.0
-    drag.delegate = self
-    drawButton.addGestureRecognizer(drag)
-    
+    drawButtonR.frame = CGRect(x: view.frame.maxX - keyboardHeight / 4.0 - keyboardHeight / 2.0, y: keyboardHeight / 4.0, width: keyboardHeight / 2.0, height: keyboardHeight / 2.0)
+    drawButtonR.layer.cornerRadius = keyboardHeight / 4.0
+    drawButtonR.backgroundColor = .white
+    drawButtonR.isHidden = true
+    keyboardCover.addSubview(drawButtonR)
 
-    self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
+    let holdL = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
+    holdL.minimumPressDuration = 0.0
+    holdL.delegate = self
+    drawButtonL.addGestureRecognizer(holdL)
+
+    let holdR = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
+    holdR.minimumPressDuration = 0.0
+    holdR.delegate = self
+    drawButtonR.addGestureRecognizer(holdR)
+
+    underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
-    self.underFingerView.alpha = 0.0
     underFingerView.layer.borderWidth = 0.5
     underFingerView.layer.borderColor = Theme.divider.cgColor
-    self.view.addSubview(underFingerView)
+    keyboardCover.addSubview(underFingerView)
     
     prefs.setValue(true, forKey: "saved")
 
@@ -138,8 +153,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
              image: UIImage(systemName: "square.and.arrow.down")) { [weak self] action in
       guard let self = self, let drawing = self.canvas?.getDrawing() else { return }
       UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(self.savedImage), nil)
-      self.feedbackGenerator = UINotificationFeedbackGenerator()
-      self.feedbackGenerator?.prepare()
+      self.notificationFeedback = UINotificationFeedbackGenerator()
+      self.notificationFeedback?.prepare()
     }
     let deleteAction =
     UIAction(title: NSLocalizedString("Delete", comment: ""),
@@ -158,10 +173,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
     if (sender.state == .began) {
+      feedback = UISelectionFeedbackGenerator()
+      feedback?.selectionChanged()
       aimDrawingOn = true
     } else if (sender.state == .ended) {
       aimDrawingOn = false
       canvas?.completeCurve()
+      feedback?.selectionChanged()
+      feedback = nil
     }
   }
   
@@ -177,21 +196,21 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
     if let err = error {
-      feedbackGenerator?.notificationOccurred(.error)
-      feedbackGenerator = nil
+      notificationFeedback?.notificationOccurred(.error)
+      notificationFeedback = nil
       view.makeToast("Error saving drawing", position: .center)
       print(err)
       return
     }
-    feedbackGenerator?.notificationOccurred(.success)
+    notificationFeedback?.notificationOccurred(.success)
     view.makeToast("Saved to Photos", position: .center)
-    feedbackGenerator = nil
+    notificationFeedback = nil
   }
 
   func duplicateDrawing () {
     guard let image = canvas?.getDrawing() else { return }
-    feedbackGenerator = UINotificationFeedbackGenerator()
-    feedbackGenerator?.prepare()
+    notificationFeedback = UINotificationFeedbackGenerator()
+    notificationFeedback?.prepare()
     let realm = try! Realm()
     let drawingDuplicate = Drawing()
     drawingDuplicate.base64 = image.toBase64()
@@ -199,8 +218,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       realm.add(drawingDuplicate)
     }
     view.makeToast("Duplicated Drawing", position: .center)
-    feedbackGenerator?.notificationOccurred(.success)
-    feedbackGenerator = nil
+    notificationFeedback?.notificationOccurred(.success)
+    notificationFeedback = nil
   }
   
   @objc func shareDrawing () {
@@ -322,8 +341,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
 extension DrawingViewController: ColorKeyboardDelegate {
 
-  func setColor (_ color: UIColor) {
-    keyboardCover.backgroundColor = color
+  func setColor (_ color: UIColor, secondary: UIColor) {
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+      self?.keyboardCover.backgroundColor = color
+      self?.drawButtonL.backgroundColor = secondary
+      self?.drawButtonR.backgroundColor = secondary
+    }, completion: nil)
   }
   
   func trash() {
@@ -332,15 +355,15 @@ extension DrawingViewController: ColorKeyboardDelegate {
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
       guard let self = self, let drawing = self.drawing else { return }
-      self.feedbackGenerator = UINotificationFeedbackGenerator()
-      self.feedbackGenerator?.prepare()
+      self.notificationFeedback = UINotificationFeedbackGenerator()
+      self.notificationFeedback?.prepare()
       let realm = try! Realm()
       try! realm.write {
         realm.delete(drawing)
       }
       self.drawing = nil
-      self.feedbackGenerator?.notificationOccurred(.success)
-      self.feedbackGenerator = nil
+      self.notificationFeedback?.notificationOccurred(.success)
+      self.notificationFeedback = nil
     }))
     
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
@@ -384,18 +407,17 @@ extension DrawingViewController: CanvasDelegate {
   func hideUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = true
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.underFingerView.alpha = 0.0
-      self.drawButton.alpha = 0.0
       self.keyboardCover.alpha = 0.0
     }, completion: nil)
   }
 
   func showUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.underFingerView.alpha = 1.0
-      self.drawButton.alpha = 1.0
-      self.keyboardCover.alpha = 1.0
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+      self?.keyboardCover.alpha = 1.0
+      let isBullsEye = self?.colorKeyboard?.state == .bullsEye
+      self?.drawButtonL.isHidden = !isBullsEye
+      self?.drawButtonR.isHidden = !isBullsEye
     }, completion: nil)
   }
 
