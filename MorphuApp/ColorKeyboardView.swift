@@ -11,9 +11,6 @@ import Foundation
 
 protocol ColorKeyboardDelegate {
   func setColor(_ color: UIColor, secondary: UIColor)
-  func undo()
-  func redo()
-  func trash()
   func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
@@ -27,9 +24,6 @@ enum KeyboardToolState: Int {
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let currentColorView = UIView()
   let brushSizeSlider = UISlider()
-  let undoButton = UIButton()
-  let redoButton = UIButton()
-  let trashButton = UIButton()
   let dropperButton = UIButton()
   let paintBucketButton = UIButton()
   let bullsEyeButton = UIButton()
@@ -100,27 +94,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     let buttonSize = selectorWidth
     
-    trashButton.setImage(R.image.trashIcon(), for: UIControlState())
-    trashButton.tintColor = .white
-    trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
-    trashButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
-    trashButton.showsTouchWhenHighlighted = true
-//    toolbarWrapper.addSubview(trashButton)
-    
-    undoButton.setImage(R.image.undoIcon(), for: UIControlState())
-    undoButton.tintColor = .white
-    undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
-    undoButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
-    undoButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(undoButton)
-    
-    redoButton.setImage(R.image.redoIcon(), for: UIControlState())
-    redoButton.tintColor = .white
-    redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
-    redoButton.frame = CGRect(x: frame.minX + (buttonSize), y: 0, width: buttonSize, height: buttonSize)
-    redoButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(redoButton)
-    
     paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
     paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
     paintBucketButton.tintColor = .white
@@ -146,7 +119,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     bullsEyeButton.setImage(R.image.bullsEyeActive(), for: .selected)
     bullsEyeButton.tintColor = .white
     bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
-    bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: 0, width: buttonSize, height: buttonSize)
+    bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
     bullsEyeButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(bullsEyeButton)
     
@@ -186,29 +159,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     return newButton
   }
-  
-  @objc fileprivate func undo(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.undo()
-  }
-  
-  @objc fileprivate func redo(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.redo()
-  }
-  
-  @objc fileprivate func trash(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.trash()
-    state = .none
-  }
-  
+
   @objc fileprivate func dropper(_ sender: UIButton) {
     feedbackGenerator = UISelectionFeedbackGenerator()
     feedbackGenerator?.selectionChanged()
@@ -328,20 +279,14 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
     
     if (colorDarkness < 1.87) {
-      undoButton.tintColor = .white
-      trashButton.tintColor = .white
       dropperButton.tintColor = .white
       paintBucketButton.tintColor = .white
-      redoButton.tintColor = .white
       eraserButton.tintColor = .white
       bullsEyeButton.tintColor = .white
       paintBucketSpinner.color = .white
     } else {
-      undoButton.tintColor = .black
-      trashButton.tintColor = .black
       dropperButton.tintColor = .black
       paintBucketButton.tintColor = .black
-      redoButton.tintColor = .black
       eraserButton.tintColor = .black
       bullsEyeButton.tintColor = .black
       paintBucketSpinner.color = .black

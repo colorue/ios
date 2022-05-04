@@ -55,6 +55,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   let drawButtonL = UIButton(type: UIButtonType.custom)
   let drawButtonR = UIButton(type: UIButtonType.custom)
 
+  let undoButton = UIButton(type: .custom)
+  let redoButton = UIButton(type: .custom)
+
   @IBOutlet weak var postButton: UIBarButtonItem!
 
   var aimDrawingOn = false
@@ -68,7 +71,31 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 //    let logo = R.image.logoInactive()
 //    let imageView = UIImageView(image:logo)
 //    imageView.tintColor = Theme.black
-//    self.navigationItem.titleView = imageView
+
+
+//    let undoButton = UIButton(type: .custom)
+//    undoButton.tintColor = .black
+//    undoButton.setImage(UIImage(named: "arrow.uturn.backward.circle"), for: .normal)
+//    self.navigationItem.titleView = undoButton
+
+
+    let configuration = UIImage.SymbolConfiguration(pointSize: 20)
+
+    undoButton.isEnabled = false
+    undoButton.setImage(UIImage(systemName: "arrow.uturn.backward.circle", withConfiguration: configuration), for: .normal)
+    undoButton.addTarget(self, action: #selector(DrawingViewController.undo), for: .touchUpInside)
+    undoButton.tintColor = .black
+
+    redoButton.isEnabled = false
+    redoButton.setImage(UIImage(systemName: "arrow.uturn.forward.circle", withConfiguration: configuration), for: .normal)
+    redoButton.addTarget(self, action: #selector(DrawingViewController.redo), for: .touchUpInside)
+    redoButton.tintColor = .black
+
+    let undoWrapper = UIStackView(arrangedSubviews: [undoButton, redoButton])
+    undoWrapper.axis = .horizontal
+    undoWrapper.spacing = 24.0
+    self.navigationItem.titleView = undoWrapper
+
     self.navigationController?.navigationBar.backgroundColor = .white
     self.navigationController?.navigationBar.tintColor = .black
     navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
@@ -370,16 +397,27 @@ extension DrawingViewController: ColorKeyboardDelegate {
     self.present(deleteAlert, animated: true, completion: nil)
   }
   
-  func undo() {
+  @objc func undo() {
     self.canvas!.undo()
+    feedback = UISelectionFeedbackGenerator()
+    feedback?.selectionChanged()
+    feedback = nil
   }
   
-  func redo() {
+  @objc func redo() {
     self.canvas!.redo()
+    feedback = UISelectionFeedbackGenerator()
+    feedback?.selectionChanged()
+    feedback = nil
   }
 }
 
 extension DrawingViewController: CanvasDelegate {
+  func updateUndoButtons(undo: Bool, redo: Bool) {
+    undoButton.isEnabled = undo
+    redoButton.isEnabled = redo
+  }
+
   func getCurrentColor() -> UIColor {
     return colorKeyboard!.getCurrentColor()
   }
