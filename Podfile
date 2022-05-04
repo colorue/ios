@@ -6,23 +6,18 @@ target 'Colorue' do
   use_frameworks!
 
   # Pods for Colorue
-  #    pod 'Firebase/Core'
-  #    pod 'Firebase/Database'
-  #    pod 'Firebase/Auth'
-  #    pod 'Firebase/Messaging'
-  #    pod 'Firebase/Storage'
-  #    pod 'Firebase/Crash'
   #    pod 'Kingfisher'
 
-    pod 'R.swift'
-    pod 'Toast-Swift', '~> 5.0.1'
+    pod 'R.swift','~>6'
+    pod 'Toast-Swift','~>5'
+    pod 'RealmSwift','~>10'
 end
 
 post_install do |installer|
     installer.pods_project.targets.each do |target|
         target.build_configurations.each do |config|
             config.build_settings['SWIFT_VERSION'] = '4.2'
+            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '13.0'
         end
     end
 end
-

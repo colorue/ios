@@ -6,34 +6,12 @@
 //  Copyright © 2016 Dylan Wight. All rights reserved.
 //
 
+import RealmSwift
 import Foundation
 
-class Drawing {
-
-    var id: String
-    var url: String
-    var createdAt: Double
-
-    init( id: String, url: String, createdAt: Double) {
-      self.id = id
-      self.url = url
-      self.createdAt = createdAt
-    }
-
-    func toAnyObject()-> NSDictionary {
-        return ["id": self.id,
-                "createdAt": self.createdAt,
-                "url": self.url]
-    }
-}
-
-extension Drawing: Hashable {
-    var hashValue: Int {
-        return id.hashValue
-    }
-}
-
-// MARK: Equatable
-func == (lhs: Drawing, rhs: Drawing) -> Bool {
-    return lhs.id == rhs.id
+class Drawing: Object {
+  @Persisted(primaryKey: true) var id: String = NSUUID().uuidString
+  @Persisted var base64: String?
+  @Persisted var createdAt: Double = Date().timeIntervalSince1970
+  @Persisted var updatedAt: Double = Date().timeIntervalSince1970
 }

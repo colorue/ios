@@ -123,13 +123,13 @@ struct R: Rswift.Validatable {
     /// This struct is generated for `DrawingsViewController`, and contains static references to 1 segues.
     struct drawingsViewController {
       /// Segue identifier `openDrawing`.
-      static let openDrawing: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, DrawingsViewController, UIKit.UINavigationController> = Rswift.StoryboardSegueIdentifier(identifier: "openDrawing")
+      static let openDrawing: Rswift.StoryboardSegueIdentifier<UIKit.UIStoryboardSegue, DrawingsViewController, DrawingViewController> = Rswift.StoryboardSegueIdentifier(identifier: "openDrawing")
 
       #if os(iOS) || os(tvOS)
       /// Optionally returns a typed version of segue `openDrawing`.
       /// Returns nil if either the segue identifier, the source, destination, or segue types don't match.
       /// For use inside `prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?)`.
-      static func openDrawing(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, DrawingsViewController, UIKit.UINavigationController>? {
+      static func openDrawing(segue: UIKit.UIStoryboardSegue) -> Rswift.TypedStoryboardSegueInfo<UIKit.UIStoryboardSegue, DrawingsViewController, DrawingViewController>? {
         return Rswift.TypedStoryboardSegueInfo(segueIdentifier: R.segue.drawingsViewController.openDrawing, segue: segue)
       }
       #endif
@@ -749,7 +749,7 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct drawing: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = UIKit.UINavigationController
+      typealias InitialController = DrawingViewController
 
       let bundle = R.hostingBundle
       let name = "Drawing"
