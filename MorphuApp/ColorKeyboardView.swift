@@ -35,7 +35,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let paintBucketSpinner = UIActivityIndicatorView()
     
     let eraserButton = UIButton()
-    let progressBar = UIProgressView()
     fileprivate let prefs = UserDefaults.standard
     
     let sliderConstant:Float = 2.0
@@ -71,14 +70,21 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
 
         let selectorWidth = frame.width/11
-        
+
+        let colorButtonWrapper = UIView()
+        addSubview(colorButtonWrapper)
+        colorButtonWrapper.frame = CGRect(x: 0, y: 0, width: frame.width, height: frame.height - selectorWidth)
         for tag in 0...10 {
-            addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
+          colorButtonWrapper.addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
         }
         
-        currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: selectorWidth)
+        currentColorView.frame = CGRect(x: 0, y: frame.height - selectorWidth, width: frame.width, height: selectorWidth)
         addSubview(currentColorView)
-        
+
+        let toolbarWrapper = UIView()
+        toolbarWrapper.frame = currentColorView.frame
+        addSubview(currentColorView)
+
         
         brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
         brushSizeSlider.maximumTrackTintColor = UIColor.white
@@ -86,69 +92,63 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
         brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
         brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
-        addSubview(brushSizeSlider)
+      toolbarWrapper.addSubview(brushSizeSlider)
         
         let buttonSize = selectorWidth
 
         trashButton.setImage(R.image.trashIcon(), for: UIControlState())
         trashButton.tintColor = .white
         trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
-        trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        trashButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
         trashButton.showsTouchWhenHighlighted = true
-        addSubview(trashButton)
+      toolbarWrapper.addSubview(trashButton)
         
         undoButton.setImage(R.image.undoIcon(), for: UIControlState())
         undoButton.tintColor = .white
         undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
-        undoButton.frame = CGRect(x: frame.minX + buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        undoButton.frame = CGRect(x: frame.minX + buttonSize, y: 0, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
-        addSubview(undoButton)
+      toolbarWrapper.addSubview(undoButton)
 
         redoButton.setImage(R.image.redoIcon(), for: UIControlState())
         redoButton.tintColor = .white
         redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
-        redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
         redoButton.showsTouchWhenHighlighted = true
-        addSubview(redoButton)
+      toolbarWrapper.addSubview(redoButton)
         
         paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
         paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
         paintBucketButton.tintColor = .white
         paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
-        paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
         paintBucketButton.showsTouchWhenHighlighted = true
-        addSubview(paintBucketButton)
+      toolbarWrapper.addSubview(paintBucketButton)
         
         paintBucketSpinner.hidesWhenStopped = true
         paintBucketSpinner.center = paintBucketButton.center
         paintBucketSpinner.color = .white
-        addSubview(paintBucketSpinner)
+      toolbarWrapper.addSubview(paintBucketSpinner)
         
         dropperButton.setImage(R.image.dropper(), for: UIControlState())
         dropperButton.setImage(R.image.dropperActive(), for: .selected)
         dropperButton.tintColor = .white
         dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
-        dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
         dropperButton.showsTouchWhenHighlighted = true
-        addSubview(dropperButton)
+      toolbarWrapper.addSubview(dropperButton)
         
         bullsEyeButton.setImage(R.image.bullsEye(), for: UIControlState())
         bullsEyeButton.setImage(R.image.bullsEyeActive(), for: .selected)
         bullsEyeButton.tintColor = .white
         bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
-        bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: 0, width: buttonSize, height: buttonSize)
         bullsEyeButton.showsTouchWhenHighlighted = true
-        addSubview(bullsEyeButton)
+      toolbarWrapper.addSubview(bullsEyeButton)
 
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
         separatorU.backgroundColor = Theme.divider
         addSubview(separatorU)
-        
-        progressBar.frame = CGRect(x: 0, y: 0, width: frame.width/2, height: 0)
-        progressBar.center = currentColorView.center
-        progressBar.progress = 0.0
-        progressBar.isHidden = true
-        addSubview(progressBar)
         
         if prefs.bool(forKey: Prefs.saved) {
             let red = CGFloat(prefs.float(forKey: Prefs.colorRed))
@@ -173,7 +173,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         newButton.backgroundColor = color
         newButton.tag = tag
         newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
-        newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: selectorWidth, width: selectorWidth, height: frame.height - selectorWidth)
+        newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - selectorWidth)
         
         let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
         tap.minimumPressDuration = 0.15
@@ -282,26 +282,16 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       let equivalentColor = blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
       let coreColor = equivalentColor.coreImageColor
       let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
-
+        print("colorDarkness", colorDarkness)
         if (colorDarkness < 1.6) {
             brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
             brushSizeSlider.maximumTrackTintColor = UIColor.white
-            
-            progressBar.tintColor = UIColor.lightGray
-            progressBar.trackTintColor = UIColor.white
-            
         } else if colorDarkness < 2.67 {
             brushSizeSlider.minimumTrackTintColor = UIColor.black
             brushSizeSlider.maximumTrackTintColor = UIColor.white
-            
-            progressBar.tintColor = UIColor.black
-            progressBar.trackTintColor = UIColor.white
         } else {
             brushSizeSlider.minimumTrackTintColor = UIColor.black
             brushSizeSlider.maximumTrackTintColor = UIColor.lightGray
-            
-            progressBar.tintColor = UIColor.black
-            progressBar.trackTintColor = UIColor.lightGray
         }
         
         if (colorDarkness < 1.87) {
@@ -323,30 +313,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
             bullsEyeButton.tintColor = .black
             paintBucketSpinner.color = .black
         }
-    }
-    
-    func uploading(_ progress: Float) {
-        undoButton.isHidden = true
-        trashButton.isHidden = true
-        dropperButton.isHidden = true
-        paintBucketButton.isHidden = true
-        redoButton.isHidden = true
-        paintBucketSpinner.isHidden = true
-        progressBar.isHidden = false
-        progressBar.setProgress(progress, animated: true)
-    }
-    
-    func uploadingFailed() {
-        progressBar.progress = 0.0
-        undoButton.isHidden = false
-        trashButton.isHidden = false
-        dropperButton.isHidden = false
-        paintBucketButton.isHidden = false
-        redoButton.isHidden = false
-        bullsEyeButton.isHidden = false
-        paintBucketSpinner.isHidden = false
-        brushSizeSlider.isHidden = false
-        progressBar.isHidden = true
     }
 }
 
