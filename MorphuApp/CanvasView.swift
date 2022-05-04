@@ -217,6 +217,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
     if state == .began {
       drawDot(position)
+      mergeCurrentStroke(true)
       delegate.showUnderFingerView()
       setUnderFingerView(position, dropper: false)
     } else if state == .changed {
