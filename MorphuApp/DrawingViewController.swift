@@ -42,6 +42,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   }
   
   var baseImage: UIImage?
+  var feedbackGenerator: UINotificationFeedbackGenerator? = nil
   
   let prefs = UserDefaults.standard
   
@@ -51,15 +52,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   var keyboardCover = UIView()
   
   let backButton = UIButton(type: UIButtonType.custom)
-  
+
   @IBOutlet weak var postButton: UIBarButtonItem!
-  
+
   //MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    
     
     let logo = R.image.logoInactive()
     let imageView = UIImageView(image:logo)
@@ -76,15 +76,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     let canvasHeight = self.view.frame.height - keyboardHeight - 60
     
     let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 60, width: canvasHeight/1.3, height: canvasHeight)
-    
-    
-    //        if prefs.bool(forKey: Prefs.saved) {
-    //            if baseImage == nil {
-    //                if let savedDrawing = prefs.string(forKey: Prefs.savedDrawing) {
-    //                    baseImage = UIImage.fromBase64(savedDrawing)
-    //                }
-    //            }
-    //        }
     
     let canvas = CanvasView(frame: canvasFrame)
     canvas.delegate = self
@@ -127,16 +118,22 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   @IBAction func saveDrawing(_ sender: UIButton) {
     if let drawing = canvas?.getDrawing() {
       UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(savedImage), nil)
+      feedbackGenerator = UINotificationFeedbackGenerator()
+      feedbackGenerator?.prepare()
     }
   }
   
   @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
     if let err = error {
+      feedbackGenerator?.notificationOccurred(.error)
+      feedbackGenerator = nil
       view.makeToast("Error saving drawing", position: .center)
       print(err)
       return
     }
+    feedbackGenerator?.notificationOccurred(.success)
     view.makeToast("Saved to Photos", position: .center)
+    feedbackGenerator = nil
   }
   
   @IBAction func shareDrawing (_ sender: UIButton) {
