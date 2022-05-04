@@ -3,7 +3,7 @@
 //  Colorue
 //
 //  Created by Dylan Wight on 4/28/22.
-//  Copyright © 2022 Dylan Wight. All rights reserved.
+//  Duplicateright © 2022 Dylan Wight. All rights reserved.
 //
 
 import Foundation
@@ -131,10 +131,10 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
                                contextMenuConfigurationForItemAt indexPath: IndexPath,
                                point: CGPoint) -> UIContextMenuConfiguration? {
       return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
-        let copyAction =
-            UIAction(title: NSLocalizedString("Copy", comment: ""),
+        let duplicateAction =
+            UIAction(title: NSLocalizedString("Duplicate", comment: ""),
                      image: UIImage(systemName: "doc.on.doc")) { action in
-                self.performCopy(indexPath)
+                self.performDuplicate(indexPath)
             }
 
         let shareAction =
@@ -154,7 +154,7 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
                      attributes: .destructive) { action in
                 self.performDelete(indexPath)
             }
-          return UIMenu(title: "", children: [copyAction, shareAction, saveAction, deleteAction])
+          return UIMenu(title: "", children: [duplicateAction, shareAction, saveAction, deleteAction])
       }
   }
 
@@ -167,14 +167,14 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
         activityItems: [image], applicationActivities: nil)
 
     // This lines is for the popover you need to show in iPad
+    activityViewController.popoverPresentationController?.sourceView = collectionView
     if let cell = collectionView?.cellForItem(at: indexPath) {
+      print("cell.frame", cell.frame)
       activityViewController.popoverPresentationController?.sourceRect = cell.frame
     }
-    activityViewController.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
 
     // This line remove the arrow of the popover to show in iPad
     activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
-    activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
 
     // Pre-configuring activity items
     activityViewController.activityItemsConfiguration = [
@@ -198,13 +198,13 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     self.present(activityViewController, animated: true, completion: nil)
   }
 
-  private func performCopy (_ indexPath: IndexPath) {
+  private func performDuplicate (_ indexPath: IndexPath) {
     let drawing = drawings[indexPath.row]
     let realm = try! Realm()
-    let drawingCopy = Drawing()
-    drawingCopy.base64 = drawing.base64
+    let drawingDuplicate = Drawing()
+    drawingDuplicate.base64 = drawing.base64
     try! realm.write {
-      realm.add(drawingCopy)
+      realm.add(drawingDuplicate)
     }
   }
 
@@ -225,10 +225,9 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
   }
 
   private func performDelete (_ indexPath: IndexPath) {
-    let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertControllerStyle.actionSheet)
+    let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
 
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
-      print("performDelete", indexPath)
       guard let drawing = self?.drawings[indexPath.row]  else { return }
       let realm = try! Realm()
       try! realm.write {
@@ -239,4 +238,8 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
     self.present(deleteAlert, animated: true, completion: nil)
   }
+}
+
+extension DrawingsViewController: UIPopoverPresentationControllerDelegate {
+
 }

@@ -142,7 +142,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   @IBAction func shareDrawing (_ sender: UIButton) {
     guard let drawing = canvas?.getDrawing() else { return }
 
-    let activityViewController : UIActivityViewController = UIActivityViewController(
+    let activityViewController: UIActivityViewController = UIActivityViewController(
         activityItems: [drawing], applicationActivities: nil)
 
     // This lines is for the popover you need to show in iPad
@@ -151,7 +151,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
 
     // This line remove the arrow of the popover to show in iPad
     activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
-    activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 150, y: 150, width: 0, height: 0)
 
     // Pre-configuring activity items
     activityViewController.activityItemsConfiguration = [
@@ -164,11 +163,11 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     activityViewController.excludedActivityTypes = [
         UIActivity.ActivityType.postToWeibo,
         UIActivity.ActivityType.print,
-        UIActivity.ActivityType.assignToContact,
         UIActivity.ActivityType.addToReadingList,
         UIActivity.ActivityType.postToFlickr,
         UIActivity.ActivityType.postToVimeo,
         UIActivity.ActivityType.postToTencentWeibo,
+        UIActivity.ActivityType.airDrop
     ]
 
     activityViewController.isModalInPresentation = true
@@ -324,10 +323,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
 extension DrawingViewController: ColorKeyboardDelegate {
 
   func trash() {
-      let deleteAlert = UIAlertController(title: "Clear drawing?", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+      let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
 
-      deleteAlert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action: UIAlertAction!) in
-          self.canvas!.trash()
+      deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
+        self?.canvas!.trash()
+        guard let drawing = self?.drawing else { return }
+          let realm = try! Realm()
+          try! realm.write {
+            realm.delete(drawing)
+          }
+          self?.drawing = nil
       }))
 
       deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
@@ -342,15 +347,3 @@ extension DrawingViewController: ColorKeyboardDelegate {
       self.canvas!.redo()
   }
 }
-
-
-extension UINavigationBar {
-
-    func setBottomBorderColor(color: UIColor, height: CGFloat) {
-        let bottomBorderRect = CGRect(x: 0, y: frame.height, width: frame.width, height: height)
-        let bottomBorderView = UIView(frame: bottomBorderRect)
-        bottomBorderView.backgroundColor = color
-        addSubview(bottomBorderView)
-    }
-}
-

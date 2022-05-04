@@ -373,6 +373,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     }
     
     func trash() {
+        undoStack.removeAll()
         currentStroke = (UIImage.getImageWithColor(UIColor.white, size: actualSize))
         mergeCurrentStroke(false)
         addToUndoStack(imageView.image)

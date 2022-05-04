@@ -18,17 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
 //        let bundle = Bundle.main.infoDictionary!
-
-//        FirebaseApp.configure()
-//        Database.database().isPersistenceEnabled = true
-//        Auth.auth().signInAnonymously { authResult, error in
-//          guard let user = authResult?.user else {
-//            print(error)
-//            return
-//          }
-//          print("user", user.uid)
-//        }
-
         return true
     }
 
