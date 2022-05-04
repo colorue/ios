@@ -84,13 +84,18 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         brushSizeSlider.maximumTrackTintColor = UIColor.white
         brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
         brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
-        
         brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
-        
         brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
         addSubview(brushSizeSlider)
         
         let buttonSize = selectorWidth
+
+        trashButton.setImage(R.image.trashIcon(), for: UIControlState())
+        trashButton.tintColor = .white
+        trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
+        trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        trashButton.showsTouchWhenHighlighted = true
+        addSubview(trashButton)
         
         undoButton.setImage(R.image.undoIcon(), for: UIControlState())
         undoButton.tintColor = .white
@@ -98,13 +103,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         undoButton.frame = CGRect(x: frame.minX + buttonSize, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
         undoButton.showsTouchWhenHighlighted = true
         addSubview(undoButton)
-        
-        trashButton.setImage(R.image.trashIcon(), for: UIControlState())
-        trashButton.tintColor = .white
-        trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
-        trashButton.frame = CGRect(x: frame.minX, y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-        trashButton.showsTouchWhenHighlighted = true
-        addSubview(trashButton)
+
+        redoButton.setImage(R.image.redoIcon(), for: UIControlState())
+        redoButton.tintColor = .white
+        redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
+        redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
+        redoButton.showsTouchWhenHighlighted = true
+        addSubview(redoButton)
         
         paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
         paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
@@ -135,13 +140,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         bullsEyeButton.showsTouchWhenHighlighted = true
         addSubview(bullsEyeButton)
 
-        redoButton.setImage(R.image.redoIcon(), for: UIControlState())
-        redoButton.tintColor = .white
-        redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
-        redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: (selectorWidth - buttonSize)/2, width: buttonSize, height: buttonSize)
-        redoButton.showsTouchWhenHighlighted = true
-        addSubview(redoButton)
-
         let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
         separatorU.backgroundColor = Theme.divider
         addSubview(separatorU)
@@ -164,7 +162,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         } else {
             brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
             currentColorView.backgroundColor = Theme.colors[Int(arc4random_uniform(8) + 1)]
-          currentAlpha = 1.0
+            currentAlpha = 1.0
         }
         
         updateButtonColor()
