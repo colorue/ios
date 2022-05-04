@@ -102,19 +102,19 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
     trashButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
     trashButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(trashButton)
+//    toolbarWrapper.addSubview(trashButton)
     
     undoButton.setImage(R.image.undoIcon(), for: UIControlState())
     undoButton.tintColor = .white
     undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
-    undoButton.frame = CGRect(x: frame.minX + buttonSize, y: 0, width: buttonSize, height: buttonSize)
+    undoButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
     undoButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(undoButton)
     
     redoButton.setImage(R.image.redoIcon(), for: UIControlState())
     redoButton.tintColor = .white
     redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
-    redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
+    redoButton.frame = CGRect(x: frame.minX + (buttonSize), y: 0, width: buttonSize, height: buttonSize)
     redoButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(redoButton)
     

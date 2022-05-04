@@ -21,20 +21,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="PqF-xI-acO">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="action" id="OVE-88-MqG">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="shareDrawing:" destination="CdS-6r-7bw" id="bPu-UJ-ZIe"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="save" id="8Hf-28-OCg">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="saveDrawing:" destination="CdS-6r-7bw" id="wEx-2E-UMy"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis.circle" catalog="system" id="OVE-88-MqG">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
@@ -49,4 +38,7 @@
             <point key="canvasLocation" x="125" y="-701"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

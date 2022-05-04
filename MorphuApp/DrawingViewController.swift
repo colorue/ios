@@ -117,6 +117,44 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     self.view.addSubview(underFingerView)
     
     prefs.setValue(true, forKey: "saved")
+
+
+
+    let duplicateAction =
+    UIAction(title: NSLocalizedString("Duplicate", comment: ""),
+             image: UIImage(systemName: "doc.on.doc")) { [weak self] action in
+      print("Duplicate")
+      self?.duplicateDrawing()
+    }
+
+    let shareAction =
+    UIAction(title: NSLocalizedString("Share", comment: ""),
+             image: UIImage(systemName: "square.and.arrow.up")) { [weak self] action in
+      print("Share")
+      self?.shareDrawing()
+    }
+
+    let saveAction =
+    UIAction(title: NSLocalizedString("Add to Photos", comment: ""),
+             image: UIImage(systemName: "square.and.arrow.down")) { [weak self] action in
+      guard let self = self, let drawing = self.canvas?.getDrawing() else { return }
+      UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(self.savedImage), nil)
+      self.feedbackGenerator = UINotificationFeedbackGenerator()
+      self.feedbackGenerator?.prepare()
+    }
+    let deleteAction =
+    UIAction(title: NSLocalizedString("Delete", comment: ""),
+             image: UIImage(systemName: "trash"),
+             attributes: .destructive) { [weak self] action in
+      print("Delete")
+      self?.trash()
+    }
+    if #available(iOS 14.0, *) {
+      postButton.menu = UIMenu(title: "", children: [duplicateAction, shareAction, saveAction, deleteAction])
+      postButton.primaryAction = nil
+    } else {
+      // Fallback on earlier versions
+    }
   }
 
   @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
@@ -138,14 +176,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     }
   }
   
-  @IBAction func saveDrawing(_ sender: UIButton) {
-    if let drawing = canvas?.getDrawing() {
-      UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(savedImage), nil)
-      feedbackGenerator = UINotificationFeedbackGenerator()
-      feedbackGenerator?.prepare()
-    }
-  }
-  
   @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
     if let err = error {
       feedbackGenerator?.notificationOccurred(.error)
@@ -158,8 +188,23 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     view.makeToast("Saved to Photos", position: .center)
     feedbackGenerator = nil
   }
+
+  func duplicateDrawing () {
+    guard let image = canvas?.getDrawing() else { return }
+    feedbackGenerator = UINotificationFeedbackGenerator()
+    feedbackGenerator?.prepare()
+    let realm = try! Realm()
+    let drawingDuplicate = Drawing()
+    drawingDuplicate.base64 = image.toBase64()
+    try! realm.write {
+      realm.add(drawingDuplicate)
+    }
+    view.makeToast("Duplicated Drawing", position: .center)
+    feedbackGenerator?.notificationOccurred(.success)
+    feedbackGenerator = nil
+  }
   
-  @IBAction func shareDrawing (_ sender: UIButton) {
+  func shareDrawing () {
     guard let drawing = canvas?.getDrawing() else { return }
     
     let activityViewController: UIActivityViewController = UIActivityViewController(
@@ -283,12 +328,16 @@ extension DrawingViewController: ColorKeyboardDelegate {
     
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
-      guard let drawing = self?.drawing else { return }
+      guard let self = self, let drawing = self.drawing else { return }
+      self.feedbackGenerator = UINotificationFeedbackGenerator()
+      self.feedbackGenerator?.prepare()
       let realm = try! Realm()
       try! realm.write {
         realm.delete(drawing)
       }
-      self?.drawing = nil
+      self.drawing = nil
+      self.feedbackGenerator?.notificationOccurred(.success)
+      self.feedbackGenerator = nil
     }))
     
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
