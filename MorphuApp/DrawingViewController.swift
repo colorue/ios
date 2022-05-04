@@ -207,7 +207,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     self.colorKeyboard?.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.5,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
       self.underFingerView.alpha = 1.0
-      self.keyboardCover.alpha = 0.5
+      self.keyboardCover.alpha = 0.7
     }, completion: nil)
   }
   
