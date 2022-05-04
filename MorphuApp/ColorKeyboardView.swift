@@ -34,6 +34,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let bullsEyeButton = UIButton()
   let paintBucketSpinner = UIActivityIndicatorView()
 
+  var feedbackGenerator : UISelectionFeedbackGenerator? = nil
+
   let eraserButton = UIButton()
   fileprivate let prefs = UserDefaults.standard
 
@@ -172,7 +174,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     newButton.backgroundColor = color
     newButton.tag = tag
     newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
-    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: selectorWidth, width: selectorWidth, height: frame.height - selectorWidth)
+    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - selectorWidth)
 
     let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
     tap.minimumPressDuration = 0.15
@@ -183,28 +185,45 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
 
   @objc fileprivate func undo(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     delegate?.undo()
   }
 
   @objc fileprivate func redo(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     delegate?.redo()
   }
 
   @objc fileprivate func trash(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     delegate?.trash()
     state = .none
   }
 
   @objc fileprivate func dropper(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     state = state == .colorDropper ? .none : .colorDropper
   }
 
   @objc fileprivate func paintBucket(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     state = state == .paintBucket ? .none : .paintBucket
   }
 
   @objc fileprivate func bullsEye(_ sender: UIButton) {
-
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     if (!prefs.bool(forKey: "bullsEyeHowTo")) {
       let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
       dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
@@ -219,7 +238,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
 
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
-
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     if (sender.view!.tag == 0) {
       currentAlpha = 0.0
       currentColorView.backgroundColor = .white
@@ -231,6 +252,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
 
   @objc fileprivate func buttonTapped(_ sender: UIButton) {
+    feedbackGenerator = UISelectionFeedbackGenerator()
+    feedbackGenerator?.selectionChanged()
+    feedbackGenerator = nil
     let percentMix: CGFloat = 0.1
 
     if (sender.tag == 0) {
