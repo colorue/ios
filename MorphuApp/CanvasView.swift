@@ -21,6 +21,7 @@ protocol CanvasDelegate {
   func setKeyboardState(_ state: KeyboardToolState)
   func startPaintBucketSpinner()
   func stopPaintBucketSpinner()
+  func isDrawingOn() -> Bool
 }
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
@@ -100,7 +101,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     case .paintBucket:
       paintBucket(actualPosition, state: sender.state)
     case .bullsEye:
-      bullsEye(actualPosition, state: sender.state)
+      if delegate.isDrawingOn() {
+        curveTouch(actualPosition, state: sender.state)
+      } else {
+        bullsEye(actualPosition, state: sender.state)
+      }
     }
   }
 
@@ -184,23 +189,27 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       setUnderFingerView(position, dropper: false)
     } else if state == .ended {
       pts.append(position)
-      if pts.count >= 5 {
-        pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
-        path.move(to: pts[0])
-        path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
-        self.drawCurve()
-        pts[0] = pts[3]
-        pts[1] = pts[4]
-        pts.removeLast(3)
-      } else {
-        self.finishStroke()
-      }
-      path.removeAllPoints()
-      pts.removeAll()
-      addToUndoStack(imageView.image)
-      currentStroke = nil
+      completeCurve()
       delegate.hideUnderFingerView()
     }
+  }
+
+  func completeCurve () {
+    if pts.count >= 5 {
+      pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
+      path.move(to: pts[0])
+      path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+      self.drawCurve()
+      pts[0] = pts[3]
+      pts[1] = pts[4]
+      pts.removeLast(3)
+    } else {
+      self.finishStroke()
+    }
+    path.removeAllPoints()
+    pts.removeAll()
+    addToUndoStack(imageView.image)
+    currentStroke = nil
   }
 
   fileprivate func bullsEye(_ position: CGPoint, state: UIGestureRecognizerState) {

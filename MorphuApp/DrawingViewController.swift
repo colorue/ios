@@ -9,6 +9,7 @@
 import UIKit
 import Toast_Swift
 import RealmSwift
+import SwiftUI
 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
@@ -31,7 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 
-class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, CanvasDelegate, UIPopoverPresentationControllerDelegate {
+class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
   
   var drawing: Drawing? {
     didSet {
@@ -50,10 +51,11 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
   var canvas: CanvasView?
   var underFingerView = UIImageView()
   var keyboardCover = UIView()
-  
-  let backButton = UIButton(type: UIButtonType.custom)
+  let drawButton = UIButton(type: UIButtonType.custom)
 
   @IBOutlet weak var postButton: UIBarButtonItem!
+
+  var aimDrawingOn = false
 
   //MARK: Life Cycle
   override func viewDidLoad() {
@@ -61,10 +63,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     
-    let logo = R.image.logoInactive()
-    let imageView = UIImageView(image:logo)
-    imageView.tintColor = Theme.black
-    self.navigationItem.titleView = imageView
+//    let logo = R.image.logoInactive()
+//    let imageView = UIImageView(image:logo)
+//    imageView.tintColor = Theme.black
+//    self.navigationItem.titleView = imageView
     self.navigationController?.navigationBar.backgroundColor = .white
     self.navigationController?.navigationBar.tintColor = .black
     navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
@@ -95,14 +97,35 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     keyboardCover.backgroundColor = UIColor.black
     self.keyboardCover.alpha = 0.0
     self.view.addSubview(keyboardCover)
+
+
+    drawButton.titleLabel?.text = "Draw"
+    drawButton.frame = CGRect(x: 0, y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
+    drawButton.backgroundColor = .red
+    drawButton.alpha = 0.0
+    view.addSubview(drawButton)
+
+    let drag = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
+    drag.minimumPressDuration = 0.0
+    drag.delegate = self
+    drawButton.addGestureRecognizer(drag)
     
-    
+
     self.underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: canvas.frame.maxY + 0.5, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
     self.underFingerView.alpha = 0.0
     self.view.addSubview(underFingerView)
     
     prefs.setValue(true, forKey: "saved")
+  }
+
+  @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
+    if (sender.state == .began) {
+      aimDrawingOn = true
+    } else if (sender.state == .ended) {
+      aimDrawingOn = false
+      canvas?.completeCurve()
+    }
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -169,70 +192,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, Canv
     
     activityViewController.isModalInPresentation = true
     self.present(activityViewController, animated: true, completion: nil)
-  }
-  
-  func getCurrentColor() -> UIColor {
-    return colorKeyboard!.getCurrentColor()
-  }
-  
-  func getCurrentBrushSize() -> Float {
-    return colorKeyboard!.getCurrentBrushSize()
-  }
-  
-  func getAlpha() -> CGFloat? {
-    return colorKeyboard?.getAlpha()
-  }
-  
-  func setAlphaHigh() {
-    colorKeyboard?.setAlphaHigh()
-  }
-  
-  func setUnderfingerView(_ underFingerImage: UIImage) {
-    self.colorKeyboard?.isUserInteractionEnabled = false
-    if underFingerView.isHidden {
-      underFingerView.isHidden = false
-    }
-    underFingerView.image = underFingerImage
-  }
-  
-  func hideUnderFingerView() {
-    self.colorKeyboard?.isUserInteractionEnabled = true
-    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.underFingerView.alpha = 0.0
-      self.keyboardCover.alpha = 0.0
-    }, completion: nil)
-  }
-  
-  func showUnderFingerView() {
-    self.colorKeyboard?.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.underFingerView.alpha = 1.0
-      self.keyboardCover.alpha = 0.7
-    }, completion: nil)
-  }
-  
-  func setColor(_ color: UIColor?) {
-    guard let color = color else { return }
-    self.colorKeyboard!.setColor(color)
-  }
-  
-  func startPaintBucketSpinner() {
-    colorKeyboard?.paintBucketButton.isHidden = true
-    colorKeyboard?.paintBucketSpinner.startAnimating()
-  }
-  
-  func stopPaintBucketSpinner() {
-    colorKeyboard?.paintBucketSpinner.stopAnimating()
-    colorKeyboard?.paintBucketButton.isHidden = false
-  }
-  
-  func getKeyboardState() -> KeyboardToolState {
-    return self.colorKeyboard?.state ?? .none
-  }
-  
-  func setKeyboardState(_ state: KeyboardToolState) {
-    colorKeyboard?.state = state
-    colorKeyboard?.updateButtonColor()
   }
   
   func setDropperActive(_ active: Bool) {
@@ -342,5 +301,77 @@ extension DrawingViewController: ColorKeyboardDelegate {
   
   func redo() {
     self.canvas!.redo()
+  }
+}
+
+extension DrawingViewController: CanvasDelegate {
+  func getCurrentColor() -> UIColor {
+    return colorKeyboard!.getCurrentColor()
+  }
+
+  func getCurrentBrushSize() -> Float {
+    return colorKeyboard!.getCurrentBrushSize()
+  }
+
+  func getAlpha() -> CGFloat? {
+    return colorKeyboard?.getAlpha()
+  }
+
+  func setAlphaHigh() {
+    colorKeyboard?.setAlphaHigh()
+  }
+
+  func setUnderfingerView(_ underFingerImage: UIImage) {
+    self.colorKeyboard?.isUserInteractionEnabled = false
+    if underFingerView.isHidden {
+      underFingerView.isHidden = false
+    }
+    underFingerView.image = underFingerImage
+  }
+
+  func hideUnderFingerView() {
+    self.colorKeyboard?.isUserInteractionEnabled = true
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+      self.underFingerView.alpha = 0.0
+      self.drawButton.alpha = 0.0
+      self.keyboardCover.alpha = 0.0
+    }, completion: nil)
+  }
+
+  func showUnderFingerView() {
+    self.colorKeyboard?.isUserInteractionEnabled = false
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+      self.underFingerView.alpha = 1.0
+      self.drawButton.alpha = 1.0
+      self.keyboardCover.alpha = 0.7
+    }, completion: nil)
+  }
+
+  func setColor(_ color: UIColor?) {
+    guard let color = color else { return }
+    self.colorKeyboard!.setColor(color)
+  }
+
+  func startPaintBucketSpinner() {
+    colorKeyboard?.paintBucketButton.isHidden = true
+    colorKeyboard?.paintBucketSpinner.startAnimating()
+  }
+
+  func stopPaintBucketSpinner() {
+    colorKeyboard?.paintBucketSpinner.stopAnimating()
+    colorKeyboard?.paintBucketButton.isHidden = false
+  }
+
+  func getKeyboardState() -> KeyboardToolState {
+    return self.colorKeyboard?.state ?? .none
+  }
+
+  func setKeyboardState(_ state: KeyboardToolState) {
+    colorKeyboard?.state = state
+    colorKeyboard?.updateButtonColor()
+  }
+
+  func isDrawingOn() -> Bool {
+    return aimDrawingOn
   }
 }
