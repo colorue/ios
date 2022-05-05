@@ -50,8 +50,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   var colorKeyboard: ColorKeyboardView?
   var canvas: CanvasView?
-  var underFingerView = UIImageView()
-  var keyboardCover = UIView()
+  let underFingerView = UIImageView()
+  let keyboardCover = UIView()
+  let activeColorView = UIView()
   let drawButtonL = UIButton(type: UIButtonType.custom)
   let drawButtonR = UIButton(type: UIButtonType.custom)
 
@@ -121,11 +122,19 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     
     self.view.addSubview(colorKeyboard)
     self.colorKeyboard = colorKeyboard
-    
+
+
+
     self.keyboardCover.frame = colorKeyboardFrame
     self.keyboardCover.alpha = 0.0
-    keyboardCover.backgroundColor = colorKeyboard.getCurrentColor()
+    keyboardCover.backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
     self.view.addSubview(keyboardCover)
+
+
+    activeColorView.backgroundColor = colorKeyboard.getCurrentColor()
+    activeColorView.alpha = colorKeyboard.getAlpha() ?? 1.0
+    activeColorView.frame = CGRect(x: 0, y: 0, width: keyboardCover.frame.width, height: keyboardCover.frame.height)
+    keyboardCover.addSubview(activeColorView)
 
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
     separatorU.backgroundColor = Theme.divider
@@ -283,36 +292,36 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   func setDropperActive(_ active: Bool) {
-    if active {
-      if (!prefs.bool(forKey: "dropperHowTo")) {
-        let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.alert)
-        dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-        self.present(dropperHowTo, animated: true, completion: nil)
-        prefs.setValue(true, forKey: "dropperHowTo")
-      }
-    }
+//    if active {
+//      if (!prefs.bool(forKey: "dropperHowTo")) {
+//        let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.alert)
+//        dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+//        self.present(dropperHowTo, animated: true, completion: nil)
+//        prefs.setValue(true, forKey: "dropperHowTo")
+//      }
+//    }
     self.colorKeyboard?.state = .colorDropper
     self.colorKeyboard!.updateButtonColor()
   }
   
-  @objc func unwind(_ sender: UIBarButtonItem) {
-    self.saveDrawing()
-    
-    if (!prefs.bool(forKey: "firstCloseCanvas")) {
-      let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.alert)
-      firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alert in
-        NotificationCenter.default.removeObserver(self)
-        self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
-      }))
-      firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-      
-      self.present(firstCloseCanvas, animated: true, completion: nil)
-      prefs.setValue(true, forKey: "firstCloseCanvas")
-    } else {
-      NotificationCenter.default.removeObserver(self)
-      self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
-    }
-  }
+//  @objc func unwind(_ sender: UIBarButtonItem) {
+//    self.saveDrawing()
+//
+//    if (!prefs.bool(forKey: "firstCloseCanvas")) {
+//      let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.alert)
+//      firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alert in
+//        NotificationCenter.default.removeObserver(self)
+//        self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
+//      }))
+//      firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+//
+//      self.present(firstCloseCanvas, animated: true, completion: nil)
+//      prefs.setValue(true, forKey: "firstCloseCanvas")
+//    } else {
+//      NotificationCenter.default.removeObserver(self)
+//      self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
+//    }
+//  }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
@@ -340,9 +349,11 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
 extension DrawingViewController: ColorKeyboardDelegate {
 
-  func setColor (_ color: UIColor, secondary: UIColor) {
+  func setColor (_ color: UIColor, secondary: UIColor, alpha: CGFloat) {
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
-      self?.keyboardCover.backgroundColor = color
+      self?.activeColorView.backgroundColor = color
+      self?.activeColorView.alpha = alpha
+      print("setColor", alpha)
       self?.drawButtonL.backgroundColor = secondary
       self?.drawButtonR.backgroundColor = secondary
     }, completion: nil)

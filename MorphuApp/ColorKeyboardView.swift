@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 protocol ColorKeyboardDelegate {
-  func setColor(_ color: UIColor, secondary: UIColor)
+  func setColor(_ color: UIColor, secondary: UIColor, alpha: CGFloat)
   func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
@@ -261,7 +261,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   func setColor(_ color: UIColor) {
     currentColorView.backgroundColor = color
     updateButtonColor()
-    delegate?.setColor(color, secondary: paintBucketButton.tintColor)
+    delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
     prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
     prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
     prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
