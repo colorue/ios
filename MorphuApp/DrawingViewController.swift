@@ -31,11 +31,18 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
-  
-  var drawing: Drawing? {
+
+  let prefs = UserDefaults.standard
+
+  private var drawing: Drawing? {
+    let realm = try! Realm()
+    return realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
+  }
+
+  var drawingId: String? {
     didSet {
+      prefs.setValue(drawingId, forKey: "openDrawing")
       if let base64 = drawing?.base64 {
         baseImage = UIImage.fromBase64(base64)
       }
@@ -45,9 +52,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   var baseImage: UIImage?
   var notificationFeedback: UINotificationFeedbackGenerator? = nil
   var feedback: UISelectionFeedbackGenerator? = nil
-  
-  let prefs = UserDefaults.standard
-  
+
   var colorKeyboard: ColorKeyboardView?
   var canvas: CanvasView?
   let underFingerView = UIImageView()
@@ -353,7 +358,6 @@ extension DrawingViewController: ColorKeyboardDelegate {
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.activeColorView.backgroundColor = color
       self?.activeColorView.alpha = alpha
-      print("setColor", alpha)
       self?.drawButtonL.backgroundColor = secondary
       self?.drawButtonR.backgroundColor = secondary
     }, completion: nil)
@@ -371,7 +375,7 @@ extension DrawingViewController: ColorKeyboardDelegate {
       try! realm.write {
         realm.delete(drawing)
       }
-      self.drawing = nil
+      self.drawingId = nil
       self.notificationFeedback?.notificationOccurred(.success)
       self.notificationFeedback = nil
     }))
@@ -409,7 +413,7 @@ extension DrawingViewController: CanvasDelegate {
       } else {
         let drawing = Drawing()
         drawing.base64 = canvas.getDrawing().toBase64()
-        self.drawing = drawing
+        self.drawingId = drawing.id
         try! realm.write {
           realm.add(drawing)
         }

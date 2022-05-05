@@ -18,6 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
     //        let bundle = Bundle.main.infoDictionary!
+    if let drawingId = UserDefaults.standard.string(forKey: "openDrawing") {
+      openDrawing(drawingId)
+      return true
+    }
+
     return true
   }
   
@@ -26,5 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     let notificationCenter = NotificationCenter.default
     // Saves active drawing
     notificationCenter.post(name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+  }
+
+
+  private func openDrawing(_ drawingId: String) {
+    guard
+      let drawingsViewController = R.storyboard.drawings.instantiateInitialViewController(),
+      let drawingViewController = R.storyboard.drawing.instantiateInitialViewController()
+      else { return }
+    drawingViewController.drawingId = drawingId
+    self.window?.rootViewController = drawingsViewController
+    drawingsViewController.pushViewController(drawingViewController, animated: false)
   }
 }

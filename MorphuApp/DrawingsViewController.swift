@@ -55,15 +55,18 @@ final class DrawingsViewController: UICollectionViewController {
       }
     }
   }
+
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    UserDefaults.standard.removeObject(forKey: "openDrawing")
+  }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     guard let drawingController = segue.destination as? DrawingViewController else { return }
     if let drawingCell = sender as? DrawingCell {
-      drawingController.drawing = drawingCell.drawing
+      drawingController.drawingId = drawingCell.drawing?.id
     }
   }
-  
-  @IBAction func close(_ unwindSegue: UIStoryboardSegue) {}
 }
 
 // MARK: - UICollectionViewDataSource
