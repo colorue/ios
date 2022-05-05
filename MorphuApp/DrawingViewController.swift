@@ -414,8 +414,10 @@ extension DrawingViewController: ColorKeyboardDelegate {
 
 extension DrawingViewController: CanvasDelegate {
   func updateUndoButtons(undo: Bool, redo: Bool) {
-    undoButton.isEnabled = undo
-    redoButton.isEnabled = redo
+    DispatchQueue.main.async { [weak self] in
+      self?.undoButton.isEnabled = undo
+      self?.redoButton.isEnabled = redo
+    }
   }
 
   func getCurrentColor() -> UIColor {
