@@ -397,20 +397,22 @@ extension DrawingViewController: ColorKeyboardDelegate {
 
 extension DrawingViewController: CanvasDelegate {
   func saveDrawing() {
-    guard let canvas = canvas, !canvas.isEmpty else { return }
-    let realm = try! Realm()
+    DispatchQueue.main.async { [weak self] in
+      guard  let self = self, let canvas = self.canvas, !canvas.isEmpty else { return }
+      let realm = try! Realm()
 
-    if let drawing = drawing {
-      try! realm.write {
-        drawing.base64 = self.canvas?.getDrawing().toBase64()
-        drawing.updatedAt = Date().timeIntervalSince1970
-      }
-    } else {
-      let drawing = Drawing()
-      drawing.base64 = self.canvas?.getDrawing().toBase64()
-      self.drawing = drawing
-      try! realm.write {
-        realm.add(drawing)
+      if let drawing = self.drawing {
+        try! realm.write {
+          drawing.base64 = canvas.getDrawing().toBase64()
+          drawing.updatedAt = Date().timeIntervalSince1970
+        }
+      } else {
+        let drawing = Drawing()
+        drawing.base64 = canvas.getDrawing().toBase64()
+        self.drawing = drawing
+        try! realm.write {
+          realm.add(drawing)
+        }
       }
     }
   }

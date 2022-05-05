@@ -131,9 +131,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       delegate.startPaintBucketSpinner()
       delegate.hideUnderFingerView()
       mergeCurrentStroke(false)
+      let touchedColor = imageView.image!.color(atPosition: position) ?? .white
+      let mixedColor = UIColor.blendColor(touchedColor , withColor: delegate.getCurrentColor(), percentMix: delegate.getAlpha() ?? 1.0)
 
       DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
-        let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: delegate.getCurrentColor(), tolerance: 5)
+        let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: mixedColor, tolerance: 5)
         self.addToUndoStack(filledImage)
         DispatchQueue.main.async {
           self.mergeCurrentStroke(false)

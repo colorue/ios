@@ -12,4 +12,10 @@ extension UIColor {
   var coreImageColor: CoreImage.CIColor? {
     return CoreImage.CIColor(color: self)  // The resulting Core Image color, or nil
   }
+
+  static func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat = 0.5) -> UIColor {
+    let c1 = color1.coreImageColor!
+    let c2 = color2.coreImageColor!
+    return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
+  }
 }

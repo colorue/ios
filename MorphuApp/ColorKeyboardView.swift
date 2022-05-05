@@ -231,15 +231,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
         setColor(Theme.colors[sender.tag])
       }
       currentAlpha = currentAlpha * (1 - percentMix) + percentMix
-      setColor(blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix))
+      setColor(UIColor.blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix))
     }
     updateButtonColor()
-  }
-  
-  fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
-    let c1 = color1.coreImageColor!
-    let c2 = color2.coreImageColor!
-    return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
   }
   
   func getCurrentColor() -> UIColor {
@@ -268,7 +262,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func updateButtonColor() {
-    let equivalentColor = blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
+    let equivalentColor = UIColor.blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
     let coreColor = equivalentColor.coreImageColor
     let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
     if (colorDarkness < 1.6) {
