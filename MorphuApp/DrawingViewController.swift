@@ -223,6 +223,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     notificationFeedback?.notificationOccurred(.success)
     view.makeToast("Saved to Photos", position: .center)
     notificationFeedback = nil
+    AppStoreReviewManager.requestReviewIfAppropriate()
   }
 
   func duplicateDrawing () {
@@ -273,6 +274,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     
     activityViewController.isModalInPresentation = true
     self.present(activityViewController, animated: true, completion: nil)
+    activityViewController.completionWithItemsHandler = { activityType, completed, items, error in
+      guard completed else { return }
+      AppStoreReviewManager.requestReviewIfAppropriate()
+    }
   }
   
   func setDropperActive(_ active: Bool) {

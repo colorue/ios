@@ -199,6 +199,10 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     
     activityViewController.isModalInPresentation = true
     self.present(activityViewController, animated: true, completion: nil)
+    activityViewController.completionWithItemsHandler = { activityType, completed, items, error in
+      guard completed else { return }
+      AppStoreReviewManager.requestReviewIfAppropriate()
+    }
   }
   
   private func performDuplicate (_ indexPath: IndexPath) {
@@ -225,6 +229,7 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
       return
     }
     view.makeToast("Saved to Photos", position: .center)
+    AppStoreReviewManager.requestReviewIfAppropriate()
   }
   
   private func performDelete (_ indexPath: IndexPath) {
