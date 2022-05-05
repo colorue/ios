@@ -242,10 +242,17 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   @objc func shareDrawing () {
-    guard let drawing = canvas?.getDrawing() else { return }
+    guard let drawing = canvas?.getDrawing(),
+          let data = UIImagePNGRepresentation(drawing)
+      else { return }
+
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let filename = paths[0].appendingPathComponent("Colorue.png")
+    try? data.write(to: filename)
+
     
     let activityViewController: UIActivityViewController = UIActivityViewController(
-      activityItems: [drawing], applicationActivities: nil)
+      activityItems: [filename], applicationActivities: nil)
     
     // This lines is for the popover you need to show in iPad
     activityViewController.popoverPresentationController?.barButtonItem = postButton
@@ -281,36 +288,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   func setDropperActive(_ active: Bool) {
-//    if active {
-//      if (!prefs.bool(forKey: "dropperHowTo")) {
-//        let dropperHowTo = UIAlertController(title: "Color Dropper Tool", message: "Tap on or drag to a color on the canvas to switch to it." , preferredStyle: UIAlertControllerStyle.alert)
-//        dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-//        self.present(dropperHowTo, animated: true, completion: nil)
-//        prefs.setValue(true, forKey: "dropperHowTo")
-//      }
-//    }
     self.colorKeyboard?.state = .colorDropper
     self.colorKeyboard!.updateButtonColor()
   }
-  
-//  @objc func unwind(_ sender: UIBarButtonItem) {
-//    self.saveDrawing()
-//
-//    if (!prefs.bool(forKey: "firstCloseCanvas")) {
-//      let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.alert)
-//      firstCloseCanvas.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: { alert in
-//        NotificationCenter.default.removeObserver(self)
-//        self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
-//      }))
-//      firstCloseCanvas.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
-//
-//      self.present(firstCloseCanvas, animated: true, completion: nil)
-//      prefs.setValue(true, forKey: "firstCloseCanvas")
-//    } else {
-//      NotificationCenter.default.removeObserver(self)
-//      self.performSegue(withIdentifier: R.segue.drawingViewController.backToHome, sender: self)
-//    }
-//  }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)

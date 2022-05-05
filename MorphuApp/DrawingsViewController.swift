@@ -164,10 +164,14 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
   private func performShare (_ indexPath: IndexPath) {
     let drawing = drawings[indexPath.row]
     guard let base64 = drawing.base64 else { return }
-    let image = UIImage.fromBase64(base64)
-    
+
+    let data = UIImagePNGRepresentation(UIImage.fromBase64(base64))!
+    let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+    let filename = paths[0].appendingPathComponent("Colorue.png")
+    try? data.write(to: filename)
+
     let activityViewController : UIActivityViewController = UIActivityViewController(
-      activityItems: [image], applicationActivities: nil)
+      activityItems: [filename], applicationActivities: nil)
     
     // This lines is for the popover you need to show in iPad
     activityViewController.popoverPresentationController?.sourceView = collectionView
@@ -250,4 +254,18 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
 
 extension DrawingsViewController: UIPopoverPresentationControllerDelegate {
   
+}
+
+extension DrawingsViewController: UIActivityItemSource {
+  func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
+      return "The pig is in the poke"
+  }
+
+  func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
+      return "The pig is in the poke"
+  }
+
+  func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
+      return "Secret message"
+  }
 }
