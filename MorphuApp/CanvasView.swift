@@ -23,6 +23,7 @@ protocol CanvasDelegate {
   func stopPaintBucketSpinner()
   func isDrawingOn() -> Bool
   func updateUndoButtons(undo: Bool, redo: Bool)
+  func saveDrawing()
 }
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
@@ -32,7 +33,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
   fileprivate var lastPoint: CGPoint?
   fileprivate var currentStroke: UIImage?
-  fileprivate var undoStack = [UIImage]()
+  fileprivate var undoStack = [UIImage]() {
+    didSet {
+      delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
+      delegate?.saveDrawing()
+    }
+  }
   fileprivate var redoStack = [UIImage]()
   fileprivate var imageView = UIImageView()
   fileprivate let positionIndicator = R.image.positionIndicator()!
@@ -84,7 +90,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     drag.minimumPressDuration = 0.0
     drag.delegate = self
     addGestureRecognizer(drag)
-    delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
   }
 
   // MARK: Controll Methods
@@ -368,7 +373,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         undoStack.append(image)
       }
       redoStack.removeAll()
-      delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
     }
   }
 
@@ -378,7 +382,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     if let undone = undoStack.popLast() {
       redoStack.append(undone)
       mergeCurrentStroke(false)
-      delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
     }
   }
 
@@ -386,7 +389,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     if let redone = redoStack.popLast() {
       undoStack.append(redone)
       mergeCurrentStroke(false)
-      delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
     }
   }
 
@@ -396,7 +398,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     mergeCurrentStroke(false)
     addToUndoStack(imageView.image)
     currentStroke = nil
-    delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
   }
 
   func getDrawing() -> UIImage {

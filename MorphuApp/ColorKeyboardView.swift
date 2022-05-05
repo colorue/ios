@@ -47,6 +47,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   fileprivate var currentAlpha: CGFloat = 1.0 {
     didSet {
       currentColorView.alpha = currentAlpha
+      prefs.setValue(currentAlpha, forKey: Prefs.colorAlpha)
     }
   }
   
@@ -200,6 +201,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let newSize = Float(lroundf(sender.value))
     sender.setValue(newSize, animated: true)
     feedbackGenerator = nil
+    prefs.setValue(getCurrentBrushSize(), forKey: Prefs.brushSize)
   }
   
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
@@ -245,7 +247,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func getCurrentBrushSize() -> Float {
-    return  pow(brushSizeSlider.value, sliderConstant)
+    return pow(brushSizeSlider.value, sliderConstant)
   }
   
   func getAlpha() -> CGFloat? {
@@ -260,6 +262,9 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     currentColorView.backgroundColor = color
     updateButtonColor()
     delegate?.setColor(color, secondary: paintBucketButton.tintColor)
+    prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
+    prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
+    prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
   }
   
   func updateButtonColor() {

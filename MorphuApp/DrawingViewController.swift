@@ -159,9 +159,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     underFingerView.layer.borderColor = Theme.divider.cgColor
     keyboardCover.addSubview(underFingerView)
     
-    prefs.setValue(true, forKey: "saved")
-
-
+    prefs.setValue(true, forKey: Prefs.saved)
 
     let duplicateAction =
     UIAction(title: NSLocalizedString("Duplicate", comment: ""),
@@ -298,7 +296,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   @objc func unwind(_ sender: UIBarButtonItem) {
-    self.save()
+    self.saveDrawing()
     
     if (!prefs.bool(forKey: "firstCloseCanvas")) {
       let firstCloseCanvas = UIAlertController(title: "Close Canvas?", message: "Don't worry your drawing is saved" , preferredStyle: UIAlertControllerStyle.alert)
@@ -318,39 +316,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    self.save()
+    self.saveDrawing()
     NotificationCenter.default.removeObserver(self)
   }
   
   @objc func appMovedToBackground() {
-    self.save()
+    self.saveDrawing()
     self.hideUnderFingerView()
-  }
-  
-  fileprivate func save() {
-    let color = self.colorKeyboard?.getCurrentColor()
-    prefs.setValue(color?.coreImageColor!.red, forKey: Prefs.colorRed)
-    prefs.setValue(color?.coreImageColor!.green, forKey: Prefs.colorGreen)
-    prefs.setValue(color?.coreImageColor!.blue, forKey: Prefs.colorBlue)
-    prefs.setValue(colorKeyboard?.getAlpha(), forKey: Prefs.colorAlpha)
-    prefs.setValue(self.colorKeyboard?.getCurrentBrushSize(), forKey: Prefs.brushSize)
-    
-    guard let canvas = canvas, !canvas.isEmpty else { return }
-    let realm = try! Realm()
-    
-    if let drawing = drawing {
-      try! realm.write {
-        drawing.base64 = self.canvas?.getDrawing().toBase64()
-        drawing.updatedAt = Date().timeIntervalSince1970
-      }
-    } else {
-      let drawing = Drawing()
-      drawing.base64 = self.canvas?.getDrawing().toBase64()
-      self.drawing = drawing
-      try! realm.write {
-        realm.add(drawing)
-      }
-    }
   }
   
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
@@ -413,6 +385,25 @@ extension DrawingViewController: ColorKeyboardDelegate {
 }
 
 extension DrawingViewController: CanvasDelegate {
+  func saveDrawing() {
+    guard let canvas = canvas, !canvas.isEmpty else { return }
+    let realm = try! Realm()
+
+    if let drawing = drawing {
+      try! realm.write {
+        drawing.base64 = self.canvas?.getDrawing().toBase64()
+        drawing.updatedAt = Date().timeIntervalSince1970
+      }
+    } else {
+      let drawing = Drawing()
+      drawing.base64 = self.canvas?.getDrawing().toBase64()
+      self.drawing = drawing
+      try! realm.write {
+        realm.add(drawing)
+      }
+    }
+  }
+
   func updateUndoButtons(undo: Bool, redo: Bool) {
     DispatchQueue.main.async { [weak self] in
       self?.undoButton.isEnabled = undo
