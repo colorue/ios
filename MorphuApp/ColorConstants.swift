@@ -20,6 +20,7 @@ struct Theme {
   static let purple = UIColor(red: 128.0/255.0, green: 0.0/255.0, blue: 255.0/255.0, alpha: 1.0)
   static let pink = UIColor(red: 255.0/255.0, green: 0.0/255.0, blue: 255.0/255.0, alpha: 1.0)
   static let white = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
+  static let halfOpacityCheck = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
 
   static var colors: [UIColor] {
     return [clear, black, red, orange, yellow, green, cyan, blue, purple, pink, white]
