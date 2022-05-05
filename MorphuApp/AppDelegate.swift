@@ -33,8 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     notificationCenter.post(name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
   }
 
+  func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+    if (shortcutItem.type == "NewDrawing") {
+      openDrawing()
+    }
+  }
 
-  private func openDrawing(_ drawingId: String) {
+  private func openDrawing(_ drawingId: String? = nil) {
     guard
       let drawingsViewController = R.storyboard.drawings.instantiateInitialViewController(),
       let drawingViewController = R.storyboard.drawing.instantiateInitialViewController()

@@ -21,6 +21,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   var drawingId: String? {
     didSet {
+      guard let drawingId = drawingId else { return }
       prefs.setValue(drawingId, forKey: "openDrawing")
       if let base64 = drawing?.base64 {
         baseImage = UIImage.fromBase64(base64)

@@ -28,6 +28,7 @@
 		87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE392821F5ED00949265 /* UINavigationBar.swift */; };
 		87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3B2822B24D00949265 /* DrawingService.swift */; };
 		87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */; };
+		87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3F28249A9100949265 /* SceneDelegate.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -69,6 +70,7 @@
 		87DEFE392821F5ED00949265 /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		87DEFE3B2822B24D00949265 /* DrawingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
+		87DEFE3F28249A9100949265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -201,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
+				87DEFE3F28249A9100949265 /* SceneDelegate.swift */,
 			);
 			name = Delagate;
 			sourceTree = "<group>";
@@ -441,6 +444,7 @@
 				87F14922281C653500FB389E /* Drawing.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
+				87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */,
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
 				87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */,
 				8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */,

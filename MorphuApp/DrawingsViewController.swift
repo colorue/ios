@@ -255,17 +255,3 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
 extension DrawingsViewController: UIPopoverPresentationControllerDelegate {
   
 }
-
-extension DrawingsViewController: UIActivityItemSource {
-  func activityViewControllerPlaceholderItem(_ activityViewController: UIActivityViewController) -> Any {
-      return "The pig is in the poke"
-  }
-
-  func activityViewController(_ activityViewController: UIActivityViewController, itemForActivityType activityType: UIActivity.ActivityType?) -> Any? {
-      return "The pig is in the poke"
-  }
-
-  func activityViewController(_ activityViewController: UIActivityViewController, subjectForActivityType activityType: UIActivity.ActivityType?) -> String {
-      return "Secret message"
-  }
-}
