@@ -21,6 +21,4 @@ struct Prefs {
   static let saved = "saved"
 
   // MARK: Tutorials
-
-
 }
