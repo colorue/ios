@@ -531,9 +531,9 @@ extension DrawingViewController {
     if motion == .motionShake {
       guard undoButton.isEnabled || redoButton.isEnabled else { return }
 
-      feedback = UISelectionFeedbackGenerator()
-      feedback?.selectionChanged()
-      feedback = nil
+      notificationFeedback = UINotificationFeedbackGenerator()
+      notificationFeedback?.notificationOccurred(.success)
+      notificationFeedback = nil
 
       let title = undoButton.isEnabled ? "Undo added stroke" : "Redo added stroke"
       let undoAlert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
