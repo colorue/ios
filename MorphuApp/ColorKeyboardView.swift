@@ -30,8 +30,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let paintBucketButton = ToolbarButton()
   let bullsEyeButton = ToolbarButton()
   let paintBucketSpinner = UIActivityIndicatorView()
-  
-  var pastStrokeSize: Float = 0.0
 
   var state: KeyboardToolState = .none {
     didSet {
@@ -107,7 +105,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     colorButtonWrapper.frame = CGRect(x: 0, y: buttonSize, width: frame.width, height: frame.height - buttonSize)
     addSubview(colorButtonWrapper)
     for (tag, color) in Theme.colors.enumerated() {
-      colorButtonWrapper.addSubview(makeColorButton(withColor: color, tag: tag))
+      let newButton = ColorButton(color: color, tag: tag, isTransparent: tag == 0)
+      newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - buttonSize)
+      newButton.delegate = self
+      colorButtonWrapper.addSubview(newButton)
     }
     currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: buttonSize)
     addSubview(currentColorView)
@@ -120,11 +121,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     toolbarWrapper.addSubview(brushSizeSlider)
 
     paintBucketButton.setImage(R.image.paintBucket()!, for: .normal)
-    paintBucketButton.tintColor = .white
     paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
     paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
-    paintBucketButton.showsTouchWhenHighlighted = true
-    paintBucketButton.layer.cornerRadius = buttonSize / 2.0
     toolbarWrapper.addSubview(paintBucketButton)
     
     paintBucketSpinner.hidesWhenStopped = true
@@ -133,18 +131,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     toolbarWrapper.addSubview(paintBucketSpinner)
     
     dropperButton.setImage(UIImage(systemName: "eyedropper"), for: .normal)
-    dropperButton.tintColor = .white
     dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
     dropperButton.frame = CGRect(x: (buttonSize), y: 0, width: buttonSize, height: buttonSize)
-    dropperButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(dropperButton)
     
     bullsEyeButton.setImage(UIImage(systemName: "scope"), for: .normal)
-
-    bullsEyeButton.tintColor = .white
     bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
     bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
-    bullsEyeButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(bullsEyeButton)
     
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
@@ -165,21 +158,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       opacity = 1.0
     }
   }
-  
-  fileprivate func makeColorButton(withColor color: UIColor, tag: Int) -> UIButton {
-    let newButton = UIButton()
-    newButton.backgroundColor = color
-    newButton.tag = tag
-    newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
-    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - buttonSize)
-    
-    let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
-    tap.minimumPressDuration = 0.15
-    tap.delegate = self
-    newButton.addGestureRecognizer(tap)
-    
-    return newButton
-  }
 
   @objc fileprivate func dropper(_ sender: UIButton) {
     Haptic.selectionChanged()
@@ -195,32 +173,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     Haptic.selectionChanged()
     state = state == .bullsEye ? .none : .bullsEye
   }
-  
-  @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
-    guard let view = sender.view else { return }
-    Haptic.selectionChanged()
-    if (view.tag == 0) {
-      opacity = 0.0
-      color = .white
-    } else {
-      opacity = 1.0
-      color = Theme.colors[view.tag]
-    }
-  }
-  
-  @objc fileprivate func buttonTapped(_ sender: UIButton) {
-    Haptic.selectionChanged()
-    if (sender.tag == 0) {
-      opacity = opacity * (1 - percentMix)
-    } else {
-      if (opacity == 0) {
-        color = Theme.colors[sender.tag]
-      }
-      opacity = opacity * (1 - percentMix) + percentMix
-      color = UIColor.blendColor(color, withColor: Theme.colors[sender.tag], percentMix: percentMix)
-    }
-  }
-  
+
   func updateButtonColor() {
     brushSizeSlider.updateColors(darkness: darkness)
     if (darkness < 1.87) {
@@ -237,15 +190,26 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
 }
 
-
-class ToolbarButton: UIButton {
-  override var isSelected: Bool {
-    didSet {
-      if isSelected {
-        alpha = 0.4
-      } else {
-        alpha = 1.0
+extension ColorKeyboardView: ColorButtonDelegate {
+  func tapped(_ colorButton: ColorButton) {
+    if (colorButton.isTransparent) {
+      opacity = opacity * (1 - percentMix)
+    } else {
+      if (opacity == 0) {
+        color = colorButton.color
       }
+      opacity = opacity * (1 - percentMix) + percentMix
+      color = UIColor.blendColor(color, withColor: colorButton.color, percentMix: percentMix)
+    }
+  }
+
+  func held(_ colorButton: ColorButton) {
+    if (colorButton.isTransparent) {
+      opacity = 0.0
+      color = .white
+    } else {
+      opacity = 1.0
+      color = colorButton.color
     }
   }
 }

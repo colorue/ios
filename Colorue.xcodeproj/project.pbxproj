@@ -29,6 +29,8 @@
 		87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3F28249A9100949265 /* SceneDelegate.swift */; };
 		87DEFE422825873600949265 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE412825873600949265 /* Haptic.swift */; };
 		87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */; };
+		87DEFE462825921200949265 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE452825921200949265 /* ToolbarButton.swift */; };
+		87DEFE48282593EA00949265 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE47282593EA00949265 /* ColorButton.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -71,6 +73,8 @@
 		87DEFE3F28249A9100949265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		87DEFE412825873600949265 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
+		87DEFE452825921200949265 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		87DEFE47282593EA00949265 /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -260,6 +264,8 @@
 				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
 				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
 				87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */,
+				87DEFE452825921200949265 /* ToolbarButton.swift */,
+				87DEFE47282593EA00949265 /* ColorButton.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -431,6 +437,7 @@
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */,
+				87DEFE462825921200949265 /* ToolbarButton.swift in Sources */,
 				87DEFE422825873600949265 /* Haptic.swift in Sources */,
 				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
 				87F14922281C653500FB389E /* Drawing.swift in Sources */,
@@ -442,6 +449,7 @@
 				8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */,
+				87DEFE48282593EA00949265 /* ColorButton.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
