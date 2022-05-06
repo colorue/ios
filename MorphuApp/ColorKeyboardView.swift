@@ -258,7 +258,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func updateButtonColor() {
-    let equivalentColor = UIColor.blendColor(currentColorView.backgroundColor!, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - currentAlpha))
+    let equivalentColor = UIColor.blendColor(color, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - currentAlpha))
     let coreColor = equivalentColor.coreImageColor
     let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
     if (colorDarkness < 1.6) {
