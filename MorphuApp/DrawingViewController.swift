@@ -9,6 +9,7 @@
 import UIKit
 import Toast_Swift
 import RealmSwift
+import AVFoundation
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
 
@@ -22,10 +23,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   var drawingId: String? {
     didSet {
-      guard let drawingId = drawingId else { return }
-      prefs.setValue(drawingId, forKey: "openDrawing")
-      if let base64 = drawing?.base64 {
-        baseImage = UIImage.fromBase64(base64)
+      if let drawingId = drawingId {
+        prefs.setValue(drawingId, forKey: "openDrawing")
+        if let base64 = drawing?.base64 {
+          baseImage = UIImage.fromBase64(base64)
+        }
+      } else {
+        canvas?.trash()
       }
     }
   }
@@ -45,6 +49,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   let undoButton = UIButton(type: .custom)
   let redoButton = UIButton(type: .custom)
 
+  fileprivate var imagePicker = UIImagePickerController()
+
   @IBOutlet weak var postButton: UIBarButtonItem!
 
   var aimDrawingOn = false
@@ -55,15 +61,15 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     
-//    let logo = R.image.logoInactive()
-//    let imageView = UIImageView(image:logo)
-//    imageView.tintColor = Theme.black
+    //    let logo = R.image.logoInactive()
+    //    let imageView = UIImageView(image:logo)
+    //    imageView.tintColor = Theme.black
 
 
-//    let undoButton = UIButton(type: .custom)
-//    undoButton.tintColor = .black
-//    undoButton.setImage(UIImage(named: "arrow.uturn.backward.circle"), for: .normal)
-//    self.navigationItem.titleView = undoButton
+    //    let undoButton = UIButton(type: .custom)
+    //    undoButton.tintColor = .black
+    //    undoButton.setImage(UIImage(named: "arrow.uturn.backward.circle"), for: .normal)
+    //    self.navigationItem.titleView = undoButton
 
 
     let configuration = UIImage.SymbolConfiguration(pointSize: 20)
@@ -156,10 +162,23 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     
     prefs.setValue(true, forKey: Prefs.saved)
 
+
+    let newAction =
+    UIAction(title: NSLocalizedString("New Drawing", comment: ""),
+             image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
+      self?.newDrawing()
+    }
+
     let duplicateAction =
     UIAction(title: NSLocalizedString("Duplicate", comment: ""),
              image: UIImage(systemName: "doc.on.doc")) { [weak self] action in
       self?.duplicateDrawing()
+    }
+
+    let importImageAction =
+    UIAction(title: NSLocalizedString("Import Image", comment: ""),
+             image: UIImage(systemName: "photo")) { [weak self] action in
+      self?.importImage()
     }
 
     let shareAction =
@@ -183,7 +202,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       self?.trash()
     }
     if #available(iOS 14.0, *) {
-      postButton.menu = UIMenu(title: "", children: [duplicateAction, shareAction, saveAction, deleteAction])
+      postButton.menu = UIMenu(title: "", children: [newAction, duplicateAction, importImageAction, shareAction, saveAction, deleteAction])
       postButton.primaryAction = nil
     } else {
       postButton.target = self
@@ -228,6 +247,16 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     AppStoreReviewManager.requestReviewIfAppropriate()
   }
 
+  func newDrawing () {
+    guard let image = canvas?.getDrawing() else { return }
+    notificationFeedback = UINotificationFeedbackGenerator()
+    notificationFeedback?.prepare()
+    drawingId = nil
+    view.makeToast("Drawing Saved", position: .center)
+    notificationFeedback?.notificationOccurred(.success)
+    notificationFeedback = nil
+  }
+
   func duplicateDrawing () {
     guard let image = canvas?.getDrawing() else { return }
     notificationFeedback = UINotificationFeedbackGenerator()
@@ -242,11 +271,28 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     notificationFeedback?.notificationOccurred(.success)
     notificationFeedback = nil
   }
+
+  func importImage () {
+    guard UIImagePickerController.isSourceTypeAvailable(.camera),
+          UIImagePickerController.availableCaptureModes(for: .rear) != nil,
+          AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .denied
+    else {
+      guard let url = URL(string: UIApplicationOpenSettingsURLString) else { return }
+      UIApplication.shared.open(url)
+      return
+    }
+
+    imagePicker.allowsEditing = false
+    imagePicker.sourceType = .photoLibrary
+    imagePicker.delegate = self
+    self.present(imagePicker, animated: true, completion: nil)
+  }
+
   
   @objc func shareDrawing () {
     guard let drawing = canvas?.getDrawing(),
           let data = UIImagePNGRepresentation(drawing)
-      else { return }
+    else { return }
 
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let filename = paths[0].appendingPathComponent("Colorue.png")
@@ -461,5 +507,24 @@ extension DrawingViewController: CanvasDelegate {
 
   func isDrawingOn() -> Bool {
     return aimDrawingOn
+  }
+}
+
+
+// MARK: -  UIImagePickerControllerDelegate
+extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+      canvas?.baseDrawing = pickedImage
+      notificationFeedback?.notificationOccurred(.success)
+      notificationFeedback = nil
+    }
+
+    imagePicker.dismiss(animated: true, completion: nil)
+  }
+
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    self.dismiss(animated: true, completion: nil)
   }
 }

@@ -54,7 +54,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         trash()
         return
       }
-      undoStack.removeAll()
+//      undoStack.removeAll()
       undoStack.append(baseDrawing)
       mergeCurrentStroke(false)
     }
