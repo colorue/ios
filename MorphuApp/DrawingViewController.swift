@@ -208,6 +208,34 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       Haptic.selectionChanged()
     }
   }
+
+  func trash() {
+    let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
+
+    deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
+      self?.canvas!.trash()
+      guard let self = self, let drawing = self.drawing else { return }
+      let realm = try! Realm()
+      try! realm.write {
+        realm.delete(drawing)
+      }
+      self.drawingId = nil
+      Haptic.notificationOccurred(.success)
+    }))
+
+    deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+    self.present(deleteAlert, animated: true, completion: nil)
+  }
+
+  @objc func undo() {
+    self.canvas?.undo()
+    Haptic.selectionChanged()
+  }
+
+  @objc func redo() {
+    self.canvas?.redo()
+    Haptic.selectionChanged()
+  }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -347,37 +375,12 @@ extension DrawingViewController: ColorKeyboardDelegate {
       self?.drawButtonR.backgroundColor = secondary
     }, completion: nil)
   }
-  
-  func trash() {
-    let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
-    
-    deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
-      self?.canvas!.trash()
-      guard let self = self, let drawing = self.drawing else { return }
-      let realm = try! Realm()
-      try! realm.write {
-        realm.delete(drawing)
-      }
-      self.drawingId = nil
-      Haptic.notificationOccurred(.success)
-    }))
-    
-    deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
-    self.present(deleteAlert, animated: true, completion: nil)
-  }
-  
-  @objc func undo() {
-    self.canvas?.undo()
-    Haptic.selectionChanged()
-  }
-  
-  @objc func redo() {
-    self.canvas?.redo()
-    Haptic.selectionChanged()
-  }
 }
 
 extension DrawingViewController: CanvasDelegate {
+  func isDrawingOn() -> Bool {
+    return aimDrawingOn
+  }
 
   func saveDrawing() {
     DispatchQueue.main.async { [weak self] in
@@ -454,32 +457,15 @@ extension DrawingViewController: CanvasDelegate {
     colorKeyboard?.color = color
   }
 
-  func startPaintBucketSpinner() {
-    tool?.startAnimating()
-//    colorKeyboard?.paintBucketButton.isHidden = true
-//    colorKeyboard?.paintBucketSpinner.startAnimating()
-  }
-
-  func stopPaintBucketSpinner() {
-    tool?.stopAnimating()
-//    colorKeyboard?.paintBucketSpinner.stopAnimating()
-//    colorKeyboard?.paintBucketButton.isHidden = false
-  }
-
   func getKeyboardTool() -> ToolbarButton? {
     return self.colorKeyboard?.tool
   }
 
   func setKeyboardState(_ tool: ToolbarButton?) {
     colorKeyboard?.tool = tool
-    colorKeyboard?.updateButtonColor()
-  }
-
-  func isDrawingOn() -> Bool {
-    return aimDrawingOn
+//    colorKeyboard?.updateButtonColor()
   }
 }
-
 
 // MARK: -  UIImagePickerControllerDelegate
 extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

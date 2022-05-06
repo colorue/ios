@@ -8,6 +8,7 @@
 
 import Foundation
 import PureLayout
+import UIKit
 
 enum KeyboardToolState: Int {
   case none = 0
@@ -55,7 +56,6 @@ class ToolbarButton: UIButton {
   }
 
   private func layoutButton () {
-    print("layoutButton")
     self.addTarget(self, action: #selector(ToolbarButton.tapped(_:)), for: .touchUpInside)
     self.setImage(self.iconImage, for: .normal)
     self.setImage(nil, for: .focused)
@@ -91,5 +91,9 @@ class ToolbarButton: UIButton {
   func stopAnimating () {
     self.setImage(iconImage, for: .normal)
     spinner.stopAnimating()
+  }
+
+  func updateTint(color: UIColor, alpha: CGFloat) {
+    self.tintColor = color.getDarkness(alpha: alpha) < 1.87 ? .white : .black
   }
 }

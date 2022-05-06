@@ -30,7 +30,8 @@ class BrushSizeSlider: UISlider {
     layoutSlider()
   }
 
-  func updateColors(darkness: CGFloat) {
+  func updateTint(color: UIColor, alpha: CGFloat) {
+    let darkness = color.getDarkness(alpha: alpha)
     if (darkness < 1.6) {
       minimumTrackTintColor = UIColor.lightGray
       maximumTrackTintColor = UIColor.white
