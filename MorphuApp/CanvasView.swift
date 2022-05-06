@@ -250,20 +250,17 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   fileprivate func drawDot(_ position: CGPoint) {
 
     guard let delegate = delegate else { return }
-
-    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-
     let color = delegate.getCurrentColor()
 
-    UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: position.x, y: position.y))
-    UIGraphicsGetCurrentContext()?.addLine(to: CGPoint(x: position.x, y: position.y))
-
-    UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
-    UIGraphicsGetCurrentContext()?.setLineWidth(CGFloat(delegate.getCurrentBrushSize()) * resizeScale)
-    UIGraphicsGetCurrentContext()?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
-
-    UIGraphicsGetCurrentContext()?.strokePath()
-    UIGraphicsGetCurrentContext()?.flush()
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+    let context = UIGraphicsGetCurrentContext()
+    context?.move(to: CGPoint(x: position.x, y: position.y))
+    context?.addLine(to: CGPoint(x: position.x, y: position.y))
+    context?.setLineCap(CGLineCap.round)
+    context?.setLineWidth(CGFloat(delegate.getCurrentBrushSize()) * resizeScale)
+    context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
+    context?.strokePath()
+    context?.flush()
     currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
   }
@@ -302,33 +299,30 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   fileprivate func finishStroke() {
 
     guard let delegate = delegate else { return }
+    let color = delegate.getCurrentColor()
 
     if !pts.isEmpty {
       UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
       currentStroke?.draw(at: CGPoint.zero)
 
       let context = UIGraphicsGetCurrentContext()
-
-      let color = delegate.getCurrentColor()
-
       if pts.count <= 2 {
         context?.move(to: CGPoint(x: pts.first!.x, y: pts.first!.y))
         context?.addLine(to: CGPoint(x: pts.last!.x, y: pts.last!.y))
       } else if pts.count == 3 {
-        UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
+        context?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
         context?.addQuadCurve(to: CGPoint(x: pts[1].x, y: pts[1].y), control: CGPoint(x: pts[2].x, y: pts[2].y))
-      }
-      else if pts.count == 4 {
-        UIGraphicsGetCurrentContext()?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
+      } else if pts.count == 4 {
+        context?.move(to: CGPoint(x: pts[0].x, y: pts[0].y))
         context?.addQuadCurve(to: CGPoint(x: pts[1].x, y: pts[1].y), control: CGPoint(x: pts[3].x, y: pts[3].y))
       }
 
-      UIGraphicsGetCurrentContext()?.setLineCap(CGLineCap.round)
-      UIGraphicsGetCurrentContext()?.setLineWidth(CGFloat(delegate.getCurrentBrushSize()) * resizeScale)
-      UIGraphicsGetCurrentContext()?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
+      context?.setLineCap(CGLineCap.round)
+      context?.setLineWidth(CGFloat(delegate.getCurrentBrushSize()) * resizeScale)
+      context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
 
-      UIGraphicsGetCurrentContext()?.strokePath()
-      UIGraphicsGetCurrentContext()?.flush()
+      context?.strokePath()
+      context?.flush()
       currentStroke = UIGraphicsGetImageFromCurrentImageContext()
       UIGraphicsEndImageContext()
     }
@@ -349,13 +343,13 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
   fileprivate func drawDropperIndicator(_ point: CGPoint) {
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+    let context = UIGraphicsGetCurrentContext()
     positionIndicator.draw(at: CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
-    UIGraphicsGetCurrentContext()?.strokePath()
-    UIGraphicsGetCurrentContext()?.flush()
+    context?.strokePath()
+    context?.flush()
     currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
   }
-
 
   fileprivate func mergeCurrentStroke(_ alpha: Bool) {
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
