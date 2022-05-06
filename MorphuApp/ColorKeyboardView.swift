@@ -93,13 +93,12 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderMoved(_:)), for: .valueChanged)
     brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
     toolbarWrapper.addSubview(brushSizeSlider)
-    
 
     paintBucketButton.setImage(R.image.paintBucket()!, for: .normal)
     paintBucketButton.tintColor = .white
     paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
     paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
-//    paintBucketButton.showsTouchWhenHighlighted = true
+    paintBucketButton.showsTouchWhenHighlighted = true
     paintBucketButton.layer.cornerRadius = buttonSize / 2.0
     toolbarWrapper.addSubview(paintBucketButton)
     
@@ -112,7 +111,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     dropperButton.tintColor = .white
     dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
     dropperButton.frame = CGRect(x: (buttonSize), y: 0, width: buttonSize, height: buttonSize)
-//    dropperButton.showsTouchWhenHighlighted = true
+    dropperButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(dropperButton)
     
     bullsEyeButton.setImage(UIImage(systemName: "scope"), for: .normal)
@@ -120,7 +119,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     bullsEyeButton.tintColor = .white
     bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
     bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
-//    bullsEyeButton.showsTouchWhenHighlighted = true
+    bullsEyeButton.showsTouchWhenHighlighted = true
     toolbarWrapper.addSubview(bullsEyeButton)
     
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
@@ -178,12 +177,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     feedbackGenerator = UISelectionFeedbackGenerator()
     feedbackGenerator?.selectionChanged()
     feedbackGenerator = nil
-    if (!prefs.bool(forKey: "bullsEyeHowTo")) {
-      let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
-      dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-      delegate?.present(dropperHowTo, animated: true, completion: nil)
-      prefs.setValue(true, forKey: "bullsEyeHowTo")
-    }
     state = state == .bullsEye ? .none : .bullsEye
   }
   
@@ -226,6 +219,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     if (sender.tag == 0) {
       currentAlpha = currentAlpha * (1 - percentMix)
+      setColor(currentColorView.backgroundColor!)
     } else {
       if (currentAlpha == 0) {
         setColor(Theme.colors[sender.tag])
@@ -254,11 +248,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   
   func setColor(_ color: UIColor) {
     currentColorView.backgroundColor = color
-    updateButtonColor()
-    delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
     prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
     prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
     prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
+    updateButtonColor()
+    delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
   }
   
   func updateButtonColor() {
