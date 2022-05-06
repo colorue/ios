@@ -35,8 +35,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
   
   var baseImage: UIImage?
-  var notificationFeedback: UINotificationFeedbackGenerator? = nil
-  var feedback: UISelectionFeedbackGenerator? = nil
 
   var colorKeyboard: ColorKeyboardView?
   var canvas: CanvasView?
@@ -113,8 +111,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     self.view.addSubview(keyboardCover)
 
 
-    activeColorView.backgroundColor = colorKeyboard.getCurrentColor()
-    activeColorView.alpha = colorKeyboard.getAlpha() ?? 1.0
+    activeColorView.backgroundColor = colorKeyboard.color
+    activeColorView.alpha = colorKeyboard.alpha
     activeColorView.frame = CGRect(x: 0, y: 0, width: keyboardCover.frame.width, height: keyboardCover.frame.height)
     keyboardCover.addSubview(activeColorView)
 
@@ -182,8 +180,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
              image: UIImage(systemName: "square.and.arrow.down")) { [weak self] action in
       guard let self = self, let drawing = self.canvas?.getDrawing() else { return }
       UIImageWriteToSavedPhotosAlbum(drawing, self, #selector(self.savedImage), nil)
-      self.notificationFeedback = UINotificationFeedbackGenerator()
-      self.notificationFeedback?.prepare()
     }
     let deleteAction =
     UIAction(title: NSLocalizedString("Delete", comment: ""),
@@ -202,14 +198,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
     if (sender.state == .began) {
-      feedback = UISelectionFeedbackGenerator()
-      feedback?.selectionChanged()
+      Haptic.selectionChanged()
       aimDrawingOn = true
     } else if (sender.state == .ended) {
       aimDrawingOn = false
       canvas?.completeCurve()
-      feedback?.selectionChanged()
-      feedback = nil
+      Haptic.selectionChanged()
     }
   }
   
@@ -225,32 +219,25 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
     if let err = error {
-      notificationFeedback?.notificationOccurred(.error)
-      notificationFeedback = nil
+      Haptic.notificationOccurred(.error)
       view.makeToast("Error saving drawing", position: .center)
       print(err)
       return
     }
-    notificationFeedback?.notificationOccurred(.success)
+    Haptic.notificationOccurred(.success)
     view.makeToast("Saved to Photos", position: .center)
-    notificationFeedback = nil
     AppStoreReviewManager.requestReviewIfAppropriate()
   }
 
   func newDrawing () {
     guard let _ = drawingId else { return }
-    notificationFeedback = UINotificationFeedbackGenerator()
-    notificationFeedback?.prepare()
     self.drawingId = nil
     view.makeToast("Drawing Saved", position: .center)
-    notificationFeedback?.notificationOccurred(.success)
-    notificationFeedback = nil
+    Haptic.notificationOccurred(.success)
   }
 
   func duplicateDrawing () {
     guard let image = canvas?.getDrawing() else { return }
-    notificationFeedback = UINotificationFeedbackGenerator()
-    notificationFeedback?.prepare()
     let realm = try! Realm()
     let drawingDuplicate = Drawing()
     drawingDuplicate.base64 = image.toBase64()
@@ -258,8 +245,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       realm.add(drawingDuplicate)
     }
     view.makeToast("Duplicated Drawing", position: .center)
-    notificationFeedback?.notificationOccurred(.success)
-    notificationFeedback = nil
+    Haptic.notificationOccurred(.success)
   }
 
   func importImage () {
@@ -371,15 +357,12 @@ extension DrawingViewController: ColorKeyboardDelegate {
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
       guard let self = self, let drawing = self.drawing else { return }
-      self.notificationFeedback = UINotificationFeedbackGenerator()
-      self.notificationFeedback?.prepare()
       let realm = try! Realm()
       try! realm.write {
         realm.delete(drawing)
       }
       self.drawingId = nil
-      self.notificationFeedback?.notificationOccurred(.success)
-      self.notificationFeedback = nil
+      Haptic.notificationOccurred(.success)
     }))
     
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
@@ -388,16 +371,13 @@ extension DrawingViewController: ColorKeyboardDelegate {
   
   @objc func undo() {
     self.canvas!.undo()
-    feedback = UISelectionFeedbackGenerator()
-    feedback?.selectionChanged()
-    feedback = nil
+    Haptic.selectionChanged()
+
   }
   
   @objc func redo() {
     self.canvas!.redo()
-    feedback = UISelectionFeedbackGenerator()
-    feedback?.selectionChanged()
-    feedback = nil
+    Haptic.selectionChanged()
   }
 }
 
@@ -431,19 +411,19 @@ extension DrawingViewController: CanvasDelegate {
   }
 
   func getCurrentColor() -> UIColor {
-    return colorKeyboard!.getCurrentColor()
+    return colorKeyboard?.color ?? .black
   }
 
   func getCurrentBrushSize() -> Float {
-    return colorKeyboard!.getCurrentBrushSize()
+    return colorKeyboard?.brushSize ?? 0
   }
 
   func getAlpha() -> CGFloat? {
-    return colorKeyboard?.getAlpha()
+    return colorKeyboard?.alpha
   }
 
   func setAlphaHigh() {
-    colorKeyboard?.setAlphaHigh()
+    colorKeyboard?.alpha = 1.0
   }
 
   func setUnderfingerView(_ underFingerImage: UIImage) {
@@ -508,8 +488,7 @@ extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationCo
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
       canvas?.baseDrawing = pickedImage
-      notificationFeedback?.notificationOccurred(.success)
-      notificationFeedback = nil
+      Haptic.notificationOccurred(.success)
     }
 
     imagePicker.dismiss(animated: true, completion: nil)
@@ -531,11 +510,7 @@ extension DrawingViewController {
   override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
     if motion == .motionShake {
       guard undoButton.isEnabled || redoButton.isEnabled else { return }
-
-      notificationFeedback = UINotificationFeedbackGenerator()
-      notificationFeedback?.notificationOccurred(.success)
-      notificationFeedback = nil
-
+      Haptic.notificationOccurred(.success)
       let title = undoButton.isEnabled ? "Undo added stroke" : "Redo added stroke"
       let undoAlert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
 

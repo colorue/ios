@@ -50,8 +50,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   fileprivate var actualSize = CGSize()
   fileprivate let prefs = UserDefaults.standard
 
-  var feedbackGenerator: UISelectionFeedbackGenerator? = nil
-
   var baseDrawing: UIImage? {
     didSet {
       guard let baseDrawing = baseDrawing else {
@@ -153,8 +151,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     guard let delegate = delegate else { return }
 
     if state == .began {
-      feedbackGenerator = UISelectionFeedbackGenerator()
-      feedbackGenerator?.prepare()
+      Haptic.selectionChanged(prepare: true)
       delegate.setColor(imageView.image!.color(atPosition: position))
       delegate.showUnderFingerView()
       delegate.setAlphaHigh()
@@ -164,14 +161,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       let dropperColor = imageView.image!.color(atPosition: position)
       if let color = dropperColor, color != delegate.getCurrentColor() {
         delegate.setColor(color)
-        feedbackGenerator?.selectionChanged()
-        feedbackGenerator?.prepare()
+        Haptic.selectionChanged(prepare: true)
       }
       drawDropperIndicator(position)
       setUnderFingerView(position, dropper: true)
     } else if state == .ended {
-      feedbackGenerator?.selectionChanged()
-      feedbackGenerator = nil
+      Haptic.selectionChanged()
       delegate.setKeyboardState(.none)
       delegate.hideUnderFingerView()
       currentStroke = nil

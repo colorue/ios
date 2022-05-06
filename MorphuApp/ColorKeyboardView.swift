@@ -29,7 +29,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let bullsEyeButton = ToolbarButton()
   let paintBucketSpinner = UIActivityIndicatorView()
   
-  var feedbackGenerator: UISelectionFeedbackGenerator? = nil
   var pastStrokeSize:Float = 0.0
   
   fileprivate let prefs = UserDefaults.standard
@@ -43,13 +42,19 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       bullsEyeButton.isSelected = state == .bullsEye
     }
   }
+
+  var brushSize: Float {
+    get {
+      return pow(brushSizeSlider.value, sliderConstant)
+    }
+  }
   
-  fileprivate var currentAlpha: CGFloat = 1.0 {
+  var opacity: CGFloat = 1.0 {
     didSet {
-      currentColorView.alpha = currentAlpha
-      prefs.setValue(currentAlpha, forKey: Prefs.colorAlpha)
+      currentColorView.alpha = opacity
+      prefs.setValue(opacity, forKey: Prefs.colorAlpha)
       updateButtonColor()
-      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
+      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
     }
   }
 
@@ -60,7 +65,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
       prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
       updateButtonColor()
-      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
+      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
     }
   }
   
@@ -145,13 +150,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       let blue = CGFloat(prefs.float(forKey: Prefs.colorBlue))
       let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
       
-      currentAlpha = alpha
+      opacity = alpha
       color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
       brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
       color = Theme.colors[Int(arc4random_uniform(8) + 1)]
-      currentAlpha = 1.0
+      opacity = 1.0
     }
 
     updateButtonColor()
@@ -173,23 +178,17 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
 
   @objc fileprivate func dropper(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
+    Haptic.selectionChanged()
     state = state == .colorDropper ? .none : .colorDropper
   }
   
   @objc fileprivate func paintBucket(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
+    Haptic.selectionChanged()
     state = state == .paintBucket ? .none : .paintBucket
   }
   
   @objc fileprivate func bullsEye(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
+    Haptic.selectionChanged()
     state = state == .bullsEye ? .none : .bullsEye
   }
   
@@ -197,68 +196,46 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     let newSize = Float(lroundf(sender.value))
     if newSize != pastStrokeSize {
       pastStrokeSize = newSize
-      feedbackGenerator = feedbackGenerator ?? UISelectionFeedbackGenerator()
-      feedbackGenerator?.selectionChanged()
-      feedbackGenerator?.prepare()
+      Haptic.selectionChanged(prepare: true)
     }
   }
 
   @objc fileprivate func sliderChanged(_ sender: UISlider) {
     let newSize = Float(lroundf(sender.value))
     sender.setValue(newSize, animated: true)
-    feedbackGenerator = nil
-    prefs.setValue(getCurrentBrushSize(), forKey: Prefs.brushSize)
+    Haptic.selection = nil
+    prefs.setValue(brushSize, forKey: Prefs.brushSize)
   }
   
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
     guard let view = sender.view else { return }
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
+    Haptic.selectionChanged()
     if (view.tag == 0) {
-      currentAlpha = 0.0
+      opacity = 0.0
       color = .white
     } else {
-      currentAlpha = 1.0
+      opacity = 1.0
       color = Theme.colors[view.tag]
     }
   }
   
   @objc fileprivate func buttonTapped(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
+    Haptic.selectionChanged()
     let percentMix: CGFloat = 0.1
     
     if (sender.tag == 0) {
-      currentAlpha = currentAlpha * (1 - percentMix)
+      opacity = opacity * (1 - percentMix)
     } else {
-      if (currentAlpha == 0) {
+      if (opacity == 0) {
         color = Theme.colors[sender.tag]
       }
-      currentAlpha = currentAlpha * (1 - percentMix) + percentMix
+      opacity = opacity * (1 - percentMix) + percentMix
       color = UIColor.blendColor(color, withColor: Theme.colors[sender.tag], percentMix: percentMix)
     }
   }
   
-  func getCurrentColor() -> UIColor {
-    return currentColorView.backgroundColor!
-  }
-  
-  func getCurrentBrushSize() -> Float {
-    return pow(brushSizeSlider.value, sliderConstant)
-  }
-  
-  func getAlpha() -> CGFloat? {
-    return currentAlpha
-  }
-  
-  func setAlphaHigh() {
-    currentAlpha = 1.0
-  }
-  
   func updateButtonColor() {
-    let equivalentColor = UIColor.blendColor(color, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - currentAlpha))
+    let equivalentColor = UIColor.blendColor(color, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - opacity))
     let coreColor = equivalentColor.coreImageColor
     let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
     if (colorDarkness < 1.6) {
