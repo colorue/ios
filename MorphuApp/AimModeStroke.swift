@@ -15,7 +15,7 @@ class AimModeStroke: DrawingStroke {
       super.began(position: position)
     } else {
       drawDot(position)
-      canvas.mergeCurrentStroke(true)
+      canvas.mergeCurrentStroke(true, image: currentStroke)
     }
   }
 
@@ -24,17 +24,22 @@ class AimModeStroke: DrawingStroke {
       super.changed(position: position)
     } else {
       drawDot(position)
+      canvas.mergeCurrentStroke(true, image: currentStroke)
     }
   }
 
   override func ended(position: CGPoint) {
     if canvas.delegate?.isDrawingOn() ?? false {
-      super.changed(position: position)
+      super.ended(position: position)
     } else {
-      canvas.addToUndoStack(canvas.imageView.image)
-      canvas.mergeCurrentStroke(false)
-      canvas.undo()
-      _ = canvas.redoStack.popLast()
+      canvas.clearCurrentStroke()
     }
+  }
+
+  override func end() {
+    path.removeAllPoints()
+    pts.removeAll()
+    canvas.mergeCurrentStroke(true, image: currentStroke)
+    canvas.addToUndoStack(canvas.imageView.image)
   }
 }

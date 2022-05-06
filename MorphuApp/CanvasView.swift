@@ -26,13 +26,7 @@ protocol CanvasDelegate {
 
 class CanvasView: UIView, UIGestureRecognizerDelegate {
 
-  var path: UIBezierPath = UIBezierPath()
-  var pts: [CGPoint] = [CGPoint]()
-
   var drawingStroke: DrawingStroke?
-
-  var lastPoint: CGPoint?
-  var currentStroke: UIImage?
   var undoStack = [UIImage]() {
     didSet {
       delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
@@ -56,7 +50,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         return
       }
       undoStack.append(baseDrawing)
-      mergeCurrentStroke(false)
+      imageView.image = baseDrawing
     }
   }
 
@@ -97,17 +91,16 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   @objc fileprivate func handleDrag(_ sender: UILongPressGestureRecognizer) {
     guard let delegate = delegate else { return }
     let position = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
-    mergeCurrentStroke(true)
+//    mergeCurrentStroke(true)
 
     let tool = delegate.getKeyboardTool()?.type ?? .none
     // isDropper is only used for sizing, I'd like to clean it up
     let isDropper = tool == .colorDropper || tool == .paintBucket
     if sender.state == .began {
-      delegate.showUnderFingerView()
-      setUnderFingerView(position, dropper: isDropper)
       drawingStroke = DrawingStroke.makeStroke(canvas: self, type: tool)
       drawingStroke?.began(position: position)
-      mergeCurrentStroke(true)
+      delegate.showUnderFingerView()
+      setUnderFingerView(position, dropper: isDropper)
     } else if sender.state == .changed {
       drawingStroke?.changed(position: position)
       delegate.showUnderFingerView()
@@ -115,14 +108,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     } else if sender.state == .ended {
       drawingStroke?.ended(position: position)
       drawingStroke = nil
-      currentStroke = nil
       delegate.hideUnderFingerView()
-      mergeCurrentStroke(false)
     }
   }
 
   func completeCurve () {
-    drawingStroke?.completeCurve()
+    drawingStroke?.end()
   }
 
   func setUnderFingerView(_ position: CGPoint, dropper: Bool) {
@@ -153,37 +144,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     delegate.setUnderfingerView(imageView.image!.cropToSquare(position, cropSize: underFingerSize))
   }
 
-
-  // MARK: Drawing Methods
-
-
-
-  func drawCurve() {
-    guard let delegate = delegate else { return }
-
-    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-    currentStroke?.draw(at: CGPoint.zero)
-    delegate.getCurrentColor().setStroke()
-    path.lineWidth = CGFloat(delegate.getCurrentBrushSize()) * resizeScale
-    path.lineCapStyle = CGLineCap.round
-    path.stroke()
-    currentStroke = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-  }
-
-  func mergeCurrentStroke(_ alpha: Bool) {
-    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-    undoStack.last?.draw(at: CGPoint.zero)
-
-    if alpha {
-      currentStroke?.draw(at: CGPoint.zero, blendMode: .normal, alpha: delegate?.getAlpha() ?? 1.0)
-    } else {
-      currentStroke?.draw(at: CGPoint.zero)
-    }
-    imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-  }
-
   func addToUndoStack(_ image: UIImage?) {
     if let image = image {
       if undoStack.count <= 64 {
@@ -201,23 +161,20 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   func undo() {
     if let undone = undoStack.popLast() {
       redoStack.append(undone)
-      mergeCurrentStroke(false)
+      imageView.image = undoStack.last
     }
   }
 
   func redo() {
     if let redone = redoStack.popLast() {
       undoStack.append(redone)
-      mergeCurrentStroke(false)
+      imageView.image = undoStack.last
     }
   }
 
   func trash() {
     undoStack.removeAll()
-    currentStroke = (UIImage.getImageWithColor(UIColor.white, size: actualSize))
-    mergeCurrentStroke(false)
-    addToUndoStack(imageView.image)
-    currentStroke = nil
+    imageView.image = UIImage.getImageWithColor(UIColor.white, size: actualSize)
   }
 
   func getDrawing() -> UIImage {
@@ -225,6 +182,43 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       return drawing
     } else {
       return UIImage.getImageWithColor(UIColor.white, size: actualSize)
+    }
+  }
+}
+
+extension CanvasView: DrawingStrokeDelegate {
+
+  // MARK: Drawing Methods
+  func mergeCurrentStroke(_ alpha: Bool, image: UIImage?) {
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+    undoStack.last?.draw(at: CGPoint.zero)
+    if alpha {
+      image?.draw(at: CGPoint.zero, blendMode: .normal, alpha: delegate?.getAlpha() ?? 1.0)
+    } else {
+      image?.draw(at: CGPoint.zero)
+    }
+    imageView.image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+  }
+
+  func clearCurrentStroke () {
+    imageView.image = undoStack.last
+  }
+
+  func paintAt(position: CGPoint, color: UIColor, alpha: CGFloat) {
+    clearCurrentStroke()
+    let touchedColor = imageView.image!.color(atPosition: position) ?? .white
+    let mixedColor = UIColor.blendColor(touchedColor , withColor: color, percentMix: alpha)
+    delegate?.getKeyboardTool()?.startAnimating()
+
+    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { [weak self] in
+      guard let self = self else { return }
+      let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: mixedColor, tolerance: 5)
+      self.addToUndoStack(filledImage)
+      DispatchQueue.main.async {
+        self.mergeCurrentStroke(false, image: filledImage)
+        self.delegate?.getKeyboardTool()?.stopAnimating()
+      }
     }
   }
 }

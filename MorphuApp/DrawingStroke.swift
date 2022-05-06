@@ -8,12 +8,18 @@
 
 import Foundation
 
+protocol DrawingStrokeDelegate {
+  func mergeCurrentStroke(_ alpha: Bool, image: UIImage?)
+  func paintAt(position: CGPoint, color: UIColor, alpha: CGFloat)
+}
+
 class DrawingStroke {
 
   let positionIndicator = R.image.positionIndicator()!
+  var currentStroke: UIImage?
 
-  var pts: [CGPoint] = [CGPoint]()
-  var path: UIBezierPath = UIBezierPath()
+  var pts = [CGPoint]()
+  var path = UIBezierPath()
   var canvas: CanvasView
   var color: UIColor
   var alpha: CGFloat
@@ -40,9 +46,9 @@ class DrawingStroke {
   }
 
   func began(position: CGPoint) {
-    pts.removeAll()
     pts.append(position)
     finishStroke()
+    canvas.mergeCurrentStroke(true, image: currentStroke)
   }
 
   func changed(position: CGPoint) {
@@ -56,17 +62,38 @@ class DrawingStroke {
       pts[1] = pts[4]
       pts.removeLast(3)
     }
+    canvas.mergeCurrentStroke(true, image: currentStroke)
   }
 
   func ended(position: CGPoint) {
     pts.append(position)
-    completeCurve()
+    if pts.count >= 5 {
+      pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
+      path.move(to: pts[0])
+      path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
+      self.drawCurve()
+      pts[0] = pts[3]
+      pts[1] = pts[4]
+      pts.removeLast(3)
+    } else {
+      self.finishStroke()
+    }
+    path.removeAllPoints()
+    pts.removeAll()
+    canvas.mergeCurrentStroke(true, image: currentStroke)
+    canvas.addToUndoStack(canvas.imageView.image)
   }
+
+  func end() {
+
+  }
+
+  // MARK: utility functions
 
   func finishStroke() {
     if !pts.isEmpty {
       UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
-      canvas.currentStroke?.draw(at: CGPoint.zero)
+      currentStroke?.draw(at: CGPoint.zero)
 
       let context = UIGraphicsGetCurrentContext()
       if pts.count <= 2 {
@@ -86,37 +113,19 @@ class DrawingStroke {
 
       context?.strokePath()
       context?.flush()
-      canvas.currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+      currentStroke = UIGraphicsGetImageFromCurrentImageContext()
       UIGraphicsEndImageContext()
     }
   }
 
-  func completeCurve () {
-    if pts.count >= 5 {
-      pts[3] = CGPoint(x: (pts[2].x + pts[4].x)/2.0, y: (pts[2].y + pts[4].y)/2.0)
-      path.move(to: pts[0])
-      path.addCurve(to: pts[3], controlPoint1: pts[1], controlPoint2: pts[2])
-      self.drawCurve()
-      pts[0] = pts[3]
-      pts[1] = pts[4]
-      pts.removeLast(3)
-    } else {
-      self.finishStroke()
-    }
-    path.removeAllPoints()
-    pts.removeAll()
-    canvas.addToUndoStack(canvas.imageView.image)
-    canvas.currentStroke = nil
-  }
-
   func drawCurve() {
     UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
-    canvas.currentStroke?.draw(at: CGPoint.zero)
+    currentStroke?.draw(at: CGPoint.zero)
     color.setStroke()
     path.lineWidth = CGFloat(brushSize) * canvas.resizeScale
     path.lineCapStyle = CGLineCap.round
     path.stroke()
-    canvas.currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+    currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
   }
 
@@ -130,7 +139,7 @@ class DrawingStroke {
     context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
     context?.strokePath()
     context?.flush()
-    canvas.currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+    currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
   }
 
@@ -140,7 +149,7 @@ class DrawingStroke {
     positionIndicator.draw(at: CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
     context?.strokePath()
     context?.flush()
-    canvas.currentStroke = UIGraphicsGetImageFromCurrentImageContext()
+    currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
   }
 }

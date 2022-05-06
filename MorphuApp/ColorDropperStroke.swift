@@ -15,6 +15,7 @@ class ColorDropperStroke: DrawingStroke {
     delegate.setColor(canvas.imageView.image!.color(atPosition: position))
     delegate.setAlphaHigh()
     drawDropperIndicator(position)
+    canvas.mergeCurrentStroke(true, image: currentStroke)
   }
 
   override func changed(position: CGPoint) {
@@ -25,14 +26,13 @@ class ColorDropperStroke: DrawingStroke {
       Haptic.selectionChanged(prepare: true)
     }
     drawDropperIndicator(position)
+    canvas.mergeCurrentStroke(true, image: currentStroke)
   }
 
   override func ended(position: CGPoint) {
     guard let delegate = canvas.delegate else { return }
     Haptic.selectionChanged()
     delegate.setKeyboardState(nil)
-    delegate.hideUnderFingerView()
-    canvas.currentStroke = nil
-    canvas.mergeCurrentStroke(false)
+    canvas.clearCurrentStroke()
   }
 }
