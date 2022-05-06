@@ -39,7 +39,11 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       delegate?.saveDrawing()
     }
   }
-  fileprivate var redoStack = [UIImage]()
+  fileprivate var redoStack = [UIImage]()  {
+    didSet {
+      delegate?.updateUndoButtons(undo: !isEmpty, redo: !redoStack.isEmpty)
+    }
+  }
   fileprivate var imageView = UIImageView()
   fileprivate let positionIndicator = R.image.positionIndicator()!
   fileprivate let resizeScale: CGFloat = 2.0

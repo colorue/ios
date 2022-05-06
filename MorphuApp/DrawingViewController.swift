@@ -60,17 +60,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     super.viewDidLoad()
     
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
-    
-    //    let logo = R.image.logoInactive()
-    //    let imageView = UIImageView(image:logo)
-    //    imageView.tintColor = Theme.black
-
-
-    //    let undoButton = UIButton(type: .custom)
-    //    undoButton.tintColor = .black
-    //    undoButton.setImage(UIImage(named: "arrow.uturn.backward.circle"), for: .normal)
-    //    self.navigationItem.titleView = undoButton
-
+    becomeFirstResponder() // To get shake gesture
 
     let configuration = UIImage.SymbolConfiguration(pointSize: 20)
 
@@ -526,5 +516,43 @@ extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationCo
 
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     self.dismiss(animated: true, completion: nil)
+  }
+}
+
+// MARK: -  ShakeGestureRegognizer
+extension DrawingViewController {
+  override var canBecomeFirstResponder: Bool {
+    get {
+      return true
+    }
+  }
+
+  override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) {
+    if motion == .motionShake {
+      guard undoButton.isEnabled || redoButton.isEnabled else { return }
+
+      feedback = UISelectionFeedbackGenerator()
+      feedback?.selectionChanged()
+      feedback = nil
+
+      let title = undoButton.isEnabled ? "Undo added stroke" : "Redo added stroke"
+      let undoAlert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+
+      if (undoButton.isEnabled) {
+        undoAlert.addAction(UIAlertAction(title: "Undo", style: .default, handler: { [weak self] (action: UIAlertAction!) in
+          self?.canvas!.undo()
+        }))
+      }
+
+      if (redoButton.isEnabled) {
+        let redoTitle = undoButton.isEnabled ? "Redo added stroke" : "Redo"
+        undoAlert.addAction(UIAlertAction(title: redoTitle, style: .default, handler: { [weak self] (action: UIAlertAction!) in
+          self?.canvas!.redo()
+        }))
+      }
+
+      undoAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+      self.present(undoAlert, animated: true, completion: nil)
+    }
   }
 }

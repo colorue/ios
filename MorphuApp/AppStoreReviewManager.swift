@@ -9,7 +9,7 @@
 import StoreKit
 
 enum AppStoreReviewManager {
-  static let minimumReviewWorthyActionCount = 1
+  static let minimumReviewWorthyActionCount = 5
 
   static func requestReviewIfAppropriate() {
 
@@ -21,7 +21,7 @@ enum AppStoreReviewManager {
 
     defaults.set(actionCount, forKey: .reviewWorthyActionCount)
 
-    guard actionCount >= minimumReviewWorthyActionCount else {
+    guard actionCount >= minimumReviewWorthyActionCount || !defaults.bool(forKey: .firstRequest) else {
       return
     }
 
@@ -35,6 +35,7 @@ enum AppStoreReviewManager {
 
     SKStoreReviewController.requestReview()
 
+    defaults.set(true, forKey: .firstRequest)
     defaults.set(0, forKey: .reviewWorthyActionCount)
     defaults.set(currentVersion, forKey: .lastReviewRequestAppVersion)
   }
@@ -43,4 +44,5 @@ enum AppStoreReviewManager {
 extension String {
   static let lastReviewRequestAppVersion = "lastReviewRequestAppVersion"
   static let reviewWorthyActionCount = "reviewWorthyActionCount"
+  static let firstRequest = "firstRequest"
 }

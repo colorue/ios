@@ -85,7 +85,6 @@ struct R: Rswift.Validatable {
   }
 
   static func validate() throws {
-    try font.validate()
     try intern.validate()
   }
 
@@ -176,56 +175,15 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.file` struct is generated, and contains static references to 3 files.
+  /// This `R.file` struct is generated, and contains static references to 1 files.
   struct file {
     /// Resource file `GoogleService-Info.plist`.
     static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
-    /// Resource file `OpenSans-Regular.ttf`.
-    static let openSansRegularTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "OpenSans-Regular", pathExtension: "ttf")
-    /// Resource file `playtime.ttf`.
-    static let playtimeTtf = Rswift.FileResource(bundle: R.hostingBundle, name: "playtime", pathExtension: "ttf")
 
     /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
     static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.googleServiceInfoPlist
       return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "OpenSans-Regular", withExtension: "ttf")`
-    static func openSansRegularTtf(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.openSansRegularTtf
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    /// `bundle.url(forResource: "playtime", withExtension: "ttf")`
-    static func playtimeTtf(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.playtimeTtf
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    fileprivate init() {}
-  }
-
-  /// This `R.font` struct is generated, and contains static references to 2 fonts.
-  struct font: Rswift.Validatable {
-    /// Font `OpenSans`.
-    static let openSans = Rswift.FontResource(fontName: "OpenSans")
-    /// Font `PlaytimeWithHotToddies`.
-    static let playtimeWithHotToddies = Rswift.FontResource(fontName: "PlaytimeWithHotToddies")
-
-    /// `UIFont(name: "OpenSans", size: ...)`
-    static func openSans(size: CGFloat) -> UIKit.UIFont? {
-      return UIKit.UIFont(resource: openSans, size: size)
-    }
-
-    /// `UIFont(name: "PlaytimeWithHotToddies", size: ...)`
-    static func playtimeWithHotToddies(size: CGFloat) -> UIKit.UIFont? {
-      return UIKit.UIFont(resource: playtimeWithHotToddies, size: size)
-    }
-
-    static func validate() throws {
-      if R.font.openSans(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'OpenSans' could not be loaded, is 'OpenSans-Regular.ttf' added to the UIAppFonts array in this targets Info.plist?") }
-      if R.font.playtimeWithHotToddies(size: 42) == nil { throw Rswift.ValidationError(description:"[R.swift] Font 'PlaytimeWithHotToddies' could not be loaded, is 'playtime.ttf' added to the UIAppFonts array in this targets Info.plist?") }
     }
 
     fileprivate init() {}
