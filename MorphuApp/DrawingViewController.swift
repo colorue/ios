@@ -21,6 +21,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     return realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
   }
 
+  var tool: ToolbarButton?
+
   var drawingId: String? {
     didSet {
       if let drawingId = drawingId {
@@ -311,11 +313,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     }
   }
   
-  func setDropperActive(_ active: Bool) {
-    self.colorKeyboard?.state = .colorDropper
-    self.colorKeyboard!.updateButtonColor()
-  }
-  
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     self.saveDrawing()
@@ -370,18 +367,18 @@ extension DrawingViewController: ColorKeyboardDelegate {
   }
   
   @objc func undo() {
-    self.canvas!.undo()
+    self.canvas?.undo()
     Haptic.selectionChanged()
-
   }
   
   @objc func redo() {
-    self.canvas!.redo()
+    self.canvas?.redo()
     Haptic.selectionChanged()
   }
 }
 
 extension DrawingViewController: CanvasDelegate {
+
   func saveDrawing() {
     DispatchQueue.main.async { [weak self] in
       guard  let self = self, let canvas = self.canvas, !canvas.isEmpty else { return }
@@ -458,21 +455,23 @@ extension DrawingViewController: CanvasDelegate {
   }
 
   func startPaintBucketSpinner() {
-    colorKeyboard?.paintBucketButton.isHidden = true
-    colorKeyboard?.paintBucketSpinner.startAnimating()
+    tool?.startAnimating()
+//    colorKeyboard?.paintBucketButton.isHidden = true
+//    colorKeyboard?.paintBucketSpinner.startAnimating()
   }
 
   func stopPaintBucketSpinner() {
-    colorKeyboard?.paintBucketSpinner.stopAnimating()
-    colorKeyboard?.paintBucketButton.isHidden = false
+    tool?.stopAnimating()
+//    colorKeyboard?.paintBucketSpinner.stopAnimating()
+//    colorKeyboard?.paintBucketButton.isHidden = false
   }
 
-  func getKeyboardState() -> KeyboardToolState {
-    return self.colorKeyboard?.state ?? .none
+  func getKeyboardTool() -> ToolbarButton? {
+    return self.colorKeyboard?.tool
   }
 
-  func setKeyboardState(_ state: KeyboardToolState) {
-    colorKeyboard?.state = state
+  func setKeyboardState(_ tool: ToolbarButton?) {
+    colorKeyboard?.tool = tool
     colorKeyboard?.updateButtonColor()
   }
 

@@ -17,10 +17,8 @@ protocol CanvasDelegate {
   func hideUnderFingerView()
   func showUnderFingerView()
   func setColor(_ color: UIColor?)
-  func getKeyboardState() -> KeyboardToolState
-  func setKeyboardState(_ state: KeyboardToolState)
-  func startPaintBucketSpinner()
-  func stopPaintBucketSpinner()
+  func getKeyboardTool() -> ToolbarButton?
+  func setKeyboardState(_ tool: ToolbarButton?)
   func isDrawingOn() -> Bool
   func updateUndoButtons(undo: Bool, redo: Bool)
   func saveDrawing()
@@ -102,7 +100,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     let actualPosition = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
     mergeCurrentStroke(true)
 
-    switch (delegate.getKeyboardState()) {
+    let toolType = delegate.getKeyboardTool()?.type ?? .none
+    switch (toolType) {
     case .none:
       curveTouch(actualPosition, state: sender.state)
     case .colorDropper:
@@ -130,7 +129,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       setUnderFingerView(position, dropper: true)
     } else if state == .ended {
       currentStroke = nil
-      delegate.startPaintBucketSpinner()
+      delegate.getKeyboardTool()?.startAnimating()
       delegate.hideUnderFingerView()
       mergeCurrentStroke(false)
       let touchedColor = imageView.image!.color(atPosition: position) ?? .white
@@ -141,7 +140,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         self.addToUndoStack(filledImage)
         DispatchQueue.main.async {
           self.mergeCurrentStroke(false)
-          delegate.stopPaintBucketSpinner()
+          delegate.getKeyboardTool()?.stopAnimating()
         }
       }
     }
@@ -167,7 +166,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       setUnderFingerView(position, dropper: true)
     } else if state == .ended {
       Haptic.selectionChanged()
-      delegate.setKeyboardState(.none)
+      delegate.setKeyboardState(nil)
       delegate.hideUnderFingerView()
       currentStroke = nil
       mergeCurrentStroke(false)

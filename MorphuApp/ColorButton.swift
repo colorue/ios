@@ -9,8 +9,8 @@
 import UIKit
 
 protocol ColorButtonDelegate: class {
-  func tapped(_ colorButton: ColorButton)
-  func held(_ colorButton: ColorButton)
+  func colorButtonTapped(_ colorButton: ColorButton)
+  func colorButtonHeld(_ colorButton: ColorButton)
 }
 
 class ColorButton: UIButton {
@@ -30,7 +30,6 @@ class ColorButton: UIButton {
     self.backgroundColor = color
     self.tag = tag
     self.isTransparent = isTransparent
-
     self.addTarget(self, action: #selector(ColorButton.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
     let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorButton.buttonHeld(_:)))
     tap.minimumPressDuration = 0.15
@@ -40,15 +39,13 @@ class ColorButton: UIButton {
 
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
     Haptic.selectionChanged()
-    delegate?.held(self)
+    delegate?.colorButtonHeld(self)
   }
 
   @objc fileprivate func buttonTapped(_ sender: UIButton) {
     Haptic.selectionChanged()
-    delegate?.tapped(self)
+    delegate?.colorButtonTapped(self)
   }
 }
 
-extension ColorButton: UIGestureRecognizerDelegate {
-
-}
+extension ColorButton: UIGestureRecognizerDelegate { }

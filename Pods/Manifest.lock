@@ -1,4 +1,5 @@
 PODS:
+  - PureLayout (3.1.9)
   - R.swift (6.1.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
@@ -10,12 +11,14 @@ PODS:
   - Toast-Swift (5.0.1)
 
 DEPENDENCIES:
+  - PureLayout (~> 3)
   - R.swift (~> 6)
   - RealmSwift (~> 10)
   - Toast-Swift (~> 5)
 
 SPEC REPOS:
   https://cdn.cocoapods.org/:
+    - PureLayout
     - R.swift
     - R.swift.Library
     - Realm
@@ -23,12 +26,13 @@ SPEC REPOS:
     - Toast-Swift
 
 SPEC CHECKSUMS:
+  PureLayout: 5fb5e5429519627d60d079ccb1eaa7265ce7cf88
   R.swift: ec98ff71c4ab2f6fd01dd077e5afd15e63a4834c
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
   Realm: 978303663d0509166498f423d112e5ee97d4c91b
   RealmSwift: a0c30c1efc49e928a0a6f8fb141bb2629616d79b
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 99a831cb9ef2ee370f4bcd28fea861677b545f30
+PODFILE CHECKSUM: ca00ff1d260a3c09ba5070f86e2229863339fda0
 
 COCOAPODS: 1.11.3

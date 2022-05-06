@@ -11,6 +11,7 @@ target 'Colorue' do
     pod 'R.swift','~>6'
     pod 'Toast-Swift','~>5'
     pod 'RealmSwift','~>10'
+    pod 'PureLayout','~>3'
 end
 
 post_install do |installer|

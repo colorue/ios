@@ -14,28 +14,30 @@ protocol ColorKeyboardDelegate {
   func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
 }
 
-enum KeyboardToolState: Int {
-  case none = 0
-  case colorDropper = 1
-  case paintBucket = 2
-  case bullsEye = 3
-}
-
 let percentMix: CGFloat = 0.1
 
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let currentColorView = UIView()
   let brushSizeSlider = BrushSizeSlider()
-  let dropperButton = ToolbarButton()
-  let paintBucketButton = ToolbarButton()
-  let bullsEyeButton = ToolbarButton()
-  let paintBucketSpinner = UIActivityIndicatorView()
+  let dropperButton = ToolbarButton(type: .colorDropper)
+  let paintBucketButton = ToolbarButton(type: .paintBucket)
+  let bullsEyeButton = ToolbarButton(type: .bullsEye)
 
-  var state: KeyboardToolState = .none {
+  var tool: ToolbarButton? {
     didSet {
       dropperButton.isSelected = state == .colorDropper
       paintBucketButton.isSelected = state == .paintBucket
       bullsEyeButton.isSelected = state == .bullsEye
+    }
+  }
+
+  var state: KeyboardToolState {
+    get {
+      if let tool = tool {
+        return tool.type
+      } else {
+        return .none
+      }
     }
   }
 
@@ -120,23 +122,15 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: buttonSize/2.0)
     toolbarWrapper.addSubview(brushSizeSlider)
 
-    paintBucketButton.setImage(R.image.paintBucket()!, for: .normal)
-    paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
+    paintBucketButton.delegate = self
     paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
     toolbarWrapper.addSubview(paintBucketButton)
     
-    paintBucketSpinner.hidesWhenStopped = true
-    paintBucketSpinner.center = paintBucketButton.center
-    paintBucketSpinner.color = .white
-    toolbarWrapper.addSubview(paintBucketSpinner)
-    
-    dropperButton.setImage(UIImage(systemName: "eyedropper"), for: .normal)
-    dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
+    dropperButton.delegate = self
     dropperButton.frame = CGRect(x: (buttonSize), y: 0, width: buttonSize, height: buttonSize)
     toolbarWrapper.addSubview(dropperButton)
     
-    bullsEyeButton.setImage(UIImage(systemName: "scope"), for: .normal)
-    bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
+    bullsEyeButton.delegate = self
     bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
     toolbarWrapper.addSubview(bullsEyeButton)
     
@@ -159,39 +153,22 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
   }
 
-  @objc fileprivate func dropper(_ sender: UIButton) {
-    Haptic.selectionChanged()
-    state = state == .colorDropper ? .none : .colorDropper
-  }
-  
-  @objc fileprivate func paintBucket(_ sender: UIButton) {
-    Haptic.selectionChanged()
-    state = state == .paintBucket ? .none : .paintBucket
-  }
-  
-  @objc fileprivate func bullsEye(_ sender: UIButton) {
-    Haptic.selectionChanged()
-    state = state == .bullsEye ? .none : .bullsEye
-  }
-
   func updateButtonColor() {
     brushSizeSlider.updateColors(darkness: darkness)
     if (darkness < 1.87) {
       dropperButton.tintColor = .white
       paintBucketButton.tintColor = .white
       bullsEyeButton.tintColor = .white
-      paintBucketSpinner.color = .white
     } else {
       dropperButton.tintColor = .black
       paintBucketButton.tintColor = .black
       bullsEyeButton.tintColor = .black
-      paintBucketSpinner.color = .black
     }
   }
 }
 
 extension ColorKeyboardView: ColorButtonDelegate {
-  func tapped(_ colorButton: ColorButton) {
+  func colorButtonTapped(_ colorButton: ColorButton) {
     if (colorButton.isTransparent) {
       opacity = opacity * (1 - percentMix)
     } else {
@@ -203,13 +180,23 @@ extension ColorKeyboardView: ColorButtonDelegate {
     }
   }
 
-  func held(_ colorButton: ColorButton) {
+  func colorButtonHeld(_ colorButton: ColorButton) {
     if (colorButton.isTransparent) {
       opacity = 0.0
       color = .white
     } else {
       opacity = 1.0
       color = colorButton.color
+    }
+  }
+}
+
+extension ColorKeyboardView: ToolbarButtonDelegate {
+  func toolbarButtonTapped(_ toolbarButton: ToolbarButton) {
+    if (state == toolbarButton.type) {
+      tool = nil
+    } else {
+      tool = toolbarButton
     }
   }
 }
