@@ -15,6 +15,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   let prefs = UserDefaults.standard
 
   private var drawing: Drawing? {
+    guard let drawingId = drawingId else { return nil }
     let realm = try! Realm()
     return realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
   }
