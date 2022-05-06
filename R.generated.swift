@@ -176,17 +176,6 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.entitlements` struct is generated, and contains static references to 2 properties.
-  struct entitlements {
-    static let comAppleDeveloperUbiquityKvstoreIdentifier = infoPlistString(path: [], key: "com.apple.developer.ubiquity-kvstore-identifier") ?? "$(TeamIdentifierPrefix)$(CFBundleIdentifier)"
-
-    struct comAppleDeveloperIcloudContainerIdentifiers {
-      fileprivate init() {}
-    }
-
-    fileprivate init() {}
-  }
-
   /// This `R.file` struct is generated, and contains static references to 3 files.
   struct file {
     /// Resource file `GoogleService-Info.plist`.
@@ -712,6 +701,24 @@ struct R: Rswift.Validatable {
       return UIKit.UIImage(resource: R.image.facebookLogo, compatibleWith: traitCollection)
     }
     #endif
+
+    fileprivate init() {}
+  }
+
+  /// This `R.info` struct is generated, and contains static references to 1 properties.
+  struct info {
+    struct uiApplicationShortcutItems {
+      struct newDrawing {
+        static let _key = "NewDrawing"
+        static let uiApplicationShortcutItemIconType = infoPlistString(path: ["UIApplicationShortcutItems", "NewDrawing"], key: "UIApplicationShortcutItemIconType") ?? "UIApplicationShortcutIconTypeCompose"
+        static let uiApplicationShortcutItemTitle = infoPlistString(path: ["UIApplicationShortcutItems", "NewDrawing"], key: "UIApplicationShortcutItemTitle") ?? "New Drawing"
+        static let uiApplicationShortcutItemType = infoPlistString(path: ["UIApplicationShortcutItems", "NewDrawing"], key: "UIApplicationShortcutItemType") ?? "NewDrawing"
+
+        fileprivate init() {}
+      }
+
+      fileprivate init() {}
+    }
 
     fileprivate init() {}
   }

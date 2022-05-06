@@ -68,7 +68,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
     
     let selectorWidth = frame.width/11
-    let buttonSize = selectorWidth * 1.25
+    let buttonSize = [(selectorWidth * 1.25), 80.0].min()!
 
     let colorButtonWrapper = UIView()
     colorButtonWrapper.frame = CGRect(x: 0, y: buttonSize, width: frame.width, height: frame.height - buttonSize)

@@ -92,7 +92,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     let keyboardHeight = self.view.frame.height / 5.55833333333333
     let canvasHeight = self.view.frame.height - keyboardHeight - 60
     
-    let canvasFrame = CGRect(x:(self.view.frame.width - canvasHeight/1.3)/2, y: 60, width: canvasHeight/1.3, height: canvasHeight)
+    let canvasFrame = CGRect(x: 0, y: 60, width: view.frame.width, height: canvasHeight)
     
     let canvas = CanvasView(frame: canvasFrame)
     canvas.delegate = self
