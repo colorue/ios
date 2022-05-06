@@ -16,11 +16,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   
   func application(_ application: UIApplication,
                    didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-    
-    //        let bundle = Bundle.main.infoDictionary!
+
     if let drawingId = UserDefaults.standard.string(forKey: "openDrawing") {
       openDrawing(drawingId)
       return true
+    } else if !UserDefaults.standard.bool(forKey: Prefs.saved) {
+      // Start in drawing interface for new users
+      openDrawing()
     }
 
     return true
