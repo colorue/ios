@@ -97,10 +97,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
 
     let colorButtonWrapper = UIStackView()
     colorButtonWrapper.frame = CGRect(x: 0, y: buttonSize, width: frame.width, height: frame.height - buttonSize)
+    colorButtonWrapper.distribution = .fillEqually
     addSubview(colorButtonWrapper)
     for (tag, color) in Theme.colors.enumerated() {
-      let newButton = ColorButton(color: color, tag: tag, isTransparent: tag == 0)
-//      newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - buttonSize)
+      let newButton = ColorButton(color: color, tag: tag)
       newButton.delegate = self
       colorButtonWrapper.addArrangedSubview(newButton)
     }

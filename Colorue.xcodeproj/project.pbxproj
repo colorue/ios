@@ -31,6 +31,7 @@
 		87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */; };
 		87DEFE462825921200949265 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE452825921200949265 /* ToolbarButton.swift */; };
 		87DEFE48282593EA00949265 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE47282593EA00949265 /* ColorButton.swift */; };
+		87DEFE4B2825C76000949265 /* DrawingStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4A2825C76000949265 /* DrawingStroke.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -75,6 +76,7 @@
 		87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
 		87DEFE452825921200949265 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
 		87DEFE47282593EA00949265 /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		87DEFE4A2825C76000949265 /* DrawingStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStroke.swift; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -180,6 +182,7 @@
 		8786D6211D56AEAD00AD3362 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				87DEFE492825C74F00949265 /* Strokes */,
 				87EE53E71D57CD58005B8FB3 /* Views */,
 				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
 			);
@@ -256,6 +259,14 @@
 				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
 			);
 			name = Lib;
+			sourceTree = "<group>";
+		};
+		87DEFE492825C74F00949265 /* Strokes */ = {
+			isa = PBXGroup;
+			children = (
+				87DEFE4A2825C76000949265 /* DrawingStroke.swift */,
+			);
+			name = Strokes;
 			sourceTree = "<group>";
 		};
 		87EE53E71D57CD58005B8FB3 /* Views */ = {
@@ -434,6 +445,7 @@
 			files = (
 				87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */,
 				87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */,
+				87DEFE4B2825C76000949265 /* DrawingStroke.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */,
