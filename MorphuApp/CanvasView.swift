@@ -29,7 +29,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   var path: UIBezierPath = UIBezierPath()
   var pts: [CGPoint] = [CGPoint]()
 
-  var drawingTool: DrawingTool?
+  var drawingStroke: DrawingStroke?
 
   var lastPoint: CGPoint?
   var currentStroke: UIImage?
@@ -55,7 +55,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
         trash()
         return
       }
-//      undoStack.removeAll()
       undoStack.append(baseDrawing)
       mergeCurrentStroke(false)
     }
@@ -97,29 +96,33 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
   @objc fileprivate func handleDrag(_ sender: UILongPressGestureRecognizer) {
     guard let delegate = delegate else { return }
-    let actualPosition = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
+    let position = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
     mergeCurrentStroke(true)
-    let type = delegate.getKeyboardTool()?.type ?? .none
+
+    let tool = delegate.getKeyboardTool()?.type ?? .none
+    // isDropper is only used for sizing, I'd like to clean it up
+    let isDropper = tool == .colorDropper || tool == .paintBucket
     if sender.state == .began {
-      switch (type) {
-      case .none:
-        drawingTool = DefaultTool(canvas: self, color: delegate.getCurrentColor(), alpha: delegate.getAlpha()!, brushSize: delegate.getCurrentBrushSize())
-      case .colorDropper:
-        drawingTool = ColorDropperTool(canvas: self, color: delegate.getCurrentColor(), alpha: delegate.getAlpha()!, brushSize: delegate.getCurrentBrushSize())
-      case .paintBucket:
-        drawingTool = PaintBucketTool(canvas: self, color: delegate.getCurrentColor(), alpha: delegate.getAlpha()!, brushSize: delegate.getCurrentBrushSize())
-      case .bullsEye:
-        drawingTool = BullsEyeTool(canvas: self, color: delegate.getCurrentColor(), alpha: delegate.getAlpha()!, brushSize: delegate.getCurrentBrushSize())
-      }
-    }
-    drawingTool?.handleDrag(position: actualPosition, state: sender.state)
-    if sender.state == .ended {
-      drawingTool = nil
+      delegate.showUnderFingerView()
+      setUnderFingerView(position, dropper: isDropper)
+      drawingStroke = DrawingStroke.makeStroke(canvas: self, type: tool)
+      drawingStroke?.began(position: position)
+      mergeCurrentStroke(true)
+    } else if sender.state == .changed {
+      drawingStroke?.changed(position: position)
+      delegate.showUnderFingerView()
+      setUnderFingerView(position, dropper: isDropper)
+    } else if sender.state == .ended {
+      drawingStroke?.ended(position: position)
+      drawingStroke = nil
+      currentStroke = nil
+      delegate.hideUnderFingerView()
+      mergeCurrentStroke(false)
     }
   }
 
   func completeCurve () {
-    drawingTool?.completeCurve()
+    drawingStroke?.completeCurve()
   }
 
   func setUnderFingerView(_ position: CGPoint, dropper: Bool) {
