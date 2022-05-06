@@ -21,20 +21,18 @@ enum KeyboardToolState: Int {
   case bullsEye = 3
 }
 
+let percentMix: CGFloat = 0.1
+
 class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let currentColorView = UIView()
-  let brushSizeSlider = UISlider()
+  let brushSizeSlider = BrushSizeSlider()
   let dropperButton = ToolbarButton()
   let paintBucketButton = ToolbarButton()
   let bullsEyeButton = ToolbarButton()
   let paintBucketSpinner = UIActivityIndicatorView()
   
-  var pastStrokeSize:Float = 0.0
-  
-  fileprivate let prefs = UserDefaults.standard
-  
-  let sliderConstant:Float = 2.0
-  
+  var pastStrokeSize: Float = 0.0
+
   var state: KeyboardToolState = .none {
     didSet {
       dropperButton.isSelected = state == .colorDropper
@@ -43,16 +41,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
   }
 
-  var brushSize: Float {
-    get {
-      return pow(brushSizeSlider.value, sliderConstant)
-    }
-  }
-  
   var opacity: CGFloat = 1.0 {
     didSet {
       currentColorView.alpha = opacity
-      prefs.setValue(opacity, forKey: Prefs.colorAlpha)
+      Store.setValue(opacity, forKey: Prefs.colorAlpha)
       updateButtonColor()
       delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
     }
@@ -61,14 +53,40 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   var color: UIColor = .white {
     didSet {
       currentColorView.backgroundColor = color
-      prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
-      prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
-      prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
+      Store.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
+      Store.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
+      Store.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
       updateButtonColor()
       delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
     }
   }
-  
+
+  var darkness: CGFloat {
+    get {
+      let equivalentColor = UIColor.blendColor(color, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - opacity))
+      let coreColor = equivalentColor.coreImageColor
+      return coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
+    }
+  }
+
+  var brushSize: Float {
+    get {
+      return brushSizeSlider.size
+    }
+  }
+
+  private var selectorWidth: CGFloat {
+    get {
+      return frame.width / CGFloat(Theme.colors.count)
+    }
+  }
+
+  private var buttonSize: CGFloat {
+    get {
+      return  [(selectorWidth * 1.25), 80.0].min() ?? 0
+    }
+  }
+
   var delegate: ColorKeyboardDelegate?
   
   override init (frame: CGRect) {
@@ -81,35 +99,24 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     displayKeyboard()
   }
   
-  func displayKeyboard() {
+  private func displayKeyboard() {
     
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
-    
-    let selectorWidth = frame.width/11
-    let buttonSize = [(selectorWidth * 1.25), 80.0].min()!
 
     let colorButtonWrapper = UIView()
     colorButtonWrapper.frame = CGRect(x: 0, y: buttonSize, width: frame.width, height: frame.height - buttonSize)
     addSubview(colorButtonWrapper)
-    for tag in 0...10 {
-      colorButtonWrapper.addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth, buttonSize: buttonSize))
+    for (tag, color) in Theme.colors.enumerated() {
+      colorButtonWrapper.addSubview(makeColorButton(withColor: color, tag: tag))
     }
-
-
     currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: buttonSize)
     addSubview(currentColorView)
     
     let toolbarWrapper = UIView()
     toolbarWrapper.frame = currentColorView.frame
     addSubview(toolbarWrapper)
-    
-    brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
-    brushSizeSlider.maximumTrackTintColor = UIColor.white
-    brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
-    brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
+
     brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: buttonSize/2.0)
-    brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderMoved(_:)), for: .valueChanged)
-    brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
     toolbarWrapper.addSubview(brushSizeSlider)
 
     paintBucketButton.setImage(R.image.paintBucket()!, for: .normal)
@@ -144,25 +151,22 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     separatorU.backgroundColor = Theme.divider
     addSubview(separatorU)
     
-    if prefs.bool(forKey: Prefs.saved) {
-      let red = CGFloat(prefs.float(forKey: Prefs.colorRed))
-      let green = CGFloat(prefs.float(forKey: Prefs.colorGreen))
-      let blue = CGFloat(prefs.float(forKey: Prefs.colorBlue))
-      let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
-      
+    if Store.bool(forKey: Prefs.saved) {
+      let red = CGFloat(Store.float(forKey: Prefs.colorRed))
+      let green = CGFloat(Store.float(forKey: Prefs.colorGreen))
+      let blue = CGFloat(Store.float(forKey: Prefs.colorBlue))
+      let alpha = CGFloat(Store.float(forKey: Prefs.colorAlpha))
       opacity = alpha
       color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-      brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
+      brushSizeSlider.value = pow(Store.float(forKey: Prefs.brushSize), 1/sliderConstant)
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
       color = Theme.colors[Int(arc4random_uniform(8) + 1)]
       opacity = 1.0
     }
-
-    updateButtonColor()
   }
   
-  fileprivate func colorButton(withColor color: UIColor, tag: Int, selectorWidth: CGFloat, buttonSize: CGFloat) -> UIButton {
+  fileprivate func makeColorButton(withColor color: UIColor, tag: Int) -> UIButton {
     let newButton = UIButton()
     newButton.backgroundColor = color
     newButton.tag = tag
@@ -192,21 +196,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     state = state == .bullsEye ? .none : .bullsEye
   }
   
-  @objc fileprivate func sliderMoved(_ sender: UISlider) {
-    let newSize = Float(lroundf(sender.value))
-    if newSize != pastStrokeSize {
-      pastStrokeSize = newSize
-      Haptic.selectionChanged(prepare: true)
-    }
-  }
-
-  @objc fileprivate func sliderChanged(_ sender: UISlider) {
-    let newSize = Float(lroundf(sender.value))
-    sender.setValue(newSize, animated: true)
-    Haptic.selection = nil
-    prefs.setValue(brushSize, forKey: Prefs.brushSize)
-  }
-  
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
     guard let view = sender.view else { return }
     Haptic.selectionChanged()
@@ -221,8 +210,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   
   @objc fileprivate func buttonTapped(_ sender: UIButton) {
     Haptic.selectionChanged()
-    let percentMix: CGFloat = 0.1
-    
     if (sender.tag == 0) {
       opacity = opacity * (1 - percentMix)
     } else {
@@ -235,21 +222,8 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   func updateButtonColor() {
-    let equivalentColor = UIColor.blendColor(color, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - opacity))
-    let coreColor = equivalentColor.coreImageColor
-    let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
-    if (colorDarkness < 1.6) {
-      brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
-      brushSizeSlider.maximumTrackTintColor = UIColor.white
-    } else if colorDarkness < 2.67 {
-      brushSizeSlider.minimumTrackTintColor = UIColor.black
-      brushSizeSlider.maximumTrackTintColor = UIColor.white
-    } else {
-      brushSizeSlider.minimumTrackTintColor = UIColor.black
-      brushSizeSlider.maximumTrackTintColor = UIColor.lightGray
-    }
-    
-    if (colorDarkness < 1.87) {
+    brushSizeSlider.updateColors(darkness: darkness)
+    if (darkness < 1.87) {
       dropperButton.tintColor = .white
       paintBucketButton.tintColor = .white
       bullsEyeButton.tintColor = .white

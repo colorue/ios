@@ -9,7 +9,6 @@
 import Foundation
 
 struct Prefs {
-
   // MARK: Save Drawing State
 
   static let colorRed = "colorRed"
@@ -22,3 +21,5 @@ struct Prefs {
 
   // MARK: Tutorials
 }
+
+let Store = UserDefaults.standard

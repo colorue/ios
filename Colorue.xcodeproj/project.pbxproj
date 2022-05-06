@@ -28,6 +28,7 @@
 		87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */; };
 		87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3F28249A9100949265 /* SceneDelegate.swift */; };
 		87DEFE422825873600949265 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE412825873600949265 /* Haptic.swift */; };
+		87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -69,6 +70,7 @@
 		87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		87DEFE3F28249A9100949265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		87DEFE412825873600949265 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
+		87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			children = (
 				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
 				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
+				87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */,
+				87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
 				87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */,
