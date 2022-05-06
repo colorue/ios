@@ -238,10 +238,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
 
   func newDrawing () {
-    guard let image = canvas?.getDrawing() else { return }
+    guard let _ = drawingId else { return }
     notificationFeedback = UINotificationFeedbackGenerator()
     notificationFeedback?.prepare()
-    drawingId = nil
+    self.drawingId = nil
     view.makeToast("Drawing Saved", position: .center)
     notificationFeedback?.notificationOccurred(.success)
     notificationFeedback = nil
