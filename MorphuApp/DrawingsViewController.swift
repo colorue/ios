@@ -137,7 +137,7 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     return UIContextMenuConfiguration(identifier: nil, previewProvider: nil) { suggestedActions in
       let duplicateAction =
       UIAction(title: NSLocalizedString("Duplicate", comment: ""),
-               image: UIImage(systemName: "doc.on.doc")) { action in
+               image: UIImage(systemName: "plus.square.on.square")) { action in
         self.performDuplicate(indexPath)
       }
       

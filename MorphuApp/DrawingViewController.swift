@@ -161,7 +161,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
     let duplicateAction =
     UIAction(title: NSLocalizedString("Duplicate", comment: ""),
-             image: UIImage(systemName: "doc.on.doc")) { [weak self] action in
+             image: UIImage(systemName: "plus.square.on.square")) { [weak self] action in
       self?.duplicateDrawing()
     }
 
