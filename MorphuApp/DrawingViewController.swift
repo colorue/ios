@@ -471,9 +471,10 @@ extension DrawingViewController: CanvasDelegate {
     }, completion: nil)
   }
 
+  // Used by dropper
   func setColor(_ color: UIColor?) {
     guard let color = color else { return }
-    self.colorKeyboard!.setColor(color)
+    colorKeyboard?.color = color
   }
 
   func startPaintBucketSpinner() {

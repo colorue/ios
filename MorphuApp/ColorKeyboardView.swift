@@ -48,6 +48,19 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     didSet {
       currentColorView.alpha = currentAlpha
       prefs.setValue(currentAlpha, forKey: Prefs.colorAlpha)
+      updateButtonColor()
+      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
+    }
+  }
+
+  var color: UIColor = .white {
+    didSet {
+      currentColorView.backgroundColor = color
+      prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
+      prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
+      prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
+      updateButtonColor()
+      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
     }
   }
   
@@ -133,11 +146,11 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
       
       currentAlpha = alpha
-      setColor(UIColor(red: red, green: green, blue: blue, alpha: 1.0))
+      color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
       brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-      setColor(Theme.colors[Int(arc4random_uniform(8) + 1)])
+      color = Theme.colors[Int(arc4random_uniform(8) + 1)]
       currentAlpha = 1.0
     }
 
@@ -198,17 +211,17 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
+    guard let view = sender.view else { return }
     feedbackGenerator = UISelectionFeedbackGenerator()
     feedbackGenerator?.selectionChanged()
     feedbackGenerator = nil
-    if (sender.view!.tag == 0) {
+    if (view.tag == 0) {
       currentAlpha = 0.0
-      setColor(.white)
+      color = .white
     } else {
       currentAlpha = 1.0
-      setColor(Theme.colors[sender.view!.tag])
+      color = Theme.colors[view.tag]
     }
-    updateButtonColor()
   }
   
   @objc fileprivate func buttonTapped(_ sender: UIButton) {
@@ -219,15 +232,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     
     if (sender.tag == 0) {
       currentAlpha = currentAlpha * (1 - percentMix)
-      setColor(currentColorView.backgroundColor!)
     } else {
       if (currentAlpha == 0) {
-        setColor(Theme.colors[sender.tag])
+        color = Theme.colors[sender.tag]
       }
       currentAlpha = currentAlpha * (1 - percentMix) + percentMix
-      setColor(UIColor.blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix))
+      color = UIColor.blendColor(color, withColor: Theme.colors[sender.tag], percentMix: percentMix)
     }
-    updateButtonColor()
   }
   
   func getCurrentColor() -> UIColor {
@@ -244,15 +255,6 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   
   func setAlphaHigh() {
     currentAlpha = 1.0
-  }
-  
-  func setColor(_ color: UIColor) {
-    currentColorView.backgroundColor = color
-    prefs.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
-    prefs.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
-    prefs.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
-    updateButtonColor()
-    delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: currentAlpha)
   }
   
   func updateButtonColor() {
