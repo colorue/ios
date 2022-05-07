@@ -204,7 +204,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       aimDrawingOn = true
     } else if (sender.state == .ended) {
       aimDrawingOn = false
-      canvas?.completeCurve()
+      canvas?.drawingStroke?.complete()
       Haptic.selectionChanged()
     }
   }

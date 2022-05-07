@@ -41,6 +41,12 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   var actualSize = CGSize()
   fileprivate let prefs = UserDefaults.standard
 
+  var isDrawingOn: Bool {
+    get {
+      return delegate?.isDrawingOn() ?? false
+    }
+  }
+
   var baseDrawing: UIImage? {
     didSet {
       guard let baseDrawing = baseDrawing else {
@@ -88,7 +94,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   @objc fileprivate func handleDrag(_ sender: UILongPressGestureRecognizer) {
     guard let delegate = delegate else { return }
     let position = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
-//    mergeCurrentStroke(true)
 
     let tool = delegate.getKeyboardTool()?.type ?? .none
     // isDropper is only used for sizing, I'd like to clean it up
@@ -99,6 +104,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       drawingStroke?.color = delegate.getCurrentColor()
       drawingStroke?.brushSize = delegate.getCurrentBrushSize()
       drawingStroke?.actualSize = actualSize
+      drawingStroke?.baseImage = undoStack.last
       drawingStroke?.delegate = self
       drawingStroke?.began(position: position)
       delegate.showUnderFingerView()
@@ -112,10 +118,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       drawingStroke = nil
       delegate.hideUnderFingerView()
     }
-  }
-
-  func completeCurve () {
-    drawingStroke?.end()
   }
 
   func setUnderFingerView(_ position: CGPoint, dropper: Bool) {
@@ -174,12 +176,8 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
       return UIImage.getImageWithColor(UIColor.white, size: actualSize)
     }
   }
-}
 
-// MARK: DrawingStrokeDelegate
-extension CanvasView: DrawingStrokeDelegate {
   func addToUndoStack(_ image: UIImage?) {
-    let image = image ?? imageView.image
     if let image = image {
       if undoStack.count <= 64 {
         undoStack.append(image)
@@ -190,47 +188,40 @@ extension CanvasView: DrawingStrokeDelegate {
       redoStack.removeAll()
     }
   }
+}
 
-  func mergeCurrentStroke(_ alpha: Bool, image: UIImage?) {
-    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
-    undoStack.last?.draw(at: CGPoint.zero)
-    if alpha {
-      image?.draw(at: CGPoint.zero, blendMode: .normal, alpha: delegate?.getAlpha() ?? 1.0)
-    } else {
-      image?.draw(at: CGPoint.zero)
-    }
-    imageView.image = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
+// MARK: DrawingStrokeDelegate
+extension CanvasView: DrawingStrokeDelegate {
+
+  func drawingStroke(_ stroke: DrawingStroke, completedWith image: UIImage?) {
+    addToUndoStack(image)
   }
 
-  func clearCurrentStroke () {
-    imageView.image = undoStack.last
+  func drawingStroke(_ stroke: DrawingStroke, updatedWith image: UIImage?) {
+    imageView.image = image
   }
 
-  func isDrawingOn() -> Bool {
-    return delegate?.isDrawingOn() ?? false
-  }
-
-  func pickColorAt(position: CGPoint, currentColor: UIColor?) {
-    let dropperColor = imageView.image?.color(atPosition: position)
-    if let color = dropperColor, color != currentColor {
+  func drawingStroke(_ stroke: DrawingStroke, selectedColorAt point: CGPoint) -> UIColor? {
+    let dropperColor = stroke.baseImage?.color(atPosition: point)
+    if let color = dropperColor, color != stroke.color {
       self.delegate?.setColor(color)
       Haptic.selectionChanged()
     }
+    return dropperColor
   }
 
-  func paintAt(position: CGPoint, color: UIColor, alpha: CGFloat) {
-    clearCurrentStroke()
-    let touchedColor = imageView.image!.color(atPosition: position) ?? .white
-    let mixedColor = UIColor.blendColor(touchedColor , withColor: color, percentMix: alpha)
+  func drawingStroke(_ stroke: DrawingStroke, dumpedPaintAt point: CGPoint) {
+    imageView.image = stroke.baseImage
+    let touchedColor = stroke.baseImage?.color(atPosition: point) ?? .white
+    let mixedColor = UIColor.blendColor(touchedColor , withColor: stroke.color, percentMix: stroke.alpha)
     delegate?.getKeyboardTool()?.startAnimating()
 
     DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { [weak self] in
       guard let self = self else { return }
-      let filledImage = self.undoStack.last?.pbk_imageByReplacingColorAt(Int(position.x), Int(position.y), withColor: mixedColor, tolerance: 5)
-      self.addToUndoStack(filledImage)
+      let filledImage = stroke.baseImage?.pbk_imageByReplacingColorAt(Int(point.x), Int(point.y), withColor: mixedColor, tolerance: 5)
       DispatchQueue.main.async {
-        self.mergeCurrentStroke(false, image: filledImage)
+        self.addToUndoStack(filledImage)
+        self.imageView.image = filledImage
         self.delegate?.getKeyboardTool()?.stopAnimating()
       }
     }

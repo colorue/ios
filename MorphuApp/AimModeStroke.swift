@@ -11,35 +11,37 @@ import Foundation
 class AimModeStroke: DrawingStroke {
 
   override func began(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn() {
+    if let delegate = delegate, delegate.isDrawingOn {
       super.began(position: position)
     } else {
       drawDot(position)
-      delegate?.mergeCurrentStroke(true, image: currentStroke)
+      displayStroke()
     }
   }
 
   override func changed(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn() {
+    if let delegate = delegate, delegate.isDrawingOn {
       super.changed(position: position)
     } else {
       drawDot(position)
-      delegate?.mergeCurrentStroke(true, image: currentStroke)
+      displayStroke()
     }
   }
 
   override func ended(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn() {
+    if let delegate = delegate, delegate.isDrawingOn {
       super.ended(position: position)
     } else {
-      delegate?.clearCurrentStroke()
+      delegate?.drawingStroke(self, updatedWith: baseImage)
     }
   }
 
-  override func end() {
+  override func complete() {
     path.removeAllPoints()
     pts.removeAll()
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
-    delegate?.addToUndoStack(nil)
+    if let image = displayStroke() {
+      baseImage = image
+      delegate?.drawingStroke(self, completedWith: image)
+    }
   }
 }

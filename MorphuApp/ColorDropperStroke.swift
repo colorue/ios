@@ -11,18 +11,18 @@ import Foundation
 class ColorDropperStroke: DrawingStroke {
 
   override func began(position: CGPoint) {
-    delegate?.pickColorAt(position: position, currentColor: color)
+    color = delegate?.drawingStroke(self, selectedColorAt: position) ?? color
     drawDropperIndicator(position)
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
+    displayStroke()
   }
 
   override func changed(position: CGPoint) {
-    delegate?.pickColorAt(position: position, currentColor: color)
+    color = delegate?.drawingStroke(self, selectedColorAt: position) ?? color
     drawDropperIndicator(position)
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
+    displayStroke()
   }
 
   override func ended(position: CGPoint) {
-    self.delegate?.clearCurrentStroke()
+    delegate?.drawingStroke(self, updatedWith: baseImage)
   }
 }

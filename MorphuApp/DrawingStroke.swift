@@ -7,14 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DrawingStrokeDelegate: class {
-  func mergeCurrentStroke(_ alpha: Bool, image: UIImage?)
-  func paintAt(position: CGPoint, color: UIColor, alpha: CGFloat)
-  func pickColorAt(position: CGPoint, currentColor: UIColor?)
-  func addToUndoStack(_ image: UIImage?)
-  func isDrawingOn() -> Bool
-  func clearCurrentStroke()
+  func drawingStroke(_ stroke: DrawingStroke, updatedWith image: UIImage?)
+  func drawingStroke(_ stroke: DrawingStroke, completedWith image: UIImage?)
+  func drawingStroke(_ stroke: DrawingStroke, selectedColorAt point: CGPoint) -> UIColor?
+  func drawingStroke(_ stroke: DrawingStroke, dumpedPaintAt point: CGPoint)
+  var isDrawingOn: Bool { get }
 }
 
 class DrawingStroke {
@@ -26,29 +26,17 @@ class DrawingStroke {
   var pts = [CGPoint]()
   var path = UIBezierPath()
 
+  var baseImage: UIImage?
   var color = UIColor()
   var alpha: CGFloat = 1.0
   var brushSize: Float = 0.0
   var actualSize = CGSize.zero
   let resizeScale: CGFloat = 2.0
 
-  static func makeStroke (type: KeyboardToolState) -> DrawingStroke {
-    switch (type) {
-    case .none:
-      return DefaultStroke()
-    case .colorDropper:
-      return ColorDropperStroke()
-    case .paintBucket:
-      return PaintBucketStroke()
-    case .bullsEye:
-      return AimModeStroke()
-    }
-  }
-
   func began(position: CGPoint) {
     pts.append(position)
     finishStroke()
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
+    displayStroke()
   }
 
   func changed(position: CGPoint) {
@@ -62,7 +50,7 @@ class DrawingStroke {
       pts[1] = pts[4]
       pts.removeLast(3)
     }
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
+    displayStroke()
   }
 
   func ended(position: CGPoint) {
@@ -80,11 +68,11 @@ class DrawingStroke {
     }
     path.removeAllPoints()
     pts.removeAll()
-    delegate?.mergeCurrentStroke(true, image: currentStroke)
-    delegate?.addToUndoStack(nil)
+    let image = displayStroke()
+    delegate?.drawingStroke(self, completedWith: image)
   }
 
-  func end() {
+  func complete() {
     // stub overwritten by AimModeStroke
   }
 
@@ -151,5 +139,32 @@ class DrawingStroke {
     context?.flush()
     currentStroke = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
+  }
+
+  @discardableResult
+  func displayStroke() -> UIImage? {
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
+    baseImage?.draw(at: CGPoint.zero)
+    currentStroke?.draw(at: CGPoint.zero, blendMode: .normal, alpha: alpha)
+    let image = UIGraphicsGetImageFromCurrentImageContext()
+    UIGraphicsEndImageContext()
+    delegate?.drawingStroke(self, updatedWith: image)
+    return image
+  }
+}
+
+// MARK: DrawingStroke maker
+extension DrawingStroke {
+  static func makeStroke (type: KeyboardToolState) -> DrawingStroke {
+    switch (type) {
+    case .none:
+      return DefaultStroke()
+    case .colorDropper:
+      return ColorDropperStroke()
+    case .paintBucket:
+      return PaintBucketStroke()
+    case .bullsEye:
+      return AimModeStroke()
+    }
   }
 }
