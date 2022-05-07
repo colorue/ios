@@ -24,20 +24,28 @@ class OvalStroke: DrawingStroke {
   }
 
   override func ended(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn {
-    } else {
+    if pts.isEmpty  {
       delegate?.drawingStroke(self, updatedWith: baseImage)
+    } else {
+      path.removeAllPoints()
+      pts.removeAll()
+      let image = displayStroke()
+      delegate?.drawingStroke(self, completedWith: image)
     }
-    path.removeAllPoints()
-    pts.removeAll()
-    let image = displayStroke()
-    delegate?.drawingStroke(self, completedWith: image)
   }
 
   override func start() {
     if let nextPoint = nextPoint {
       pts.append(nextPoint)
-      displayStroke()
+      changed(position: nextPoint)
+    }
+    if pts.count > 2 {
+      path.removeAllPoints()
+      pts.removeAll()
+      if let image = displayStroke() {
+        baseImage = image
+        delegate?.drawingStroke(self, completedWith: image)
+      }
     }
   }
 
@@ -45,26 +53,31 @@ class OvalStroke: DrawingStroke {
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
 
-
-
-    if pts.count == 2 {
-
+    // Draw oval
+    if pts.count > 1 {
       let ovalPath = CGMutablePath()
-
-      // Third touch will be furthest or closest point of oval
       let center = pts.first!
-      let radius1 = sqrt(center.distanceSquared(to: pts[1]))
-      let radius2 = sqrt(center.distanceSquared(to: point))
+      let radius2 = sqrt(center.distanceSquared(to: pts[1]))
+      var radius1 = sqrt(center.distanceSquared(to: point))
+      if (abs(radius2 - radius1) < radius2 / 20.0) {
+        // Snap to circle
+        radius1 = radius2
+      }
       let origin = CGPoint(x: center.x - radius1, y: center.y - radius2)
-      let frame = CGRect(origin: origin, size: CGSize(width: radius1 * 2, height: radius2 * 2))
+      let angle = atan2(point.y - center.y, point.x - center.x)
 
-      let angle = CGFloat.pi / 10
+      // What trig function do I need
+      let frame = CGRect(origin: origin, size: CGSize(width: radius1 * 2, height: radius2 * 2))
       let rotation = CGAffineTransform(translationX: frame.midX, y: frame.midY)
                                       .rotated(by: angle)
                                       .translatedBy(x: -frame.midX, y: -frame.midY)
       ovalPath.addEllipse(in: frame, transform: rotation)
       context?.addPath(ovalPath)
     } else {
+      // Draw center dot
+      context?.move(to: point)
+      context?.addLine(to: point)
+
       let center = pts.first ?? point
       let radius = pts.isEmpty ? 100.0 : sqrt(center.distanceSquared(to: point))
       let origin = CGPoint(x: center.x - radius, y: center.y - radius)
