@@ -33,6 +33,14 @@ class DrawingStroke {
   var actualSize = CGSize.zero
   let resizeScale: CGFloat = 2.0
 
+  var isSnapped: Bool = false {
+    didSet (newValue) {
+      if (isSnapped != newValue) {
+        Haptic.selectionChanged()
+      }
+    }
+  }
+
   func began(position: CGPoint) {
     pts.append(position)
     finishStroke()

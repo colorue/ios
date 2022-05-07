@@ -62,6 +62,9 @@ class OvalStroke: DrawingStroke {
       if (abs(radius2 - radius1) < radius2 / 20.0) {
         // Snap to circle
         radius1 = radius2
+        isSnapped = true
+      } else {
+        isSnapped = false
       }
       let origin = CGPoint(x: center.x - radius1, y: center.y - radius2)
       let angle = atan2(point.y - center.y, point.x - center.x)

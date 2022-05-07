@@ -22,9 +22,11 @@ class StraightLineStroke: DrawingStroke {
     if let startingPt = pts.first, pts.count > 1,  position.distanceSquared(to: startingPt) < 100  {
       nextPoint = startingPt
       drawLines(to: startingPt)
+      isSnapped = true
     } else {
       nextPoint = position
       drawLines(to: position)
+      isSnapped = false
     }
     displayStroke()
   }

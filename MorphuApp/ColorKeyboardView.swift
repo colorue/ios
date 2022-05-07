@@ -97,7 +97,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
     let toolbarWrapper = UIStackView()
     toolbarWrapper.distribution = .fillEqually
     toolbarWrapper.spacing = 16.0
-    toolbarWrapper.height(constant: [(frame.width / 10), 80.0].min() ?? 0)
+    toolbarWrapper.height(constant: min(frame.width / 10, 80.0))
     addArrangedSubview(toolbarWrapper)
 
     toolbarWrapper.addSubview(currentColorView)
