@@ -10,12 +10,19 @@ import Foundation
 import PureLayout
 import UIKit
 
-enum KeyboardToolState: Int {
+enum KeyboardToolState: Int, CaseIterable {
   case none = 0
   case colorDropper = 1
   case paintBucket = 2
   case bullsEye = 3
   case straightLine = 4
+  case curvedLine = 5
+  case oval = 6
+}
+
+enum KeyboardToolSide: Int {
+  case left = 0
+  case right = 1
 }
 
 protocol ToolbarButtonDelegate: class {
@@ -39,7 +46,24 @@ class ToolbarButton: UIButton {
       case .bullsEye:
         return UIImage(systemName: "scope")
       case .straightLine:
-        return UIImage(systemName: "line.diagonal")
+        return UIImage(systemName: "pentagon")
+      case .curvedLine:
+        return UIImage(systemName: "point.topleft.down.curvedto.point.bottomright.up.fill")
+      case .oval:
+        return UIImage(systemName: "oval")
+      }
+    }
+  }
+
+  var side: KeyboardToolSide? {
+    get {
+      switch (type) {
+      case .straightLine, .curvedLine, .oval:
+        return .left
+      case .colorDropper, .paintBucket, .bullsEye:
+        return .right
+      default:
+        return nil
       }
     }
   }
@@ -95,8 +119,12 @@ class ToolbarButton: UIButton {
     self.setImage(iconImage, for: .normal)
     spinner.stopAnimating()
   }
+}
 
-  func updateTint(color: UIColor, alpha: CGFloat) {
-    self.tintColor = color.getDarkness(alpha: alpha) < 1.87 ? .white : .black
+extension ToolbarButton {
+  static func makeAll () -> [ToolbarButton] {
+    return KeyboardToolState.allCases.map({ type in
+      ToolbarButton(type: type)
+    })
   }
 }

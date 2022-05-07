@@ -15,20 +15,16 @@ protocol ColorKeyboardDelegate {
 
 let percentMix: CGFloat = 0.1
 
-class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
+class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
   let currentColorView = UIView()
   let brushSizeSlider = BrushSizeSlider()
-  let dropperButton = ToolbarButton(type: .colorDropper)
-  let paintBucketButton = ToolbarButton(type: .paintBucket)
-  let bullsEyeButton = ToolbarButton(type: .bullsEye)
-  let straightLineButton = ToolbarButton(type: .straightLine)
-  var toolbarButtons = [ToolbarButton]()
+  let toolbarButtons = ToolbarButton.makeAll()
 
   var tool: ToolbarButton? {
     didSet {
-      dropperButton.isSelected = state == .colorDropper
-      paintBucketButton.isSelected = state == .paintBucket
-      bullsEyeButton.isSelected = state == .bullsEye
+      for button in toolbarButtons {
+        button.isSelected = state == button.type
+      }
     }
   }
 
@@ -47,7 +43,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       currentColorView.alpha = opacity
       Store.setValue(opacity, forKey: Prefs.colorAlpha)
       updateButtonColor()
-      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
+      delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
     }
   }
 
@@ -58,7 +54,13 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
       Store.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
       Store.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
       updateButtonColor()
-      delegate?.setColor(color, secondary: paintBucketButton.tintColor, alpha: opacity)
+      delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
+    }
+  }
+
+  var buttonColor: UIColor {
+    get {
+      return color.getDarkness(alpha: alpha) < 1.87 ? .white : .black
     }
   }
 
@@ -68,51 +70,38 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     }
   }
 
-  private var selectorWidth: CGFloat {
-    get {
-      return frame.width / CGFloat(Theme.colors.count)
-    }
-  }
-
-  private var buttonSize: CGFloat {
-    get {
-      return  [(selectorWidth * 1.25), 80.0].min() ?? 0
-    }
-  }
-
   var delegate: ColorKeyboardDelegate?
   
   override init (frame: CGRect) {
     super.init(frame : frame)
     displayKeyboard()
+    loadState()
   }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
+
+  required init(coder: NSCoder) {
+    super.init(coder: coder)
     displayKeyboard()
+    loadState()
   }
-  
+
   private func displayKeyboard() {
-    toolbarButtons = [dropperButton, paintBucketButton, bullsEyeButton, straightLineButton]
+    axis = .vertical
+    distribution = .fill
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
 
-    let colorButtonWrapper = UIStackView()
-    colorButtonWrapper.frame = CGRect(x: 0, y: buttonSize, width: frame.width, height: frame.height - buttonSize)
-    colorButtonWrapper.distribution = .fillEqually
-    addSubview(colorButtonWrapper)
-    for (tag, color) in Theme.colors.enumerated() {
-      let newButton = ColorButton(color: color, tag: tag)
-      newButton.delegate = self
-      colorButtonWrapper.addArrangedSubview(newButton)
-    }
-    currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: buttonSize)
-    addSubview(currentColorView)
-    
+    let separatorU = UIView()
+    separatorU.backgroundColor = Theme.divider
+    separatorU.height(constant: 0.5)
+    addArrangedSubview(separatorU)
+
     let toolbarWrapper = UIStackView()
     toolbarWrapper.distribution = .fillEqually
     toolbarWrapper.spacing = 16.0
-    toolbarWrapper.frame = currentColorView.frame
-    addSubview(toolbarWrapper)
+    toolbarWrapper.height(constant: [(frame.width / 10), 80.0].min() ?? 0)
+    addArrangedSubview(toolbarWrapper)
+
+    toolbarWrapper.addSubview(currentColorView)
+    currentColorView.autoPinEdgesToSuperviewEdges()
 
     let toolWrapperL = UIStackView()
     toolWrapperL.distribution = .fillEqually
@@ -123,22 +112,23 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     toolbarWrapper.addArrangedSubview(brushSizeSlider)
     toolbarWrapper.addArrangedSubview(toolWrapperR)
 
-    straightLineButton.delegate = self
-    toolWrapperL.addArrangedSubview(straightLineButton)
-    
-    dropperButton.delegate = self
-    toolWrapperR.addArrangedSubview(dropperButton)
+    for tool in toolbarButtons {
+      tool.delegate = self
+      switch (tool.side) {
+        case .left:  toolWrapperL.addArrangedSubview(tool)
+        case .right: toolWrapperR.addArrangedSubview(tool)
+        default: continue
+      }
+    }
 
-    paintBucketButton.delegate = self
-    toolWrapperR.addArrangedSubview(paintBucketButton)
-    
-    bullsEyeButton.delegate = self
-    toolWrapperR.addArrangedSubview(bullsEyeButton)
-    
-    let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
-    separatorU.backgroundColor = Theme.divider
-    addSubview(separatorU)
-    loadState ()
+    let colorButtonWrapper = UIStackView()
+    colorButtonWrapper.distribution = .fillEqually
+    addArrangedSubview(colorButtonWrapper)
+    for (tag, color) in Theme.colors.enumerated() {
+      let newButton = ColorButton(color: color, tag: tag)
+      newButton.delegate = self
+      colorButtonWrapper.addArrangedSubview(newButton)
+    }
   }
 
   private func loadState () {
@@ -160,7 +150,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   private func updateButtonColor() {
     brushSizeSlider.updateTint(color: color, alpha: opacity)
     for button in toolbarButtons {
-      button.updateTint(color: color, alpha: opacity)
+      button.tintColor = buttonColor
     }
   }
 }

@@ -171,6 +171,8 @@ extension DrawingStroke {
       return AimModeStroke()
     case .straightLine:
       return StraightLineStroke()
+    default:
+      return DefaultStroke()
     }
   }
 }

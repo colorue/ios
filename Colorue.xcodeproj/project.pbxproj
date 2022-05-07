@@ -38,6 +38,7 @@
 		87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE522825CAC800949265 /* DefaultStroke.swift */; };
 		87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE542826102E00949265 /* StraightLineStroke.swift */; };
 		87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */; };
+		87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE592826E49800949265 /* UIView+heightWidth.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -89,6 +90,7 @@
 		87DEFE522825CAC800949265 /* DefaultStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStroke.swift; sourceTree = "<group>"; };
 		87DEFE542826102E00949265 /* StraightLineStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLineStroke.swift; sourceTree = "<group>"; };
 		87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+distanceSquared.swift"; sourceTree = "<group>"; };
+		87DEFE592826E49800949265 /* UIView+heightWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+heightWidth.swift"; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */,
 				87DEFE392821F5ED00949265 /* UINavigationBar.swift */,
 				87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */,
+				87DEFE592826E49800949265 /* UIView+heightWidth.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */,
 				8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */,
+				87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
