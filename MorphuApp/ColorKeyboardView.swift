@@ -21,6 +21,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   let dropperButton = ToolbarButton(type: .colorDropper)
   let paintBucketButton = ToolbarButton(type: .paintBucket)
   let bullsEyeButton = ToolbarButton(type: .bullsEye)
+  let straightLineButton = ToolbarButton(type: .straightLine)
   var toolbarButtons = [ToolbarButton]()
 
   var tool: ToolbarButton? {
@@ -92,7 +93,7 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
   }
   
   private func displayKeyboard() {
-    toolbarButtons = [dropperButton, paintBucketButton, bullsEyeButton]
+    toolbarButtons = [dropperButton, paintBucketButton, bullsEyeButton, straightLineButton]
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
 
     let colorButtonWrapper = UIStackView()
@@ -125,6 +126,10 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     bullsEyeButton.delegate = self
     bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
     toolbarWrapper.addSubview(bullsEyeButton)
+
+    straightLineButton.delegate = self
+    straightLineButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
+    toolbarWrapper.addSubview(straightLineButton)
     
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
     separatorU.backgroundColor = Theme.divider

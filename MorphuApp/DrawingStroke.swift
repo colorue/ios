@@ -72,6 +72,10 @@ class DrawingStroke {
     delegate?.drawingStroke(self, completedWith: image)
   }
 
+  func start () {
+    // stub overwritten by StraingLineStroke
+  }
+
   func complete() {
     // stub overwritten by AimModeStroke
   }
@@ -165,6 +169,8 @@ extension DrawingStroke {
       return PaintBucketStroke()
     case .bullsEye:
       return AimModeStroke()
+    case .straightLine:
+      return StraightLineStroke()
     }
   }
 }

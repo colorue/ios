@@ -36,6 +36,8 @@
 		87DEFE4F2825CA4F00949265 /* AimModeStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */; };
 		87DEFE512825CAA900949265 /* ColorDropperStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE502825CAA900949265 /* ColorDropperStroke.swift */; };
 		87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE522825CAC800949265 /* DefaultStroke.swift */; };
+		87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE542826102E00949265 /* StraightLineStroke.swift */; };
+		87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -85,6 +87,8 @@
 		87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimModeStroke.swift; sourceTree = "<group>"; };
 		87DEFE502825CAA900949265 /* ColorDropperStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDropperStroke.swift; sourceTree = "<group>"; };
 		87DEFE522825CAC800949265 /* DefaultStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStroke.swift; sourceTree = "<group>"; };
+		87DEFE542826102E00949265 /* StraightLineStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLineStroke.swift; sourceTree = "<group>"; };
+		87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+distanceSquared.swift"; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -241,6 +245,7 @@
 				8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */,
 				87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */,
 				87DEFE392821F5ED00949265 /* UINavigationBar.swift */,
+				87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				87DEFE4C2825CA2700949265 /* PaintBucketStroke.swift */,
 				87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */,
 				87DEFE502825CAA900949265 /* ColorDropperStroke.swift */,
+				87DEFE542826102E00949265 /* StraightLineStroke.swift */,
 			);
 			name = Strokes;
 			sourceTree = "<group>";
@@ -460,6 +466,7 @@
 				87DEFE4B2825C76000949265 /* DrawingStroke.swift in Sources */,
 				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
 				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
+				87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */,
 				87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */,
 				87DEFE462825921200949265 /* ToolbarButton.swift in Sources */,
 				87DEFE422825873600949265 /* Haptic.swift in Sources */,
@@ -477,6 +484,7 @@
 				87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */,
 				87DEFE48282593EA00949265 /* ColorButton.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
+				87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87DEFE4F2825CA4F00949265 /* AimModeStroke.swift in Sources */,

@@ -15,6 +15,7 @@ enum KeyboardToolState: Int {
   case colorDropper = 1
   case paintBucket = 2
   case bullsEye = 3
+  case straightLine = 4
 }
 
 protocol ToolbarButtonDelegate: class {
@@ -37,6 +38,8 @@ class ToolbarButton: UIButton {
         return R.image.paintBucket()
       case .bullsEye:
         return UIImage(systemName: "scope")
+      case .straightLine:
+        return UIImage(systemName: "line.diagonal")
       }
     }
   }

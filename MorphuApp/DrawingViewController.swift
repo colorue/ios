@@ -138,11 +138,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     holdL.minimumPressDuration = 0.0
     holdL.delegate = self
     drawButtonL.addGestureRecognizer(holdL)
+    drawButtonL.actions(forTarget: #selector(DrawingViewController.handleTapped(_:)), forControlEvent: .touchDown)
 
     let holdR = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
     holdR.minimumPressDuration = 0.0
     holdR.delegate = self
     drawButtonR.addGestureRecognizer(holdR)
+    drawButtonR.actions(forTarget: #selector(DrawingViewController.handleTapped(_:)), forControlEvent: .touchDown)
+
 
     underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
@@ -201,12 +204,18 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
     if (sender.state == .began) {
       Haptic.selectionChanged()
+      canvas?.drawingStroke?.start()
       aimDrawingOn = true
     } else if (sender.state == .ended) {
-      aimDrawingOn = false
+      aimDrawingOn = false // TODO: This could be passed directly to the stroke
       canvas?.drawingStroke?.complete()
       Haptic.selectionChanged()
     }
+  }
+
+  @objc private func handleTapped(_ sender: UIButton) {
+    Haptic.selectionChanged()
+    canvas?.drawingStroke?.start()
   }
 
   func trash() {
@@ -441,9 +450,9 @@ extension DrawingViewController: CanvasDelegate {
     self.colorKeyboard?.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.keyboardCover.alpha = 1.0
-      let isBullsEye = self?.colorKeyboard?.state == .bullsEye
-      self?.drawButtonL.isHidden = !isBullsEye
-      self?.drawButtonR.isHidden = !isBullsEye
+      let showDrawButtons = self?.colorKeyboard?.state == .bullsEye || self?.colorKeyboard?.state == .straightLine
+      self?.drawButtonL.isHidden = !showDrawButtons
+      self?.drawButtonR.isHidden = !showDrawButtons
     }, completion: nil)
   }
 
