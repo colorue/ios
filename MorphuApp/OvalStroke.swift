@@ -1,31 +1,25 @@
 //
-//  LineStroke.swift
+//  OvalStroke.swift
 //  Colorue
 //
-//  Created by Dylan Wight on 5/6/22.
+//  Created by Dylan Wight on 5/7/22.
 //  Copyright © 2022 Dylan Wight. All rights reserved.
 //
 
 import Foundation
 
-class StraightLineStroke: DrawingStroke {
+class OvalStroke: DrawingStroke {
   var nextPoint: CGPoint?
 
   override func began(position: CGPoint) {
     nextPoint = position
-    drawLines(to: position)
+    drawCircle(to: position)
     displayStroke()
   }
 
   override func changed(position: CGPoint) {
-    // Snap to starting point
-    if let startingPt = pts.first, pts.count > 1,  position.distanceSquared(to: startingPt) < 100  {
-      nextPoint = startingPt
-      drawLines(to: startingPt)
-    } else {
-      nextPoint = position
-      drawLines(to: position)
-    }
+    nextPoint = position
+    drawCircle(to: position)
     displayStroke()
   }
 
@@ -47,16 +41,14 @@ class StraightLineStroke: DrawingStroke {
     }
   }
 
-  func drawLines(to point: CGPoint) {
-    guard !pts.isEmpty else {
-      return drawDot(point)
-    }
+  func drawCircle(to point: CGPoint) {
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
-    context?.move(to: point)
-    for pt in pts.reversed() {
-      context?.addLine(to: pt)
-    }
+    let center = pts.first ?? point
+    let radius = pts.isEmpty ? 100.0 : sqrt(center.distanceSquared(to: point))
+    let origin = CGPoint(x: center.x - radius, y: center.y - radius)
+    let frame = CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))
+    context?.addEllipse(in: frame)
     context?.setLineCap(.round)
     context?.setLineJoin(.round)
     context?.setLineWidth(CGFloat(brushSize) * resizeScale)

@@ -68,6 +68,17 @@ class ToolbarButton: UIButton {
     }
   }
 
+  var usesAimButtons: Bool {
+    get {
+      switch (type) {
+      case .straightLine, .curvedLine, .oval, .bullsEye:
+        return true
+      default:
+        return false
+      }
+    }
+  }
+
   override var tintColor: UIColor! {
     didSet {
       spinner.color = tintColor

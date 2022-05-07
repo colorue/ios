@@ -101,8 +101,7 @@ class DrawingStroke {
 
       context?.setLineCap(CGLineCap.round)
       context?.setLineWidth(CGFloat(brushSize) * resizeScale)
-      context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
-
+      context?.setStrokeColor(color)
       context?.strokePath()
       context?.flush()
       currentStroke = UIGraphicsGetImageFromCurrentImageContext()
@@ -128,7 +127,7 @@ class DrawingStroke {
     context?.addLine(to: CGPoint(x: position.x, y: position.y))
     context?.setLineCap(CGLineCap.round)
     context?.setLineWidth(CGFloat(brushSize) * resizeScale)
-    context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
+    context?.setStrokeColor(color)
     context?.strokePath()
     context?.flush()
     currentStroke = UIGraphicsGetImageFromCurrentImageContext()
@@ -171,8 +170,10 @@ extension DrawingStroke {
       return AimModeStroke()
     case .straightLine:
       return StraightLineStroke()
-    default:
-      return DefaultStroke()
+    case .curvedLine:
+      return CurveStroke()
+    case .oval:
+      return OvalStroke()
     }
   }
 }

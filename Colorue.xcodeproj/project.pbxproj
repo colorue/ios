@@ -39,6 +39,9 @@
 		87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE542826102E00949265 /* StraightLineStroke.swift */; };
 		87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */; };
 		87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE592826E49800949265 /* UIView+heightWidth.swift */; };
+		87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5B2826EA0000949265 /* CurveStroke.swift */; };
+		87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5D2826F65100949265 /* OvalStroke.swift */; };
+		87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -91,6 +94,9 @@
 		87DEFE542826102E00949265 /* StraightLineStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLineStroke.swift; sourceTree = "<group>"; };
 		87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+distanceSquared.swift"; sourceTree = "<group>"; };
 		87DEFE592826E49800949265 /* UIView+heightWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+heightWidth.swift"; sourceTree = "<group>"; };
+		87DEFE5B2826EA0000949265 /* CurveStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveStroke.swift; sourceTree = "<group>"; };
+		87DEFE5D2826F65100949265 /* OvalStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalStroke.swift; sourceTree = "<group>"; };
+		87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+setStrokeColor.swift"; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -249,6 +255,7 @@
 				87DEFE392821F5ED00949265 /* UINavigationBar.swift */,
 				87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */,
 				87DEFE592826E49800949265 /* UIView+heightWidth.swift */,
+				87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -286,6 +293,8 @@
 				87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */,
 				87DEFE502825CAA900949265 /* ColorDropperStroke.swift */,
 				87DEFE542826102E00949265 /* StraightLineStroke.swift */,
+				87DEFE5B2826EA0000949265 /* CurveStroke.swift */,
+				87DEFE5D2826F65100949265 /* OvalStroke.swift */,
 			);
 			name = Strokes;
 			sourceTree = "<group>";
@@ -488,6 +497,8 @@
 				87DEFE48282593EA00949265 /* ColorButton.swift in Sources */,
 				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
 				87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */,
+				87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */,
+				87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */,
 				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
 				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
 				87DEFE4F2825CA4F00949265 /* AimModeStroke.swift in Sources */,
@@ -495,6 +506,7 @@
 				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
 				87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */,
 				8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */,
+				87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */,
 				87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */,
 				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
 			);

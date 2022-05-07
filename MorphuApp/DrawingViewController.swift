@@ -449,7 +449,7 @@ extension DrawingViewController: CanvasDelegate {
     self.colorKeyboard?.isUserInteractionEnabled = false
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.keyboardCover.alpha = 1.0
-      let showDrawButtons = self?.colorKeyboard?.state == .bullsEye || self?.colorKeyboard?.state == .straightLine
+      let showDrawButtons = self?.colorKeyboard?.tool?.usesAimButtons ?? false
       self?.drawButtonL.isHidden = !showDrawButtons
       self?.drawButtonR.isHidden = !showDrawButtons
     }, completion: nil)
