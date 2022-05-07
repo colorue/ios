@@ -25,6 +25,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
       for button in toolbarButtons {
         button.isSelected = state == button.type
       }
+      Store.setValue(state.rawValue, forKey: Prefs.tool)
     }
   }
 
@@ -140,6 +141,11 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
       opacity = alpha
       color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
       brushSizeSlider.value = pow(Store.float(forKey: Prefs.brushSize), 1/sliderConstant)
+
+      tool = toolbarButtons.first(where: { toolbarButton in
+        return toolbarButton.type.rawValue == Store.integer(forKey: Prefs.tool)
+      })
+
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
       color = Theme.colors[Int(arc4random_uniform(8) + 1)]

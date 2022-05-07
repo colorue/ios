@@ -74,6 +74,8 @@ class CurveStroke: DrawingStroke {
           var p3: CGPoint?
           if i < points.count - 1 {
               p3 = points[i + 1]
+          } else if (isSnapped) {
+            p3 = points[0]
           }
 
           let newControlP = controlPointForPoints(p1: p1, p2: p2, next: p3)

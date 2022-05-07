@@ -69,7 +69,6 @@ class OvalStroke: DrawingStroke {
       let origin = CGPoint(x: center.x - radius1, y: center.y - radius2)
       let angle = atan2(point.y - center.y, point.x - center.x)
 
-      // What trig function do I need
       let frame = CGRect(origin: origin, size: CGSize(width: radius1 * 2, height: radius2 * 2))
       let rotation = CGAffineTransform(translationX: frame.midX, y: frame.midY)
                                       .rotated(by: angle)

@@ -18,6 +18,7 @@ struct Prefs {
   static let brushSize = "brushSize"
   static let savedDrawing = "savedDrawing"
   static let saved = "saved"
+  static let tool = "tool"
 
   // MARK: Tutorials
 }
