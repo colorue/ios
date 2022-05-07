@@ -50,7 +50,7 @@ class ToolbarButton: UIButton {
       case .curvedLine:
         return UIImage(systemName: "point.topleft.down.curvedto.point.bottomright.up.fill")
       case .oval:
-        return UIImage(systemName: "oval")
+        return UIImage(systemName: "smallcircle.circle")
       }
     }
   }

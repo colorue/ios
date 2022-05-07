@@ -30,14 +30,14 @@ class StraightLineStroke: DrawingStroke {
   }
 
   override func ended(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn {
-    } else {
+    if pts.count < 2 {
       delegate?.drawingStroke(self, updatedWith: baseImage)
+    } else {
+      path.removeAllPoints()
+      pts.removeAll()
+      let image = displayStroke()
+      delegate?.drawingStroke(self, completedWith: image)
     }
-    path.removeAllPoints()
-    pts.removeAll()
-    let image = displayStroke()
-    delegate?.drawingStroke(self, completedWith: image)
   }
 
   override func start() {
