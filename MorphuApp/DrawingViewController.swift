@@ -422,10 +422,6 @@ extension DrawingViewController: CanvasDelegate {
     return colorKeyboard?.alpha
   }
 
-  func setAlphaHigh() {
-    colorKeyboard?.alpha = 1.0
-  }
-
   func setUnderfingerView(_ underFingerImage: UIImage) {
     self.colorKeyboard?.isUserInteractionEnabled = false
     if underFingerView.isHidden {
@@ -454,16 +450,15 @@ extension DrawingViewController: CanvasDelegate {
   // Used by dropper
   func setColor(_ color: UIColor?) {
     guard let color = color else { return }
-    colorKeyboard?.color = color
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+      self?.colorKeyboard?.color = color
+      self?.colorKeyboard?.opacity = 1.0
+      self?.colorKeyboard?.tool = nil
+    })
   }
 
   func getKeyboardTool() -> ToolbarButton? {
     return self.colorKeyboard?.tool
-  }
-
-  func setKeyboardState(_ tool: ToolbarButton?) {
-    colorKeyboard?.tool = tool
-//    colorKeyboard?.updateButtonColor()
   }
 }
 

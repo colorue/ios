@@ -8,47 +8,47 @@
 
 import Foundation
 
-protocol DrawingStrokeDelegate {
+protocol DrawingStrokeDelegate: class {
   func mergeCurrentStroke(_ alpha: Bool, image: UIImage?)
   func paintAt(position: CGPoint, color: UIColor, alpha: CGFloat)
+  func pickColorAt(position: CGPoint, currentColor: UIColor?)
+  func addToUndoStack(_ image: UIImage?)
+  func isDrawingOn() -> Bool
+  func clearCurrentStroke()
 }
 
 class DrawingStroke {
 
   let positionIndicator = R.image.positionIndicator()!
   var currentStroke: UIImage?
+  weak var delegate: DrawingStrokeDelegate?
 
   var pts = [CGPoint]()
   var path = UIBezierPath()
-  var canvas: CanvasView
-  var color: UIColor
-  var alpha: CGFloat
-  var brushSize: Float
 
-  static func makeStroke (canvas: CanvasView, type: KeyboardToolState) -> DrawingStroke {
+  var color = UIColor()
+  var alpha: CGFloat = 1.0
+  var brushSize: Float = 0.0
+  var actualSize = CGSize.zero
+  let resizeScale: CGFloat = 2.0
+
+  static func makeStroke (type: KeyboardToolState) -> DrawingStroke {
     switch (type) {
     case .none:
-      return DefaultStroke(canvas: canvas)
+      return DefaultStroke()
     case .colorDropper:
-      return ColorDropperStroke(canvas: canvas)
+      return ColorDropperStroke()
     case .paintBucket:
-      return PaintBucketStroke(canvas: canvas)
+      return PaintBucketStroke()
     case .bullsEye:
-      return AimModeStroke(canvas: canvas)
+      return AimModeStroke()
     }
-  }
-
-  init(canvas: CanvasView) {
-    self.canvas = canvas
-    self.color = canvas.delegate!.getCurrentColor()
-    self.alpha = canvas.delegate!.getAlpha()!
-    self.brushSize = canvas.delegate!.getCurrentBrushSize()
   }
 
   func began(position: CGPoint) {
     pts.append(position)
     finishStroke()
-    canvas.mergeCurrentStroke(true, image: currentStroke)
+    delegate?.mergeCurrentStroke(true, image: currentStroke)
   }
 
   func changed(position: CGPoint) {
@@ -62,7 +62,7 @@ class DrawingStroke {
       pts[1] = pts[4]
       pts.removeLast(3)
     }
-    canvas.mergeCurrentStroke(true, image: currentStroke)
+    delegate?.mergeCurrentStroke(true, image: currentStroke)
   }
 
   func ended(position: CGPoint) {
@@ -80,19 +80,19 @@ class DrawingStroke {
     }
     path.removeAllPoints()
     pts.removeAll()
-    canvas.mergeCurrentStroke(true, image: currentStroke)
-    canvas.addToUndoStack(canvas.imageView.image)
+    delegate?.mergeCurrentStroke(true, image: currentStroke)
+    delegate?.addToUndoStack(nil)
   }
 
   func end() {
-
+    // stub overwritten by AimModeStroke
   }
 
   // MARK: utility functions
 
   func finishStroke() {
     if !pts.isEmpty {
-      UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
+      UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
       currentStroke?.draw(at: CGPoint.zero)
 
       let context = UIGraphicsGetCurrentContext()
@@ -108,7 +108,7 @@ class DrawingStroke {
       }
 
       context?.setLineCap(CGLineCap.round)
-      context?.setLineWidth(CGFloat(brushSize) * canvas.resizeScale)
+      context?.setLineWidth(CGFloat(brushSize) * resizeScale)
       context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
 
       context?.strokePath()
@@ -119,10 +119,10 @@ class DrawingStroke {
   }
 
   func drawCurve() {
-    UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     currentStroke?.draw(at: CGPoint.zero)
     color.setStroke()
-    path.lineWidth = CGFloat(brushSize) * canvas.resizeScale
+    path.lineWidth = CGFloat(brushSize) * resizeScale
     path.lineCapStyle = CGLineCap.round
     path.stroke()
     currentStroke = UIGraphicsGetImageFromCurrentImageContext()
@@ -130,12 +130,12 @@ class DrawingStroke {
   }
 
   func drawDot(_ position: CGPoint) {
-    UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
     context?.move(to: CGPoint(x: position.x, y: position.y))
     context?.addLine(to: CGPoint(x: position.x, y: position.y))
     context?.setLineCap(CGLineCap.round)
-    context?.setLineWidth(CGFloat(brushSize) * canvas.resizeScale)
+    context?.setLineWidth(CGFloat(brushSize) * resizeScale)
     context?.setStrokeColor(red: color.coreImageColor!.red, green: color.coreImageColor!.green, blue: color.coreImageColor!.blue, alpha: 1.0)
     context?.strokePath()
     context?.flush()
@@ -144,7 +144,7 @@ class DrawingStroke {
   }
 
   func drawDropperIndicator(_ point: CGPoint) {
-    UIGraphicsBeginImageContextWithOptions(canvas.actualSize, false, 1.0)
+    UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
     positionIndicator.draw(at: CGPoint(x: point.x - (positionIndicator.size.width / 2), y: point.y - (positionIndicator.size.height / 2)))
     context?.strokePath()

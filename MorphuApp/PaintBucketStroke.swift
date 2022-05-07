@@ -11,15 +11,15 @@ import Foundation
 class PaintBucketStroke: DrawingStroke {
   override func began(position: CGPoint) {
     drawDropperIndicator(position)
-    canvas.mergeCurrentStroke(true, image: currentStroke)
+    delegate?.mergeCurrentStroke(true, image: currentStroke)
   }
 
   override func changed(position: CGPoint) {
     drawDropperIndicator(position)
-    canvas.mergeCurrentStroke(true, image: currentStroke)
+    delegate?.mergeCurrentStroke(true, image: currentStroke)
   }
 
   override func ended(position: CGPoint) {
-    canvas.paintAt(position: position, color: color, alpha: alpha)
+    delegate?.paintAt(position: position, color: color, alpha: alpha)
   }
 }
