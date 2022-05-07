@@ -108,28 +108,32 @@ class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
     currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: buttonSize)
     addSubview(currentColorView)
     
-    let toolbarWrapper = UIView()
+    let toolbarWrapper = UIStackView()
+    toolbarWrapper.distribution = .fillEqually
+    toolbarWrapper.spacing = 16.0
     toolbarWrapper.frame = currentColorView.frame
     addSubview(toolbarWrapper)
 
-    brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: buttonSize/2.0)
-    toolbarWrapper.addSubview(brushSizeSlider)
+    let toolWrapperL = UIStackView()
+    toolWrapperL.distribution = .fillEqually
+    let toolWrapperR = UIStackView()
+    toolWrapperR.distribution = .fillEqually
 
-    paintBucketButton.delegate = self
-    paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
-    toolbarWrapper.addSubview(paintBucketButton)
-    
-    dropperButton.delegate = self
-    dropperButton.frame = CGRect(x: (buttonSize), y: 0, width: buttonSize, height: buttonSize)
-    toolbarWrapper.addSubview(dropperButton)
-    
-    bullsEyeButton.delegate = self
-    bullsEyeButton.frame = CGRect(x: 0, y: 0, width: buttonSize, height: buttonSize)
-    toolbarWrapper.addSubview(bullsEyeButton)
+    toolbarWrapper.addArrangedSubview(toolWrapperL)
+    toolbarWrapper.addArrangedSubview(brushSizeSlider)
+    toolbarWrapper.addArrangedSubview(toolWrapperR)
 
     straightLineButton.delegate = self
-    straightLineButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
-    toolbarWrapper.addSubview(straightLineButton)
+    toolWrapperL.addArrangedSubview(straightLineButton)
+    
+    dropperButton.delegate = self
+    toolWrapperR.addArrangedSubview(dropperButton)
+
+    paintBucketButton.delegate = self
+    toolWrapperR.addArrangedSubview(paintBucketButton)
+    
+    bullsEyeButton.delegate = self
+    toolWrapperR.addArrangedSubview(bullsEyeButton)
     
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
     separatorU.backgroundColor = Theme.divider
