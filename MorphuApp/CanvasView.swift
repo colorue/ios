@@ -166,7 +166,9 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
 
   func trash() {
     undoStack.removeAll()
-    imageView.image = UIImage.getImageWithColor(UIColor.white, size: actualSize)
+    let clearCanvas = UIImage.getImageWithColor(UIColor.white, size: actualSize)
+    undoStack.append(clearCanvas)
+    imageView.image = clearCanvas
   }
 
   func getDrawing() -> UIImage {
@@ -202,9 +204,9 @@ extension CanvasView: DrawingStrokeDelegate {
   }
 
   func drawingStroke(_ stroke: DrawingStroke, selectedColorAt point: CGPoint) -> UIColor? {
-    let dropperColor = stroke.baseImage?.color(atPosition: point)
-    if let color = dropperColor, color != stroke.color {
-      self.delegate?.setColor(color)
+    let dropperColor = imageView.image?.color(atPosition: point) ?? .white
+    if dropperColor != stroke.color {
+      self.delegate?.setColor(dropperColor)
       Haptic.selectionChanged()
     }
     return dropperColor

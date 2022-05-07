@@ -146,7 +146,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     drawButtonR.addGestureRecognizer(holdR)
     drawButtonR.actions(forTarget: #selector(DrawingViewController.handleTapped(_:)), forControlEvent: .touchDown)
 
-
     underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
     underFingerView.layer.borderWidth = 0.5
@@ -428,7 +427,7 @@ extension DrawingViewController: CanvasDelegate {
   }
 
   func getAlpha() -> CGFloat? {
-    return colorKeyboard?.alpha
+    return colorKeyboard?.opacity
   }
 
   func setUnderfingerView(_ underFingerImage: UIImage) {

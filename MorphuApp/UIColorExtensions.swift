@@ -20,7 +20,7 @@ extension UIColor {
   }
 
   func getDarkness(alpha: CGFloat = 1.0) -> CGFloat{
-    let equivalentColor = UIColor.blendColor(self, withColor: .white, percentMix: (1.0 - alpha))
+    let equivalentColor = UIColor.blendColor(self, withColor: Theme.halfOpacityCheck, percentMix: (1.0 - alpha))
     let coreColor = equivalentColor.coreImageColor
     return coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue
   }

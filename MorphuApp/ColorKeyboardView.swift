@@ -60,7 +60,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
 
   var buttonColor: UIColor {
     get {
-      return color.getDarkness(alpha: alpha) < 1.87 ? .white : .black
+      return color.getDarkness(alpha: opacity) < 1.87 ? .white : .black
     }
   }
 
