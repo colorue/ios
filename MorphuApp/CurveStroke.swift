@@ -75,11 +75,11 @@ class CurveStroke: DrawingStroke {
         if i < points.count - 1 {
           p3 = points[i + 1]
         } else if (isSnapped) {
-          p3 = points[0]
+          p3 = points[1]
         }
 
         if (i == 1 && isSnapped) {
-          oldControlP = antipodalFor(point: controlPointForPoints(p1: points.last!, p2: p1, next: p2), center: p1)
+          oldControlP = antipodalFor(point: controlPointForPoints(p1: points[points.count - 2], p2: p1, next: p2), center: p1)
         }
 
         let newControlP = controlPointForPoints(p1: p1, p2: p2, next: p3)
