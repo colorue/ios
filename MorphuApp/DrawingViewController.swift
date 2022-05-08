@@ -470,9 +470,9 @@ extension DrawingViewController: CanvasDelegate {
 
 // MARK: -  UIImagePickerControllerDelegate
 extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    print("pickedImage", info)
+    if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       canvas?.baseDrawing = pickedImage
       Haptic.notificationOccurred(.success)
     }
