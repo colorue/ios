@@ -17,7 +17,7 @@ extension UIView {
     setConstraint(value: constant, attribute: .width)
   }
 
-  private func removeConstraint(attribute: NSLayoutAttribute) {
+  private func removeConstraint(attribute: NSLayoutConstraint.Attribute) {
     constraints.forEach {
       if $0.firstAttribute == attribute {
         removeConstraint($0)
@@ -25,14 +25,14 @@ extension UIView {
     }
   }
 
-  private func setConstraint(value: CGFloat, attribute: NSLayoutAttribute) {
+  private func setConstraint(value: CGFloat, attribute: NSLayoutConstraint.Attribute) {
     removeConstraint(attribute: attribute)
     let constraint =
       NSLayoutConstraint(item: self,
                          attribute: attribute,
-                         relatedBy: NSLayoutRelation.equal,
+                         relatedBy: NSLayoutConstraint.Relation.equal,
                          toItem: nil,
-                         attribute: NSLayoutAttribute.notAnAttribute,
+                         attribute: NSLayoutConstraint.Attribute.notAnAttribute,
                          multiplier: 1,
                          constant: value)
     self.addConstraint(constraint)

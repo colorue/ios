@@ -15,7 +15,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   var window: UIWindow?
   
   func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
     if let drawingId = UserDefaults.standard.string(forKey: "openDrawing") {
       openDrawing(drawingId)
@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   func applicationWillResignActive(_ application: UIApplication) {
     let notificationCenter = NotificationCenter.default
     // Saves active drawing
-    notificationCenter.post(name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+    notificationCenter.post(name: UIApplication.willResignActiveNotification, object: nil)
   }
 
   func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {

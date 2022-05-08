@@ -30,7 +30,7 @@ class ColorButton: UIButton {
     self.backgroundColor = color
     self.tag = tag
     self.isTransparent = tag == 0
-    self.addTarget(self, action: #selector(ColorButton.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
+    self.addTarget(self, action: #selector(ColorButton.buttonTapped(_:)), for: UIControl.Event.touchUpInside)
     let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorButton.buttonHeld(_:)))
     tap.minimumPressDuration = 0.15
     tap.delegate = self

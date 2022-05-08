@@ -43,8 +43,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   let underFingerView = UIImageView()
   let keyboardCover = UIView()
   let activeColorView = UIView()
-  let drawButtonL = UIButton(type: UIButtonType.custom)
-  let drawButtonR = UIButton(type: UIButtonType.custom)
+  let drawButtonL = UIButton(type: UIButton.ButtonType.custom)
+  let drawButtonR = UIButton(type: UIButton.ButtonType.custom)
 
   let undoButton = UIButton(type: .custom)
   let redoButton = UIButton(type: .custom)
@@ -84,7 +84,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
     
     
-    NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSNotification.Name.UIApplicationWillResignActive, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
     
     let keyboardHeight = self.view.frame.height / 5.55833333333333
     let canvasHeight = self.view.frame.height - keyboardHeight - 60
@@ -218,7 +218,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
 
   func trash() {
-    let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
+    let deleteAlert = UIAlertController(title: "Are you want to delete this drawing?", message: nil, preferredStyle: UIAlertController.Style.preferActionSheet)
 
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
@@ -248,8 +248,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if (!prefs.bool(forKey: "drawingHowTo")) {
-      let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertControllerStyle.alert)
-      drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+      let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertController.Style.alert)
+      drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
       self.present(drawingHowTo, animated: true, completion: nil)
       prefs.setValue(true, forKey: "drawingHowTo")
     }
@@ -291,7 +291,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
           UIImagePickerController.availableCaptureModes(for: .rear) != nil,
           AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .denied
     else {
-      guard let url = URL(string: UIApplicationOpenSettingsURLString) else { return }
+      guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
       UIApplication.shared.open(url)
       return
     }
@@ -305,7 +305,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   @objc func shareDrawing () {
     guard let drawing = canvas?.getDrawing(),
-          let data = UIImagePNGRepresentation(drawing)
+          let data = drawing.pngData()
     else { return }
 
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
@@ -376,7 +376,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 extension DrawingViewController: ColorKeyboardDelegate {
 
   func setColor (_ color: UIColor, secondary: UIColor, alpha: CGFloat) {
-    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.activeColorView.backgroundColor = color
       self?.activeColorView.alpha = alpha
       self?.drawButtonL.backgroundColor = secondary
@@ -440,14 +440,14 @@ extension DrawingViewController: CanvasDelegate {
 
   func hideUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = true
-    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.beginFromCurrentState, animations: {
       self.keyboardCover.alpha = 0.0
     }, completion: nil)
   }
 
   func showUnderFingerView() {
     self.colorKeyboard?.isUserInteractionEnabled = false
-    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.keyboardCover.alpha = 1.0
       let showDrawButtons = self?.colorKeyboard?.tool?.usesAimButtons ?? false
       self?.drawButtonL.isHidden = !showDrawButtons
@@ -458,7 +458,7 @@ extension DrawingViewController: CanvasDelegate {
   // Used by dropper
   func setColor(_ color: UIColor?) {
     guard let color = color else { return }
-    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { [weak self] in
+    UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.beginFromCurrentState, animations: { [weak self] in
       self?.colorKeyboard?.color = color
       self?.colorKeyboard?.opacity = 1.0
       self?.colorKeyboard?.tool = nil
@@ -474,7 +474,7 @@ extension DrawingViewController: CanvasDelegate {
 extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+    if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
       canvas?.baseDrawing = pickedImage
       Haptic.notificationOccurred(.success)
     }
@@ -500,7 +500,7 @@ extension DrawingViewController {
       guard undoButton.isEnabled || redoButton.isEnabled else { return }
       Haptic.notificationOccurred(.success)
       let title = undoButton.isEnabled ? "Undo added stroke" : "Redo added stroke"
-      let undoAlert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertControllerStyle.alert)
+      let undoAlert = UIAlertController(title: title, message: nil, preferredStyle: UIAlertController.Style.alert)
 
       if (undoButton.isEnabled) {
         undoAlert.addAction(UIAlertAction(title: "Undo", style: .default, handler: { [weak self] (action: UIAlertAction!) in

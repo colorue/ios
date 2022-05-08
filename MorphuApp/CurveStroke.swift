@@ -15,8 +15,8 @@ class CurveStroke: DrawingStroke {
 
   override func began(position: CGPoint) {
     nextPoint = position
-    displayStroke()
     drawCurves(to: position)
+    displayStroke()
   }
 
   override func changed(position: CGPoint) {

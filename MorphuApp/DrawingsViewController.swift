@@ -166,7 +166,7 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
     let drawing = drawings[indexPath.row]
     guard let base64 = drawing.base64 else { return }
 
-    let data = UIImagePNGRepresentation(UIImage.fromBase64(base64))!
+    let data = UIImage.fromBase64(base64).pngData()!
     let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
     let filename = paths[0].appendingPathComponent("Colorue.png")
     try? data.write(to: filename)
@@ -238,7 +238,7 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
   }
   
   private func performDelete (_ indexPath: IndexPath) {
-    let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertControllerStyle.preferActionSheet)
+    let deleteAlert = UIAlertController(title: "This drawing will be deleted from Colorue.", message: nil, preferredStyle: UIAlertController.Style.preferActionSheet)
     
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       guard let drawing = self?.drawings[indexPath.row]  else { return }

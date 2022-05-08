@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B077558B878CCB9876E93D9 /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */; };
 		8733CC64281A4BAF000D053D /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC63281A4BAE000D053D /* R.generated.swift */; };
 		8733CC66281B42BD000D053D /* Drawings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8733CC65281B42BD000D053D /* Drawings.storyboard */; };
 		8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC68281B4554000D053D /* DrawingsViewController.swift */; };
@@ -42,19 +43,35 @@
 		87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5B2826EA0000949265 /* CurveStroke.swift */; };
 		87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5D2826F65100949265 /* OvalStroke.swift */; };
 		87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */; };
+		87DEFE7228274C4200949265 /* ColorueWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
 		87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87F14920281C574400FB389E /* GoogleService-Info.plist */; };
 		87F14922281C653500FB389E /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC71281C4E22000D053D /* Drawing.swift */; };
-		FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 16C591373F34C788F4677031 /* Pods_Colorue.framework */; };
+		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		87DEFE7928274C4200949265 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.dev.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.dev.xcconfig"; sourceTree = "<group>"; };
+		063BEE6750A977D4E9A35FB7 /* Pods-ColorueWidgetExtension.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.dev.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.dev.xcconfig"; sourceTree = "<group>"; };
+		0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.prod.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.prod.xcconfig"; sourceTree = "<group>"; };
-		16C591373F34C788F4677031 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8487168CB5E1D450097EA754 /* Pods-ColorueWidgetExtension.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.prod.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.prod.xcconfig"; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8733CC63281A4BAE000D053D /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8733CC65281B42BD000D053D /* Drawings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawings.storyboard; sourceTree = "<group>"; };
@@ -97,11 +114,21 @@
 		87DEFE5B2826EA0000949265 /* CurveStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveStroke.swift; sourceTree = "<group>"; };
 		87DEFE5D2826F65100949265 /* OvalStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalStroke.swift; sourceTree = "<group>"; };
 		87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+setStrokeColor.swift"; sourceTree = "<group>"; };
+		87DEFE6628274C3D00949265 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		87DEFE6828274C3D00949265 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		87DEFE6B28274C3D00949265 /* ColorueWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorueWidget.swift; sourceTree = "<group>"; };
+		87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ColorueWidget.intentdefinition; sourceTree = "<group>"; };
+		87DEFE6E28274C4200949265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87DEFE7028274C4200949265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		87DEFE8228274C8500949265 /* ColorueWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorueWidget.swift; sourceTree = "<group>"; };
+		87DEFE8428274C8800949265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87DEFE8628274C8800949265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
 		87F14920281C574400FB389E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		949B1424181131409C789152 /* Pods_ColorueWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorueWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
 		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -111,7 +138,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FF070D1B5AAF3FF715C315AA /* Pods_Colorue.framework in Frameworks */,
+				FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */,
+				6B077558B878CCB9876E93D9 /* Pods_Colorue.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +153,8 @@
 				E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */,
 				00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */,
 				129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */,
+				063BEE6750A977D4E9A35FB7 /* Pods-ColorueWidgetExtension.dev.xcconfig */,
+				8487168CB5E1D450097EA754 /* Pods-ColorueWidgetExtension.prod.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -154,6 +184,8 @@
 			children = (
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
+				87DEFE6A28274C3D00949265 /* ColorueWidget */,
+				87DEFE8128274C8500949265 /* ColorueWidget */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
 				872E82E11D01296F005A56A3 /* Colorue α.app */,
 			);
@@ -299,6 +331,27 @@
 			name = Strokes;
 			sourceTree = "<group>";
 		};
+		87DEFE6A28274C3D00949265 /* ColorueWidget */ = {
+			isa = PBXGroup;
+			children = (
+				87DEFE6B28274C3D00949265 /* ColorueWidget.swift */,
+				87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */,
+				87DEFE6E28274C4200949265 /* Assets.xcassets */,
+				87DEFE7028274C4200949265 /* Info.plist */,
+			);
+			path = ColorueWidget;
+			sourceTree = "<group>";
+		};
+		87DEFE8128274C8500949265 /* ColorueWidget */ = {
+			isa = PBXGroup;
+			children = (
+				87DEFE8228274C8500949265 /* ColorueWidget.swift */,
+				87DEFE8428274C8800949265 /* Assets.xcassets */,
+				87DEFE8628274C8800949265 /* Info.plist */,
+			);
+			path = ColorueWidget;
+			sourceTree = "<group>";
+		};
 		87EE53E71D57CD58005B8FB3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,7 +377,10 @@
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				16C591373F34C788F4677031 /* Pods_Colorue.framework */,
+				87DEFE6628274C3D00949265 /* WidgetKit.framework */,
+				87DEFE6828274C3D00949265 /* SwiftUI.framework */,
+				949B1424181131409C789152 /* Pods_ColorueWidgetExtension.framework */,
+				0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -342,6 +398,7 @@
 				873AFA0A1CED7697006FD34A /* Frameworks */,
 				873AFA0B1CED7697006FD34A /* Resources */,
 				20A8E4FDBD6AFBC6256ED97A /* [CP] Embed Pods Frameworks */,
+				87DEFE7928274C4200949265 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
@@ -358,13 +415,13 @@
 		873AFA051CED7697006FD34A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 1330;
 				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Dylan Wight";
 				TargetAttributes = {
 					873AFA0C1CED7697006FD34A = {
 						CreatedOnToolsVersion = 7.3;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 1330;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -487,6 +544,7 @@
 				87F14922281C653500FB389E /* Drawing.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
+				87DEFE7228274C4200949265 /* ColorueWidget.intentdefinition in Sources */,
 				87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */,
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
 				87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */,
@@ -632,6 +690,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -639,7 +698,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = DEVELOPMENT;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -655,7 +714,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Dev;
@@ -664,6 +723,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_ENABLE_MODULES = YES;
@@ -671,7 +731,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = PRODUCTION;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 17;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -687,7 +747,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Prod;
