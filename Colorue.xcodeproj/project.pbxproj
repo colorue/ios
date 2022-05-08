@@ -43,7 +43,6 @@
 		87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5B2826EA0000949265 /* CurveStroke.swift */; };
 		87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5D2826F65100949265 /* OvalStroke.swift */; };
 		87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */; };
-		87DEFE7228274C4200949265 /* ColorueWidget.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */; };
 		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
@@ -116,13 +115,6 @@
 		87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+setStrokeColor.swift"; sourceTree = "<group>"; };
 		87DEFE6628274C3D00949265 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		87DEFE6828274C3D00949265 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		87DEFE6B28274C3D00949265 /* ColorueWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorueWidget.swift; sourceTree = "<group>"; };
-		87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = ColorueWidget.intentdefinition; sourceTree = "<group>"; };
-		87DEFE6E28274C4200949265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87DEFE7028274C4200949265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		87DEFE8228274C8500949265 /* ColorueWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorueWidget.swift; sourceTree = "<group>"; };
-		87DEFE8428274C8800949265 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		87DEFE8628274C8800949265 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
@@ -184,8 +176,6 @@
 			children = (
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
-				87DEFE6A28274C3D00949265 /* ColorueWidget */,
-				87DEFE8128274C8500949265 /* ColorueWidget */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
 				872E82E11D01296F005A56A3 /* Colorue α.app */,
 			);
@@ -329,27 +319,6 @@
 				87DEFE5D2826F65100949265 /* OvalStroke.swift */,
 			);
 			name = Strokes;
-			sourceTree = "<group>";
-		};
-		87DEFE6A28274C3D00949265 /* ColorueWidget */ = {
-			isa = PBXGroup;
-			children = (
-				87DEFE6B28274C3D00949265 /* ColorueWidget.swift */,
-				87DEFE6D28274C3D00949265 /* ColorueWidget.intentdefinition */,
-				87DEFE6E28274C4200949265 /* Assets.xcassets */,
-				87DEFE7028274C4200949265 /* Info.plist */,
-			);
-			path = ColorueWidget;
-			sourceTree = "<group>";
-		};
-		87DEFE8128274C8500949265 /* ColorueWidget */ = {
-			isa = PBXGroup;
-			children = (
-				87DEFE8228274C8500949265 /* ColorueWidget.swift */,
-				87DEFE8428274C8800949265 /* Assets.xcassets */,
-				87DEFE8628274C8800949265 /* Info.plist */,
-			);
-			path = ColorueWidget;
 			sourceTree = "<group>";
 		};
 		87EE53E71D57CD58005B8FB3 /* Views */ = {
@@ -544,7 +513,6 @@
 				87F14922281C653500FB389E /* Drawing.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
-				87DEFE7228274C4200949265 /* ColorueWidget.intentdefinition in Sources */,
 				87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */,
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
 				87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */,
