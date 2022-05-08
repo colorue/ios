@@ -50,13 +50,15 @@ class OvalStroke: DrawingStroke {
   }
 
   func drawCircle(to point: CGPoint) {
+
+    guard let center =  pts.first else {
+      return  drawDropperIndicator(point)
+    }
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
-
-    // Draw oval
     if pts.count > 1 {
+      // Draw oval
       let ovalPath = CGMutablePath()
-      let center = pts.first!
       let radius2 = sqrt(center.distanceSquared(to: pts[1]))
       var radius1 = sqrt(center.distanceSquared(to: point))
       if (abs(radius2 - radius1) < radius2 / 20.0) {
@@ -76,12 +78,8 @@ class OvalStroke: DrawingStroke {
       ovalPath.addEllipse(in: frame, transform: rotation)
       context?.addPath(ovalPath)
     } else {
-      // Draw center dot
-      context?.move(to: point)
-      context?.addLine(to: point)
-
-      let center = pts.first ?? point
-      let radius = pts.isEmpty ? 100.0 : sqrt(center.distanceSquared(to: point))
+      // Draw circle
+      let radius = sqrt(center.distanceSquared(to: point))
       let origin = CGPoint(x: center.x - radius, y: center.y - radius)
       let frame = CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))
       context?.addEllipse(in: frame)

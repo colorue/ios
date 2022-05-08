@@ -287,9 +287,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   }
 
   func importImage () {
-    guard UIImagePickerController.isSourceTypeAvailable(.camera),
-          UIImagePickerController.availableCaptureModes(for: .rear) != nil,
-          AVCaptureDevice.authorizationStatus(for: AVMediaType.video) != .denied
+    guard UIImagePickerController.isSourceTypeAvailable(.photoLibrary)
     else {
       guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
       UIApplication.shared.open(url)
