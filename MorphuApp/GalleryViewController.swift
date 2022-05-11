@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class DrawingsViewController: UICollectionViewController {
+final class GalleryViewController: UICollectionViewController {
   // MARK: - Properties
   private var drawings: Results<Drawing> {
     let realm = try! Realm()
@@ -70,7 +70,7 @@ final class DrawingsViewController: UICollectionViewController {
 }
 
 // MARK: - UICollectionViewDataSource
-extension DrawingsViewController {
+extension GalleryViewController {
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
     return 1
   }
@@ -97,7 +97,7 @@ extension DrawingsViewController {
 }
 
 // MARK: - Collection View Flow Layout Delegate
-extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
+extension GalleryViewController: UICollectionViewDelegateFlowLayout {
   // 1
   func collectionView(
     _ collectionView: UICollectionView,
@@ -253,6 +253,6 @@ extension DrawingsViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
-extension DrawingsViewController: UIPopoverPresentationControllerDelegate {
+extension GalleryViewController: UIPopoverPresentationControllerDelegate {
   
 }

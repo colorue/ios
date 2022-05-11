@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		6B077558B878CCB9876E93D9 /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */; };
 		8733CC64281A4BAF000D053D /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC63281A4BAE000D053D /* R.generated.swift */; };
-		8733CC66281B42BD000D053D /* Drawings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8733CC65281B42BD000D053D /* Drawings.storyboard */; };
-		8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC68281B4554000D053D /* DrawingsViewController.swift */; };
+		8733CC66281B42BD000D053D /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8733CC65281B42BD000D053D /* Gallery.storyboard */; };
+		8733CC69281B4554000D053D /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC68281B4554000D053D /* GalleryViewController.swift */; };
 		8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC6A281B5858000D053D /* DrawingCell.swift */; };
 		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
 		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
@@ -73,8 +73,8 @@
 		8487168CB5E1D450097EA754 /* Pods-ColorueWidgetExtension.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.prod.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.prod.xcconfig"; sourceTree = "<group>"; };
 		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8733CC63281A4BAE000D053D /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		8733CC65281B42BD000D053D /* Drawings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawings.storyboard; sourceTree = "<group>"; };
-		8733CC68281B4554000D053D /* DrawingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingsViewController.swift; sourceTree = "<group>"; };
+		8733CC65281B42BD000D053D /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
+		8733CC68281B4554000D053D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		8733CC6A281B5858000D053D /* DrawingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
 		8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = SOURCE_ROOT; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
@@ -154,7 +154,7 @@
 		8733CC67281B453B000D053D /* Drawings */ = {
 			isa = PBXGroup;
 			children = (
-				8733CC68281B4554000D053D /* DrawingsViewController.swift */,
+				8733CC68281B4554000D053D /* GalleryViewController.swift */,
 				8733CC6A281B5858000D053D /* DrawingCell.swift */,
 			);
 			name = Drawings;
@@ -263,7 +263,7 @@
 			children = (
 				8786D65E1D56DC3900AD3362 /* Drawing.storyboard */,
 				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
-				8733CC65281B42BD000D053D /* Drawings.storyboard */,
+				8733CC65281B42BD000D053D /* Gallery.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -426,7 +426,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8733CC66281B42BD000D053D /* Drawings.storyboard in Resources */,
+				8733CC66281B42BD000D053D /* Gallery.storyboard in Resources */,
 				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
@@ -517,7 +517,7 @@
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
 				87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */,
 				87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */,
-				8733CC69281B4554000D053D /* DrawingsViewController.swift in Sources */,
+				8733CC69281B4554000D053D /* GalleryViewController.swift in Sources */,
 				8763D3111CEE229C00E3D528 /* ColorConstants.swift in Sources */,
 				87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */,
 				87DEFE48282593EA00949265 /* ColorButton.swift in Sources */,

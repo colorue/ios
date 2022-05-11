@@ -43,11 +43,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
   private func openDrawing(_ drawingId: String? = nil) {
     guard
-      let drawingsViewController = R.storyboard.drawings.instantiateInitialViewController(),
+      let galleryViewController = R.storyboard.gallery.instantiateInitialViewController(),
       let drawingViewController = R.storyboard.drawing.instantiateInitialViewController()
       else { return }
     drawingViewController.drawingId = drawingId
-    self.window?.rootViewController = drawingsViewController
-    drawingsViewController.pushViewController(drawingViewController, animated: false)
+    self.window?.rootViewController = galleryViewController
+    galleryViewController.pushViewController(drawingViewController, animated: false)
   }
 }
