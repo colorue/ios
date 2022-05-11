@@ -55,6 +55,12 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Gallery" id="DZZ-lr-vK2">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="person.circle" catalog="system" id="7i1-0L-YYS">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="yaB-96-dJy" kind="show" id="dKP-xQ-ffe"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="compose" id="Ho6-oO-ojP">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -67,6 +73,16 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dKA-Tf-VJv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-141" y="57"/>
+        </scene>
+        <!--Settings-->
+        <scene sceneID="nev-8c-9UZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" id="yaB-96-dJy" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="HuY-zf-Fq4"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b8v-JD-lh6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="399" y="-56"/>
         </scene>
         <!--Drawing-->
         <scene sceneID="B1e-d9-UhM">
@@ -99,6 +115,7 @@
         <segue reference="Thc-Lg-F41"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

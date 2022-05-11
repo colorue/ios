@@ -27,7 +27,7 @@ final class GalleryViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
+//    navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
     
     if let savedDrawing = UserDefaults.standard.string(forKey: Prefs.savedDrawing) {
       let realm = try! Realm()
@@ -261,6 +261,8 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     deleteAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
     self.present(deleteAlert, animated: true, completion: nil)
   }
+
+   @IBAction func unwind(segue: UIStoryboardSegue) {}
 }
 
 extension GalleryViewController: UIPopoverPresentationControllerDelegate {

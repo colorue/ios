@@ -37,5 +37,7 @@ struct Theme {
   static let infoText = UIColor.black
   static let descriptionText = UIColor.black
 
+  static let backgroundGrey = UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
+
   static let tabSelection = UIColor(red: 235.0/255.0, green: 235.0/255.0, blue: 235.0/255.0, alpha: 1.0)
 }
