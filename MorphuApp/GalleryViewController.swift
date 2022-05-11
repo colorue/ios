@@ -200,6 +200,8 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
       UIActivity.ActivityType.postToFlickr,
       UIActivity.ActivityType.postToVimeo,
       UIActivity.ActivityType.postToTencentWeibo,
+      UIActivity.ActivityType.airDrop,
+      UIActivity.ActivityType.saveToCameraRoll
     ]
     
     activityViewController.isModalInPresentation = true
@@ -229,10 +231,18 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
   
   @objc func savedImage(_ im:UIImage, error:Error?, context:UnsafeMutableRawPointer?) {
     if let err = error {
-      view.makeToast("Error saving drawing", position: .center)
       print(err)
-      return
+      let photosAlert = UIAlertController(title: "Colorue", message: "Please allow access to Photos to save your drawings", preferredStyle: UIAlertController.Style.alert)
+
+      photosAlert.addAction(UIAlertAction(title: "Open Settings", style: .default, handler: {  (action: UIAlertAction!) in
+        if let appSettings = URL(string: UIApplication.openSettingsURLString) {
+            UIApplication.shared.open(appSettings, options: [:], completionHandler: nil)
+        }
+      }))
+      photosAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil ))
+      return self.present(photosAlert, animated: true, completion: nil)
     }
+    Haptic.notificationOccurred(.success)
     view.makeToast("Saved to Photos", position: .center)
     AppStoreReviewManager.requestReviewIfAppropriate()
   }

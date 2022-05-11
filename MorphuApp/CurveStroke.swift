@@ -34,14 +34,19 @@ class CurveStroke: DrawingStroke {
   }
 
   override func ended(position: CGPoint) {
-    if pts.count < 2 {
+    if pts.isEmpty {
       delegate?.drawingStroke(self, updatedWith: baseImage)
+    } else if
+      let nextPoint = nextPoint,
+      let last = pts.last,
+      last.distanceSquared(to: nextPoint) < 25 {
+      // Nothing new since last onPress, don't re-added to undoStack
     } else {
-      path.removeAllPoints()
-      pts.removeAll()
       let image = displayStroke()
       delegate?.drawingStroke(self, completedWith: image)
     }
+    path.removeAllPoints()
+    pts.removeAll()
   }
 
   override func onPress() {
@@ -49,6 +54,10 @@ class CurveStroke: DrawingStroke {
     if let nextPoint = nextPoint {
       pts.append(nextPoint)
       displayStroke()
+      let image = displayStroke()
+      if pts.count > 1 {
+        delegate?.drawingStroke(self, completedWith: image)
+      }
     }
   }
 

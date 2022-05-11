@@ -46,11 +46,11 @@ class ToolbarButton: UIButton {
       case .bullsEye:
         return UIImage(systemName: "scope")
       case .straightLine:
-        return UIImage(systemName: "pentagon")
+        return  R.image.lineTool()
       case .curvedLine:
-        return UIImage(systemName: "point.topleft.down.curvedto.point.bottomright.up.fill")
+        return R.image.curveTool()
       case .oval:
-        return UIImage(systemName: "smallcircle.circle")
+        return R.image.circleTool()
       }
     }
   }
