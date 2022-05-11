@@ -34,7 +34,8 @@ class OvalStroke: DrawingStroke {
     }
   }
 
-  override func start() {
+  override func onPress() {
+    super.onPress()
     if let nextPoint = nextPoint {
       pts.append(nextPoint)
       changed(position: nextPoint)

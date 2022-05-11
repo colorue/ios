@@ -14,7 +14,6 @@ protocol DrawingStrokeDelegate: class {
   func drawingStroke(_ stroke: DrawingStroke, completedWith image: UIImage?)
   func drawingStroke(_ stroke: DrawingStroke, selectedColorAt point: CGPoint) -> UIColor?
   func drawingStroke(_ stroke: DrawingStroke, dumpedPaintAt point: CGPoint)
-  var isDrawingOn: Bool { get }
 }
 
 class DrawingStroke {
@@ -32,6 +31,7 @@ class DrawingStroke {
   var brushSize: Float = 0.0
   var actualSize = CGSize.zero
   let resizeScale: CGFloat = 2.0
+  var isDrawing = false
 
   var isSnapped: Bool = false {
     didSet (newValue) {
@@ -80,12 +80,11 @@ class DrawingStroke {
     delegate?.drawingStroke(self, completedWith: image)
   }
 
-  func start () {
-    // stub overwritten by StraingLineStroke
+  func onPress () {
+    Haptic.selectionChanged()
   }
 
-  func complete() {
-    // stub overwritten by AimModeStroke
+  func onRelease() {
   }
 
   // MARK: utility functions

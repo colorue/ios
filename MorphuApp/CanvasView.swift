@@ -17,7 +17,6 @@ protocol CanvasDelegate: class {
   func showUnderFingerView()
   func setColor(_ color: UIColor?)
   func getKeyboardTool() -> ToolbarButton?
-  func isDrawingOn() -> Bool
   func updateUndoButtons(undo: Bool, redo: Bool)
   func saveDrawing()
 }
@@ -40,12 +39,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   let resizeScale: CGFloat = 2.0
   var actualSize = CGSize()
   fileprivate let prefs = UserDefaults.standard
-
-  var isDrawingOn: Bool {
-    get {
-      return delegate?.isDrawingOn() ?? false
-    }
-  }
 
   var baseDrawing: UIImage? {
     didSet {

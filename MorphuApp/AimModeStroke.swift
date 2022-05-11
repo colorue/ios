@@ -11,16 +11,17 @@ import Foundation
 class AimModeStroke: DrawingStroke {
 
   override func began(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn {
+    if isDrawing {
       super.began(position: position)
     } else {
       drawDot(position)
       displayStroke()
+      
     }
   }
 
   override func changed(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn {
+    if isDrawing {
       super.changed(position: position)
     } else {
       drawDot(position)
@@ -29,14 +30,22 @@ class AimModeStroke: DrawingStroke {
   }
 
   override func ended(position: CGPoint) {
-    if let delegate = delegate, delegate.isDrawingOn {
+    if isDrawing {
       super.ended(position: position)
     } else {
       delegate?.drawingStroke(self, updatedWith: baseImage)
     }
   }
 
-  override func complete() {
+  override func onPress() {
+    super.onPress()
+    isDrawing = true
+  }
+
+  override func onRelease() {
+    super.onRelease()
+    Haptic.selectionChanged()
+    isDrawing = false
     path.removeAllPoints()
     pts.removeAll()
     if let image = displayStroke() {

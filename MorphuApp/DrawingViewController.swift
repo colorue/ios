@@ -53,8 +53,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   @IBOutlet weak var postButton: UIBarButtonItem!
 
-  var aimDrawingOn = false
-
   //MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -134,17 +132,17 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     drawButtonR.isHidden = true
     keyboardCover.addSubview(drawButtonR)
 
-    let holdL = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
+    let holdL = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.onDrag(_:)))
     holdL.minimumPressDuration = 0.0
     holdL.delegate = self
     drawButtonL.addGestureRecognizer(holdL)
-    drawButtonL.actions(forTarget: #selector(DrawingViewController.handleTapped(_:)), forControlEvent: .touchDown)
+//    drawButtonL.actions(forTarget: #selector(DrawingViewController.onTap(_:)), forControlEvent: .touchDown)
 
-    let holdR = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.handleDrag(_:)))
+    let holdR = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.onDrag(_:)))
     holdR.minimumPressDuration = 0.0
     holdR.delegate = self
     drawButtonR.addGestureRecognizer(holdR)
-    drawButtonR.actions(forTarget: #selector(DrawingViewController.handleTapped(_:)), forControlEvent: .touchDown)
+//    drawButtonR.actions(forTarget: #selector(DrawingViewController.onTap(_:)), forControlEvent: .touchDown)
 
     underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
@@ -200,21 +198,12 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     }
   }
 
-  @objc private func handleDrag(_ sender: UILongPressGestureRecognizer) {
+  @objc private func onDrag(_ sender: UILongPressGestureRecognizer) {
     if (sender.state == .began) {
-      Haptic.selectionChanged()
-      canvas?.drawingStroke?.start()
-      aimDrawingOn = true
+      canvas?.drawingStroke?.onPress()
     } else if (sender.state == .ended) {
-      aimDrawingOn = false // TODO: This could be passed directly to the stroke
-      canvas?.drawingStroke?.complete()
-      Haptic.selectionChanged()
+      canvas?.drawingStroke?.onRelease()
     }
-  }
-
-  @objc private func handleTapped(_ sender: UIButton) {
-    Haptic.selectionChanged()
-    canvas?.drawingStroke?.start()
   }
 
   func trash() {
@@ -384,9 +373,6 @@ extension DrawingViewController: ColorKeyboardDelegate {
 }
 
 extension DrawingViewController: CanvasDelegate {
-  func isDrawingOn() -> Bool {
-    return aimDrawingOn
-  }
 
   func saveDrawing() {
     DispatchQueue.main.async { [weak self] in
@@ -471,7 +457,6 @@ extension DrawingViewController: CanvasDelegate {
 // MARK: -  UIImagePickerControllerDelegate
 extension DrawingViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    print("pickedImage", info)
     if let pickedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
       canvas?.baseDrawing = pickedImage
       Haptic.notificationOccurred(.success)

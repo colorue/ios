@@ -44,7 +44,8 @@ class CurveStroke: DrawingStroke {
     }
   }
 
-  override func start() {
+  override func onPress() {
+    super.onPress()
     if let nextPoint = nextPoint {
       pts.append(nextPoint)
       displayStroke()
