@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="fZW-0J-spp">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Loading View Controller-->
+        <scene sceneID="Mpx-O3-9RF">
+            <objects>
+                <viewController id="fZW-0J-spp" userLabel="Loading View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="oTY-lF-Asg"/>
+                        <viewControllerLayoutGuide type="bottom" id="LG5-H3-SWA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Bnq-9R-nEg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" image="Colorue Logo" translatesAutoresizingMaskIntoConstraints="NO" id="hX4-HP-fpL">
+                                <rect key="frame" x="0.0" y="-52" width="414" height="1000"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="hX4-HP-fpL" secondAttribute="trailing" constant="-20" id="Zy3-3f-5H6"/>
+                            <constraint firstItem="hX4-HP-fpL" firstAttribute="centerY" secondItem="Bnq-9R-nEg" secondAttribute="centerY" id="rsc-Eu-jPw"/>
+                            <constraint firstItem="hX4-HP-fpL" firstAttribute="leading" secondItem="Bnq-9R-nEg" secondAttribute="leadingMargin" constant="-20" id="w2L-aa-a6F"/>
+                        </constraints>
+                    </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qLY-S2-ahw" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-795" y="366"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Colorue Logo" width="512" height="1000"/>
+    </resources>
+</document>
