@@ -190,12 +190,12 @@ struct R: Rswift.Validatable {
     static let circleTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Circle Tool")
     /// Image `ClearPattern`.
     static let clearPattern = Rswift.ImageResource(bundle: R.hostingBundle, name: "ClearPattern")
+    /// Image `Colorue Logo`.
+    static let colorueLogo = Rswift.ImageResource(bundle: R.hostingBundle, name: "Colorue Logo")
     /// Image `Curve Tool`.
     static let curveTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Curve Tool")
     /// Image `Line Tool`.
     static let lineTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Line Tool")
-    /// Image `Morphu Brand`.
-    static let morphuBrand = Rswift.ImageResource(bundle: R.hostingBundle, name: "Morphu Brand")
     /// Image `Paint Bucket`.
     static let paintBucket = Rswift.ImageResource(bundle: R.hostingBundle, name: "Paint Bucket")
     /// Image `PositionIndicator`.
@@ -216,6 +216,13 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "Colorue Logo", bundle: ..., traitCollection: ...)`
+    static func colorueLogo(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.colorueLogo, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Curve Tool", bundle: ..., traitCollection: ...)`
     static func curveTool(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.curveTool, compatibleWith: traitCollection)
@@ -226,13 +233,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "Line Tool", bundle: ..., traitCollection: ...)`
     static func lineTool(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.lineTool, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Morphu Brand", bundle: ..., traitCollection: ...)`
-    static func morphuBrand(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.morphuBrand, compatibleWith: traitCollection)
     }
     #endif
 
@@ -358,7 +358,7 @@ struct _R: Rswift.Validatable {
       let name = "Launch Screen"
 
       static func validate() throws {
-        if UIKit.UIImage(named: "Morphu Brand", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Morphu Brand' is used in storyboard 'Launch Screen', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Colorue Logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Colorue Logo' is used in storyboard 'Launch Screen', but couldn't be loaded.") }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }

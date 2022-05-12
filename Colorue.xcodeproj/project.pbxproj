@@ -8,48 +8,48 @@
 
 /* Begin PBXBuildFile section */
 		6B077558B878CCB9876E93D9 /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */; };
-		8733CC64281A4BAF000D053D /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC63281A4BAE000D053D /* R.generated.swift */; };
-		8733CC66281B42BD000D053D /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8733CC65281B42BD000D053D /* Gallery.storyboard */; };
-		8733CC69281B4554000D053D /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC68281B4554000D053D /* GalleryViewController.swift */; };
-		8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC6A281B5858000D053D /* DrawingCell.swift */; };
-		8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2BA1CEE220200E3D528 /* AppDelegate.swift */; };
-		8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */; };
-		8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2C61CEE226700E3D528 /* DrawingViewController.swift */; };
-		8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E01CEE229C00E3D528 /* CanvasView.swift */; };
-		8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */; };
-		8763D3111CEE229C00E3D528 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F71CEE229C00E3D528 /* Theme.swift */; };
-		8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */; };
-		8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */; };
-		8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8763D3141CEE22D300E3D528 /* Assets.xcassets */; };
-		8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8786D65E1D56DC3900AD3362 /* Drawing.storyboard */; };
-		87B4C7CE282D917A00F1309A /* ToastSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B4C7CD282D917A00F1309A /* ToastSwift.swift */; };
-		87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */; };
-		87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */; };
-		87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE392821F5ED00949265 /* UINavigationBar.swift */; };
-		87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3B2822B24D00949265 /* DrawingService.swift */; };
-		87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */; };
-		87DEFE422825873600949265 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE412825873600949265 /* Haptic.swift */; };
-		87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */; };
-		87DEFE462825921200949265 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE452825921200949265 /* ToolbarButton.swift */; };
-		87DEFE48282593EA00949265 /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE47282593EA00949265 /* ColorButton.swift */; };
-		87DEFE4B2825C76000949265 /* DrawingStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4A2825C76000949265 /* DrawingStroke.swift */; };
-		87DEFE4D2825CA2700949265 /* PaintBucketStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4C2825CA2700949265 /* PaintBucketStroke.swift */; };
-		87DEFE4F2825CA4F00949265 /* AimModeStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */; };
-		87DEFE512825CAA900949265 /* ColorDropperStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE502825CAA900949265 /* ColorDropperStroke.swift */; };
-		87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE522825CAC800949265 /* DefaultStroke.swift */; };
-		87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE542826102E00949265 /* StraightLineStroke.swift */; };
-		87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */; };
-		87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE592826E49800949265 /* UIView+heightWidth.swift */; };
-		87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5B2826EA0000949265 /* CurveStroke.swift */; };
-		87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5D2826F65100949265 /* OvalStroke.swift */; };
-		87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */; };
-		87E2DE11282C47CE00967CFE /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87E2DE10282C47CE00967CFE /* Settings.storyboard */; };
-		87E7ED7A282C51E70079BED8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87E7ED79282C51E70079BED8 /* SettingsViewController.swift */; };
-		87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EE53E81D57CE9F005B8FB3 /* Prefs.swift */; };
-		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
-		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
-		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
-		87F14922281C653500FB389E /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC71281C4E22000D053D /* Drawing.swift */; };
+		8703D7B1282D9B2A00258CEE /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77B282D9B2A00258CEE /* Gallery.storyboard */; };
+		8703D7B2282D9B2A00258CEE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */; };
+		8703D7B3282D9B2A00258CEE /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77D282D9B2A00258CEE /* Settings.storyboard */; };
+		8703D7B4282D9B2A00258CEE /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77E282D9B2A00258CEE /* Drawing.storyboard */; };
+		8703D7B5282D9B2A00258CEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D780282D9B2A00258CEE /* AppDelegate.swift */; };
+		8703D7B6282D9B2A00258CEE /* ToastSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D783282D9B2A00258CEE /* ToastSwift.swift */; };
+		8703D7B7282D9B2A00258CEE /* UIImage_UIImageColorPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8703D785282D9B2A00258CEE /* UIImage_UIImageColorPicker.m */; };
+		8703D7B8282D9B2A00258CEE /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D788282D9B2A00258CEE /* UIImage+PaintBucket.swift */; };
+		8703D7B9282D9B2A00258CEE /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D789282D9B2A00258CEE /* ImageBuffer.swift */; };
+		8703D7BA282D9B2A00258CEE /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78A282D9B2A00258CEE /* Pixel.swift */; };
+		8703D7BB282D9B2A00258CEE /* CGPoint+distanceSquared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78C282D9B2A00258CEE /* CGPoint+distanceSquared.swift */; };
+		8703D7BC282D9B2A00258CEE /* CGContext+setStrokeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78D282D9B2A00258CEE /* CGContext+setStrokeColor.swift */; };
+		8703D7BD282D9B2A00258CEE /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78E282D9B2A00258CEE /* UIImageExtensions.swift */; };
+		8703D7BE282D9B2A00258CEE /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78F282D9B2A00258CEE /* UINavigationBar.swift */; };
+		8703D7BF282D9B2A00258CEE /* UIAlertControllerStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D790282D9B2A00258CEE /* UIAlertControllerStyle.swift */; };
+		8703D7C0282D9B2A00258CEE /* UIView+heightWidth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D791282D9B2A00258CEE /* UIView+heightWidth.swift */; };
+		8703D7C1282D9B2A00258CEE /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D792282D9B2A00258CEE /* UIColorExtensions.swift */; };
+		8703D7C2282D9B2A00258CEE /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */; };
+		8703D7C3282D9B2A00258CEE /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D795282D9B2A00258CEE /* DrawingService.swift */; };
+		8703D7C4282D9B2A00258CEE /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D796282D9B2A00258CEE /* Drawing.swift */; };
+		8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D797282D9B2A00258CEE /* Theme.swift */; };
+		8703D7C6282D9B2A00258CEE /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D798282D9B2A00258CEE /* Haptic.swift */; };
+		8703D7C7282D9B2A00258CEE /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D799282D9B2A00258CEE /* Prefs.swift */; };
+		8703D7C8282D9B2A00258CEE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79C282D9B2A00258CEE /* SettingsViewController.swift */; };
+		8703D7C9282D9B2A00258CEE /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79E282D9B2A00258CEE /* DrawingViewController.swift */; };
+		8703D7CA282D9B2A00258CEE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A0282D9B2A00258CEE /* CanvasView.swift */; };
+		8703D7CB282D9B2A00258CEE /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A1282D9B2A00258CEE /* BrushSizeSlider.swift */; };
+		8703D7CC282D9B2A00258CEE /* ColorButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A2282D9B2A00258CEE /* ColorButton.swift */; };
+		8703D7CD282D9B2A00258CEE /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A3282D9B2A00258CEE /* ToolbarButton.swift */; };
+		8703D7CE282D9B2A00258CEE /* ColorKeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A4282D9B2A00258CEE /* ColorKeyboardView.swift */; };
+		8703D7CF282D9B2A00258CEE /* DrawingStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A6282D9B2A00258CEE /* DrawingStroke.swift */; };
+		8703D7D0282D9B2A00258CEE /* OvalStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A7282D9B2A00258CEE /* OvalStroke.swift */; };
+		8703D7D1282D9B2A00258CEE /* ColorDropperStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A8282D9B2A00258CEE /* ColorDropperStroke.swift */; };
+		8703D7D2282D9B2A00258CEE /* AimModeStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A9282D9B2A00258CEE /* AimModeStroke.swift */; };
+		8703D7D3282D9B2A00258CEE /* PaintBucketStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7AA282D9B2A00258CEE /* PaintBucketStroke.swift */; };
+		8703D7D4282D9B2A00258CEE /* CurveStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7AB282D9B2A00258CEE /* CurveStroke.swift */; };
+		8703D7D5282D9B2A00258CEE /* StraightLineStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7AC282D9B2A00258CEE /* StraightLineStroke.swift */; };
+		8703D7D6282D9B2A00258CEE /* DefaultStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7AD282D9B2A00258CEE /* DefaultStroke.swift */; };
+		8703D7D7282D9B2A00258CEE /* DrawingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7AF282D9B2A00258CEE /* DrawingCell.swift */; };
+		8703D7D8282D9B2A00258CEE /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7B0282D9B2A00258CEE /* GalleryViewController.swift */; };
+		8703D7DA282D9B5300258CEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8703D7D9282D9B5200258CEE /* Assets.xcassets */; };
+		8703D7E3282D9C8A00258CEE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7E2282D9C8A00258CEE /* R.generated.swift */; };
 		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
@@ -70,55 +70,56 @@
 		00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.dev.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.dev.xcconfig"; sourceTree = "<group>"; };
 		0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.prod.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.prod.xcconfig"; sourceTree = "<group>"; };
-		8733CC63281A4BAE000D053D /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
-		8733CC65281B42BD000D053D /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
-		8733CC68281B4554000D053D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
-		8733CC6A281B5858000D053D /* DrawingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
+		8703D777282D9AD400258CEE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8703D77B282D9B2A00258CEE /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
+		8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		8703D77D282D9B2A00258CEE /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		8703D77E282D9B2A00258CEE /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
+		8703D780282D9B2A00258CEE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		8703D783282D9B2A00258CEE /* ToastSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastSwift.swift; sourceTree = "<group>"; };
+		8703D785282D9B2A00258CEE /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
+		8703D786282D9B2A00258CEE /* Color-Picker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Color-Picker-Bridging-Header.h"; sourceTree = "<group>"; };
+		8703D788282D9B2A00258CEE /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
+		8703D789282D9B2A00258CEE /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
+		8703D78A282D9B2A00258CEE /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		8703D78C282D9B2A00258CEE /* CGPoint+distanceSquared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGPoint+distanceSquared.swift"; sourceTree = "<group>"; };
+		8703D78D282D9B2A00258CEE /* CGContext+setStrokeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CGContext+setStrokeColor.swift"; sourceTree = "<group>"; };
+		8703D78E282D9B2A00258CEE /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		8703D78F282D9B2A00258CEE /* UINavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
+		8703D790282D9B2A00258CEE /* UIAlertControllerStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIAlertControllerStyle.swift; sourceTree = "<group>"; };
+		8703D791282D9B2A00258CEE /* UIView+heightWidth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+heightWidth.swift"; sourceTree = "<group>"; };
+		8703D792282D9B2A00258CEE /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
+		8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
+		8703D795282D9B2A00258CEE /* DrawingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
+		8703D796282D9B2A00258CEE /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
+		8703D797282D9B2A00258CEE /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		8703D798282D9B2A00258CEE /* Haptic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
+		8703D799282D9B2A00258CEE /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
+		8703D79C282D9B2A00258CEE /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8703D79E282D9B2A00258CEE /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
+		8703D7A0282D9B2A00258CEE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		8703D7A1282D9B2A00258CEE /* BrushSizeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
+		8703D7A2282D9B2A00258CEE /* ColorButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
+		8703D7A3282D9B2A00258CEE /* ToolbarButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
+		8703D7A4282D9B2A00258CEE /* ColorKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorKeyboardView.swift; sourceTree = "<group>"; };
+		8703D7A6282D9B2A00258CEE /* DrawingStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingStroke.swift; sourceTree = "<group>"; };
+		8703D7A7282D9B2A00258CEE /* OvalStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OvalStroke.swift; sourceTree = "<group>"; };
+		8703D7A8282D9B2A00258CEE /* ColorDropperStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorDropperStroke.swift; sourceTree = "<group>"; };
+		8703D7A9282D9B2A00258CEE /* AimModeStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AimModeStroke.swift; sourceTree = "<group>"; };
+		8703D7AA282D9B2A00258CEE /* PaintBucketStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintBucketStroke.swift; sourceTree = "<group>"; };
+		8703D7AB282D9B2A00258CEE /* CurveStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurveStroke.swift; sourceTree = "<group>"; };
+		8703D7AC282D9B2A00258CEE /* StraightLineStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StraightLineStroke.swift; sourceTree = "<group>"; };
+		8703D7AD282D9B2A00258CEE /* DefaultStroke.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultStroke.swift; sourceTree = "<group>"; };
+		8703D7AF282D9B2A00258CEE /* DrawingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
+		8703D7B0282D9B2A00258CEE /* GalleryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
+		8703D7D9282D9B5200258CEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8703D7DB282D9B8000258CEE /* Colorue.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Colorue.entitlements; sourceTree = SOURCE_ROOT; };
+		8703D7DC282D9C1D00258CEE /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8703D7DE282D9C2A00258CEE /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		8703D7E0282D9C3C00258CEE /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
+		8703D7E2282D9C8A00258CEE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		8703D7E4282D9EAD00258CEE /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		8733CC71281C4E22000D053D /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = SOURCE_ROOT; };
-		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8746362E1D56E6B3000BD73E /* Color-Picker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Color-Picker-Bridging-Header.h"; sourceTree = "<group>"; };
-		874D18FF1D973E7D00534AEA /* Colorue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorue.entitlements; sourceTree = SOURCE_ROOT; };
-		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		8763D2C61CEE226700E3D528 /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
-		8763D2E01CEE229C00E3D528 /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
-		8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorKeyboardView.swift; sourceTree = "<group>"; };
-		8763D2F71CEE229C00E3D528 /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
-		8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
-		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
-		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		8786D65E1D56DC3900AD3362 /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
-		87B4C7CB282D8B8600F1309A /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		87B4C7CD282D917A00F1309A /* ToastSwift.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastSwift.swift; sourceTree = "<group>"; };
-		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
-		87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerStyle.swift; sourceTree = "<group>"; };
-		87DEFE392821F5ED00949265 /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
-		87DEFE3B2822B24D00949265 /* DrawingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
-		87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
-		87DEFE412825873600949265 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
-		87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
-		87DEFE452825921200949265 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
-		87DEFE47282593EA00949265 /* ColorButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorButton.swift; sourceTree = "<group>"; };
-		87DEFE4A2825C76000949265 /* DrawingStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingStroke.swift; sourceTree = "<group>"; };
-		87DEFE4C2825CA2700949265 /* PaintBucketStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaintBucketStroke.swift; sourceTree = "<group>"; };
-		87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AimModeStroke.swift; sourceTree = "<group>"; };
-		87DEFE502825CAA900949265 /* ColorDropperStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDropperStroke.swift; sourceTree = "<group>"; };
-		87DEFE522825CAC800949265 /* DefaultStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultStroke.swift; sourceTree = "<group>"; };
-		87DEFE542826102E00949265 /* StraightLineStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StraightLineStroke.swift; sourceTree = "<group>"; };
-		87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+distanceSquared.swift"; sourceTree = "<group>"; };
-		87DEFE592826E49800949265 /* UIView+heightWidth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+heightWidth.swift"; sourceTree = "<group>"; };
-		87DEFE5B2826EA0000949265 /* CurveStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurveStroke.swift; sourceTree = "<group>"; };
-		87DEFE5D2826F65100949265 /* OvalStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OvalStroke.swift; sourceTree = "<group>"; };
-		87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGContext+setStrokeColor.swift"; sourceTree = "<group>"; };
-		87DEFE6628274C3D00949265 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
-		87DEFE6828274C3D00949265 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
-		87E2DE10282C47CE00967CFE /* Settings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		87E7ED79282C51E70079BED8 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
-		87EE53E81D57CE9F005B8FB3 /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
-		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
-		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
-		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,211 +144,203 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		8733CC67281B453B000D053D /* Gallery */ = {
+		8703D779282D9B2A00258CEE /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8733CC68281B4554000D053D /* GalleryViewController.swift */,
-				8733CC6A281B5858000D053D /* DrawingCell.swift */,
+				8703D77A282D9B2A00258CEE /* Storyboards */,
+				8703D77F282D9B2A00258CEE /* Delagate */,
+				8703D781282D9B2A00258CEE /* Libraries */,
+				8703D78B282D9B2A00258CEE /* Extensions */,
+				8703D793282D9B2A00258CEE /* API */,
+				8703D79A282D9B2A00258CEE /* Modules */,
 			);
-			name = Gallery;
+			path = Source;
 			sourceTree = "<group>";
 		};
-		8733CC6C281C4859000D053D /* API */ = {
+		8703D77A282D9B2A00258CEE /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2F71CEE229C00E3D528 /* Theme.swift */,
-				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
-				8733CC71281C4E22000D053D /* Drawing.swift */,
-				87DEFE3B2822B24D00949265 /* DrawingService.swift */,
-				87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */,
-				87DEFE412825873600949265 /* Haptic.swift */,
+				8703D77B282D9B2A00258CEE /* Gallery.storyboard */,
+				8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */,
+				8703D77D282D9B2A00258CEE /* Settings.storyboard */,
+				8703D77E282D9B2A00258CEE /* Drawing.storyboard */,
 			);
-			name = API;
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8703D77F282D9B2A00258CEE /* Delagate */ = {
+			isa = PBXGroup;
+			children = (
+				8703D780282D9B2A00258CEE /* AppDelegate.swift */,
+			);
+			path = Delagate;
+			sourceTree = "<group>";
+		};
+		8703D781282D9B2A00258CEE /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				8703D782282D9B2A00258CEE /* Toast */,
+				8703D784282D9B2A00258CEE /* ColorPicker */,
+				8703D787282D9B2A00258CEE /* PaintBucket */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		8703D782282D9B2A00258CEE /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				8703D783282D9B2A00258CEE /* ToastSwift.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
+		8703D784282D9B2A00258CEE /* ColorPicker */ = {
+			isa = PBXGroup;
+			children = (
+				8703D785282D9B2A00258CEE /* UIImage_UIImageColorPicker.m */,
+				8703D786282D9B2A00258CEE /* Color-Picker-Bridging-Header.h */,
+			);
+			path = ColorPicker;
+			sourceTree = "<group>";
+		};
+		8703D787282D9B2A00258CEE /* PaintBucket */ = {
+			isa = PBXGroup;
+			children = (
+				8703D788282D9B2A00258CEE /* UIImage+PaintBucket.swift */,
+				8703D789282D9B2A00258CEE /* ImageBuffer.swift */,
+				8703D78A282D9B2A00258CEE /* Pixel.swift */,
+			);
+			path = PaintBucket;
+			sourceTree = "<group>";
+		};
+		8703D78B282D9B2A00258CEE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8703D78C282D9B2A00258CEE /* CGPoint+distanceSquared.swift */,
+				8703D78D282D9B2A00258CEE /* CGContext+setStrokeColor.swift */,
+				8703D78E282D9B2A00258CEE /* UIImageExtensions.swift */,
+				8703D78F282D9B2A00258CEE /* UINavigationBar.swift */,
+				8703D790282D9B2A00258CEE /* UIAlertControllerStyle.swift */,
+				8703D791282D9B2A00258CEE /* UIView+heightWidth.swift */,
+				8703D792282D9B2A00258CEE /* UIColorExtensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8703D793282D9B2A00258CEE /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */,
+				8703D795282D9B2A00258CEE /* DrawingService.swift */,
+				8703D796282D9B2A00258CEE /* Drawing.swift */,
+				8703D797282D9B2A00258CEE /* Theme.swift */,
+				8703D798282D9B2A00258CEE /* Haptic.swift */,
+				8703D799282D9B2A00258CEE /* Prefs.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8703D79A282D9B2A00258CEE /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				8703D79B282D9B2A00258CEE /* Settings */,
+				8703D79D282D9B2A00258CEE /* Drawing */,
+				8703D7AE282D9B2A00258CEE /* Gallery */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		8703D79B282D9B2A00258CEE /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				8703D79C282D9B2A00258CEE /* SettingsViewController.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		8703D79D282D9B2A00258CEE /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				8703D79E282D9B2A00258CEE /* DrawingViewController.swift */,
+				8703D79F282D9B2A00258CEE /* Views */,
+				8703D7A5282D9B2A00258CEE /* Strokes */,
+			);
+			path = Drawing;
+			sourceTree = "<group>";
+		};
+		8703D79F282D9B2A00258CEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				8703D7A0282D9B2A00258CEE /* CanvasView.swift */,
+				8703D7A1282D9B2A00258CEE /* BrushSizeSlider.swift */,
+				8703D7A2282D9B2A00258CEE /* ColorButton.swift */,
+				8703D7A3282D9B2A00258CEE /* ToolbarButton.swift */,
+				8703D7A4282D9B2A00258CEE /* ColorKeyboardView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		8703D7A5282D9B2A00258CEE /* Strokes */ = {
+			isa = PBXGroup;
+			children = (
+				8703D7A6282D9B2A00258CEE /* DrawingStroke.swift */,
+				8703D7A7282D9B2A00258CEE /* OvalStroke.swift */,
+				8703D7A8282D9B2A00258CEE /* ColorDropperStroke.swift */,
+				8703D7A9282D9B2A00258CEE /* AimModeStroke.swift */,
+				8703D7AA282D9B2A00258CEE /* PaintBucketStroke.swift */,
+				8703D7AB282D9B2A00258CEE /* CurveStroke.swift */,
+				8703D7AC282D9B2A00258CEE /* StraightLineStroke.swift */,
+				8703D7AD282D9B2A00258CEE /* DefaultStroke.swift */,
+			);
+			path = Strokes;
+			sourceTree = "<group>";
+		};
+		8703D7AE282D9B2A00258CEE /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				8703D7AF282D9B2A00258CEE /* DrawingCell.swift */,
+				8703D7B0282D9B2A00258CEE /* GalleryViewController.swift */,
+			);
+			path = Gallery;
 			sourceTree = "<group>";
 		};
 		873AFA041CED7697006FD34A = {
 			isa = PBXGroup;
 			children = (
-				873AFA0F1CED7697006FD34A /* Colorue */,
+				87B4C7E0282D95FC00F1309A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
-				87B4C7CB282D8B8600F1309A /* Colorue.app */,
-			);
-			sourceTree = "<group>";
-		};
-		873AFA0F1CED7697006FD34A /* Colorue */ = {
-			isa = PBXGroup;
-			children = (
-				878F02B41DA1AEAB0097DB5C /* Source */,
-				8786D6341D56B16700AD3362 /* Media */,
-				8763D31F1CEE247F00E3D528 /* Supporting Files */,
-			);
-			name = Colorue;
-			path = MorphuApp;
-			sourceTree = "<group>";
-		};
-		8746362D1D56E636000BD73E /* ColorPicker */ = {
-			isa = PBXGroup;
-			children = (
-				8746362E1D56E6B3000BD73E /* Color-Picker-Bridging-Header.h */,
-				87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */,
-			);
-			name = ColorPicker;
-			sourceTree = "<group>";
-		};
-		8763D3171CEE242100E3D528 /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				87E7ED78282C51D70079BED8 /* Settings */,
-				8733CC67281B453B000D053D /* Gallery */,
-				8786D6211D56AEAD00AD3362 /* Drawing */,
-			);
-			name = Modules;
-			sourceTree = "<group>";
-		};
-		8763D31F1CEE247F00E3D528 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
+				8703D7DC282D9C1D00258CEE /* README.md */,
+				8703D7DE282D9C2A00258CEE /* LICENSE */,
+				8703D7E0282D9C3C00258CEE /* CODE_OF_CONDUCT.md */,
 				8733CC70281C4A55000D053D /* .gitignore */,
-				874D18FF1D973E7D00534AEA /* Colorue.entitlements */,
-				873AFA1C1CED7697006FD34A /* Info.plist */,
+				8703D7E4282D9EAD00258CEE /* Colorue.app */,
 			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		8786D6211D56AEAD00AD3362 /* Drawing */ = {
+		87B4C7E0282D95FC00F1309A /* Colorue */ = {
 			isa = PBXGroup;
 			children = (
-				87DEFE492825C74F00949265 /* Strokes */,
-				87EE53E71D57CD58005B8FB3 /* Views */,
-				8763D2C61CEE226700E3D528 /* DrawingViewController.swift */,
+				8703D779282D9B2A00258CEE /* Source */,
+				87B4C7E1282D989C00F1309A /* Media */,
+				8703D7DB282D9B8000258CEE /* Colorue.entitlements */,
+				8703D777282D9AD400258CEE /* Info.plist */,
 			);
-			name = Drawing;
+			path = Colorue;
 			sourceTree = "<group>";
 		};
-		8786D6331D56B11A00AD3362 /* Delagate */ = {
+		87B4C7E1282D989C00F1309A /* Media */ = {
 			isa = PBXGroup;
 			children = (
-				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
+				8703D7D9282D9B5200258CEE /* Assets.xcassets */,
+				8703D7E2282D9C8A00258CEE /* R.generated.swift */,
 			);
-			name = Delagate;
-			sourceTree = "<group>";
-		};
-		8786D6341D56B16700AD3362 /* Media */ = {
-			isa = PBXGroup;
-			children = (
-				8733CC63281A4BAE000D053D /* R.generated.swift */,
-				8763D3141CEE22D300E3D528 /* Assets.xcassets */,
-			);
-			name = Media;
-			sourceTree = "<group>";
-		};
-		8786D6351D56B19300AD3362 /* Storyboards */ = {
-			isa = PBXGroup;
-			children = (
-				8786D65E1D56DC3900AD3362 /* Drawing.storyboard */,
-				8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */,
-				8733CC65281B42BD000D053D /* Gallery.storyboard */,
-				87E2DE10282C47CE00967CFE /* Settings.storyboard */,
-			);
-			name = Storyboards;
-			sourceTree = "<group>";
-		};
-		878F02B31DA1AE860097DB5C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2F81CEE229C00E3D528 /* UIColorExtensions.swift */,
-				8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */,
-				87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */,
-				87DEFE392821F5ED00949265 /* UINavigationBar.swift */,
-				87DEFE562826D45D00949265 /* CGPoint+distanceSquared.swift */,
-				87DEFE592826E49800949265 /* UIView+heightWidth.swift */,
-				87DEFE5F2827054B00949265 /* CGContext+setStrokeColor.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
-		878F02B41DA1AEAB0097DB5C /* Source */ = {
-			isa = PBXGroup;
-			children = (
-				8733CC6C281C4859000D053D /* API */,
-				8786D6331D56B11A00AD3362 /* Delagate */,
-				8763D3171CEE242100E3D528 /* Modules */,
-				878F02B31DA1AE860097DB5C /* Extensions */,
-				878F02B51DA1AEE30097DB5C /* Libraries */,
-				8786D6351D56B19300AD3362 /* Storyboards */,
-			);
-			name = Source;
-			sourceTree = "<group>";
-		};
-		878F02B51DA1AEE30097DB5C /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				87B4C7CC282D916A00F1309A /* Toast */,
-				87EF7E711D447BF9001089D2 /* PaintBucket */,
-				8746362D1D56E636000BD73E /* ColorPicker */,
-			);
-			name = Libraries;
-			sourceTree = "<group>";
-		};
-		87B4C7CC282D916A00F1309A /* Toast */ = {
-			isa = PBXGroup;
-			children = (
-				87B4C7CD282D917A00F1309A /* ToastSwift.swift */,
-			);
-			name = Toast;
-			sourceTree = "<group>";
-		};
-		87DEFE492825C74F00949265 /* Strokes */ = {
-			isa = PBXGroup;
-			children = (
-				87DEFE4A2825C76000949265 /* DrawingStroke.swift */,
-				87DEFE522825CAC800949265 /* DefaultStroke.swift */,
-				87DEFE4C2825CA2700949265 /* PaintBucketStroke.swift */,
-				87DEFE4E2825CA4F00949265 /* AimModeStroke.swift */,
-				87DEFE502825CAA900949265 /* ColorDropperStroke.swift */,
-				87DEFE542826102E00949265 /* StraightLineStroke.swift */,
-				87DEFE5B2826EA0000949265 /* CurveStroke.swift */,
-				87DEFE5D2826F65100949265 /* OvalStroke.swift */,
-			);
-			name = Strokes;
-			sourceTree = "<group>";
-		};
-		87E7ED78282C51D70079BED8 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				87E7ED79282C51E70079BED8 /* SettingsViewController.swift */,
-			);
-			name = Settings;
-			sourceTree = "<group>";
-		};
-		87EE53E71D57CD58005B8FB3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				8763D2E01CEE229C00E3D528 /* CanvasView.swift */,
-				8763D2E11CEE229C00E3D528 /* ColorKeyboardView.swift */,
-				87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */,
-				87DEFE452825921200949265 /* ToolbarButton.swift */,
-				87DEFE47282593EA00949265 /* ColorButton.swift */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
-		87EF7E711D447BF9001089D2 /* PaintBucket */ = {
-			isa = PBXGroup;
-			children = (
-				87EF7E721D447C15001089D2 /* ImageBuffer.swift */,
-				87EF7E741D447C3E001089D2 /* Pixel.swift */,
-				87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */,
-			);
-			name = PaintBucket;
+			path = Media;
 			sourceTree = "<group>";
 		};
 		DE439F15BD0892DF68EBA465 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				87DEFE6628274C3D00949265 /* WidgetKit.framework */,
-				87DEFE6828274C3D00949265 /* SwiftUI.framework */,
 				0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */,
 			);
 			name = Frameworks;
@@ -374,7 +367,7 @@
 			);
 			name = Colorue;
 			productName = MorphuApp;
-			productReference = 87B4C7CB282D8B8600F1309A /* Colorue.app */;
+			productReference = 8703D7E4282D9EAD00258CEE /* Colorue.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -403,10 +396,9 @@
 			};
 			buildConfigurationList = 873AFA081CED7697006FD34A /* Build configuration list for PBXProject "Colorue" */;
 			compatibilityVersion = "Xcode 13.0";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -425,11 +417,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8733CC66281B42BD000D053D /* Gallery.storyboard in Resources */,
-				8786D65F1D56DC3900AD3362 /* Drawing.storyboard in Resources */,
-				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
-				87E2DE11282C47CE00967CFE /* Settings.storyboard in Resources */,
-				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
+				8703D7B1282D9B2A00258CEE /* Gallery.storyboard in Resources */,
+				8703D7B2282D9B2A00258CEE /* Launch Screen.storyboard in Resources */,
+				8703D7B4282D9B2A00258CEE /* Drawing.storyboard in Resources */,
+				8703D7DA282D9B5300258CEE /* Assets.xcassets in Resources */,
+				8703D7B3282D9B2A00258CEE /* Settings.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -489,7 +481,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n\n";
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/Colorue/Media/R.generated.swift\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -498,43 +490,43 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */,
-				87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */,
-				87DEFE4B2825C76000949265 /* DrawingStroke.swift in Sources */,
-				8763D2D61CEE226700E3D528 /* DrawingViewController.swift in Sources */,
-				87EE53E91D57CE9F005B8FB3 /* Prefs.swift in Sources */,
-				87DEFE552826102E00949265 /* StraightLineStroke.swift in Sources */,
-				87DEFE382821F5D000949265 /* UIAlertControllerStyle.swift in Sources */,
-				87DEFE462825921200949265 /* ToolbarButton.swift in Sources */,
-				87DEFE422825873600949265 /* Haptic.swift in Sources */,
-				87DEFE512825CAA900949265 /* ColorDropperStroke.swift in Sources */,
-				8763D2BB1CEE220200E3D528 /* AppDelegate.swift in Sources */,
-				87F14922281C653500FB389E /* Drawing.swift in Sources */,
-				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
-				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
-				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
-				87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */,
-				87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */,
-				8733CC69281B4554000D053D /* GalleryViewController.swift in Sources */,
-				8763D3111CEE229C00E3D528 /* Theme.swift in Sources */,
-				87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */,
-				87DEFE48282593EA00949265 /* ColorButton.swift in Sources */,
-				87B4C7CE282D917A00F1309A /* ToastSwift.swift in Sources */,
-				8763D3131CEE229C00E3D528 /* UIImageExtensions.swift in Sources */,
-				87DEFE572826D45D00949265 /* CGPoint+distanceSquared.swift in Sources */,
-				87DEFE602827054B00949265 /* CGContext+setStrokeColor.swift in Sources */,
-				87E7ED7A282C51E70079BED8 /* SettingsViewController.swift in Sources */,
-				87DEFE5E2826F65100949265 /* OvalStroke.swift in Sources */,
-				87BB3C541D04B88D00662BA1 /* UIImage_UIImageColorPicker.m in Sources */,
-				8763D2FB1CEE229C00E3D528 /* ColorKeyboardView.swift in Sources */,
-				87DEFE4F2825CA4F00949265 /* AimModeStroke.swift in Sources */,
-				87DEFE4D2825CA2700949265 /* PaintBucketStroke.swift in Sources */,
-				87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */,
-				87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */,
-				8733CC6B281B5858000D053D /* DrawingCell.swift in Sources */,
-				87DEFE5C2826EA0000949265 /* CurveStroke.swift in Sources */,
-				87DEFE5A2826E49800949265 /* UIView+heightWidth.swift in Sources */,
-				8763D3121CEE229C00E3D528 /* UIColorExtensions.swift in Sources */,
+				8703D7CF282D9B2A00258CEE /* DrawingStroke.swift in Sources */,
+				8703D7C7282D9B2A00258CEE /* Prefs.swift in Sources */,
+				8703D7CB282D9B2A00258CEE /* BrushSizeSlider.swift in Sources */,
+				8703D7BD282D9B2A00258CEE /* UIImageExtensions.swift in Sources */,
+				8703D7B5282D9B2A00258CEE /* AppDelegate.swift in Sources */,
+				8703D7D6282D9B2A00258CEE /* DefaultStroke.swift in Sources */,
+				8703D7C8282D9B2A00258CEE /* SettingsViewController.swift in Sources */,
+				8703D7C1282D9B2A00258CEE /* UIColorExtensions.swift in Sources */,
+				8703D7B9282D9B2A00258CEE /* ImageBuffer.swift in Sources */,
+				8703D7D1282D9B2A00258CEE /* ColorDropperStroke.swift in Sources */,
+				8703D7E3282D9C8A00258CEE /* R.generated.swift in Sources */,
+				8703D7D4282D9B2A00258CEE /* CurveStroke.swift in Sources */,
+				8703D7C4282D9B2A00258CEE /* Drawing.swift in Sources */,
+				8703D7B7282D9B2A00258CEE /* UIImage_UIImageColorPicker.m in Sources */,
+				8703D7D7282D9B2A00258CEE /* DrawingCell.swift in Sources */,
+				8703D7CA282D9B2A00258CEE /* CanvasView.swift in Sources */,
+				8703D7C0282D9B2A00258CEE /* UIView+heightWidth.swift in Sources */,
+				8703D7BB282D9B2A00258CEE /* CGPoint+distanceSquared.swift in Sources */,
+				8703D7D2282D9B2A00258CEE /* AimModeStroke.swift in Sources */,
+				8703D7C9282D9B2A00258CEE /* DrawingViewController.swift in Sources */,
+				8703D7CE282D9B2A00258CEE /* ColorKeyboardView.swift in Sources */,
+				8703D7B8282D9B2A00258CEE /* UIImage+PaintBucket.swift in Sources */,
+				8703D7BA282D9B2A00258CEE /* Pixel.swift in Sources */,
+				8703D7D0282D9B2A00258CEE /* OvalStroke.swift in Sources */,
+				8703D7CC282D9B2A00258CEE /* ColorButton.swift in Sources */,
+				8703D7D3282D9B2A00258CEE /* PaintBucketStroke.swift in Sources */,
+				8703D7BC282D9B2A00258CEE /* CGContext+setStrokeColor.swift in Sources */,
+				8703D7BF282D9B2A00258CEE /* UIAlertControllerStyle.swift in Sources */,
+				8703D7C6282D9B2A00258CEE /* Haptic.swift in Sources */,
+				8703D7C3282D9B2A00258CEE /* DrawingService.swift in Sources */,
+				8703D7C2282D9B2A00258CEE /* AppStoreReviewManager.swift in Sources */,
+				8703D7CD282D9B2A00258CEE /* ToolbarButton.swift in Sources */,
+				8703D7B6282D9B2A00258CEE /* ToastSwift.swift in Sources */,
+				8703D7D5282D9B2A00258CEE /* StraightLineStroke.swift in Sources */,
+				8703D7D8282D9B2A00258CEE /* GalleryViewController.swift in Sources */,
+				8703D7BE282D9B2A00258CEE /* UINavigationBar.swift in Sources */,
+				8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -669,7 +661,7 @@
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
-				INFOPLIST_FILE = MorphuApp/Info.plist;
+				INFOPLIST_FILE = Colorue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -680,7 +672,7 @@
 				PRODUCT_MODULE_NAME = Colorue;
 				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Color-Picker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Colorue/Source/Libraries/ColorPicker/Color-Picker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -702,7 +694,7 @@
 				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
-				INFOPLIST_FILE = MorphuApp/Info.plist;
+				INFOPLIST_FILE = Colorue/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -714,7 +706,7 @@
 				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Color-Picker-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Colorue/Source/Libraries/ColorPicker/Color-Picker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
