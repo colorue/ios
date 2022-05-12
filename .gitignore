@@ -1,2 +1,5 @@
 Pods/*
-*/xcuserdata/*
+*xcworkspace/xcuserdata/*
+
+
+git rm --cached Colorue.xcworkspace/xcuserdata/DylanWight.xcuserdatad/UserInterfaceState.xcuserstate
