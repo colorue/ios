@@ -141,7 +141,7 @@ struct R: Rswift.Validatable {
   #endif
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 5 storyboards.
   struct storyboard {
     /// Storyboard `About`.
     static let about = _R.storyboard.about()
@@ -151,6 +151,8 @@ struct R: Rswift.Validatable {
     static let gallery = _R.storyboard.gallery()
     /// Storyboard `Launch Screen`.
     static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `Onboarding`.
+    static let onboarding = _R.storyboard.onboarding()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "About", bundle: ...)`
@@ -177,6 +179,13 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Launch Screen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Onboarding", bundle: ...)`
+    static func onboarding(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.onboarding)
     }
     #endif
 
@@ -314,6 +323,9 @@ struct _R: Rswift.Validatable {
       #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
+      #if os(iOS) || os(tvOS)
+      try onboarding.validate()
+      #endif
     }
 
     #if os(iOS) || os(tvOS)
@@ -375,6 +387,25 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if UIKit.UIImage(named: "Colorue Logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Colorue Logo' is used in storyboard 'Launch Screen', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct onboarding: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = OnboardingViewController
+
+      let bundle = R.hostingBundle
+      let name = "Onboarding"
+
+      static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "hand.tap") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'hand.tap' is used in storyboard 'Onboarding', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "paintbrush") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'paintbrush' is used in storyboard 'Onboarding', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "viewfinder") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'viewfinder' is used in storyboard 'Onboarding', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }

@@ -146,7 +146,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
       })
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-      color = Theme.colors[Int(arc4random_uniform(8) + 1)]
+      color = Theme.purple
       opacity = 1.0
     }
   }

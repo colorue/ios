@@ -55,7 +55,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   //MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     becomeFirstResponder() // To get shake gesture
 
@@ -194,6 +194,13 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     } else {
       postButton.target = self
       postButton.action = #selector(DrawingViewController.shareDrawing)
+    }
+
+
+
+    if let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController() {
+      onboardingViewController.type = .welcome
+      navigationController?.present(onboardingViewController, animated: true)
     }
   }
 
@@ -458,6 +465,8 @@ extension DrawingViewController: CanvasDelegate {
   func getKeyboardTool() -> ToolbarButton? {
     return self.colorKeyboard?.tool
   }
+
+  @IBAction func unwind(segue: UIStoryboardSegue) {}
 }
 
 // MARK: -  UIImagePickerControllerDelegate

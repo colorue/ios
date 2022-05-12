@@ -50,6 +50,9 @@
 		8703D7D8282D9B2A00258CEE /* GalleryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7B0282D9B2A00258CEE /* GalleryViewController.swift */; };
 		8703D7DA282D9B5300258CEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8703D7D9282D9B5200258CEE /* Assets.xcassets */; };
 		8703D7E3282D9C8A00258CEE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7E2282D9C8A00258CEE /* R.generated.swift */; };
+		87263436282DB0280052B4C5 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87263435282DB0280052B4C5 /* Onboarding.storyboard */; };
+		87263439282DB9C10052B4C5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87263438282DB9C10052B4C5 /* OnboardingViewController.swift */; };
+		8726343B282DC43F0052B4C5 /* OnboardingItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8726343A282DC43F0052B4C5 /* OnboardingItemView.swift */; };
 		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
@@ -119,6 +122,9 @@
 		8703D7E0282D9C3C00258CEE /* CODE_OF_CONDUCT.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CODE_OF_CONDUCT.md; sourceTree = "<group>"; };
 		8703D7E2282D9C8A00258CEE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		8703D7E4282D9EAD00258CEE /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87263435282DB0280052B4C5 /* Onboarding.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
+		87263438282DB9C10052B4C5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
+		8726343A282DC43F0052B4C5 /* OnboardingItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingItemView.swift; sourceTree = "<group>"; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -164,6 +170,7 @@
 				8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */,
 				8703D77D282D9B2A00258CEE /* About.storyboard */,
 				8703D77E282D9B2A00258CEE /* Drawing.storyboard */,
+				87263435282DB0280052B4C5 /* Onboarding.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -243,6 +250,7 @@
 		8703D79A282D9B2A00258CEE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				87263437282DB9AC0052B4C5 /* Onboarding */,
 				8703D79B282D9B2A00258CEE /* About */,
 				8703D79D282D9B2A00258CEE /* Drawing */,
 				8703D7AE282D9B2A00258CEE /* Gallery */,
@@ -302,6 +310,15 @@
 				8703D7B0282D9B2A00258CEE /* GalleryViewController.swift */,
 			);
 			path = Gallery;
+			sourceTree = "<group>";
+		};
+		87263437282DB9AC0052B4C5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				87263438282DB9C10052B4C5 /* OnboardingViewController.swift */,
+				8726343A282DC43F0052B4C5 /* OnboardingItemView.swift */,
+			);
+			path = Onboarding;
 			sourceTree = "<group>";
 		};
 		873AFA041CED7697006FD34A = {
@@ -420,6 +437,7 @@
 				8703D7B1282D9B2A00258CEE /* Gallery.storyboard in Resources */,
 				8703D7B2282D9B2A00258CEE /* Launch Screen.storyboard in Resources */,
 				8703D7B4282D9B2A00258CEE /* Drawing.storyboard in Resources */,
+				87263436282DB0280052B4C5 /* Onboarding.storyboard in Resources */,
 				8703D7DA282D9B5300258CEE /* Assets.xcassets in Resources */,
 				8703D7B3282D9B2A00258CEE /* About.storyboard in Resources */,
 			);
@@ -502,6 +520,7 @@
 				8703D7D1282D9B2A00258CEE /* ColorDropperStroke.swift in Sources */,
 				8703D7E3282D9C8A00258CEE /* R.generated.swift in Sources */,
 				8703D7D4282D9B2A00258CEE /* CurveStroke.swift in Sources */,
+				8726343B282DC43F0052B4C5 /* OnboardingItemView.swift in Sources */,
 				8703D7C4282D9B2A00258CEE /* Drawing.swift in Sources */,
 				8703D7B7282D9B2A00258CEE /* UIImage_UIImageColorPicker.m in Sources */,
 				8703D7D7282D9B2A00258CEE /* DrawingCell.swift in Sources */,
@@ -513,6 +532,7 @@
 				8703D7CE282D9B2A00258CEE /* ColorKeyboardView.swift in Sources */,
 				8703D7B8282D9B2A00258CEE /* UIImage+PaintBucket.swift in Sources */,
 				8703D7BA282D9B2A00258CEE /* Pixel.swift in Sources */,
+				87263439282DB9C10052B4C5 /* OnboardingViewController.swift in Sources */,
 				8703D7D0282D9B2A00258CEE /* OvalStroke.swift in Sources */,
 				8703D7CC282D9B2A00258CEE /* ColorButton.swift in Sources */,
 				8703D7D3282D9B2A00258CEE /* PaintBucketStroke.swift in Sources */,
