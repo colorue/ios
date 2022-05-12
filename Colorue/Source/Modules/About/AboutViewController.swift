@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class SettingsViewController: UITableViewController {
+final class AboutViewController: UITableViewController {
 
   @IBOutlet weak var snapSwitch: UISwitch?
 

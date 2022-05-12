@@ -10,7 +10,7 @@
 		6B077558B878CCB9876E93D9 /* Pods_Colorue.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */; };
 		8703D7B1282D9B2A00258CEE /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77B282D9B2A00258CEE /* Gallery.storyboard */; };
 		8703D7B2282D9B2A00258CEE /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */; };
-		8703D7B3282D9B2A00258CEE /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77D282D9B2A00258CEE /* Settings.storyboard */; };
+		8703D7B3282D9B2A00258CEE /* About.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77D282D9B2A00258CEE /* About.storyboard */; };
 		8703D7B4282D9B2A00258CEE /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8703D77E282D9B2A00258CEE /* Drawing.storyboard */; };
 		8703D7B5282D9B2A00258CEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D780282D9B2A00258CEE /* AppDelegate.swift */; };
 		8703D7B6282D9B2A00258CEE /* ToastSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D783282D9B2A00258CEE /* ToastSwift.swift */; };
@@ -31,7 +31,7 @@
 		8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D797282D9B2A00258CEE /* Theme.swift */; };
 		8703D7C6282D9B2A00258CEE /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D798282D9B2A00258CEE /* Haptic.swift */; };
 		8703D7C7282D9B2A00258CEE /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D799282D9B2A00258CEE /* Prefs.swift */; };
-		8703D7C8282D9B2A00258CEE /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79C282D9B2A00258CEE /* SettingsViewController.swift */; };
+		8703D7C8282D9B2A00258CEE /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79C282D9B2A00258CEE /* AboutViewController.swift */; };
 		8703D7C9282D9B2A00258CEE /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79E282D9B2A00258CEE /* DrawingViewController.swift */; };
 		8703D7CA282D9B2A00258CEE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A0282D9B2A00258CEE /* CanvasView.swift */; };
 		8703D7CB282D9B2A00258CEE /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A1282D9B2A00258CEE /* BrushSizeSlider.swift */; };
@@ -73,7 +73,7 @@
 		8703D777282D9AD400258CEE /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8703D77B282D9B2A00258CEE /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		8703D77D282D9B2A00258CEE /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		8703D77D282D9B2A00258CEE /* About.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = About.storyboard; sourceTree = "<group>"; };
 		8703D77E282D9B2A00258CEE /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
 		8703D780282D9B2A00258CEE /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8703D783282D9B2A00258CEE /* ToastSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToastSwift.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 		8703D797282D9B2A00258CEE /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8703D798282D9B2A00258CEE /* Haptic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		8703D799282D9B2A00258CEE /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
-		8703D79C282D9B2A00258CEE /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		8703D79C282D9B2A00258CEE /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8703D79E282D9B2A00258CEE /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		8703D7A0282D9B2A00258CEE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
 		8703D7A1282D9B2A00258CEE /* BrushSizeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
@@ -147,12 +147,12 @@
 		8703D779282D9B2A00258CEE /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				8703D77A282D9B2A00258CEE /* Storyboards */,
-				8703D77F282D9B2A00258CEE /* Delagate */,
-				8703D781282D9B2A00258CEE /* Libraries */,
-				8703D78B282D9B2A00258CEE /* Extensions */,
+				8703D77F282D9B2A00258CEE /* Delegate */,
 				8703D793282D9B2A00258CEE /* API */,
 				8703D79A282D9B2A00258CEE /* Modules */,
+				8703D781282D9B2A00258CEE /* Libraries */,
+				8703D78B282D9B2A00258CEE /* Extensions */,
+				8703D77A282D9B2A00258CEE /* Storyboards */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -162,18 +162,18 @@
 			children = (
 				8703D77B282D9B2A00258CEE /* Gallery.storyboard */,
 				8703D77C282D9B2A00258CEE /* Launch Screen.storyboard */,
-				8703D77D282D9B2A00258CEE /* Settings.storyboard */,
+				8703D77D282D9B2A00258CEE /* About.storyboard */,
 				8703D77E282D9B2A00258CEE /* Drawing.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
 		};
-		8703D77F282D9B2A00258CEE /* Delagate */ = {
+		8703D77F282D9B2A00258CEE /* Delegate */ = {
 			isa = PBXGroup;
 			children = (
 				8703D780282D9B2A00258CEE /* AppDelegate.swift */,
 			);
-			path = Delagate;
+			path = Delegate;
 			sourceTree = "<group>";
 		};
 		8703D781282D9B2A00258CEE /* Libraries */ = {
@@ -243,19 +243,19 @@
 		8703D79A282D9B2A00258CEE /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				8703D79B282D9B2A00258CEE /* Settings */,
+				8703D79B282D9B2A00258CEE /* About */,
 				8703D79D282D9B2A00258CEE /* Drawing */,
 				8703D7AE282D9B2A00258CEE /* Gallery */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
 		};
-		8703D79B282D9B2A00258CEE /* Settings */ = {
+		8703D79B282D9B2A00258CEE /* About */ = {
 			isa = PBXGroup;
 			children = (
-				8703D79C282D9B2A00258CEE /* SettingsViewController.swift */,
+				8703D79C282D9B2A00258CEE /* AboutViewController.swift */,
 			);
-			path = Settings;
+			path = About;
 			sourceTree = "<group>";
 		};
 		8703D79D282D9B2A00258CEE /* Drawing */ = {
@@ -421,7 +421,7 @@
 				8703D7B2282D9B2A00258CEE /* Launch Screen.storyboard in Resources */,
 				8703D7B4282D9B2A00258CEE /* Drawing.storyboard in Resources */,
 				8703D7DA282D9B5300258CEE /* Assets.xcassets in Resources */,
-				8703D7B3282D9B2A00258CEE /* Settings.storyboard in Resources */,
+				8703D7B3282D9B2A00258CEE /* About.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,7 +496,7 @@
 				8703D7BD282D9B2A00258CEE /* UIImageExtensions.swift in Sources */,
 				8703D7B5282D9B2A00258CEE /* AppDelegate.swift in Sources */,
 				8703D7D6282D9B2A00258CEE /* DefaultStroke.swift in Sources */,
-				8703D7C8282D9B2A00258CEE /* SettingsViewController.swift in Sources */,
+				8703D7C8282D9B2A00258CEE /* AboutViewController.swift in Sources */,
 				8703D7C1282D9B2A00258CEE /* UIColorExtensions.swift in Sources */,
 				8703D7B9282D9B2A00258CEE /* ImageBuffer.swift in Sources */,
 				8703D7D1282D9B2A00258CEE /* ColorDropperStroke.swift in Sources */,

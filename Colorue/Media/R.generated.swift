@@ -143,14 +143,21 @@ struct R: Rswift.Validatable {
   #if os(iOS) || os(tvOS)
   /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
+    /// Storyboard `About`.
+    static let about = _R.storyboard.about()
     /// Storyboard `Drawing`.
     static let drawing = _R.storyboard.drawing()
     /// Storyboard `Gallery`.
     static let gallery = _R.storyboard.gallery()
     /// Storyboard `Launch Screen`.
     static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Settings`.
-    static let settings = _R.storyboard.settings()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "About", bundle: ...)`
+    static func about(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.about)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Drawing", bundle: ...)`
@@ -170,13 +177,6 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "Launch Screen", bundle: ...)`
     static func launchScreen(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.launchScreen)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Settings", bundle: ...)`
-    static func settings(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.settings)
     }
     #endif
 
@@ -303,6 +303,9 @@ struct _R: Rswift.Validatable {
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
+      try about.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try drawing.validate()
       #endif
       #if os(iOS) || os(tvOS)
@@ -311,10 +314,23 @@ struct _R: Rswift.Validatable {
       #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
-      #if os(iOS) || os(tvOS)
-      try settings.validate()
-      #endif
     }
+
+    #if os(iOS) || os(tvOS)
+    struct about: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+
+      let bundle = R.hostingBundle
+      let name = "About"
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     struct drawing: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -341,7 +357,7 @@ struct _R: Rswift.Validatable {
       let name = "Gallery"
 
       static func validate() throws {
-        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "person.circle") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'person.circle' is used in storyboard 'Gallery', but couldn't be loaded.") } }
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "info.circle") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'info.circle' is used in storyboard 'Gallery', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
@@ -359,22 +375,6 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if UIKit.UIImage(named: "Colorue Logo", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Colorue Logo' is used in storyboard 'Launch Screen', but couldn't be loaded.") }
-        if #available(iOS 11.0, tvOS 11.0, *) {
-        }
-      }
-
-      fileprivate init() {}
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    struct settings: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = UIKit.UINavigationController
-
-      let bundle = R.hostingBundle
-      let name = "Settings"
-
-      static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
