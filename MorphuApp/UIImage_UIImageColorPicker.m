@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Canvix-Bridging-Header.h"
+#import "Color-Picker-Bridging-Header.h"
 
 @implementation UIImage (Picker)
 - (nullable UIColor *)colorAtPosition:(CGPoint)position {

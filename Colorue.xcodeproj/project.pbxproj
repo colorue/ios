@@ -27,7 +27,6 @@
 		87DEFE3A2821F5ED00949265 /* UINavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE392821F5ED00949265 /* UINavigationBar.swift */; };
 		87DEFE3C2822B24D00949265 /* DrawingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3B2822B24D00949265 /* DrawingService.swift */; };
 		87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */; };
-		87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE3F28249A9100949265 /* SceneDelegate.swift */; };
 		87DEFE422825873600949265 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE412825873600949265 /* Haptic.swift */; };
 		87DEFE4428258EFB00949265 /* BrushSizeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */; };
 		87DEFE462825921200949265 /* ToolbarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87DEFE452825921200949265 /* ToolbarButton.swift */; };
@@ -49,7 +48,6 @@
 		87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E721D447C15001089D2 /* ImageBuffer.swift */; };
 		87EF7E751D447C3E001089D2 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E741D447C3E001089D2 /* Pixel.swift */; };
 		87EF7E771D447C5A001089D2 /* UIImage+PaintBucket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */; };
-		87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 87F14920281C574400FB389E /* GoogleService-Info.plist */; };
 		87F14922281C653500FB389E /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8733CC71281C4E22000D053D /* Drawing.swift */; };
 		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
@@ -69,20 +67,16 @@
 
 /* Begin PBXFileReference section */
 		00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.dev.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.dev.xcconfig"; sourceTree = "<group>"; };
-		063BEE6750A977D4E9A35FB7 /* Pods-ColorueWidgetExtension.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.dev.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.dev.xcconfig"; sourceTree = "<group>"; };
 		0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Colorue.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.prod.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.prod.xcconfig"; sourceTree = "<group>"; };
-		8487168CB5E1D450097EA754 /* Pods-ColorueWidgetExtension.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.prod.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.prod.xcconfig"; sourceTree = "<group>"; };
-		872E82E11D01296F005A56A3 /* Colorue α.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Colorue α.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8733CC63281A4BAE000D053D /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = SOURCE_ROOT; };
 		8733CC65281B42BD000D053D /* Gallery.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		8733CC68281B4554000D053D /* GalleryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryViewController.swift; sourceTree = "<group>"; };
 		8733CC6A281B5858000D053D /* DrawingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCell.swift; sourceTree = "<group>"; };
-		8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Colorue-da64083b8488.json"; sourceTree = SOURCE_ROOT; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
 		8733CC71281C4E22000D053D /* Drawing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = SOURCE_ROOT; };
 		873AFA1C1CED7697006FD34A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Canvix-Bridging-Header.h"; sourceTree = "<group>"; };
+		8746362E1D56E6B3000BD73E /* Color-Picker-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Color-Picker-Bridging-Header.h"; sourceTree = "<group>"; };
 		874D18FF1D973E7D00534AEA /* Colorue.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Colorue.entitlements; sourceTree = SOURCE_ROOT; };
 		8763D2BA1CEE220200E3D528 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8763D2BC1CEE221D00E3D528 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -94,12 +88,12 @@
 		8763D2F91CEE229C00E3D528 /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
 		8763D3141CEE22D300E3D528 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8786D65E1D56DC3900AD3362 /* Drawing.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
+		87B4C7CB282D8B8600F1309A /* Colorue.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Colorue.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIImage_UIImageColorPicker.m; sourceTree = "<group>"; };
 		87DEFE372821F5D000949265 /* UIAlertControllerStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIAlertControllerStyle.swift; sourceTree = "<group>"; };
 		87DEFE392821F5ED00949265 /* UINavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UINavigationBar.swift; sourceTree = "<group>"; };
 		87DEFE3B2822B24D00949265 /* DrawingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingService.swift; sourceTree = "<group>"; };
 		87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
-		87DEFE3F28249A9100949265 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		87DEFE412825873600949265 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		87DEFE4328258EFB00949265 /* BrushSizeSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrushSizeSlider.swift; sourceTree = "<group>"; };
 		87DEFE452825921200949265 /* ToolbarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarButton.swift; sourceTree = "<group>"; };
@@ -123,10 +117,6 @@
 		87EF7E721D447C15001089D2 /* ImageBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageBuffer.swift; sourceTree = "<group>"; };
 		87EF7E741D447C3E001089D2 /* Pixel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		87EF7E761D447C5A001089D2 /* UIImage+PaintBucket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+PaintBucket.swift"; sourceTree = "<group>"; };
-		87F14920281C574400FB389E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		949B1424181131409C789152 /* Pods_ColorueWidgetExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorueWidgetExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.debug.xcconfig"; sourceTree = "<group>"; };
-		E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Colorue.release.xcconfig"; path = "Pods/Target Support Files/Pods-Colorue/Pods-Colorue.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,12 +135,8 @@
 		6AA7B21F98929F59F5124881 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C1E9D337EE0314B9F108640A /* Pods-Colorue.debug.xcconfig */,
-				E8106296AB6A9F9FA282519A /* Pods-Colorue.release.xcconfig */,
 				00D466C34ED502D5492B3237 /* Pods-Colorue.dev.xcconfig */,
 				129B203450C285AF87CA4918 /* Pods-Colorue.prod.xcconfig */,
-				063BEE6750A977D4E9A35FB7 /* Pods-ColorueWidgetExtension.dev.xcconfig */,
-				8487168CB5E1D450097EA754 /* Pods-ColorueWidgetExtension.prod.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -181,7 +167,7 @@
 				873AFA0F1CED7697006FD34A /* Colorue */,
 				6AA7B21F98929F59F5124881 /* Pods */,
 				DE439F15BD0892DF68EBA465 /* Frameworks */,
-				872E82E11D01296F005A56A3 /* Colorue α.app */,
+				87B4C7CB282D8B8600F1309A /* Colorue.app */,
 			);
 			sourceTree = "<group>";
 		};
@@ -196,19 +182,21 @@
 			path = MorphuApp;
 			sourceTree = "<group>";
 		};
-		8746362D1D56E636000BD73E /* Objective-C */ = {
+		8746362D1D56E636000BD73E /* ColorPicker */ = {
 			isa = PBXGroup;
 			children = (
-				8746362E1D56E6B3000BD73E /* Canvix-Bridging-Header.h */,
+				8746362E1D56E6B3000BD73E /* Color-Picker-Bridging-Header.h */,
 				87BB3C531D04B5D500662BA1 /* UIImage_UIImageColorPicker.m */,
 			);
-			name = "Objective-C";
+			name = ColorPicker;
 			sourceTree = "<group>";
 		};
 		8763D3171CEE242100E3D528 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				8786D62D1D56AF8700AD3362 /* Main */,
+				87E7ED78282C51D70079BED8 /* Settings */,
+				8733CC67281B453B000D053D /* Gallery */,
+				8786D6211D56AEAD00AD3362 /* Drawing */,
 			);
 			name = Modules;
 			sourceTree = "<group>";
@@ -216,9 +204,7 @@
 		8763D31F1CEE247F00E3D528 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				87F14920281C574400FB389E /* GoogleService-Info.plist */,
 				8733CC70281C4A55000D053D /* .gitignore */,
-				8733CC6F281C49CC000D053D /* Colorue-da64083b8488.json */,
 				874D18FF1D973E7D00534AEA /* Colorue.entitlements */,
 				873AFA1C1CED7697006FD34A /* Info.plist */,
 			);
@@ -235,21 +221,10 @@
 			name = Drawing;
 			sourceTree = "<group>";
 		};
-		8786D62D1D56AF8700AD3362 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				87E7ED78282C51D70079BED8 /* Settings */,
-				8733CC67281B453B000D053D /* Gallery */,
-				8786D6211D56AEAD00AD3362 /* Drawing */,
-			);
-			name = Main;
-			sourceTree = "<group>";
-		};
 		8786D6331D56B11A00AD3362 /* Delagate */ = {
 			isa = PBXGroup;
 			children = (
 				8763D2BA1CEE220200E3D528 /* AppDelegate.swift */,
-				87DEFE3F28249A9100949265 /* SceneDelegate.swift */,
 			);
 			name = Delagate;
 			sourceTree = "<group>";
@@ -305,7 +280,7 @@
 			isa = PBXGroup;
 			children = (
 				87EF7E711D447BF9001089D2 /* PaintBucket */,
-				8746362D1D56E636000BD73E /* Objective-C */,
+				8746362D1D56E636000BD73E /* ColorPicker */,
 				8763D2F71CEE229C00E3D528 /* Theme.swift */,
 				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
 			);
@@ -362,7 +337,6 @@
 			children = (
 				87DEFE6628274C3D00949265 /* WidgetKit.framework */,
 				87DEFE6828274C3D00949265 /* SwiftUI.framework */,
-				949B1424181131409C789152 /* Pods_ColorueWidgetExtension.framework */,
 				0928D0593AA5BB4545B18F37 /* Pods_Colorue.framework */,
 			);
 			name = Frameworks;
@@ -389,7 +363,7 @@
 			);
 			name = Colorue;
 			productName = MorphuApp;
-			productReference = 872E82E11D01296F005A56A3 /* Colorue α.app */;
+			productReference = 87B4C7CB282D8B8600F1309A /* Colorue.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -445,7 +419,6 @@
 				8763D2BD1CEE221D00E3D528 /* Launch Screen.storyboard in Resources */,
 				87E2DE11282C47CE00967CFE /* Settings.storyboard in Resources */,
 				8763D3151CEE22D300E3D528 /* Assets.xcassets in Resources */,
-				87F14921281C574400FB389E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +501,6 @@
 				87F14922281C653500FB389E /* Drawing.swift in Sources */,
 				8763D2FA1CEE229C00E3D528 /* CanvasView.swift in Sources */,
 				8733CC64281A4BAF000D053D /* R.generated.swift in Sources */,
-				87DEFE4028249A9100949265 /* SceneDelegate.swift in Sources */,
 				87EF7E731D447C15001089D2 /* ImageBuffer.swift in Sources */,
 				87DEFE532825CAC800949265 /* DefaultStroke.swift in Sources */,
 				87DEFE3E2824853300949265 /* AppStoreReviewManager.swift in Sources */,
@@ -612,7 +584,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Dev;
 		};
@@ -665,7 +637,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = singlefile;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Prod;
@@ -682,7 +654,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = DEVELOPMENT;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -691,12 +663,12 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
-				PRODUCT_BUNDLE_IDENTIFIER = com.colorue.app.dev;
+				MARKETING_VERSION = 2.0.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.colorue.app;
 				PRODUCT_MODULE_NAME = Colorue;
-				PRODUCT_NAME = "Colorue α";
+				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Color-Picker-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -715,7 +687,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COLORUE_ENV = PRODUCTION;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = PFZQYGDT75;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = MorphuApp/Info.plist;
@@ -724,13 +696,13 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.colorue.app;
 				PRODUCT_MODULE_NAME = Colorue;
 				PRODUCT_NAME = Colorue;
 				PROVISIONING_PROFILE = "";
 				SWIFT_COMPILATION_MODE = singlefile;
-				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Canvix-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "MorphuApp/Color-Picker-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

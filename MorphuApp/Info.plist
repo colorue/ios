@@ -4,6 +4,8 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>Colorue</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -24,18 +26,11 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>colorue</string>
-				<string>fb1213218985375111</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>FacebookAppID</key>
-	<string>1213218985375111</string>
-	<key>FacebookDisplayName</key>
-	<string>Colorue</string>
-	<key>FirebaseAppDelegateProxyEnabled</key>
-	<string>NO</string>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

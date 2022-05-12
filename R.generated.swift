@@ -141,7 +141,7 @@ struct R: Rswift.Validatable {
   #endif
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 4 storyboards.
   struct storyboard {
     /// Storyboard `Drawing`.
     static let drawing = _R.storyboard.drawing()
@@ -149,6 +149,8 @@ struct R: Rswift.Validatable {
     static let gallery = _R.storyboard.gallery()
     /// Storyboard `Launch Screen`.
     static let launchScreen = _R.storyboard.launchScreen()
+    /// Storyboard `Settings`.
+    static let settings = _R.storyboard.settings()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "Drawing", bundle: ...)`
@@ -171,23 +173,16 @@ struct R: Rswift.Validatable {
     }
     #endif
 
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Settings", bundle: ...)`
+    static func settings(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.settings)
+    }
+    #endif
+
     fileprivate init() {}
   }
   #endif
-
-  /// This `R.file` struct is generated, and contains static references to 1 files.
-  struct file {
-    /// Resource file `GoogleService-Info.plist`.
-    static let googleServiceInfoPlist = Rswift.FileResource(bundle: R.hostingBundle, name: "GoogleService-Info", pathExtension: "plist")
-
-    /// `bundle.url(forResource: "GoogleService-Info", withExtension: "plist")`
-    static func googleServiceInfoPlist(_: Void = ()) -> Foundation.URL? {
-      let fileResource = R.file.googleServiceInfoPlist
-      return fileResource.bundle.url(forResource: fileResource)
-    }
-
-    fileprivate init() {}
-  }
 
   /// This `R.image` struct is generated, and contains static references to 12 images.
   struct image {
@@ -361,6 +356,9 @@ struct _R: Rswift.Validatable {
       #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
+      #if os(iOS) || os(tvOS)
+      try settings.validate()
+      #endif
     }
 
     #if os(iOS) || os(tvOS)
@@ -388,6 +386,7 @@ struct _R: Rswift.Validatable {
       let name = "Gallery"
 
       static func validate() throws {
+        if #available(iOS 13.0, *) { if UIKit.UIImage(systemName: "person.circle") == nil { throw Rswift.ValidationError(description: "[R.swift] System image named 'person.circle' is used in storyboard 'Gallery', but couldn't be loaded.") } }
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
@@ -405,6 +404,22 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if UIKit.UIImage(named: "Morphu Brand", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Morphu Brand' is used in storyboard 'Launch Screen', but couldn't be loaded.") }
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct settings: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UIKit.UINavigationController
+
+      let bundle = R.hostingBundle
+      let name = "Settings"
+
+      static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
