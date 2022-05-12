@@ -1,8 +1,8 @@
 ![image](https://user-images.githubusercontent.com/16690226/166158098-4c9f3019-a8bd-4361-a2f6-763767856837.png)
 
-# Colorue: drawing is fun
+# Colorue
 
-Colorue is a free, open source drawing app for iOS. It is a simple, but effective drawing tool for your iPhone or iPad. This is a great and fun project for beginner iOS developers, join our [Discord](https://discord.gg/mntPxavfTZ) if you are interested in getting involved.  
+Colorue is a simple, but effective drawing app for iOS. Join our [Discord](https://discord.gg/mntPxavfTZ) if you are interested in getting involved in development.  
 
 
 ## Features
@@ -14,6 +14,10 @@ Colorue is a free, open source drawing app for iOS. It is a simple, but effectiv
 - Undo & Redo
 - Share to messenging and social media apps
 - Save to Photos
+- Importing images
+- Circle / oval tool
+- Straight line too
+- Curved line tool
 
 ### Installing
 1. Clone the repo 
@@ -24,5 +28,5 @@ Colorue is a free, open source drawing app for iOS. It is a simple, but effectiv
 ### Links
 - [Homepage](https://colorue.org)
 - [App Store](https://apps.apple.com/app/id1621782369)
-- [User Drawings](https://colorue.com/drawings)
 - [Discord Community](https://discord.gg/mntPxavfTZ)
+- [Instagram](https://www.instagram.com/colorue/)
