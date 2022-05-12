@@ -7,7 +7,6 @@ target 'Colorue' do
 
   # Pods for Colorue
   pod 'R.swift','~>6'
-  pod 'Toast-Swift','~>5'
   pod 'RealmSwift','~>10'
   pod 'PureLayout','~>3'
 end
