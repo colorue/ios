@@ -25,7 +25,7 @@ enum KeyboardToolSide: Int {
   case right = 1
 }
 
-protocol ToolbarButtonDelegate: class {
+protocol ToolbarButtonDelegate: AnyObject {
   func toolbarButtonTapped(_ toolbarButton: ToolbarButton)
 }
 

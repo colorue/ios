@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CanvasDelegate: class {
+protocol CanvasDelegate: AnyObject {
   func getCurrentColor() -> UIColor
   func getCurrentBrushSize() -> Float
   func getAlpha() -> CGFloat?
@@ -211,7 +211,7 @@ extension CanvasView: DrawingStrokeDelegate {
     let mixedColor = UIColor.blendColor(touchedColor , withColor: stroke.color, percentMix: stroke.alpha)
     delegate?.getKeyboardTool()?.startAnimating()
 
-    DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { [weak self] in
+    DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async { [weak self] in
       guard let self = self else { return }
       let filledImage = stroke.baseImage?.pbk_imageByReplacingColorAt(Int(point.x), Int(point.y), withColor: mixedColor, tolerance: 5)
       DispatchQueue.main.async {

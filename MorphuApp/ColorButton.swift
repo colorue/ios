@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ColorButtonDelegate: class {
+protocol ColorButtonDelegate: AnyObject {
   func colorButtonTapped(_ colorButton: ColorButton)
   func colorButtonHeld(_ colorButton: ColorButton)
 }

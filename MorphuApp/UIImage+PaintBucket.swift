@@ -8,9 +8,9 @@
 
 import UIKit
 
-public extension UIImage {
+extension UIImage {
 
-  @objc public func pbk_imageByReplacingColorAt(_ x: Int, _ y: Int, withColor: UIColor, tolerance: Int) -> UIImage {
+  @objc func pbk_imageByReplacingColorAt(_ x: Int, _ y: Int, withColor: UIColor, tolerance: Int) -> UIImage {
 
     guard x > 0, y > 0, x < Int(size.width), y < Int(size.height) else { return self }
 

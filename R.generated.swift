@@ -184,7 +184,7 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.image` struct is generated, and contains static references to 12 images.
+  /// This `R.image` struct is generated, and contains static references to 7 images.
   struct image {
     /// Image `Circle Tool`.
     static let circleTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Circle Tool")
@@ -196,16 +196,6 @@ struct R: Rswift.Validatable {
     static let lineTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Line Tool")
     /// Image `Morphu Brand`.
     static let morphuBrand = Rswift.ImageResource(bundle: R.hostingBundle, name: "Morphu Brand")
-    /// Image `Onboarding1`.
-    static let onboarding1 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Onboarding1")
-    /// Image `Onboarding2`.
-    static let onboarding2 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Onboarding2")
-    /// Image `Onboarding3`.
-    static let onboarding3 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Onboarding3")
-    /// Image `Onboarding4`.
-    static let onboarding4 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Onboarding4")
-    /// Image `Onboarding5`.
-    static let onboarding5 = Rswift.ImageResource(bundle: R.hostingBundle, name: "Onboarding5")
     /// Image `Paint Bucket`.
     static let paintBucket = Rswift.ImageResource(bundle: R.hostingBundle, name: "Paint Bucket")
     /// Image `PositionIndicator`.
@@ -243,41 +233,6 @@ struct R: Rswift.Validatable {
     /// `UIImage(named: "Morphu Brand", bundle: ..., traitCollection: ...)`
     static func morphuBrand(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.morphuBrand, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Onboarding1", bundle: ..., traitCollection: ...)`
-    static func onboarding1(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.onboarding1, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Onboarding2", bundle: ..., traitCollection: ...)`
-    static func onboarding2(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.onboarding2, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Onboarding3", bundle: ..., traitCollection: ...)`
-    static func onboarding3(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.onboarding3, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Onboarding4", bundle: ..., traitCollection: ...)`
-    static func onboarding4(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.onboarding4, compatibleWith: traitCollection)
-    }
-    #endif
-
-    #if os(iOS) || os(tvOS)
-    /// `UIImage(named: "Onboarding5", bundle: ..., traitCollection: ...)`
-    static func onboarding5(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
-      return UIKit.UIImage(resource: R.image.onboarding5, compatibleWith: traitCollection)
     }
     #endif
 

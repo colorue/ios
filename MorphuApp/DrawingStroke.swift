@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-protocol DrawingStrokeDelegate: class {
+protocol DrawingStrokeDelegate: AnyObject {
   func drawingStroke(_ stroke: DrawingStroke, updatedWith image: UIImage?)
   func drawingStroke(_ stroke: DrawingStroke, completedWith image: UIImage?)
   func drawingStroke(_ stroke: DrawingStroke, selectedColorAt point: CGPoint) -> UIColor?
