@@ -153,6 +153,8 @@
 		8733CC6C281C4859000D053D /* API */ = {
 			isa = PBXGroup;
 			children = (
+				8763D2F71CEE229C00E3D528 /* Theme.swift */,
+				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
 				8733CC71281C4E22000D053D /* Drawing.swift */,
 				87DEFE3B2822B24D00949265 /* DrawingService.swift */,
 				87DEFE3D2824853300949265 /* AppStoreReviewManager.swift */,
@@ -270,21 +272,19 @@
 				8786D6331D56B11A00AD3362 /* Delagate */,
 				8763D3171CEE242100E3D528 /* Modules */,
 				878F02B31DA1AE860097DB5C /* Extensions */,
-				878F02B51DA1AEE30097DB5C /* Lib */,
+				878F02B51DA1AEE30097DB5C /* Libraries */,
 				8786D6351D56B19300AD3362 /* Storyboards */,
 			);
 			name = Source;
 			sourceTree = "<group>";
 		};
-		878F02B51DA1AEE30097DB5C /* Lib */ = {
+		878F02B51DA1AEE30097DB5C /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				87EF7E711D447BF9001089D2 /* PaintBucket */,
 				8746362D1D56E636000BD73E /* ColorPicker */,
-				8763D2F71CEE229C00E3D528 /* Theme.swift */,
-				87EE53E81D57CE9F005B8FB3 /* Prefs.swift */,
 			);
-			name = Lib;
+			name = Libraries;
 			sourceTree = "<group>";
 		};
 		87DEFE492825C74F00949265 /* Strokes */ = {
