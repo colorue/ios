@@ -10,331 +10,185 @@ import UIKit
 import Foundation
 
 protocol ColorKeyboardDelegate {
-  func undo()
-  func redo()
-  func trash()
-  func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?)
+  func setColor(_ color: UIColor, secondary: UIColor, alpha: CGFloat)
 }
 
-enum KeyboardToolState: Int {
-  case none = 0
-  case colorDropper = 1
-  case paintBucket = 2
-  case bullsEye = 3
-}
+let percentMix: CGFloat = 0.1
 
-class ColorKeyboardView: UIView, UIGestureRecognizerDelegate {
+class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
   let currentColorView = UIView()
-  let brushSizeSlider = UISlider()
-  let undoButton = UIButton()
-  let redoButton = UIButton()
-  let trashButton = UIButton()
-  let dropperButton = UIButton()
-  let paintBucketButton = UIButton()
-  let bullsEyeButton = UIButton()
-  let paintBucketSpinner = UIActivityIndicatorView()
-  
-  var feedbackGenerator: UISelectionFeedbackGenerator? = nil
-  
-  let eraserButton = UIButton()
-  fileprivate let prefs = UserDefaults.standard
-  
-  let sliderConstant:Float = 2.0
-  
-  var state: KeyboardToolState = .none {
+  let brushSizeSlider = BrushSizeSlider()
+  let toolbarButtons = ToolbarButton.makeAll()
+
+  var tool: ToolbarButton? {
     didSet {
-      dropperButton.isSelected = state == .colorDropper
-      paintBucketButton.isSelected = state == .paintBucket
-      bullsEyeButton.isSelected = state == .bullsEye
+      for button in toolbarButtons {
+        button.isSelected = state == button.type
+      }
+      Store.setValue(state.rawValue, forKey: Prefs.tool)
     }
   }
-  
-  fileprivate var currentAlpha: CGFloat = 1.0 {
-    didSet {
-      currentColorView.alpha = currentAlpha
+
+  var state: KeyboardToolState {
+    get {
+      if let tool = tool {
+        return tool.type
+      } else {
+        return .none
+      }
     }
   }
-  
+
+  var opacity: CGFloat = 1.0 {
+    didSet {
+      currentColorView.alpha = opacity
+      Store.setValue(opacity, forKey: Prefs.colorAlpha)
+      updateButtonColor()
+      delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
+    }
+  }
+
+  var color: UIColor = .white {
+    didSet {
+      currentColorView.backgroundColor = color
+      Store.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
+      Store.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
+      Store.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
+      updateButtonColor()
+      delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
+    }
+  }
+
+  var buttonColor: UIColor {
+    get {
+      return color.getDarkness(alpha: opacity) < 1.87 ? .white : .black
+    }
+  }
+
+  var brushSize: Float {
+    get {
+      return brushSizeSlider.size
+    }
+  }
+
   var delegate: ColorKeyboardDelegate?
   
   override init (frame: CGRect) {
     super.init(frame : frame)
     displayKeyboard()
+    loadState()
   }
-  
-  required init?(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
+
+  required init(coder: NSCoder) {
+    super.init(coder: coder)
     displayKeyboard()
+    loadState()
   }
-  
-  func displayKeyboard() {
-    
+
+  private func displayKeyboard() {
+    axis = .vertical
+    distribution = .fill
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
-    
-    let selectorWidth = frame.width/11
-    
-    let colorButtonWrapper = UIView()
-    addSubview(colorButtonWrapper)
-    colorButtonWrapper.frame = CGRect(x: 0, y: selectorWidth, width: frame.width, height: frame.height - selectorWidth)
-    for tag in 0...10 {
-      colorButtonWrapper.addSubview(colorButton(withColor: Theme.colors[tag], tag: tag, selectorWidth: selectorWidth))
-    }
-    
-    currentColorView.frame = CGRect(x: 0, y: 0, width: frame.width, height: selectorWidth)
-    addSubview(currentColorView)
-    
-    let toolbarWrapper = UIView()
-    toolbarWrapper.frame = currentColorView.frame
-    addSubview(toolbarWrapper)
-    
-    brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
-    brushSizeSlider.maximumTrackTintColor = UIColor.white
-    brushSizeSlider.maximumValue = pow(100, 1/sliderConstant)
-    brushSizeSlider.minimumValue = pow(1, 1/sliderConstant)
-    brushSizeSlider.center = CGPoint(x: frame.width/2.0, y: selectorWidth/2.0)
-    brushSizeSlider.addTarget(self, action: #selector(ColorKeyboardView.sliderChanged(_:)), for: .touchUpInside)
-    toolbarWrapper.addSubview(brushSizeSlider)
-    
-    let buttonSize = selectorWidth
-    
-    trashButton.setImage(R.image.trashIcon(), for: UIControlState())
-    trashButton.tintColor = .white
-    trashButton.addTarget(self, action: #selector(ColorKeyboardView.trash(_:)), for: .touchUpInside)
-    trashButton.frame = CGRect(x: frame.minX, y: 0, width: buttonSize, height: buttonSize)
-    trashButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(trashButton)
-    
-    undoButton.setImage(R.image.undoIcon(), for: UIControlState())
-    undoButton.tintColor = .white
-    undoButton.addTarget(self, action: #selector(ColorKeyboardView.undo(_:)), for: .touchUpInside)
-    undoButton.frame = CGRect(x: frame.minX + buttonSize, y: 0, width: buttonSize, height: buttonSize)
-    undoButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(undoButton)
-    
-    redoButton.setImage(R.image.redoIcon(), for: UIControlState())
-    redoButton.tintColor = .white
-    redoButton.addTarget(self, action: #selector(ColorKeyboardView.redo(_:)), for: .touchUpInside)
-    redoButton.frame = CGRect(x: frame.minX + (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
-    redoButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(redoButton)
-    
-    paintBucketButton.setImage(R.image.paintBucket(), for: UIControlState())
-    paintBucketButton.setImage(R.image.paintBucketActive(), for: .selected)
-    paintBucketButton.tintColor = .white
-    paintBucketButton.addTarget(self, action: #selector(ColorKeyboardView.paintBucket(_:)), for: .touchUpInside)
-    paintBucketButton.frame = CGRect(x: frame.maxX - (buttonSize * 1), y: 0, width: buttonSize, height: buttonSize)
-    paintBucketButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(paintBucketButton)
-    
-    paintBucketSpinner.hidesWhenStopped = true
-    paintBucketSpinner.center = paintBucketButton.center
-    paintBucketSpinner.color = .white
-    toolbarWrapper.addSubview(paintBucketSpinner)
-    
-    dropperButton.setImage(R.image.dropper(), for: UIControlState())
-    dropperButton.setImage(R.image.dropperActive(), for: .selected)
-    dropperButton.tintColor = .white
-    dropperButton.addTarget(self, action: #selector(ColorKeyboardView.dropper(_:)), for: .touchUpInside)
-    dropperButton.frame = CGRect(x: frame.maxX - (buttonSize * 2), y: 0, width: buttonSize, height: buttonSize)
-    dropperButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(dropperButton)
-    
-    bullsEyeButton.setImage(R.image.bullsEye(), for: UIControlState())
-    bullsEyeButton.setImage(R.image.bullsEyeActive(), for: .selected)
-    bullsEyeButton.tintColor = .white
-    bullsEyeButton.addTarget(self, action: #selector(ColorKeyboardView.bullsEye(_:)), for: .touchUpInside)
-    bullsEyeButton.frame = CGRect(x: frame.maxX - (buttonSize * 3), y: 0, width: buttonSize, height: buttonSize)
-    bullsEyeButton.showsTouchWhenHighlighted = true
-    toolbarWrapper.addSubview(bullsEyeButton)
-    
-    let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: frame.width, height: 0.5))
+
+    let separatorU = UIView()
     separatorU.backgroundColor = Theme.divider
-    addSubview(separatorU)
-    
-    if prefs.bool(forKey: Prefs.saved) {
-      let red = CGFloat(prefs.float(forKey: Prefs.colorRed))
-      let green = CGFloat(prefs.float(forKey: Prefs.colorGreen))
-      let blue = CGFloat(prefs.float(forKey: Prefs.colorBlue))
-      let alpha = CGFloat(prefs.float(forKey: Prefs.colorAlpha))
-      
-      currentAlpha = alpha
-      currentColorView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-      brushSizeSlider.value = pow(prefs.float(forKey: Prefs.brushSize), 1/sliderConstant)
+    separatorU.height(constant: 0.5)
+    addArrangedSubview(separatorU)
+
+    let toolbarWrapper = UIStackView()
+    toolbarWrapper.distribution = .fillEqually
+    toolbarWrapper.spacing = 16.0
+    toolbarWrapper.height(constant: min(frame.width / 10, 80.0))
+    addArrangedSubview(toolbarWrapper)
+
+    toolbarWrapper.addSubview(currentColorView)
+    currentColorView.autoPinEdgesToSuperviewEdges()
+
+    let toolWrapperL = UIStackView()
+    toolWrapperL.distribution = .fillEqually
+    let toolWrapperR = UIStackView()
+    toolWrapperR.distribution = .fillEqually
+
+    toolbarWrapper.addArrangedSubview(toolWrapperL)
+    toolbarWrapper.addArrangedSubview(brushSizeSlider)
+    toolbarWrapper.addArrangedSubview(toolWrapperR)
+
+    for tool in toolbarButtons {
+      tool.delegate = self
+      switch (tool.side) {
+        case .left:  toolWrapperL.addArrangedSubview(tool)
+        case .right: toolWrapperR.addArrangedSubview(tool)
+        default: continue
+      }
+    }
+
+    let colorButtonWrapper = UIStackView()
+    colorButtonWrapper.distribution = .fillEqually
+    addArrangedSubview(colorButtonWrapper)
+    for (tag, color) in Theme.colors.enumerated() {
+      let newButton = ColorButton(color: color, tag: tag)
+      newButton.delegate = self
+      colorButtonWrapper.addArrangedSubview(newButton)
+    }
+  }
+
+  private func loadState () {
+    if Store.bool(forKey: Prefs.saved) {
+      let red = CGFloat(Store.float(forKey: Prefs.colorRed))
+      let green = CGFloat(Store.float(forKey: Prefs.colorGreen))
+      let blue = CGFloat(Store.float(forKey: Prefs.colorBlue))
+      let alpha = CGFloat(Store.float(forKey: Prefs.colorAlpha))
+      opacity = alpha
+      color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+      brushSizeSlider.value = pow(Store.float(forKey: Prefs.brushSize), 1/sliderConstant)
+      tool = toolbarButtons.first(where: { toolbarButton in
+        return toolbarButton.type.rawValue == Store.integer(forKey: Prefs.tool)
+      })
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-      currentColorView.backgroundColor = Theme.colors[Int(arc4random_uniform(8) + 1)]
-      currentAlpha = 1.0
+      color = Theme.colors[Int(arc4random_uniform(8) + 1)]
+      opacity = 1.0
     }
-    
-    updateButtonColor()
   }
-  
-  fileprivate func colorButton(withColor color:UIColor, tag: Int, selectorWidth: CGFloat) -> UIButton {
-    let newButton = UIButton()
-    newButton.backgroundColor = color
-    newButton.tag = tag
-    newButton.addTarget(self, action: #selector(ColorKeyboardView.buttonTapped(_:)), for: UIControlEvents.touchUpInside)
-    newButton.frame = CGRect(x: frame.minX + CGFloat(tag) * selectorWidth, y: 0, width: selectorWidth, height: frame.height - selectorWidth)
-    
-    let tap = UILongPressGestureRecognizer(target: self, action: #selector(ColorKeyboardView.buttonHeld(_:)))
-    tap.minimumPressDuration = 0.15
-    tap.delegate = self
-    newButton.addGestureRecognizer(tap)
-    
-    return newButton
-  }
-  
-  @objc fileprivate func undo(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.undo()
-  }
-  
-  @objc fileprivate func redo(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.redo()
-  }
-  
-  @objc fileprivate func trash(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    delegate?.trash()
-    state = .none
-  }
-  
-  @objc fileprivate func dropper(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    state = state == .colorDropper ? .none : .colorDropper
-  }
-  
-  @objc fileprivate func paintBucket(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    state = state == .paintBucket ? .none : .paintBucket
-  }
-  
-  @objc fileprivate func bullsEye(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    if (!prefs.bool(forKey: "bullsEyeHowTo")) {
-      let dropperHowTo = UIAlertController(title: "Bull's Eye Tool", message: "Place a dot where you lift your finger" , preferredStyle: UIAlertControllerStyle.alert)
-      dropperHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
-      delegate?.present(dropperHowTo, animated: true, completion: nil)
-      prefs.setValue(true, forKey: "bullsEyeHowTo")
-    }
-    state = state == .bullsEye ? .none : .bullsEye
-  }
-  
-  @objc fileprivate func sliderChanged(_ sender: UISlider) {
-    sender.setValue(Float(lroundf(sender.value)), animated: true)
-  }
-  
-  @objc fileprivate func buttonHeld(_ sender: UITapGestureRecognizer) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    if (sender.view!.tag == 0) {
-      currentAlpha = 0.0
-      currentColorView.backgroundColor = .white
-    } else {
-      currentAlpha = 1.0
-      currentColorView.backgroundColor = Theme.colors[sender.view!.tag]
-    }
-    updateButtonColor()
-  }
-  
-  @objc fileprivate func buttonTapped(_ sender: UIButton) {
-    feedbackGenerator = UISelectionFeedbackGenerator()
-    feedbackGenerator?.selectionChanged()
-    feedbackGenerator = nil
-    let percentMix: CGFloat = 0.1
-    
-    if (sender.tag == 0) {
-      currentAlpha = currentAlpha * (1 - percentMix)
-    } else {
-      if (currentAlpha == 0) {
-        currentColorView.backgroundColor = Theme.colors[sender.tag]
-      }
-      currentAlpha = currentAlpha * (1 - percentMix) + percentMix
-      currentColorView.backgroundColor = blendColor(currentColorView.backgroundColor!, withColor: Theme.colors[sender.tag], percentMix: percentMix)
-    }
-    updateButtonColor()
-  }
-  
-  fileprivate func blendColor(_ color1: UIColor, withColor color2: UIColor, percentMix: CGFloat) -> UIColor {
-    let c1 = color1.coreImageColor!
-    let c2 = color2.coreImageColor!
-    return UIColor(red: c1.red * (1 - percentMix) + c2.red * percentMix, green: c1.green * (1 - percentMix) + c2.green * percentMix, blue: c1.blue * (1 - percentMix) + c2.blue * percentMix, alpha: 1.0)
-  }
-  
-  func getCurrentColor() -> UIColor {
-    return currentColorView.backgroundColor!
-  }
-  
-  func getCurrentBrushSize() -> Float {
-    return  pow(brushSizeSlider.value, sliderConstant)
-  }
-  
-  func getAlpha() -> CGFloat? {
-    return currentAlpha
-  }
-  
-  func setAlphaHigh() {
-    currentAlpha = 1.0
-  }
-  
-  func setColor(_ color: UIColor) {
-    setCurrentColor(color, animationTime: 0.5)
-  }
-  
-  fileprivate func setCurrentColor(_ color: UIColor, animationTime: Double) {
-    UIView.animate(withDuration: animationTime,delay: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: {
-      self.currentColorView.backgroundColor = color
-    }, completion: nil)
-  }
-  
-  func updateButtonColor() {
-    let equivalentColor = blendColor(currentColorView.backgroundColor!, withColor: .white, percentMix: (1.0 - currentAlpha))
-    let coreColor = equivalentColor.coreImageColor
-    let colorDarkness = (coreColor!.red + coreColor!.green * 2.0 + coreColor!.blue)
-    if (colorDarkness < 1.6) {
-      brushSizeSlider.minimumTrackTintColor = UIColor.lightGray
-      brushSizeSlider.maximumTrackTintColor = UIColor.white
-    } else if colorDarkness < 2.67 {
-      brushSizeSlider.minimumTrackTintColor = UIColor.black
-      brushSizeSlider.maximumTrackTintColor = UIColor.white
-    } else {
-      brushSizeSlider.minimumTrackTintColor = UIColor.black
-      brushSizeSlider.maximumTrackTintColor = UIColor.lightGray
-    }
-    
-    if (colorDarkness < 1.87) {
-      undoButton.tintColor = .white
-      trashButton.tintColor = .white
-      dropperButton.tintColor = .white
-      paintBucketButton.tintColor = .white
-      redoButton.tintColor = .white
-      eraserButton.tintColor = .white
-      bullsEyeButton.tintColor = .white
-      paintBucketSpinner.color = .white
-    } else {
-      undoButton.tintColor = .black
-      trashButton.tintColor = .black
-      dropperButton.tintColor = .black
-      paintBucketButton.tintColor = .black
-      redoButton.tintColor = .black
-      eraserButton.tintColor = .black
-      bullsEyeButton.tintColor = .black
-      paintBucketSpinner.color = .black
+
+  private func updateButtonColor() {
+    brushSizeSlider.updateTint(color: color, alpha: opacity)
+    for button in toolbarButtons {
+      button.tintColor = buttonColor
     }
   }
 }
 
+extension ColorKeyboardView: ColorButtonDelegate {
+  func colorButtonTapped(_ colorButton: ColorButton) {
+    if (colorButton.isTransparent) {
+      opacity = opacity * (1 - percentMix)
+    } else {
+      if (opacity == 0) {
+        color = colorButton.color
+      }
+      opacity = opacity * (1 - percentMix) + percentMix
+      color = UIColor.blendColor(color, withColor: colorButton.color, percentMix: percentMix)
+    }
+  }
+
+  func colorButtonHeld(_ colorButton: ColorButton) {
+    if (colorButton.isTransparent) {
+      opacity = 0.0
+      color = .white
+    } else {
+      opacity = 1.0
+      color = colorButton.color
+    }
+  }
+}
+
+extension ColorKeyboardView: ToolbarButtonDelegate {
+  func toolbarButtonTapped(_ toolbarButton: ToolbarButton) {
+    if (state == toolbarButton.type) {
+      tool = nil
+    } else {
+      tool = toolbarButton
+    }
+  }
+}

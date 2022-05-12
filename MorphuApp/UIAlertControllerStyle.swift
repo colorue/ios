@@ -8,8 +8,8 @@
 
 import Foundation
 
-extension UIAlertControllerStyle {
-  static var preferActionSheet: UIAlertControllerStyle {
+extension UIAlertController.Style {
+  static var preferActionSheet: UIAlertController.Style {
     if UIDevice.current.userInterfaceIdiom == .pad {
       return .alert
     } else {

@@ -7,22 +7,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Navigation Controller-->
-        <scene sceneID="YOZ-5q-1uO">
-            <objects>
-                <navigationController id="75c-Q6-Wtp" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ntR-07-EFG">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="CdS-6r-7bw" kind="relationship" relationship="rootViewController" id="1xe-3k-IBF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="VU4-Qt-S8J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-678" y="-701"/>
-        </scene>
         <!--Drawing View Controller-->
         <scene sceneID="qkb-xs-yVn">
             <objects>
@@ -37,21 +21,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="PqF-xI-acO">
-                        <rightBarButtonItems>
-                            <barButtonItem systemItem="action" id="OVE-88-MqG">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="shareDrawing:" destination="CdS-6r-7bw" id="bPu-UJ-ZIe"/>
-                                </connections>
-                            </barButtonItem>
-                            <barButtonItem systemItem="save" id="8Hf-28-OCg">
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <connections>
-                                    <action selector="saveDrawing:" destination="CdS-6r-7bw" id="wEx-2E-UMy"/>
-                                </connections>
-                            </barButtonItem>
-                        </rightBarButtonItems>
+                        <barButtonItem key="rightBarButtonItem" image="ellipsis.circle" catalog="system" id="OVE-88-MqG">
+                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="postButton" destination="OVE-88-MqG" id="7eP-6M-WmE"/>
                         <segue destination="2lo-qD-s5v" kind="unwind" identifier="backToHome" unwindAction="backToMain:" id="BeJ-mQ-WqR"/>
@@ -64,4 +38,7 @@
             <point key="canvasLocation" x="125" y="-701"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ellipsis.circle" catalog="system" width="128" height="121"/>
+    </resources>
 </document>

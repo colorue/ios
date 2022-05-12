@@ -11,7 +11,7 @@ import UIKit
 class DrawingCell: UICollectionViewCell {
   @IBOutlet var imageView: UIImageView? {
     didSet {
-      imageView?.layer.cornerRadius = 12
+      imageView?.layer.cornerRadius = 8
       imageView?.clipsToBounds = true
       imageView?.layer.borderColor = Theme.divider.cgColor
       imageView?.layer.borderWidth = 0.5

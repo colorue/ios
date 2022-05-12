@@ -47,19 +47,25 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSContactsUsageDescription</key>
-	<string>Used to find contacts using Colorue</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow Colorue to import images</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Give Colorue access to save drawings to photos</string>
-	<key>UIAppFonts</key>
+	<key>UIApplicationShortcutItems</key>
 	<array>
-		<string>playtime.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
+		<dict>
+			<key>UIApplicationShortcutItemIconType</key>
+			<string>UIApplicationShortcutIconTypeCompose</string>
+			<key>UIApplicationShortcutItemTitle</key>
+			<string>New Drawing</string>
+			<key>UIApplicationShortcutItemType</key>
+			<string>NewDrawing</string>
+		</dict>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Drawings</string>
+	<string>Gallery</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -67,11 +73,13 @@
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarStyle</key>
-	<string>UIStatusBarStyleDefault</string>
+	<string>UIStatusBarStyleLightContent</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
 </dict>
