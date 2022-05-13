@@ -13,7 +13,6 @@ enum AppStoreReviewManager {
   static let minimumReviewWorthyActionCount = 5
 
   static func requestReviewIfAppropriate() {
-
     let defaults = UserDefaults.standard
     let bundle = Bundle.main
 
@@ -22,9 +21,8 @@ enum AppStoreReviewManager {
 
     defaults.set(actionCount, forKey: .reviewWorthyActionCount)
 
-    guard actionCount >= minimumReviewWorthyActionCount || !defaults.bool(forKey: .firstRequest) else {
-      return
-    }
+    guard actionCount >= minimumReviewWorthyActionCount || !defaults.bool(forKey: .firstRequest)
+    else { return }
 
     let bundleVersionKey = kCFBundleVersionKey as String
     let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
@@ -34,8 +32,9 @@ enum AppStoreReviewManager {
       return
     }
 
-    SKStoreReviewController.requestReview()
+    guard let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene  else { return }
 
+    SKStoreReviewController.requestReview(in: scene)
     defaults.set(true, forKey: .firstRequest)
     defaults.set(0, forKey: .reviewWorthyActionCount)
     defaults.set(currentVersion, forKey: .lastReviewRequestAppVersion)

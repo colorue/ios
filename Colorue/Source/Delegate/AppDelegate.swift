@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
   
@@ -41,20 +40,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
   }
 
-  // App launched
-  func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-      guard let _: UIWindowScene = scene as? UIWindowScene else { return }
-      maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
-  }
+  func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
 
-  // App opened from background
-  func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-      maybeOpenedFromWidget(urlContexts: URLContexts)
-  }
+    guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
+          let drawingId = components.path?.replacingOccurrences(of: "/", with: "")
+      else { return false }
 
-  private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
-      guard let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "colorue" }) else { return }
-      print("🚀 Launched from widget")
+    openDrawing(drawingId)
+
+    return true
   }
 
   private func openDrawing(_ drawingId: String? = nil) {
@@ -67,3 +61,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     galleryViewController.pushViewController(drawingViewController, animated: false)
   }
 }
+

@@ -8,7 +8,6 @@
 
 import WidgetKit
 import SwiftUI
-import RealmSwift
 
 struct Provider: TimelineProvider {
 
@@ -22,17 +21,7 @@ struct Provider: TimelineProvider {
   }
 
   func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-    var entries: [SimpleEntry] = []
-
-    // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-    let currentDate = Date()
-    for hourOffset in 0 ..< 5 {
-      let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-      let entry = SimpleEntry(date: entryDate)
-      entries.append(entry)
-    }
-
-    let timeline = Timeline(entries: entries, policy: .atEnd)
+    let timeline = Timeline(entries: [SimpleEntry(date: Date())], policy: .atEnd)
     completion(timeline)
   }
 }
@@ -43,20 +32,19 @@ struct SimpleEntry: TimelineEntry {
 
 struct ColorueWidgetEntryView : View {
   var entry: Provider.Entry
-  private static let deeplinkURL: URL = URL(string: "colorue://")!
 
   var body: some View {
-    if let base64 = StoreShared.string(forKey: "openDrawing64") {
-      Image(uiImage: UIImage.fromBase64(base64)).resizable().scaledToFill().widgetURL(ColorueWidgetEntryView.deeplinkURL)
-    } else {
-      Image("Polygon Tool")
+    if let base64 = StoreShared.string(forKey: "widgetDrawingImage"),
+       let drawingId = StoreShared.string(forKey: "widgetDrawingId"),
+       let deeplinkURL: URL = URL(string: "colorue://widget/\(drawingId)") {
+      Image(uiImage: UIImage.fromBase64(base64)).resizable().scaledToFill().widgetURL(deeplinkURL)
     }
   }
 }
 
 @main
 struct ColorueWidget: Widget {
-  let kind: String = "ColorueWidget"
+  let kind: String = "com.colorue.app.ColorueWidget"
 
   var body: some WidgetConfiguration {
     StaticConfiguration(kind: kind, provider: Provider()) { entry in

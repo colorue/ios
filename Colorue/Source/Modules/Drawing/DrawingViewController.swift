@@ -26,8 +26,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       if let drawingId = drawingId {
         StoreShared.setValue(drawingId, forKey: "openDrawing")
         if let base64 = drawing?.base64 {
-          StoreShared.setValue(base64, forKey: "openDrawing64")
           baseImage = UIImage.fromBase64(base64)
+          Widget.update(drawing: drawing)
         }
       } else {
         canvas?.trash()
@@ -394,7 +394,6 @@ extension DrawingViewController: CanvasDelegate {
     DispatchQueue.main.async { [weak self] in
       guard  let self = self, let canvas = self.canvas, !canvas.isEmpty else { return }
       let base64 = canvas.getDrawing().toBase64()
-      StoreShared.setValue(base64, forKey: "openDrawing64")
       if let drawing = self.drawing {
         try! Database.shared.write {
           drawing.base64 = base64
@@ -404,11 +403,12 @@ extension DrawingViewController: CanvasDelegate {
         let drawing = Drawing()
         drawing.base64 = base64
         self.drawingId = drawing.id
-        StoreShared.setValue(drawing.id, forKey: "openDrawing")
         try! Database.shared.write {
           Database.shared.add(drawing)
+          self.prefs.setValue(drawing.id, forKey: "openDrawing")
         }
       }
+      Widget.update(drawing: self.drawing)
     }
   }
 
