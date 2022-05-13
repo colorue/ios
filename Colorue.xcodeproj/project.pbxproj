@@ -30,7 +30,6 @@
 		8703D7C4282D9B2A00258CEE /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D796282D9B2A00258CEE /* Drawing.swift */; };
 		8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D797282D9B2A00258CEE /* Theme.swift */; };
 		8703D7C6282D9B2A00258CEE /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D798282D9B2A00258CEE /* Haptic.swift */; };
-		8703D7C7282D9B2A00258CEE /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D799282D9B2A00258CEE /* Prefs.swift */; };
 		8703D7C8282D9B2A00258CEE /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79C282D9B2A00258CEE /* AboutViewController.swift */; };
 		8703D7C9282D9B2A00258CEE /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79E282D9B2A00258CEE /* DrawingViewController.swift */; };
 		8703D7CA282D9B2A00258CEE /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D7A0282D9B2A00258CEE /* CanvasView.swift */; };
@@ -61,7 +60,6 @@
 		87263454282DFA1B0052B4C5 /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D78E282D9B2A00258CEE /* UIImageExtensions.swift */; };
 		87263455282DFB860052B4C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8703D7D9282D9B5200258CEE /* Assets.xcassets */; };
 		87263457282E03180052B4C5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87263456282E03170052B4C5 /* Database.swift */; };
-		8726345A282E0E090052B4C5 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D799282D9B2A00258CEE /* Prefs.swift */; };
 		87B315AE282ED23500E9DFF6 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D796282D9B2A00258CEE /* Drawing.swift */; };
 		87B315B0282ED31300E9DFF6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87263456282E03170052B4C5 /* Database.swift */; };
 		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
@@ -120,7 +118,6 @@
 		8703D796282D9B2A00258CEE /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
 		8703D797282D9B2A00258CEE /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8703D798282D9B2A00258CEE /* Haptic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
-		8703D799282D9B2A00258CEE /* Prefs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prefs.swift; sourceTree = "<group>"; };
 		8703D79C282D9B2A00258CEE /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8703D79E282D9B2A00258CEE /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		8703D7A0282D9B2A00258CEE /* CanvasView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
@@ -285,7 +282,6 @@
 				8703D796282D9B2A00258CEE /* Drawing.swift */,
 				8703D797282D9B2A00258CEE /* Theme.swift */,
 				8703D798282D9B2A00258CEE /* Haptic.swift */,
-				8703D799282D9B2A00258CEE /* Prefs.swift */,
 				87263456282E03170052B4C5 /* Database.swift */,
 			);
 			path = API;
@@ -623,7 +619,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				87263454282DFA1B0052B4C5 /* UIImageExtensions.swift in Sources */,
-				8726345A282E0E090052B4C5 /* Prefs.swift in Sources */,
 				87263449282DF49C0052B4C5 /* ColorueWidget.swift in Sources */,
 				87B315B0282ED31300E9DFF6 /* Database.swift in Sources */,
 				87B315AE282ED23500E9DFF6 /* Drawing.swift in Sources */,
@@ -635,7 +630,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8703D7CF282D9B2A00258CEE /* DrawingStroke.swift in Sources */,
-				8703D7C7282D9B2A00258CEE /* Prefs.swift in Sources */,
 				8703D7CB282D9B2A00258CEE /* BrushSizeSlider.swift in Sources */,
 				8703D7BD282D9B2A00258CEE /* UIImageExtensions.swift in Sources */,
 				8703D7B5282D9B2A00258CEE /* AppDelegate.swift in Sources */,

@@ -65,6 +65,6 @@ class BrushSizeSlider: UISlider {
     let newSize = Float(lroundf(sender.value))
     sender.setValue(newSize, animated: true)
     Haptic.selection = nil
-    Store.setValue(size, forKey: Prefs.brushSize)
+    Database.set(size, for: .brushSize)
   }
 }

@@ -38,7 +38,6 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
   var imageView = UIImageView()
   let resizeScale: CGFloat = 2.0
   var actualSize = CGSize()
-  fileprivate let prefs = UserDefaults.standard
 
   var baseDrawing: UIImage? {
     didSet {

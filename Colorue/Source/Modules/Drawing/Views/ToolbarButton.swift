@@ -80,6 +80,23 @@ class ToolbarButton: UIButton {
     }
   }
 
+  var howToKey: DataKey? {
+    get {
+      switch (type) {
+      case .straightLine:
+        return .howToStraightLine
+      case .curvedLine:
+        return .howToCurvedLine
+      case .oval:
+        return .howToOval
+      case .bullsEye:
+        return .howToBullsEye
+      default:
+        return nil
+      }
+    }
+  }
+
   override var tintColor: UIColor! {
     didSet {
       spinner.color = tintColor

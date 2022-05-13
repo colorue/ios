@@ -26,7 +26,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
       for button in toolbarButtons {
         button.isSelected = state == button.type
       }
-      Store.setValue(state.rawValue, forKey: Prefs.tool)
+      Database.set(state.rawValue, for: .tool)
     }
   }
 
@@ -43,7 +43,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
   var opacity: CGFloat = 1.0 {
     didSet {
       currentColorView.alpha = opacity
-      Store.setValue(opacity, forKey: Prefs.colorAlpha)
+      Database.set(opacity, for: .colorAlpha)
       updateButtonColor()
       delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
     }
@@ -52,9 +52,9 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
   var color: UIColor = .white {
     didSet {
       currentColorView.backgroundColor = color
-      Store.setValue(color.coreImageColor!.red, forKey: Prefs.colorRed)
-      Store.setValue(color.coreImageColor!.green, forKey: Prefs.colorGreen)
-      Store.setValue(color.coreImageColor!.blue, forKey: Prefs.colorBlue)
+      Database.set(color.coreImageColor?.red, for: .colorRed)
+      Database.set(color.coreImageColor?.green, for: .colorGreen)
+      Database.set(color.coreImageColor?.blue, for: .colorBlue)
       updateButtonColor()
       delegate?.setColor(color, secondary: buttonColor, alpha: opacity)
     }
@@ -134,16 +134,16 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
   }
 
   private func loadState () {
-    if Store.bool(forKey: Prefs.saved) {
-      let red = CGFloat(Store.float(forKey: Prefs.colorRed))
-      let green = CGFloat(Store.float(forKey: Prefs.colorGreen))
-      let blue = CGFloat(Store.float(forKey: Prefs.colorBlue))
-      let alpha = CGFloat(Store.float(forKey: Prefs.colorAlpha))
+    if Database.bool(for: .saved) {
+      let red = CGFloat(Database.float(for: .colorRed))
+      let green = CGFloat(Database.float(for: .colorGreen))
+      let blue = CGFloat(Database.float(for: .colorBlue))
+      let alpha = CGFloat(Database.float(for: .colorAlpha))
       opacity = alpha
       color = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
-      brushSizeSlider.value = pow(Store.float(forKey: Prefs.brushSize), 1/sliderConstant)
+      brushSizeSlider.value = pow(Database.float(for: .brushSize), 1/sliderConstant)
       tool = toolbarButtons.first(where: { toolbarButton in
-        return toolbarButton.type.rawValue == Store.integer(forKey: Prefs.tool)
+        return toolbarButton.type.rawValue == Database.integer(for: .tool)
       })
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2

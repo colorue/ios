@@ -28,13 +28,13 @@ final class GalleryViewController: UICollectionViewController {
     super.viewDidLoad()
 //    navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
     
-    if let savedDrawing = UserDefaults.standard.string(forKey: Prefs.savedDrawing) {
+    if let savedDrawing = Database.string(for: .savedDrawing) {
       let realm = try! Realm()
       let drawing = Drawing()
       drawing.base64 = savedDrawing
       try! realm.write {
         realm.add(drawing)
-        UserDefaults.standard.removeObject(forKey: Prefs.savedDrawing)
+        Database.remove(key: .savedDrawing)
       }
     }
     
@@ -57,7 +57,7 @@ final class GalleryViewController: UICollectionViewController {
 
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    UserDefaults.standard.removeObject(forKey: "openDrawing")
+    Database.remove(key: .openDrawing)
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

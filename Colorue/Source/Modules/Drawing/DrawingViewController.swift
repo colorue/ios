@@ -12,8 +12,6 @@ import AVFoundation
 
 class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPopoverPresentationControllerDelegate {
 
-  let prefs = UserDefaults.standard
-
   private var drawing: Drawing? {
     guard let drawingId = drawingId else { return nil }
     return Database.realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
@@ -24,7 +22,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   var drawingId: String? {
     didSet {
       if let drawingId = drawingId {
-        prefs.setValue(drawingId, forKey: "openDrawing")
+        Database.set(drawingId, for: .openDrawing)
         if let base64 = drawing?.base64 {
           baseImage = UIImage.fromBase64(base64)
           Database.update(drawing: drawing)
@@ -148,8 +146,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     underFingerView.layer.borderWidth = 0.5
     underFingerView.layer.borderColor = Theme.divider.cgColor
     keyboardCover.addSubview(underFingerView)
-    
-    prefs.setValue(true, forKey: Prefs.saved)
+    Database.set(true, for: .saved)
+
 
 
     let newAction =
@@ -234,9 +232,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
-    if (!prefs.bool(forKey: "drawingHowTo")) {
+    if (!Database.bool(for: .drawingHowTo)) {
       if let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController() {
-        prefs.setValue(true, forKey: "drawingHowTo")
+        Database.set(true, for: .drawingHowTo)
         navigationController?.present(onboardingViewController, animated: true)
       }
     }
@@ -377,13 +375,12 @@ extension DrawingViewController: ColorKeyboardDelegate {
 
   func colorKeyboardView(_ colorKeyboardView: ColorKeyboardView, selected toolbarButton: ToolbarButton) {
 
-    guard [.straightLine, .curvedLine, .oval, .bullsEye].contains(toolbarButton.type),
-          !prefs.bool(forKey: "howTo\(toolbarButton.type.rawValue)"),
+    guard let howToKey = toolbarButton.howToKey,
+          !Database.bool(for: howToKey),
           let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController()
     else { return }
-
     onboardingViewController.type = toolbarButton.type
-    prefs.setValue(true, forKey: "howTo\(toolbarButton.type.rawValue)")
+    Database.set(true, for: howToKey)
     navigationController?.present(onboardingViewController, animated: true)
   }
 }
@@ -405,7 +402,7 @@ extension DrawingViewController: CanvasDelegate {
         self.drawingId = drawing.id
         try! Database.realm.write {
           Database.realm.add(drawing)
-          self.prefs.setValue(drawing.id, forKey: "openDrawing")
+          Database.set(drawing.id, for: .openDrawing)
         }
       }
       Database.update(drawing: self.drawing)

@@ -13,20 +13,19 @@ enum AppStoreReviewManager {
   static let minimumReviewWorthyActionCount = 5
 
   static func requestReviewIfAppropriate() {
-    let defaults = UserDefaults.standard
     let bundle = Bundle.main
 
-    var actionCount = defaults.integer(forKey: .reviewWorthyActionCount)
+    var actionCount = Database.integer(for: .reviewWorthyActionCount)
     actionCount += 1
 
-    defaults.set(actionCount, forKey: .reviewWorthyActionCount)
+    Database.set(actionCount, for: .reviewWorthyActionCount)
 
-    guard actionCount >= minimumReviewWorthyActionCount || !defaults.bool(forKey: .firstRequest)
+    guard actionCount >= minimumReviewWorthyActionCount || !Database.bool(for: .firstRequest)
     else { return }
 
     let bundleVersionKey = kCFBundleVersionKey as String
     let currentVersion = bundle.object(forInfoDictionaryKey: bundleVersionKey) as? String
-    let lastVersion = defaults.string(forKey: .lastReviewRequestAppVersion)
+    let lastVersion = Database.string(for: .lastReviewRequestAppVersion)
 
     guard lastVersion == nil || lastVersion != currentVersion else {
       return
@@ -35,14 +34,8 @@ enum AppStoreReviewManager {
     guard let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene  else { return }
 
     SKStoreReviewController.requestReview(in: scene)
-    defaults.set(true, forKey: .firstRequest)
-    defaults.set(0, forKey: .reviewWorthyActionCount)
-    defaults.set(currentVersion, forKey: .lastReviewRequestAppVersion)
+    Database.set(true, for: .firstRequest)
+    Database.set(0, for: .reviewWorthyActionCount)
+    Database.set(currentVersion, for: .lastReviewRequestAppVersion)
   }
-}
-
-extension String {
-  static let lastReviewRequestAppVersion = "lastReviewRequestAppVersion"
-  static let reviewWorthyActionCount = "reviewWorthyActionCount"
-  static let firstRequest = "firstRequest"
 }
