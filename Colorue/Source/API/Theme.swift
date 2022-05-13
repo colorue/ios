@@ -21,17 +21,15 @@ struct Theme {
   static let pink = UIColor(red: 255.0/255.0, green: 0.0/255.0, blue: 255.0/255.0, alpha: 1.0)
   static let white = UIColor(red: 255.0/255.0, green: 255.0/255.0, blue: 255.0/255.0, alpha: 1.0)
   static let halfOpacityCheck = UIColor(red: 242.0/255.0, green: 242.0/255.0, blue: 242.0/255.0, alpha: 1.0)
+  static let darkGreen = UIColor(red: 0.0/255.0, green: 155.0/255.0, blue: 0.0/255.0, alpha: 1.0)
 
   static var colors: [UIColor] {
     return [clear, black, red, orange, yellow, green, cyan, blue, purple, pink, white]
   }
 
   static let background = UIColor(red: 230.0/255.0, green: 230.0/255.0, blue: 230.0/255.0, alpha: 1.0)
-  static let contentBackground = UIColor.white//UIColor(red: 247.0/255.0, green: 247.0/255.0, blue: 247.0/255.0, alpha: 1.0)
+  static let contentBackground = UIColor.white
   static let divider = UIColor(red: 220.0/255.0, green: 220.0/255.0, blue: 220.0/255.0, alpha: 1.0)
-
-  //    let morhpu = UIColor(red: 61.0/255.0, green: 14.0/255.0, blue: 133.0/255.0, alpha: 1.0)
-  //    let morhpuColorBright = UIColor(red: 71.0/255.0, green: 17.0/255.0, blue: 153.0/255.0, alpha: 1.0)
 
   static let cover = UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 0.7)
   static let infoText = UIColor.black

@@ -128,12 +128,12 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="fSl-zj-H2W">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" role="primary" translatesAutoresizingMaskIntoConstraints="NO" id="fSl-zj-H2W">
                                         <rect key="frame" x="0.0" y="652" width="350" height="46"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="46" id="2sK-wg-izy"/>
                                         </constraints>
-                                        <buttonConfiguration key="configuration" style="filled" title="Continue" cornerStyle="large"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Continue" cornerStyle="large"/>
                                         <connections>
                                             <segue destination="mj8-lt-CQt" kind="unwind" unwindAction="unwindWithSegue:" id="SFR-ru-FlW"/>
                                         </connections>

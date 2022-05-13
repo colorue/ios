@@ -193,8 +193,10 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.image` struct is generated, and contains static references to 7 images.
+  /// This `R.image` struct is generated, and contains static references to 10 images.
   struct image {
+    /// Image `Bezier Tool`.
+    static let bezierTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Bezier Tool")
     /// Image `Circle Tool`.
     static let circleTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Circle Tool")
     /// Image `ClearPattern`.
@@ -205,10 +207,21 @@ struct R: Rswift.Validatable {
     static let curveTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Curve Tool")
     /// Image `Line Tool`.
     static let lineTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Line Tool")
+    /// Image `Oval Tool`.
+    static let ovalTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Oval Tool")
     /// Image `Paint Bucket`.
     static let paintBucket = Rswift.ImageResource(bundle: R.hostingBundle, name: "Paint Bucket")
+    /// Image `Polygon Tool`.
+    static let polygonTool = Rswift.ImageResource(bundle: R.hostingBundle, name: "Polygon Tool")
     /// Image `PositionIndicator`.
     static let positionIndicator = Rswift.ImageResource(bundle: R.hostingBundle, name: "PositionIndicator")
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "Bezier Tool", bundle: ..., traitCollection: ...)`
+    static func bezierTool(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.bezierTool, compatibleWith: traitCollection)
+    }
+    #endif
 
     #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Circle Tool", bundle: ..., traitCollection: ...)`
@@ -246,9 +259,23 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "Oval Tool", bundle: ..., traitCollection: ...)`
+    static func ovalTool(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.ovalTool, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UIImage(named: "Paint Bucket", bundle: ..., traitCollection: ...)`
     static func paintBucket(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
       return UIKit.UIImage(resource: R.image.paintBucket, compatibleWith: traitCollection)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIImage(named: "Polygon Tool", bundle: ..., traitCollection: ...)`
+    static func polygonTool(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.polygonTool, compatibleWith: traitCollection)
     }
     #endif
 

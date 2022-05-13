@@ -9,7 +9,7 @@
 import Foundation
 
 class OnboardingItemView: UIStackView {
-  convenience init (icon: UIImage?, title: String?, subtitle: String?) {
+  convenience init (icon: UIImage?, title: String?, subtitle: String?, tint: UIColor?) {
     self.init()
     axis = .horizontal
     distribution = .fill
@@ -17,10 +17,11 @@ class OnboardingItemView: UIStackView {
     spacing = 16.0
 
     let iconView = UIImageView()
-    iconView.tintColor = Theme.purple
+    iconView.tintColor = tint ?? Theme.purple
     iconView.image = icon
     iconView.height(constant: 50.0)
     iconView.width(constant: 50.0)
+    iconView.contentMode = .scaleAspectFit
     addArrangedSubview(iconView)
 
     let textStack = UIStackView()

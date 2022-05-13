@@ -11,6 +11,7 @@ import Foundation
 
 protocol ColorKeyboardDelegate {
   func setColor(_ color: UIColor, secondary: UIColor, alpha: CGFloat)
+  func colorKeyboardView(_ colorKeyboardView: ColorKeyboardView, selected toolbarButton: ToolbarButton)
 }
 
 let percentMix: CGFloat = 0.1
@@ -189,6 +190,7 @@ extension ColorKeyboardView: ToolbarButtonDelegate {
       tool = nil
     } else {
       tool = toolbarButton
+      delegate?.colorKeyboardView(self, selected: toolbarButton)
     }
   }
 }

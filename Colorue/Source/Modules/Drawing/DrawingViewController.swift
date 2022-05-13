@@ -195,13 +195,6 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
       postButton.target = self
       postButton.action = #selector(DrawingViewController.shareDrawing)
     }
-
-
-
-    if let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController() {
-      onboardingViewController.type = .welcome
-      navigationController?.present(onboardingViewController, animated: true)
-    }
   }
 
   @objc private func onDrag(_ sender: UILongPressGestureRecognizer) {
@@ -243,10 +236,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     if (!prefs.bool(forKey: "drawingHowTo")) {
-      let drawingHowTo = UIAlertController(title: "Welcome! Get Started Drawing", message: "Press color tabs to switch to their color, tap them to mix a bit of their color with your current color (Shown in the horizontal bar). Change your stroke size with the slider." , preferredStyle: UIAlertController.Style.alert)
-      drawingHowTo.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-      self.present(drawingHowTo, animated: true, completion: nil)
-      prefs.setValue(true, forKey: "drawingHowTo")
+      if let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController() {
+        prefs.setValue(true, forKey: "drawingHowTo")
+        navigationController?.present(onboardingViewController, animated: true)
+      }
     }
   }
 
@@ -382,6 +375,18 @@ extension DrawingViewController: ColorKeyboardDelegate {
       self?.drawButtonL.backgroundColor = secondary
       self?.drawButtonR.backgroundColor = secondary
     }, completion: nil)
+  }
+
+  func colorKeyboardView(_ colorKeyboardView: ColorKeyboardView, selected toolbarButton: ToolbarButton) {
+
+    guard [.straightLine, .curvedLine, .oval, .bullsEye].contains(toolbarButton.type),
+          !prefs.bool(forKey: "howTo\(toolbarButton.type.rawValue)"),
+          let onboardingViewController = R.storyboard.onboarding.instantiateInitialViewController()
+    else { return }
+
+    onboardingViewController.type = toolbarButton.type
+    prefs.setValue(true, forKey: "howTo\(toolbarButton.type.rawValue)")
+    navigationController?.present(onboardingViewController, animated: true)
   }
 }
 
