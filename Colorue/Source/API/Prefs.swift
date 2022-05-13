@@ -24,5 +24,3 @@ struct Prefs {
 }
 
 let Store = UserDefaults.standard
-
-let StoreShared = UserDefaults(suiteName: "group.com.colorue.app")!

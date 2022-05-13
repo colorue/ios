@@ -12,7 +12,7 @@ import RealmSwift
 final class GalleryViewController: UICollectionViewController {
   // MARK: - Properties
   private var drawings: Results<Drawing> {
-    return Database.shared.objects(Drawing.self)
+    return Database.realm.objects(Drawing.self)
       .sorted(byKeyPath: "updatedAt", ascending: false)
   }
   
@@ -215,8 +215,8 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     let drawing = drawings[indexPath.row]
     let drawingDuplicate = Drawing()
     drawingDuplicate.base64 = drawing.base64
-    try! Database.shared.write {
-      Database.shared.add(drawingDuplicate)
+    try! Database.realm.write {
+      Database.realm.add(drawingDuplicate)
     }
   }
   
@@ -250,8 +250,8 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       guard let drawing = self?.drawings[indexPath.row]  else { return }
-      try! Database.shared.write {
-        Database.shared.delete(drawing)
+      try! Database.realm.write {
+        Database.realm.delete(drawing)
       }
     }))
     

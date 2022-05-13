@@ -34,8 +34,8 @@ struct ColorueWidgetEntryView : View {
   var entry: Provider.Entry
 
   var body: some View {
-    if let base64 = StoreShared.string(forKey: "widgetDrawingImage"),
-       let drawingId = StoreShared.string(forKey: "widgetDrawingId"),
+    if let base64 = Database.shared?.string(forKey: "widgetDrawingImage"),
+       let drawingId = Database.shared?.string(forKey: "widgetDrawingId"),
        let deeplinkURL: URL = URL(string: "colorue://widget/\(drawingId)") {
       Image(uiImage: UIImage.fromBase64(base64)).resizable().scaledToFill().widgetURL(deeplinkURL)
     }

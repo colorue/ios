@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     return true
   }
   
-  
   func applicationWillResignActive(_ application: UIApplication) {
     let notificationCenter = NotificationCenter.default
     // Saves active drawing
@@ -43,11 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) -> Bool {
 
     guard let components = NSURLComponents(url: url, resolvingAgainstBaseURL: true),
-          let drawingId = components.path?.replacingOccurrences(of: "/", with: "")
-      else { return false }
+          let drawingId = components.path?.replacingOccurrences(of: "/", with: "") else {
+      return true
+    }
 
     openDrawing(drawingId)
-
     return true
   }
 

@@ -16,6 +16,7 @@ target 'ColorueWidgetExtension' do
   use_frameworks!
 
   # Pods for ColorueWidgetExtension
+  pod 'RealmSwift','~>10'
 end
 
 post_install do |installer|

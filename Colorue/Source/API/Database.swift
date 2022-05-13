@@ -7,22 +7,20 @@
 //
 
 import RealmSwift
+import WidgetKit
 
 struct Database {
-  static var shared: Realm {
-//    let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: "group.com.colorue.app")
-//
-//
-//
-//    print("url", url)
-//    let config = Realm.Configuration(fileURL: url)
-//
-//    let realm =  try! Realm(configuration: config)
-//
-//    let folderPath = realm.configuration.fileURL!.deletingLastPathComponent().path
-//    try! FileManager.default.setAttributes([FileAttributeKey.protectionKey: FileProtectionType.none],
-//                                            ofItemAtPath: folderPath)
+  static var realm: Realm {
     return try! Realm()
   }
-}
 
+  static let shared = UserDefaults(suiteName: "group.com.colorue.app")
+  static let defaults = UserDefaults()
+
+  static func update (drawing: Drawing?) {
+    guard let base64 = drawing?.base64, let drawingId = drawing?.id else { return }
+    shared?.setValue(base64, forKey: "widgetDrawingImage")
+    shared?.setValue(drawingId, forKey: "widgetDrawingId")
+    WidgetCenter.shared.reloadTimelines(ofKind: "com.colorue.app.ColorueWidget")
+  }
+}

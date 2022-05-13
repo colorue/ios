@@ -16,7 +16,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   private var drawing: Drawing? {
     guard let drawingId = drawingId else { return nil }
-    return Database.shared.object(ofType: Drawing.self, forPrimaryKey: drawingId)
+    return Database.realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
   }
 
   var tool: ToolbarButton?
@@ -24,10 +24,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   var drawingId: String? {
     didSet {
       if let drawingId = drawingId {
-        StoreShared.setValue(drawingId, forKey: "openDrawing")
+        prefs.setValue(drawingId, forKey: "openDrawing")
         if let base64 = drawing?.base64 {
           baseImage = UIImage.fromBase64(base64)
-          Widget.update(drawing: drawing)
+          Database.update(drawing: drawing)
         }
       } else {
         canvas?.trash()
@@ -211,8 +211,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
       guard let self = self, let drawing = self.drawing else { return }
-      try! Database.shared.write {
-        Database.shared.delete(drawing)
+      try! Database.realm.write {
+        Database.realm.delete(drawing)
       }
       self.drawingId = nil
       Haptic.notificationOccurred(.success)
@@ -271,8 +271,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     guard let image = canvas?.getDrawing() else { return }
     let drawingDuplicate = Drawing()
     drawingDuplicate.base64 = image.toBase64()
-    try! Database.shared.write {
-      Database.shared.add(drawingDuplicate)
+    try! Database.realm.write {
+      Database.realm.add(drawingDuplicate)
     }
     view.makeToast("Duplicated Drawing", position: .center)
     Haptic.notificationOccurred(.success)
@@ -395,7 +395,7 @@ extension DrawingViewController: CanvasDelegate {
       guard  let self = self, let canvas = self.canvas, !canvas.isEmpty else { return }
       let base64 = canvas.getDrawing().toBase64()
       if let drawing = self.drawing {
-        try! Database.shared.write {
+        try! Database.realm.write {
           drawing.base64 = base64
           drawing.updatedAt = Date().timeIntervalSince1970
         }
@@ -403,12 +403,12 @@ extension DrawingViewController: CanvasDelegate {
         let drawing = Drawing()
         drawing.base64 = base64
         self.drawingId = drawing.id
-        try! Database.shared.write {
-          Database.shared.add(drawing)
+        try! Database.realm.write {
+          Database.realm.add(drawing)
           self.prefs.setValue(drawing.id, forKey: "openDrawing")
         }
       }
-      Widget.update(drawing: self.drawing)
+      Database.update(drawing: self.drawing)
     }
   }
 

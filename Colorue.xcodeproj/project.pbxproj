@@ -62,7 +62,8 @@
 		87263455282DFB860052B4C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8703D7D9282D9B5200258CEE /* Assets.xcassets */; };
 		87263457282E03180052B4C5 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87263456282E03170052B4C5 /* Database.swift */; };
 		8726345A282E0E090052B4C5 /* Prefs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D799282D9B2A00258CEE /* Prefs.swift */; };
-		87B315AC282EA54F00E9DFF6 /* Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87B315AB282EA54F00E9DFF6 /* Widget.swift */; };
+		87B315AE282ED23500E9DFF6 /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D796282D9B2A00258CEE /* Drawing.swift */; };
+		87B315B0282ED31300E9DFF6 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87263456282E03170052B4C5 /* Database.swift */; };
 		FF070D1B5AAF3FF715C315AA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 /* End PBXBuildFile section */
 
@@ -156,7 +157,6 @@
 		87263456282E03170052B4C5 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		87263459282E06280052B4C5 /* ColorueWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ColorueWidgetExtension.entitlements; sourceTree = "<group>"; };
 		8733CC70281C4A55000D053D /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = SOURCE_ROOT; };
-		87B315AB282EA54F00E9DFF6 /* Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Widget.swift; sourceTree = "<group>"; };
 		F1A526244BB9F7D1A34485D0 /* Pods-ColorueWidgetExtension.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorueWidgetExtension.dev.xcconfig"; path = "Pods/Target Support Files/Pods-ColorueWidgetExtension/Pods-ColorueWidgetExtension.dev.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -287,7 +287,6 @@
 				8703D798282D9B2A00258CEE /* Haptic.swift */,
 				8703D799282D9B2A00258CEE /* Prefs.swift */,
 				87263456282E03170052B4C5 /* Database.swift */,
-				87B315AB282EA54F00E9DFF6 /* Widget.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -626,6 +625,8 @@
 				87263454282DFA1B0052B4C5 /* UIImageExtensions.swift in Sources */,
 				8726345A282E0E090052B4C5 /* Prefs.swift in Sources */,
 				87263449282DF49C0052B4C5 /* ColorueWidget.swift in Sources */,
+				87B315B0282ED31300E9DFF6 /* Database.swift in Sources */,
+				87B315AE282ED23500E9DFF6 /* Drawing.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,7 +661,6 @@
 				87263439282DB9C10052B4C5 /* OnboardingViewController.swift in Sources */,
 				8703D7D0282D9B2A00258CEE /* OvalStroke.swift in Sources */,
 				8703D7CC282D9B2A00258CEE /* ColorButton.swift in Sources */,
-				87B315AC282EA54F00E9DFF6 /* Widget.swift in Sources */,
 				8703D7D3282D9B2A00258CEE /* PaintBucketStroke.swift in Sources */,
 				8703D7BC282D9B2A00258CEE /* CGContext+setStrokeColor.swift in Sources */,
 				8703D7BF282D9B2A00258CEE /* UIAlertControllerStyle.swift in Sources */,
