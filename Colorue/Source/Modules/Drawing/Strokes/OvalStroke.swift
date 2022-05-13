@@ -36,18 +36,14 @@ class OvalStroke: DrawingStroke {
 
   override func onPress() {
     super.onPress()
-    if let nextPoint = nextPoint {
-      pts.append(nextPoint)
-      changed(position: nextPoint)
+
+    guard let nextPoint = nextPoint  else { return }
+    if pts.count > 1 {
+      // Turn back into circle from oval
+      _ = pts.popLast()
     }
-    if pts.count > 2 {
-      path.removeAllPoints()
-      pts.removeAll()
-      if let image = displayStroke() {
-        baseImage = image
-        delegate?.drawingStroke(self, completedWith: image)
-      }
-    }
+    pts.append(nextPoint)
+    changed(position: nextPoint)
   }
 
   func drawCircle(to point: CGPoint) {
