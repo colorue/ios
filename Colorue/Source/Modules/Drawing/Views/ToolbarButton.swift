@@ -33,6 +33,7 @@ class ToolbarButton: UIButton {
   var type: KeyboardToolState = .none
 
   let spinner = UIActivityIndicatorView()
+  let selectedIndicator = UIView()
 
   var iconImage: UIImage? {
     get {
@@ -82,6 +83,7 @@ class ToolbarButton: UIButton {
   override var tintColor: UIColor! {
     didSet {
       spinner.color = tintColor
+      selectedIndicator.backgroundColor = tintColor
     }
   }
 
@@ -104,15 +106,20 @@ class ToolbarButton: UIButton {
     spinner.color = .white
     self.addSubview(spinner)
     spinner.autoCenterInSuperview()
+
+
+    selectedIndicator.height(constant: 3.0)
+    selectedIndicator.isHidden = true
+    self.addSubview(selectedIndicator)
+    selectedIndicator.autoPinEdge(toSuperviewEdge: .left)
+    selectedIndicator.autoPinEdge(toSuperviewEdge: .right)
+    selectedIndicator.autoPinEdge(toSuperviewEdge: .top)
   }
 
   override var isSelected: Bool {
     didSet {
-      if isSelected {
-        alpha = 0.4
-      } else {
-        alpha = 1.0
-      }
+      selectedIndicator.isHidden = !isSelected
+      alpha = isSelected ? 0.6 : 1.0
     }
   }
 
