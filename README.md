@@ -19,11 +19,13 @@ Colorue is a simple, but effective drawing app for iOS. Join our [Discord](https
 - Straight line too
 - Curved line tool
 
-### Installing
-1. Clone the repo 
-2. Run `pod install`
-3. Open Colorue.workspace
-4. Run the project with ⌘R 
+### Getting started
+1. `git clone https://github.com/colorue/ios.git`
+2. `cd ios`
+3. `pod install`
+4. `open -a xcode Colorue.xcworkspace`
+5. Update the Target signing team
+6. Run the project with ⌘R 
 
 ### Links
 - [Homepage](https://colorue.org)
