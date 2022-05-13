@@ -193,6 +193,17 @@ struct R: Rswift.Validatable {
   }
   #endif
 
+  /// This `R.entitlements` struct is generated, and contains static references to 1 properties.
+  struct entitlements {
+    struct comAppleSecurityApplicationGroups {
+      static let groupComColorueApp = infoPlistString(path: ["com.apple.security.application-groups"], key: "group.com.colorue.app") ?? "group.com.colorue.app"
+
+      fileprivate init() {}
+    }
+
+    fileprivate init() {}
+  }
+
   /// This `R.image` struct is generated, and contains static references to 10 images.
   struct image {
     /// Image `Bezier Tool`.

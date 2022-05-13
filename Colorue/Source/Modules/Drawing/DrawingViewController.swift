@@ -16,8 +16,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   private var drawing: Drawing? {
     guard let drawingId = drawingId else { return nil }
-    let realm = try! Realm()
-    return realm.object(ofType: Drawing.self, forPrimaryKey: drawingId)
+    return Database.shared.object(ofType: Drawing.self, forPrimaryKey: drawingId)
   }
 
   var tool: ToolbarButton?
@@ -25,8 +24,9 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
   var drawingId: String? {
     didSet {
       if let drawingId = drawingId {
-        prefs.setValue(drawingId, forKey: "openDrawing")
+        StoreShared.setValue(drawingId, forKey: "openDrawing")
         if let base64 = drawing?.base64 {
+          StoreShared.setValue(base64, forKey: "openDrawing64")
           baseImage = UIImage.fromBase64(base64)
         }
       } else {
@@ -211,9 +211,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     deleteAlert.addAction(UIAlertAction(title: "Delete Drawing", style: .destructive, handler: { [weak self] (action: UIAlertAction!) in
       self?.canvas!.trash()
       guard let self = self, let drawing = self.drawing else { return }
-      let realm = try! Realm()
-      try! realm.write {
-        realm.delete(drawing)
+      try! Database.shared.write {
+        Database.shared.delete(drawing)
       }
       self.drawingId = nil
       Haptic.notificationOccurred(.success)
@@ -270,11 +269,10 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
   func duplicateDrawing () {
     guard let image = canvas?.getDrawing() else { return }
-    let realm = try! Realm()
     let drawingDuplicate = Drawing()
     drawingDuplicate.base64 = image.toBase64()
-    try! realm.write {
-      realm.add(drawingDuplicate)
+    try! Database.shared.write {
+      Database.shared.add(drawingDuplicate)
     }
     view.makeToast("Duplicated Drawing", position: .center)
     Haptic.notificationOccurred(.success)
@@ -395,19 +393,20 @@ extension DrawingViewController: CanvasDelegate {
   func saveDrawing() {
     DispatchQueue.main.async { [weak self] in
       guard  let self = self, let canvas = self.canvas, !canvas.isEmpty else { return }
-      let realm = try! Realm()
-
+      let base64 = canvas.getDrawing().toBase64()
+      StoreShared.setValue(base64, forKey: "openDrawing64")
       if let drawing = self.drawing {
-        try! realm.write {
-          drawing.base64 = canvas.getDrawing().toBase64()
+        try! Database.shared.write {
+          drawing.base64 = base64
           drawing.updatedAt = Date().timeIntervalSince1970
         }
       } else {
         let drawing = Drawing()
-        drawing.base64 = canvas.getDrawing().toBase64()
+        drawing.base64 = base64
         self.drawingId = drawing.id
-        try! realm.write {
-          realm.add(drawing)
+        StoreShared.setValue(drawing.id, forKey: "openDrawing")
+        try! Database.shared.write {
+          Database.shared.add(drawing)
         }
       }
     }

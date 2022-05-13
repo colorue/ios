@@ -107,7 +107,6 @@ class ToolbarButton: UIButton {
     self.addSubview(spinner)
     spinner.autoCenterInSuperview()
 
-
     selectedIndicator.height(constant: 3.0)
     selectedIndicator.isHidden = true
     self.addSubview(selectedIndicator)

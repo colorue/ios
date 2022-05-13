@@ -20,9 +20,7 @@ class DrawingCell: UICollectionViewCell {
   
   var drawing: Drawing? {
     didSet {
-      if let base64 = drawing?.base64 {
-        imageView?.image = UIImage.fromBase64(base64)
-      }
+      imageView?.image = drawing?.image
     }
   }
 }
