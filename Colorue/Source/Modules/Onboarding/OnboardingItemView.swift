@@ -17,7 +17,7 @@ class OnboardingItemView: UIStackView {
     spacing = 16.0
 
     let iconView = UIImageView()
-    iconView.tintColor = tint ?? Theme.purple
+    iconView.tintColor = tint
     iconView.image = icon
     iconView.height(constant: 50.0)
     iconView.width(constant: 50.0)

@@ -28,7 +28,6 @@
 		8703D7C1282D9B2A00258CEE /* UIColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D792282D9B2A00258CEE /* UIColorExtensions.swift */; };
 		8703D7C2282D9B2A00258CEE /* AppStoreReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */; };
 		8703D7C4282D9B2A00258CEE /* Drawing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D796282D9B2A00258CEE /* Drawing.swift */; };
-		8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D797282D9B2A00258CEE /* Theme.swift */; };
 		8703D7C6282D9B2A00258CEE /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D798282D9B2A00258CEE /* Haptic.swift */; };
 		8703D7C8282D9B2A00258CEE /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79C282D9B2A00258CEE /* AboutViewController.swift */; };
 		8703D7C9282D9B2A00258CEE /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8703D79E282D9B2A00258CEE /* DrawingViewController.swift */; };
@@ -116,7 +115,6 @@
 		8703D792282D9B2A00258CEE /* UIColorExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtensions.swift; sourceTree = "<group>"; };
 		8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppStoreReviewManager.swift; sourceTree = "<group>"; };
 		8703D796282D9B2A00258CEE /* Drawing.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Drawing.swift; sourceTree = "<group>"; };
-		8703D797282D9B2A00258CEE /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		8703D798282D9B2A00258CEE /* Haptic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		8703D79C282D9B2A00258CEE /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		8703D79E282D9B2A00258CEE /* DrawingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
@@ -280,7 +278,6 @@
 			children = (
 				8703D794282D9B2A00258CEE /* AppStoreReviewManager.swift */,
 				8703D796282D9B2A00258CEE /* Drawing.swift */,
-				8703D797282D9B2A00258CEE /* Theme.swift */,
 				8703D798282D9B2A00258CEE /* Haptic.swift */,
 				87263456282E03170052B4C5 /* Database.swift */,
 			);
@@ -666,7 +663,6 @@
 				8703D7D8282D9B2A00258CEE /* GalleryViewController.swift in Sources */,
 				8703D7BE282D9B2A00258CEE /* UINavigationBar.swift in Sources */,
 				87263457282E03180052B4C5 /* Database.swift in Sources */,
-				8703D7C5282D9B2A00258CEE /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

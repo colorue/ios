@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
       openDrawing(drawingId)
       return true
     } else if !Database.bool(for: .saved) {
-      // Start in drawing interface for new users
+      // NOTE: Start in drawing interface for new users
       openDrawing()
     }
 
@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   
   func applicationWillResignActive(_ application: UIApplication) {
     let notificationCenter = NotificationCenter.default
-    // Saves active drawing
+    // NOTE: Saves active drawing
     notificationCenter.post(name: UIApplication.willResignActiveNotification, object: nil)
   }
 

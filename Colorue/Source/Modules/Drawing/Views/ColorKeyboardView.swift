@@ -92,7 +92,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
     backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
 
     let separatorU = UIView()
-    separatorU.backgroundColor = Theme.divider
+    separatorU.backgroundColor = R.color.border()
     separatorU.height(constant: 0.5)
     addArrangedSubview(separatorU)
 
@@ -126,7 +126,21 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
     let colorButtonWrapper = UIStackView()
     colorButtonWrapper.distribution = .fillEqually
     addArrangedSubview(colorButtonWrapper)
-    for (tag, color) in Theme.colors.enumerated() {
+
+    let colors = [
+      R.color.transparent()!,
+      R.color.black()!,
+      R.color.red()!,
+      R.color.orange()!,
+      R.color.yellow()!,
+      R.color.green()!,
+      R.color.cyan()!,
+      R.color.blue()!,
+      R.color.purple()!,
+      R.color.pink()!,
+      R.color.white()!
+    ]
+    for (tag, color) in colors.enumerated() {
       let newButton = ColorButton(color: color, tag: tag)
       newButton.delegate = self
       colorButtonWrapper.addArrangedSubview(newButton)
@@ -147,7 +161,7 @@ class ColorKeyboardView: UIStackView, UIGestureRecognizerDelegate {
       })
     } else {
       brushSizeSlider.value = (brushSizeSlider.maximumValue + brushSizeSlider.minimumValue) / 2
-      color = Theme.purple
+      color = R.color.purple()!
       opacity = 1.0
     }
   }
