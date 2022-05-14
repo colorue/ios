@@ -57,6 +57,20 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     navigationController?.interactivePopGestureRecognizer?.isEnabled = false
     becomeFirstResponder() // To get shake gesture
 
+    self.navigationController?.navigationBar.backgroundColor = .white
+    self.navigationController?.navigationBar.tintColor = .black
+    navigationController?.navigationBar.setBottomBorderColor(color: R.color.border()!, height: 0.5)
+
+    NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
+
+    setupUndoButtons()
+    let keyboardHeight = self.view.frame.height / 5.55833333333333
+    setupCanvasView(height: self.view.frame.height - keyboardHeight - 60)
+    setupKeyboardView(height: keyboardHeight)
+    setupActions()
+  }
+
+  private func setupUndoButtons () {
     let configuration = UIImage.SymbolConfiguration(pointSize: 20)
 
     undoButton.isEnabled = false
@@ -73,40 +87,29 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     undoWrapper.axis = .horizontal
     undoWrapper.spacing = 24.0
     self.navigationItem.titleView = undoWrapper
+  }
 
-    self.navigationController?.navigationBar.backgroundColor = .white
-    self.navigationController?.navigationBar.tintColor = .black
-    navigationController?.navigationBar.setBottomBorderColor(color: R.color.border()!, height: 0.5)
-    
-    
-    NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
-    
-    let keyboardHeight = self.view.frame.height / 5.55833333333333
-    let canvasHeight = self.view.frame.height - keyboardHeight - 60
-    
-    let canvasFrame = CGRect(x: 0, y: 60, width: view.frame.width, height: canvasHeight)
-    
+  private func setupCanvasView (height: CGFloat) {
+    let canvasFrame = CGRect(x: 0, y: 60, width: view.frame.width, height: height)
     let canvas = CanvasView(frame: canvasFrame)
     canvas.delegate = self
     canvas.baseDrawing = baseImage
-    
     self.view.addSubview(canvas)
     self.canvas = canvas
-    
-    let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: canvas.frame.maxY, width: self.view.frame.width, height: keyboardHeight)
+  }
+
+  private func setupKeyboardView (height: CGFloat) {
+    let colorKeyboardFrame = CGRect(x: CGFloat(0.0), y: view.frame.maxY - height, width: self.view.frame.width, height: height)
     let colorKeyboard = ColorKeyboardView(frame: colorKeyboardFrame)
     colorKeyboard.delegate = self
-    
+
     self.view.addSubview(colorKeyboard)
     self.colorKeyboard = colorKeyboard
-
-
 
     self.keyboardCover.frame = colorKeyboardFrame
     self.keyboardCover.alpha = 0.0
     keyboardCover.backgroundColor = UIColor(patternImage: R.image.clearPattern()!)
     self.view.addSubview(keyboardCover)
-
 
     activeColorView.backgroundColor = colorKeyboard.color
     activeColorView.alpha = colorKeyboard.alpha
@@ -117,14 +120,14 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     separatorU.backgroundColor = R.color.border()
     keyboardCover.addSubview(separatorU)
 
-    drawButtonL.frame = CGRect(x: keyboardHeight / 4.0, y: keyboardHeight / 4.0, width: keyboardHeight / 2.0, height: keyboardHeight / 2.0)
-    drawButtonL.layer.cornerRadius = keyboardHeight / 4.0
+    drawButtonL.frame = CGRect(x: height / 4.0, y: height / 4.0, width: height / 2.0, height: height / 2.0)
+    drawButtonL.layer.cornerRadius = height / 4.0
     drawButtonL.backgroundColor = .white
     drawButtonL.isHidden = true
     keyboardCover.addSubview(drawButtonL)
 
-    drawButtonR.frame = CGRect(x: view.frame.maxX - keyboardHeight / 4.0 - keyboardHeight / 2.0, y: keyboardHeight / 4.0, width: keyboardHeight / 2.0, height: keyboardHeight / 2.0)
-    drawButtonR.layer.cornerRadius = keyboardHeight / 4.0
+    drawButtonR.frame = CGRect(x: view.frame.maxX - height / 4.0 - height / 2.0, y: height / 4.0, width: height / 2.0, height: height / 2.0)
+    drawButtonR.layer.cornerRadius = height / 4.0
     drawButtonR.backgroundColor = .white
     drawButtonR.isHidden = true
     keyboardCover.addSubview(drawButtonR)
@@ -133,23 +136,21 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     holdL.minimumPressDuration = 0.0
     holdL.delegate = self
     drawButtonL.addGestureRecognizer(holdL)
-//    drawButtonL.actions(forTarget: #selector(DrawingViewController.onTap(_:)), forControlEvent: .touchDown)
 
     let holdR = UILongPressGestureRecognizer(target: self, action: #selector(DrawingViewController.onDrag(_:)))
     holdR.minimumPressDuration = 0.0
     holdR.delegate = self
     drawButtonR.addGestureRecognizer(holdR)
-//    drawButtonR.actions(forTarget: #selector(DrawingViewController.onTap(_:)), forControlEvent: .touchDown)
 
-    underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
+    underFingerView.frame = CGRect(x: colorKeyboard.frame.midX - (height/2), y: 0, width: height, height: height)
     underFingerView.backgroundColor = UIColor.white
     underFingerView.layer.borderWidth = 0.5
     underFingerView.layer.borderColor = R.color.border()?.cgColor
     keyboardCover.addSubview(underFingerView)
     Database.set(true, for: .saved)
+  }
 
-
-
+  private func setupActions () {
     let newAction =
     UIAction(title: NSLocalizedString("New Drawing", comment: ""),
              image: UIImage(systemName: "square.and.pencil")) { [weak self] action in
@@ -186,13 +187,8 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
              attributes: .destructive) { [weak self] action in
       self?.trash()
     }
-    if #available(iOS 14.0, *) {
-      postButton.menu = UIMenu(title: "", children: [newAction, duplicateAction, importImageAction, shareAction, saveAction, deleteAction])
-      postButton.primaryAction = nil
-    } else {
-      postButton.target = self
-      postButton.action = #selector(DrawingViewController.shareDrawing)
-    }
+    postButton.menu = UIMenu(title: "", children: [newAction, duplicateAction, importImageAction, shareAction, saveAction, deleteAction])
+    postButton.primaryAction = nil
   }
 
   @objc private func onDrag(_ sender: UILongPressGestureRecognizer) {
