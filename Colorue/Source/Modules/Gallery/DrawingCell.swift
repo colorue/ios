@@ -13,7 +13,7 @@ class DrawingCell: UICollectionViewCell {
     didSet {
       imageView?.layer.cornerRadius = 8
       imageView?.clipsToBounds = true
-      imageView?.layer.borderColor = Theme.divider.cgColor
+      imageView?.layer.borderColor = R.color.border()?.cgColor
       imageView?.layer.borderWidth = 0.5
     }
   }

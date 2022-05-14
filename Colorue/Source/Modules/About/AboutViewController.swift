@@ -14,8 +14,8 @@ final class AboutViewController: UITableViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    tableView.backgroundColor = Theme.backgroundGrey
-    tableView.separatorColor = Theme.divider
+    tableView.backgroundColor = R.color.backgroundGrey()
+    tableView.separatorColor = R.color.border()
 
     let footerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
     footerLabel.textColor = .lightGray

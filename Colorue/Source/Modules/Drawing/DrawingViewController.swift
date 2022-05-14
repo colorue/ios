@@ -76,7 +76,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
 
     self.navigationController?.navigationBar.backgroundColor = .white
     self.navigationController?.navigationBar.tintColor = .black
-    navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
+    navigationController?.navigationBar.setBottomBorderColor(color: R.color.border()!, height: 0.5)
     
     
     NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: UIApplication.willResignActiveNotification, object: nil)
@@ -114,7 +114,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     keyboardCover.addSubview(activeColorView)
 
     let separatorU = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 0.5))
-    separatorU.backgroundColor = Theme.divider
+    separatorU.backgroundColor = R.color.border()
     keyboardCover.addSubview(separatorU)
 
     drawButtonL.frame = CGRect(x: keyboardHeight / 4.0, y: keyboardHeight / 4.0, width: keyboardHeight / 2.0, height: keyboardHeight / 2.0)
@@ -144,7 +144,7 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     underFingerView.frame = CGRect(x: canvas.frame.midX - (keyboardHeight/2), y: 0, width: keyboardHeight, height: keyboardHeight)
     underFingerView.backgroundColor = UIColor.white
     underFingerView.layer.borderWidth = 0.5
-    underFingerView.layer.borderColor = Theme.divider.cgColor
+    underFingerView.layer.borderColor = R.color.border()?.cgColor
     keyboardCover.addSubview(underFingerView)
     Database.set(true, for: .saved)
 

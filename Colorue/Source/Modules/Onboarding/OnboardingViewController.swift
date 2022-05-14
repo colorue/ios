@@ -32,7 +32,7 @@ class OnboardingViewController: UIViewController {
       continueButton?.tintColor = .white
       continueButton?.titleLabel?.textColor = .white
       continueButton?.titleLabel?.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
-      continueButton?.backgroundColor = Theme.purple
+      continueButton?.backgroundColor = R.color.purple()
       continueButton?.layer.cornerRadius = 12.0
     }
   }
@@ -69,15 +69,15 @@ class OnboardingViewController: UIViewController {
     get {
       switch type {
       case .none:
-        return Theme.purple
+        return R.color.purple()
       case .straightLine:
-        return Theme.red
+        return R.color.red()
       case .curvedLine:
-        return Theme.orange
+        return R.color.orange()
       case .oval:
-        return Theme.darkGreen
+        return R.color.darkGreen()
       case .bullsEye:
-        return Theme.blue
+        return R.color.blue()
       default:
         return nil
       }
