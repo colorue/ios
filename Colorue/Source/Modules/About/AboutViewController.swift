@@ -17,7 +17,6 @@ final class AboutViewController: UITableViewController {
     tableView.backgroundColor = Theme.backgroundGrey
     tableView.separatorColor = Theme.divider
 
-
     let footerLabel = UILabel(frame: CGRect(x: 0, y: 0, width: tableView.frame.width, height: 60))
     footerLabel.textColor = .lightGray
     footerLabel.textAlignment = .center
@@ -33,10 +32,6 @@ final class AboutViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 12.0
   }
-//
-//  override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//    return 20.0
-//  }
 
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.section == 0 else { return }
@@ -79,23 +74,19 @@ final class AboutViewController: UITableViewController {
     let activityViewController : UIActivityViewController = UIActivityViewController(
       activityItems: ["Simple, but effective drawing for iOS", url], applicationActivities: nil)
 
-    // This lines is for the popover you need to show in iPad
     activityViewController.popoverPresentationController?.sourceView = tableView
     if let cell = tableView?.cellForRow(at: indexPath) {
       activityViewController.popoverPresentationController?.sourceRect = cell.frame
     }
 
-    // This line remove the arrow of the popover to show in iPad
     activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
 
-    // Pre-configuring activity items
     activityViewController.activityItemsConfiguration = [
       UIActivity.ActivityType.message,
       UIActivity.ActivityType.postToFacebook,
       UIActivity.ActivityType.postToTwitter,
     ] as? UIActivityItemsConfigurationReading
 
-    // Anything you want to exclude
     activityViewController.excludedActivityTypes = [
       UIActivity.ActivityType.postToWeibo,
       UIActivity.ActivityType.print,

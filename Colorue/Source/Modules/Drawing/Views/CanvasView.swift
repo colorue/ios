@@ -88,7 +88,7 @@ class CanvasView: UIView, UIGestureRecognizerDelegate {
     let position = CGPoint(x: sender.location(in: imageView).x * resizeScale, y: sender.location(in: imageView).y * resizeScale)
 
     let tool = delegate.getKeyboardTool()?.type ?? .none
-    // isDropper is only used for sizing, I'd like to clean it up
+    // TODO: isDropper is only used for sizing, clean this up
     let isDropper = tool == .colorDropper || tool == .paintBucket
     if sender.state == .began {
       drawingStroke = DrawingStroke.makeStroke(type: tool)

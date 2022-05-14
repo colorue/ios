@@ -304,21 +304,17 @@ class DrawingViewController: UIViewController, UIGestureRecognizerDelegate, UIPo
     let activityViewController: UIActivityViewController = UIActivityViewController(
       activityItems: [filename], applicationActivities: nil)
     
-    // This lines is for the popover you need to show in iPad
     activityViewController.popoverPresentationController?.barButtonItem = postButton
     activityViewController.popoverPresentationController?.sourceView = UIApplication.shared.windows.first
     
-    // This line remove the arrow of the popover to show in iPad
     activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
     
-    // Pre-configuring activity items
     activityViewController.activityItemsConfiguration = [
       UIActivity.ActivityType.message,
       UIActivity.ActivityType.postToFacebook,
       UIActivity.ActivityType.postToTwitter,
     ] as? UIActivityItemsConfigurationReading
     
-    // Anything you want to exclude
     activityViewController.excludedActivityTypes = [
       UIActivity.ActivityType.postToWeibo,
       UIActivity.ActivityType.addToReadingList,
@@ -453,7 +449,7 @@ extension DrawingViewController: CanvasDelegate {
     }, completion: nil)
   }
 
-  // Used by dropper
+  // NOTE: this is used by ColorDropperStroke
   func setColor(_ color: UIColor?) {
     guard let color = color else { return }
     UIView.animate(withDuration: 0.3, delay: 0.0, options: UIView.AnimationOptions.beginFromCurrentState, animations: { [weak self] in

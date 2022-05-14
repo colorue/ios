@@ -39,7 +39,7 @@ class OvalStroke: DrawingStroke {
 
     guard let nextPoint = nextPoint  else { return }
     if pts.count > 1 {
-      // Turn back into circle from oval
+      // NOTE: Turn back into circle from oval
       _ = pts.popLast()
     }
     pts.append(nextPoint)
@@ -54,12 +54,12 @@ class OvalStroke: DrawingStroke {
     UIGraphicsBeginImageContextWithOptions(actualSize, false, 1.0)
     let context = UIGraphicsGetCurrentContext()
     if pts.count > 1 {
-      // Draw oval
+      // NOTE: Draw oval
       let ovalPath = CGMutablePath()
       let radius2 = sqrt(center.distanceSquared(to: pts[1]))
       var radius1 = sqrt(center.distanceSquared(to: point))
       if (abs(radius2 - radius1) < radius2 / 20.0) {
-        // Snap to circle
+        // NOTE: Snap to circle
         radius1 = radius2
         isSnapped = true
       } else {
@@ -75,7 +75,7 @@ class OvalStroke: DrawingStroke {
       ovalPath.addEllipse(in: frame, transform: rotation)
       context?.addPath(ovalPath)
     } else {
-      // Draw circle
+      // NOTE: Draw circle
       let radius = sqrt(center.distanceSquared(to: point))
       let origin = CGPoint(x: center.x - radius, y: center.y - radius)
       let frame = CGRect(origin: origin, size: CGSize(width: radius * 2, height: radius * 2))

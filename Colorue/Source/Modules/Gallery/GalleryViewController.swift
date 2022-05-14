@@ -26,8 +26,7 @@ final class GalleryViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    navigationController?.navigationBar.setBottomBorderColor(color: Theme.divider, height: 0.5)
-    
+
     if let savedDrawing = Database.string(for: .savedDrawing) {
       let realm = try! Realm()
       let drawing = Drawing()
@@ -97,21 +96,18 @@ extension GalleryViewController {
 
 // MARK: - Collection View Flow Layout Delegate
 extension GalleryViewController: UICollectionViewDelegateFlowLayout {
-  // 1
+
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
     sizeForItemAt indexPath: IndexPath
   ) -> CGSize {
-    // 2
     let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
     let availableWidth = view.frame.width - paddingSpace
     let widthPerItem = availableWidth / itemsPerRow
-    
     return CGSize(width: widthPerItem, height: widthPerItem)
   }
   
-  // 3
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -120,7 +116,6 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     return sectionInsets
   }
   
-  // 4
   func collectionView(
     _ collectionView: UICollectionView,
     layout collectionViewLayout: UICollectionViewLayout,
@@ -173,24 +168,20 @@ extension GalleryViewController: UICollectionViewDelegateFlowLayout {
     let activityViewController : UIActivityViewController = UIActivityViewController(
       activityItems: [filename], applicationActivities: nil)
     
-    // This lines is for the popover you need to show in iPad
     activityViewController.popoverPresentationController?.sourceView = collectionView
     if let cell = collectionView?.cellForItem(at: indexPath) {
       print("cell.frame", cell.frame)
       activityViewController.popoverPresentationController?.sourceRect = cell.frame
     }
     
-    // This line remove the arrow of the popover to show in iPad
     activityViewController.popoverPresentationController?.permittedArrowDirections = UIPopoverArrowDirection.any
     
-    // Pre-configuring activity items
     activityViewController.activityItemsConfiguration = [
       UIActivity.ActivityType.message,
       UIActivity.ActivityType.postToFacebook,
       UIActivity.ActivityType.postToTwitter,
     ] as? UIActivityItemsConfigurationReading
     
-    // Anything you want to exclude
     activityViewController.excludedActivityTypes = [
       UIActivity.ActivityType.postToWeibo,
       UIActivity.ActivityType.print,
